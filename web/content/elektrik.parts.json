@@ -1,0 +1,70 @@
+{
+  "model": "elektrik",
+  "file": "/models/elektrik.glb",
+  "license": {
+    "source": "scripts/build-models.mjs — kod ile üretildi",
+    "author": "Everything For My Car",
+    "license": "Proje içi üretim — üçüncü taraf lisans yükümlülüğü yok",
+    "url": ""
+  },
+  "parts": {
+    "part.aku": "aku_govdesi",
+    "part.aku-arti-kutup": "aku_arti_kutup",
+    "part.aku-eksi-kutup": "aku_eksi_kutup",
+    "part.aku-arti-kelepce": "aku_arti_kelepce",
+    "part.aku-eksi-kelepce": "aku_eksi_kelepce",
+    "part.multimetre": "multimetre_govdesi",
+    "part.multimetre-ekran": "multimetre_ekran",
+    "part.multimetre-secici": "multimetre_secici",
+    "part.prob-kirmizi": "prob_kirmizi",
+    "part.prob-siyah": "prob_siyah",
+    "part.sigorta-kutusu": "sigorta_kutusu",
+    "part.sigorta.1": "sigorta_1",
+    "part.sigorta.2": "sigorta_2",
+    "part.role": "role",
+    "part.role-soketi": "role_soketi",
+    "part.kablo-demeti": "kablo_demeti",
+    "part.far-soketi": "far_soketi",
+    "part.sase-noktasi": "sase_noktasi",
+    "part.alternator": "alternator_govdesi",
+    "part.alternator-kasnagi": "alternator_kasnagi",
+    "part.alternator-b-ucu": "alternator_b_ucu",
+    "part.alternator-regulator": "alternator_regulator",
+    "part.mars-motoru": "mars_govdesi",
+    "part.mars-selenoidi": "mars_selenoidi",
+    "part.mars-b-ucu": "mars_b_ucu",
+    "part.mars-tetik-ucu": "mars_tetik_ucu",
+    "part.sensor": "sensor_govdesi",
+    "part.sensor-soketi": "sensor_soketi"
+  },
+  "props": {
+    "part.far-ampulu": {
+      "file": "/models/vendor/lightbulb_01/lightbulb_01.gltf",
+      "at": [
+        0.3,
+        0.93,
+        -0.33
+      ],
+      "credit": "Josh Dean — CC0"
+    },
+    "dekor.kablo-yumagi": {
+      "file": "/models/vendor/modular_electric_cables/modular_electric_cables.gltf",
+      "at": [
+        0.7,
+        0.93,
+        -0.3
+      ],
+      "scale": 0.07,
+      "rotateY": 0.6,
+      "credit": "Kuutti Siitonen — CC0"
+    }
+  },
+  "_notes": {
+    "kapsam": "Araç Elektrik ve Elektronik alanının tezgâh sahnesi: kaynak (akü), koruma (sigorta), iletken (kablo, şase) ve tüketici (far) bir arada. Şarj, marş ve sensör aşamaları için alternatör, marş motoru ve iki uçlu bir sensör de tezgâhta duruyor. Kontrol ünitesi ve teşhis cihazı henüz yok; hata kodu dersi cihazı metinde anlatıyor.",
+    "olcek": "Metre. Tezgâh yüzeyi y=0.90; parçalar yüzeyin üstünde durur. X = tezgâh boyu, Z = derinlik (+Z izleyiciye yakın).",
+    "yapisal": "tezgah_yuzeyi bir adımın hedefi değildir; parçaların üzerinde durduğu yüzeydir.",
+    "kutup-rengi": "Artı kutup kırmızı, eksi kutup çelik gri. Sahnede ikisi ayırt edilebilir olmalıdır; ama ders kutbu renkten değil işaretten okumayı öğretir, çünkü sahadaki kablo rengi güvenilmez.",
+    "nokta-yasagi": "Mesh adlarında nokta yok: three.js GLTFLoader düğüm adındaki '.', ':', '/', '[', ']' karakterlerini siler. part.sigorta.1 -> sigorta_1 eşlemesi bu yüzden var.",
+    "model": "Şematik: gövdeler kutu ve silindir. Amaç devrenin yapısını ve prob yerini öğretmek; gerçek bir sigorta kutusunun görünümünü vermek değil."
+  }
+}

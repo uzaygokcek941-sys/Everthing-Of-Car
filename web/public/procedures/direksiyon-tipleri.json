@@ -1,0 +1,177 @@
+{
+  "id": "direksiyon.tipleri",
+  "area": "direksiyon",
+  "stage": 0,
+  "title": "Mekanik, Hidrolik ve Elektrik Yardımlı Sistemler",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 35,
+  "prerequisites": ["direksiyon.sistem-haritasi"],
+  "learningGoals": [
+    "Üç sistem tipinin ortak yanını ve ayrıldıkları noktayı bilmek",
+    "Yardımın kesilmesi hâlinde her tipte ne olduğunu açıklamak",
+    "Teşhise başlarken 'bu araçta hangi yardım var' sorusunu ilk sormayı alışkanlık hâline getirmek"
+  ],
+
+  "safety": [
+    { "rule": "Hidrolik devrede kaçak aranırken el hortum ve bağlantı noktalarında gezdirilmez", "why": "Basınç altındaki bir kaçak, gözle görülmeyecek incelikte bir jet hâlinde deriyi delip dokuya sıvı enjekte edebilir; bu acil cerrahi gerektiren bir yaralanmadır. Kaçak, kâğıt veya karton parçası gezdirilerek aranır", "blocksStart": true },
+    { "rule": "Motor çalışırken kayış ve kasnak bölgesine el uzatılmaz", "why": "Hidrolik pompa kayışla döner; dönen kasnak parmağı anında kapar", "blocksStart": true },
+    { "rule": "Elektrik yardımlı sistemde çalışırken üreticinin öngördüğü şekilde enerji kesilir", "why": "EPS motoru güçlüdür ve kontrol ünitesi beklenmedik anda destek verebilir", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true },
+    { "id": "tool.teshis-cihazi", "label": "Teşhis cihazı", "required": true },
+    { "id": "tool.basinc-test-cihazi", "label": "Hidrolik basınç test cihazı", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Üç araç yan yana duruyor: biri yardımsız, biri hidrolik yardımlı, biri elektrik yardımlı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.direksiyon-simidi",
+        "question": "Üçünün ortak yanı ne?",
+        "options": [
+          { "label": "Zincir üçünde de aynıdır; fark, zincire eklenmiş yardım katmanındadır", "verdict": "ayni-zincir", "correct": true, "explain": "Bu dersin en önemli cümlesi budur. Simit, mil, mafsal, dişli kutusu, rot çubuğu ve rot başından oluşan mekanik zincir üç sistemde de vardır ve hareketi taşıyan hâlâ odur. Hidrolik ya da elektrik yardım, bu zinciri değiştirmez; zincire bir kuvvet EKLER. Yani yardım sistemi tekerleği çevirmez, sürücünün çevirmesini kolaylaştırır. Bunun iki büyük sonucu vardır. Birincisi güvenlikle ilgilidir: yardım tamamen kesilse bile araç yönetilebilir kalır, çünkü mekanik bağlantı yerindedir — direksiyon çok ağırlaşır ama kopmaz. İkincisi teşhisle ilgilidir ve bu alanda sürekli işine yarayacak: bir şikâyet duyduğunda önce şunu sormalısın — bu şikâyet zincirin kendisiyle mi ilgili, yoksa yardım katmanıyla mı? Boşluk, ses ve merkeze dönmeme çoğunlukla zincirin işidir; ağırlık, tek yönde zorlanma ve yardımın gelip gitmesi ise yardım katmanının işi. Bu iki soruyu ayırmadan yapılan teşhis, yanlış parçayla biter. Not: bazı yeni araçlarda simit ile tekerlek arasında mekanik bağlantı bulunmayan tasarımlar da geliştirilmektedir; bunlar bu dersin kapsamı dışındadır ve kendi prosedürleriyle çalışılır." },
+          { "label": "Üçünde de tekerleği bir motor çevirir", "verdict": "motor", "explain": "Yardım sistemleri kuvvet ekler; hareketi mekanik zincir taşır." },
+          { "label": "Üçünde de dişli kutusu yoktur", "verdict": "kutusuz", "explain": "Dişli kutusu üçünde de vardır; dönmeyi yanal harekete o çevirir." },
+          { "label": "Ortak yanları yoktur, tamamen farklı sistemlerdir", "verdict": "farkli", "explain": "Ortak yanları zincirin kendisidir; fark yalnız yardım katmanında." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Yardım katmanı zincire eklenir, zinciri değiştirmez. Bu cümle bu alandaki teşhislerin yarısını çözüyor."
+    },
+    {
+      "id": 2,
+      "instruction": "Hidrolik yardımlı araca bak: motorun yanında kayışla dönen bir pompa var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.hidrolik-pompa",
+        "question": "Bu sistem yardımı nasıl üretiyor?",
+        "options": [
+          { "label": "Motor kayışla pompayı döndürür, pompa sıvıyı basınçlandırır; sürücü direksiyonu çevirdiğinde bir valf basıncı doğru tarafa yönlendirip kremayeri iter", "verdict": "pompa-valf", "correct": true, "explain": "Hidrolik yardımın mantığı basittir: sürücünün kolunun yapamayacağı kuvveti sıvı basıncı yapar. Motor, kayış aracılığıyla bir pompayı sürekli döndürür; pompa depodan aldığı sıvıyı basınçlandırır ve basınç hortumuyla dişli kutusuna gönderir. Kutunun içinde sürücünün hareketini algılayan bir valf vardır. Sürücü direksiyonu sağa çevirdiğinde valf basıncı kremayerin bir tarafına yönlendirir, sıvı orada bir pistonu iter ve kremayer o yöne kayarken sürücünün uyguladığı kuvvete eklenir. Direksiyon bırakıldığında valf ortalanır ve basınç iki tarafa da eşit dağılır. Kullanılan sıvı dönüş hortumuyla depoya döner. Bu sistemin iki karakteristik özelliği vardır ve ikisi de teşhiste doğrudan işe yarar. Birincisi: yardım yalnız motor çalışırken vardır, çünkü pompayı motor döndürür. Motor durursa direksiyon anında ağırlaşır — bu bir arıza değil, sistemin doğasıdır ve sürücüye bunun anlatılması gerekir. İkincisi: pompa motor çalıştığı sürece sürekli çalışır, yani direksiyon hiç çevrilmese bile enerji harcar. Bu, hidrolik sistemin yakıt tüketimine küçük ama sürekli bir yük bindirmesinin sebebidir ve elektrik yardımlı sistemlerin yaygınlaşmasının başlıca gerekçesidir." },
+          { "label": "Pompa doğrudan tekerleği çevirir", "verdict": "tekerlek", "explain": "Pompa yalnız basınç üretir; hareketi kremayer taşır." },
+          { "label": "Sıvı yalnız yağlama içindir", "verdict": "yaglama", "explain": "Sıvı hem yağlar hem de kuvvet aktarır; asıl görevi basınç iletmek." },
+          { "label": "Yardım aküden gelen elektrikle üretilir", "verdict": "aku", "explain": "Klasik hidrolik sistemde pompayı motor kayışı döndürür." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Hidrolik sistemi anlatırken en sık atlanan nokta: pompa boşta bile çalışır. Bu, hem yakıt hem de aşınma anlamına gelir."
+    },
+    {
+      "id": 3,
+      "instruction": "Hidrolik deposunun seviyesini iki kez okudun: araç soğukken 42 mm, çalışıp ısındıktan sonra 47 mm. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.hidrolik-deposu",
+        "unit": "mm",
+        "acceptRange": [4.8, 5.2]
+      },
+      "camera": "direksiyon",
+      "hint": "47 eksi 42.",
+      "teachingNote": "5 mm'lik bu fark bir kaçak ya da eksilme değil; sıvının ısınınca genleşmesidir. Bu yüzden hidrolik depoların çoğunda iki ayrı işaret bulunur — biri soğuk, biri sıcak. Yanlış işarete bakarak seviye tamamlamak, sistemi fazla doldurmakla sonuçlanır ve ısındığında sıvı taşar. Buradan çıkan kural şudur: bir seviye okuması, hangi koşulda okunduğu söylenmeden anlamsızdır. Aynı kural motor yağında da geçerliydi. Doğru seviye aralığı araca özgüdür ve bu ders bir değer vermiyor; verdiği şey okuma disiplini."
+    },
+    {
+      "id": 4,
+      "instruction": "Elektrik yardımlı araca geç. Kayış yok, pompa yok; bunun yerine bir elektrik motoru var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.eps-motoru",
+        "question": "Bu düzenin hidroliğe göre kazandırdığı ne?",
+        "options": [
+          { "label": "Motor yalnız gerektiğinde çalışır ve destek miktarı elektronik olarak değiştirilebilir", "verdict": "gerektiginde-ve-degisken", "correct": true, "explain": "Elektrik yardımlı sistemde (kısaca EPS) yardımı bir elektrik motoru üretir. Motor, tasarıma göre direksiyon koluna, pinyona ya da doğrudan kremayere bağlanır ve sürücü direksiyonu çevirdiğinde ona ekleyerek destek verir. Hidroliğe göre iki temel üstünlüğü vardır. Birincisi enerjidir: elektrik motoru yalnız direksiyon çevrildiğinde akım çeker, düz giderken hiçbir şey harcamaz — hâlbuki hidrolik pompa motor çalıştığı sürece sürekli döner. İkincisi ve daha önemlisi kontroldür: desteğin miktarı bir kontrol ünitesi tarafından belirlendiği için yazılımla değiştirilebilir. Park hâlinde ve düşük hızda bol destek verilir, direksiyon parmakla çevrilir; yüksek hızda destek azaltılır, direksiyon ağırlaşır ve araç daha kararlı hissedilir. Bu, hidrolikte ancak ek düzeneklerle ve sınırlı biçimde yapılabilen bir şeydir. Üçüncü bir sonuç da vardır: EPS elektronik olduğu için başka sistemlerle konuşabilir; şerit takip, park asistanı ve kararlılık kontrolü gibi işlevler direksiyona müdahale edebildikleri için EPS ile mümkün olur. Bedeli ise şudur: sistem artık bir elektrik-elektronik sistemidir. Arızası sensör, kablo, modül ya da besleme arızası olabilir ve teşhisi mekanik değil, teşhis cihazıyla yapılır." },
+          { "label": "Mekanik zinciri ortadan kaldırır", "verdict": "zincirsiz", "explain": "Zincir yerinde durur; EPS yalnız kuvvet ekler." },
+          { "label": "Direksiyonu tamamen otomatik hâle getirir", "verdict": "otomatik", "explain": "Destek verir; aracı sürücü yönetir." },
+          { "label": "Hiçbir üstünlüğü yok, yalnız ucuz olduğu için kullanılır", "verdict": "ucuz", "explain": "Enerji ve değişken destek gerçek teknik üstünlükler." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "EPS'in asıl kazanımı yakıt değil, kontrol edilebilirlik. Direksiyona yazılımla dokunulabilmesi, sürücü destek sistemlerinin kapısını açtı."
+    },
+    {
+      "id": 5,
+      "instruction": "EPS'te motoru neyin tetiklediğine bak.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.tork-sensoru",
+        "question": "Kontrol ünitesi ne kadar destek vereceğini nereden biliyor?",
+        "options": [
+          { "label": "Tork sensörü sürücünün simide uyguladığı kuvveti ölçer; kontrol ünitesi bunu hız ve diğer verilerle birleştirip destek miktarını belirler", "verdict": "tork-sensoru", "correct": true, "explain": "EPS'in kalbi tork sensörüdür. Direksiyon kolonunun içinde, sürücünün simide uyguladığı burulma kuvvetini ölçen bir düzenektir; çoğu tasarımda kolon iki parçadan oluşur ve aralarındaki çok küçük burulma açısı ölçülerek sürücünün ne kadar kuvvet uyguladığı bulunur. Kontrol ünitesi bu sinyali alır, üzerine araç hızını ve tasarıma göre motor devri, direksiyon açısı ve kararlılık kontrol verilerini ekler ve elektrik motoruna ne kadar akım vereceğine karar verir. Bu zincirin anlaşılması teşhis açısından kritiktir çünkü sistemi bir sıra hâlinde düşünmeni sağlar: SENSÖR ölçer, MODÜL karar verir, MOTOR uygular. Destek gelmiyorsa üçünden biri ya da aralarındaki bağlantı sorunludur ve hangisi olduğu tahminle değil, teşhis cihazıyla veri okunarak bulunur. Tork sensörü arızalandığında sistem çoğu zaman kendini güvenli tarafa alır ve desteği tamamen keser — çünkü yanlış ölçülmüş bir kuvvete göre destek vermek, direksiyonu kendi başına çeviren bir sisteme dönüşmek demektir. Bu yüzden 'destek kesildi' şikâyeti bir arızanın kendisi değil, çoğu zaman sistemin doğru davranışıdır." },
+          { "label": "Direksiyonun kaç derece döndüğüne bakarak", "verdict": "aci", "explain": "Açı sensörü ayrı bir veri; desteğin girişi uygulanan kuvvettir." },
+          { "label": "Sürücünün seçtiği bir düğmeyle", "verdict": "dugme", "explain": "Bazı araçlarda mod seçimi var ama esas giriş tork sensörüdür." },
+          { "label": "Sabit bir destek verilir, ölçüm yapılmaz", "verdict": "sabit", "explain": "Destek sürekli hesaplanır; sabit destek EPS'in amacına aykırı." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Sensör ölçer, modül karar verir, motor uygular. Bu üçlü sıra, EPS teşhisinin iskeleti."
+    },
+    {
+      "id": 6,
+      "instruction": "Müşteri 'direksiyon ağırlaştı' diyor. Aracın hangi tip olduğunu henüz bilmiyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.eps-kontrol-unitesi",
+        "question": "Hangi soru seni en hızlı doğru yere götürür?",
+        "options": [
+          { "label": "Ağırlık motor çalışırken de var mı, ne zaman başladı ve panelde bir uyarı lambası yanıyor mu", "verdict": "kosul-sorulari", "correct": true, "explain": "Bu üç soru, aracı sökmeden şüphelilerin çoğunu eleyen sorulardır. Ağırlık motor çalışmıyorken varsa ve çalışınca geçiyorsa sistem normaldir; sürücü yalnız yardımın motora bağlı olduğunu bilmiyordur. Ağırlık motor çalışırken de sürüyorsa yardım katmanında bir sorun vardır ve buradan sonra tip belirleyicidir: hidrolikte sıvı seviyesi, kayış, pompa ve basınç sırayla bakılır; EPS'te teşhis cihazıyla sistem okunur, çünkü destek kesilmişse sistem bunu neredeyse her zaman bir kodla kaydeder. Başlangıç zamanı da ayırt eder: bir anda başlayan ağırlık genellikle bir kopma, kesilme ya da sistemin kendini kapatmasıdır; haftalar içinde yavaşça artan ağırlık ise aşınma, sıvı kaybı ya da mekanik sıkışmadır. Uyarı lambası ise kestirme yoldur: EPS lambası yanıyorsa sistem kendi arızasını zaten bildirmiştir ve ilk iş kodu okumaktır. Bu üç soru sorulmadan kaputun açılması, çoğu zaman gereksiz sökme ve yanlış parça demektir. Ayrıca ağırlığın kaynağı her zaman direksiyon sistemi de değildir; çok düşük lastik basıncı ve sıkışmış bir ön takım mafsalı da aynı şikâyeti üretir ve bunlar Lastik ve Tekerlek alanının konusudur." },
+          { "label": "Doğrudan pompa değiştirilir", "verdict": "pompa-degistir", "explain": "Aracın tipi bile bilinmeden parça değiştirilmez; EPS'te pompa yoktur." },
+          { "label": "Hidrolik sıvısı eklenir", "verdict": "sivi-ekle", "explain": "Araç EPS ise eklenecek sıvı yoktur; hidrolikse önce sebebi bulunur." },
+          { "label": "Ön düzen ayarı yapılır", "verdict": "on-duzen", "explain": "Ayar ağırlığı çözmez; önce yardım katmanı değerlendirilir." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Diğer alanlardaki desen burada da geçerli: doğru soru, aletten önce gelir."
+    },
+    {
+      "id": 7,
+      "instruction": "Yardım tamamen kesildi — hidrolikte kayış koptu, EPS'te modül devre dışı kaldı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.direksiyon-simidi",
+        "question": "Araç ne hâlde?",
+        "options": [
+          { "label": "Direksiyon çok ağırlaşır ama yönetilebilir kalır; mekanik zincir yerindedir. Düşük hızda ve manevrada çok zorlanılır, araç güvenli biçimde durdurulup servise götürülür", "verdict": "agir-ama-yonetilebilir", "correct": true, "explain": "Yardım sistemleri bilerek böyle tasarlanır: yardım kaybolduğunda direksiyon kilitlenmez, yalnız ağırlaşır. Sebebi ilk adımda öğrendiğin şeydir — hareketi taşıyan hâlâ mekanik zincirdir ve yardım ona eklenen bir kuvvettir. Bu yüzden kayışı kopmuş bir araç da, EPS'i devre dışı kalmış bir araç da yol kenarına çekilebilir. Ancak 'yönetilebilir' kelimesi yanıltmamalıdır: özellikle düşük hızda, park hâlinde ve manevrada direksiyon şaşırtıcı derecede ağırlaşır ve sürücü buna hazırlıksız yakalanır. Bu yüzden doğru davranış hızı düşürmek, ani manevradan kaçınmak, güvenli bir yerde durmak ve aracı çektirmektir; 'nasılsa çevriliyor' diyerek yola devam etmek değil. İki ek uyarı: hidrolikte kayış kopması yalnız direksiyonu değil, aynı kayışın döndürdüğü şarj alternatörünü ve devir daim pompasını da durdurmuş olabilir — o zaman asıl acil sorun motorun ısınmasıdır. EPS'te ise destek kesilmesi bir arıza sonucu olabildiği gibi sistemin kendini koruması da olabilir; sürekli park manevrası sonrası motor ısınınca destek geçici olarak azaltılabilir ve araç soğuyunca normale döner. Bu ikisini ayırmak için kod okunur." },
+          { "label": "Direksiyon kilitlenir, araç yönetilemez", "verdict": "kilit", "explain": "Mekanik zincir yerinde olduğu için kilitlenmez, yalnız ağırlaşır." },
+          { "label": "Hiçbir fark hissedilmez", "verdict": "fark-yok", "explain": "Özellikle düşük hızda ağırlık çok belirgindir." },
+          { "label": "Fren de devre dışı kalır", "verdict": "fren", "explain": "Fren ayrı bir sistemdir; direksiyon yardımının kesilmesiyle ilgisi yoktur." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Bu adım aşama 0'ı kapatıyor: sınır, harita ve tipler. Bundan sonrası ölçme — boşluğun büyüklüğü ve yeri."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Hidrolik ve elektrik yardımlı sistemlerin mekanik sistemle ortak yanı nedir?",
+        "a": "ayni-zincir",
+        "options": [
+          { "verdict": "ayni-zincir", "label": "Simitten tekerleğe uzanan mekanik zincir üçünde de aynıdır; yardım katmanı ona kuvvet ekler", "explain": "Yardım sistemi tekerleği çevirmez, sürücünün çevirmesini kolaylaştırır. Bunun iki sonucu vardır: yardım tamamen kesilse bile araç yönetilebilir kalır çünkü mekanik bağlantı yerindedir; ve teşhiste şikâyetin zincirle mi yardım katmanıyla mı ilgili olduğu ilk ayrılan sorudur." },
+          { "verdict": "motor", "label": "Üçünde de tekerleği bir motor çevirir", "explain": "Hareketi mekanik zincir taşır." },
+          { "verdict": "kutusuz", "label": "Üçünde de dişli kutusu yoktur", "explain": "Dişli kutusu üçünde de vardır." },
+          { "verdict": "farkli", "label": "Ortak yanları yoktur", "explain": "Ortak yanları zincirin kendisidir." }
+        ]
+      },
+      {
+        "q": "EPS'te kontrol ünitesi destek miktarını neye göre belirler?",
+        "a": "tork-sensoru",
+        "options": [
+          { "verdict": "tork-sensoru", "label": "Tork sensörünün ölçtüğü, sürücünün simide uyguladığı kuvvete ve araç hızı gibi verilere göre", "explain": "Sıra şudur: sensör ölçer, modül karar verir, motor uygular. Tork sensörü kolonun içindeki çok küçük burulmayı ölçerek sürücünün ne kadar kuvvet uyguladığını bulur. Sensör arızalanırsa sistem desteği tamamen keser, çünkü yanlış ölçüme göre destek vermek direksiyonu kendi başına çeviren bir sisteme dönüşmek olurdu." },
+          { "verdict": "aci", "label": "Yalnız direksiyonun kaç derece döndüğüne bakarak", "explain": "Açı ek bir veridir; giriş uygulanan kuvvettir." },
+          { "verdict": "dugme", "label": "Sürücünün seçtiği düğmeyle", "explain": "Mod seçimi olabilir ama esas giriş tork sensörüdür." },
+          { "verdict": "sabit", "label": "Sabit destek verir", "explain": "Destek sürekli hesaplanır." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 42 mm ve 47 mm SENARYO okumalarıdır; istenen FARKTIR (5 mm) ve ders bir seviye sınırı vermiyor. Gösterilen şey seviyenin sıcaklığa bağlı okunması gerektiğidir.",
+    "sourceRequired": "Hidrolik sistem basınç değerleri, sıvı tipi ve doğru seviye aralığı ile EPS destek eğrileri bilinçle VERİLMEDİ; hepsi araca ve üreticiye özgüdür. Sıvı tipi özellikle kritiktir ve künyesiz yazılmaz.",
+    "kapsam": "Elektro-hidrolik (elektrik motoruyla döndürülen pompa) ara tipi ve mekanik bağlantısı olmayan tasarımlar metinde anıldı ama ayrı ders konusu değil. Hidrolik devrenin ayrıntısı aşama 3'te, EPS'in ayrıntısı aşama 4'te işleniyor. Ağırlık şikâyetinin lastik ve ön takım kaynaklı olabileceği belirtildi; o teşhis Lastik ve Tekerlek alanında.",
+    "reviewedByMechanic": false
+  }
+}

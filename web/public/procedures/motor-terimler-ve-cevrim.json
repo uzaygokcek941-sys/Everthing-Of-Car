@@ -1,0 +1,144 @@
+{
+  "id": "motor.terimler-ve-cevrim",
+  "area": "motor-mekanik",
+  "stage": 3,
+  "title": "Dört Zamanlı Çevrim, Ölü Noktalar, Terimler",
+  "vehicleClass": "motor",
+  "estimatedMinutes": 18,
+  "prerequisites": ["temel.civata-sokme-takma"],
+  "learningGoals": [
+    "Dört zamanı piston yönü ve supap durumundan okumak",
+    "Krank ve kam mili arasındaki 2:1 ilişkisini bilmek",
+    "Sıkıştırma oranını hacimlerden hesaplamak"
+  ],
+
+  "safety": [
+    { "rule": "Krank elle çevrilirken kontak kapalı ve buji kabloları sökülü olmalı", "why": "Marş kazara dönerse el, kayış ile kasnak arasında kalır. Ayrıca sıkışmış bir silindirde kompresyon krankı geri tepebilir", "blocksStart": true },
+    { "rule": "Krank yalnız normal dönüş yönünde çevrilir", "why": "Ters çevirmek triger gergisini boşaltır; gergi boşalınca kayış dişten atlayabilir ve motorun zaman ayarı bozulur", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.lokma-19", "label": "19 mm lokma (krank kasnak somunu)", "required": true },
+    { "id": "tool.circir", "label": "1/2\" cırcır kolu", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Krankı normal dönüş yönünde iki tam tur çevir ve pistonun kaç kez inip çıktığını say.",
+      "interaction": {
+        "type": "rotate",
+        "target": "part.krank-kasnagi",
+        "direction": "cw",
+        "turns": 2,
+        "tool": "tool.lokma-19",
+        "requiresGesture": true
+      },
+      "camera": "motor-on",
+      "commonMistake": {
+        "if": "ters-yon",
+        "feedback": "Krankı ters çeviriyorsun. Triger gergisi bu yönde boşalır ve kayış diş atlayabilir; motor elle bile olsa yalnız kendi yönünde döndürülür."
+      },
+      "hint": "Piston iki kez yukarı, iki kez aşağı gitti. Dört hareket = dört zaman.",
+      "teachingNote": "Dört zamanlı motorda bir çevrim krankın İKİ turudur. Kam mili bu sürede yalnız BİR tur atar; bu yüzden kam kasnağı krank kasnağının iki katı dişlidir. Bu tek cümle bilinmeden ne sente anlaşılır ne triger."
+    },
+    {
+      "id": 2,
+      "instruction": "Piston aşağı iniyor. Emme supabı açık, egzoz supabı kapalı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.silindir-1",
+        "question": "Bu silindir hangi zamanda?",
+        "options": [
+          { "label": "Emme", "verdict": "emme", "correct": true, "explain": "Piston aşağı inerken silindirde alçalan basınç oluşur ve açık emme supabından hava-yakıt karışımı içeri çekilir. Zamanı okumanın kuralı budur: piston hangi yöne gidiyor ve hangi supap açık." },
+          { "label": "Sıkıştırma", "verdict": "sikistirma", "explain": "Sıkıştırmada piston YUKARI çıkar ve iki supap da kapalıdır. Açık supapla sıkıştırma olmaz, karışım geri kaçar." },
+          { "label": "İş (güç)", "verdict": "is", "explain": "İş zamanında piston aşağı iner ama iki supap da KAPALIDIR; basıncın pistonu itebilmesi için silindirin kapalı olması gerekir." },
+          { "label": "Egzoz", "verdict": "egzoz", "explain": "Egzozda piston yukarı çıkar ve egzoz supabı açıktır. Burada tam tersi görünüyor." }
+        ]
+      },
+      "camera": "motor-kesit",
+      "teachingNote": "Zaman ezberlenmez, okunur: piston yönü + supap durumu. İki bilgi dördü de ayırır — biri hariç."
+    },
+    {
+      "id": 3,
+      "instruction": "Piston üst ölü noktada. İki supap da kapalı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.silindir-1",
+        "question": "Bu silindir hangi zamanda?",
+        "options": [
+          { "label": "Bu görüntüyle ayırt edilemez; kam mili işaretine bakmak gerekir", "verdict": "ayirt-edilemez", "correct": true, "explain": "Piston ÜÖN'de ve iki supap kapalıysa iki ihtimal vardır: sıkıştırmanın sonu ya da iş zamanının başı. Krank ikisinde de aynı yerdedir, çünkü krank iki turda bir kez tekrar eder — kam mili bir turda. Ayrımı yapan tek şey kam mili (veya distribütör) işaretidir. Motoru 'senteye getirmek' tam olarak bu belirsizliği ortadan kaldırmaktır." },
+          { "label": "Kesinlikle sıkıştırma sonu", "verdict": "sikistirma", "explain": "Olabilir ama kesin değil. Bir tur sonra piston yine tam buradadır ve supaplar yine kapalıdır; o zaman iş zamanının başıdır." },
+          { "label": "Kesinlikle iş zamanı başı", "verdict": "is", "explain": "Aynı sebeple kesin değil. Krankın konumu bu iki durumu ayıramaz." },
+          { "label": "Egzoz sonu", "verdict": "egzoz", "explain": "Egzoz sonunda egzoz supabı henüz kapanmakta, emme açılmaktadır — iki supap birden kapalı değildir." }
+        ]
+      },
+      "camera": "motor-kesit",
+      "hint": "Krank iki turda bir çevrim tamamlıyor. O halde tek başına krank konumu sana çevrimin neresinde olduğunu söyleyebilir mi?",
+      "teachingNote": "Bu adımın cevabı 'bilmiyorum' değil, 'bu veriyle bilinemez'. İkisi farklı şeydir ve ustayı çıraktan ayıran fark budur: usta eksik veriyle karar vermez, eksik olanı söyler."
+    },
+    {
+      "id": 4,
+      "instruction": "Silindir süpürme hacmi 450 cm³, yanma odası hacmi 50 cm³. Sıkıştırma oranını hesapla ve gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.silindir-1",
+        "unit": ":1",
+        "bookValue": 10,
+        "acceptRange": [9.9, 10.1]
+      },
+      "camera": "motor-kesit",
+      "hint": "Piston altta iken silindirdeki toplam hacmi, piston üstte iken kalan hacme böl.",
+      "teachingNote": "Sıkıştırma oranı = (süpürme hacmi + yanma odası hacmi) / yanma odası hacmi = (450 + 50) / 50 = 10:1. Payda yanma odasıdır; silindir kapağı yüzeyi taşlandığında yanma odası küçülür ve oran farkında olmadan yükselir. Buradaki hacimler egzersiz değeridir."
+    },
+    {
+      "id": 5,
+      "instruction": "ÜÖN civarında bir an için emme ve egzoz supapları birlikte açık kalıyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.silindir-1",
+        "question": "İki supabın aynı anda açık olması ne anlama gelir?",
+        "options": [
+          { "label": "Kasıtlı tasarımdır — supap bindirmesi; dolumu artırır", "verdict": "bindirme", "correct": true, "explain": "Buna supap bindirmesi denir. Dışarı akan egzoz gazının ataleti silindirde emme etkisi yaratır ve taze dolguyu içeri çeker; egzoz da daha iyi süpürülür. Kam milinin profiline bilerek konmuştur, arıza değildir." },
+          { "label": "Kam mili aşınmış, ayar kaçmış", "verdict": "asinma", "explain": "Aşınma boşluğu büyütür, supabı erken açmaz. Bindirmeyi arıza sanmak yaygın bir çırak hatasıdır ve sağlam motorun sökülmesine yol açar." },
+          { "label": "Motoru soğutmak için", "verdict": "sogutma", "explain": "Soğutma su ceketi ve yağın işidir. Bindirmenin amacı gaz değişimi, ısı atımı değil." },
+          { "label": "Triger bir diş kaymış", "verdict": "triger-kaymis", "explain": "Diş kayması bindirmeyi değil, bütün supap zamanlamasını topluca kaydırır ve motor ya çalışmaz ya da güçsüz çalışır. Bindirme normal çalışmanın parçasıdır." }
+        ]
+      },
+      "camera": "motor-kesit",
+      "teachingNote": "Yüksek devir için tasarlanmış motorlarda bindirme geniştir; bu motorlar rölantide kaba çalışır. Rölantideki 'düzensizlik' her zaman arıza değildir."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Bir çevrim tamamlanana kadar krank ve kam mili kaçar tur döner?",
+        "a": "krank-2-kam-1",
+        "options": [
+          { "verdict": "krank-2-kam-1", "label": "Krank 2 tur, kam mili 1 tur", "explain": "Dört zaman = krankın 720°'si. Her supap bu sürede yalnız bir kez açılıp kapandığı için kam mili yarı hızda döner. Triger kasnaklarının diş sayısı da bu yüzden 2:1'dir." },
+          { "verdict": "ikisi-de-1", "label": "İkisi de 1 tur", "explain": "Krank tek turda yalnız iki zaman tamamlar. Dört zaman için iki tur gerekir." },
+          { "verdict": "krank-1-kam-2", "label": "Krank 1 tur, kam mili 2 tur", "explain": "Ters. Kam mili krankın yarısı hızında döner, iki katı değil." },
+          { "verdict": "krank-4-kam-2", "label": "Krank 4 tur, kam mili 2 tur", "explain": "Zaman sayısı ile tur sayısı aynı şey değil; her zaman krankın yarım turudur." }
+        ]
+      },
+      {
+        "q": "Benzinli motorda sıkıştırma oranını sınırlayan şey nedir?",
+        "a": "vuruntu",
+        "options": [
+          { "verdict": "vuruntu", "label": "Karışımın buji ateşlemeden kendiliğinden tutuşması (vuruntu)", "explain": "Sıkıştırma hem basıncı hem sıcaklığı yükseltir. Bir noktadan sonra karışım bujiyi beklemeden patlar; bu kontrolsüz yanma piston tepesini deler. Dizelde ise durum tersine çevrilmiştir: yakıtın sıcak havada kendiliğinden tutuşması zaten istenen şeydir, o yüzden dizelin sıkıştırma oranı yüksektir." },
+          { "verdict": "mars-gucu", "label": "Marş motorunun gücü", "explain": "Marş gücü bir tasarım kısıtı olabilir ama sıkıştırma oranının üst sınırını yakıtın tutuşma davranışı belirler." },
+          { "verdict": "yag-tuketimi", "label": "Yağ tüketimi", "explain": "Yağ tüketimi segman ve gömlek durumuyla ilgilidir, sıkıştırma oranının sınırı değildir." },
+          { "verdict": "sinir-yok", "label": "Sınır yoktur, ne kadar yüksekse o kadar iyi", "explain": "Verim oranla artar ama vuruntu sınırı aşıldığında motor kendini yok eder. Mühendislik bu iki eğrinin kesiştiği yerde durur." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "sourceRequired": "450 ve 50 cm³ egzersiz değerleridir, belirli bir motora ait değildir. Gerçek motorun süpürme hacmi ve sıkıştırma oranı üretici verisidir ve kaynaksız yayınlanmaz.",
+    "kapsam": "Bu ders motor kesiti gerektiriyor. Model gelene kadar adımlar metinle oynanır; piston ve supap hareketi animasyonlu değildir.",
+    "reviewedByMechanic": false
+  }
+}

@@ -1,0 +1,176 @@
+{
+  "id": "aksesuar.merkezi-kilit",
+  "area": "aksesuar-ses",
+  "stage": 1,
+  "title": "Merkezî Kilit Sisteminin Kontrolü ve Elemanları",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 30,
+  "prerequisites": ["aksesuar.sokme-teknigi"],
+  "learningGoals": [
+    "Merkezî kilidin bir motor değil bir zincir olduğunu görmek",
+    "Tek kapı ile bütün kapılar arasındaki arıza ayrımını yapmak",
+    "Kilit motorunun mekanik ve elektriksel testini ayrı ayrı uygulamak"
+  ],
+
+  "safety": [
+    { "rule": "Kapı döşemesi sökülmeden önce akü eksi ucu ayrılır ve doğrulanır", "why": "Kilit motoru sürekli beslemeli bir hattan çalışır; metal alet uca değdiğinde kısa devre olur", "blocksStart": true },
+    { "rule": "Kapı içinde el varken kimse uzaktan kumandaya basmaz", "why": "Kilit mekanizması ani ve güçlü hareket eder; parmak sıkışması bu işin en sık kazasıdır", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.multimetre", "label": "Multimetre", "required": true },
+    { "id": "tool.plastik-sokme-spatulasi", "label": "Plastik söküm spatulası", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Kapı döşemesini söktün. Kilidin arkasındaki küçük motora bak.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.merkezi-kilit-motoru",
+        "question": "Merkezî kilit sistemi neyden oluşur?",
+        "options": [
+          { "label": "Bir zincirden: kumanda ya da düğme → modül → her kapıdaki motor → kilit mekanizmasının mandalı; her halka ayrı ayrı arızalanabilir", "verdict": "zincir", "correct": true, "explain": "Merkezî kilit sürücünün bir düğmeye basıp bütün kapıların kilitlenmesi gibi görünür ama arkasında sıralı bir zincir vardır ve teşhis bu zinciri bilmekle başlar. Zincirin başında istek vardır: sürücü kapısındaki düğme, uzaktan kumanda ya da kapı kolundaki temassız sensör. İstek modüle gider. Modül kararı verir ve HER kapıdaki kilit motoruna kendi çıkışından enerji gönderir. Motor küçük bir elektrik motorudur; bir dişli düzeneğiyle kilit mekanizmasının mandalını iter ya da çeker. Mandal hareket edince kapı kilitlenir veya açılır. Bu zinciri bilmenin pratik karşılığı şudur: 'merkezî kilit çalışmıyor' diye gelen bir araçta hiçbir zaman tek bir ihtimal yoktur. Bütün kapılar birden çalışmıyorsa arıza ortak halkalardadır — besleme, sigorta, modül ya da istek kaynağı. Yalnız bir kapı çalışmıyorsa ortak halkalar sağlamdır ve arıza o kapıya ait halkadadır: o kapının motoru, kablosu ya da körükten geçen teller. Bu tek soru — 'hepsi mi, biri mi' — teşhis süresini yarıya indirir." },
+          { "label": "Tek bir motordan; o motor bütün kapıları mekanik çubuklarla çeker", "verdict": "tek-motor", "explain": "Çok eski bazı sistemlerde çubuk vardı; modern araçlarda her kapının kendi motoru vardır." },
+          { "label": "Yalnız uzaktan kumandadan ve alıcıdan", "verdict": "kumanda", "explain": "Kumanda yalnız isteği iletir; kilitleyen şey kapıdaki motordur." },
+          { "label": "Kapı kolunun mekanik parçasından", "verdict": "kol", "explain": "Kol mekanik açmayı sağlar; merkezî kilit ayrı bir elektrikli düzenektir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Bu alanın bütün teşhis dersleri bu ayrımla başlıyor: hepsi mi çalışmıyor, biri mi? Cevap arıza aramanın yarısını siliyor."
+    },
+    {
+      "id": 2,
+      "instruction": "Müşteri 'kilit çalışmıyor' diyor. İlk hamleni yapıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kapi-modulu",
+        "question": "Hiçbir alet almadan önce ne yapılır?",
+        "options": [
+          { "label": "Her kapı tek tek denenir ve hangilerinin çalıştığı yazılır; ayrıca istek üç ayrı kaynaktan verilir — düğme, kumanda ve varsa kapı kolu", "verdict": "haritala", "correct": true, "explain": "Aletten önce harita çıkar. İki eksende deneme yapılır. Birinci eksen kapılardır: dört kapı, bagaj ve varsa yakıt kapağı ayrı ayrı denenir ve hangisinin kilitlendiği, hangisinin açıldığı yazılır — çünkü bir kapı yalnız kilitleniyor ama açılmıyor olabilir ve bu tek yönlü arıza motorun bir sargısını ya da modülün bir çıkışını işaret eder, bilgiyi kaybetmemek gerekir. İkinci eksen istek kaynağıdır: aynı işlem sürücü kapısındaki düğmeyle, uzaktan kumandayla ve varsa kapı kolundaki sensörle ayrı ayrı denenir. Bu ikinci eksen çok ayırt edicidir. Kumandayla çalışıp düğmeyle çalışmıyorsa modül ve motorlar sağlamdır, sorun düğmede ya da düğmenin modüle giden kablosundadır. Düğmeyle çalışıp kumandayla çalışmıyorsa zincirin kapı tarafı sağlamdır, sorun kumanda, pil ya da alıcı tarafındadır. Bu iki eksenlik tablo beş dakika sürer ve çoğu zaman doğrudan arızalı halkayı gösterir. Tablo çıkarmadan sökülen ilk kapı, çoğu zaman yanlış kapıdır." },
+          { "label": "Sigorta doğrudan değiştirilir", "verdict": "sigorta-degistir", "explain": "Sigorta atmışsa sebebi vardır; sebep bulunmadan değiştirilen sigorta tekrar atar." },
+          { "label": "Sürücü kapısı sökülür", "verdict": "sok", "explain": "Hangi kapının sorunlu olduğu belli değilken söküm tahmindir." },
+          { "label": "Modül değiştirilir", "verdict": "modul-degistir", "explain": "En pahalı halkayla başlamak teşhis değildir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "İki eksenli tablo: hangi kapı × hangi istek kaynağı. Bu tablo bu dersin en çok işe yarayan tek çıktısı."
+    },
+    {
+      "id": 3,
+      "instruction": "Tablo çıktı: yalnız arka sol kapı çalışmıyor, üç kapı ve bagaj normal. O kapıyı söktün, motorun soketini eline aldın.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.multimetre-aksesuar",
+        "unit": "V",
+        "acceptRange": [11.4, 11.8]
+      },
+      "camera": "aksesuar",
+      "hint": "Kilit komutu anında soket ucunda 12,1 V, aç komutu anında 0,5 V okudun. Farkı gir.",
+      "teachingNote": "11,6 voltluk bu fark tek başına çok şey söylüyor: modül o kapıya komutu GÖNDERİYOR. Yani modül, besleme, sigorta ve kapıya giden kablo — hepsi sağlam. Geriye tek bir halka kalıyor: motorun kendisi. Ölçümün nasıl yapıldığı da önemli: soket ayrılır, problar soketin araç tarafındaki iki ucuna değdirilir ve komut verilirken okunur. Merkezî kilit motorları çift yönlü çalışır; yani aynı iki uca kilitlerken bir yönde, açarken ters yönde gerilim uygulanır. Bu yüzden iki komut ayrı ayrı denenir — bir yönde gerilim gelip diğerinde gelmiyorsa arıza motorda değil, modülün o çıkışındadır. Kabul edilebilir besleme gerilimi ve motorun çektiği akım araca özgüdür; bu ders bir sınır vermiyor, ölçülen şey iki komut arasındaki farktır."
+    },
+    {
+      "id": 4,
+      "instruction": "Komut geliyor ama motor kıpırdamıyor. Motoru sökmeden önce mekanik tarafını kontrol et.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.merkezi-kilit-motoru",
+        "question": "Motor dönmüyorsa sebep her zaman motor mudur?",
+        "options": [
+          { "label": "Hayır — motor sağlam olup mandal sıkışmış olabilir; önce mekanizma elle hareket ettirilerek serbest olduğu doğrulanır", "verdict": "once-mekanik", "correct": true, "explain": "Elektrik geliyor ve hareket yok denince ilk akla gelen motorun yandığıdır, ama bu her zaman doğru değildir ve yanlış parça değiştirmenin en sık sebebidir. Kilit motoru bir mandalı iter; o mandal donmuş, paslanmış, eğilmiş ya da içine giren bir cisimle sıkışmış olabilir. Motor sağlamdır ama yükü kaldıramaz. Kontrol basittir ve enerji kesikken yapılır: mekanizmanın hareketli parçası elle kilitli ve açık konumlar arasında gezdirilir. Serbestçe gidip geliyorsa mekanik taraf sağlamdır ve şüphe motora döner. Zorlanıyorsa ya da bir noktada takılıyorsa sorun mekaniktir. İkinci sık sebep şudur: kapı ile gövde arasındaki körükten geçen kablonun içinde kopuk vardır ve kapı belli bir açıdayken temas kesilir — o zaman komut ölçümde görünür ama motora ulaşmaz. Bu yüzden ölçüm mümkünse motorun soketinde, kapı normal konumundayken yapılır. Üçüncüsü buzlanmadır: kışın donan bir mekanizma, motor sağlamken kilidi hareketsiz bırakır ve ısınınca kendiliğinden düzelir; müşteri 'bazen oluyor' diyorsa bu ihtimal ilk sıradadır." },
+          { "label": "Evet, elektrik geliyorsa hareket etmeyen motor bozuktur", "verdict": "motor-bozuk", "explain": "Mandal sıkışmışsa sağlam motor da hareket ettiremez; parça boşuna değişir." },
+          { "label": "Sorun her zaman moduldedir", "verdict": "modul", "explain": "Modülün komut gönderdiği ölçümle zaten görüldü." },
+          { "label": "Kapı hizası ayarlanır", "verdict": "hiza", "explain": "Hiza kapı kapanmasını etkiler; kilit motorunun hareketsizliğini açıklamaz." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "'Elektrik var, hareket yok' cümlesi iki ihtimal taşır: motor ya da yük. İkisini ayırmanın yolu elle denemek — ve bedava."
+    },
+    {
+      "id": 5,
+      "instruction": "Başka bir araç: hiçbir kapı çalışmıyor, kumanda da düğme de etkisiz.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sigorta-kutusu-aksesuar",
+        "question": "Bu tabloda arama nereden başlar?",
+        "options": [
+          { "label": "Ortak halkalardan: sigorta, modülün beslemesi ve şasesi — çünkü tek bir arıza ancak ortak bir noktadaysa bütün kapıları birden durdurabilir", "verdict": "ortak-halka", "correct": true, "explain": "Dört kapının dördünün de aynı anda arızalanma ihtimali yok denecek kadar düşüktür. Bütün kapılar birden çalışmıyorsa arıza mutlaka hepsinin paylaştığı bir halkadadır ve bu halkalar azdır: sistemin sigortası, modülün besleme ucu, modülün şase ucu ve modülün kendisi. Arama sırası ucuzdan pahalıya ve kolaydan zora doğrudur. Önce sigorta bakılır — ama değiştirilerek değil, önce atmış olup olmadığına bakılarak; atmışsa bu bir bulgudur, bir yerde kısa devre var demektir ve sebebi bulunmadan yeni sigorta takmak o sigortayı da yakar. Sonra modülün besleme ucunda gerilim ölçülür. Sonra şase ucunda gerilim düşümü ölçülür — kötü şase bu tabloyu birebir üretir ve en çok atlanan sebeptir. Bunların hepsi sağlamsa şüphe modüle döner, ama modül son sıradadır çünkü hem en pahalı hem de birçok araçta takıldıktan sonra araca tanıtılması gereken parçadır. Bir de basit bir ihtimal vardır ve önce sorulur: aracın kendi hırsızlık koruması ya da bir 'taşıma modu' devrede olabilir; bu durumda hiçbir parça bozuk değildir." },
+          { "label": "Dört kapının motoru da ayrı ayrı ölçülür", "verdict": "dort-motor", "explain": "Dördünün birden bozulması gerçekçi değil; ortak halka aranır." },
+          { "label": "Kumandanın pili değiştirilir", "verdict": "pil", "explain": "Düğme de çalışmıyorsa sorun kumandada değildir." },
+          { "label": "Kapı döşemeleri sökülür", "verdict": "sok", "explain": "Ortak halkalar sökmeden ölçülebilir; söküm son çaredir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Ortak arıza ortak halkadadır — bu cümle bu alanda da, elektrik alanında da aynı şekilde çalışıyor."
+    },
+    {
+      "id": 6,
+      "instruction": "Üçüncü araç: kapılar kilitleniyor ama açılmıyor. Yalnız tek yönde çalışıyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kapi-modulu",
+        "question": "Tek yönlü çalışma neyi anlatır?",
+        "options": [
+          { "label": "Zincirin iki yönü ayrı sürülür; tek yön çalışmıyorsa arıza o yönü süren tarafta ya da o yönün mekanik yolundadır, ortak besleme sağlamdır", "verdict": "tek-yon", "correct": true, "explain": "Merkezî kilit iki ayrı komut çalıştırır: kilitle ve aç. Motor çift yönlüdür ve modül aynı iki uca ters kutupta gerilim uygulayarak yönü belirler. Bu yüzden tek yönün çalışmaması çok bilgilendirici bir belirtidir — besleme, sigorta, şase ve motorun kendisi büyük ihtimalle sağlamdır, çünkü diğer yönde hepsi çalışıyor. Geriye üç ihtimal kalır. Birincisi modülün o yönü süren çıkışıdır; iki uçta da ölçüm yapılır ve çalışmayan yönde gerilimin gelmediği görülür. İkincisi mekanik yoldur: kilit mandalının açma tarafı ayrı bir kola basar ve o kol eğilmiş ya da sıkışmış olabilir; kilitlerken çalışan mekanizma açarken takılabilir. Üçüncüsü ve sık atlanan ihtimal bir ayardır: birçok araçta 'çocuk kilidi' ve 'hırsızlık kilidi' işlevi vardır ve devreye girdiğinde kapı içeriden ya da bazen dışarıdan açılmaz — bu bir arıza değildir. Bu yüzden tek yönlü şikâyette müşteriye ilk sorulacak soru şudur: hangi kapılar, içeriden mi dışarıdan mı, ve bu ne zaman başladı?" },
+          { "label": "Motor kesin bozuktur", "verdict": "motor", "explain": "Diğer yönde çalışan bir motor bütünüyle bozuk değildir." },
+          { "label": "Akü zayıftır", "verdict": "aku", "explain": "Zayıf akü tek yönü seçmez; her iki yönü de etkiler." },
+          { "label": "Bu normaldir, bütün araçlarda böyle olur", "verdict": "normal", "explain": "Normal değildir; ama çocuk/hırsızlık kilidi devredeyse arıza da değildir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Tek yönlü arıza bir hediyedir: ortak halkaları tek ölçüm yapmadan eler. Belirtinin kendisi bir teşhis aracıdır."
+    },
+    {
+      "id": 7,
+      "instruction": "Arızayı buldun, motoru değiştirdin, kapıyı topluyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kapi-ic-dosemesi",
+        "question": "Panel takılmadan önce hangi denemeler yapılır?",
+        "options": [
+          { "label": "Dört kapı ve bagaj, üç istek kaynağının hepsiyle ve iki yönde tek tek denenir; ayrıca kapı açıkken ve kapalıyken ayrı ayrı", "verdict": "tam-deneme", "correct": true, "explain": "Bir kilit işini bitirmenin şartı, arızalı kapının çalışması değildir; ilk çıkarılan tablonun tamamının artık temiz olmasıdır. Deneme dört boyutta yapılır. Birincisi bütün kapılar: dört kapı, bagaj ve varsa yakıt kapağı. İkincisi bütün istek kaynakları: sürücü düğmesi, uzaktan kumanda, varsa kapı kolu sensörü ve anahtar. Üçüncüsü iki yön: kilitle ve aç. Dördüncüsü ve en çok atlanan boyut kapı konumudur — deneme hem kapı açıkken hem kapalıyken yapılır, çünkü kapı kapandığında körükteki kablo demeti farklı bir açıya girer ve orada kopuk varsa arıza yalnız o konumda görünür. Bir de mekanik son kontrol vardır: kilitliyken kapı kolu çekilerek kapının gerçekten açılmadığı doğrulanır. Elektriksel olarak kilitlenmiş görünüp mekanik olarak açılan bir kapı, müşterinin güvenlik sorunudur ve gösterge panelinde hiçbir uyarı vermez. Panel takıldıktan sonra bulunan her eksik, ikinci bir söküm demektir ve klipsler her sökümde yorulur." },
+          { "label": "Yalnız değiştirilen kapı denenir", "verdict": "tek-kapi", "explain": "İşe başlarken çıkarılan tablonun tamamı temizlenmelidir." },
+          { "label": "Panel takılır, sonra denenir", "verdict": "sonra", "explain": "Bir eksik çıkarsa ikinci söküm gerekir." },
+          { "label": "Müşteri denesin, sorun olursa gelir", "verdict": "musteri", "explain": "Teslim öncesi bulunmayan hata teslim sonrası on kat iştir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Kapı açıkken çalışıp kapalıyken çalışmayan kilit, körükteki kopuğun klasik imzası — bir sonraki dersin konusu tam olarak bu."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "'Merkezî kilit çalışmıyor' şikâyetinde aletten önce ne yapılır?",
+        "a": "haritala",
+        "options": [
+          { "verdict": "haritala", "label": "İki eksenli tablo çıkarılır: hangi kapılar × hangi istek kaynağı", "explain": "Dört kapı, bagaj ve yakıt kapağı ayrı ayrı; her biri düğme, uzaktan kumanda ve varsa kapı kolu sensörüyle ayrı ayrı denenir. Kumandayla çalışıp düğmeyle çalışmıyorsa sorun düğme tarafındadır; tersi ise kumanda/alıcı tarafındadır. Bütün kapılar birden çalışmıyorsa arıza ortak halkadadır, tek kapı çalışmıyorsa o kapıya ait halkadadır." },
+          { "verdict": "sigorta-degistir", "label": "Sigorta değiştirilir", "explain": "Sigorta attıysa sebebi vardır." },
+          { "verdict": "sok", "label": "Sürücü kapısı sökülür", "explain": "Hangi kapı olduğu belli değilken söküm tahmindir." },
+          { "verdict": "modul-degistir", "label": "Modül değiştirilir", "explain": "En pahalı halkayla başlamak teşhis değildir." }
+        ]
+      },
+      {
+        "q": "Kilit motoruna komut geliyor ama motor hareket etmiyor. Sonuç nedir?",
+        "a": "once-mekanik",
+        "options": [
+          { "verdict": "once-mekanik", "label": "Motor bozuk olabilir ama önce mekanizmanın serbest olduğu elle doğrulanır", "explain": "Sıkışmış, paslanmış, eğilmiş ya da donmuş bir mandalı sağlam motor da hareket ettiremez. Enerji kesikken mekanizma elle kilitli ve açık konumlar arasında gezdirilir; serbestse şüphe motora döner. Ayrıca körükteki kopuk, kapı belli bir açıdayken teması kesebilir; bu yüzden ölçüm motorun soketinde ve kapı normal konumundayken yapılır." },
+          { "verdict": "motor-bozuk", "label": "Motor kesin bozuktur", "explain": "Yük sıkışmışsa motor suçsuzdur." },
+          { "verdict": "modul", "label": "Modül bozuktur", "explain": "Modülün komut gönderdiği ölçüldü." },
+          { "verdict": "hiza", "label": "Kapı hizası ayarlanır", "explain": "Hiza bu belirtiyi açıklamaz." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 12,1 V ve 0,5 V SENARYO okumalarıdır; istenen FARKTIR (11,6 V) ve ders bir besleme gerilimi sınırı vermiyor.",
+    "sourceRequired": "Kilit motorunun çalışma gerilimi ve akım çekişi, sistem sigortasının amperi, modülün kabul edilebilir şase gerilim düşümü ve modül tanıtma işlemi bilinçle VERİLMEDİ; hepsi araç ve üretici belgesine aittir.",
+    "kapsam": "Modül kodlama ve teşhis cihazıyla arıza kodu okuma KAPSAM DIŞIDIR. Immobilizer ve anahtar tanıtma bir sonraki dersin konusu ve orada da sınır olarak anlatılıyor, işlem olarak değil. Kapı içi hava yastığı bulunan araçlarda söküm öncesi güvenli durum ilkesi aşama 0'daki dersten geçerlidir.",
+    "reviewedByMechanic": false
+  }
+}

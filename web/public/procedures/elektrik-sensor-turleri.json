@@ -1,0 +1,173 @@
+{
+  "id": "elektrik.sensor-turleri",
+  "area": "arac-elektrik",
+  "stage": 8,
+  "title": "Sensör Türleri ve Verdikleri Sinyal",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 30,
+  "prerequisites": ["elektrik.multimetre-direnc", "elektrik.gerilim-dusumu", "elektrik.sema-okuma"],
+  "learningGoals": [
+    "Direncini değiştiren sensörlerle kendi sinyalini üreten sensörleri ayırmak",
+    "Her iki türün doğru ölçüm yöntemini seçmek",
+    "Sensörün yanlış okumasının sebebinin kablo ve şase tarafında olabileceğini görmek"
+  ],
+
+  "safety": [
+    { "rule": "Sensör soketleri kontak açıkken ayrılmaz ve takılmaz", "why": "Soket ayrılıp takılırken oluşan ani gerilim sıçraması modülün girişine zarar verebilir ve gereksiz hata kaydı üretir", "blocksStart": true },
+    { "rule": "Sensör uçlarına doğrudan akü gerilimi verilmez", "why": "Sensörlerin çoğu düşük gerilimle çalışır; akü gerilimi verilen bir sensör anında bozulur, bazı durumlarda modül girişini de yakar", "blocksStart": true },
+    { "rule": "Soket pinlerine kalın prob sokularak ölçüm yapılmaz", "why": "Dişi pin genişler ve o soket bir daha güvenilir temas kurmaz; ölçüm için ince uçlu prob ya da geriden temas yöntemi kullanılır", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.multimetre", "label": "Dijital multimetre", "required": true },
+    { "id": "tool.uzatma-prob", "label": "İnce uçlu prob", "required": true },
+    { "id": "tool.sema", "label": "Araç devre şeması", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Tezgâhta iki uçlu bir sensör var. Önce sensörün ne yaptığını anlıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sensor",
+        "question": "Bir sensör kontrol ünitesine bilgiyi nasıl iletir?",
+        "options": [
+          { "label": "Fiziksel bir büyüklüğü elektriksel bir büyüklüğe çevirerek: direnç, gerilim ya da darbe olarak", "verdict": "cevirici", "correct": true, "explain": "Sensör bir çeviricidir. Sıcaklık, basınç, konum, hız, oksijen miktarı gibi fiziksel bir büyüklüğü kontrol ünitesinin okuyabileceği elektriksel bir büyüklüğe çevirir. Kontrol ünitesi sıcaklığı hissedemez; yalnızca kendi girişindeki gerilimi ölçebilir. Dolayısıyla motorun sıcaklığı hakkında bildiği tek şey, o girişte gördüğü gerilimdir. Bu cümle teşhisin temelidir: kontrol ünitesi sensörün doğru söylediğini varsayar, çünkü doğrulayacak ikinci bir duyusu yoktur. Sensör yanlış bir değer bildirirse ya da aradaki kablo o değeri bozarsa, kontrol ünitesi yanlış bilgiye göre karar verir ve motor buna göre kötü çalışır. Sensörü ölçmek, kontrol ünitesinin gördüğü şeyi bizim de görmemiz demektir." },
+          { "label": "Doğrudan sayı gönderir", "verdict": "sayi", "explain": "Kontrol ünitesi sayıyı kendi üretir; sensörden gelen elektriksel bir büyüklüktür." },
+          { "label": "Mekanik bir kolla iletir", "verdict": "mekanik", "explain": "Bazı eski sistemlerde mekanik bağ vardı; elektronik sistemde iletim elektrikseldir." },
+          { "label": "Kendi kararını verip motoru ayarlar", "verdict": "karar", "explain": "Karar kontrol ünitesinindir; sensör yalnız bilgi verir." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Kontrol ünitesinin motor hakkında bildiği her şey, girişlerindeki gerilimlerden ibarettir. Sensör yanılırsa o da yanılır."
+    },
+    {
+      "id": 2,
+      "instruction": "Sensörler iki büyük aileye ayrılır.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sensor-soketi",
+        "question": "Bu iki aile nasıl ayrılır?",
+        "options": [
+          { "label": "Direncini değiştirenler ve kendi sinyalini üretenler", "verdict": "iki-aile", "correct": true, "explain": "Birinci aile dirençlidir. Kendi başına gerilim üretmez, yalnız direncini değiştirir. Kontrol ünitesi bu sensöre içindeki sabit bir direnç üzerinden besleme verir ve sensörün üzerinde kalan payı okur. Sıcaklık sensörleri, yakıt seviyesi vericileri ve kelebek konum sensörlerinin çoğu böyledir. İkinci aile kendi sinyalini üretir: dönen bir mıknatıs karşısındaki sargı kendi gerilimini üretir ve devir bilgisi bu dalganın kendisidir; oksijen sensörünün bir kısmı da kendi küçük gerilimini üretir. Aradaki fark yalnız teorik değildir, ölçüm yöntemini belirler. Dirençli sensör sökülüp ohmmetreyle de ölçülebilir; üreten sensörün çıkışı ancak hareket hâlindeyken, gerilim kademesinde görülür. Yanlış aileye yanlış yöntem uygulamak, sağlam sensörü arızalı göstermenin en kolay yoludur." },
+          { "label": "Pahalı olanlar ve ucuz olanlar", "verdict": "fiyat", "explain": "Fiyat ölçüm yöntemini belirlemez." },
+          { "label": "Motor içindekiler ve dışındakiler", "verdict": "konum", "explain": "Konum erişimi etkiler ama sinyal türünü belirlemez." },
+          { "label": "Eski ve yeni sensörler", "verdict": "yas", "explain": "İki aile de her yaştaki araçta bulunur." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Bir sensöre nasıl ölçüm yapacağını, hangi aileden olduğu belirler. Aileyi bilmeden yapılan ölçüm sonucu değil, kafa karışıklığını ölçer."
+    },
+    {
+      "id": 3,
+      "instruction": "Elindeki dirençli tipte bir sıcaklık sensörü. Soket takılıyken sinyal ucundan ölçtün: 4,60 V. Aynı koşulda sağlam bir araçta 3,10 V. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.multimetre-ekran",
+        "unit": "V",
+        "acceptRange": [1.45, 1.55]
+      },
+      "camera": "tezgah",
+      "hint": "4,60 eksi 3,10.",
+      "teachingNote": "Dirençli sensörde okunan gerilim, kontrol ünitesinin içindeki sabit direnç ile sensörün direncinin paylaştığı gerilimdir. Sensörün direnci büyüdükçe üzerinde kalan pay artar, küçüldükçe azalır. Bu yüzden sinyal ucundaki gerilim, aslında sensör direncinin okunabilir hâlidir. Beslemenin tamamına yakın bir değer okumak, o hattın kesik olduğu anlamına gelir — kopmuş bir kablo sonsuz direnç gibi davranır ve bütün gerilim sensörün üzerinde kalmış gibi görünür. Bunun tersi de doğrudur: sıfıra yakın bir okuma, hattın gövdeye değdiğini söyler."
+    },
+    {
+      "id": 4,
+      "instruction": "Yüksek okuma iki şeyden biri olabilir.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sensor",
+        "question": "Sensörü suçlamadan önce ne yapılır?",
+        "options": [
+          { "label": "Sensör sökülüp direnci ayrıca ölçülür ve devrenin kendisi elenir", "verdict": "iki-yonlu", "correct": true, "explain": "Sinyal ucundaki yüksek gerilim iki ayrı sebepten çıkabilir: gerçekten direnci büyümüş bir sensör, ya da kopmuş bir kablo. İkisi kontrol ünitesine tıpatıp aynı görünür, çünkü kontrol ünitesi ikisini de sadece yüksek gerilim olarak okur. Ayırmanın yolu ikinci bir ölçümdür. Sensör soketi ayrılır ve sensörün kendi direnci doğrudan ölçülür; ayrıca soket tarafında besleme ve şase uçlarının gerçekten geldiği kontrol edilir. Hızlı bir deneme de vardır: soket ayrıldığında okuma beslemenin tamamına çıkmalı, sinyal ile şase uçları soket tarafında birleştirildiğinde sıfıra inmelidir. Bu iki tepki alınabiliyorsa kablolar sağlamdır ve suç sensördedir. Alınamıyorsa arıza sensörün dışındadır ve yeni sensör hiçbir şeyi değiştirmez." },
+          { "label": "Doğrudan sensör değiştirilir", "verdict": "degistir", "explain": "Kopuk kablo da aynı okumayı verir; yeni sensör aynı sonucu gösterir." },
+          { "label": "Hata kodu silinip beklenir", "verdict": "kod-sil", "explain": "Sebep dururken kod geri gelir; silmek teşhis değildir." },
+          { "label": "Kontrol ünitesi değiştirilir", "verdict": "ecu", "explain": "En pahalı ve en son düşünülecek aday; önce sensör ve kablo elenir." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Kontrol ünitesi kopuk kabloyu ve bozuk sensörü ayırt edemez; ikisi de ona aynı gerilimi gösterir. Bu ayrımı yapan ustadır."
+    },
+    {
+      "id": 5,
+      "instruction": "Sensörün şase ucunu da ölçtün: şase ucu ile akünün eksi kutbu arasında 0,45 V. Sağlam bir araçta 0,03 V. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.multimetre-ekran",
+        "unit": "V",
+        "acceptRange": [0.40, 0.45]
+      },
+      "camera": "tezgah",
+      "hint": "0,45 eksi 0,03.",
+      "teachingNote": "Sensörün şase ucu, bütün ölçümünün sıfır noktasıdır. O nokta gerçek şaseye göre yükselmişse sensörün ürettiği sinyal de aynı miktarda yükselir ve kontrol ünitesi olduğundan farklı bir değer okur. Sensör sağlamdır, kablo sağlamdır, ama okunan bilgi yanlıştır. Bu, sensör arızalarının en sinsi biçimidir: hiçbir şey kopuk değildir, her şey çalışır görünür, yalnız sayı yanlıştır. Bu yüzden bir sensör suçlanmadan önce şase referansı ölçülür. Aynı kötü şaseyi paylaşan birkaç sensör birden yanlış okuyorsa, aynı anda birden çok anlamsız hata kodu görünmesinin sebebi de budur."
+    },
+    {
+      "id": 6,
+      "instruction": "Şimdi kendi sinyalini üreten tipte bir sensör var: dönen bir mil karşısındaki devir sensörü.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sensor",
+        "question": "Bu sensör nasıl ölçülür?",
+        "options": [
+          { "label": "Mil döndürülürken çıkışına bakılır; ürettiği sinyal ancak hareket hâlinde vardır", "verdict": "hareketle-olc", "correct": true, "explain": "Kendi sinyalini üreten sensörün çıkışı, ancak karşısındaki parça hareket ederken vardır. Duran bir mil karşısında sensör hiçbir şey üretmez ve ölçüm sıfır okur; bu, sensörün bozuk olduğu anlamına gelmez. Doğru yöntem, mil döndürülürken çıkışa bakmaktır — marş basılırken ya da elle çevrilirken. Bu tür sensörlerde sargı direncini ölçmek de bir ön kontrol olarak işe yarar, çünkü kopmuş ya da kısa devre olmuş bir sargı hemen görünür; ama sargı direnci normalken sinyal üretemeyen sensörler de vardır. Sık atlanan bir nokta da mesafedir: sensör ile karşısındaki parça arasındaki boşluk büyümüşse, sensör sağlamken de zayıf sinyal üretir. Toz, metal talaşı ve yerinden oynamış bir braket aynı sonucu verir." },
+          { "label": "Ohmmetreyle direnci ölçülür ve karar verilir", "verdict": "sadece-direnc", "explain": "Ön kontrol olarak işe yarar ama sargısı normal olup sinyal üretmeyen sensör de olur." },
+          { "label": "Soket takılıyken beslemesi ölçülür", "verdict": "besleme", "explain": "Bu tür sensörlerin bir kısmı beslenmez; kendi gerilimini üretir." },
+          { "label": "Sökülüp gözle incelenir", "verdict": "gozle", "explain": "Mesafe ve kirlilik gözle görülebilir ama sinyal ancak ölçülerek doğrulanır." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Üreten sensörde ölçüm hareket ister, dirençli sensörde koşul ister. İkisinde de ölçüm sensörün çalıştığı şartta yapılır."
+    },
+    {
+      "id": 7,
+      "instruction": "İki aileyi de ölçtün.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.multimetre-ekran",
+        "question": "Bir sensörün doğru okuduğu nasıl anlaşılır?",
+        "options": [
+          { "label": "Bilinen bir referansla karşılaştırılarak: bilinen bir koşul ya da aynı koşuldaki komşu bir sensör", "verdict": "referansla", "correct": true, "explain": "Bir sensörün makul bir değer göstermesi, doğru değeri gösterdiği anlamına gelmez. Doğruluk ancak bilinen bir referansla anlaşılır. En kolay referans bilinen bir koşuldur: gece boyunca dışarıda duran bir aracın motor sıcaklığı, hava sıcaklığına eşit olmak zorundadır. Bu koşulda motor sıcaklık sensörü ile hava sıcaklığı sensörü birbirinden belirgin biçimde farklı okuyorsa ikisinden biri yanlıştır ve hangisinin yanlış olduğu ortam sıcaklığına bakılarak anlaşılır. İkinci referans komşu sensördür: aynı fiziksel büyüklüğü gören iki sensör aynı şeyi söylemek zorundadır. Üçüncüsü, sensörü bilinen bir şarta sokmaktır — sıcaklık sensörünü sıcak suya tutmak gibi. Referanssız okuma bir sayıdır; referanslı okuma bir kanıttır." },
+          { "label": "Değer aralık içindeyse doğrudur", "verdict": "aralik", "explain": "Aralık içinde ama yanlış okuyan sensör en sık rastlanan durumdur; kod bile vermez." },
+          { "label": "Hata kodu yoksa doğrudur", "verdict": "kod-yok", "explain": "Kod ancak makul aralığın dışına çıkınca oluşur; içeride kalan sapma kodsuz ilerler." },
+          { "label": "Yeni sensörse doğrudur", "verdict": "yeni", "explain": "Yeni sensör de kötü şase ya da hatalı parça yüzünden yanlış okuyabilir." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Sensör teşhisinin özeti: aileyi tanı, doğru yöntemle ölç, kablo ve şaseyi ele, sonra sonucu bir referansla karşılaştır. Dördü de yapılmadan sensör suçlanmaz."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Dirençli sensörle kendi sinyalini üreten sensör arasındaki ölçüm farkı nedir?",
+        "a": "direnc-ve-hareket",
+        "options": [
+          { "verdict": "direnc-ve-hareket", "label": "Dirençli sensör sökülüp direnç olarak da ölçülebilir; üreten sensörün çıkışı ancak hareket hâlinde görülür", "explain": "Dirençli sensör kendi gerilimini üretmez, yalnız direncini değiştirir; kontrol ünitesi içindeki sabit direnç üzerinden besler ve sensörün üzerinde kalan payı okur. Bu yüzden hem sinyal gerilimi hem sökülü hâldeki direnci ölçülebilir. Kendi sinyalini üreten sensör ise ancak karşısındaki parça hareket ederken çıkış verir; duran mil karşısında sıfır okuması arıza değildir. Yanlış aileye yanlış yöntem uygulamak sağlam sensörü arızalı gösterir." },
+          { "verdict": "fiyat", "label": "Biri pahalı, diğeri ucuz", "explain": "Fiyatın ölçüm yöntemiyle ilgisi yok." },
+          { "verdict": "yok", "label": "Fark yoktur, ikisi de aynı ölçülür", "explain": "Üreten sensöre ohmmetreyle karar vermek yanlış sonuç üretir." },
+          { "verdict": "konum", "label": "Biri motor içinde, diğeri dışında", "explain": "Konum erişimi etkiler, sinyal türünü değil." }
+        ]
+      },
+      {
+        "q": "Sensörün şase ucundaki kayıp neden önemlidir?",
+        "a": "sifir-noktasi",
+        "options": [
+          { "verdict": "sifir-noktasi", "label": "Şase ucu sensörün sıfır noktasıdır; yükselirse sinyal de yükselir ve kontrol ünitesi yanlış değer okur", "explain": "Sensörün ürettiği bilgi, şase ucuna göre ölçülür. O nokta gerçek şaseye göre yükselmişse sinyal de aynı miktarda kayar; sensör sağlamdır, kopuk bir kablo yoktur, ama okunan bilgi yanlıştır. Sensör arızalarının en sinsi biçimi budur — hiçbir şey kopuk görünmez, yalnız sayı yanlıştır. Aynı kötü şaseyi paylaşan birkaç sensör birden yanlış okuyorsa, aynı anda birden çok anlamsız hata kodu görünmesinin sebebi de budur." },
+          { "verdict": "onemsiz", "label": "Önemsizdir, şase her yerde aynıdır", "explain": "Şase noktaları boya, pas ve nemle bozulur; ölçülmeden aynı sayılmaz." },
+          { "verdict": "sigorta", "label": "Sigortayı attırır", "explain": "Küçük akımlı sensör devresinde sigorta atmaz; arıza sessizce sürer." },
+          { "verdict": "kod", "label": "Her zaman hata kodu üretir", "explain": "Sapma makul aralıkta kalırsa kod hiç oluşmaz." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 4,60 V / 3,10 V ve adım 5'teki 0,45 V / 0,03 V SENARYO okumalarıdır. Öğrenciden istenen üretici sınırı değil, arızalı araç ile sağlam araç arasındaki FARKTIR. sourceRequired bu yüzden gerekmedi.",
+    "sourceRequired": "Sensör besleme gerilimi, sıcaklığa karşı direnç tabloları, hava boşluğu ölçüsü ve sargı direnci araca ve sensöre özgüdür; bu derste bilinçle VERİLMEDİ. Ders karşılaştırma ve devre mantığı üzerine kuruldu.",
+    "kapsam": "Sahnede tek bir iki uçlu sensör ve soketi var; sıcaklık, devir ve oksijen sensörleri arasındaki fiziksel farklar metinde anlatılıyor. Osiloskop sahnede yok — üreten sensörün dalga biçimini görmek için gereken alet anılıyor ama uygulanmıyor.",
+    "reviewedByMechanic": false
+  }
+}

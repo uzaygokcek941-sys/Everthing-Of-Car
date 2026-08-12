@@ -1,0 +1,177 @@
+{
+  "id": "lastik.balans-hazirlik",
+  "area": "lastik-tekerlek",
+  "stage": 5,
+  "title": "Balansa Hazırlık: Temizlik, Merkezleme ve Tekrarlanabilirlik",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 30,
+  "prerequisites": ["lastik.janttan-sokme"],
+  "learningGoals": [
+    "Eski ağırlıkların ve kalıntının neden temizlendiğini bilmek",
+    "Tekerleğin balans miline nasıl merkezlendiğini ve yanlış merkezlemenin sonucunu görmek",
+    "Bir ölçümün tekrarlanabilir olmadan geçerli sayılmayacağını kavramak"
+  ],
+
+  "safety": [
+    { "rule": "Tekerlek mile somunuyla tam sıkılmadan makine çalıştırılmaz", "why": "Yüksek devirde gevşek tekerlek milden fırlar", "blocksStart": true },
+    { "rule": "Makinenin koruma kapağı kapatılmadan ölçüm başlatılmaz", "why": "Sırttan kopan bir taş ya da ağırlık dönme hızıyla fırlar", "blocksStart": true },
+    { "rule": "Sırt yüzeyindeki taşlar elle değil aletle çıkarılır", "why": "Taşın yanındaki cam ya da metal parçası eli keser", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.balans-makinesi", "label": "Balans makinesi", "required": true },
+    { "id": "tool.agirlik-pensesi", "label": "Ağırlık pensesi", "required": true },
+    { "id": "tool.tel-firca", "label": "Tel fırça", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Tekerlek balansa geldi. Jantın iç yüzünde eski yapıştırma ağırlıklar, kenarında klipsli ağırlıklar var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.balans-agirligi",
+        "question": "İlk iş ne?",
+        "options": [
+          { "label": "Bütün eski ağırlıklar sökülür ve yapıştırma kalıntısı temizlenir", "verdict": "eskiyi-sok", "correct": true, "explain": "Balans makinesi tekerleğin mevcut kütle dağılımını ölçer ve dengeye getirmek için ne kadar ağırlık gerektiğini söyler. Jantın üzerinde eski ağırlıklar dururken yapılan ölçüm, tekerleğin kendi dengesizliğini değil 'tekerlek artı eski ağırlıklar' bütününün dengesizliğini verir. Eski ağırlıklar önceki bir lastiğin ya da önceki bir konumun hatasını düzeltmek için takılmıştır ve şimdi geçersizdir; üstlerine yeni ağırlık eklemek, eski hatanın üstüne yeni bir düzeltme koymak demektir. Sonuç ne dengeli ne de öngörülebilir bir tekerlektir. Bu yüzden ölçümden önce klipsli ağırlıklar pense ile sökülür, yapıştırma ağırlıkların bıraktığı bant kalıntısı kazınarak temizlenir. Kalıntının temizlenmesinin ikinci bir sebebi daha var: yeni yapıştırma ağırlık eski bandın üstüne yapıştırılırsa tutmaz ve ilk çukurda düşer — müşteri birkaç gün sonra titreşimle geri gelir." },
+          { "label": "Eskilerin üstüne yeni ağırlık eklenir", "verdict": "ustune-ekle", "explain": "Ölçüm eski hatanın üstüne yapılır; sonuç dengeli bir tekerlek olmaz." },
+          { "label": "Yalnız klipsli olanlar sökülür", "verdict": "yalniz-klips", "explain": "Yapıştırma ağırlıklar da kütledir; hepsi sökülür." },
+          { "label": "Makine eskileri hesaba katar", "verdict": "makine-hesaplar", "explain": "Makine yalnız toplam dengesizliği ölçer; hangi kütlenin eski olduğunu bilemez." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bir ölçüm her zaman sıfır noktası ister. Balansta sıfır noktası, üzerinde hiçbir düzeltme bulunmayan tekerlektir."
+    },
+    {
+      "id": 2,
+      "instruction": "Sırtın kanallarında sıkışmış taşlar ve jantın iç yüzünde kurumuş çamur var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik",
+        "question": "Bunlar ölçümü etkiler mi?",
+        "options": [
+          { "label": "Etkiler: hepsi kütledir ve tekerleğin bir tarafında toplanmışsa ölçüme dengesizlik olarak girer", "verdict": "kutle", "correct": true, "explain": "Balans bir kütle dağılımı ölçümüdür ve makine kütlenin ne olduğunu sormaz, yalnız nerede olduğunu ölçer. Jantın iç yüzünde birikmiş kurumuş çamur, sırtın kanallarına sıkışmış taşlar ve hatta içeride kalmış su, tekerleğin bir tarafında toplandıkları ölçüde gerçek bir dengesizlik üretirler. Bunlar temizlenmeden yapılan balans geçici bir duruma göre ayarlanmış olur: çamur bir yağmurda dökülür, taş bir çukurda fırlar ve tekerlek yeniden dengesiz kalır — üstelik bu kez takılan ağırlıklar da yanlış yerdedir, yani durum eskisinden kötüdür. Bu yüzden balans öncesi tekerlek temizlenir: iç yüz fırçalanır, sırttaki taşlar aletle çıkarılır, içeride su varsa boşaltılır. Kış aylarında jant içine yapışan kar ve buz da aynı sebeple titreşim yapar; müşteri 'kışın titriyor yazın geçiyor' diyorsa ilk bakılacak yer burasıdır." },
+          { "label": "Etkilemez, ağırlıkları çok az", "verdict": "az", "explain": "Balans gram düzeyinde bir ölçümdür; birikmiş çamur bu düzeyi rahatça aşar." },
+          { "label": "Yalnız taşlar etkiler", "verdict": "yalniz-tas", "explain": "Çamur ve su da kütledir ve genelde tek tarafta toplanır." },
+          { "label": "Makine bunları filtreler", "verdict": "filtre", "explain": "Makine kütlenin kaynağını ayırt edemez; yalnız dengesizliği ölçer." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Müşterinin 'kışın titriyor, yazın geçiyor' cümlesi neredeyse her zaman jant içine yapışan kar ve buzu gösterir — arıza değil, birikinti."
+    },
+    {
+      "id": 3,
+      "instruction": "Tekerlek mile takıldı ve ölçüldü: 45 g dengesizlik çıktı. Somunu gevşetip tekerleği mil üzerinde 180° çevirdin ve tekrar ölçtün: 25 g. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.balans-makinesi",
+        "unit": "g",
+        "acceptRange": [19, 21]
+      },
+      "camera": "tekerlek",
+      "hint": "45 eksi 25.",
+      "teachingNote": "20 g'lık bu fark tekerlekten gelmiyor — tekerlek aynı tekerlek. Fark, tekerleğin mile her seferinde biraz farklı merkezlenmesinden geliyor. Bu, balanstaki en kritik doğrulama testidir: aynı tekerlek iki farklı konumda ölçüldüğünde sonuçlar birbirine yakın çıkmalıdır. Çıkmıyorsa ölçüm tekrarlanabilir değildir ve o ölçüme göre takılan ağırlık da güvenilmez. Ustanın buradaki işi ağırlık takmak değil, önce merkezlemeyi düzeltmektir."
+    },
+    {
+      "id": 4,
+      "instruction": "Ölçümler tutarsız çıktı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.balans-mili",
+        "question": "Sebep nerede aranır?",
+        "options": [
+          { "label": "Merkezlemede: koni ya da flanşın jantı doğru ortalamaması, mil ve koni yüzeylerindeki kir ve hasar", "verdict": "merkezleme", "correct": true, "explain": "Balans makinesi tekerleği milin ekseni etrafında döndürür ve dengesizliği o eksene göre hesaplar. Tekerlek mile tam ortalanmamışsa makine, aslında var olmayan bir dengesizlik ölçer — ölçtüğü şey tekerleğin dengesizliği değil, merkez kaçıklığıdır. Bu durumda takılan ağırlık gerçek bir hatayı düzeltmez, üstelik yenisini yaratır: tekerlek araca takıldığında kendi göbeğine göre merkezlenir ve balans makinesinde 'düzeltilmiş' olan denge orada bozulur. Merkezlemenin üç yaygın sorunu vardır. Birincisi yanlış koni seçimi ya da koninin yanlış taraftan takılmasıdır. İkincisi kirdir: mil, koni ve jantın göbek deliği temiz olmalıdır, aradaki bir çapak ya da pas tekerleği eğik oturtur. Üçüncüsü, bijon delikleriyle merkezlenmesi gereken bir jantın koniyle merkezlenmeye çalışılmasıdır; bu tip jantlarda flanş adaptörü kullanılır. Doğrulama yöntemi az önce yapılan testtir: tekerlek döndürülüp tekrar ölçülür." },
+          { "label": "Lastikte: iç yapısı bozuktur", "verdict": "lastik", "explain": "İç yapı bozukluğu her ölçümde AYNI sonucu verir; tutarsızlık merkezleme işaretidir." },
+          { "label": "Makine bozuktur, değiştirilmeli", "verdict": "makine-bozuk", "explain": "Makine kalibrasyonu ayrı bir konu; önce merkezleme kontrol edilir." },
+          { "label": "Normaldir, ortalaması alınır", "verdict": "ortalama", "explain": "İki tutarsız ölçümün ortalaması da geçersizdir; sebep giderilir." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Ölçümün tekrarlanabilirliği, ölçümün doğruluğundan önce gelir. Tekrarlanmayan bir sayı, doğru da olsa güvenilmez."
+    },
+    {
+      "id": 5,
+      "instruction": "Jantın göbek deliği makinenin konisine oturuyor ama bu jant araca bijon delikleriyle merkezleniyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.jant",
+        "question": "Ne kullanılır?",
+        "options": [
+          { "label": "Flanş adaptörü: jant araçta neyle merkezleniyorsa makinede de onunla merkezlenmelidir", "verdict": "flans", "correct": true, "explain": "Balansın amacı, tekerleği araçta döneceği eksene göre dengelemektir. Bu yüzden makinedeki merkezleme, araçtaki merkezlemeyle aynı yüzeyden yapılmalıdır. Göbek merkezli bir jant araçta göbeğin çıkıntısından merkezlenir; makinede de göbek deliğinden, yani koniyle merkezlenmesi doğrudur. Somun merkezli bir jant ise araçta bijon somunlarının konik yüzeylerinden ortalanır; makinede koniyle merkezlenirse iki merkez birbirinden farklı olur ve makinede kusursuz dengelenen tekerlek araçta dengesiz döner. Bu tip jantlarda bijon deliklerinden tutan flanş adaptörü kullanılır. Aynı gerekçe, göbek deliği makinenin en büyük konisinden de büyük olan jantlar için de geçerlidir. Bu ayrım özellikle sonradan alınan jantlarda önem kazanır ve 'balans yaptırdım geçmedi' şikâyetlerinin sessiz sebeplerinden biridir." },
+          { "label": "En büyük koni kullanılır, yeterli", "verdict": "buyuk-koni", "explain": "Koni göbek deliğinden merkezler; bu jant araçta oradan merkezlenmiyor." },
+          { "label": "Koni arkadan takılır", "verdict": "arkadan", "explain": "Koninin yönü ayrı bir konu; merkezleme yüzeyi yine göbek deliği olur." },
+          { "label": "Fark etmez, denge dengedir", "verdict": "farketmez", "explain": "Denge hangi eksene göre kurulduğuna bağlıdır; eksen değişirse denge de değişir." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Balans soyut bir denge değil, belirli bir eksene göre dengedir. Yanlış eksene göre kurulan denge, doğru eksende dengesizliktir."
+    },
+    {
+      "id": 6,
+      "instruction": "Merkezleme düzeltildi, ölçümler artık tekrarlanıyor. Ama jantın kenarında gözle görülür bir eğrilik var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.komparator",
+        "question": "Balansa devam edilir mi?",
+        "options": [
+          { "label": "Hayır: önce salgı ölçülür. Geometri hatası ağırlık takarak düzeltilemez", "verdict": "once-salgi", "correct": true, "explain": "Balans ve salgı iki farklı kusurdur ve biri diğerinin yerine geçmez. Balans, kütlenin dönme ekseni etrafında eşit dağılmamasıdır ve karşı tarafa ağırlık takarak düzeltilir. Salgı ise geometrik bir kusurdur: tekerleğin kenarı ya da sırtı dönerken düz bir daire çizmez, yana ya da yukarı aşağı sapar. Bu, eğilmiş bir jantın, jant üzerine merkezsiz oturmuş bir lastiğin ya da kirli bir göbek yüzeyinin sonucudur. Salgılı bir tekerleğe ağırlık takmak hiçbir şeyi düzeltmez, çünkü sorun kütle dağılımı değil biçimdir; hatta makine bazen salgıyı dengesizlik gibi okur ve gereksiz ağırlık taktırır. Sonuç, jantın üzerine gereksiz ağırlıklar takılmış ve titreşimi hâlâ geçmemiş bir tekerlektir. Bu yüzden gözle eğrilik görülüyorsa ya da balans olduğu hâlde titreşim sürüyorsa komparatörle salgı ölçülür. Salgı ölçümü ve sınırları 7. aşamada, jant dersinde ele alınıyor." },
+          { "label": "Devam edilir, ağırlıkla telafi edilir", "verdict": "agirlikla-telafi", "explain": "Geometri hatası kütleyle telafi edilmez; gereksiz ağırlık takılmış olur." },
+          { "label": "Devam edilir, salgıya sonra bakılır", "verdict": "sonra", "explain": "Salgı varsa balans ölçümü de bozulur; sıra tersine dönmez." },
+          { "label": "Jant doğrudan değiştirilir", "verdict": "degistir", "explain": "Önce ölçülür; her eğriliğin miktarı ve yeri aynı sonucu vermez." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "İki kusuru ayırmak bu işin özü: kütle hatası ağırlıkla, biçim hatası düzeltme ya da parça değişimiyle giderilir. Karıştırıldığında ikisi de çözülmez."
+    },
+    {
+      "id": 7,
+      "instruction": "Makine uzun süredir kalibre edilmemiş.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.balans-makinesi",
+        "question": "Bu neden önemli?",
+        "options": [
+          { "label": "Sapmış bir makine yanlış değeri güvenle gösterir; ölçüm aletine güvenmeden ölçüme güvenilemez", "verdict": "kalibrasyon", "correct": true, "explain": "Balans makinesi bir ölçü aletidir ve bütün ölçü aletleri gibi zamanla sapar. Sapmanın tehlikeli tarafı sessiz olmasıdır: makine hata vermez, ekranda net bir sayı gösterir ve o sayı yanlıştır. Sonuç, dengeli bir tekerleğe gereksiz ağırlık takılması ya da dengesiz bir tekerleğin dengeli sanılmasıdır; ikisi de müşteriye titreşim olarak geri döner ve usta sebebi başka yerde arar. Bu yüzden makinenin kalibrasyonu üreticinin öngördüğü aralıklarla ve öngördüğü yöntemle kontrol edilir; birçok makinede bunun için bilinen bir kalibrasyon ağırlığı ve makinenin kendi menüsünde bir yordam bulunur. Aynı ilke bu alandaki bütün aletler için geçerliydi: manometre referansla karşılaştırılır, tork anahtarı kontrol edilir, diş mastarı sıfırlanır. Ölçüm zincirinin ilk halkası her zaman aletin kendisidir." },
+          { "label": "Önemli değil, makineler sapmaz", "verdict": "sapmaz", "explain": "Her ölçü aleti sapar; balans makinesi de darbe ve titreşim altında çalışır." },
+          { "label": "Yalnız çok eski makinelerde önemli", "verdict": "eski", "explain": "Yaş değil, kalibrasyonun ne zaman kontrol edildiği belirleyici." },
+          { "label": "Müşteri fark etmez", "verdict": "musteri", "explain": "Titreşim olarak fark eder; üstelik sebep bulunamaz hâle gelir." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bu alandaki dördüncü alet doğrulaması: manometre, tork anahtarı, diş mastarı ve balans makinesi. Aynı kural, dört farklı yerde."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Balanstan önce neden eski ağırlıklar sökülür?",
+        "a": "sifir-noktasi",
+        "options": [
+          { "verdict": "sifir-noktasi", "label": "Ölçümün sıfır noktası, üzerinde hiçbir düzeltme bulunmayan tekerlektir; eskiler dururken ölçülen şey tekerleğin kendi dengesizliği değildir", "explain": "Makine yalnız toplam dengesizliği ölçer, hangi kütlenin eski bir düzeltme olduğunu bilemez. Eski ağırlıklar önceki bir lastiğin ya da konumun hatası içindir ve artık geçersizdir; üstlerine ekleme yapmak eski hatanın üstüne yeni düzeltme koymak olur. Ayrıca eski bant kalıntısı temizlenmezse yeni yapıştırma ağırlık tutmaz ve ilk çukurda düşer." },
+          { "verdict": "gorunum", "label": "Görünüm için", "explain": "Jantın iç yüzü; sebep tamamen ölçümle ilgili." },
+          { "verdict": "agirlik", "label": "Tekerlek hafiflesin diye", "explain": "Toplam ağırlık değil, dağılımı önemli." },
+          { "verdict": "gereksiz", "label": "Gerekmez, makine hesaba katar", "explain": "Makine kütlenin kaynağını ayırt edemez." }
+        ]
+      },
+      {
+        "q": "Aynı tekerlek mil üzerinde çevrilip tekrar ölçüldüğünde farklı değer çıkıyorsa sebep nedir?",
+        "a": "merkezleme",
+        "options": [
+          { "verdict": "merkezleme", "label": "Merkezleme: tekerlek mile her seferinde biraz farklı oturuyor, ölçülen şey dengesizlik değil merkez kaçıklığı", "explain": "Tekerlek aynı tekerlek olduğuna göre farkın kaynağı tekerlek değildir. Yanlış koni seçimi, kirli mil ya da göbek deliği, veya bijon delikleriyle merkezlenmesi gereken bir jantın koniyle tutulması bu farkı üretir. Bu ölçüme göre takılan ağırlık gerçek bir hatayı düzeltmez, yenisini yaratır. Önce merkezleme düzeltilir, sonra ölçülür." },
+          { "verdict": "lastik", "label": "Lastiğin iç yapısı bozuktur", "explain": "İç yapı bozukluğu her ölçümde aynı sonucu verir." },
+          { "verdict": "normal", "label": "Normaldir, ortalaması alınır", "explain": "İki tutarsız ölçümün ortalaması da geçersizdir." },
+          { "verdict": "hiz", "label": "Makine farklı hızda döndürmüştür", "explain": "Makine sabit yordamla çalışır; fark merkezlemeden gelir." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 45 g ve 25 g SENARYO okumalarıdır ve kabul edilebilir dengesizlik SINIRI değildir. İstenen FARKTIR (20 g); dersin gösterdiği şey ölçümün tekrarlanabilir olmadığıdır.",
+    "sourceRequired": "Kabul edilebilir azami dengesizlik (kaç gram) bilinçle VERİLMEDİ: makineye, jant çapına ve araca göre değişir. Kalibrasyon aralığı da makine üreticisinin belgesine bırakıldı.",
+    "kapsam": "Salgı ölçümü ve sınırları 7. aşamada jant dersinde; balans işleminin kendisi bir sonraki derste. Sahnedeki balans makinesi şematiktir, koni ve flanş adaptörü ayrı parça olarak modellenmedi.",
+    "reviewedByMechanic": false
+  }
+}

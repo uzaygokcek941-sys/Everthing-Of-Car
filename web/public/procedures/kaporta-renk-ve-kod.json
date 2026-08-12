@@ -1,0 +1,177 @@
+{
+  "id": "kaporta.renk-ve-kod",
+  "area": "kaporta",
+  "stage": 6,
+  "title": "Renk Kodu, Varyant ve Deneme Kartı",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 40,
+  "prerequisites": ["kaporta.astar"],
+  "learningGoals": [
+    "Renk kodunun rengi tek başına vermediğini, varyant ve solma yüzünden eşleştirmenin araca yapıldığını görmek",
+    "Deneme kartının neden zorunlu bir adım olduğunu ve nasıl doğru okunduğunu bilmek",
+    "Renk farkının görünmezlikle değil geçişle çözüldüğünü anlamak"
+  ],
+
+  "safety": [
+    { "rule": "Boya karıştırma ve püskürtme uygun solunum koruması ve havalandırma olmadan yapılmaz", "why": "Boya ve sertleştiricilerin solunması kalıcı sağlık zararı verir; deneme kartı püskürtmek de püskürtmedir", "blocksStart": true },
+    { "rule": "Renk eşleştirme kararı yapay aydınlatma altında verilmez", "why": "İki farklı boya bir ışıkta aynı, başka bir ışıkta farklı görünebilir; karar gün ışığında verilir", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.renk-karti", "label": "Deneme kartı", "required": true },
+    { "id": "tool.boya-tabancasi", "label": "Boya tabancası", "required": true },
+    { "id": "tool.olcum-mastari", "label": "Ölçüm mastarı", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Aracın renk kodunu etiketten okudun. Kodu boya tedarikçisine verip karışımı istemek üzeresin.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-kapi-paneli",
+        "question": "Renk kodu tek başına rengi verir mi?",
+        "options": [
+          { "label": "Vermez: aynı kodun üretim dönemine ve fabrikaya göre varyantları olur, üstelik araç yıllar içinde solmuştur — kod başlangıç noktasıdır, eşleştirme kodun değil aracın kendisine yapılır", "verdict": "kod-baslangic", "correct": true, "explain": "Renk kodu bir adres değil, bir başlangıç noktasıdır. Üç ayrı sebep kodu tek başına yetersiz bırakır. Birincisi varyanttır: aynı model aynı kodla farklı fabrikalarda ve farklı yıllarda üretilirken pigment tedarikçisi ya da karışım revize edilebilir; sonuçta tek bir kodun altında birbirinden gözle ayırt edilebilir birkaç farklı formül bulunur. Boya üreticisinin veri tabanı bunları ayrı kayıtlar olarak tutar ve hangisinin kullanılacağı yalnız kodla değil, üretim tarihi ve gövde numarası gibi ek bilgilerle ya da doğrudan araçla karşılaştırarak belirlenir. İkincisi solmadır: fabrikadan çıkmış bir renk, güneş ve hava koşulları altında yıllar içinde değişir. Sekiz yıllık bir aracın kapısı, fabrika kodunun bugünkü karşılığıyla artık aynı değildir — kod doğru olsa bile sonuç tutmaz. Üçüncüsü önceki onarımdır: panel daha önce boyanmış olabilir ve o boyanın ne olduğunu kod söylemez. Bu yüzden usta kodu alır ama kararı araca bakarak verir. Renk kodu etiketinin araçta nerede olduğu, hangi bilgilerin varyant seçiminde kullanıldığı ve varyant tabloları marka ve boya üreticisine özgüdür; bu ders bunları vermiyor." },
+          { "label": "Verir, kod neyse renk odur", "verdict": "kod-yeter", "explain": "Aynı kodun varyantları vardır ve araç solmuştur." },
+          { "label": "Yeni araçlarda verir, eskide vermez", "verdict": "yeni-arac", "explain": "Varyant sorunu yeni araçta da vardır; solma ayrı bir konudur." },
+          { "label": "Kod gereksizdir, göz kararı yeterlidir", "verdict": "goz", "explain": "Kod başlangıç noktasıdır; onsuz karışım rastgeleye döner." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Kod bir adres değil, başlangıç noktası. Varyant + solma + önceki onarım: üçü birden kodu tek başına yetersiz bırakır."
+    },
+    {
+      "id": 2,
+      "instruction": "Rengi bitişik panele açarak geçiş yapacaksın. İki plan var: dar açılım 200 mm, geniş açılım 340 mm. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.olcum-mastari",
+        "unit": "mm",
+        "acceptRange": [138, 142]
+      },
+      "camera": "kaporta",
+      "hint": "340 eksi 200.",
+      "teachingNote": "140 mm fark — ve bu farkın anlamı, gözün renk değişimini nerede yakalayacağıdır. Açılım (blend), yeni rengin bitişik panelde giderek incelerek eski rengin içinde kaybolmasıdır. Dar bir açılımda iki renk kısa bir mesafede buluşur; aradaki fark ne kadar küçük olursa olsun, göz kısa mesafedeki değişimi bir sınır olarak okur. Geniş açılımda aynı fark uzun bir mesafeye yayılır ve göz onu bir sınır değil, yüzeyin doğal değişimi olarak görür. Yani açılım genişliği, renk farkını yok etmez — farkın algılanma eşiğinin altına inmesini sağlar. Buradan iki pratik sonuç çıkar. Birincisi, renk ne kadar tutmuyorsa açılım o kadar geniş olmalıdır; 'tutmadı, biraz daha açayım' değil, 'ne kadar tutmadığını gör, ona göre planla'. İkincisi, metalik ve sedefli renklerde açılım daha geniş tutulur, çünkü bu renklerde fark yalnız tonda değil, ışığın yansıma biçiminde de olur. Açılımın nerede biteceği de önemlidir: bir kıvrımda ya da doğal bir hatta bitmesi, düz yüzeyin ortasında bitmesinden her zaman daha iyidir. Kaç mm açılım yapılacağı, hangi ürünle yumuşatılacağı ve kaç kat uygulanacağı ürüne ve renge özgüdür; buradaki iki sayı senaryo değeridir."
+    },
+    {
+      "id": 3,
+      "instruction": "Karışım hazır. Doğrudan araca sürüp bakmayı düşünüyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.boya-tabancasi",
+        "question": "Karışan renk nasıl kontrol edilir?",
+        "options": [
+          { "label": "Deneme kartıyla: aynı tabanca ve aynı ayarla karta püskürtülür, KURUTULUR, sonra aracın kendi paneline tutularak gün ışığında bakılır — yaş boya kuru boyadan farklı görünür", "verdict": "deneme-karti", "correct": true, "explain": "Deneme kartı, bu aşamanın atlanınca en pahalıya patlayan adımıdır: atlarsan yanlış rengi doğrudan araca uygularsın ve geri dönüş bütün katmanları sökmek demektir. Kartın doğru kullanımının dört şartı var. Birincisi aynı koşul: kart, işi yapacağın tabancayla, aynı ayarla, aynı kat sayısıyla ve aynı mesafeden püskürtülür. Farklı ayarla püskürtülen kart farklı renk verir — özellikle metaliklerde, çünkü metalik parçacıkların yüzeye nasıl dizildiğini uygulama belirler. İkincisi kuruma: yaş boya, kuru boyadan koyu ve farklı görünür; karar yaş kart üzerinden verilirse hemen her zaman yanlış çıkar. Üçüncüsü karşılaştırma yeri: kart havada tutulup değerlendirilmez, aracın onarılacak panelinin hemen yanına, temizlenmiş ve gerekiyorsa cilalanmış bir yüzeye dayanarak bakılır. Dördüncüsü ışık: karar gün ışığında verilir. İki farklı formül bir ışık altında aynı, başka bir ışık altında farklı görünebilir — bu yüzden atölye lambası altında verilen 'tuttu' kararı dışarıda bozulur. Kart aynı zamanda bir kayıttır: hangi formülün hangi araçta kullanıldığı üzerine yazılır ve saklanır. Karışım oranları, ürün adları ve kart hazırlama talimatı boya üreticisinin belgesindedir; bu ders bunları vermiyor." },
+          { "label": "Doğrudan araca sürülür, en gerçekçi yöntem budur", "verdict": "araca-sur", "explain": "Tutmazsa bütün katmanları geri almak gerekir." },
+          { "label": "Renk kartı kataloğuna bakmak yeterlidir", "verdict": "katalog", "explain": "Katalog aracın bugünkü solmuş hâlini göstermez." },
+          { "label": "Yaşken bakmak daha doğrudur", "verdict": "yas", "explain": "Yaş boya kuru boyadan farklı görünür." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Aynı tabanca, aynı ayar, kuru kart, aracın kendi paneli, gün ışığı. Dördü birden olmazsa kart yanıltır."
+    },
+    {
+      "id": 4,
+      "instruction": "Metalik bir renkte kart bir açıdan tutuyor, yandan bakınca araçtan daha açık görünüyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-camurluk",
+        "question": "Bu ne anlama gelir?",
+        "options": [
+          { "label": "Metalik renkte bakış açısı değiştikçe renk değişir; kart tek açıdan değil birden çok açıdan okunur — ve açıdan açıya değişen bu fark çoğu zaman pigmentten değil uygulamadan gelir", "verdict": "acisal-fark", "correct": true, "explain": "Metalik ve sedefli boyalarda renk, katmanın içindeki yansıtıcı parçacıkların ışığı nasıl döndürdüğüyle belirlenir. Bu yüzden aynı boya, dik bakışta ve yandan bakışta farklı görünür — atölyede buna açıdan açıya değişim denir ve tek açıdan verilen karar bu yüzden eksiktir. Kart en az iki, tercihen üç açıdan okunur: dik, eğik ve sıyırma açısı. Asıl bilgi ise şurada: bu parçacıkların yüzeye nasıl dizildiğini büyük ölçüde uygulama belirler. Tabancanın mesafesi, hava basıncı, katın ıslaklığı ve kat sayısı değişince aynı formül daha açık ya da daha koyu, daha benekli ya da daha düz görünür. Yani yandan bakışta açık çıkan bir kart çoğu zaman 'yanlış formül' değil, 'farklı uygulanmış aynı formül' demektir. Doğru tepki, hemen formülü değiştirmek yerine kartı işi yapacağın koşullarla yeniden püskürtmek ve öyle karşılaştırmaktır. Fark uygulama düzeltilince kapanıyorsa sorun renkte değildir. Kapanmıyorsa formül varyantı gözden geçirilir. Üçüncü bir ihtimal daha var: aracın o paneli daha önce boyanmıştır ve karşılaştırma yaptığın yüzey fabrika boyası değildir. Uygulama parametrelerinin renge etkisinin sayısal karşılığı ürüne ve tabancaya özgüdür; bu ders sayı vermiyor." },
+          { "label": "Formül yanlıştır, hemen değiştirilir", "verdict": "formul-yanlis", "explain": "Önce uygulama koşulları eşitlenir; fark çoğu zaman oradan gelir." },
+          { "label": "Metalikte açı farkı normaldir, dikkate alınmaz", "verdict": "onemsiz", "explain": "Araçta da aynı açı farkı görünür; dikkate alınır." },
+          { "label": "Vernik atılınca eşitlenir", "verdict": "vernik", "explain": "Vernik parlaklık ekler, parçacık dizilimini değiştirmez." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Metalikte rengi formül kadar uygulama belirler. Kartı işin koşullarıyla yeniden püskürtmeden formülü suçlama."
+    },
+    {
+      "id": 5,
+      "instruction": "Kart yakın ama tam tutmuyor. Panelin sınırında bitirip geçmeyi düşünüyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.arka-kapi-paneli",
+        "question": "Renk tam tutmadığında ne yapılır?",
+        "options": [
+          { "label": "Bitişik panele açılım yapılır: yeni renk komşu panelde giderek incelerek eskinin içinde kaybolur — panel sınırında bitirmek iki rengi yan yana getirir ve farkı bir hat hâline dönüştürür", "verdict": "acilim", "correct": true, "explain": "Renk eşleştirmede hedef, farkı sıfırlamak değil — çoğu zaman mümkün de değildir — farkı gözün yakalayamayacağı bir dağılıma yaymaktır. Panel sınırında bitirmek bunun tam tersini yapar: iki rengi keskin bir hat boyunca yan yana getirir ve göz, yan yana duran iki tonu her koşulda ayırt eder. Bu yüzden fark küçük olsa bile sınırda biten iş 'boya tutmamış' olarak görünür. Açılım, yeni rengi komşu panelin içine doğru giderek azalan yoğunlukta taşır; geçiş bölgesinde iki renk üst üste biner ve fark uzun bir mesafeye yayılır. Uygulamada üç şey belirleyicidir. Birincisi genişlik: fark ne kadar büyükse açılım o kadar geniş olur. İkincisi bitiş yeri: açılımın bir kıvrımda, bir hatta ya da yüzeyin doğal olarak gölgelendiği bir yerde bitmesi, düz yüzeyin ortasında bitmesinden her zaman daha iyidir. Üçüncüsü vernik sınırıdır — renk açılımı bir yerde biter ama vernik genellikle panelin tamamına ya da doğal bir sınıra kadar götürülür; verniğin ortada bırakılan sınırı da ışıkta kendini gösterir. Bir de dürüstlük tarafı var: açılım komşu panele dokunmak demektir ve bu, müşteriye önceden söylenir. Hangi ürünle, kaç kat ve kaç mm açılım yapılacağı ürüne özgüdür." },
+          { "label": "Panel sınırında bitirilir, fuga zaten ayırır", "verdict": "sinirda-bitir", "explain": "Fuga iki rengi yan yana getirir; göz bunu hat olarak okur." },
+          { "label": "Renk koyulaştırılıp fark bastırılır", "verdict": "koyulastir", "explain": "Göz kararı formül düzeltmesi hatayı büyütür." },
+          { "label": "Kalın kat atılırsa fark kapanır", "verdict": "kalin-kat", "explain": "Kalınlık tonu kapatmaz; metalikte daha da değiştirir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Hedef farkı sıfırlamak değil, algı eşiğinin altına indirmek. Sınırda bitirmek farkı hat hâline getirir."
+    },
+    {
+      "id": 6,
+      "instruction": "Aracın tavanı ve kaputu, yan panellerden gözle görülür biçimde daha soluk.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.tavan-paneli",
+        "question": "Renk hangi yüzeye göre ayarlanır?",
+        "options": [
+          { "label": "Onarılan panelin kendi komşularına göre: yatay yüzeyler güneşi dik aldığı için daha çok solar, yani tek bir araçta birden fazla 'doğru renk' vardır — referans, boyanan panelin yanında duran yüzeydir", "verdict": "komsu-panel", "correct": true, "explain": "Bir aracın bütün panelleri aynı hızda solmaz. Tavan, kaput ve bagaj kapağı güneşi neredeyse dik alır; kapılar ve çamurluklar eğik alır. Yıllar sonra sonuç, aynı kodla boyanmış bir araçta yatay yüzeylerin yan yüzeylerden belirgin biçimde soluk olmasıdır. Buradan çıkan pratik kural şudur: renk 'araca' değil, onarılan panelin göz tarafından birlikte görüleceği komşu yüzeylere göre ayarlanır. Bir kapı boyanacaksa referans yandaki kapı ve çamurluktur, tavan değil. Tavan boyanacaksa referans kaput ve bagaj olabilir. Bu ayrım atlandığında ortaya şu tuhaf sonuç çıkar: renk 'doğru' karışmıştır ama yanlış yere doğrudur. İkinci bir konu daha var — karşılaştırma yapılan yüzeyin durumu. Üzerinde ince kir tabakası, oksitlenmiş mat bir katman ya da eski cila kalıntısı olan bir panel gerçek renginden farklı görünür; bu yüzden karşılaştırmadan önce o yüzey temizlenir ve gerekiyorsa hafifçe cilalanır. Cila sonrası ortaya çıkan renk çoğu zaman beklenenden daha canlıdır ve eşleştirme kararı değişir. Üçüncüsü: aracın daha önce boyanmış bir paneli referans alınırsa fabrika rengini değil, bir başkasının işini kopyalamış olursun — bunu önceden fark etmek gerekir. Solma hızları ve renklerin dayanımı üretici ve iklim koşullarına bağlıdır; sayı verilmiyor." },
+          { "label": "Aracın genel ortalamasına göre", "verdict": "ortalama", "explain": "Ortalama hiçbir panele uymaz; göz komşu yüzeyle karşılaştırır." },
+          { "label": "Fabrika koduna göre, solma dikkate alınmaz", "verdict": "fabrika", "explain": "Solma gerçek ve gözle görülür bir farktır." },
+          { "label": "En temiz panele göre", "verdict": "en-temiz", "explain": "Ölçüt temizlik değil, birlikte görülecek komşu yüzeydir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Bir araçta birden fazla doğru renk vardır. Referans, boyanan panelin yanında duran yüzey — ve o yüzey önce temizlenir."
+    },
+    {
+      "id": 7,
+      "instruction": "Renk kararı verildi, kart kayda geçti.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kaput-kaporta",
+        "question": "Bu dersin özeti nedir?",
+        "options": [
+          { "label": "Renk bir kod değil bir karardır: kodla başlanır, araçla eşleştirilir, kuru kartla gün ışığında doğrulanır ve kalan fark açılımla çözülür", "verdict": "renk-karar", "correct": true, "explain": "Bu dersin dört adımı bir zincir kurar ve zincirin hiçbir halkası atlanamaz. Kodla başlanır çünkü kod olmadan karışım rastgeleye döner. Araçla eşleştirilir çünkü kodun altında birden fazla varyant vardır ve araç solmuştur. Kuru kartla gün ışığında doğrulanır çünkü yaş boya ve yapay ışık kararı bozar. Kalan fark açılımla çözülür çünkü hedef farkı sıfırlamak değil, gözün yakalayamayacağı bir dağılıma yaymaktır. Bu zincirde en sık atlanan halka kart, en sık yapılan hata ise panel sınırında bitirmektir; ikisi de aynı sonucu verir — teslimde göze çarpan bir ton farkı. Bir de bu dersin kendine özgü dürüstlük tarafı var. Renk eşleştirme, kaporta işinin müşterinin en kolay denetleyebildiği kısmıdır: taşıyıcı yapıyı ya da astarı göremez ama iki panel arasındaki ton farkını ilk bakışta görür. Bu yüzden bazı işlerde 'nasılsa fark etmez' diye kısa kesilen adımlar, tam da fark edilecek yerdedir. Açılımın komşu panele dokunacağı da işin başında söylenir, sonunda değil. Sırada uygulama var: tabanca ayarı, kat sayısı ve ortam koşulları — yani doğru karışan rengin araca doğru biçimde gitmesi." },
+          { "label": "Renk kodu bulunursa iş biter", "verdict": "kod", "explain": "Varyant, solma ve önceki onarım kodu tek başına yetersiz bırakır." },
+          { "label": "İyi boya markası farkı ortadan kaldırır", "verdict": "marka", "explain": "Marka formül verir; eşleştirme kararını usta verir." },
+          { "label": "Tecrübeli usta göz kararıyla tutturur", "verdict": "goz-karari", "explain": "Tecrübe kartı doğru okumaya yarar, kartın yerini tutmaz." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Renk, müşterinin en kolay denetleyebildiği iş. Görülmeyecek diye kısa kesilen adımlar tam da görülecek yerde."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Renk kodu elinde. Neden doğrudan o karışımla araca geçilmez?",
+        "a": "kod-baslangic",
+        "options": [
+          { "verdict": "kod-baslangic", "label": "Kod bir başlangıç noktasıdır: aynı kodun üretim dönemine göre varyantları vardır, araç yıllar içinde solmuştur ve panel daha önce boyanmış olabilir", "explain": "Eşleştirme kodun değil aracın kendisine yapılır ve kuru deneme kartıyla gün ışığında doğrulanır. Varyant tabloları boya üreticisinin veri tabanındadır." },
+          { "verdict": "kod-yeter", "label": "Geçilir, kod neyse renk odur", "explain": "Varyant ve solma kodu tek başına yetersiz bırakır." },
+          { "verdict": "yeni-arac", "label": "Yalnız eski araçlarda sorun olur", "explain": "Varyant sorunu yeni araçta da vardır." },
+          { "verdict": "goz", "label": "Kod gereksizdir", "explain": "Kod olmadan karışım rastgeleye döner." }
+        ]
+      },
+      {
+        "q": "Kart araca yakın ama tam tutmuyor. Doğru çözüm nedir?",
+        "a": "acilim",
+        "options": [
+          { "verdict": "acilim", "label": "Bitişik panele açılım yapılır; yeni renk komşu panelde giderek incelerek eskinin içinde kaybolur", "explain": "Panel sınırında bitirmek iki rengi yan yana getirir ve göz bunu hat olarak okur. Fark büyükse açılım genişletilir ve mümkünse bir kıvrımda bitirilir. Komşu panele dokunulacağı müşteriye önceden söylenir." },
+          { "verdict": "sinirda-bitir", "label": "Panel sınırında bitirilir", "explain": "Fark bir hat hâline gelir." },
+          { "verdict": "koyulastir", "label": "Renk göz kararı koyulaştırılır", "explain": "Formülü göz kararı düzeltmek hatayı büyütür." },
+          { "verdict": "kalin-kat", "label": "Kalın kat atılır", "explain": "Kalınlık tonu kapatmaz, metalikte değiştirir." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2'deki 200 mm ve 340 mm SENARYO açılım planlarıdır; istenen FARKTIR (140 mm). Ders hiçbir renk ya da ürün için açılım mesafesi önermiyor.",
+    "sourceRequired": "Renk kodu etiketinin araçtaki yeri, varyant tabloları, varyant seçiminde kullanılan ek bilgiler, karışım oranları, ürün adları, deneme kartı hazırlama talimatı, kat sayısı ve uygulama parametrelerinin renge sayısal etkisi bilinçle VERİLMEDİ; hepsi marka ve boya üreticisine özgüdür ve üreticinin renk veri tabanından okunur.",
+    "kapsam": "Boya kabini kurulumu, havalandırma ve atık yönetimi mevzuatı KAPSAM DIŞIDIR; ders renk eşleştirmenin karar zincirini öğretiyor.",
+    "kaynak": "Bu alan kullanıcının açık talebiyle eklendi (talep birebir: 'birde alanlara kaportayı ekleyelim'); konu başlıkları MEB Otomotiv Gövde ve Boya dalının çerçevesini takip ediyor, kazanım numarası iddiası yok.",
+    "reviewedByMechanic": false
+  }
+}

@@ -1,0 +1,177 @@
+{
+  "id": "direksiyon.eps-yapisi",
+  "area": "direksiyon",
+  "stage": 4,
+  "title": "Motor, Tork Sensörü ve Kontrol Ünitesi",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 35,
+  "prerequisites": ["direksiyon.hidrolik-hava"],
+  "learningGoals": [
+    "EPS'i sensör-modül-motor sırası olarak okumak",
+    "Tork sensörünün ne ölçtüğünü ve neden iki kanallı olduğunu bilmek",
+    "Sistemin hangi verileri kullandığını ve hangi sistemlerle konuştuğunu görmek"
+  ],
+
+  "safety": [
+    { "rule": "EPS üzerinde çalışırken üreticinin öngördüğü şekilde enerji kesilir ve beklenir", "why": "Kontrol ünitesi beklenmedik anda destek verebilir; motor güçlüdür ve simidi kendi başına çevirebilir", "blocksStart": true },
+    { "rule": "Direksiyon simidinin sökülmesini gerektiren hiçbir işlem bu derste yapılmaz", "why": "Simit sökümü airbag ve spiral kablo işlemidir; alanın kırmızı çizgisi burada da geçerlidir", "blocksStart": true },
+    { "rule": "Konnektörler kontak açıkken takılıp çıkarılmaz", "why": "Canlı devrede konnektör hareketi modülü kalıcı olarak bozabilir ve hata kaydı üretir", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.teshis-cihazi", "label": "Teşhis cihazı", "required": true },
+    { "id": "tool.multimetre", "label": "Dijital multimetre", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "EPS'i bir sıra olarak düşün.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.eps-kontrol-unitesi",
+        "question": "Sıra nasıl işler?",
+        "options": [
+          { "label": "Sensör ölçer, modül karar verir, motor uygular; arıza bu üçünden birinde ya da aralarındaki bağlantıdadır", "verdict": "sensor-modul-motor", "correct": true, "explain": "EPS'in bütün teşhisi bu üç adımlık sıraya oturur ve sırayı bilmek, elektronik bir sistemi elle yoklanacak bir mekanizma gibi görmekten kurtarır. Sensör ölçer: tork sensörü sürücünün simide uyguladığı kuvveti, açı sensörü direksiyonun konumunu bildirir. Modül karar verir: bu girdileri araç hızı ve tasarıma göre motor devri, vites, kararlılık kontrol verileriyle birleştirip ne kadar destek verileceğini hesaplar. Motor uygular: hesaplanan akım motora gider ve destek üretilir. Sistem ayrıca kendi kendini sürekli denetler; bir girdi mantıksızsa ya da motorun çektiği akım beklenenden farklıysa modül bunu arıza olarak kaydeder. Teşhis açısından bunun anlamı şudur: 'destek yok' bir arıza adı değil, bir sonuçtur ve sebebi sırada bir yerdedir — ölçüm gelmiyordur, karar verilemiyordur, uygulama yapılamıyordur ya da aradaki besleme veya haberleşme kopmuştur. Bu yüzden EPS teşhisi elle değil, teşhis cihazıyla canlı veri okunarak yapılır: sensörün ne gördüğü ile motorun ne yaptığı yan yana konur ve zincirin nerede koptuğu görülür. Mekanik alanlarda öğrenilen 'zinciri böl' yöntemi burada elektronik biçimini alıyor." },
+          { "label": "Motor sürekli sabit destek verir", "verdict": "sabit", "explain": "Destek her an yeniden hesaplanır." },
+          { "label": "Sürücü desteği düğmeyle seçer", "verdict": "dugme", "explain": "Bazı araçlarda mod seçimi var ama karar modülündür." },
+          { "label": "Sistem yalnız mekanik çalışır", "verdict": "mekanik", "explain": "Mekanik zincir vardır ama destek elektronik olarak hesaplanır." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "'Zinciri böl' yöntemi burada elektronik biçimini alıyor: sensör ne görüyor, motor ne yapıyor — yan yana konur."
+    },
+    {
+      "id": 2,
+      "instruction": "Tork sensörüne bak.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.tork-sensoru",
+        "question": "Bu sensör tam olarak neyi ölçüyor?",
+        "options": [
+          { "label": "Kolonun iki parçası arasındaki çok küçük burulmayı; bu burulma sürücünün uyguladığı kuvvetle orantılıdır", "verdict": "burulma-olcer", "correct": true, "explain": "Tork sensörü kuvveti doğrudan ölçemez; ölçtüğü şey bir deformasyondur. Direksiyon kolonu sensör bölgesinde iki parçaya ayrılır ve arada burulmaya izin veren esnek bir eleman bulunur. Sürücü simide kuvvet uyguladığında üst parça alt parçaya göre çok küçük bir açıyla burulur — gözle görülmeyecek kadar küçük, ama ölçülebilir. Sensör bu iki parçanın göreli konumunu okur ve burulmayı elektrik sinyaline çevirir. Burulma ne kadar büyükse sürücü o kadar zorlanıyor demektir; modül de desteği ona göre artırır. Tasarımın iki önemli sonucu vardır. Birincisi, sensör aynı zamanda YÖNÜ de bildirir: burulmanın işareti sağa mı sola mı çevrildiğini söyler, yoksa modül desteği hangi yöne vereceğini bilemezdi. İkincisi, sistemin ölü noktası yoktur: sürücü direksiyonu tutup hiç çevirmese bile uyguladığı kuvvet ölçülür ve gerekiyorsa destek verilir. Bu sensör kolonun içinde, dışarıdan görülmeyen bir yerdedir ve genellikle ayrı olarak sökülüp takılmaz; arızalandığında değişen birim çoğu zaman kolon ya da modülle birlikte olur." },
+          { "label": "Direksiyonun kaç derece döndüğünü", "verdict": "aci", "explain": "O açı sensörünün işi; tork sensörü burulmayı ölçer." },
+          { "label": "Araç hızını", "verdict": "hiz", "explain": "Hız başka bir kaynaktan gelir." },
+          { "label": "Motor akımını", "verdict": "akim", "explain": "Akım modülün çıkışı, sensörün girdisi değil." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Sensör kuvveti değil, kuvvetin ürettiği burulmayı ölçüyor. İşareti aynı zamanda yönü de söylüyor."
+    },
+    {
+      "id": 3,
+      "instruction": "Teşhis cihazıyla tork sensörünün iki kanalını okudun: direksiyon serbestken kanal A 2,52 V, kanal B 2,48 V. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.tork-sensoru",
+        "unit": "V",
+        "acceptRange": [0.035, 0.045]
+      },
+      "camera": "direksiyon",
+      "hint": "2,52 eksi 2,48.",
+      "teachingNote": "0,04 V'luk bu küçük fark, sensörün iki kanallı olmasının sebebini gösteriyor. Güvenlik açısından kritik sensörler tek sinyal üretmez; birbirini denetleyen iki kanal üretir. Modül bu iki değeri sürekli karşılaştırır ve aralarındaki ilişki beklenen aralıktan çıkarsa sensöre güvenmeyi bırakıp desteği keser. Sebebi açıktır: yanlış ölçülmüş bir kuvvete göre destek vermek, direksiyonu kendi başına çeviren bir sisteme dönüşmek olurdu. Bu yüzden 'destek kesildi' şikâyeti çoğu zaman bir arıza değil, sistemin doğru davranışıdır. Beklenen kanal farkı ve gerilim aralıkları araca özgüdür; bu ders bir sınır vermiyor, gösterdiği şey iki kanalın neden var olduğu."
+    },
+    {
+      "id": 4,
+      "instruction": "Modülün hangi verileri kullandığına bak.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.eps-kontrol-unitesi",
+        "question": "Destek hesabına hangi girdiler karışır?",
+        "options": [
+          { "label": "Uygulanan tork ve direksiyon açısı ile araç hızı; tasarıma göre motor devri, vites konumu ve kararlılık kontrol verileri de eklenir", "verdict": "tork-aci-hiz", "correct": true, "explain": "Desteğin miktarı tek bir girdiden hesaplanmaz. Temel girdi uygulanan torktur — sürücü ne kadar zorluyor. İkincisi direksiyon açısıdır: sistem simidin nerede olduğunu ve ne hızla çevrildiğini bilir; bu, merkeze dönüş yardımı ve sönümleme gibi işlevler için gerekir. Üçüncüsü ve en belirleyicisi araç hızıdır. Düşük hızda ve park hâlinde bol destek verilir, direksiyon neredeyse parmakla çevrilir; hız yükseldikçe destek kısılır ve direksiyon ağırlaşarak araç daha kararlı hissedilir. Bu yüzden hız bilgisi kaybolduğunda EPS çoğu zaman güvenli tarafa geçer ve desteği sabitler ya da azaltır — sürücü bunu 'direksiyon birden ağırlaştı' diye tarif eder, hâlbuki EPS sağlamdır ve asıl arıza tekerlek hız sensöründe ya da haberleşmededir. Bu, bu dersin en pratik çıkarımıdır: EPS'in girdileri başka sistemlerden geldiği için, EPS arızası gibi görünen şey sıklıkla başka bir sistemin arızasıdır. Tasarıma göre motor devri, vites konumu ve kararlılık kontrol verileri de hesaba katılır." },
+          { "label": "Yalnız araç hızı", "verdict": "sadece-hiz", "explain": "Hız belirleyici ama temel girdi uygulanan tork." },
+          { "label": "Yalnız dış hava sıcaklığı", "verdict": "sicaklik", "explain": "Sıcaklık koruma amaçlı izlenir ama destek hesabının girdisi değil." },
+          { "label": "Hiçbiri; destek sabittir", "verdict": "sabit", "explain": "Destek sürekli yeniden hesaplanır." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "EPS arızası gibi görünen şey sıklıkla başka bir sistemin arızası. Hız bilgisi kaybolunca destek de değişir."
+    },
+    {
+      "id": 5,
+      "instruction": "Motorun beslemesine bak: kalın kablolar ve ayrı bir sigorta var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.eps-motoru",
+        "question": "Neden bu kadar kalın besleme gerekiyor?",
+        "options": [
+          { "label": "Motor destek verirken yüksek akım çeker; bu yüzden besleme ve şase bağlantısındaki küçük bir direnç bile desteği düşürür", "verdict": "yuksek-akim", "correct": true, "explain": "EPS motoru, hidrolik pompanın yaptığı işi elektrikle yapar ve bu iş küçük değildir — özellikle park manevrasında motor kısa süreli olarak belirgin bir akım çeker. Beslemenin kalın olması, sigortanın ayrı ve büyük olması bundandır. Bunun teşhisteki karşılığı çok pratiktir: bu devrede gerilim düşümü doğrudan performans kaybı demektir. Paslanmış bir şase bağlantısı, oksitlenmiş bir konnektör ucu ya da gevşemiş bir akü kutup başı, normal koşullarda hiçbir belirti vermezken EPS yük altındayken gerilimi düşürür ve modül desteği kısar ya da tamamen keser. Sürücünün tarifi tanıdıktır: 'park ederken bir an ağırlaşıyor, sonra düzeliyor.' Bu yüzden EPS teşhisinin ilk adımlarından biri elektrik alanında öğrenilen gerilim düşümü ölçümüdür — sistem yük altındayken modülün besleme ve şase uçlarında ölçülen gerilim, aküdeki gerilimle karşılaştırılır. Aynı sebeple zayıf ya da yaşlanmış bir akü, kendi başına EPS uyarısı üretebilir. Modül değiştirmeden önce beslemenin sağlığı doğrulanır; aksi hâlde yeni modül aynı şikâyetle geri gelir." },
+          { "label": "Motor sürekli çalıştığı için", "verdict": "surekli", "explain": "Motor yalnız destek gerektiğinde çalışır; mesele anlık yüksek akım." },
+          { "label": "Isınmasın diye", "verdict": "isinma", "explain": "Kalın kablo ısınmayı da azaltır ama sebep akım ihtiyacı." },
+          { "label": "Gürültü azaltmak için", "verdict": "gurultu", "explain": "Kablo kalınlığının sesle ilgisi yok." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Paslı bir şase bağlantısı, EPS'i tamamen sağlam bir sistemde bile arızalı gösterebilir."
+    },
+    {
+      "id": 6,
+      "instruction": "Uzun bir park manevrası sonrası destek belirgin biçimde azaldı, araç bir süre bekleyince normale döndü.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.eps-motoru",
+        "question": "Bu bir arıza mı?",
+        "options": [
+          { "label": "Genellikle değil; sistem ısındığında kendini korumak için desteği geçici olarak azaltır. Yine de tekrarlıyorsa besleme, soğuma ve kod kaydı kontrol edilir", "verdict": "isil-koruma", "correct": true, "explain": "EPS motoru ve modülü akım geçtikçe ısınır ve bu ısı bir yerde sınıra dayanır. Kontrol ünitesi bu sınıra yaklaşıldığında desteği kademeli olarak azaltır — buna ısıl koruma denir ve amacı motoru ve modülü yanmaktan korumaktır. Sürücü bunu 'uzun park manevrasından sonra direksiyon ağırlaştı, biraz sonra düzeldi' diye tarif eder ve bu tarif başlı başına bir teşhistir: geçici, kullanım yoğunluğuna bağlı ve kendiliğinden düzelen bir destek azalması normal davranıştır. Ancak bu, her tekrarın normal olduğu anlamına gelmez. Aynı durum sıradan kullanımda ve kısa manevralarda da oluyorsa altta bir sebep vardır: besleme tarafında gerilim düşümü motoru daha çok zorlar, soğuma yolları tıkanmış olabilir, ya da mekanik tarafta artan bir direnç — sıkı ayarlanmış bir kutu, sıkışmış bir mafsal, çok düşük lastik basıncı — motoru sürekli yüksek yükte çalıştırıyordur. Bu yüzden doğru yaklaşım şudur: davranışı normal olarak açıkla, ama tekrar sıklığını sor ve kodlara bak. Sistem çoğu zaman bu olayı bir kayıt olarak tutar ve kayıt, normal koruma ile gerçek arızayı ayırır." },
+          { "label": "Kesinlikle arızadır, modül değiştirilir", "verdict": "modul", "explain": "Isıl koruma normal davranıştır; önce sıklık ve kodlara bakılır." },
+          { "label": "Motor yanmıştır", "verdict": "yandi", "explain": "Yanmış motor destek vermez ve kendiliğinden düzelmez." },
+          { "label": "Sıvı azalmıştır", "verdict": "sivi", "explain": "EPS'te hidrolik sıvı yoktur." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Normal koruma ile gerçek arızayı ayıran şey tekrar sıklığı ve kayıt. Davranışı açıkla ama sormadan geçme."
+    },
+    {
+      "id": 7,
+      "instruction": "EPS'in başka sistemlerle ilişkisine bak.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.aci-sensoru",
+        "question": "EPS'in elektronik olmasının getirdiği ek işlevler neler?",
+        "options": [
+          { "label": "Şerit takip, park asistanı ve kararlılık kontrolü gibi sistemler direksiyona müdahale edebilir; bu yüzden EPS onlarla haberleşir ve onlardaki arıza EPS'e yansıyabilir", "verdict": "surucu-destek", "correct": true, "explain": "EPS, desteği yazılımla belirlediği için direksiyona başka sistemlerin de dokunmasına imkân verir. Şerit takip sistemi aracı şeritte tutmak için küçük bir düzeltme torku uygulatabilir; park asistanı manevra sırasında direksiyonu doğrudan çevirebilir; kararlılık kontrolü savrulma anında sürücüye doğru yönde bir yardım verebilir. Bunların hepsi EPS motoru üzerinden gerçekleşir. Bu bağlantının iki sonucu vardır. Birincisi teşhis içindir: EPS'te görülen bir arıza kodu, kaynağı başka bir sistemde olan bir sorunun yansıması olabilir — kamera arızalı olduğu için şerit takip devre dışı kalmış ve EPS bunu kaydetmiş olabilir. Bu yüzden kodlar yalnız EPS'ten değil, ilgili bütün sistemlerden okunur ve hangisinin önce oluştuğuna bakılır. İkincisi güvenlik içindir: direksiyona kendi başına müdahale edebilen bir sistem üzerinde çalışırken enerji kesilmeden ve prosedüre uyulmadan iş yapılmaz, çünkü modül beklenmedik anda simidi çevirebilir. Ayrıca bu sistemlerden herhangi biri onarım gördüğünde kalibrasyon gerekebilir; bu, bir sonraki derslerin konusu." },
+          { "label": "Hiçbir ek işlev yok, yalnız destek verir", "verdict": "yok", "explain": "Elektronik olması sürücü destek sistemlerinin kapısını açtı." },
+          { "label": "Yalnız yakıt tasarrufu sağlar", "verdict": "yakit", "explain": "Yakıt bir kazanım ama tek sonuç değil." },
+          { "label": "Yalnız radyoyu etkiler", "verdict": "radyo", "explain": "İlgisi yok." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "EPS kodu, kaynağı başka sistemde olan bir sorunun yansıması olabilir. Kodlar ilgili bütün sistemlerden okunur."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Tork sensörü tam olarak neyi ölçer?",
+        "a": "burulma-olcer",
+        "options": [
+          { "verdict": "burulma-olcer", "label": "Kolonun iki parçası arasındaki çok küçük burulmayı; bu burulma uygulanan kuvvetle orantılıdır", "explain": "Sensör kuvveti doğrudan değil, kuvvetin ürettiği deformasyonu ölçer. Kolon sensör bölgesinde iki parçaya ayrılır ve arada burulmaya izin veren esnek bir eleman vardır; iki parçanın göreli konumu okunup elektrik sinyaline çevrilir. Burulmanın işareti aynı zamanda yönü söyler, yoksa modül desteği hangi yöne vereceğini bilemezdi." },
+          { "verdict": "aci", "label": "Direksiyonun kaç derece döndüğünü", "explain": "O açı sensörünün işi." },
+          { "verdict": "hiz", "label": "Araç hızını", "explain": "Hız başka kaynaktan gelir." },
+          { "verdict": "akim", "label": "Motor akımını", "explain": "Akım modülün çıkışı." }
+        ]
+      },
+      {
+        "q": "EPS motorunun beslemesi neden kalındır ve bunun teşhisteki karşılığı nedir?",
+        "a": "yuksek-akim",
+        "options": [
+          { "verdict": "yuksek-akim", "label": "Destek verirken yüksek akım çeker; besleme ve şasedeki küçük bir direnç bile desteği düşürür", "explain": "Paslanmış şase bağlantısı, oksitlenmiş konnektör ya da gevşek akü kutup başı normalde belirti vermezken EPS yük altındayken gerilimi düşürür ve modül desteği kısar. Sürücünün tarifi 'park ederken bir an ağırlaşıyor, sonra düzeliyor' olur. Bu yüzden modül değiştirmeden önce yük altında gerilim düşümü ölçülür; aksi hâlde yeni modül aynı şikâyetle geri gelir." },
+          { "verdict": "surekli", "label": "Motor sürekli çalıştığı için", "explain": "Yalnız destek gerektiğinde çalışır." },
+          { "verdict": "isinma", "label": "Isınmasın diye", "explain": "Sebep akım ihtiyacı." },
+          { "verdict": "gurultu", "label": "Gürültü için", "explain": "İlgisi yok." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 2,52 V ve 2,48 V SENARYO okumalarıdır; istenen FARKTIR (0,04 V) ve gösterilen şey iki kanallı sensörün birbirini denetlemesidir. Beklenen kanal farkı ve gerilim aralıkları verilmiyor.",
+    "sourceRequired": "Tork sensörü gerilim aralıkları, kanal ilişkisi, EPS motoru akım değerleri, sigorta amperi ve ısıl koruma eşikleri bilinçle VERİLMEDİ; araca ve üreticiye özgüdür.",
+    "kapsam": "Uyarı lambası ve destek kaybı teşhisi bir sonraki ders. Onarım sonrası öğrenme aşama 4'ün üçüncü dersi. Açı sensörünün ESP ile ilişkisi aşama 5'te ayrı ders. Simit ve airbag sökümü kapsam dışı — alanın kırmızı çizgisi.",
+    "reviewedByMechanic": false
+  }
+}

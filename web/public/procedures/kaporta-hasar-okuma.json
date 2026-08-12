@@ -1,0 +1,178 @@
+{
+  "id": "kaporta.hasar-okuma",
+  "area": "kaporta",
+  "stage": 0,
+  "title": "Hasarı Okumak: Darbe Nereden Geldi, Enerji Nereye Gitti",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 40,
+  "prerequisites": ["kaporta.govde-yapisi"],
+  "learningGoals": [
+    "Görünen hasardan darbenin yönünü ve şiddetini okumak",
+    "Boya kalınlığı ölçerek geçmiş onarımı bulmak",
+    "İşe başlamadan önce kapsamı belirleyip kayıt altına almak"
+  ],
+
+  "safety": [
+    { "rule": "Hasar değerlendirmesi bitmeden hiçbir parça sökülmez ve hiçbir fiyat verilmez", "why": "Yarım sökülmüş bir araçta kapsam büyüdüğünde ne geri dönülebilir ne dürüst bir fiyat verilebilir; müşteri de sen de sıkışırsınız", "blocksStart": true },
+    { "rule": "Taşıyıcı bölgede hasar görülürse iş bu aşamada durdurulur ve kılavuza bakılır", "why": "Bu alanın değişmeyen sınırı; taşıyıcı hasar dış panel işi gibi ele alınmaz", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.kalinlik-olcer", "label": "Boya kalınlık ölçer", "required": true },
+    { "id": "tool.olcum-mastari", "label": "Ölçüm mastarı", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true },
+    { "id": "tool.kayit-formu", "label": "Kayıt formu", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Araç geldi. Ön çamurlukta belirgin bir göçük var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.gocuk-bolgesi",
+        "question": "Değerlendirmeye nereden başlanır?",
+        "options": [
+          { "label": "Darbenin yönü ve şiddeti okunur: göçüğün en derin noktası, kıvrımların yönü ve boyanın çatlayıp çatlamadığı darbenin nereden geldiğini ve enerjinin nereye gittiğini söyler", "verdict": "yon-ve-siddet", "correct": true, "explain": "Bir göçük yalnız bir çukur değildir; sacın üzerine yazılmış bir kayıttır ve okunması öğrenilir. Üç şey okunur. Birincisi yön: göçüğün en derin noktası darbenin ilk temas ettiği yerdir ve çevresindeki kıvrımlar enerjinin yayıldığı yönü gösterir — kıvrımlar hangi tarafa uzuyorsa darbe o yöne doğru ilerlemiştir. İkincisi şiddet: sac yalnız içeri girmişse darbe hafiftir; sac gerilmiş, incelmiş ya da katlanmışsa şiddet yüksektir. Boyanın çatlaması da bir ölçüdür — boya esner ama bir sınıra kadar; çatlamışsa sac o noktada kalıcı olarak gerilmiş demektir. Üçüncüsü sınır: göçüğün kenarında sacın kilitlendiği bir hat vardır ve bu hattın nerede olduğu onarımın nereden başlayacağını belirler; göçük dersinde bu ayrıntıya gireceksin. Bu okumanın asıl faydası şudur: darbenin yönünü bilirsen enerjinin nereye gittiğini de tahmin edersin. Öne doğru gelen bir darbe çamurluğu geçip taşıyıcı ayağa, kaput menteşesine ve far yuvasına ulaşmış olabilir; yandan gelen bir darbe kapı boşluğunu bozmuş olabilir. Yani görünen hasar, arama listesinin başlangıcıdır — sonu değil." },
+          { "label": "Doğrudan macun çekilir", "verdict": "macun", "explain": "Değerlendirme yapılmadan onarım başlamaz." },
+          { "label": "Parça hemen sökülür", "verdict": "sok", "explain": "Kapsam belirlenmeden sökmek geri dönüşü zorlaştırır." },
+          { "label": "Fiyat verilir, gerisi sonra bakılır", "verdict": "fiyat", "explain": "Kapsam bilinmeden verilen fiyat ya seni ya müşteriyi mağdur eder." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Göçük sacın üzerine yazılmış bir kayıt. Yönünü okursan enerjinin nereye gittiğini tahmin edersin."
+    },
+    {
+      "id": 2,
+      "instruction": "Boya kalınlığını iki noktada ölçtün: hasarsız tavanda 118 mikron, kapı panelinde 342 mikron okudun. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.kalinlik-olcer",
+        "unit": "mikron",
+        "acceptRange": [222, 226]
+      },
+      "camera": "kaporta",
+      "hint": "342 eksi 118.",
+      "teachingNote": "224 mikronluk bu fark, o kapının daha önce onarım gördüğünün güçlü bir işaretidir ve bu ölçüm bu alanın en hızlı bilgi veren aletidir. Mantığı basittir: fabrika boyası ince ve her panelde birbirine yakın kalınlıktadır, çünkü kontrollü bir süreçte uygulanır. Sonradan yapılan bir onarımda ise altta macun, üstünde astar ve boya vardır; toplam kalınlık belirgin biçimde artar. Bu yüzden ölçüm tek bir noktada değil, aracın her paneli üzerinde birkaç noktada yapılır ve bir harita çıkarılır — hangi panel diğerlerinden farklı? Okumanın kuralları var. Birincisi karşılaştırmadır: mutlak sayı değil, panelden panele fark önemlidir; farklı üreticilerin fabrika boya kalınlıkları farklıdır ve bu ders bir sınır vermiyor. İkincisi çok noktadır: aynı panelde bile kalınlık değişebilir, bu yüzden birkaç nokta okunur ve panelin ortalaması karşılaştırılır. Üçüncüsü yorumdur: yüksek okuma her zaman kötü onarım demek değildir — bir panel iyi onarılmış da olabilir; ölçüm 'burada bir geçmiş var' der, 'burada kötü iş var' demez. Dördüncüsü sınırdır: alüminyum ve plastik parçalarda bu ölçüm farklı çalışır ya da hiç çalışmaz, cihazın tipi buna göre seçilir. Bu ölçümün iki pratik kullanımı vardır: iş öncesinde aracın geçmişini görmek ve teslim sırasında yapılan işi kayda geçirmek — ikincisi, sonradan çıkacak tartışmaları bitirir."
+    },
+    {
+      "id": 3,
+      "instruction": "Göçük ön çamurlukta ama kaput ile çamurluk arasındaki boşluk bir uçta dar, diğer uçta geniş.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kaput-kaporta",
+        "question": "Bu ne anlama gelir?",
+        "options": [
+          { "label": "Enerji görünen panelin ötesine gitmiş olabilir: parçaların oturuşu bozulmuşsa altta bağlantı ya da taşıyıcı bölge etkilenmiştir — çapraz ölçü ve boşluk kontrolü yapılmadan kapsam belirlenemez", "verdict": "gizli-hasar", "correct": true, "explain": "Panellerin arasındaki boşluğa fuga denir ve fabrikada bu boşluk baştan sona eşit olacak biçimde ayarlanır. Bir uçta dar diğer uçta geniş bir fuga, o panelin ya da onu taşıyan yapının yerinden oynadığını söyler — ve bu bilgi, göçüğün kendisinden daha değerlidir. Çünkü göçük dış paneldedir ve düzeltilebilir; fuga bozukluğu ise altta bir şeylerin değiştiğini gösterir. Kontrol sırası şudur. Birincisi bütün fugalar gezilir: kaput-çamurluk, çamurluk-kapı, kapı-kapı, kapı-arka panel, bagaj kapağı çevresi. Bir tarafta bozulan fuga karşı tarafta da kontrol edilir — çünkü gövde bir kutudur ve bir köşe oynadığında karşı köşe de değişir. İkincisi çapraz ölçülerdir: kapı boşluğunun ya da motor bölmesinin köşegen ölçüleri alınır ve iki köşegen karşılaştırılır; eşit değillerse o boşluk artık kare değildir. Bu, bir mastar ve biraz sabırla yapılabilen, pahalı bir cihaz gerektirmeyen bir kontroldür. Üçüncüsü kapı davranışıdır: kapılar aynı kuvvetle kapanıyor mu, biri zorlanıyor ya da sürtüyor mu. Bu üç kontrolden biri bile bozukluk gösteriyorsa iş artık bir çamurluk düzeltme işi değildir ve kapsam yeniden belirlenir. Kabul edilebilir fuga ve köşegen farkları araca özgüdür; bu ders bir sınır vermiyor, karşılaştırma karşı tarafla yapılır." },
+          { "label": "Normaldir, fugalar zaten eşit olmaz", "verdict": "normal", "explain": "Fabrikada fuga eşit ayarlanır; belirgin fark bir işarettir." },
+          { "label": "Yalnız menteşe ayarı bozulmuştur", "verdict": "mentese", "explain": "Olabilir ama önce alttaki yapı elenmeden karar verilmez." },
+          { "label": "Çamurluk düzeltilince kendiliğinden düzelir", "verdict": "kendiliginden", "explain": "Fuga bozukluğu panelin altındaki yapıdan geliyorsa düzelmez." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Fuga bozukluğu göçükten daha değerli bir bilgi: altta bir şeylerin oynadığını söyler. Köşegenleri ölç."
+    },
+    {
+      "id": 4,
+      "instruction": "Kapı panelinin kenarında boyanın altında hafif bir kabarma ve düzensiz punta izleri görüyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.punta-noktasi",
+        "question": "Bunlar ne söyler?",
+        "options": [
+          { "label": "Araç daha önce onarım görmüş: düzensiz punta, kalın boya, ton farkı ve elle çekilmiş sızdırmazlık izleri geçmiş bir işin izleridir ve bu bilgi işe başlamadan müşteriyle paylaşılır", "verdict": "gecmis-onarim", "correct": true, "explain": "Bir aracın geçmişini okumak bu alanda ayrı bir beceridir ve iki sebeple önemlidir: yapacağın işin kapsamını değiştirir ve seni haksız bir suçlamadan korur. Okunacak izler bellidir. Birincisi punta düzenidir: fabrika noktaları eşit aralıklı ve düzgündür, sonradan atılanlar düzensiz ve farklı boyutludur. İkincisi boya kalınlığıdır ve az önce ölçtün. Üçüncüsü ton ve dokudur: onarılan panel gün ışığında hafif farklı bir ton verebilir ya da yüzeyi farklı bir dokuya sahip olabilir; bu, panellere yan yana ve farklı açılardan bakarak anlaşılır. Dördüncüsü sızdırmazlık izleridir — fabrikada panel birleşimlerine düzgün ve makine ağzından çıkmış gibi bir sızdırmazlık uygulanır, sonradan elle çekilmiş olanlar düzensizdir. Beşincisi cıvata başlarıdır: sökülmüş bir cıvatanın başında anahtar izi ve boya çatlağı kalır. Altıncısı kabarma ve pas izleridir: eski onarımda çıplak metal kalmışsa ya da koruma yapılmamışsa yıllar içinde boyanın altından kabarma başlar — bu, sonraki derslerin ana konusu. Bu bilgi bulunduğunda yapılacak şey nettir ve etik bir konudur: müşteriye söylenir. 'Bu kapı daha önce onarım görmüş, altında macun var; ben üstüne çalışırsam sonuç şu ölçüde olur' cümlesi hem beklentiyi kurar hem seni koruma altına alır." },
+          { "label": "Fabrika izleridir, normaldir", "verdict": "fabrika", "explain": "Fabrika izleri düzenli olur; düzensizlik sonradan yapılan işi gösterir." },
+          { "label": "Önemsizdir, üstünden geçilir", "verdict": "onemsiz", "explain": "Kapsamı ve sonucu değiştirir; ayrıca müşteriye söylenir." },
+          { "label": "Müşteriye söylenmez, iş küçülür", "verdict": "soyleme", "explain": "Söylenmezse sonradan çıkan her kusur sana yazılır." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Geçmişi okumak seni haksız suçlamadan korur. Bulduğunu müşteriye söyle — beklenti baştan kurulur."
+    },
+    {
+      "id": 5,
+      "instruction": "Değerlendirme bitti. İşe başlamadan önce.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.zimpara-bolgesi",
+        "question": "Ne yapılır?",
+        "options": [
+          { "label": "Aracın mevcut durumu kayda geçirilir: hasarlı VE hasarsız bölgeler fotoğraflanır, boya kalınlığı haritası ve fuga ölçümleri yazılır, tespit edilen eski onarımlar not edilir", "verdict": "kayit", "correct": true, "explain": "Bu adım teknik değil ama bu alanda en çok para ve itibar kurtaran adımdır. Kaporta işinde araç günlerce atölyede kalır, birçok kişinin eline değer, sökülür ve takılır. İş bittiğinde müşteri aracına bakar ve gözü daha önce hiç fark etmediği bir çiziği, bir eziği ya da bir ton farkını görür — ve o an aklına gelen ilk şey burada olduğudur. Elinde kayıt yoksa bu tartışmayı kazanamazsın ve genelde parasını sen ödersin. Kayıt üç parçadır. Birincisi fotoğraftır: aracın dört köşesi, hasarlı bölge yakın ve uzak, tavan ve kaput geniş açıdan, jantlar ve tamponlar ayrıca çekilir — ve önemlisi, hasarsız bölgeler de çekilir. İkincisi ölçümdür: boya kalınlığı haritası, fuga ve köşegen ölçümleri yazılır; bunlar hem geçmişi hem işin başlangıç durumunu belgeler. Üçüncüsü kapsamdır: yapılacak işler ve yapılmayacaklar yazılı hâle getirilir — 'sol ön çamurluk düzeltilecek ve boyanacak, kapıdaki mevcut onarım kapsam dışı' gibi. Bu üç parça müşteriyle birlikte gözden geçirilir ve onayı alınır. Bunun bir yan faydası daha var: kapsam yazıldığında iş sırasında büyüyen talepler kendiliğinden yönetilir ve her ek iş ayrı konuşulur." },
+          { "label": "Doğrudan söküme geçilir", "verdict": "sok", "explain": "Kayıt olmadan sonradan çıkan her tartışma kaybedilir." },
+          { "label": "Yalnız hasarlı bölge fotoğraflanır", "verdict": "yalniz-hasar", "explain": "Hasarsız bölgeler de belgelenir; asıl koruma orada." },
+          { "label": "Sözlü anlaşma yeterlidir", "verdict": "sozlu", "explain": "Günler süren bir işte sözlü kapsam iki tarafı da sıkıştırır." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Hasarsız bölgeleri de fotoğrafla. Asıl koruma orada — 'bu çizik burada oldu' tartışmasını bitiren şey o."
+    },
+    {
+      "id": 6,
+      "instruction": "Müşteriye kapsamı anlatıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-camurluk",
+        "question": "Nasıl anlatılır?",
+        "options": [
+          { "label": "Ne yapılacağı, ne yapılmayacağı ve neyin garanti edilemeyeceği açıkça söylenir: komşu panellerle ton uyumu, eski onarımların altındaki sürprizler ve kapsamın büyüme ihtimali baştan konuşulur", "verdict": "acik-kapsam", "correct": true, "explain": "Kaporta ve boyada müşteri memnuniyetsizliğinin çoğu kötü işten değil, kurulmamış beklentiden çıkar. Dört şey baştan söylenir. Birincisi kapsamdır: hangi paneller yapılacak, hangileri yapılmayacak. İkincisi ton uyumudur ve en çok tartışma çıkaran konudur — bir panel boyandığında komşu panellerle tam aynı tonu tutturmak her zaman mümkün olmayabilir, çünkü fabrika boyası zamanla güneşten ve yıkamadan değişir; bu yüzden çoğu zaman komşu panellere geçişli bir uygulama gerekir ve bunun kapsama dâhil olup olmadığı baştan konuşulur. Üçüncüsü sürprizlerdir: sökülmeden görülemeyen şeyler vardır — altta çıkan pas, eski bir onarımın kötü macunu, kırılmış bir bağlantı; bunlar çıkarsa iş durdurulur ve haber verilir. Dördüncüsü süredir: boya işinin kuruma ve bekleme süreleri vardır ve bunlar acele edilerek kısaltılamaz; söz verilen gün buna göre verilir. Bir de asla söylenmemesi gereken bir cümle vardır: 'hiç belli olmaz, yepyeni gibi olur.' Bu cümle, bir kusur çıktığında bütün işi değersizleştirir. Onun yerine dürüst olan şudur: şu yapılacak, şu sonuca ulaşırız, şu ihtimal var. Bu dille konuşan usta daha az iş kaybeder ve çok daha az iş geri alır." },
+          { "label": "Her şey mükemmel olacak denir", "verdict": "mukemmel", "explain": "Kurulamayan beklenti, iyi işi bile değersizleştirir." },
+          { "label": "Teknik ayrıntı anlatılmaz", "verdict": "anlatma", "explain": "Kapsam ve sınır anlatılmazsa sonradan tartışma çıkar." },
+          { "label": "Sürprizler çıkarsa sonra söylenir", "verdict": "sonra", "explain": "İhtimal baştan söylenir; çıktığında iş durdurulup haber verilir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "'Yepyeni gibi olur' deme. 'Şu yapılacak, şu sonuca ulaşırız, şu ihtimal var' de."
+    },
+    {
+      "id": 7,
+      "instruction": "Değerlendirme ve kayıt tamamlandı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.olcum-mastari",
+        "question": "Bu aşamada öğrenilen neydi?",
+        "options": [
+          { "label": "Görünen hasar aramanın başlangıcı: darbenin yönü okunur, enerjinin gittiği yer fuga ve köşegen ölçümüyle aranır, geçmiş onarım boya kalınlığıyla bulunur ve her şey kayda geçirilir", "verdict": "ozet", "correct": true, "explain": "Aşama 0 boyunca üç şey kuruldu ve bu alanın kalanı bunların üstüne biniyor. Birincisi sınırdır: taşıyıcı yapı, çelik sınıfı, kaynak öncesi hazırlık ve solunum — bunlar tartışmaya kapalı ve her derste geri gelecekler. İkincisi haritadır: gövde bir kutu, hasar tek panelde kalmaz, her parçanın taşıyıcı olup olmadığı ve nasıl bağlandığı işi tarif eder. Üçüncüsü okumadır: göçük bir kayıttır, fuga altını söyler, boya kalınlığı geçmişi söyler, punta düzeni geçmişi doğrular. Bu üçü bir araya geldiğinde ortaya bir çalışma sırası çıkıyor ve o sıra bu alanın tamamında değişmiyor: önce bak ve ölç, sonra kapsamı belirle, sonra müşteriyle anlaş, sonra başla. Acemi usta bu sıranın ilk üçünü atlar ve doğrudan dördüncüden başlar; sonuç, yarım sökülmüş bir araç, büyüyen bir fatura ve tartışmalı bir teslimdir. Bir sonraki aşamada malzeme ve birleştirme bilgisine geçiyorsun — yani 'bu parçaya nasıl dokunulur' sorusunun cevabına." },
+          { "label": "Göçüğü hızlı düzeltmeyi", "verdict": "hizli", "explain": "Bu aşamada henüz onarıma geçilmedi." },
+          { "label": "Fiyat vermeyi", "verdict": "fiyat", "explain": "Fiyat kapsamın sonucu; asıl öğrenilen kapsamı belirlemek." },
+          { "label": "Boya seçmeyi", "verdict": "boya", "explain": "Boya çok sonraki aşamanın konusu." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Sıra değişmiyor: önce bak ve ölç, sonra kapsam, sonra anlaşma, sonra başla. Sırada malzeme ve birleştirme."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Bir panelin boya kalınlığı diğerlerinden belirgin yüksek çıktı. Bu ne demek?",
+        "a": "gecmis-onarim",
+        "options": [
+          { "verdict": "gecmis-onarim", "label": "O panel büyük olasılıkla daha önce onarım görmüş: altında macun ve ek katmanlar var", "explain": "Fabrika boyası ince ve panelden panele birbirine yakındır; sonradan yapılan onarımda macun, astar ve boya toplam kalınlığı artırır. Okuma mutlak sayıyla değil panelden panele farkla yapılır ve her panelde birkaç nokta ölçülür. Yüksek okuma 'kötü iş' demek değildir — 'burada bir geçmiş var' der. Alüminyum ve plastikte ölçüm farklı çalışır." },
+          { "verdict": "fabrika", "label": "Fabrika farkıdır", "explain": "Fabrika kalınlıkları panelden panele bu kadar ayrılmaz." },
+          { "verdict": "onemsiz", "label": "Önemsizdir", "explain": "Kapsamı ve beklenen sonucu değiştirir." },
+          { "verdict": "soyleme", "label": "Müşteriye söylenmez", "explain": "Söylenmezse sonradan çıkan kusur sana yazılır." }
+        ]
+      },
+      {
+        "q": "Kaput ile çamurluk arasındaki boşluk bir uçta dar, diğer uçta geniş. Ne yapılır?",
+        "a": "gizli-hasar",
+        "options": [
+          { "verdict": "gizli-hasar", "label": "Enerji görünen panelin ötesine gitmiş olabilir: bütün fugalar gezilir, köşegen ölçüleri alınır ve kapılar denenir", "explain": "Fabrikada fuga baştan sona eşit ayarlanır; bozulması altta bir şeylerin oynadığını söyler. Gövde bir kutu olduğu için bir köşe oynadığında karşı köşe de değişir — karşı taraf da kontrol edilir. Köşegen ölçümü pahalı cihaz gerektirmez, bir mastar ve sabır yeter. Bu kontroller bozukluk gösteriyorsa iş artık bir panel düzeltme işi değildir." },
+          { "verdict": "normal", "label": "Normaldir", "explain": "Belirgin fark bir işarettir." },
+          { "verdict": "mentese", "label": "Yalnız menteşe ayarıdır", "explain": "Alttaki yapı elenmeden karar verilmez." },
+          { "verdict": "kendiliginden", "label": "Panel düzelince düzelir", "explain": "Sebep alttaysa düzelmez." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2'deki 118 mikron ve 342 mikron SENARYO okumalarıdır; istenen FARKTIR (224 mikron) ve ders hiçbir araç için fabrika boya kalınlığı ya da kabul edilebilir sınır iddia etmiyor.",
+    "sourceRequired": "Fabrika boya kalınlıkları, kabul edilebilir fuga ve köşegen farkları ve hangi panelin hangi ölçüde onarılabileceği bilinçle VERİLMEDİ; hepsi araca özgüdür ve karşılaştırma aracın kendi karşı tarafıyla yapılır.",
+    "kapsam": "Gövde ölçüm sistemiyle yapısal doğrulama ve şasi çekme KAPSAM DIŞIDIR; ders yalnız basit köşegen ve fuga kontrolünü ve bulgu çıktığında durmayı öğretiyor. Sigorta ve ekspertiz süreçleri de kapsam dışı.",
+    "kaynak": "Bu alan kullanıcının açık talebiyle eklendi; konu başlıkları MEB Otomotiv Gövde ve Boya dalının çerçevesini takip ediyor, kazanım numarası iddiası yok.",
+    "reviewedByMechanic": false
+  }
+}

@@ -1,0 +1,176 @@
+{
+  "id": "aksesuar.hoparlor-montaj",
+  "area": "aksesuar-ses",
+  "stage": 8,
+  "title": "Hoparlör Değişimi: Ölçü Uyumu, Sızdırmazlık ve Kutup",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 40,
+  "prerequisites": ["aksesuar.bas-unite-montaj"],
+  "learningGoals": [
+    "Hoparlörün araca uyup uymadığını montajdan önce belirlemek",
+    "Hoparlörün arkasını ayırmanın ve su bariyerinin neden sesin yarısı olduğunu görmek",
+    "Kutup ve bağlantı disiplinini montaj sırasında korumak"
+  ],
+
+  "safety": [
+    { "rule": "Kapı döşemesi sökülürken sarı konektörlü hiçbir birime dokunulmaz", "why": "Kapı içinde yan darbe hava yastığı bulunabilir; bu alanın ilk dersinden beri değişmeyen sınır", "blocksStart": true },
+    { "rule": "Su bariyeri eksiksiz yerine takılmadan kapı döşemesi kapatılmaz", "why": "Bariyer kapı içine giren suyu aşağıya yönlendirir; eksik ya da yırtık bir bariyer suyu doğrudan kabine ve modüle taşır", "blocksStart": true },
+    { "rule": "Hoparlör bağlantısı yapılırken ses sistemi kapalı ve enerji kesik olur", "why": "Çalışır durumdaki bir yükselticinin çıkışını gövdeye ya da birbirine değdirmek yükselticiyi bozar", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.multimetre", "label": "Multimetre", "required": true },
+    { "id": "tool.plastik-sokme-spatulasi", "label": "Plastik söküm spatulası", "required": true },
+    { "id": "tool.tornavida-seti", "label": "Tornavida seti", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Müşteri kapı hoparlörlerini değiştirmek istiyor. Parça seçimine bakıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.hoparlor-kapi",
+        "question": "Yeni hoparlörün araca uyup uymadığı nasıl belirlenir?",
+        "options": [
+          { "label": "Üç ölçü birden kontrol edilir: montaj çapı ve delik düzeni, gövdenin arkaya doğru derinliği ve ön tarafın döşemeye çarpmayacak yüksekliği", "verdict": "uc-olcu", "correct": true, "explain": "Hoparlör uyumu tek bir çap rakamı değildir ve montajda en çok burada sürpriz yaşanır. Üç ölçü birlikte tutmak zorundadır. Birincisi montaj çapı ve delik düzenidir: hoparlörün oturacağı yuvanın çapı ile vida deliklerinin yerleşimi uymuyorsa ya adaptör halkası kullanılır ya da parça değişir. İkincisi derinliktir ve en çok atlanandır — hoparlörün mıknatısı arkaya doğru yer kaplar, kapının içinde ise cam mekanizması, kriko rayı ve kilit çubukları vardır; derin bir hoparlör camın önünü keser, cam inip kalkarken hoparlöre çarpar ve ikisi birden bozulur. Bu yüzden cam tamamen indirilip mekanizmanın gerçekte nereden geçtiği görülür. Üçüncüsü ön yüksekliktir: hoparlörün ön çerçevesi ve varsa ızgarası kapı döşemesinin arkasına değmemelidir; değerse döşeme tam oturmaz ve titreşimle ses üretir. Dördüncü bir kontrol de vardır ve elektrikseldir: yeni hoparlörün nominal değeri ve dayanabileceği güç, aracın kendi yükselticisiyle uyumlu olmalıdır — çok düşük değerli bir hoparlör fabrika yükselticisini zorlar. Bütün bu ölçüler ürüne ve araca özgüdür; bu ders bir rakam vermiyor, ölçüler yerinde alınır." },
+          { "label": "Yalnız çapına bakılır", "verdict": "cap", "explain": "Derinlik ve ön yükseklik de tutmalı." },
+          { "label": "Aynı marka seçilirse uyar", "verdict": "marka", "explain": "Marka değil ölçü belirler." },
+          { "label": "Sığmazsa yuva genişletilir", "verdict": "genislet", "explain": "Kapı sacını kesmek gövde bütünlüğüne ve pasa açılan bir karardır." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Cam tamamen indirilip mekanizmanın nereden geçtiği görülür. Derin hoparlör camla çarpışır ve ikisi birden bozulur."
+    },
+    {
+      "id": 2,
+      "instruction": "Yeni hoparlörün montaj derinliği 52 mm, kapıdaki kullanılabilir boşluk 46 mm. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.kapi-saci",
+        "unit": "mm",
+        "acceptRange": [5.5, 6.5]
+      },
+      "camera": "aksesuar",
+      "hint": "52 eksi 46.",
+      "teachingNote": "6 milimetrelik bu fark montajın bu hâliyle yapılamayacağını söylüyor — ve bu bilgiyi montajdan ÖNCE almak işin yarısını kurtarmaktır. Ölçü nasıl alınır: kapı döşemesi sökülür, cam tamamen indirilir ve yuvadan içeriye doğru gerçek boşluk ölçülür; ölçüm cam mekanizmasının en yakın noktasına kadar yapılır, sac yüzeyine kadar değil. Fark çıktığında üç seçenek vardır. Birincisi daha sığ bir hoparlör seçmektir ve doğru olan çoğu zaman budur; araç için özel olarak sığ üretilmiş modeller vardır. İkincisi bir adaptör halkası kullanmaktır — halka hoparlörü birkaç milimetre öne alır ve bazen bu fark yeter; ama halka aynı zamanda hoparlörü döşemeye yaklaştırır, yani ön yükseklik yeniden kontrol edilir. Üçüncüsü kapıdaki engeli değiştirmeye kalkmaktır ve bu yapılmaz: kapı sacını kesmek, cam mekanizmasının yolunu değiştirmek ya da hoparlörün mıknatısını törpülemek gövde bütünlüğünü, cam sistemini ve hoparlörü bozar. Bir de ara bir durum vardır ve dikkat ister: hoparlör sığar görünür ama cam inerken sürtünür; bu ancak cam birkaç kez indirilip kaldırılarak anlaşılır ve bu deneme mutlaka döşeme kapatılmadan yapılır. Kullanılabilir derinlik araca özgüdür; bu ders bir değer vermiyor, ölçü yerinde alınır."
+    },
+    {
+      "id": 3,
+      "instruction": "Uygun hoparlör bulundu. Eskisini söküyorsun.",
+      "interaction": {
+        "type": "unscrew",
+        "target": "part.hoparlor-kapi",
+        "turns": 4,
+        "direction": "ccw",
+        "requiresGesture": true
+      },
+      "camera": "aksesuar",
+      "hint": "Hoparlörün dört vidasını saat yönünün tersine çevir.",
+      "teachingNote": "Söküm sırası şudur ve her adımı bu alanın önceki derslerinden geliyor: kapı döşemesi klips ve vida düzeni bilinerek sökülür, döşeme asılı bırakılmaz elle desteklenir, soketleri ayrılır, su bariyeri yırtılmadan kenarından açılır ve hoparlörün vidaları sökülür. Üç ayrıntı işi kurtarır. Birincisi bariyerdir: bariyer çoğu zaman yapışkan bir madde ile sacın üzerine yapıştırılmıştır; sıcak havada kolay ayrılır, soğukta yırtılır — bu yüzden mümkünse araç ısıtılır ve bariyer yavaş, geniş bir açıyla kaldırılır. Yırtılırsa uygun bir malzemeyle onarılır ya da yenilenir, çünkü geri takılmayan bariyer suyu kabine taşır. İkincisi vidalardır: hoparlör vidaları çoğu zaman sac üzerine doğrudan çakılan tipte olur ve aşırı sıkıldığında yuvasını sıyırır; sökümde de zorlanan bir vida sacı deforme eder. Üçüncüsü sokettir: eski hoparlörün soketi çıkarılırken kablodan değil soketin gövdesinden çekilir; kablodan çekmek uçları demetten sıyırır. Ve sökülen eski hoparlör hemen atılmaz — yeni hoparlörle yan yana konup çapı, derinliği, delik düzeni ve soket tipi karşılaştırılır. Bu karşılaştırma, ayna dersinde öğrenilen kuralın aynısı: yeni parçada ilk şüphe uyumsuzluktur."
+    },
+    {
+      "id": 4,
+      "instruction": "Yeni hoparlörü takacaksın. Arkasına bakıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kapi-saci",
+        "question": "Hoparlörün arkası için ne yapılır?",
+        "options": [
+          { "label": "Hoparlörün oturduğu yüzey boşluk bırakmayacak biçimde kapatılır ve kapı sacındaki büyük açıklıklar örtülür — ama su tahliye yolları açık bırakılır", "verdict": "arka-ayrim", "correct": true, "explain": "Ses zinciri dersinde öğrenilen fizik burada uygulanıyor: hoparlör önündeki havayı iterken arkasındakini çeker, arkadan çıkan ses öne dolanırsa öndeki sesi zayıflatır ve en çok kalın seslerde bu kayıp yaşanır. Montajda bunu azaltmanın üç adımı vardır. Birincisi oturma yüzeyidir: hoparlörün çerçevesi ile sac arasında ince bir conta ya da sızdırmaz şerit kullanılır, böylece sesin doğrudan kenardan dolanması engellenir; adaptör halkası kullanılıyorsa halkanın hem sacla hem hoparlörle teması boşluksuz olmalıdır. İkincisi kapı sacındaki açıklıklardır — kapıların iç sacında montaj için bırakılmış büyük delikler vardır ve bunlar hoparlörün arkasını kapının bütün boşluğuna açar; uygun bir malzemeyle örtülmeleri sesi belirgin biçimde toparlar. Üçüncüsü sacın titremesidir: hoparlörün karşısındaki dış sac ince ve boşsa titrer, hem enerji yutar hem uğultu üretir; yüzeye yapıştırılan sönümleyici malzeme bunu azaltır. Bu üç adım birlikte yapıldığında aynı hoparlör belirgin biçimde farklı ses verir — ve bu, müşterinin parayı hoparlöre değil işçiliğe verdiği yerdir. Sınır nettir: bütün bu işler su bariyerini ve kapının kendi su tahliye yollarını kapatmadan yapılır; kapı içine giren su aşağıdan çıkabilmelidir, tahliye kapanırsa kapı içinde su birikir ve mekanizmayı da modülü de bitirir." },
+          { "label": "Hiçbir şey yapılmaz, hoparlör vidalanır", "verdict": "vidala", "explain": "Arkadan dolanan ses bası götürür." },
+          { "label": "Kapının içi tamamen doldurulur", "verdict": "doldur", "explain": "Su tahliye yolları kapanır; kapı içinde su birikir." },
+          { "label": "Su bariyeri çıkarılır, yer açılır", "verdict": "bariyer-cikar", "explain": "Bariyer suyu yönlendirir; çıkarılırsa su kabine gider." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Müşteri parayı hoparlöre değil bu üç adıma veriyor: oturma yüzeyi, sac açıklıkları, sönümleme. Ama tahliye yolu asla kapanmaz."
+    },
+    {
+      "id": 5,
+      "instruction": "Kabloyu bağlıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.hoparlor-arka",
+        "question": "Bağlantıda hangi disiplin korunur?",
+        "options": [
+          { "label": "Kutup disiplini: kablonun işaretli teli bütün hoparlörlerde aynı uca bağlanır; fabrika soketi varsa kesilmez, uygun bir ara kabloyla kullanılır", "verdict": "kutup-ve-soket", "correct": true, "explain": "Ses zinciri dersinde ters kutbun ne yaptığını gördün: sistem çalışır, bütün hoparlörler ses verir ama bas kaybolur ve müşteri neyin eksik olduğunu tarif edemez. Bu hatanın önlenmesi montaj anındaki bir disiplindir, sonradan bulunması ise saatler alır. Kural basittir: hoparlör kablosunun iki teli farklıdır — biri çizgilidir, işaretlidir ya da farklı renktedir; montaj boyunca aynı tel her hoparlörde aynı uca bağlanır ve bu disiplin dört kapıda da bozulmaz. Hoparlörün uçları da işaretlidir ve genelde biri diğerinden geniştir. İkinci konu sokettir: birçok araçta hoparlörün fabrika soketi vardır ve bu soket kesilmez — piyasada bu sokete takılıp yeni hoparlörün uçlarına geçen ara kablolar bulunur, doğru yöntem budur. Kesilen bir hoparlör soketi, baş ünite demetini kesmekle aynı hatadır: geri dönüş imkânını yok eder ve ek noktası zamanla oksitlenir. Üçüncü konu ek kalitesidir: ara kablo kullanılamıyorsa bağlantı uygun bir sıkma ucu ya da lehimle yapılır, yalıtılır ve kablo kapı içinde hareket etmeyecek biçimde sabitlenir. Dördüncüsü güzergâhtır: hoparlör kablosu cam mekanizmasının, kilit çubuklarının ve körüğün hareketli parçalarının yoluna girmez; kapı kablo geçişi dersindeki kurallar burada da geçerli." },
+          { "label": "Uçlar rastgele bağlanır, ses zaten gelir", "verdict": "rastgele", "explain": "Ses gelir ama bas kaybolur; hata aylarca fark edilmez." },
+          { "label": "Fabrika soketi kesilir", "verdict": "kes", "explain": "Ara kablo varken kesmek geri dönüşü yok eder." },
+          { "label": "Kablolar birbirine bükülüp bırakılır", "verdict": "buk", "explain": "Yalıtılmamış ve sabitlenmemiş ek arıza üretir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "İşaretli tel dört kapıda da aynı uca. Bu disiplin montaj anında bedava, sonradan bulmak saatler."
+    },
+    {
+      "id": 6,
+      "instruction": "Hoparlör takıldı. Döşemeyi kapatmadan önce.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kapi-ic-dosemesi",
+        "question": "Döşeme kapatılmadan önce ne denenir?",
+        "options": [
+          { "label": "Ses tek tek her hoparlörden dinlenir, cam birkaç kez indirilip kaldırılarak sürtme olmadığı görülür, kilit ve düğmeler denenir ve su bariyeri eksiksiz yerine takılır", "verdict": "dene-ve-bariyer", "correct": true, "explain": "Bu adım, kapı döşemesi dersinde öğrenilen kuralın hoparlör hâlidir ve dört maddeye bölünür. Birincisi sestir: ses dengesi tek tek her yöne kaydırılarak yalnız o hoparlörün ses verdiği doğrulanır; bir hoparlör sessizse bağlantı yarımdır, cızırtı varsa uç gövdeye değiyordur. Ayrıca kalın sesli bir parça çalınır ve hoparlörün rahat çalıştığı, bir yere çarpmadığı dinlenir — çarpan bir koni belirgin ve rahatsız edici bir ses verir. İkincisi camdır ve bu montaja özgüdür: cam tamamen indirilip kaldırılır, en az iki kez; hoparlörün mıknatısına ya da çerçevesine sürtme olup olmadığı hem dinlenir hem elle hissedilir. Bu deneme döşeme kapatıldıktan sonra yapılırsa ve sürtme varsa her şey yeniden sökülür. Üçüncüsü kapının diğer işlevleridir: kilit, cam düğmeleri, ayna ayarı ve varsa aydınlatma denenir — söküm sırasında yarım kalan bir soket burada yakalanır. Dördüncüsü su bariyeridir ve atlanmaz: bariyer eksiksiz yerine oturtulur, yırtıklar onarılır ve yapışkan yüzeyi tam temas edecek biçimde bastırılır. Bariyer, kapıya giren suyun kabine değil aşağıya gitmesini sağlar; yarım yapıştırılmış bir bariyer ilk yağmurda halının altını ıslatır ve orada soketleri oksitler — sunroof dersinde görülen zincirin aynısı." },
+          { "label": "Döşeme kapatılır, sonra dinlenir", "verdict": "sonra", "explain": "Cam sürtüyorsa her şey yeniden sökülür." },
+          { "label": "Ses geliyorsa yeterlidir", "verdict": "ses", "explain": "Cam denemesi ve bariyer ayrıca yapılır." },
+          { "label": "Bariyer gerekmez", "verdict": "bariyer-yok", "explain": "Bariyer olmadan su kabine gider." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Cam en az iki kez indirilip kaldırılır. Sürtme ancak burada yakalanır — döşeme kapandıktan sonra değil."
+    },
+    {
+      "id": 7,
+      "instruction": "Dört kapı da bitti. Teslim.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.subwoofer",
+        "question": "Teslimde müşteriye ne söylenir?",
+        "options": [
+          { "label": "Sesin çok yüksek seviyede bozulmaya başlarsa hemen kısılması gerektiği, yeni hoparlörlerin ilk saatlerde farklı duyulabileceği ve görünmeyen hangi işlerin yapıldığı", "verdict": "anlat", "correct": true, "explain": "Teslim konuşması üç maddeliktir ve sonraki şikâyetlerin çoğunu keser. Birincisi ve en önemlisi bozulma uyarısıdır: ses çok yükseltildiğinde sistem sinyali bozmaya başlar ve bozulmuş sinyal, gücünden bağımsız olarak hoparlörü yakar. Müşteriye söylenecek cümle şudur — ses bozulmaya başladığında hemen kısılır, 'biraz daha açayım' denmez. Bu tek cümle, bir ay sonra yanmış hoparlörle geri gelmeyi engeller. İkincisi beklentiyi kurmaktır: yeni hoparlörler ilk kullanımda biraz farklı duyulabilir, çünkü hem hareketli parçaları yeni hem kulak eski sese alışkındır; bu bir arıza değildir ve söylenmezse müşteri ilk gün 'beklediğim gibi olmadı' der. Üçüncüsü yapılan işi anlatmaktır: hangi hoparlörler değişti, kapı sacında hangi sızdırmazlık ve sönümleme çalışması yapıldı, su bariyeri onarıldı mı. Müşteri ödediği paranın karşılığında yalnız dört parça görmez — görünmeyen işi bilmesi, işin değerini de kalıcılığını da kurar. Bir de dürüst bir sınır söylenir: kapı hoparlörü aracın kabininde çalışıyor ve her kabin farklı; sistemin verebileceği bas seviyesinin bir sınırı var, daha fazlası ayrı bir bas hoparlörü ve yükseltici işidir. Bu cümle bir sonraki satışın kapısıdır ama asıl işlevi beklentiyi dürüst kurmaktır." },
+          { "label": "Hiçbir şey; sistem çalışıyor", "verdict": "sessiz", "explain": "Bozulma uyarısı söylenmezse hoparlör yanar." },
+          { "label": "Sonuna kadar açabilir denir", "verdict": "sonuna", "explain": "Bozulan sinyal hoparlörü yakar." },
+          { "label": "Sorun çıkarsa gelsin denir", "verdict": "gelsin", "explain": "Önceden anlatılan sınır, sonradan çözülen şikâyetten ucuz." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Aşama 8 bitti. Sırada arıza teşhis: cam çalışmıyor, ses gelmiyor, akü boşalıyor — üç şikâyet, üç ayrı zincir."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Yeni hoparlörün uyumu nasıl belirlenir?",
+        "a": "uc-olcu",
+        "options": [
+          { "verdict": "uc-olcu", "label": "Montaj çapı ve delik düzeni, arkaya doğru derinlik, döşemeye çarpmayacak ön yükseklik — üçü birden", "explain": "Derinlik en çok atlanandır: kapı içinde cam mekanizması, kriko rayı ve kilit çubukları vardır; derin bir hoparlör camın önünü keser ve cam inerken ikisi birden bozulur. Ölçü, cam tamamen indirilip mekanizmanın en yakın noktasına kadar alınır. Ayrıca hoparlörün nominal değeri aracın yükselticisiyle uyumlu olmalıdır." },
+          { "verdict": "cap", "label": "Yalnız çapa bakılır", "explain": "Derinlik ve ön yükseklik de tutmalı." },
+          { "verdict": "marka", "label": "Aynı marka seçilir", "explain": "Marka değil ölçü belirler." },
+          { "verdict": "genislet", "label": "Sığmazsa yuva genişletilir", "explain": "Kapı sacını kesmek pasa ve gövde bütünlüğüne açılan bir karardır." }
+        ]
+      },
+      {
+        "q": "Hoparlörün arkası için montajda ne yapılır?",
+        "a": "arka-ayrim",
+        "options": [
+          { "verdict": "arka-ayrim", "label": "Oturma yüzeyi boşluksuz kapatılır ve kapı sacındaki büyük açıklıklar örtülür; tahliye yolları açık bırakılır", "explain": "Hoparlörün arkasından çıkan ses öne dolanırsa kendi sesini bastırır — en çok kalın seslerde. Üç adım: oturma yüzeyinde conta, sac açıklıklarının örtülmesi, dış sacın sönümlenmesi. Ama su bariyeri ve kapının tahliye yolları asla kapatılmaz; kapanırsa kapı içinde su birikir ve mekanizmayı da modülü de bitirir." },
+          { "verdict": "vidala", "label": "Hiçbir şey, hoparlör vidalanır", "explain": "Arkadan dolanan ses bası götürür." },
+          { "verdict": "doldur", "label": "Kapının içi doldurulur", "explain": "Tahliye kapanır, su birikir." },
+          { "verdict": "bariyer-cikar", "label": "Su bariyeri çıkarılır", "explain": "Su kabine gider." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2'deki 52 mm ve 46 mm SENARYO okumalarıdır; istenen FARKTIR (6 mm) ve ders hiçbir araç için kullanılabilir derinlik değeri vermiyor.",
+    "sourceRequired": "Hoparlör montaj çapı, derinliği, delik düzeni, nominal empedans ve güç değerleri, vida sıkma torku, sönümleme ve sızdırmazlık malzemesi ile adaptör halkası ölçüleri bilinçle VERİLMEDİ; hepsi araca ve ürüne özgüdür, ölçü yerinde alınır.",
+    "kapsam": "Kapı sacını kesme, cam mekanizmasının yolunu değiştirme ve hoparlör gövdesinde değişiklik KAPSAM DIŞIDIR. Yan darbe hava yastığı bileşenlerine müdahale kapsam dışı — bu alanın kırmızı çizgisi.",
+    "kaynak": "Ses dersleri MEB çerçeve programının aksesuar modülüyle birebir eşleşmiyor; bu aşama proje kararıyla kuruldu. Su bariyeri, söküm tekniği ve kapı kablo geçişi kuralları bu alanın aşama 0-1 derslerinden geliyor.",
+    "reviewedByMechanic": false
+  }
+}

@@ -1,0 +1,173 @@
+{
+  "id": "elektrik.soket-temizligi",
+  "area": "arac-elektrik",
+  "stage": 3,
+  "title": "Soket, Pin Gevşemesi ve Korozyon: Görünmeyen Direnç",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 25,
+  "prerequisites": ["elektrik.kablo-onarimi", "elektrik.multimetre-gerilim"],
+  "learningGoals": [
+    "Gevşek pini ve korozyonu, parça arızasından ayırt etmek",
+    "Aralıklı arızayı oynatma testiyle ortaya çıkarmak",
+    "Soketi doğru temizleyip doğru korumak: pin genişletmeden, yanlış madde kullanmadan"
+  ],
+
+  "safety": [
+    { "rule": "Soket canlıyken ayrılmaz; kontak kapatılır", "why": "Akım akarken ayrılan soketin pinleri arasında ark oluşur. Ark, pin yüzeyini yakarak tam da onarmaya çalıştığın temas direncini üretir; büyük akımlı devrelerde ayrıca tehlikelidir", "blocksStart": true },
+    { "rule": "Pin yuvasına prob ya da tornavida zorla sokulmaz", "why": "Genişleyen bir dişi pin bir daha sıkı temas vermez. Ölçüm arka taraftan ya da uygun ince prob ucuyla yapılır; aksi hâlde ölçüm sırasında kalıcı bir arıza üretilir", "blocksStart": true },
+    { "rule": "Elektrik temas yüzeylerinde zımpara ve tel fırça kullanılmaz", "why": "Pinlerin üzerinde korozyonu geciktiren ince bir kaplama vardır. Zımpara bu kaplamayı kaldırır; yüzey ilk gün parlar, birkaç ay içinde eskisinden hızlı bozulur", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.multimetre", "label": "Dijital multimetre", "required": true },
+    { "id": "tool.kontak-temizleyici", "label": "Kontak temizleyici sprey", "required": true },
+    { "id": "tool.pin-cikarma-aleti", "label": "Pin çıkarma aleti", "required": false },
+    { "id": "tool.dielektrik-gres", "label": "Dielektrik gres", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Far bazen yanıyor, bazen sönüyor. Ampul yeni, sigorta sağlam. Motor titreşiminde sönüp yanıyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.far-soketi",
+        "question": "Bu tarif neyi işaret eder?",
+        "options": [
+          { "label": "Temas arızasını: bir bağlantı yerinde gevşeklik ya da korozyon var, titreşim temas durumunu değiştiriyor", "verdict": "temas-arizasi", "correct": true, "explain": "Bir parça ya çalışır ya çalışmaz; ama bir temas, aradaki bütün değerleri alabilir. Titreşimle değişen bir belirti neredeyse her zaman mekanik bir temas sorununu gösterir: gevşemiş bir pin, oksitlenmiş bir yüzey, yerine tam oturmamış bir soket ya da kırılmaya başlamış bir tel. Ampulün yeni olması ve sigortanın sağlam olması iki büyük ihtimali zaten elemiştir. Aralıklı arızalarda en pahalı hata, arıza o an görünmediği için parça değiştirip göndermektir; araç birkaç gün sonra aynı şikâyetle geri gelir. Doğru yol, arızayı ortaya çıkaracak koşulu bilerek üretmektir." },
+          { "label": "Ampul kötü kalitedir", "verdict": "ampul", "explain": "Ampul yeni ve sorun titreşimle geliyor; ampul arızası böyle davranmaz." },
+          { "label": "Akü zayıftır", "verdict": "aku", "explain": "Zayıf akü bütün devreleri etkiler ve titreşimle açılıp kapanmaz." },
+          { "label": "Şase noktası kesinlikle kopmuştur", "verdict": "sase-kopuk", "explain": "Şase güçlü bir şüphelidir ama kopuk olsaydı far hiç yanmazdı; belirti kısmi temas diyor." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Elektrikte 'bazen' kelimesi neredeyse her zaman temas demektir. Parçalar ya bozulur ya bozulmaz; ara değerleri temaslar üretir."
+    },
+    {
+      "id": 2,
+      "instruction": "Arızayı yakalamak için far yanarken kablo demetini ve soketi elle hafifçe oynattın. Far kısa süre söndü.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kablo-demeti",
+        "question": "Bu test ne sağladı?",
+        "options": [
+          { "label": "Arızayı istediğin anda üretebilir hâle getirdi; artık ölçüm yaparken belirtiyi de oluşturabilirsin", "verdict": "kosul-uretme", "correct": true, "explain": "Aralıklı arızanın en zor tarafı, ölçüm yaparken ortada olmamasıdır. Oynatma testi bunu çözer: belirtiyi tetikleyen hareketi bulduğunda arızayı kontrol altına almış olursun. Bundan sonra ölçü aletini bağlar, aynı hareketi tekrarlar ve ekranda değerin sıçradığı anı yakalarsın. Test bölge bölge yapılır — önce soket, sonra demetin dönüş noktaları, sonra şase — ve hangi noktada belirti çıkıyorsa arama oraya daralır. Çalışan bir araç üzerinde yapılan en verimli tekniklerden biridir ve hiçbir maliyeti yoktur." },
+          { "label": "Arızayı kalıcı olarak giderdi", "verdict": "giderdi", "explain": "Oynatmak arızayı gidermez; yalnız yerini gösterir. Geçici düzelme bile teşhistir." },
+          { "label": "Hiçbir şey; tesadüftür", "verdict": "tesaduf", "explain": "Belirti hareketle tekrarlanabiliyorsa tesadüf değildir, kanıttır." },
+          { "label": "Ampulün bozuk olduğunu kanıtladı", "verdict": "ampul", "explain": "Ampule dokunulmadı; oynatılan yer soket ve demet." }
+        ]
+      },
+      "camera": "tezgah",
+      "hint": "Belirtiyi üretebiliyorsan, ölçümü de o anda yapabilirsin.",
+      "teachingNote": "Aralıklı arızada asıl beceri ölçmek değil, arızayı istediğin anda ortaya çıkarabilmektir. Koşulu üretebilen usta, arızayı yakalamış sayılır."
+    },
+    {
+      "id": 3,
+      "instruction": "Ölçüm için soketi ayıracaksın. Tırnağa bas ve çek.",
+      "interaction": {
+        "type": "press-and-pull",
+        "target": "part.far-soketi"
+      },
+      "camera": "tezgah",
+      "hint": "Kontak kapalı olmalı; canlı soket ayrılmaz.",
+      "teachingNote": "Canlı soketi ayırmak pinler arasında ark üretir ve ark, pin yüzeyini yakarak tam da aradığın temas direncini yaratır. Yanlış zamanda ayrılan bir soket, teşhis ederken arıza üretir."
+    },
+    {
+      "id": 4,
+      "instruction": "Soketin içinde yeşilimsi bir tabaka ve bir pinde gevşeklik var. Far yanarken ölçmüştün: ampul ucunda 11,40 V. Sokete elinle bastırınca 12,30 V oldu. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.multimetre-ekran",
+        "unit": "V",
+        "acceptRange": [0.85, 0.95]
+      },
+      "camera": "tezgah",
+      "hint": "12,30 eksi 11,40.",
+      "teachingNote": "Elinle bastırdığında gerilimin yükselmesi, kaybın tam olarak o sokette olduğunun kanıtıdır: bastırınca temas iyileşti, direnç düştü, ampule ulaşan pay arttı. Bu tek hareket hem arızanın yerini hem büyüklüğünü verir. Bu kadar kaybın olduğu bir sokette pin yüzeyi genelde ısınmıştır; ısınma korozyonu artırır, korozyon direnci büyütür ve arıza kendi kendini besler."
+    },
+    {
+      "id": 5,
+      "instruction": "Soketi temizleyeceksin.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.far-soketi",
+        "question": "Doğru temizlik nasıl yapılır?",
+        "options": [
+          { "label": "Elektrik kontak temizleyicisiyle yıkanır, tamamen kurutulur; kaplamayı kaldıracak zımpara ve tel fırça kullanılmaz", "verdict": "kontak-temizleyici", "correct": true, "explain": "Pinlerin üzerinde korozyonu geciktiren ince bir kaplama vardır ve temizliğin amacı o kaplamayı korumaktır. Elektrik kontak temizleyicisi oksidi ve kiri çözer, iz bırakmadan uçar. Zımpara ya da tel fırça kaplamayı kaldırır: yüzey ilk gün parlak görünür ama korumasız kalan bakır birkaç ay içinde eskisinden hızlı kararır ve arıza daha kötü biçimde geri gelir. Genel amaçlı yağ çözücüler ve yağlar da kullanılmaz; bazıları plastiği yumuşatır, bazıları kalıntı bırakıp tozu yapıştırır. Temizlikten sonra soket tamamen kurutulur, çünkü kalan sıvı nem yolunu açık tutar. İsteğe bağlı son adım, sokete uygun dielektrik gres uygulamaktır: bu madde metal temasa engel olmaz, temasın çevresindeki boşluktan nemi dışarıda tutar." },
+          { "label": "İnce zımparayla parlatılır", "verdict": "zimpara", "explain": "Kaplamayı kaldırır; kısa vadede iyi görünür, orta vadede arızayı büyütür." },
+          { "label": "Yağ çözücü sprey sıkılır ve kapatılır", "verdict": "yag-cozucu", "explain": "Kalıntı bırakır ve plastiğe zarar verebilir; kurutulmadan kapatmak nemi hapseder." },
+          { "label": "Temizlik gerekmez, sokete gres basmak yeterlidir", "verdict": "sadece-gres", "explain": "Kirin üstüne basılan gres oksidi kapatır; önce temizlik, sonra koruma." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Temizlikte amaç parlatmak değil, koruyucu yüzeyi bozmadan kiri almaktır. Elektrik temaslarında parlaklık bir kalite ölçüsü değildir."
+    },
+    {
+      "id": 6,
+      "instruction": "Gevşek pin duruyor. Temizlik onu düzeltmedi.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.far-soketi",
+        "question": "Gevşek dişi pin ne yapılır?",
+        "options": [
+          { "label": "Pin çıkarma aletiyle sökülüp kavraması düzeltilir ya da yenisiyle değiştirilir; sıkışması takıp çekerek kontrol edilir", "verdict": "pini-degistir", "correct": true, "explain": "Dişi pin, erkek pini yaylanarak kavrar. Zamanla bu yay gücünü kaybeder — sık takıp çıkarma, aşırı ısınma ya da yuvaya sokulan kalın bir prob yüzünden. Gücü giden pin görünürde yerindedir ama titreşimle temas değiştirir; belirtisi tam da bu dersteki aralıklı arızadır. Çözüm, pini soket gövdesinden usulünce çıkarmak ve ya kavramasını düzeltmek ya da yenisini takmaktır. Onarımdan sonra kontrol basittir: erkek pin takılıp çekildiğinde belirgin bir direnç hissedilmelidir. Bu iş için pin çıkarma aleti kullanılır; tornavidayla zorlamak soket gövdesindeki tutucu tırnağı kırar ve o zaman bütün soket değişir." },
+          { "label": "Pin yuvası tornavidayla sıkıştırılır", "verdict": "tornavida", "explain": "Kontrolsüz müdahale pin gövdesini deforme eder ve tutucu tırnağı kırar." },
+          { "label": "Üzerine gres sıkılır, temas artar", "verdict": "gres", "explain": "Gres nemi uzak tutar, mekanik kavramayı geri getirmez." },
+          { "label": "Sorun değil, temizlik yeterlidir", "verdict": "temizlik-yeter", "explain": "Temizlik oksidi alır ama zayıflamış yay gücünü geri getirmez; arıza sürer." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Bir temas iki şeyden oluşur: temiz yüzey ve yeterli kuvvet. Temizlik birincisini verir, mekanik onarım ikincisini. Biri eksikse arıza durmaz."
+    },
+    {
+      "id": 7,
+      "instruction": "Soket temizlendi, pin yenilendi, geri takıldı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.far-ampulu",
+        "question": "İşi kapatmadan önce ne yapılır?",
+        "options": [
+          { "label": "Aynı ölçüm ve aynı oynatma testi tekrarlanır: kayıp düşmeli ve hareketle değer sıçramamalı", "verdict": "iki-testi-tekrarla", "correct": true, "explain": "Bu arızanın iki imzası vardı: ölçülebilir bir gerilim kaybı ve harekete duyarlılık. Doğrulama ikisini birden kapsamalı. Kayıp neredeyse sıfıra indiyse temas onarılmıştır; demeti ve soketi oynatırken ekrandaki değer sabit kalıyorsa mekanik kavrama da yerindedir. Yalnız birine bakmak yanıltır: temizlenmiş ama hâlâ gevşek bir pin ilk ölçümde iyi okuyup birkaç gün sonra geri gelir. Ayrıca soketin yerine tam oturduğu tırnağın sesiyle ve elle çekilerek doğrulanır — yarım oturmuş bir soket, en temiz pinlerle bile aynı arızayı üretir." },
+          { "label": "Yalnız farın yandığına bakılır", "verdict": "yaniyor", "explain": "Yanması yeterli değil; arıza zaten aralıklıydı ve o an yanıyor olabilir." },
+          { "label": "Soket bantla sarılır, oynamasın", "verdict": "bantla", "explain": "Bant mekanik kavramayı sağlamaz ve nemi hapseder; tırnak zaten bu iş için vardır." },
+          { "label": "Müşteriye birkaç gün gözlemlemesi söylenir", "verdict": "musteri", "explain": "Doğrulamayı müşteriye devretmek işi yarım bırakmaktır; iki test birkaç dakikadır." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Aralıklı bir arızayı kapatmanın tek yolu, onu ortaya çıkaran koşulu tekrar üretip artık çıkmadığını görmektir."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Titreşimle gelip giden bir elektrik arızası neyi işaret eder?",
+        "a": "temas",
+        "options": [
+          { "verdict": "temas", "label": "Temas arızasını: gevşek pin, oksitlenmiş yüzey, yarım oturmuş soket ya da kırılmaya başlamış tel", "explain": "Bir parça ya çalışır ya çalışmaz; ama bir temas aradaki bütün değerleri alabilir. Titreşimle değişen belirti, mekanik olarak değişen bir temas demektir. Bu yüzden aralıklı arızalarda aranacak şey parça değil bağlantıdır: pin kavraması, oksit, soketin oturması, telin ek ve kıvrım noktaları. Arızayı yakalamanın yolu da mekaniktir — oynatma testiyle belirtiyi istediğin anda üretmek ve o anda ölçmek." },
+          { "verdict": "parca", "label": "Parçanın bozulduğunu", "explain": "Bozuk parça genelde sürekli bozuktur; titreşimle açılıp kapanmaz." },
+          { "verdict": "yazilim", "label": "Kontrol ünitesi yazılımını", "explain": "Yazılım titreşime tepki vermez; bu belirti mekanik bir temas sorunudur." },
+          { "verdict": "tesaduf", "label": "Tesadüftür, kendi geçer", "explain": "Kendi geçmez; koşul geri geldiğinde arıza da geri gelir." }
+        ]
+      },
+      {
+        "q": "Sokete elle bastırınca gerilimin yükselmesi ne anlama gelir?",
+        "a": "kayip-o-sokette",
+        "options": [
+          { "verdict": "kayip-o-sokette", "label": "Kaybın o sokette olduğunu: bastırınca temas iyileşti, direnç düştü, tüketiciye ulaşan pay arttı", "explain": "Bastırmak temas yüzeylerini birbirine yaklaştırır ve kavrama kuvvetini geçici olarak artırır. Direnç düşünce o bağlantının üzerinde harcanan gerilim azalır ve tüketiciye kalan pay yükselir. Ekranda gördüğün sıçrama bu yüzden hem arızanın yerini hem büyüklüğünü söyler. Aynı hareketle belirtiyi üretebiliyorsan teşhis tamamlanmıştır; geriye temizlik ve mekanik onarım kalır." },
+          { "verdict": "aku", "label": "Akünün toparladığını", "explain": "Akü elle bastırmakla toparlamaz; değişen şey o soketteki temas." },
+          { "verdict": "olcum-hatasi", "label": "Ölçüm hatası olduğunu", "explain": "Tekrarlanabilen ve harekete bağlı bir değişim hata değil, kanıttır." },
+          { "verdict": "ampul", "label": "Ampulün bozuk olduğunu", "explain": "Ampule dokunulmadı; değişen şey bağlantıydı." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 4'teki 11,40 V ve 12,30 V SENARYO okumalarıdır. Öğrenciden istenen bir üretici sınırı değil, aynı noktadaki iki okumanın FARKIDIR (0,90 V). sourceRequired bu yüzden gerekmedi.",
+    "sourceRequired": "Kabul edilebilir temas direnci, pin kavrama kuvveti ve dielektrik gres tipi bu derste sayı ya da ürün adı olarak VERİLMEDİ; bunlar konektör tipine ve üreticiye özgüdür.",
+    "kapsam": "Soket tek bir kutu olarak modellendi; pin geometrisi, tırnak ve korozyon dokusu yok. Temizlik ve pin değişimi seçim olarak öğretiliyor. Oynatma testinin sahnede jesti yok — mevcut etkileşim dilbilgisi bunu karşılamadığı için ertelendi.",
+    "reviewedByMechanic": false
+  }
+}

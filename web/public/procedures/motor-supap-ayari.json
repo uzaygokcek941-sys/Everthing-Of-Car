@@ -1,0 +1,180 @@
+{
+  "id": "motor.supap-ayari",
+  "area": "motor-mekanik",
+  "stage": 7,
+  "title": "Supap Boşluğu: Ölçüm, Ayar ve Sıkının Neden Boştan Tehlikeli Olduğu",
+  "vehicleClass": "binek-arac",
+  "estimatedMinutes": 30,
+  "prerequisites": ["motor.silindir-kapagi", "temel.el-aletleri"],
+  "learningGoals": [
+    "Supap boşluğunu yalnız kam lobu tabanı üzerindeyken ölçmek",
+    "Sentili doğru his ile kullanmak",
+    "Sıkı ayarın supabı yaktığını, boş ayarın yalnız ses yaptığını bilmek"
+  ],
+
+  "safety": [
+    { "rule": "Ölçüm kılavuzun belirttiği sıcaklıkta yapılır", "why": "Metal ısındıkça uzar ve boşluk değişir. Soğuk için verilmiş değeri sıcak motorda tutturmak, motor soğuduğunda boşluğu gereğinden büyük bırakır; tersi ise boşluğu kapatır", "blocksStart": true },
+    { "rule": "Krank elle ve daima motorun normal dönüş yönünde çevrilir", "why": "Ters çevirmek triger kayışının gergin tarafını boşa alır ve kayışın diş atlamasına yol açabilir", "blocksStart": true },
+    { "rule": "Kapak açıkken içeri parça düşürülmez", "why": "Supap kapağının altındaki boşluklar doğrudan kartere iner. Düşen sentil yaprağı ya da somun yağ emiş süzgecine kadar gider", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.lokma-10", "label": "10 mm lokma", "required": true },
+    { "id": "tool.sentil", "label": "Sentil takımı", "required": true },
+    { "id": "tool.circir", "label": "Cırcır kolu", "required": true },
+    { "id": "tool.kumpas", "label": "Kumpas", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Şikâyet: motorun üstünden düzenli bir tıkırtı geliyor. Soğukken belirgin, ısınınca hafifliyor ama tamamen geçmiyor. Ses motor devrinin yarısı hızında.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.supap-kapagi",
+        "question": "Bu ses neyi gösterir?",
+        "options": [
+          { "label": "Supap boşluğu açılmış", "verdict": "supap-boslugu", "correct": true, "explain": "Sesin devrin yarısı hızında olması tek başına belirleyicidir: kam mili krank milinin yarısı hızda döner, yani supap mekanizmasından gelen her ses devrin yarısında tekrarlanır. Bu, sesin kaynağını motorun üst yarısına kilitler. Boşluk açıldığında kam lobu supabı itmeye başlamadan önce arada boş bir mesafe kalır ve o mesafe her çevrimde bir vuruşla kapanır; duyduğun tıkırtı budur. Isınınca parçalar uzayıp boşluk azaldığı için ses hafifler ama kaybolmaz." },
+          { "label": "Biyel yatağı vurmaya başlamış", "verdict": "biyel", "explain": "Biyel sesi devirle aynı hızdadır, daha derinden gelir ve yük altında belirginleşir. Bu ses devrin yarısı hızında ve üstten geliyor." },
+          { "label": "Egzoz manifolt contası kaçırıyor", "verdict": "manifolt", "explain": "Manifolt kaçağı ısınınca genellikle tamamen kaybolur ve sesi tıslamadır, düzenli tıkırtı değil." },
+          { "label": "Triger kayışı gevşemiş", "verdict": "triger", "explain": "Gevşek kayış sürekli bir uğultu ya da düzensiz çırpma yapar; kam hızında düzenli tek vuruş üretmez." }
+        ]
+      },
+      "camera": "motor-ust",
+      "teachingNote": "Sesin hızı, sesin tonundan daha çok bilgi taşır. Devirle aynı hızdaki ses krank tarafını, devrin yarısı hızındaki ses kam ve supap tarafını gösterir. Bu tek ayrım, aramanı motorun yarısına indirir."
+    },
+    {
+      "id": 2,
+      "instruction": "Supap kapağı cıvatalarını sök ve kapağı kaldır.",
+      "interaction": {
+        "type": "unscrew",
+        "target": "part.motor-kapagi-civata",
+        "count": 6,
+        "turns": 5,
+        "tool": "tool.lokma-10"
+      },
+      "camera": "motor-ust",
+      "commonMistake": {
+        "if": "yanlis-alet",
+        "feedback": "Bu cıvatalar 10 mm. Kapak cıvataları düşük torkludur; yakın ölçüde bir lokma kafayı kolayca yuvarlar."
+      },
+      "hint": "Kapak yapışmışsa çekiçle değil, avuç içiyle yandan hafifçe zorla; conta yüzeyine alet sokma.",
+      "teachingNote": "Supap kapağı contası çoğu motorda kauçuktur ve tekrar kullanılabilir görünür. Sertleşip düzleştiyse kullanılmaz; kapak contası kaçağı, yanlış teşhis edilen yağ kaçaklarının en yaygın kaynağıdır."
+    },
+    {
+      "id": 3,
+      "instruction": "Ölçüme başlayacaksın. Kam mili gözünün önünde.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kam-mili",
+        "question": "Bir supabın boşluğu ne zaman ölçülür?",
+        "options": [
+          { "label": "O supabın kam lobu ters yöne bakarken, yani itici lobun taban dairesi üzerindeyken", "verdict": "taban-dairesi", "correct": true, "explain": "Kam lobunun yuvarlak kısmına taban dairesi denir ve supap mekanizması yalnız orada tamamen serbesttir. Boşluk, tanımı gereği o serbest durumdaki aralıktır. Lob yukarı bakmaya başladığı anda supabı itmeye başlar ve ölçülen aralık gerçek boşluk olmaktan çıkar. Bu yüzden her supap kendi sırası geldiğinde, yani lobu ters yöne bakarken ölçülür; kranki elle çevirerek supapları sırayla o konuma getirirsin." },
+          { "label": "Motor rölantide çalışırken", "verdict": "calisirken", "explain": "Çalışan motorda mekanizma sürekli hareket hâlindedir; sentil sokmak hem ölçüm değil hem tehlikelidir." },
+          { "label": "Supap tam açıkken", "verdict": "supap-acik", "explain": "Supap açıkken mekanizmada boşluk zaten yoktur; ölçülecek aralık kalmaz." },
+          { "label": "Sıra fark etmez, hepsi aynı anda ölçülebilir", "verdict": "hepsi", "explain": "Aynı anda yalnız bazı supaplar taban dairesi üzerindedir. Diğerlerini ölçmek yanlış sayı üretir." }
+        ]
+      },
+      "camera": "motor-ust",
+      "hint": "Krank kasnağını elle ve normal dönüş yönünde çevirerek supapları sırayla ölçüm konumuna getir.",
+      "teachingNote": "Bu adım atlandığında bütün ölçümler yanlış çıkar ve usta motorun ayarını bozarak bitirir. Doğru anı beklemek, ölçüm aletinden daha önemlidir."
+    },
+    {
+      "id": 4,
+      "instruction": "Birinci silindirin emme supabı ölçüm konumunda. Bu motorun kılavuzu emme için 0,20-0,30 mm istiyor. Sentil yapraklarını dene ve hafif sürtünmeyle geçen kalınlığı bul.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.supap",
+        "unit": "mm",
+        "acceptRange": [0.2, 0.3]
+      },
+      "camera": "motor-ust",
+      "hint": "Doğru yaprak zorlanmadan girer ama serbest de kaymaz; çekerken hafif bir sürtünme hissedersin.",
+      "teachingNote": "Sentil kullanımı bir his işidir ve bu his öğrenilir. Yaprak zorla giriyorsa boşluk daha küçüktür; kendi ağırlığıyla kayıp gidiyorsa daha büyüktür. İki yaprak arasında kaldıysan ikisini de not al ve aralığın neresinde olduğunu yaz. Buradaki 0,20-0,30 bu senaryonun kılavuz değeridir; kendi motorunda kendi kılavuzunun sayısını kullanacaksın."
+    },
+    {
+      "id": 5,
+      "instruction": "Ölçüm bitti. Yanındaki çırak motor sıcakken ölçseydik daha doğru olmaz mıydı diye soruyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.supap",
+        "question": "Ne cevap verirsin?",
+        "options": [
+          { "label": "Doğru olan, kılavuzun hangi sıcaklık için değer verdiğine uymaktır; soğuk değeri sıcak motorda kullanmak ayarı bozar", "verdict": "kilavuza-uy", "correct": true, "explain": "Supap boşluğu sıcaklıkla değişir çünkü kam mili, itici, supap sapı ve kapak farklı oranlarda uzar. Bu yüzden her üretici değerini belirli bir sıcaklık için verir: kimi soğuk motor, kimi çalışma sıcaklığı. İkisi birbirinin yerine kullanılamaz. Soğuk için verilmiş değeri sıcak motorda tutturursan, motor soğuduğunda boşluk gereğinden büyük olur; tersini yaparsan motor ısındığında boşluk kapanır ve supap tam oturamaz. Doğru cevap sıcak ya da soğuk değil, kılavuzun dediğidir." },
+          { "label": "Sıcak ölçüm her zaman daha doğrudur, motor çalışırkenki hâli odur", "verdict": "sicak-dogru", "explain": "Mantıklı görünür ama kılavuz soğuk değer veriyorsa sıcak ölçüm o değerle karşılaştırılamaz. Ölçüm ancak referansıyla aynı koşuldaysa anlamlıdır." },
+          { "label": "Soğuk ölçüm her zaman doğrudur", "verdict": "soguk-dogru", "explain": "Bazı motorlarda değer çalışma sıcaklığı için verilir. Genel bir kural yoktur, kılavuz vardır." },
+          { "label": "Fark ihmal edilebilir", "verdict": "fark-yok", "explain": "Fark, ayarın toleransıyla aynı büyüklükte olabilir. İhmal edilirse ayar toleransın dışına çıkar." }
+        ]
+      },
+      "camera": "motor-ust",
+      "teachingNote": "Bir ölçüm, ancak karşılaştırıldığı değerle aynı koşulda alındıysa ölçümdür. Bu kural supap boşluğunda da, kompresyonda da, yağ basıncında da aynıdır."
+    },
+    {
+      "id": 6,
+      "instruction": "Ayar yaparken toleransın hangi ucuna yaklaşacağına karar veriyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.supap",
+        "question": "İki hatadan hangisi daha pahalıdır?",
+        "options": [
+          { "label": "Sıkı ayar; supap tam kapanamaz ve oturma yüzeyinden ısı atamayıp yanar", "verdict": "siki-tehlikeli", "correct": true, "explain": "Supap, yanma odasında aldığı ısının büyük bölümünü kapalıyken oturduğu yüzeyden kapağa aktarır. Boşluk gereğinden küçükse supap tam oturamaz, o temas kesilir ve supap ısıyı atacak yer bulamaz. Sonuç, supap kenarının yanıp aşınmasıdır ve bu geri dönüşü olmayan bir hasardır; kapak sökülüp supap yenilenir. Boş ayar ise gürültü yapar, güç ve verimi bir miktar düşürür ama supabı yakmaz. Bu yüzden emin olamadığın durumda toleransın boş tarafında kalmak, sıkı tarafında kalmaktan güvenlidir." },
+          { "label": "Boş ayar; ses yapar ve motora zarar verir", "verdict": "bos-tehlikeli", "explain": "Boş ayar ses yapar ve uzun vadede mekanizmayı yorar ama supabı yakmaz. İki hatadan ucuz olanıdır." },
+          { "label": "İkisi de aynı derecede zararlıdır", "verdict": "esit", "explain": "Değildir. Biri gürültü, diğeri kapak sökümü demektir." },
+          { "label": "Tolerans içinde kalındığı sürece hiçbiri önemli değildir", "verdict": "onemsiz", "explain": "Tolerans içinde kalmak esastır ama ölçüm belirsizse hangi yöne yanılmanın daha ucuz olduğunu bilmek gerekir." }
+        ]
+      },
+      "camera": "motor-ust",
+      "teachingNote": "Bu, bütün ayar işlerinin genel kuralıdır: iki yönde de hata mümkünse, hangi yöndeki hatanın daha ucuz olduğunu bil ve belirsizlikte o yöne yanıl."
+    },
+    {
+      "id": 7,
+      "instruction": "Ayar tamam. Kapağı kapatıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.supap-kapagi",
+        "question": "Kapağı takarken neye dikkat edilir?",
+        "options": [
+          { "label": "Conta yuvasına tam oturtulur, cıvatalar merkezden dışa ve düşük torkla sıkılır; sonra motor çalıştırılıp kaçak izlenir", "verdict": "conta-merkezden", "correct": true, "explain": "Supap kapağı ince saç ya da plastiktir ve cıvata torkları düşüktür. Fazla sıkmak kapağı çarpıtır ve tam da önlemeye çalıştığın kaçağı yaratır. Conta yuvadan çıkmışsa kapak onu ezer ve kaçak ilk dakikada başlar. Sıkma yine merkezden dışa yapılır. En sonunda motor çalıştırılıp birkaç dakika izlenir: yağ kaçağı en kolay sıcak ve basınç altındayken görünür." },
+          { "label": "Sızdırmasın diye cıvatalar iyice sıkılır", "verdict": "iyice-sik", "explain": "Kapak çarpılır ve orta bölge yüzeyden kalkar. Sızdırmazlığı sağlayan conta ve düz yüzeydir." },
+          { "label": "Conta yerine silikon sürülür", "verdict": "silikon", "explain": "Üretici öngörmüyorsa silikon kullanılmaz; taşan silikon kopup yağ kanallarına gider." },
+          { "label": "Kapak takıldıktan sonra kontrol gerekmez", "verdict": "kontrol-yok", "explain": "İşin bittiğini gösteren şey kapağın takılması değil, kaçak olmadığının görülmesidir." }
+        ]
+      },
+      "camera": "motor-ust",
+      "teachingNote": "Küçük parçaların düşük torku vardır ve bu tork gücün değil, ölçünün işidir. Elin kuvvetine güvenerek sıkılan her ince kapak eninde sonunda çarpılır."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Sıkı supap ayarı neden boş ayardan tehlikelidir?",
+        "a": "isi-atamaz",
+        "options": [
+          { "verdict": "isi-atamaz", "label": "Supap tam kapanamaz, oturma yüzeyinden ısı atamaz ve yanar", "explain": "Supap aldığı ısının büyük bölümünü, kapalıyken oturduğu yüzey üzerinden silindir kapağına aktarır. Boşluk gereğinden küçükse supap o yüzeye tam oturamaz, ısı yolu kesilir ve supap kenarı yanmaya başlar. Bu hasar geri dönüşsüzdür; kapak sökülür, supap ve yuvası yenilenir. Boş ayarda ise tıkırtı duyulur, dolgu ve güç bir miktar düşer ama supap yanmaz. İki hatadan biri gürültü, diğeri onarım demektir." },
+          { "verdict": "ses-yapar", "label": "Daha çok ses yapar", "explain": "Ses yapan boş ayardır; sıkı ayar sessizdir ve tehlikesi de buradan gelir." },
+          { "verdict": "yakit-artar", "label": "Yakıt tüketimini artırır", "explain": "Tüketim etkilenebilir ama asıl sorun supabın yanmasıdır." },
+          { "verdict": "fark-yok", "label": "Aralarında pratik fark yoktur", "explain": "Fark, bir tıkırtı ile bir kapak sökümü arasındaki farktır." }
+        ]
+      },
+      {
+        "q": "Boşluk neden yalnız kam lobunun taban dairesi üzerindeyken ölçülür?",
+        "a": "serbest-durum",
+        "options": [
+          { "verdict": "serbest-durum", "label": "Mekanizma yalnız orada tamamen serbesttir; boşluk o serbest aralığın tanımıdır", "explain": "Kam lobunun yuvarlak kısmı, supabı hiç itmediği bölgedir. Supap boşluğu tam olarak o durumdaki aralık demektir. Lob dönüp yükselmeye başladığı anda supabı itmeye başlar ve arada ölçülecek serbest aralık kalmaz; o konumda alınan her sayı gerçek boşluktan küçüktür. Bu yüzden supaplar tek tek, krank elle çevrilerek kendi ölçüm konumlarına getirilir." },
+          { "verdict": "kolay-erisim", "label": "O konumda sentil daha kolay girer", "explain": "Kolaylık değil, doğruluk meselesidir." },
+          { "verdict": "yag-akmasi", "label": "Yağ o konumda çekilir", "explain": "Yağın konumu ölçümü belirlemez." },
+          { "verdict": "gelenek", "label": "Alışılmış yöntem böyle", "explain": "Mekanik bir zorunluluktur; başka konumda ölçülen sayı yanlıştır." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 4'teki 0,20-0,30 mm SENARYO verisidir ve belirli bir araca ait bir iddia değildir. Supap boşluğu motora göre değişir, emme ve egzoz için farklıdır, ve kılavuzun hangi sıcaklık için verdiği de değişir. Bu yüzden sourceRequired ile işaretlenmedi: kaynaklandırılacak bir gerçek iddia değil, sentil kullanma becerisinin uygulandığı bir örnektir. Adımın öğretim notu da bunu öğrenciye açıkça söylüyor.",
+    "sourceRequired": "Supap boşluğu değerleri, ölçüm sıcaklığı ve kapak cıvatası torku araca özgüdür; bu derste gerçek bir araç için sayı verilmedi.",
+    "kapsam": "Ayar mekanizması motora göre değişir (şim değiştirme, vidalı ayar, hidrolik itici). Bu ders ölçüm ve karar üzerine kuruldu; ayar mekanizmasının kendisi motor ailesine özgü olduğu için tek bir yöntem öğretilmedi.",
+    "reviewedByMechanic": false
+  }
+}

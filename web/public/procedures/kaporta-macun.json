@@ -1,0 +1,177 @@
+{
+  "id": "kaporta.macun",
+  "area": "kaporta",
+  "stage": 5,
+  "title": "Macun: İnce Kat, Doğru Kuruma, Aşırı Macunun Bedeli",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 40,
+  "prerequisites": ["kaporta.yuzey-hazirligi"],
+  "learningGoals": [
+    "Macunun bir onarım malzemesi değil bir yüzey düzeltme malzemesi olduğunu görmek",
+    "Kalın macunun neden zamanla çatladığını ve nem aldığını bilmek",
+    "Sertleştirici oranı ve kuruma süresinin neden tartışmaya kapalı olduğunu anlamak"
+  ],
+
+  "safety": [
+    { "rule": "Macun ve sertleştirici ile çalışırken uygun eldiven, göz koruması ve havalandırma kullanılır", "why": "Sertleştirici ciltte tahriş ve duyarlılık yapar; zımpara tozu solunum yoluyla zarar verir", "blocksStart": true },
+    { "rule": "Macun çıplak metale doğrudan uygulanmaz — ürünün teknik belgesi ne diyorsa o uygulanır", "why": "Pek çok sistem macunun altında uygun bir astar ister; çıplak metale doğrudan uygulanan macun nem alarak korozyon başlatabilir", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.macun-spatulasi", "label": "Macun spatulası", "required": true },
+    { "id": "tool.zimpara-makinesi", "label": "Zımpara makinesi", "required": true },
+    { "id": "tool.kalinlik-olcer", "label": "Kalınlık ölçer", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Göçük düzeltildi ama yüzeyde hâlâ hafif dalgalar var. Macuna geçeceksin.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.gocuk-bolgesi",
+        "question": "Macunun işi nedir?",
+        "options": [
+          { "label": "Sac doğru biçimine getirildikten sonra kalan çok küçük yüzey farklarını kapatmak: macun bir düzeltme malzemesi değil, düzeltmenin tamamlayıcısıdır — sacın yapamadığını yapmaz", "verdict": "tamamlayici", "correct": true, "explain": "Bu alanda en çok kötüye kullanılan malzeme macundur ve sebebi cazibesidir: dakikalar içinde her çukuru doldurur, zımparalanınca kusursuz düz görünür ve boya altında tamamen kaybolur. Bu yüzden zor bir göçüğü uğraşmak yerine macunla kapatmak sürekli bir ayartmadır. Ama macunun ne olduğu bellidir: sacın yerine geçen bir malzeme değil, sac zaten doğru biçime getirildikten sonra kalan çok küçük yüzey farklarını kapatan bir tamamlayıcıdır. Sac düzeltilmeden yapılan bir macun uygulaması üç sorunu birden satın alır. Birincisi kalınlık: doldurulan boşluk büyüdükçe macun kalınlaşır ve kalın macun bu dersin geri kalanının konusu olan bütün sorunları getirir. İkincisi hareket: altındaki sac gerilmiş ve dengesiz kalmışsa ısı değişimleriyle hafifçe oynar; üstündeki sert macun bu hareketi izleyemez ve kenarından çatlar. Üçüncüsü ağırlık ve güven: macun sacın taşıdığı yükü taşımaz, yani kalın macunla 'onarılmış' bir bölge yapısal olarak hâlâ eksiktir. Doğru sıra bu yüzden değişmez: önce sac elden geldiğince doğru biçime getirilir, sonra kalan fark macunla alınır. Ne kadar kalınlığın kabul edilebilir olduğu ürüne göre değişir ve ürünün teknik belgesinde yazar; bu ders bir sınır iddia etmiyor." },
+          { "label": "Göçüğü doldurmak", "verdict": "doldur", "explain": "Göçük doldurulmaz, düzeltilir; macun kalan farkı alır." },
+          { "label": "Sacı güçlendirmek", "verdict": "guclendir", "explain": "Macun yapısal yük taşımaz." },
+          { "label": "Pası durdurmak", "verdict": "pas", "explain": "Macun korumaz; pas ayrı ele alınır." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Macun sacın yapamadığını yapmaz. Sac düzeltilmeden atılan macun üç sorunu birden satın alır."
+    },
+    {
+      "id": 2,
+      "instruction": "İki farklı işte macun kalınlığını ölçtün: iyi hazırlanmış yüzeyde 0,6 mm, sac düzeltilmeden yapılan işte 2,8 mm. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.kalinlik-olcer",
+        "unit": "mm",
+        "acceptRange": [2.1, 2.3]
+      },
+      "camera": "kaporta",
+      "hint": "2,8 eksi 0,6.",
+      "teachingNote": "2,2 milimetre — ve bu fark, iki işin kaç yıl dayanacağını belirliyor. Kalın macunun üç ayrı sorunu vardır. Birincisi büzülme: macun sertleşirken hacmi bir miktar küçülür ve bu küçülme kalınlıkla orantılıdır. İnce bir katmanda fark edilmez; kalın bir katmanda ise yüzeyde belirgin bir çökme olarak ortaya çıkar — üstelik bu çökme hemen değil, haftalar hatta aylar içinde tamamlanır. Yani araç teslim edilirken kusursuz görünür, iki ay sonra o bölgede hafif bir çukur belirir. İkincisi hareket farkı: metal ile macun ısındığında ve soğuduğunda farklı miktarda genleşir; kalın bir macun katmanı bu farkı yutamaz ve kenarlarında çatlaklar oluşur. Çatlaktan nem girer, macunun altındaki metale ulaşır ve korozyon başlar — kabaran boya dersinde göreceğin tablonun en yaygın sebeplerinden biri budur. Üçüncüsü mekanik zayıflık: kalın macun darbeye ve baskıya dayanmaz; küçük bir taş çarpmasında kırılır ve altındaki gerçek durumu ortaya çıkarır. Bir de dürüstlük tarafı vardır ve bu alanda sık karşılaşılır: kalın macun, yapılmamış bir onarımın üzerini örtmek için kullanıldığında hem teknik hem ahlaki bir sorundur. Buradaki iki sayı senaryo okumasıdır; kabul edilebilir kalınlık ürüne özgüdür."
+    },
+    {
+      "id": 3,
+      "instruction": "Macunu karıştıracaksın. Sertleştiriciyi göz kararı eklemeyi düşünüyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.zimpara-bolgesi",
+        "question": "Sertleştirici oranı neden kritik?",
+        "options": [
+          { "label": "Oran hem sertleşmeyi hem malzemenin nihai özelliklerini belirler: az sertleştirici tam sertleşmeyen, yumuşak kalan ve zamanla hareket eden bir katman; fazla sertleştirici kırılgan ve renk sorunu üretebilen bir katman verir", "verdict": "oran-kritik", "correct": true, "explain": "Macun tek başına sertleşmez; sertleştirici ile arasında bir kimyasal tepkime olur ve ortaya yeni bir malzeme çıkar. Bu tepkimenin doğru yürümesi için iki bileşenin ürünün belirlediği oranda buluşması gerekir. Az sertleştirici konulduğunda tepkime tamamlanmaz: katman yüzeyde sertleşmiş gibi görünse de içinde yumuşak kalır, zımparalanırken tıkanır ve zamanla hareket eder — üzerine atılan boya bir süre sonra o bölgede yumuşama ya da iz gösterir. Ayrıca tam sertleşmemiş bir katman çözücüleri emer ve boya sisteminin altında sorun üretir. Fazla sertleştirici ise malzemeyi kırılgan yapar ve bazı ürünlerde üstteki katmanlarda renk bozulmasına yol açabilir. İkinci konu karıştırmanın kendisidir: iki bileşen homojen karışmalıdır, aksi hâlde aynı kütlenin bir yerinde fazla, bir yerinde eksik sertleştirici bulunur ve o bölgeler farklı sertleşir; sonuç zımparalarken belli olur — bazı yerler kolay, bazı yerler zor alınır. Karıştırma temiz bir zemin üzerinde ve katlayarak yapılır, hızlı çevirmek hava kabarcığı hapseder ve o kabarcıklar zımparadan sonra küçük delikler olarak açığa çıkar. Üçüncü konu süredir: karıştırıldıktan sonra ürünün belirli bir uygulama süresi vardır ve o süre geçince malzeme yüzeye düzgün yayılmaz. Oran, karışım ve süre değerleri ürünün teknik belgesinde yazar; bu ders bir oran ya da süre vermiyor." },
+          { "label": "Göz kararı yeterlidir", "verdict": "goz-karari", "explain": "Oran malzemenin nihai özelliklerini belirler; tahminle yapılmaz." },
+          { "label": "Fazla sertleştirici her zaman daha iyidir", "verdict": "fazla", "explain": "Fazlası kırılganlık ve renk sorunu üretebilir." },
+          { "label": "Sertleştirici olmadan da kurur", "verdict": "sertlestiricisiz", "explain": "Bu tip macunlar tepkimeyle sertleşir; sertleştirici olmadan kürlenmez." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Karışım hızlı çevrilirse hava kabarcığı hapsolur; o kabarcıklar zımparadan sonra küçük delikler olarak çıkar."
+    },
+    {
+      "id": 4,
+      "instruction": "İlk kat macunu attın. Tek katta bitirmek için kalın çekmeyi düşünüyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-camurluk",
+        "question": "Kalın tek kat mı, ince çok kat mı?",
+        "options": [
+          { "label": "İnce katlar hâlinde: her kat düzgün sertleşir, büzülmesi azdır ve hava boşluğu kalma ihtimali düşer — kalın tek kat dışarıdan sertleşip içeride yumuşak kalabilir", "verdict": "ince-kat", "correct": true, "explain": "Kalın uygulama, tek bir hamlede işi bitirme isteğinden doğar ve üç ayrı riski birden getirir. Birincisi eksik kürlenme: kalın bir katmanın dışı hızla sertleşir ve içeriye giden yolu kapatır; içeride kalan kısım tam kürlenmez, yumuşak kalır ve zamanla hareket eder. Dışarıdan bakınca hiçbir belirti yoktur — zımparalanır, boyanır, teslim edilir; sorun aylar sonra çıkar. İkincisi büzülme: kürlenme sırasındaki hacim küçülmesi kalınlıkla artar, yani kalın katman daha çok çeker ve o çekme yüzeyde çukur olarak belirir. Üçüncüsü hava: spatula ile kalın çekilen bir katmanın altında hava boşlukları hapsolur; zımpara o boşlukları açtığında yüzeyde küçük delikler ortaya çıkar ve tek tek doldurulmaları gerekir. Doğru yöntem ince katlar hâlinde ilerlemektir: her kat, ürünün belirttiği süre kadar kürlenmeye bırakılır ve gerekiyorsa üstüne yenisi çekilir. Uygulamada birkaç ayrıntı işi kolaylaştırır — ilk kat, yüzeye iyice bastırılarak ince çekilir ki tutunması güçlü olsun; sonraki katlar gerekli yere odaklanır; ve macun her zaman gereğinden biraz geniş ve biraz yüksek bırakılıp zımparayla forma getirilir, çünkü eksik bırakılan bir bölgeye ikinci kez macun çekmek ek geçiş ve ek iş demektir." },
+          { "label": "Kalın tek kat, zaman kazandırır", "verdict": "kalin-tek", "explain": "İçeride yumuşak kalabilir, çok çeker ve hava hapseder." },
+          { "label": "Fark etmez", "verdict": "fark-yok", "explain": "Kürlenme, büzülme ve hava boşluğu davranışı değişir." },
+          { "label": "Kat sayısı yalnız görünümü etkiler", "verdict": "gorunum", "explain": "Kürlenme kalitesini ve dayanımı da etkiler." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Kalın katın dışı hızla sertleşip içeri giden yolu kapatır. İçeride kalan kısım aylar sonra konuşur."
+    },
+    {
+      "id": 5,
+      "instruction": "Macun kurudu görünüyor. Hemen zımparalamak istiyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kalinlik-olcer",
+        "question": "Kuruma süresi neden beklenir?",
+        "options": [
+          { "label": "Yüzeyin sertleşmesi kürlenmenin tamamlandığı anlamına gelmez: erken zımparalanan macun tıkanır, ısınıp yumuşar ve tam kürlenmediği için zamanla çeker — sonuç aylar sonra beliren bir çukurdur", "verdict": "kurumayi-bekle", "correct": true, "explain": "Bu, macun aşamasının en çok atlanan adımıdır çünkü bekleme hiçbir şey üretmiyormuş gibi görünür. Oysa kürlenme bir süreçtir ve yüzeyin sert hissettirmesi onun bittiği anlamına gelmez; malzeme içeride hâlâ tepkimeye devam ediyor olabilir. Erken zımparalamanın üç sonucu vardır. Birincisi işlem sırasında görülür: tam kürlenmemiş macun zımpara kâğıdını tıkar, sürtünmeyle ısınıp yumuşar ve düzgün alınmaz — usta 'macun sakızlaşıyor' der. İkincisi yüzeydedir: yumuşak malzeme zımpara altında eşit alınmaz, bazı yerler çukurlaşır. Üçüncüsü ve en pahalısı zamanla ortaya çıkar: kürlenmesi tamamlanmamış bir katman kalan büzülmesini boyanın altında yapar ve o bölgede birkaç ay içinde bir çökme belirir. Müşteri geri geldiğinde herkes boyayı suçlar. Kuruma süresi ortam sıcaklığından doğrudan etkilenir: soğukta uzar, sıcakta kısalır ve bu yüzden 'yarım saat bekledim' demek yetmez — koşullar farklıysa süre de farklıdır. Kürlenmeyi hızlandırmak için ısı kullanılıyorsa bunun da ürünün izin verdiği biçimde yapılması gerekir; aşırı ısı yüzeyi hızla kapatıp içeriyi hapsedebilir. Süre ve sıcaklık değerleri ürünün teknik belgesinde yazar; bu ders bir süre iddia etmiyor." },
+          { "label": "Yüzey sertse kurumuştur", "verdict": "yuzey-sert", "explain": "Yüzey sertliği kürlenmenin tamamlandığını göstermez." },
+          { "label": "Isıtılarak hemen zımparalanır", "verdict": "isit", "explain": "Aşırı ısı yüzeyi kapatıp içeriyi hapsedebilir; ürün şartına bakılır." },
+          { "label": "Zamanı ustanın deneyimi belirler", "verdict": "deneyim", "explain": "Süre ortam koşullarına ve ürüne bağlıdır." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "'Yarım saat bekledim' bir ölçüt değil: kuruma süresi ortam sıcaklığına bağlı ve soğukta uzuyor."
+    },
+    {
+      "id": 6,
+      "instruction": "Macunu zımparalayıp forma getireceksin.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.zimpara-bolgesi",
+        "question": "Macun nasıl zımparalanır?",
+        "options": [
+          { "label": "Geniş ve düz bir taban kullanılarak, panelin kendi formunu izleyerek: parmak ucuyla ya da küçük bir tabanla zımparalamak macunun ortasını çukurlaştırır ve yüzeyde dalga bırakır", "verdict": "genis-taban", "correct": true, "explain": "Macun zımparalamanın amacı malzemeyi almak değil, panelin doğru formunu yeniden kurmaktır — ve form, kullanılan tabanın büyüklüğüyle doğrudan ilgilidir. Geniş ve düz bir taban, zımparayı yüzeyin yüksek noktalarına bindirir ve çukurları atlar; böylece yüzey giderek düzleşir. Parmak ucu ya da küçük bir blok ise yüzeyin şeklini izler: çukurun içine girer, oradan da malzeme alır ve çukur kapanmaz — üstelik macunun ortası daha yumuşak olduğu için oradan daha çok alınır ve ortada bir çöküklük oluşur. Bu yüzden düz yüzeylerde uzun ve düz bir taban, eğimli yüzeylerde ise o eğime uyan esnek bir taban kullanılır. İkinci ilke yön: zımpara tek yönde değil, çapraz yönlerde dönüşümlü olarak çalıştırılır — böylece bir yönde oluşan izler bir sonraki yönde alınır ve yüzeyin genel düzlüğü ortaya çıkar. Üçüncü ilke kontrol: ara ara elle kontrol yapılır ve şüphe varsa kılavuz kat kullanılır; kılavuz kat çukurlarda kaldığı için nereden malzeme alınmadığını hemen gösterir. Dördüncü ilke geçiş: macunun kenarı, çevredeki boyaya doğru incelerek açılır ve elle hissedilen bir basamak bırakılmaz. Son olarak: macun asla son kat olarak bırakılmaz — üstüne uygun astar gelir, çünkü macun gözeneklidir ve doğrudan boya altında farklı emiş yaparak yüzeyde iz üretir." },
+          { "label": "Parmak ucuyla, hassas olsun diye", "verdict": "parmak", "explain": "Parmak yüzeyin şeklini izler; ortayı çukurlaştırır." },
+          { "label": "Tek yönde, hızlıca", "verdict": "tek-yon", "explain": "Çapraz yönler dönüşümlü kullanılır; tek yön iz bırakır." },
+          { "label": "Macun üstüne doğrudan boya atılır", "verdict": "dogrudan-boya", "explain": "Macun gözeneklidir; üstüne uygun astar gelir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Zımparanın amacı malzeme almak değil, panelin formunu yeniden kurmak. Formu tabanın büyüklüğü belirler."
+    },
+    {
+      "id": 7,
+      "instruction": "Macun aşamasını tamamladın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.tampon-kaporta",
+        "question": "Macun kullanımının sınırı nerede biter?",
+        "options": [
+          { "label": "Sacın düzeltilmesi gereken yerde başlar: macun bir kolaylık olarak kullanıldığında bugün kusursuz, birkaç yıl sonra çatlamış bir iş üretir — ve bu, teslimde hiçbir biçimde anlaşılmaz", "verdict": "sinir", "correct": true, "explain": "Bu dersin özeti tek bir ayrımdır: macun, işin bir adımı olarak kullanıldığında iyi bir malzemedir; işin yerine kullanıldığında bir gizleme aracıdır. Ayrımı yapmak da kolaydır — soru şudur: 'sacı elimden geldiğince düzelttim mi, yoksa uğraşmamak için mi macuna geçtim?' Cevap ikincisiyse ne olacağı bellidir. Kalın katman büzülür ve aylar içinde çöker; metal ile farklı genleştiği için kenarlarından çatlar; çatlaktan nem girer ve altında korozyon başlar; bir taş çarpmasında kırılır ve altındaki gerçek ortaya çıkar. Bunların hiçbiri teslim gününde görünmez — araç kusursuzdur, müşteri memnundur, para alınmıştır. Fark yıllar sonra ortaya çıkar ve o gün kimse o onarımı hatırlamaz. Bir de plastik parçalar için ayrı bir sınır vardır: sac macunu esneyen bir parçada kullanılmaz; tampon için esneklikli ve o malzemeye uygun bir ürün gerekir, yoksa ilk esnemede ağ biçiminde çatlar. Ve son bir kural: macun asla çıplak metale keyfî biçimde uygulanmaz ve asla son katman olarak bırakılmaz — altında ve üstünde ürünün istediği katmanlar bulunur. Sırada astar var: macunun üstünü kapatan ve boyanın gerçek zeminini kuran katman." },
+          { "label": "Sınırı yoktur, macun her şeyi düzeltir", "verdict": "sinirsiz", "explain": "Kalın macun çeker, çatlar, nem alır ve kırılır." },
+          { "label": "Yalnız görünür panellerde sınır vardır", "verdict": "gorunur", "explain": "Sınır malzemenin davranışından gelir, panelin görünürlüğünden değil." },
+          { "label": "Müşteri kabul ederse sınır yoktur", "verdict": "musteri", "explain": "Müşteri sonucu yıllar sonra görür; bilgi ustadadır." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Soru tek: sacı elimden geldiğince düzelttim mi, yoksa uğraşmamak için mi macuna geçtim? Sırada astar."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Kalın tek kat macun çekmenin sonucu nedir?",
+        "a": "ince-kat",
+        "options": [
+          { "verdict": "ince-kat", "label": "Dışı hızla sertleşip içeri giden yolu kapatır: içeride tam kürlenmeyen kısım kalır, katman daha çok büzülür ve altında hava boşlukları hapsolur — ince katlar hâlinde ilerlenir", "explain": "Eksik kürlenen kısım zamanla hareket eder ve boyanın altında çökme olarak belirir; büzülme kalınlıkla artar; hapsolan hava zımpara açtığında küçük delikler olarak çıkar. İlk kat yüzeye bastırılarak ince çekilir, sonrakiler gerekli yere odaklanır." },
+          { "verdict": "kalin-tek", "label": "Zaman kazandırır, sorun olmaz", "explain": "İçeride yumuşak kalır ve çok çeker." },
+          { "verdict": "fark-yok", "label": "Fark etmez", "explain": "Kürlenme ve büzülme davranışı değişir." },
+          { "verdict": "gorunum", "label": "Yalnız görünümü etkiler", "explain": "Dayanımı da etkiler." }
+        ]
+      },
+      {
+        "q": "Macunun yüzeyi sertleşmiş. Hemen zımparalanabilir mi?",
+        "a": "kurumayi-bekle",
+        "options": [
+          { "verdict": "kurumayi-bekle", "label": "Hayır: yüzey sertliği kürlenmenin tamamlandığını göstermez — erken zımparalanan macun tıkanır, ısınıp yumuşar ve kalan büzülmesini boyanın altında yaparak aylar sonra çukur bırakır", "explain": "Kuruma süresi ortam sıcaklığından doğrudan etkilenir; soğukta uzar. 'Yarım saat bekledim' bir ölçüt değildir. Isıyla hızlandırma ürünün izin verdiği biçimde yapılır — aşırı ısı yüzeyi kapatıp içeriyi hapseder." },
+          { "verdict": "yuzey-sert", "label": "Yüzey sertse kurumuştur", "explain": "İçeride tepkime sürebilir." },
+          { "verdict": "isit", "label": "Isıtılıp hemen zımparalanır", "explain": "Aşırı ısı içeriyi hapseder." },
+          { "verdict": "deneyim", "label": "Süreyi deneyim belirler", "explain": "Süre ürüne ve ortama bağlıdır." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2'deki 0,6 mm ve 2,8 mm SENARYO okumalarıdır; istenen FARKTIR (2,2 mm). Ders hiçbir ürün için kabul edilebilir macun kalınlığı iddia etmiyor.",
+    "sourceRequired": "Sertleştirici oranı, uygulama süresi, kuruma süresi ve sıcaklığı, azami kabul edilebilir macun kalınlığı, macun altı astar şartı, zımpara kademeleri ve plastik için uygun ürün eşleşmeleri bilinçle VERİLMEDİ; hepsi ürüne özgüdür ve ürünün teknik belgesinden okunur.",
+    "kapsam": "Ürün seçimi ve marka karşılaştırması KAPSAM DIŞIDIR; ders macunun işlevini, sınırını ve uygulama mantığını öğretiyor.",
+    "kaynak": "Bu alan kullanıcının açık talebiyle eklendi (talep birebir: 'birde alanlara kaportayı ekleyelim'); konu başlıkları MEB Otomotiv Gövde ve Boya dalının çerçevesini takip ediyor, kazanım numarası iddiası yok.",
+    "reviewedByMechanic": false
+  }
+}

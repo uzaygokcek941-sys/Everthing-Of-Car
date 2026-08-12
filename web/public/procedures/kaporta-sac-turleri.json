@@ -1,0 +1,177 @@
+{
+  "id": "kaporta.sac-turleri",
+  "area": "kaporta",
+  "stage": 1,
+  "title": "Sac Türleri: Yumuşak Çelik, Yüksek Mukavemetli Çelik, Alüminyum ve Plastik",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 35,
+  "prerequisites": ["kaporta.hasar-okuma"],
+  "learningGoals": [
+    "Bir panelin hangi malzemeden olduğunun onarım yöntemini baştan belirlediğini görmek",
+    "Yüksek mukavemetli çeliğin gözle ayırt edilemediğini ve ısıya dayanamadığını bilmek",
+    "Alüminyumun çelikten ayrı tutulması gerektiğini ve sebebini anlamak"
+  ],
+
+  "safety": [
+    { "rule": "Çelik sınıfı gözle belirlenmez; ısıtma kararı üreticinin onarım kılavuzundan verilir", "why": "Yüksek ve ultra yüksek mukavemetli çelikte ısı, mukavemeti kalıcı olarak düşürür ve bu düşüş dışarıdan hiç görünmez", "blocksStart": true },
+    { "rule": "Alüminyum tozu ve çelik tozu aynı ortamda karıştırılmaz", "why": "Çelik tozunun alüminyum yüzeye bulaşması korozyon başlatır; ayrıca bazı metal tozları yangın ve patlama riski taşır", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.kalinlik-olcer", "label": "Kalınlık ölçer", "required": true },
+    { "id": "tool.miknatis", "label": "Mıknatıs", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Elindeki mıknatısı ön çamurluğa yaklaştırıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-camurluk",
+        "question": "Mıknatıs tutmazsa bu ne anlama gelir?",
+        "options": [
+          { "label": "Panel büyük olasılıkla alüminyum ya da plastik: mıknatıs demir içeren malzemeye tutar, alüminyuma ve plastiğe tutmaz — bu, işe başlamadan önce yapılabilecek en hızlı malzeme testidir", "verdict": "miknatis-testi", "correct": true, "explain": "Mıknatıs bir malzeme laboratuvarı değildir ama bu alanda en ucuz ve en hızlı ilk bilgiyi verir. Demir içeren çeliğe tutar; alüminyuma, plastiğe ve kompozit panele tutmaz. Bu tek hareket, işin bütün planını değiştirebilecek bir ayrımı ortaya koyar. Çünkü alüminyum bir panelde çelik alışkanlıklarının neredeyse hiçbiri işlemez: alüminyum çekiçle döverek çelik gibi geri toplanmaz, ısı davranışı farklıdır ve rengi ısındıkça değişmediği için 'ne kadar ısındı' sorusunun gözle cevabı yoktur. Kaynak yöntemi ayrıdır, dolgu malzemesi ayrıdır ve en önemlisi, alüminyum panele bulaşan çelik tozu orada korozyon başlatır — bu yüzden ciddi atölyeler alüminyum işini ayrı bir alanda, ayrı aletlerle yapar. Mıknatısın söylemediği bir şey de vardır ve bu dersin asıl konusu odur: mıknatıs tutuyorsa panel çeliktir ama HANGİ çelik olduğunu söylemez. Yumuşak çelik de mıknatısı çeker, ultra yüksek mukavemetli çelik de. İkisi arasındaki fark ise onarımda hayatidir. Yani mıknatıs bir kapı açar, kararı vermez." },
+          { "label": "Panelin boyası kalındır", "verdict": "boya", "explain": "Kalın boya mıknatısın çekimini zayıflatır ama tamamen kesmez." },
+          { "label": "Panel paslanmıştır", "verdict": "pas", "explain": "Pas da demir içerir; mıknatıs yine bir miktar tutar." },
+          { "label": "Mıknatıs bozuktur", "verdict": "bozuk", "explain": "Başka bir panelde deneyerek doğrulanır; ama tutmaması anlamlı bir bilgidir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Mıknatıs bir kapı açar, kararı vermez: tuttuğunda 'çelik' der ama 'hangi çelik' demez."
+    },
+    {
+      "id": 2,
+      "instruction": "İki panelin kalınlığını ölçtün: çelik kapı panelinde 0,7 mm, alüminyum kaputta 1,1 mm. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.kalinlik-olcer",
+        "unit": "mm",
+        "acceptRange": [0.35, 0.45]
+      },
+      "camera": "kaporta",
+      "hint": "1,1 eksi 0,7.",
+      "teachingNote": "0,4 milimetrelik bu fark tesadüf değil, malzemenin doğasından geliyor. Alüminyum çelikten belirgin biçimde hafiftir ama aynı sertliği vermez; üretici bunu telafi etmek için alüminyum paneli daha kalın yapar. Sonuç yine de çelikten hafiftir — zaten alüminyumun kullanılma sebebi budur. Ama bu kalınlık farkının onarımda pratik bir sonucu var: alüminyum panel daha kalın olduğu için 'daha sağlam' sanılır, oysa davranışı tamamen farklıdır. Çelik esner ve bir miktar geri gelir; alüminyum aynı zorlamada daha az esner ve daha çabuk çatlar. Bir çeliği ikinci, üçüncü kez düzeltmeyi deneyebilirsin; alüminyumda aynı bölgeyi tekrar tekrar zorlamak çatlakla biter. Bu yüzden alüminyumda hamle sayısı azdır ve ilk hamlenin doğru olması beklenir. Ölçümün bir faydası daha var: fabrika kalınlığından belirgin sapma, o panelde daha önce macun ya da onarım olduğunu düşündürür — ama bu bir işaret, kanıt değil; boya kalınlığı ölçümüyle birlikte değerlendirilir. Fabrika sac kalınlıkları araca ve panele özgüdür ve bu ders hiçbir araç için tablo vermiyor."
+    },
+    {
+      "id": 3,
+      "instruction": "Mıknatıs kapı panelinde de, B direğinde de tutuyor. İkisi de çelik.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.direk-b",
+        "question": "İkisi de çelikse onarımları da aynı mıdır?",
+        "options": [
+          { "label": "Hayır: çeliğin mukavemet sınıfı farklıdır ve bu fark gözle görülmez — yüksek mukavemetli çelik ısıtıldığında kalıcı olarak zayıflar, hangi parçanın hangi sınıf olduğu kılavuzdan okunur", "verdict": "mukavemet-sinifi", "correct": true, "explain": "Modern bir gövdede tek tip çelik yoktur. Üretici her bölge için o bölgenin işine uygun bir çelik seçer: kolay şekil alması gereken dış panellerde yumuşak çelik, kabini ayakta tutması gereken direk ve eşiklerde yüksek ya da ultra yüksek mukavemetli çelik kullanılır. İkisi arasındaki fark ilk bakışta anlaşılmaz — ikisi de gri sactır, ikisi de mıknatıs çeker, ikisinin kalınlığı bile birbirine yakın olabilir. Fark, ısıya verdikleri tepkidedir. Yumuşak çelik ısıtılıp düzeltilebilir; ısı geçtikten sonra özelliklerini büyük ölçüde korur. Yüksek mukavemetli çelikte ise mukavemet, malzemenin kimyasal bileşiminden olduğu kadar üretimdeki ısıl işlem geçmişinden gelir; ısıtmak bu geçmişi siler ve malzeme geri dönüşü olmayan biçimde zayıflar. Kötü tarafı şudur: bu zayıflama dışarıdan hiç görünmez. Panel düzelmiş, boyanmış, kusursuz duruyor olabilir — ama bir kazada beklenen kuvveti artık taşımaz. Ölçemezsin, göremezsin, boyayla kapatırsın. Bu yüzden bu alanın kuralı serttir: ısıtma kararı gözle değil kılavuzla verilir. Kılavuz o parça için ısıtma yasağı koyuyorsa, parça ısıtılmaz — düzeltilemiyorsa değişir ya da iş devredilir." },
+          { "label": "Evet, çelik çeliktir", "verdict": "ayni", "explain": "Aynı görünürler ama ısıya tepkileri tamamen farklıdır." },
+          { "label": "Kalınlığa bakarak ayrılır", "verdict": "kalinlik", "explain": "Kalınlık bir ipucudur; bazı yüksek mukavemetli parçalar bilinçli olarak incedir." },
+          { "label": "Rengine bakarak ayrılır", "verdict": "renk", "explain": "İkisi de aynı görünür; sınıf gözle ayırt edilmez." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Isıyla zayıflayan çelik kusursuz görünür. Ölçemezsin, göremezsin — bu yüzden karar kılavuzun."
+    },
+    {
+      "id": 4,
+      "instruction": "Tampona bakıyorsun: mıknatıs tutmuyor, esniyor, arkasında bir yazı var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.tampon-kaporta",
+        "question": "Plastik tamponda arkadaki yazı neden önemli?",
+        "options": [
+          { "label": "Plastiğin türünü söyler ve onarım yöntemi ile kullanılacak dolgu, astar ve yapıştırıcı bu türe göre seçilir — yanlış eşleşen malzeme tutmaz ya da bir süre sonra kalkar", "verdict": "plastik-kodu", "correct": true, "explain": "Tampon 'plastik' diye tek bir malzeme değildir; farklı araçlarda farklı plastik aileleri kullanılır ve bunların yüzey enerjisi, ısıya tepkisi ve kaynaklanabilirliği birbirinden farklıdır. Üretici bu yüzden çoğu tamponun iç yüzüne malzeme kodunu yazar. O kod üç kararı belirler. Birincisi, onarım yöntemi: bazı plastikler sıcak hava ve dolgu çubuğuyla kaynaklanabilir, bazılarında iki bileşenli yapıştırıcı ile onarım tercih edilir. İkincisi, hazırlık: bazı plastik aileleri boyanın tutmadığı düşük yüzey enerjili malzemelerdir ve önce özel bir yapışma astarı ister; bu adım atlanırsa boya bir süre sonra pul pul kalkar ve kalkma ilk yıkamada değil aylar sonra ortaya çıkar. Üçüncüsü, esneklik: tampon çarpmada esneyerek işini yapan bir parçadır, bu yüzden üzerine sürülen macun ve boya sisteminin de esnemesi gerekir; sert bir sistem ilk esnemede çatlar. Kodun okunamadığı ya da parçanın işaretsiz olduğu durumda tahmin edilmez — üretici verisine ya da malzeme üreticisinin uyum tablosuna bakılır. Bu ders hangi kodun hangi ürünle eşleştiğini vermiyor; o eşleşme kullanılan ürünün kendi teknik belgesinde yazar ve markadan markaya değişir." },
+          { "label": "Üretim tarihini gösterir", "verdict": "tarih", "explain": "Tarih ayrı bir işarettir; malzeme kodu onarım yöntemini belirler." },
+          { "label": "Kalite işaretidir", "verdict": "kalite", "explain": "Kalite değil, malzeme ailesi bilgisidir." },
+          { "label": "Sadece geri dönüşüm içindir", "verdict": "geridonusum", "explain": "Geri dönüşüm için de kullanılır ama onarımda yöntem seçimini belirler." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Yanlış astarla boyanan tampon ilk yıkamada değil, aylar sonra pul pul kalkar."
+    },
+    {
+      "id": 5,
+      "instruction": "Alüminyum bir panelle çalışacaksın. Atölyede çelik işi de sürüyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kaput-kaporta",
+        "question": "Alüminyum işinde neden ayrı alan ve ayrı alet kullanılır?",
+        "options": [
+          { "label": "Alüminyum yüzeye bulaşan çelik parçacıkları orada korozyon başlatır ve iki farklı metal temas ettiğinde galvanik korozyon oluşur; ayrıca alüminyum tozu ayrı toplanmalıdır", "verdict": "ayri-alan", "correct": true, "explain": "İki sebep var ve ikisi de gözle görünmez biçimde ilerler. Birincisi bulaşmadır: çelik zımparasından, tel fırçasından ya da havada uçuşan taşlama tozundan gelen küçük çelik parçacıkları alüminyum yüzeye gömülür. O parçacıklar zamanla paslanır ve panelin üzerinde nokta nokta lekeler, oradan da boya kabarmaları başlar. Panel alüminyum olduğu için 'paslanmaz' sanılır, oysa paslanan alüminyum değil içine gömülen çeliktir — sonuç aynıdır. Bu yüzden alüminyum için ayrı zımpara, ayrı tel fırça, ayrı tezgâh kullanılır ve mümkünse iş ayrı bir bölmede yapılır. İkincisi galvanik korozyondur: farklı iki metal nemle birlikte temas ettiğinde aralarında küçük bir elektrik akışı doğar ve daha aktif olan metal çözünmeye başlar. Alüminyum panelin çelik bir cıvatayla doğrudan birleştirilmesi tam bu durumu üretir; bu yüzden üreticiler bu birleşimlerde araya yalıtıcı katman, özel kaplamalı bağlantı elemanı ya da yapıştırıcı koyar ve onarımda bu ayrıntı korunur. Üçüncü bir konu güvenliktir: bazı metal tozları toplandığında yangın ve patlama riski taşır, bu yüzden alüminyum tozu genel toz emişine karıştırılmaz, ayrı toplanır. Bu dersin sınırı şurası: hangi araçta hangi panelin alüminyum olduğu ve hangi bağlantı elemanının şart koşulduğu üreticiye özgüdür ve burada bir liste verilmiyor." },
+          { "label": "Alüminyum daha temiz bir metaldir", "verdict": "temiz", "explain": "Mesele temizlik değil, bulaşan çeliğin korozyon başlatması." },
+          { "label": "Alet aşınmasını önlemek için", "verdict": "asinma", "explain": "Alet ömrü değil, panelin sağlığı ve galvanik korozyon." },
+          { "label": "Gereksiz bir alışkanlıktır", "verdict": "gereksiz", "explain": "Bulaşan çelik parçacıkları aylar sonra kabarma olarak geri döner." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Alüminyumda paslanan alüminyum değil, içine gömülen çelik tozudur. Sonuç aynı."
+    },
+    {
+      "id": 6,
+      "instruction": "Bir panel çektirmeyle düzeltilirken beklenenden çabuk çatladı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.gocuk-cektirme",
+        "question": "Bu davranış hangi bilgiyi verir?",
+        "options": [
+          { "label": "Malzeme şekil değiştirme kapasitesinin sınırına gelmiştir: her metal belli bir miktar biçim değiştirebilir, o sınır aşılınca sertleşir ve çatlar — bu yüzden hamle sayısı azaltılır ve doğru yerden başlanır", "verdict": "sekillendirme-siniri", "correct": true, "explain": "Bir metali her büktüğünde, çektiğinde ya da dövdüğünde iç yapısında geri dönüşü olmayan bir değişim olur: malzeme sertleşir ve esneme kapasitesi azalır. Buna işleme sertleşmesi denir ve bu alanda üç pratik sonucu vardır. Birincisi, aynı bölgeye yapılan her yeni hamle bir öncekinden daha risklidir; ilk çekişte kolay gelen sac, beşinci çekişte aynı kuvvette çatlayabilir. Bu yüzden usta 'çok deneyerek' değil 'doğru yerden başlayarak' çalışır — bir sonraki aşamada göçüğün merkezini ve kilitlenme noktalarını okumayı öğreneceksin, sebebi tam budur. İkincisi, bu sınır malzemeden malzemeye değişir: yumuşak çeliğin toleransı geniştir, yüksek mukavemetli çeliğinki dardır, alüminyumunki daha da dardır. Aynı hamle çelikte sorun çıkarmazken alüminyumda çatlak üretir. Üçüncüsü, çatlamış bir bölge macunla kapatılmaz. Çatlak yapısal bir kusurdur ve altını doldurmak onu görünmez yapar ama ortadan kaldırmaz; nem oradan girer, korozyon başlar ve çatlak zamanla büyür. Doğru cevap ya uygun yöntemle onarım ya da parça değişimidir. Bir uyarı: bazı ustalar sacı yumuşatmak için ısıtır; bu yumuşak çelikte bazı durumlarda kabul edilebilirken yüksek mukavemetli çelikte ve alüminyumda kılavuz olmadan yapılmaz — ısı burada çözüm değil kalıcı hasardır." },
+          { "label": "Panel kalitesizdir", "verdict": "kalitesiz", "explain": "Her metalin şekil değiştirme sınırı vardır; sınır aşılmıştır." },
+          { "label": "Çektirme arızalıdır", "verdict": "alet", "explain": "Alet değil, malzemenin sınırı konuşuyor." },
+          { "label": "Daha güçlü çekmek gerekir", "verdict": "guc", "explain": "Daha fazla zorlamak çatlağı büyütür." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "İlk çekişte kolay gelen sac, beşinci çekişte çatlar. Usta çok deneyerek değil, doğru yerden başlayarak çalışır."
+    },
+    {
+      "id": 7,
+      "instruction": "Malzeme haritasını çıkardın: hangi panel ne, hangi sınırla çalışıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.zimpara-bolgesi",
+        "question": "Malzemeyi bilmek işin hangi aşamasını değiştirir?",
+        "options": [
+          { "label": "Hepsini: onarım yöntemini, alet seçimini, ısı kararını, hazırlık ve astar seçimini ve işin fiyatını — bu yüzden malzeme sorusu ilk sorulur, işin ortasında değil", "verdict": "her-asama", "correct": true, "explain": "Bu alanda yapılan en pahalı hatalardan biri, malzemeyi işin ortasında fark etmektir. Çünkü malzeme bilgisi bir ayrıntı değil, bütün zincirin ilk halkasıdır. Onarım yöntemini belirler: çelikte çekilip düzeltilecek bir hasar, alüminyumda farklı bir teknik ve daha az hamle ister, plastikte tamamen başka bir yöntemdir. Alet ve sarf seçimini belirler: ayrı zımpara, ayrı fırça, ayrı dolgu, ayrı astar. Isı kararını belirler ve bu en kritik olanıdır — yanlış malzemede ısı, geri alınamayan ve görünmeyen bir hasar bırakır. Hazırlık ve boya sistemini belirler: plastikte yapışma astarı ve esnek sistem, alüminyumda uygun ön işlem, çelikte çıplak metalin hızla korunması gerekir. Ve fiyatı belirler: alüminyum ya da kompozit bir panelin işçiliği çelik panelden farklıdır; bunu işin sonunda fark eden usta ya zarar eder ya müşteriyle tartışır. Bu yüzden sıra değişmez — aracı teslim alırken malzeme sorusu, hasarın kendisiyle birlikte sorulur ve kayda geçer. Bir de dürüstlük tarafı var: malzemesi ya da onarım yöntemi senin kapasitenin dışında olan bir işi almak, işi bitirememek ya da kötü bitirmek demektir. Bunu baştan söylemek iş kaybettirir; sonradan söylemek müşteri kaybettirir." },
+          { "label": "Yalnız boya aşamasını", "verdict": "boya", "explain": "Boyayı da etkiler ama zincir en baştan değişir." },
+          { "label": "Yalnız fiyatı", "verdict": "fiyat", "explain": "Fiyat bir sonuç; yöntem ve alet seçimi önce gelir." },
+          { "label": "Hiçbirini, usta gözüyle anlaşılır", "verdict": "goz", "explain": "Çelik sınıfı gözle ayırt edilmez; bu dersin ana uyarısı budur." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Malzemeyi işin ortasında fark etmek, bu alanın en pahalı hatası. Sırada birleştirme yöntemleri."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Mıknatıs bir panelde tutuyor. Bu panel ısıtılarak düzeltilebilir mi?",
+        "a": "mukavemet-sinifi",
+        "options": [
+          { "verdict": "mukavemet-sinifi", "label": "Bilinmez: mıknatıs 'çelik' der ama sınıfını söylemez; yüksek mukavemetli çelik ısıtıldığında kalıcı olarak zayıflar ve karar kılavuzdan verilir", "explain": "Zayıflama dışarıdan hiç görünmez — panel düzelmiş ve boyanmış olabilir ama beklenen kuvveti artık taşımaz. Ölçülemez ve boyayla kapanır; bu yüzden bu alanın kuralı serttir." },
+          { "verdict": "ayni", "label": "Evet, çelik çeliktir", "explain": "Isıya tepkileri tamamen farklıdır." },
+          { "verdict": "kalinlik", "label": "Kalınlığa bakılarak karar verilir", "explain": "Bazı yüksek mukavemetli parçalar bilinçli olarak incedir." },
+          { "verdict": "renk", "label": "Rengine bakılarak anlaşılır", "explain": "Sınıf gözle ayırt edilmez." }
+        ]
+      },
+      {
+        "q": "Alüminyum panel neden çelik işinden ayrı tutulur?",
+        "a": "ayri-alan",
+        "options": [
+          { "verdict": "ayri-alan", "label": "Bulaşan çelik parçacıkları alüminyum yüzeyde paslanır ve kabarma yapar; ayrıca iki farklı metal temasında galvanik korozyon oluşur", "explain": "Ayrı zımpara, ayrı tel fırça, ayrı tezgâh gerekir. Galvanik korozyon için üretici araya yalıtıcı katman ya da özel kaplamalı bağlantı elemanı şart koşar ve onarımda bu korunur. Metal tozu ayrıca ayrı toplanır." },
+          { "verdict": "temiz", "label": "Alüminyum daha temiz bir metaldir", "explain": "Mesele temizlik değil, bulaşma." },
+          { "verdict": "asinma", "label": "Alet aşınmasını önlemek için", "explain": "Alet ömrü değil, panelin sağlığı." },
+          { "verdict": "gereksiz", "label": "Gereksiz bir alışkanlıktır", "explain": "Bulaşma aylar sonra kabarma olarak geri döner." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2'deki 0,7 mm ve 1,1 mm SENARYO okumalarıdır; istenen FARKTIR (0,4 mm). Ders hiçbir araç için fabrika sac kalınlığı iddia etmiyor.",
+    "sourceRequired": "Çelik mukavemet sınıfları ve hangi parçanın hangi sınıf olduğu, ısıtma sıcaklık ve süre sınırları, alüminyum panel listeleri, plastik malzeme kodu ile ürün eşleşme tabloları, bağlantı elemanı şartları ve fabrika sac kalınlıkları bilinçle VERİLMEDİ; hepsi araca ve ürüne özgüdür, üreticinin onarım kılavuzundan ve malzeme üreticisinin teknik belgesinden okunur.",
+    "kapsam": "Alüminyum kaynağı, kompozit ve karbon panel onarımı ve metalurjik analiz KAPSAM DIŞIDIR — ders malzeme ayrımını ve sınırını öğretiyor, ileri onarım tekniklerini değil.",
+    "kaynak": "Bu alan kullanıcının açık talebiyle eklendi (talep birebir: 'birde alanlara kaportayı ekleyelim'); konu başlıkları MEB Otomotiv Gövde ve Boya dalının çerçevesini takip ediyor, kazanım numarası iddiası yok.",
+    "reviewedByMechanic": false
+  }
+}

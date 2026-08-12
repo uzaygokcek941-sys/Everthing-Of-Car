@@ -1,0 +1,177 @@
+{
+  "id": "lastik.on-takim-kontrol",
+  "area": "lastik-tekerlek",
+  "stage": 8,
+  "title": "Rotil, Rot Başı ve Burç Boşluğunun Kontrolü",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 30,
+  "prerequisites": ["lastik.on-duzen-terimleri", "lastik.guvenlik-kaldirma"],
+  "learningGoals": [
+    "Dikey ve yatay sallama testlerinin farklı parçaları işaret ettiğini bilmek",
+    "Rulman boşluğunu rotil boşluğundan fren pedalı yöntemiyle ayırmak",
+    "Boşluklu bir ön takımda neden ayar yapılmadığını açıklamak"
+  ],
+
+  "safety": [
+    { "rule": "Sallama testleri araç sehpaya oturtulduktan sonra yapılır", "why": "Test sırasında araca yatay kuvvet uygulanır; yalnız krikoya oturan araç bu kuvvetle devrilebilir", "blocksStart": true },
+    { "rule": "Tekerlek sallanırken el, tekerlek ile çamurluk arasına sokulmaz", "why": "Ani boşalan bir parça eli sıkıştırır", "blocksStart": true },
+    { "rule": "Boşluk tespit edilen parça değiştirilmeden araç ayara gönderilmez", "why": "Boşluklu sistemde ölçülen açı sabit değildir; ayar yolda kaybolur ve araç ayarlı sanılarak teslim edilir", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.sehpa", "label": "Sehpa (mapa)", "required": true },
+    { "id": "tool.manivela", "label": "Manivela", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Araç sehpada, tekerlek serbest. Tekerleği saat 12 ve 6 noktalarından tutup içeri dışarı sallıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.rotil",
+        "question": "Bu test hangi parçaları sorgular?",
+        "options": [
+          { "label": "Rotili, süspansiyon burçlarını ve tekerlek rulmanını: dikey düzlemdeki boşluk bu üçünden gelir", "verdict": "dikey", "correct": true, "explain": "Tekerleği üstünden ve altından tutup içeri dışarı sallamak, tekerleği dikey düzlemde eğmeye çalışır. Bu harekete direnen parçalar rotil, süspansiyon burçları ve tekerlek rulmanıdır; üçünden birinde boşluk varsa tekerlek belirgin biçimde oynar ve çoğu zaman oynamanın sonunda hafif bir tık duyulur. Test elle, kararlı ve tekrarlanabilir bir kuvvetle yapılır — asılmak ya da tekmeleyerek sarsmak gerçek boşluğu değil lastiğin esnemesini gösterir. Boşluk hissedildiğinde ikinci soru hemen gelir: bu üç adaydan hangisi? Ayrım için bir sonraki adımdaki fren pedalı yöntemi kullanılır, ayrıca elin biri parçanın üzerine konarak hareketin nereden geldiği doğrudan hissedilir. Bu test bu alandaki en ucuz kontrollerden biridir: alet gerektirmez, saniyeler sürer ve ön düzen ayarına gitmeden önce mutlaka yapılır." },
+          { "label": "Yalnız rot başını", "verdict": "rot-basi", "explain": "Rot başı yatay düzlemde çalışır; onun testi 3–9 sallamasıdır." },
+          { "label": "Yalnız direksiyon kutusunu", "verdict": "kutu", "explain": "Direksiyon kutusu boşluğu da yatay sallamada belli olur." },
+          { "label": "Fren balatalarını", "verdict": "balata", "explain": "Balata kalınlığı ayrı bir kontroldür; sallama testi boşluk arar." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Sallama yönü, sorguladığın parçayı belirler. Dikey düzlem rotil ve rulmanı, yatay düzlem direksiyon bağlantılarını sorgular."
+    },
+    {
+      "id": 2,
+      "instruction": "Dikey sallamada boşluk hissettin. Yanında bir kişi var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.gobek",
+        "question": "Rulman mı rotil mi olduğu nasıl ayrılır?",
+        "options": [
+          { "label": "İkinci kişi fren pedalına basarken test tekrarlanır: boşluk kayboluyorsa rulman, sürüyorsa rotil ya da süspansiyon bağlantısıdır", "verdict": "fren-testi", "correct": true, "explain": "Fren pedalına basıldığında balatalar diski sıkar ve disk göbeğe cıvatalıdır; yani göbekle tekerlek, aracın taşıyıcı parçasına geçici olarak kilitlenmiş olur. Bu kilit, rulmanın içindeki boşluğu ortadan kaldırır. Test bu yüzden ayırt edicidir: pedala basılıyken sallamada boşluk kayboluyorsa hareketin kaynağı rulmandı. Boşluk aynen sürüyorsa fren kilidi ona ulaşamamıştır, yani kaynak göbeğin dışındadır — rotil, salıncak burcu ya da amortisör üst yatağı. Yöntemin güzelliği hiçbir alet gerektirmemesidir; tek gereken pedala basacak bir kişidir. Ayrımı kesinleştirmek için el parçanın üzerine konur ve tekerlek sallanırken hareketin nereden geldiği doğrudan hissedilir: rotilin gövdesiyle salıncak arasında bir kıpırdama varsa rotil, burçta kauçuğun ezilip açıldığı görülüyorsa burç suçludur. Bu iki adım birlikte, pahalı bir teşhis cihazı olmadan parça düzeyinde sonuç verir." },
+          { "label": "Ayrılamaz, ikisi birden değiştirilir", "verdict": "ikisi", "explain": "Basit bir testle ayrılır; gereksiz parça değişimi önlenir." },
+          { "label": "Tekerlek elle döndürülüp sese bakılır", "verdict": "ses", "explain": "Ses rulman için ipucu verir ama boşluğun kaynağını ayırmaz." },
+          { "label": "Araç yere indirilip yol testi yapılır", "verdict": "yol", "explain": "Yol testi belirtiyi gösterir; kaynağı sehpada ayrılır." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "İki adayı ayıran en iyi test, birini geçici olarak devre dışı bırakan testtir. Fren pedalı burada tam olarak bunu yapıyor."
+    },
+    {
+      "id": 3,
+      "instruction": "Boşluğu ölçtün: sol ön tekerlekte dikey sallamada 0,2 mm, sağ ön tekerlekte 2,3 mm hareket var. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.komparator",
+        "unit": "mm",
+        "acceptRange": [2.05, 2.15]
+      },
+      "camera": "tekerlek",
+      "hint": "2,3 eksi 0,2.",
+      "teachingNote": "2,1 mm'lik bu fark, iki simetrik köşe arasındaki farktır ve bu yüzden bir sınır değeri bilmeye gerek kalmadan sonuç verir: aynı araçta, aynı yaşta, aynı yolları görmüş iki taraftan biri diğerinden belirgin biçimde boşluklu. Sol taraf o araç için sağlam bir referans oluşturuyor. Bu, bu alanın tekrar eden yöntemi — karşılaştırma, mutlak değerden daha erken ve daha güvenilir bir teşhis verir. Kabul edilebilir azami boşluk yine de araca özgüdür ve karar verilirken üreticinin değerine bakılır."
+    },
+    {
+      "id": 4,
+      "instruction": "Şimdi tekerleği saat 3 ve 9 noktalarından tutup sağa sola sallıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.rot-basi",
+        "question": "Bu test neyi sorgular?",
+        "options": [
+          { "label": "Rot başını, rot çubuğunu ve direksiyon kutusu bağlantılarını: yatay düzlemdeki boşluk direksiyon zincirinden gelir", "verdict": "yatay", "correct": true, "explain": "Tekerleği yanlarından tutup sağa sola sallamak, tekerleği direksiyon ekseninde döndürmeye çalışır. Bu hareketi tutan zincir direksiyon kutusundan başlar, rot çubuğuyla devam eder ve rot başıyla tekerleğe bağlanır. Zincirin herhangi bir yerindeki boşluk burada belli olur. Kaynağı bulmak için el zincirin üzerinde gezdirilir: rot başının küresel eklemi ile taşıyıcı arasında kıpırdama varsa rot başı, çubuğun kutuya bağlandığı yerde hareket varsa iç rot ya da kutunun kendisi suçludur. Bu testin sonuçları doğrudan sürüşe yansır — yatay boşluk direksiyonda ölü boşluk yaratır, araç yolda sürekli düzeltme ister ve toe değeri sabit kalmadığı için lastik testere dişi biçiminde aşınır. Dikey testte olduğu gibi burada da hareket kararlı ve tekrarlanabilir bir kuvvetle uygulanır; ayrıca direksiyon kilitli değilken yapılan sallamada direksiyonun kendisi dönebileceği için gerekiyorsa direksiyon sabitlenir." },
+          { "label": "Yalnız rotili", "verdict": "rotil", "explain": "Rotil dikey düzlemde daha belirgindir; yatay test direksiyon zincirini sorgular." },
+          { "label": "Tekerlek rulmanını", "verdict": "rulman", "explain": "Rulman boşluğu dikey testte ve fren pedalı yöntemiyle ayrılır." },
+          { "label": "Amortisörü", "verdict": "amortisor", "explain": "Amortisör sönümleme yapar; boşluk testi bağlantıları sorgular." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "İki test, iki düzlem, iki farklı parça grubu. Bu ayrım sayesinde bir boşluk şikâyeti daha araç yerden kalkmadan büyük ölçüde daralıyor."
+    },
+    {
+      "id": 5,
+      "instruction": "Rot başının körüğü yırtılmış, içinden gres sızmış.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.rot-basi",
+        "question": "Bu bulgu ne anlama gelir?",
+        "options": [
+          { "label": "Parçanın ömrü fiilen bitmiştir: gres çıkmış, kir ve su girmiştir; şu an boşluk hissedilmese bile kısa sürede boşluk yapar", "verdict": "koruk-yirtik", "correct": true, "explain": "Rotil ve rot başı küresel eklemlerdir; içlerindeki gres hem sürtünmeyi azaltır hem de yüzeyleri kirden ve sudan korur. Bu koruma tamamen küçük kauçuk körüğe bağlıdır. Körük yırtıldığı anda iki şey birden olur: gres dışarı atılır ve içeri toz, çamur, yol tuzu ve su girer. Bundan sonrası hızlı bir aşınma sürecidir — kirli ve yağsız çalışan küresel yüzey kısa sürede boşluk yapar. Bu yüzden yırtık körük tek başına yeterli bir bulgudur: parça o an elle sallandığında boşluk vermiyor olabilir, ama ömrü fiilen bitmiştir ve bir sonraki bakıma kalmaz. Körük kontrolü fenerle ve parçanın alt tarafına bakılarak yapılır; yırtık genellikle alt kıvrımda ve gözle kolay atlanan bir yerdedir. Aynı kontrol aks körükleri için de geçerlidir ve mantığı aynıdır: koruma bittiğinde parçanın ömrü de bitmiştir." },
+          { "label": "Yalnız kozmetik bir sorun", "verdict": "kozmetik", "explain": "Gres kaybı ve kir girişi doğrudan aşınma başlatır." },
+          { "label": "Körük değiştirilip gres eklenir, parça kalır", "verdict": "koruk-degistir", "explain": "İçeri kir girmiş bir eklem temizlenip kurtarılamaz; parça değişir." },
+          { "label": "Boşluk yoksa hiçbir şey yapılmaz", "verdict": "bosluk-yok", "explain": "Boşluk kısa sürede oluşur; yırtık körük tek başına yeterli bulgudur." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bazı bulgular şimdiki durumu değil, yakın geleceği söyler. Yırtık körük tam olarak böyle bir bulgudur."
+    },
+    {
+      "id": 6,
+      "instruction": "Sağ ön rotilde boşluk bulundu. Müşteri yalnız ön düzen ayarı istemişti.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.rotil",
+        "question": "Ne yapılır?",
+        "options": [
+          { "label": "Önce parça değiştirilir, sonra ayar yapılır; boşluklu sistemde yapılan ayar yola çıkıldığında kaybolur", "verdict": "once-parca", "correct": true, "explain": "Ön düzen ayarı, tekerleğin belirli bir açıda sabit durduğu varsayımına dayanır. Boşluklu bir eklemde tekerlek sabit durmaz: cihazın ölçtüğü açı, aracın atölyede durduğu andaki tesadüfi konumdur; yola çıkıldığında hızlanma, frenleme ve viraj kuvvetleri tekerleği boşluğun içinde oynatır ve açı sürekli değişir. Böyle bir araca yapılan ayar, kelimenin tam anlamıyla hiçbir şeydir — üstelik müşteri parasını ödemiş ve aracının ayarlı olduğuna inanmıştır, bu yüzden lastikleri aşınmaya devam ettiğinde suçu ayarı yapanda arar. Doğru sıra bellidir: boşluklu parça değiştirilir, sonra ayar yapılır. Sıra tersine çevrilemez; parça değişimi zaten geometriyi değiştirdiği için ayardan sonra parça değiştirmek de ayarı geçersiz kılar. Müşteriye anlatılması gereken şey budur: istenen iş yapılabilir ama önce şu yapılmalı, yoksa ödenen para karşılıksız kalır. Bulgu ve gerekçe iş emrine yazılır." },
+          { "label": "Ayar yapılır, parça sonra değişir", "verdict": "once-ayar", "explain": "Parça değişimi geometriyi değiştirir; ayar geçersiz olur." },
+          { "label": "Ayar yapılır, boşluk küçükse sorun olmaz", "verdict": "kucuk-bosluk", "explain": "Boşluk varsa ölçülen açı sabit değildir; ayar tutmaz." },
+          { "label": "İş reddedilir", "verdict": "reddet", "explain": "İş reddedilmez; sıra ve gerekçe anlatılır, karar müşterinin." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Sıra hatası, yapılan işi görünmez biçimde boşa çıkarır. Bu alanda ikinci kez: doğru işi yanlış sırada yapmak, yapmamakla aynı sonucu verir."
+    },
+    {
+      "id": 7,
+      "instruction": "Rotil değişti.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.rot-kolu",
+        "question": "Sıradaki iş ne?",
+        "options": [
+          { "label": "Ön düzen ölçümü ve ayarı: geometriyi belirleyen bir parça değiştiği için eski değerler geçersizdir", "verdict": "ayar-sart", "correct": true, "explain": "Rotil, salıncak, rot başı ve süspansiyon bağlantıları tekerleğin uzayda hangi açıda durduğunu belirleyen parçalardır. Bunlardan biri söküldüğünde ve yenisi takıldığında geometri kaçınılmaz olarak değişir — yeni parçanın toleransları farklıdır, bağlantı noktaları aynı yere birebir oturmayabilir ve rot başı değişiminde rot çubuğunun boyu zaten doğrudan toe'yu belirler. Bu yüzden bu parçalardan herhangi biri değiştiğinde ön düzen ölçümü zorunludur; 'zaten geçen ay ayar yaptırmıştı' cümlesi geçersizdir, çünkü o ayar eski parçanın geometrisine göre yapılmıştı. Aynı kural süspansiyon yayı ve amortisör değişimi ile aracın yüksekliğini değiştiren her işlem için de geçerlidir. Ayar yapılmadan teslim edilen bir araçta yeni takılan parça sağlam olsa bile lastikler kısa sürede aşınmaya başlar ve müşteri sorunu parçada arar." },
+          { "label": "Hiçbir şey; parça yenilendi, ayar bozulmaz", "verdict": "gerekmez", "explain": "Geometriyi belirleyen parça değişti; eski ayar geçersiz." },
+          { "label": "Yalnız yol testi yeterli", "verdict": "yol-testi", "explain": "Yol testi gerekli ama ölçümün yerini tutmaz." },
+          { "label": "Yalnız lastik basınçları kontrol edilir", "verdict": "basinc", "explain": "Basınç kontrolü ayarın ön şartı; ayarın yerine geçmez." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bu iki ders birbirine kilitli: boşlukluyken ayar yapılmaz, parça değişince ayar zorunlu olur. Sıra her zaman parça → ölçüm → ayar."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Dikey sallamada boşluk var. Rulman mı rotil mi olduğu nasıl ayrılır?",
+        "a": "fren-pedali",
+        "options": [
+          { "verdict": "fren-pedali", "label": "İkinci kişi fren pedalına basarken test tekrarlanır: boşluk kayboluyorsa rulman, sürüyorsa rotil ya da süspansiyon bağlantısı", "explain": "Pedala basıldığında balatalar diski sıkar ve disk göbeğe cıvatalı olduğu için tekerlek taşıyıcıya geçici olarak kilitlenir; bu kilit rulmandaki boşluğu ortadan kaldırır. Boşluk kayboluyorsa kaynak rulmandı, sürüyorsa göbeğin dışındadır. Ayrımı kesinleştirmek için el parçanın üzerine konur ve hareketin nereden geldiği doğrudan hissedilir. Yöntem hiçbir alet gerektirmez." },
+          { "verdict": "ses", "label": "Tekerlek döndürülüp sesine bakılır", "explain": "Ses rulman için ipucu verir ama boşluğun kaynağını ayırmaz." },
+          { "verdict": "ikisi", "label": "Ayrılamaz, ikisi birden değişir", "explain": "Basit bir testle ayrılır; gereksiz parça değişimi önlenir." },
+          { "verdict": "cihaz", "label": "Yalnız teşhis cihazıyla", "explain": "Cihaz gerekmez; fren pedalı yöntemi yeterli." }
+        ]
+      },
+      {
+        "q": "Ön takımda boşluk varken neden ön düzen ayarı yapılmaz?",
+        "a": "aci-sabit-degil",
+        "options": [
+          { "verdict": "aci-sabit-degil", "label": "Boşluklu eklemde tekerlek sabit durmaz; ölçülen açı atölyedeki tesadüfi konumdur ve yola çıkıldığında değişir", "explain": "Ayar, tekerleğin belirli bir açıda sabit durduğu varsayımına dayanır. Boşluk varsa hızlanma, frenleme ve viraj kuvvetleri tekerleği boşluğun içinde oynatır; ayar fiilen hiçbir şey yapmaz. Üstelik müşteri parasını ödemiş ve aracının ayarlı olduğuna inanmıştır. Doğru sıra: boşluklu parça değişir, sonra ölçüm ve ayar yapılır — parça değişimi geometriyi değiştirdiği için ters sıra da olmaz." },
+          { "verdict": "cihaz-bozulur", "label": "Cihaz zarar görür", "explain": "Cihazla ilgisi yok; sorun ölçülen açının sabit olmaması." },
+          { "verdict": "sure", "label": "Uzun sürdüğü için", "explain": "Süre değil, sonucun geçersiz olması belirleyici." },
+          { "verdict": "yapilir", "label": "Yapılır, boşluk küçükse sorun olmaz", "explain": "Küçük boşluk da açıyı oynatır." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 0,2 mm ve 2,3 mm SENARYO okumalarıdır; kabul edilebilir azami boşluk DEĞİLDİR. İstenen sol–sağ FARKIDIR (2,1 mm) ve dersin gösterdiği şey simetrik köşeler arasındaki karşılaştırmanın sınır değeri bilmeden sonuç verdiğidir.",
+    "sourceRequired": "Kabul edilebilir azami rotil, rot başı ve rulman boşluğu bilinçle VERİLMEDİ: araca özgüdür ve üreticinin belgesinden okunur.",
+    "kapsam": "Salıncak, viraj denge çubuğu, amortisör üst yatağı ve direksiyon kutusu ayrıntılı ele alınmadı; ders üç ana boşluk kaynağı ve ayırt etme yöntemi üzerine kurulu. Sahnede rot başı, rot kolu ve rotil var; salıncak modellenmedi.",
+    "reviewedByMechanic": false
+  }
+}

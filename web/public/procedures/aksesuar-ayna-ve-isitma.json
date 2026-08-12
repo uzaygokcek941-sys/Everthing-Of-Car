@@ -1,0 +1,171 @@
+{
+  "id": "aksesuar.ayna-ve-isitma",
+  "area": "aksesuar-ses",
+  "stage": 2,
+  "title": "Elektrikli Ayna, Isıtmalı Cam ve Ayna",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 30,
+  "prerequisites": ["aksesuar.cam-sikisma-korumasi"],
+  "learningGoals": [
+    "Ayna kumandasının iki motor ve ortak uç mantığıyla çalıştığını görmek",
+    "Isıtmanın bir direnç işi olduğunu ve kopuğun nasıl bulunduğunu bilmek",
+    "Isıtmalı yüzeylere zarar veren alışkanlıkları tanımak"
+  ],
+
+  "safety": [
+    { "rule": "Ayna camı sökülürken enerji kesik olur ve cam iki elle, kenarlarından tutulur", "why": "Ayna camı ince ve kırılgandır; kırıldığında hem keser hem arkasındaki ısıtıcı folyoyu tahrip eder", "blocksStart": true },
+    { "rule": "Isıtmalı arka cam üzerindeki iletken şeritler hiçbir aletle kazınmaz, sert bezle ovulmaz", "why": "Şeritler camın yüzeyine baskıyla oluşturulmuştur; bir kez koptuklarında o bölge bir daha ısınmaz ve onarımı ayrı bir iştir", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.multimetre", "label": "Multimetre", "required": true },
+    { "id": "tool.plastik-sokme-spatulasi", "label": "Plastik söküm spatulası", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Dış dikiz aynası dört yöne hareket ediyor. İçine bak.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.ayna-motoru",
+        "question": "Ayna kaç motorla ve kaç telle çalışır?",
+        "options": [
+          { "label": "İki motorla — biri yatay biri düşey — ve genellikle üç telle: her motorun kendi ucu ve ikisinin paylaştığı ortak bir uç", "verdict": "iki-motor-ortak", "correct": true, "explain": "Ayna cam gibi tek eksende değil, iki eksende hareket eder: sağa-sola ve yukarı-aşağı. Bu yüzden içinde iki ayrı küçük motor vardır ve her biri bir eksenden sorumludur. Akıllı olan kısım kablolamadır: iki motor için dört tel gerekirdi ama üretici bunu üçe indirir — her motorun kendi ucu ayrı, dönüş ucu ortaktır. Kumanda kolu hangi motora hangi yönde gerilim uygulanacağına karar verir; yön, gerilimin kutbunun ters çevrilmesiyle belirlenir. Bu yapının teşhisteki karşılığı çok nettir. Ayna hiçbir yöne hareket etmiyorsa şüphe ortak uçta, beslemede ya da kumanda kolundadır — çünkü tek bir arıza ancak paylaşılan bir noktadaysa iki motoru birden durdurabilir. Yalnız bir eksende hareket etmiyorsa ortak uç sağlamdır ve arıza o eksenin motorunda ya da o motorun kendi telindedir. Katlanır aynalarda üçüncü bir motor daha vardır ve o ayrı bir devredir; katlama çalışıp ayar çalışmıyorsa besleme geliyor demektir. Bu ayrım aynanın sökülüp sökülmeyeceğini bile belirler." },
+          { "label": "Tek motorla ve iki telle", "verdict": "tek-motor", "explain": "Tek motor iki ekseni birden hareket ettiremez." },
+          { "label": "Dört motorla, her yön için bir tane", "verdict": "dort-motor", "explain": "Her motor kendi ekseninde iki yöne de çalışır; kutup değişimi yönü belirler." },
+          { "label": "Motor yoktur, elle ayarlanır", "verdict": "elle", "explain": "Elektrikli aynada motorlar vardır; elle zorlamak dişlileri sıyırır." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Ortak uç fikri: iki motor, üç tel. Hiçbir yön çalışmıyorsa ortak noktaya, tek yön çalışmıyorsa o eksene bak."
+    },
+    {
+      "id": 2,
+      "instruction": "Müşterinin aynası hiç hareket etmiyor ama diğer taraf çalışıyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kapi-modulu",
+        "question": "Arama nereden başlar?",
+        "options": [
+          { "label": "Kumanda kolunun seçici anahtarından ve körükten geçen tellerden — çünkü diğer ayna çalışıyorsa kol, besleme ve modül büyük ölçüde sağlamdır", "verdict": "secici-ve-koruk", "correct": true, "explain": "Bir ayna çalışıp diğeri çalışmıyorsa bu tablo çok şey eler. Kumanda kolunun kendisi, beslemesi ve şasesi çalışıyordur — yoksa iki ayna da ölü olurdu. Geriye üç halka kalır. Birincisi kolun üzerindeki sol/sağ seçici anahtardır: bu anahtar aynı kumandayı iki aynadan birine yönlendirir ve tek başına bir aynayı ölü bırakabilir; seçici bir yönde çalışıp diğerinde çalışmıyorsa arıza tam olarak buradadır. İkincisi körükten geçen tellerdir ve bu alanın klasik şüphelisidir — kapı her açılışta büküldüğü için ayna telleri de cam ve kilit telleri gibi yorulur; belirtisi çoğu zaman konuma bağlıdır, yani kapı açıkken çalışıp kapalıyken çalışmaz ya da tersi. Üçüncüsü aynanın kendi soketidir; ayna değişimlerinden ya da kapı sökümlerinden sonra tam oturmamış olabilir. Ölçüm sırası bu üçlüyü izler: önce ayna soketinde kumanda verilirken gerilim aranır. Gerilim varsa arıza aynanın içindedir. Gerilim yoksa şüphe körüğe ve seçiciye kayar ve ölçüm kolun çıkışında tekrarlanır." },
+          { "label": "Doğrudan ayna değiştirilir", "verdict": "ayna-degistir", "explain": "Aynanın içine gerilim gelip gelmediği ölçülmeden parça değişmez." },
+          { "label": "Modül değiştirilir", "verdict": "modul", "explain": "Diğer ayna çalışıyorsa modül ve besleme sağlamdır." },
+          { "label": "Sigorta değiştirilir", "verdict": "sigorta", "explain": "Sigorta ortak halkadır; diğer ayna çalışıyor." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Seçici anahtar bu sistemin en çok atlanan halkası: tek başına bir aynayı tamamen ölü gösterir."
+    },
+    {
+      "id": 3,
+      "instruction": "Arka cam ısıtması bir bölgede çalışmıyor. Cam üzerindeki şeritlere bakıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kapi-cami",
+        "question": "Bu şeritler nasıl çalışır ve tek bölgenin ısınmaması ne anlatır?",
+        "options": [
+          { "label": "Her şerit bağımsız bir dirençtir: akım geçerken ısınır. Tek bir şerit ısınmıyorsa o şerit kopmuştur; diğerleri etkilenmez çünkü paralel bağlıdırlar", "verdict": "paralel-direnc", "correct": true, "explain": "Isıtmalı arka camın üzerindeki yatay şeritler dekoratif değildir; her biri camın yüzeyine baskıyla oluşturulmuş bir iletken şerittir ve bir dirençtir. Devre iki dikey baraya bağlıdır — camın iki yanındaki kalın şeritler — ve bütün yatay şeritler bu iki bara arasına PARALEL bağlanır. Akım geçtiğinde her şerit kendi üzerinde ısı üretir ve buğu ile buz o hattan başlayarak çözülür. Paralel bağlantının iki sonucu vardır. Birincisi bir şerit koptuğunda diğerleri çalışmaya devam eder; belirti tek bir yatay çizgi hâlinde buğulu kalan bir bölgedir ve bu görüntü doğrudan hangi şeridin koptuğunu gösterir. İkincisi hiçbir şerit ısınmıyorsa arıza tek tek şeritlerde değil, ortak noktalardadır: besleme, düğme, röle, sigorta ya da baraların bağlantı uçları. Kopuşun en sık sebebi mekaniktir — bagajda taşınan bir eşyanın sürtmesi, camı sert bir bezle ya da kazıyıcıyla temizlemek, ya da cama yapıştırılan bir şeyin sökülmesi sırasında şeridin kalkması. Bu yüzden ısıtmalı cam asla kazınmaz ve iç yüzeyi yalnız yumuşak bezle, şeritlerin uzunluğu YÖNÜNDE silinir." },
+          { "label": "Şeritler seri bağlıdır; biri koparsa hiçbiri çalışmaz", "verdict": "seri", "explain": "Seri olsaydı tek kopuk bütün camı devre dışı bırakırdı; oysa tek bölge ısınmıyor." },
+          { "label": "Şeritler yalnız görsel bir kaplamadır", "verdict": "gorsel", "explain": "Her biri akım taşıyan bir dirençtir." },
+          { "label": "Cam içine gömülü tek bir tel vardır", "verdict": "tek-tel", "explain": "Çok sayıda paralel şerit vardır; bu yüzden arıza bölgesel olur." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Buğulu kalan çizgi doğrudan arızalı şeridi gösteriyor — bu sistem arızasını kendisi işaretliyor."
+    },
+    {
+      "id": 4,
+      "instruction": "Kopuk şeridi bulacaksın. Şeridin bir ucundan başlayıp boyunca gerilim ölçüyorsun: kopuğun bir yanında 11,9 V, diğer yanında 0,2 V okudun. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.multimetre-aksesuar",
+        "unit": "V",
+        "acceptRange": [11.5, 11.9]
+      },
+      "camera": "aksesuar",
+      "hint": "11,9 eksi 0,2.",
+      "teachingNote": "11,7 voltluk bu sıçrama kopuğun yerini santim düzeyinde işaretler ve yöntem şudur: ısıtma açıkken multimetrenin siyah probu şase noktasında sabit tutulur, kırmızı prob şerit boyunca yavaşça kaydırılır. Sağlam bir şeritte gerilim baştan sona düzgün ve kademeli düşer — çünkü şerit bir dirençtir ve boyunca gerilim paylaşılır. Kopuk varsa okuma bir noktaya kadar yüksek kalır, o noktadan sonra birden sıfıra yakın düşer; kopuk tam olarak bu sıçramanın olduğu yerdedir. Kopuk çoğu zaman gözle görülmeyecek kadar incedir, bu yüzden ölçüm gözden daha güvenilirdir. Onarım için iletken gümüş esaslı özel bir onarım boyası ve şeridi maskeleyen bir şablon kullanılır; boya kuruyana kadar beklenir ve süre ürününe göre değişir — bu ders bir ürün ya da süre vermiyor. Onarım öncesi yüzey temizliği şarttır, yağlı yüzeye tutmaz."
+    },
+    {
+      "id": 5,
+      "instruction": "Ayna ısıtması çalışmıyor. Arka cam ısıtması ise sorunsuz.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.dis-dikiz-aynasi",
+        "question": "Bu iki sistem arasında nasıl bir bağ var?",
+        "options": [
+          { "label": "Birçok araçta aynı düğmeyle birlikte çalışırlar ama devreleri ayrıdır: arka cam çalışıyorsa düğme, röle ve besleme sağlamdır — arıza aynaya giden hatta ya da ayna ısıtıcısındadır", "verdict": "ayni-dugme-ayri-devre", "correct": true, "explain": "Bu bir tasarım tercihidir ve teşhis için hediyedir. Üreticiler ayna ısıtmasını genellikle arka cam ısıtma düğmesine bağlar; sürücü tek düğmeye basar, hem arka cam hem aynalar ısınır. Ama bu iki tüketici aynı düğmeden beslenip AYRI hatlarla dağılır. Arka cam ısınıyorsa şu halkalar kanıtlanmış olur: düğme çalışıyor, röle çekiyor, sigorta sağlam ve besleme var. Geriye yalnız aynaya giden yol kalır — körükten geçen tel, ayna soketi ve aynanın arkasındaki ısıtıcı elemanın kendisi. Ayna ısıtıcısı, ayna camının arkasına yapıştırılmış ince bir dirençli folyodur; ayna camı bir kez değiştirildiyse ve yeni cam ısıtmasız takıldıysa sistem hiç çalışmaz — bu, ikinci el ya da ucuz yedek parça takılmış araçlarda sık görülür ve bir arıza değil, yanlış parçadır. İkinci sık sebep folyonun uçlarının kopmasıdır: ayna camını sökerken ya da elle ayarlarken kablo çekilirse ince uçlar ayrılır. Isıtıcının sağlam olup olmadığı direnç ölçümüyle anlaşılır — kopuksa sonsuz direnç okunur. Kabul edilebilir direnç değeri araca ve parçaya özgüdür ve bu ders bir değer vermiyor; kopuk ile sağlam arasındaki fark açıktır." },
+          { "label": "Aynı devredir, biri çalışıyorsa diğeri de çalışmalı", "verdict": "ayni-devre", "explain": "Düğme ortak, dağıtım ayrıdır." },
+          { "label": "İlgisizdirler, karşılaştırma yapılamaz", "verdict": "ilgisiz", "explain": "Ortak düğme sayesinde arka cam iyi bir referanstır." },
+          { "label": "Ayna ısıtması motorla aynı devreden beslenir", "verdict": "motor-devresi", "explain": "Isıtma ayrı bir devredir; ayar motorlarıyla karışmaz." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Arka cam ısınıyorsa düğme, röle ve sigorta kanıtlanmıştır. Bedava bir referans, tek bir gözlemle."
+    },
+    {
+      "id": 6,
+      "instruction": "Ayna camını sökeceksin.",
+      "interaction": {
+        "type": "pull",
+        "target": "part.dis-dikiz-aynasi",
+        "requiresGesture": true
+      },
+      "camera": "aksesuar",
+      "hint": "Aynayı bir kenarından yatırıp arkasındaki tutucudan nazikçe kurtar.",
+      "teachingNote": "Ayna camı çoğu araçta arkasındaki bir tutucuya klipsle oturur ve sökme yöntemi tektir: ayna motorla bir yöne sonuna kadar yatırılır, açılan boşluktan geniş bir plastik spatula sokulur ve cam kenardan kurtarılır. İki uyarı vardır. Birincisi ısıtmalı aynalarda camın arkasında iki ince tel bulunur; cam çıkar çıkmaz çekilmemeli, önce tellerin uçları ayrılmalıdır — çekilen tel folyodan kopar ve o cam artık ısıtmasızdır. İkincisi cam kırılırsa dağılan parçalar motor ve dişli boşluğuna dolar; bu yüzden söküm sırasında aynanın altına bir bez serilir. Ayna camı takılırken avuç içiyle ve merkezden bastırılır, kenarından zorlanmaz; tek noktadan bastırmak camı çatlatır."
+    },
+    {
+      "id": 7,
+      "instruction": "İş bitti. Müşteriye teslim ediyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kapi-ic-dosemesi",
+        "question": "Isıtmalı yüzeyler için müşteriye ne söylenir?",
+        "options": [
+          { "label": "Buz ve buğu kazıyıcıyla ya da sert bezle temizlenmez, iç yüzey yalnız şerit YÖNÜNDE ve yumuşak bezle silinir, cama vantuz ya da yapışkanlı bir şey şeritlerin üzerine takılmaz", "verdict": "bakim-kurali", "correct": true, "explain": "Isıtmalı camın en sık bozulma sebebi arıza değil, kullanımdır — ve bu bilgi verilmezse aynı araç birkaç ay sonra aynı şikâyetle geri gelir. Dört kural söylenir. Birincisi kazımadır: iç yüzeydeki şeritler camın üstündedir, camın içinde değil; metal bir kazıyıcı, tırnak ya da sert fırça şeridi keser. Buz dıştan çözülür, ısıtma zaten bunun içindir. İkincisi silme yönüdür: iç yüzey silinecekse bez şeritlerin uzunluğu boyunca hareket ettirilir, dik olarak değil — dik silme şeritleri enine zorlar ve zamanla ince kopuklar üretir. Üçüncüsü yapıştırılan şeylerdir: vantuzlu telefon tutucusu, güneşlik ya da etiket şeritlerin üzerine gelirse, söküldüğünde şeridi de kaldırır. Dördüncüsü bagaj yüküdür — arka camın iç yüzeyine dayanan bir eşya, araç sallandıkça şeridi aşındırır ve bu, tek bir çizginin ısınmamasının en sık sebebidir. Bir de dürüstlük notu: onarım boyasıyla yapılan bir tamir çalışır ama fabrika şeridi kadar dayanıklı değildir; müşteriye bunun bir onarım olduğu söylenir." },
+          { "label": "Özel bir bakım gerekmez", "verdict": "gereksiz", "explain": "Bozulmaların çoğu kullanımdan gelir; söylenmezse iş geri döner." },
+          { "label": "Yalnız camın dışı temizlenir, içi hiç silinmez", "verdict": "hic-silme", "explain": "İç yüzey silinebilir, kural yön ve bez cinsidir." },
+          { "label": "Isıtma az kullanılmalıdır", "verdict": "az-kullan", "explain": "Isıtma kullanılmak için vardır; sorun kullanımı değil, mekanik zarardır." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Aşama 2 burada bitiyor. Aşama 3 aynı camın dışına geçiyor: silecek ve cam yıkama."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Arka camda yalnız bir yatay bölge buğulu kalıyor. Ne anlaşılır?",
+        "a": "paralel-direnc",
+        "options": [
+          { "verdict": "paralel-direnc", "label": "O şerit kopmuştur; şeritler paralel bağlı olduğu için diğerleri çalışmaya devam eder", "explain": "Her yatay şerit camın yüzeyine baskıyla oluşturulmuş bir dirençtir ve iki dikey bara arasına paralel bağlanır. Bu yüzden tek kopuk yalnız kendi hattını devre dışı bırakır ve buğulu kalan çizgi doğrudan arızalı şeridi işaret eder. Hiçbir şerit ısınmıyorsa arıza ortak noktalardadır: besleme, düğme, röle, sigorta ya da bara uçları." },
+          { "verdict": "seri", "label": "Şeritler seri bağlıdır", "explain": "Seri olsaydı tek kopuk tüm camı durdururdu." },
+          { "verdict": "gorsel", "label": "Şeritler görseldir", "explain": "Her biri akım taşır." },
+          { "verdict": "tek-tel", "label": "Cam içinde tek tel vardır", "explain": "Çok sayıda paralel şerit vardır." }
+        ]
+      },
+      {
+        "q": "Ayna ısıtması çalışmıyor ama arka cam ısıtması sorunsuz. Ne kanıtlanmıştır?",
+        "a": "ayni-dugme-ayri-devre",
+        "options": [
+          { "verdict": "ayni-dugme-ayri-devre", "label": "Düğme, röle, sigorta ve besleme sağlamdır; arıza aynaya giden hatta ya da ayna ısıtıcısındadır", "explain": "İki tüketici genellikle aynı düğmeden beslenir ama ayrı hatlarla dağılır. Geriye körükten geçen tel, ayna soketi ve aynanın arkasındaki dirençli folyo kalır. Sık bir sebep, ayna camının ısıtmasız bir yedek parçayla değiştirilmiş olmasıdır — bu bir arıza değil, yanlış parçadır. İkinci sık sebep folyo uçlarının cam sökülürken kopmasıdır." },
+          { "verdict": "ayni-devre", "label": "Aynı devredir, ikisi de çalışmalı", "explain": "Düğme ortak, dağıtım ayrıdır." },
+          { "verdict": "ilgisiz", "label": "İlgisizdirler", "explain": "Arka cam iyi bir referanstır." },
+          { "verdict": "motor-devresi", "label": "Ayna motoruyla aynı devredendir", "explain": "Isıtma ayrı devredir." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 4'teki 11,9 V ve 0,2 V SENARYO okumalarıdır; istenen FARKTIR (11,7 V) ve ders bir şerit direnci ya da normal gerilim değeri vermiyor. Kopuğun yeri, gerilimin sıçradığı noktadır.",
+    "sourceRequired": "Ayna ısıtıcısının direnç değeri, arka cam ısıtma devresinin akımı, sigorta amperi, onarım boyası ürünü ve kuruma süresi bilinçle VERİLMEDİ; hepsi araca ve ürüne özgüdür.",
+    "kapsam": "Cam değişimi ve yapıştırma cam işleri KAPSAM DIŞIDIR. Katlanır ayna motoru ve ayna içindeki kamera/sinyal modülleri metinde anıldı ama ayrı ders olarak işlenmiyor; kamera aşaması aracın kayıt sistemine ayrılmıştır ve ayna kamerası oraya girmiyor. Ayna ısıtıcı folyosunun onarımı yapılmaz, cam değişir.",
+    "reviewedByMechanic": false
+  }
+}

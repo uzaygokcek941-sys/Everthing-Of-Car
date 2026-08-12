@@ -1,0 +1,399 @@
+{
+  "area": "motor-mekanik",
+  "title": "Motor ve Mekanik",
+  "goal": "Aleti doğru tutan çıraktan, parçaya bakıp motorun ne dediğini anlayan ustaya.",
+  "framework": {
+    "meb": "Motorlu Araçlar Teknolojisi — Araç Teknolojisi Atölyesi (9. sınıf) öğrenme birimleri",
+    "myk": "11UY0021-4/B1 Araç Üzerinde Periyodik Bakım, Arıza Tespit ve Onarım İşlemleri",
+    "note": "Aşama sırası MEB programının kendi sırasıdır; uydurulmadı. Bkz. docs/MUFREDAT.md"
+  },
+  "ustalikTanimi": [
+    "Sökmek çıraklıktır: sıra ve tork bilgisiyle herkes söker.",
+    "Ustalık teşhistir: sökülen parçaya bakıp arızanın nerede olduğunu söylemektir.",
+    "Bu yüzden her aşama sökme ile başlar, teşhis ile biter. Teşhissiz aşama tamamlanmış sayılmaz."
+  ],
+  "stages": [
+    {
+      "no": 0,
+      "title": "Atölye, güvenlik ve aracı emniyete alma",
+      "why": "Yanlış sehpalanan araç öldürür. Program da buradan başlıyor.",
+      "mebUnit": "İş Sağlığı ve Güvenliği",
+      "procedures": [
+        {
+          "id": "temel.kkd-ve-atolye",
+          "title": "Kişisel koruyucu donanım ve çalışma alanı",
+          "status": "yazildi",
+          "teaches": [
+            "kkd",
+            "yangin",
+            "acil-durum"
+          ]
+        },
+        {
+          "id": "temel.kaldirma-sehpalama",
+          "title": "Aracı kaldırma ve sehpaya alma",
+          "status": "yazildi",
+          "teaches": [
+            "kaldirma-noktalari",
+            "sehpa",
+            "aku-eksi-kutup"
+          ]
+        }
+      ],
+      "gate": "Aracı doğru noktadan kaldırıp sehpaya almadan hiçbir motor aşaması açılmaz.",
+      "ustalikIsareti": "Kaldırma noktasını araca bakarak bulur, kılavuza bakmadan yanlış yerden kaldırmaz."
+    },
+    {
+      "no": 1,
+      "title": "Alet takımları",
+      "why": "Yanlış alet parçayı bozar. Buji lokması ile normal lokmanın farkını bilmeyen porseleni kırar.",
+      "mebUnit": "Temel Servis Ekipmanları",
+      "procedures": [
+        {
+          "id": "temel.el-aletleri",
+          "title": "Anahtar, lokma, cırcır",
+          "status": "yazildi",
+          "teaches": [
+            "anahtar-tipleri",
+            "lokma-secimi",
+            "uzatma-ve-mafsal"
+          ]
+        },
+        {
+          "id": "temel.olcu-aletleri",
+          "title": "Kumpas, mikrometre, sentil",
+          "status": "yazildi",
+          "teaches": [
+            "olcme",
+            "tolerans-okuma"
+          ],
+          "kapsamNotu": "Verniyer aritmetiği şıklarla öğretiliyor. Skalayı ekranda çizip okutmak read-scale etkileşimini gerektirir; 3B ölçü aleti modeli gelene kadar bekliyor."
+        },
+        {
+          "id": "temel.tork-anahtari",
+          "title": "Tork anahtarı: ayar, kullanım, saklama",
+          "status": "yazildi",
+          "teaches": [
+            "tork-kavrami",
+            "klik-noktasi",
+            "anti-seize-etkisi"
+          ]
+        }
+      ],
+      "gate": "Verilen işe doğru aleti seçer; yanlış alet seçimi aşamayı bitirmez.",
+      "ustalikIsareti": "Aleti işe göre değil, parçanın malzemesine ve erişimine göre seçer."
+    },
+    {
+      "no": 2,
+      "title": "Temel mekanik işlemler",
+      "why": "Cıvata sökmek işin yarısı. Diş sıyırmak işin sonu.",
+      "mebUnit": "Temel Mekanik İşlemler",
+      "procedures": [
+        {
+          "id": "temel.civata-sokme-takma",
+          "title": "Cıvata sökme ve takma",
+          "status": "yazildi",
+          "teaches": [
+            "sokme-yonu",
+            "capraz-sikma-sirasi",
+            "elle-baslatma"
+          ]
+        },
+        {
+          "id": "temel.sikismis-civata",
+          "title": "Sıkışmış ve turlamış cıvata",
+          "status": "yazildi",
+          "teaches": [
+            "pas-sokucu",
+            "isi",
+            "ekstraktor"
+          ]
+        },
+        {
+          "id": "temel.dis-acma",
+          "title": "Kılavuz ve pafta ile diş açma, helicoil",
+          "status": "yazildi",
+          "teaches": [
+            "dis-onarimi"
+          ]
+        }
+      ],
+      "gate": "Cıvatayı elle başlatmadan anahtara geçmez; çapraz sıkma sırasını uygular.",
+      "ustalikIsareti": "Cıvata dönmüyorsa zorlamaz — neden dönmediğini teşhis eder."
+    },
+    {
+      "no": 3,
+      "title": "Motoru tanı",
+      "why": "Parça değiştirmeden önce motorun nasıl çalıştığını bilmek gerekir.",
+      "mebUnit": "Motor Terimleri ve Motoru Senteye Getirme",
+      "procedures": [
+        {
+          "id": "motor.terimler-ve-cevrim",
+          "title": "Dört zamanlı çevrim, ölü noktalar, terimler",
+          "status": "yazildi",
+          "teaches": [
+            "cevrim",
+            "ust-olu-nokta",
+            "sikistirma-orani"
+          ],
+          "kapsamNotu": "Motor kesiti modeli yok; piston ve supap hareketi henüz animasyonlu değil."
+        },
+        {
+          "id": "motor.senteye-getirme",
+          "title": "Motoru senteye getirme",
+          "status": "yazildi",
+          "teaches": [
+            "sente-isareti",
+            "krank-cevirme"
+          ],
+          "kapsamNotu": "Krank ve kam kasnağı işaretleri model bekliyor."
+        }
+      ],
+      "gate": "Motorun hangi zamanda olduğunu işaretlerden okur.",
+      "ustalikIsareti": "Sesten ve davranıştan hangi zamanda sorun olduğunu tahmin eder."
+    },
+    {
+      "no": 4,
+      "title": "Periyodik bakım",
+      "why": "Ustanın ekmek parası burada. MYK B1 biriminin çekirdeği de bu.",
+      "mebUnit": "Motor Donanımları / periyodik bakım işleri",
+      "mykUnit": "11UY0021-4/B1",
+      "procedures": [
+        {
+          "id": "motor.buji-degisimi",
+          "title": "Buji değişimi",
+          "status": "yazildi",
+          "teaches": [
+            "tork",
+            "tirnak-boslugu",
+            "elektrot-teshisi"
+          ]
+        },
+        {
+          "id": "motor.yag-ve-filtre",
+          "title": "Motor yağı ve yağ filtresi değişimi",
+          "status": "yazildi",
+          "teaches": [
+            "yag-secimi",
+            "conta",
+            "seviye-kontrolu"
+          ],
+          "kapsamNotu": "Aracın altı ve blok modeli bekliyor; tapa ve filtre dönüşü henüz animasyonlu değil."
+        },
+        {
+          "id": "motor.hava-filtresi",
+          "title": "Hava filtresi değişimi ve kirlilik okuma",
+          "status": "yazildi",
+          "teaches": [
+            "filtre-teshisi"
+          ],
+          "kapsamNotu": "Hava filtre kutusu modeli bekliyor."
+        }
+      ],
+      "gate": "Her bakım işini tork değerine uyarak bitirir ve söktüğü parçadan teşhis çıkarır.",
+      "ustalikIsareti": "Çıkan yağın rengi ve kokusundan motorun durumunu söyler."
+    },
+    {
+      "no": 5,
+      "title": "Soğutma ve yağlama sistemleri",
+      "why": "Motoru öldüren iki şey: susuz kalmak ve yağsız kalmak.",
+      "mebUnit": "Motor Donanımları",
+      "procedures": [
+        {
+          "id": "motor.sogutma-bakim",
+          "title": "Soğutma sistemi kontrolü ve hava alma",
+          "status": "yazildi",
+          "teaches": [
+            "antifriz",
+            "hava-kilidi",
+            "basinc-testi"
+          ],
+          "kapsamNotu": "Radyatör kapağı, genleşme deposu ve üst hortum modeli bekliyor. Basınç testi cihazla değil, belirti okumayla öğretiliyor."
+        },
+        {
+          "id": "motor.termostat",
+          "title": "Termostat değişimi",
+          "status": "yazildi",
+          "teaches": [
+            "acilma-sicakligi"
+          ],
+          "kapsamNotu": "Termostat, kapağı ve radyatör alt tapası modeli bekliyor; cıvata sökme animasyonlu değil."
+        },
+        {
+          "id": "motor.yag-basinci",
+          "title": "Yağ basıncı ölçümü",
+          "status": "yazildi",
+          "teaches": [
+            "basinc-okuma"
+          ],
+          "kapsamNotu": "read-gauge yazılmadı: kadranlı manometre çizilmeden measure ile aynı davranırdı. Okuma koşulu ve yorumu inspect-and-choose ile veriliyor; kadran modeli gelince yeniden değerlendirilir."
+        }
+      ],
+      "gate": "Isınma şikâyetinde radyatörden mi termostattan mı olduğunu ayırır.",
+      "ustalikIsareti": "Hortumu elleyerek termostatın açılıp açılmadığını anlar."
+    },
+    {
+      "no": 6,
+      "title": "Sabit motor parçaları",
+      "why": "Silindir kapağı açılınca geri dönüş yok; sıra ve tork burada hayati.",
+      "mebUnit": "Sabit Motor Parçaları",
+      "procedures": [
+        {
+          "id": "motor.manifolt",
+          "title": "Emme ve egzoz manifoltu değişimi",
+          "status": "yazildi",
+          "teaches": [
+            "conta",
+            "sikma-sirasi"
+          ],
+          "kapsamNotu": "Egzoz conta kaçağının ısıyla kaybolan sesi, ısı görmüş cıvatanın kırılmadan sökülmesi ve merkezden dışa kademeli sıkma. Emme kaçağı araması bilerek yanıcı sprey yerine duman/sabunlu su ile öğretiliyor."
+        },
+        {
+          "id": "motor.silindir-kapagi",
+          "title": "Silindir kapağı sökme ve takma",
+          "status": "yazildi",
+          "teaches": [
+            "kapak-civata-sirasi",
+            "aci-torku",
+            "gonye-kontrolu"
+          ],
+          "kapsamNotu": "Sökme sırasının sıkma sırasının tersi olması, gönye+sentil ile çok yönlü düzlük kontrolü ve rotate-to-angle ile açı torku. Açı değeri (90) senaryo verisidir, araca ait bir iddia değildir."
+        },
+        {
+          "id": "motor.kapak-contasi",
+          "title": "Silindir kapak contası teşhisi ve değişimi",
+          "status": "yazildi",
+          "teaches": [
+            "su-yag-karismasi",
+            "kompresyon-kacagi"
+          ],
+          "kapsamNotu": "Teşhis ve kanıt dersi: depoda kabarcık, emülsiyon + seviye artışı, tek temiz buji, yanma gazı testi. Sökme-takma silindir kapağı dersinde işlendiği için tekrarlanmadı; asıl vurgu contayı patlatan sebebin bulunması."
+        }
+      ],
+      "gate": "Kapak cıvatalarını numara sırasına ve açı torkuna göre sıkar.",
+      "ustalikIsareti": "Egzoz dumanından ve yağ kapağından conta patlağını teşhis eder."
+    },
+    {
+      "no": 7,
+      "title": "Supap ve zaman ayarı",
+      "why": "Triger kayarsa motor kendini yer. Uygulamanın en pahalı hatası burada öğretilir.",
+      "mebUnit": "Supap Sistemleri",
+      "procedures": [
+        {
+          "id": "motor.supap-ayari",
+          "title": "Supap boşluğu ölçümü ve ayarı",
+          "status": "yazildi",
+          "teaches": [
+            "sentil-kullanimi",
+            "sicak-soguk-ayar"
+          ],
+          "kapsamNotu": "Ölçüm yalnız kam lobu taban dairesindeyken; sentil hissi; sıkı ayarın supabı yaktığı, boş ayarın yalnız ses yaptığı. Boşluk değeri (0,20-0,30 mm) senaryo verisidir, adımın kendisi bunu öğrenciye söylüyor."
+        },
+        {
+          "id": "motor.triger-degisimi",
+          "title": "Triger kayışı / zinciri değişimi",
+          "status": "yazildi",
+          "teaches": [
+            "isaret-hizalama",
+            "gergi",
+            "yanlis-dis-sonucu"
+          ],
+          "kapsamNotu": "Kilometre ile süreden hangisi önce dolarsa o; sökmeden önce işaret hizalama; montajdan sonra elle iki tam tur ve tekrar kontrol; bir dişin girişimli motordaki bedeli."
+        },
+        {
+          "id": "motor.kam-mili",
+          "title": "Kam mili kontrolü",
+          "status": "yazildi",
+          "teaches": [
+            "asinma-olcumu"
+          ],
+          "kapsamNotu": "Kardeş loblarla karşılaştırma — kılavuzdan bağımsız kanıt. Ölçüm adımı üretici sınırı değil, iki okumanın farkı. Sebep yağlamada aranıyor, eşleşen itici de değişiyor."
+        }
+      ],
+      "gate": "İşaretleri hizalamadan kayışı takamaz; bir diş kayma senaryosunun sonucunu görür.",
+      "ustalikIsareti": "Tıkırtı sesinden supap boşluğunun açıldığını anlar."
+    },
+    {
+      "no": 8,
+      "title": "Piston, biyel, krank",
+      "why": "Motorun içi. Buraya gelen usta, motoru komple açıp kapatabilir.",
+      "mebUnit": "Piston-Biyel Krank Mekanizması",
+      "procedures": [
+        {
+          "id": "motor.piston-biyel",
+          "title": "Piston-biyel sökme, segman ve gömlek ölçümü",
+          "status": "yazildi",
+          "teaches": [
+            "segman-acikligi",
+            "silindir-olcumu"
+          ],
+          "kapsamNotu": "Silindir aşınması üst-alt ölçüm farkıyla (kılavuzdan bağımsız kanıt); piston/biyel/kapak işaretleme ve yön; segman ağızlarının dağıtılması; biyel cıvatasının tek kullanımlık olması; her biyelden sonra elle çevirme."
+        },
+        {
+          "id": "motor.krank-yatak",
+          "title": "Krank mili ve yatak kontrolü",
+          "status": "yazildi",
+          "teaches": [
+            "plastigage",
+            "yatak-teshisi"
+          ],
+          "kapsamNotu": "Vuruntuyu yer-devir-yük üçlüsüyle tanıma; muylu ovalliği iki dik doğrultunun farkıyla (kılavuzsuz kanıt); yatak kabuğundaki izi okuma; plastik telle boşluk; sırta yağ sürülmemesinin ısı gerekçesi; ilk çalıştırmada önce yağ basıncı."
+        },
+        {
+          "id": "motor.volan-kece",
+          "title": "Volan ve arka keçe",
+          "status": "yazildi",
+          "teaches": [
+            "kacak-teshisi"
+          ],
+          "kapsamNotu": "İki komşu keçeyi sıvı cinsinden ayırma; keçeden önce karter havalandırması (asıl sebep); volan yüzeyindeki ısı izi; keçe dudağının yönü; volan cıvatasının tek kullanımlık olması ve çapraz sıkma."
+        }
+      ],
+      "gate": "Ölçü aletiyle toleransı okur ve parçanın kullanılabilir olup olmadığına karar verir.",
+      "ustalikIsareti": "Yatak yüzeyine bakıp yağlama mı yoksa aşırı yük mü olduğunu ayırır."
+    },
+    {
+      "no": 9,
+      "title": "Arıza teşhis — ustalık sınavı",
+      "why": "Buraya kadar parça değiştirdi. Burada arızayı bulacak.",
+      "mykUnit": "11UY0021-4/B1 — arıza tespit",
+      "procedures": [
+        {
+          "id": "motor.kompresyon-testi",
+          "title": "Kompresyon ve silindir kaçak testi",
+          "status": "yazildi",
+          "teaches": [
+            "kompresyon-okuma",
+            "kacak-yorumlama"
+          ],
+          "kapsamNotu": "Doğru test koşulları, silindirler arası farkın kanıt olarak kullanılması, yaş test ile segman-supap ayrımı, kaçak testinde dört dinleme adresi ve testin sebebi değil yeri söylediği. read-gauge etiketi kaldırıldı: fark okuması mevcut measure tipiyle karşılanıyor."
+        },
+        {
+          "id": "motor.calismama-teshisi",
+          "title": "Çalışmayan motor: yakıt mı, ateşleme mi, kompresyon mu?",
+          "status": "yazildi",
+          "teaches": [
+            "eleme-yontemi"
+          ],
+          "kapsamNotu": "Marş dönüyor mu ilk ayrımı, marş sesinden kompresyon kaybını duymak, krankı çevirip kam işaretiyle kopan trigeri doğrulamak, girişimli motorda marş vermeyi durdurmak, kayışı kesen sebebi bulmak ve ilk çalıştırmadan önce kompresyon testi."
+        },
+        {
+          "id": "motor.performans-kaybi",
+          "title": "Güç kaybı ve sarsıntı teşhisi",
+          "status": "yazildi",
+          "teaches": [
+            "semptom-neden-eslestirme"
+          ],
+          "kapsamNotu": "Belirtiyi koşullarıyla tarif ettirmek, rölanti sarsıntısından tek silindir teklemesini okumak, kompresyon farkıyla mekanik dalı elemek, yer değiştirme testiyle parçayı kanıtla suçlamak, sarsıntısız yük kaybında nefes yolu kısıtlaması ve onarımı belirtinin kendi koşulunda doğrulamak."
+        }
+      ],
+      "gate": "Verilen semptomdan doğru sistemi eler; parça değiştirerek deneme yapmaz.",
+      "ustalikIsareti": "Parçayı değiştirmeden önce ölçer. Ustayı çıraktan ayıran tek cümle budur."
+    }
+  ],
+  "_notes": {
+    "status": "yazildi = prosedür dosyası var ve oynanabilir. planlandi = yalnız başlık; uygulamada kilitli görünmeli, açılmamalı.",
+    "needsNewInteraction": "Bu prosedürler mevcut etkileşim dilbilgisiyle karşılanamıyor, kod işi gerektirir. Diğerlerinin hepsi yalnız JSON yazmakla açılır.",
+    "kapsam": "Aşama 6-8 gerçek motor sökümüdür ve 3D modelde iç parçalar gerektirir. Aşama 0-4 dış motor modeliyle yapılabilir."
+  }
+}

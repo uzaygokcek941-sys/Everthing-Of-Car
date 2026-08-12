@@ -1,0 +1,177 @@
+{
+  "id": "direksiyon.kutu-kacak",
+  "area": "direksiyon",
+  "stage": 2,
+  "title": "Kutu Sızıntısı ve Körük Kontrolü",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 35,
+  "prerequisites": ["direksiyon.kutu-yapisi"],
+  "learningGoals": [
+    "Sızıntının kaynağını yağ izine bakarak bulmak",
+    "Körüğün neden hem koruma hem de teşhis aracı olduğunu bilmek",
+    "Seviye düşmesi ile görünür sızıntıyı birbirine bağlamak"
+  ],
+
+  "safety": [
+    { "rule": "Basınç altındaki bir kaçak elle aranmaz; karton veya kâğıt gezdirilir", "why": "İnce bir jet hâlindeki hidrolik sıvı deriyi delip dokuya girebilir ve acil cerrahi gerektirir", "blocksStart": true },
+    { "rule": "Araç sehpaya alınmadan altına girilmez", "why": "Bu kontrolün tamamı aracın altında yapılır", "blocksStart": true },
+    { "rule": "Sıcak motor bölgesinde ve egzoz yakınında çalışırken temas önlenir", "why": "Sızan sıvının sıcak yüzeye damlaması hem yanık hem yangın riskidir", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true },
+    { "id": "tool.kriko-sehpa", "label": "Kriko ve sehpa", "required": true },
+    { "id": "tool.temizlik-bezi", "label": "Temizlik bezi ve karton", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Müşteri 'altından yağ damlıyor' diyor. Aracın altında ıslaklık var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kremayer-kutusu",
+        "question": "İlk iş ne?",
+        "options": [
+          { "label": "Bölge temizlenir, araç bir süre çalıştırılıp kullanılır ve sızıntının yeniden başladığı EN YÜKSEK nokta bulunur", "verdict": "temizle-ve-izle", "correct": true, "explain": "Kirli ve yağlı bir bölgede sızıntının kaynağını bulmak imkânsıza yakındır, çünkü sıvı yerçekimiyle aşağı akar ve yayılır: gözle görülen en ıslak yer neredeyse hiçbir zaman sızıntının çıktığı yer değildir. Doğru yöntem iki adımlıdır. Önce bölge temizlenir — bez, uygun bir temizleyici, gerekiyorsa basınçlı hava. Sonra sisteme iş yaptırılır: araç çalıştırılır, direksiyon birkaç kez uçtan uca çevrilir ya da müşteri birkaç gün kullanır. Ardından temiz yüzeye yeniden bakılır ve şu soru sorulur: yağ izinin EN YÜKSEK noktası neresi? Sıvı yukarıdan aşağı aktığı için kaynak, ıslak bölgenin en üst ucundadır. Bu yöntem bütün sıvı kaçaklarında geçerlidir ve motor yağı dersinde de aynı ilke geçmişti. Aceleyle 'kutu akıtıyor' deyip pahalı bir parçayı suçlamak, çoğu zaman aslında akan bir hortum bağlantısını ya da bir kelepçeyi gözden kaçırmak demektir." },
+          { "label": "En ıslak yer neresi ise sızıntı oradadır", "verdict": "en-islak", "explain": "Sıvı aşağı akar; en ıslak yer genellikle kaynak değildir." },
+          { "label": "Kutu doğrudan değiştirilir", "verdict": "degistir", "explain": "Kaynak bulunmadan parça değişmez; sızıntı hortumdan da olabilir." },
+          { "label": "Üstüne sızdırmazlık maddesi sürülür", "verdict": "macun", "explain": "Kaynağı gizler; basınçlı devrede tutmaz." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Sıvı aşağı akar. Bu yüzden kaynak, ıslak bölgenin en üst ucundadır — her sıvı kaçağında aynı kural."
+    },
+    {
+      "id": 2,
+      "instruction": "İz temizlendi, araç kullanıldı ve yağ kutunun bir ucundan, körüğün olduğu bölgeden geliyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.koruk-sol",
+        "question": "Körüğün içinde yağ birikmiş olması ne anlatır?",
+        "options": [
+          { "label": "Kutunun o taraftaki keçesi sızdırıyordur; körük yağı bir süre içeride tutar ve şişer, bu yüzden sızıntı dışarıdan görünmeden önce körükte birikir", "verdict": "kece-sizdiriyor", "correct": true, "explain": "Körük, kremayer çubuğunun kutudan çıktığı bölgeyi saran esnek bir kılıftır. Kutunun içindeki yağ ya da hidrolik sıvı, çubuğun geçtiği yerdeki keçe tarafından tutulur. Keçe yaşlandığında, sertleştiğinde ya da çubuk yüzeyi çizildiğinde sıvı oradan sızmaya başlar — ama hemen yere damlamaz, çünkü körük onu içeride hapseder. Sonuç, körüğün içinde biriken ve zamanla körüğü şişiren bir sıvıdır. Bu yüzden körüğün elle sıkılması iyi bir kontroldür: içeride sıvı varsa körük dolgun ve ağır hissedilir, bazen çalkalantı bile duyulur. Bu bulgu erken teşhis için değerlidir; sızıntı yere damlamaya başlamadan önce yakalanır. İkinci ve önemli sonucu şudur: sızıntı yalnız bir yağ kaybı değildir. Körükteki sıvı basınç altında körüğü zorlar ve sonunda yırtar; yırtıldığı anda içeriye toz ve su girmeye başlar ve arıza, keçe arızasından çubuk ve yatak arızasına dönüşür. Yani erken müdahale edilen bir keçe sızıntısı ucuz, geciktirileni pahalıdır." },
+          { "label": "Normaldir, körükte her zaman yağ olur", "verdict": "normal", "explain": "Körüğün içi kuru olmalıdır; yağ birikmesi sızıntı işaretidir." },
+          { "label": "Körük yağlanmak için doldurulmuştur", "verdict": "yaglama", "explain": "Körük yağ haznesi değil, koruma kılıfıdır." },
+          { "label": "Yağ dışarıdan girmiştir", "verdict": "disaridan", "explain": "Sağlam körük dışarıdan sıvı almaz; kaynak içeridedir." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Körüğü elle sık: dolgun ve ağırsa içinde sıvı var demektir. Sızıntı yere damlamadan bulunur."
+    },
+    {
+      "id": 3,
+      "instruction": "Hidrolik deposunu iki hafta arayla ölçtün: ilk okuma 46 mm, ikinci okuma 39 mm (ikisi de aynı sıcaklıkta). Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.hidrolik-deposu",
+        "unit": "mm",
+        "acceptRange": [6.8, 7.2]
+      },
+      "camera": "direksiyon",
+      "hint": "46 eksi 39.",
+      "teachingNote": "7 mm'lik bu düşüş, önceki derste öğrenilen sıcaklık farkıyla açıklanamaz — iki okuma aynı koşulda alındı. Kapalı bir hidrolik devre sıvı tüketmez; seviye düşüyorsa sıvı bir yerden çıkıyordur. Bu, sızıntının en güvenilir kanıtıdır ve şu yüzden değerlidir: bazı sızıntılar hiç damlamaz. Sıcak yüzeye damlayan sıvı buharlaşır, hareket hâlindeki araçta sürüklenir ya da altta bir muhafazaya toplanır; yerde leke olmaması sızıntı olmadığı anlamına gelmez. Bu yüzden seviye takibi ile görsel kontrol birlikte yürütülür. Kaybın hangi hızda olduğu da bilgidir: iki haftada belirgin bir düşüş acil, aylarda görülen çok küçük bir düşüş takip edilecek bir bulgudur. Doğru seviye aralığı araca özgüdür ve bu ders bir değer vermiyor."
+    },
+    {
+      "id": 4,
+      "instruction": "Sızıntı arıyorsun ama motor bölgesinde birden çok aday var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.donus-hortumu",
+        "question": "Hidrolik devrede sızıntı sırasıyla nerelerde aranır?",
+        "options": [
+          { "label": "Hortum bağlantıları ve kelepçeler, hortum gövdeleri, pompa mili keçesi, depo ve kapağı, kutunun kendi keçeleri", "verdict": "baglanti-hortum-pompa-kutu", "correct": true, "explain": "Sıralama ucuzdan pahalıya ve kolaydan zora doğru kurulur, çünkü bu hem zamanı hem müşterinin parasını korur. İlk bakılacak yer bağlantılardır: rakorlar, kelepçeler ve conta yüzeyleri. Titreşim ve ısı çevrimleri bunları zamanla gevşetir ve bir bağlantıyı sıkmak ya da bir contayı yenilemek en ucuz çözümdür. İkinci sırada hortum gövdeleri gelir — özellikle basınç hortumu yaşlandığında yüzeyinde çatlaklar ve kabarmalar oluşur; dönüş hortumu düşük basınçlı olduğu için genelde daha uzun ömürlüdür ama o da sertleşir. Üçüncü sırada pompanın mil keçesi vardır: sızıntı buradaysa yağ kasnak bölgesine gelir ve kayışa bulaşır; kayışa bulaşan sıvı kaymaya ve ıslık sesine yol açar, yani ayrı bir belirti üretir. Dördüncüsü depo ve kapağıdır — çatlak bir depo ya da tıkalı bir havalandırma, taşma biçiminde bir 'sızıntı' üretebilir. En son kutunun kendi keçeleri gelir; en pahalı ve en zahmetli olan burasıdır, o yüzden en son doğrulanır. Bu sıra atlandığında olan şey bellidir: sağlam bir kutu değiştirilir ve iki hafta sonra aynı ıslaklık geri gelir." },
+          { "label": "Doğrudan kutunun keçelerinden başlanır", "verdict": "kutudan-basla", "explain": "En pahalı ve en zor olan en son doğrulanır." },
+          { "label": "Yalnız depoya bakılır", "verdict": "depo", "explain": "Depo adaylardan yalnız biri." },
+          { "label": "Sıra önemli değil, hepsi aynı anda değiştirilir", "verdict": "hepsi", "explain": "Gereksiz maliyet; kaynak tespit edilerek gidilir." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Pompa keçesi sızarsa yağ kayışa bulaşır ve ıslık sesi başlar. Bir sızıntı, kendini başka bir belirtiyle haber verebilir."
+    },
+    {
+      "id": 5,
+      "instruction": "Kontrol sırasında sağ körüğün yırtık olduğunu gördün. Sol körük sağlam.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.koruk-sag",
+        "question": "Yalnız yırtık olanı mı değiştirirsin?",
+        "options": [
+          { "label": "Körük değişirken içerisi görülür ve temizlenir; iki körük aynı yaşta ve aynı koşulda olduğu için diğeri de değerlendirilir, ama karar durumuna göre verilir", "verdict": "ice-bak-digerini-degerlendir", "correct": true, "explain": "Körük değişimi bir kapak değiştirme işi değil, bir muayene fırsatıdır. Körük sökülünce içeri bakılır ve üç şey aranır: yağ kalmış mı, içeride toz ve su karışımı var mı, çubuk yüzeyinde çizik ya da pas var mı. Bu bakış kararı belirler — körük yeni yırtılmışsa temizlik, yağlama ve yeni körük yeterlidir; uzun süredir yırtıksa içeride aşınma başlamıştır ve yalnız körüğü değiştirmek arızayı yeni bir kılıfın altına saklamak olur. İkinci soru diğer körüktür. İki körük aynı gün takılmış, aynı yolları görmüş ve aynı yaşlanmayı yaşamıştır; bu yüzden biri yırtıldığında diğerinin de ömrünün sonuna yaklaştığı varsayılabilir. Ama bu bir kural değil bir şüphedir: sağlam körük elle yoklanır, esnekliği ve kıvrımları kontrol edilir, sertleşmiş ve çatlamaya başlamışsa değişir, sağlamsa bırakılır. Burada dürüst yaklaşım şudur — işçiliğin büyük kısmı zaten yapılmış olduğu için ikinci körüğü şimdi değiştirmenin maliyeti düşüktür ve bu müşteriye açıkça söylenir; karar bilgiyle verilir, korkutarak değil." },
+          { "label": "Yalnız yırtık olan değiştirilir, diğerine bakılmaz", "verdict": "sadece-yirtik", "explain": "Aynı yaştaki diğer körük de değerlendirilir." },
+          { "label": "İkisi de sorgusuz değiştirilir", "verdict": "ikisi-de", "explain": "Sağlamsa gereksiz maliyet olur; elle yoklanıp karar verilir." },
+          { "label": "Yırtık körük bantlanır", "verdict": "bant", "explain": "Toz ve suyu tutmaz; koruma işlevi geri gelmez." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Körük söküldüğünde içeriye bakılır. Bakmadan kapatmak, arızayı yeni bir kılıfın altına saklamaktır."
+    },
+    {
+      "id": 6,
+      "instruction": "Müşteri 'sızıyorsa arada bir sıvı eklerim, olur biter' diyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.hidrolik-deposu",
+        "question": "Bu yaklaşımın riski ne?",
+        "options": [
+          { "label": "Seviye bir kez fark edilmeden kritik noktanın altına düşerse pompa havayla çalışır ve kısa sürede zarar görür; ayrıca sızan sıvı kayışa ve sıcak yüzeylere damlar", "verdict": "pompa-ve-yangin", "correct": true, "explain": "Sıvı ekleyerek idare etmenin üç ayrı riski vardır ve üçü de sızıntının kendisinden daha pahalıdır. Birincisi pompadır: hidrolik pompa sıvı içinde çalışacak biçimde tasarlanmıştır ve sıvı yerine hava emmeye başladığında hem yağlaması hem soğuması kesilir. Bu, ses ve titreşimle başlar ve kısa sürede kalıcı hasara döner — üstelik parçalanan pompadan çıkan metal parçacıkları devre boyunca dolaşıp valfi ve kutuyu da bitirebilir. Sürücü seviyeyi her zaman fark edemez; bir tatilde, bir uzun yolda ya da yoğun bir haftada gözden kaçar ve tam gerektiği anda destek kaybolur. İkincisi yangın riskidir: sızan sıvı egzoz ya da turbo gibi çok sıcak yüzeylere damlarsa tutuşabilir. Üçüncüsü kayıştır: pompa bölgesinden sızan sıvı kayışa bulaşırsa kayış kayar; bu yalnız direksiyonu değil, aynı kayışın döndürdüğü şarj ve soğutma sistemini de etkiler. Ayrıca yere damlayan hidrolik sıvı çevre kirliliğidir ve atık olarak toplanması gerekir. Doğru cevap sızıntının kaynağını bulup gidermektir; ekleme yalnız araç servise gelene kadar geçerli bir geçici önlemdir." },
+          { "label": "Hiçbir riski yok, seviye korunduğu sürece sorun olmaz", "verdict": "risksiz", "explain": "Fark edilmeyen bir düşüş pompayı bitirir; ayrıca yangın ve kayış riski var." },
+          { "label": "Yalnız maliyet sorunu, teknik risk yok", "verdict": "maliyet", "explain": "Pompa hasarı, kayış ve yangın teknik risklerdir." },
+          { "label": "Su eklenerek de idare edilebilir", "verdict": "su", "explain": "Devreye yalnız üreticinin belirttiği sıvı konur; su korozyon ve arıza üretir." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Ekleme geçici bir önlemdir, çözüm değil. Sızıntının bedeli sızan sıvı değil, susuz kalan pompadır."
+    },
+    {
+      "id": 7,
+      "instruction": "Onarım bitti.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kremayer-kutusu",
+        "question": "İş nasıl kapanır?",
+        "options": [
+          { "label": "Devre üreticinin belirttiği sıvıyla doldurulup havası alınır, bölge temizlenip kurulanır ve bir süre sonra tekrar bakılarak sızıntının bittiği görsel olarak doğrulanır", "verdict": "doldur-temizle-dogrula", "correct": true, "explain": "Sızıntı onarımının doğrulaması gözle yapılır ve bunun tek koşulu yüzeyin tertemiz olmasıdır. Bu yüzden iş bittiğinde bölge yağdan arındırılır ve kurulanır; aksi hâlde eski yağ izi yenisiyle karışır ve bir hafta sonra 'hâlâ akıyor mu' sorusu yanıtsız kalır. Doldurma sırasında iki kural vardır: yalnız üreticinin belirttiği sıvı kullanılır — yanlış sıvı keçeleri şişirir ya da sertleştirir ve yeni bir sızıntı üretir — ve sistemin havası alınır, çünkü hava kalırsa pompa ses yapar ve destek düzensizleşir. Havanın alınması ayrı bir işlemdir ve hidrolik aşamasında ayrıca öğrenilecek. Ardından direksiyon uçtan uca birkaç kez çevrilir, seviye tekrar kontrol edilir ve araç bir süre kullanıldıktan sonra bölgeye yeniden bakılır. Son olarak sökülen bağlantılar tork değerine göre sıkılmış olmalı ve kutu ya da rot parçası hareket ettiyse ön düzen ayarı yapılmalıdır. Sızıntı işi 'yağ aktı, keçeyi değiştirdim' kadar basit görünür ama kapanışı bu adımlarla olur." },
+          { "label": "Sıvı eklenir ve araç teslim edilir", "verdict": "ekle-teslim", "explain": "Hava alınmadan ve doğrulama yapılmadan kapanmaz." },
+          { "label": "Bölge temizlenmez ki eski iz kalsın", "verdict": "temizleme", "explain": "Kirli yüzeyde yeni sızıntı görülemez; doğrulama imkânsızlaşır." },
+          { "label": "Elde ne sıvı varsa konur", "verdict": "hangi-sivi", "explain": "Yanlış sıvı keçeleri bozar ve yeni sızıntı üretir." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Temiz yüzey olmadan doğrulama yapılamaz. Bu yüzden temizlik, işin son adımı değil doğrulamanın ön koşulu."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Sızıntının kaynağı nasıl bulunur?",
+        "a": "temizle-ve-izle",
+        "options": [
+          { "verdict": "temizle-ve-izle", "label": "Bölge temizlenir, sisteme iş yaptırılır ve yağ izinin en yüksek noktasına bakılır", "explain": "Sıvı yerçekimiyle aşağı akıp yayıldığı için en ıslak yer neredeyse hiçbir zaman kaynak değildir. Temiz yüzeyde yeniden oluşan izin en üst ucu kaynağı gösterir. Aceleyle 'kutu akıtıyor' demek, çoğu zaman akan bir hortum bağlantısını gözden kaçırmak olur." },
+          { "verdict": "en-islak", "label": "En ıslak yere bakılır", "explain": "Sıvı aşağı akar; en ıslak yer kaynak değildir." },
+          { "verdict": "degistir", "label": "Kutu doğrudan değiştirilir", "explain": "Kaynak bulunmadan parça değişmez." },
+          { "verdict": "macun", "label": "Sızdırmazlık maddesi sürülür", "explain": "Basınçlı devrede tutmaz." }
+        ]
+      },
+      {
+        "q": "Körüğün içinde yağ birikmiş olması ne anlatır?",
+        "a": "kece-sizdiriyor",
+        "options": [
+          { "verdict": "kece-sizdiriyor", "label": "Kutunun o taraftaki keçesi sızdırıyordur; körük sıvıyı bir süre içeride tutar", "explain": "Çubuğun kutudan çıktığı yerdeki keçe yaşlandığında ya da çubuk yüzeyi çizildiğinde sıvı sızar ama körük onu hapseder; körük dolgun ve ağır hissedilir. Bu erken bir teşhis fırsatıdır. Biriken sıvı sonunda körüğü yırtar ve o anda arıza keçe arızasından çubuk ve yatak arızasına döner — erken müdahale ucuz, gecikmiş olan pahalıdır." },
+          { "verdict": "normal", "label": "Normaldir", "explain": "Körüğün içi kuru olmalıdır." },
+          { "verdict": "yaglama", "label": "Yağlama için doldurulmuştur", "explain": "Körük yağ haznesi değildir." },
+          { "verdict": "disaridan", "label": "Yağ dışarıdan girmiştir", "explain": "Sağlam körük dışarıdan sıvı almaz." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 46 mm ve 39 mm SENARYO okumalarıdır ve ikisi de aynı sıcaklıkta alındığı belirtilmiştir; istenen FARKTIR (7 mm) ve gösterilen şey kapalı devrenin sıvı tüketmediğidir. Doğru seviye aralığı verilmiyor.",
+    "sourceRequired": "Hidrolik sıvı tipi, doğru seviye aralığı ve bağlantı sıkma torkları bilinçle VERİLMEDİ; araca ve üreticiye özgüdür. Sıvı tipi özellikle kritiktir — yanlış sıvı keçeleri bozar — ve künyesiz yazılmaz.",
+    "kapsam": "Havanın alınması bu ders değil, aşama 3'ün dersi (direksiyon.hidrolik-hava). Baskı ayarı bir sonraki ders. Mekanik (yardımsız) kutularda da aynı keçe ve körük mantığı geçerlidir; ders hidrolik üzerinden anlatıyor çünkü seviye takibi orada mümkün.",
+    "reviewedByMechanic": false
+  }
+}

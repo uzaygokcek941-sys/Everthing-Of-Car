@@ -1,0 +1,175 @@
+{
+  "id": "direksiyon.bosluk-olcumu",
+  "area": "direksiyon",
+  "stage": 1,
+  "title": "Direksiyon Boşluğunun Ölçülmesi",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 30,
+  "prerequisites": ["direksiyon.sistem-haritasi", "direksiyon.tipleri"],
+  "learningGoals": [
+    "Direksiyon boşluğunun ne olduğunu tam olarak tanımlamak",
+    "Ölçümün hangi koşullarda yapıldığını ve koşulun sonucu nasıl değiştirdiğini bilmek",
+    "Hissedilen boşluk ile ölçülen boşluğu ayırmak"
+  ],
+
+  "safety": [
+    { "rule": "Ölçüm sırasında tekerlek yakınındaki kişi elini lastik ile çamurluk arasına sokmaz", "why": "Simit beklenmedik anda döndüğünde tekerlek de döner; bu boşluk el sıkıştırmak için yeterlidir", "blocksStart": true },
+    { "rule": "Motor çalışır durumda ölçüm yapılacaksa vites boşta, el freni çekili ve tekerlekler takozlanmış olur", "why": "Yardımlı sistemlerde ölçüm motor çalışırken yapılır; hareket eden bir araçta ölçüm yapılmaz", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.cetvel", "label": "Cetvel veya şerit metre", "required": true },
+    { "id": "tool.tebesir", "label": "İşaretleme kalemi veya bant", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Ölçmeden önce neyi ölçtüğünü tanımla.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.direksiyon-simidi",
+        "question": "Direksiyon boşluğu nedir?",
+        "options": [
+          { "label": "Tekerlekler hiç hareket etmezken simidin bir uçtan diğer uca serbestçe dönebildiği miktar", "verdict": "serbest-hareket", "correct": true, "explain": "Direksiyon boşluğu, sürücünün simidi çevirmeye başladığı an ile tekerleğin gerçekten dönmeye başladığı an arasındaki ölü bölgedir. Ölçüm şöyle düşünülür: simit yavaşça sağa çevrilir ve tekerleğin kımıldadığı ilk nokta işaretlenir; sonra sola çevrilir ve yine tekerleğin kımıldadığı ilk nokta işaretlenir. İki işaret arasındaki mesafe boşluktur. Bu tanımın iki inceliği vardır. Birincisi: boşluk sağ ve sol hareketin TOPLAMIDIR, tek yönü değil — çünkü sürücünün hissettiği ölü bölge de toplamdır. İkincisi: her sistemde bir miktar boşluk normaldir ve sıfır boşluk hedeflenmez; dişliler arasında hiç boşluk bırakılmayan bir sistem ısınır, sıkışır ve çabuk aşınır. Yani soru 'boşluk var mı' değil, 'boşluk kabul edilen sınırın içinde mi'dir. O sınır araca özgüdür ve üreticinin belgesinden okunur; bu ders bir sayı vermiyor." },
+          { "label": "Simidin toplam kaç tur döndüğü", "verdict": "toplam-tur", "explain": "O direksiyon oranıyla ilgili ayrı bir ölçü; boşluk ölü bölgedir." },
+          { "label": "Tekerleklerin yerde oynayabildiği açı", "verdict": "tekerlek-oynama", "explain": "O ön takım boşluğudur ve ayrı bir kontroldür." },
+          { "label": "Direksiyonun ne kadar ağır döndüğü", "verdict": "agirlik", "explain": "Ağırlık yardım katmanının konusu; boşluk bir mesafedir." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Her ölçümün ilk adımı tanımdır. Neyi ölçtüğünü tarif edemeyen, sonucu da yorumlayamaz."
+    },
+    {
+      "id": 2,
+      "instruction": "Ölçümü hangi koşullarda yapacağına karar ver.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.direksiyon-simidi",
+        "question": "Doğru koşullar hangileri?",
+        "options": [
+          { "label": "Araç düz zeminde ve tekerlekleri üstünde, tekerlekler düz konumda, yardımlı sistemlerde motor çalışır durumda", "verdict": "yerde-duz-motor-calisir", "correct": true, "explain": "Üç koşulun her birinin ayrı bir sebebi vardır. Araç tekerlekleri üstünde durur çünkü havada asılı bir tekerlek, üzerinde yük yokken çok daha kolay döner ve boşluk olduğundan küçük ölçülür; ayrıca yol yükü altında oturan mafsallar havada gevşer. Tekerlekler düz konumda olur çünkü kremayerin uçlarına yaklaştıkça diş kavraması değişir ve birçok kutuda boşluk orta konumda en azdır — ölçümü hep aynı yerde yapmak, iki farklı aracı ya da aynı aracın iki farklı zamanını karşılaştırabilmek demektir. Motorun çalışır olması ise yardımlı sistemlere özgüdür: hidrolik ya da elektrik yardım devredeyken sistem bir miktar ön yüklenir ve boşluk farklı ölçülür. Motor durmuşken ölçüp 'boşluk çok' demek, sistemi çalışmadığı hâliyle yargılamaktır. Bu koşulların yazılması ölçümün kendisi kadar önemlidir: koşulu belirtilmemiş bir ölçüm, sonraki bakımda karşılaştırılamaz." },
+          { "label": "Araç kaldırılmış, tekerlekler havada", "verdict": "havada", "explain": "Yüksüz tekerlek daha kolay döner; boşluk olduğundan küçük ölçülür." },
+          { "label": "Tekerlekler tam sağa çevrilmiş hâlde", "verdict": "sagda", "explain": "Uç konumda diş kavraması değişir; ölçüm karşılaştırılamaz olur." },
+          { "label": "Koşul önemli değil, boşluk her hâlde aynıdır", "verdict": "farketmez", "explain": "Yük, konum ve yardımın devrede olması sonucu değiştirir." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Aynı araçta üç farklı koşulda üç farklı sayı çıkar. Sayıyı değil, koşulla birlikte sayıyı kaydet."
+    },
+    {
+      "id": 3,
+      "instruction": "Aynı aracı iki koşulda ölçtün: motor çalışmıyorken 52 mm, motor çalışırken 38 mm. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.direksiyon-simidi",
+        "unit": "mm",
+        "acceptRange": [13.8, 14.2]
+      },
+      "camera": "direksiyon",
+      "hint": "52 eksi 38.",
+      "teachingNote": "14 mm'lik bu fark bir arıza değil, koşul farkıdır: yardım devreye girdiğinde sistem ön yüklenir ve ölü bölge küçülür. Buradan iki şey çıkar. Birincisi, hangi koşulda ölçtüğünü yazmadan sayı kaydetmek işe yaramaz — sonraki usta hangi sayıyla karşılaştıracağını bilemez. İkincisi ve daha önemlisi, iki koşulun farkının kendisi bir bilgidir: fark beklenenden çok büyükse yardım sistemi ölçüm sırasında düzensiz çalışıyor olabilir. Kabul edilen boşluk sınırı araca özgüdür ve bu ders bir değer vermiyor."
+    },
+    {
+      "id": 4,
+      "instruction": "Ölçümü simit çemberi üzerinde milimetre olarak aldın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.mil-mafsali",
+        "question": "Bu ölçüm iki farklı aracı karşılaştırmak için doğrudan kullanılabilir mi?",
+        "options": [
+          { "label": "Hayır; aynı boşluk açısı büyük çaplı simitte daha çok milimetre verir, karşılaştırma için çap da bilinmelidir", "verdict": "cap-bagimli", "correct": true, "explain": "Boşluk aslında bir AÇIDIR: zincirdeki ölü bölge, simidin kaç derece boşa döndüğüyle ifade edilir. Ama atölyede açı ölçmek zordur, çemberin üzerinde milimetre ölçmek kolaydır — bu yüzden pratikte simit çevresinde yay uzunluğu ölçülür. Bunun bir bedeli vardır: aynı açı, büyük çaplı bir simitte daha uzun bir yay, küçük çaplı bir simitte daha kısa bir yay verir. Yani iki farklı aracın milimetre değerleri doğrudan karşılaştırılamaz. Üretici belgeleri de bu yüzden değeri kimi zaman derece, kimi zaman belirli bir simit çapı için milimetre olarak verir; hangisi olduğuna bakılır. Pratikte en güvenilir karşılaştırma aynı aracın kendi geçmişiyle yapılan karşılaştırmadır: aynı simit, aynı koşul, farklı tarih. Boşluğun zaman içinde artması, tek bir ölçümün mutlak değerinden daha çok şey anlatır." },
+          { "label": "Evet, milimetre her araçta aynı anlama gelir", "verdict": "ayni", "explain": "Yay uzunluğu simit çapına bağlıdır; aynı açı farklı mm verir." },
+          { "label": "Hayır, çünkü boşluk aslında ölçülemez", "verdict": "olculemez", "explain": "Ölçülebilir; yalnız çapa bağlı olduğu bilinmelidir." },
+          { "label": "Evet, çünkü bütün simitler aynı çaptadır", "verdict": "ayni-cap", "explain": "Simit çapları araca göre belirgin biçimde değişir." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Aynı aracın kendi geçmişiyle karşılaştırılması, çapraz karşılaştırmadan daha güvenilir. Bu yüzden ölçüm kaydedilir."
+    },
+    {
+      "id": 5,
+      "instruction": "Ölçüm sırasında tekerleğin gerçekten hareket etmediğinden nasıl emin oluyorsun?",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.rot-basi-sol",
+        "question": "Doğru yöntem hangisi?",
+        "options": [
+          { "label": "İkinci bir kişi tekerleğe bakar ve ilk kımıldama anını söyler; tek başına yapılacaksa tekerleğe bir işaret konur", "verdict": "ikinci-kisi", "correct": true, "explain": "Ölçümün doğruluğu tamamen tek bir anın doğru yakalanmasına bağlıdır: tekerleğin kımıldamaya BAŞLADIĞI an. Sürücü koltuğundan bu an görülmez, çünkü simitteki direncin artması boşluğun bittiği anla aynı şey değildir — özellikle yardımlı sistemlerde direnç yumuşakça artar ve el yanılır. Bu yüzden doğru yöntem ikinci bir kişinin tekerleğe bakmasıdır; o kişi 'oynadı' dediği anda simitteki konum işaretlenir. Yalnız çalışılıyorsa tekerlek üzerine bir işaret konup sabit bir referansa (yer, çamurluk kenarı) göre bakılabilir, ama hassasiyet düşer. Ölçümün iki yönde de aynı dikkatle yapılması gerekir; çoğu hata sağ tarafı özenle, sol tarafı aceleyle ölçmekten çıkar. Ölçüm ayrıca iki üç kez tekrarlanır: aynı sonucu vermeyen bir ölçüm, henüz bir sonuç değildir. Tekrarlanabilirlik, bu projede balans dersinde de öğrenilen aynı ilkedir." },
+          { "label": "Simitteki direncin arttığı an yeterlidir", "verdict": "direnc", "explain": "Direnç yumuşakça artar; el yanılır, özellikle yardımlı sistemlerde." },
+          { "label": "Ses duyulduğunda tekerlek dönmüştür", "verdict": "ses", "explain": "Ses güvenilir bir gösterge değil; gözle bakılır." },
+          { "label": "Gerekmez, simitteki mesafe tek başına yeterli", "verdict": "gereksiz", "explain": "Tekerleğin ilk kımıldaması görülmeden ölçümün başlangıcı belirsizdir." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Tekrarlanmayan ölçüm sonuç değildir. Bu kural bu projede üçüncü kez karşına çıkıyor."
+    },
+    {
+      "id": 6,
+      "instruction": "Ölçüm yapıldı ve boşluk üreticinin verdiği sınırın üstünde çıktı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kremayer-kutusu",
+        "question": "Sıradaki adım ne?",
+        "options": [
+          { "label": "Boşluğun zincirin hangi halkasında olduğu aranır; ölçüm miktarı söyler, yeri söylemez", "verdict": "yer-tespiti", "correct": true, "explain": "Bu ölçümün sınırı burada görülür ve bunu bilmek ustalığın bir parçasıdır: boşluk ölçümü sana NE KADAR boşluk olduğunu söyler, NEREDE olduğunu söylemez. 40 mm boşluk; kutunun içindeki aşınmadan da, gevşemiş bir mafsal cıvatasından da, aşınmış bir rot başından da, hatta bunların üçünün toplamından da çıkabilir. Üstelik sayı aynı olduğu için hangisi olduğu ölçümden anlaşılmaz. Bu yüzden ölçüm bir kapıdır: sınırın altındaysa sistem bu açıdan iyidir ve başka şüpheliye geçilir; üstündeyse bir sonraki iş zinciri bölerek yer tespiti yapmaktır. Sıra bozulmaz — önce miktar, sonra yer, en son müdahale. Bu sırayı atlayıp doğrudan parça değiştirmek, bu alanda en pahalı hatadır çünkü direksiyon parçaları ucuz değildir ve yanlış parça değişince şikâyet aynen sürer." },
+          { "label": "Kremayer baskı ayarı sıkılır", "verdict": "baski-sik", "explain": "Boşluğun yeri bilinmeden ayar yapmak, sağlam kutuyu sıkıştırmak olabilir." },
+          { "label": "Rot başları değiştirilir", "verdict": "rot-degistir", "explain": "Ölçüm yeri söylemez; yer tespiti yapılmadan parça değişmez." },
+          { "label": "Ölçüm tekrarlanmaz, sonuç kabul edilir ve araç teslim edilir", "verdict": "teslim", "explain": "Sınır üstü boşluk giderilmeden teslim edilmez." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Miktar bir ölçümden, yer başka bir ölçümden gelir. Bir sonraki ders tam olarak bu ayırma işi."
+    },
+    {
+      "id": 7,
+      "instruction": "Başka bir araçta ölçüm sınırın içinde çıktı ama müşteri boşluktan şikâyetçi.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.direksiyon-simidi",
+        "question": "Ne yaparsın?",
+        "options": [
+          { "label": "Şikâyet ciddiye alınır; ölçüm koşulları doğrulanır ve boşluk hissi üreten başka sebepler aranır — hissedilen ile ölçülen aynı şey olmayabilir", "verdict": "hissi-arastir", "correct": true, "explain": "Ölçümün sınırın içinde olması şikâyeti geçersiz kılmaz; yalnız o tek ölçünün iyi olduğunu söyler. Önce ölçümün kendisi sorgulanır: koşullar doğru muydu, tekrarlandı mı, tekerleğin ilk kımıldaması gerçekten görüldü mü. Ölçüm sağlamsa sürücünün 'boşluk' dediği hissin başka kaynakları aranır. En sık görülenler şunlardır: aracın düz gitmemesi ve sürekli düzeltme gerektirmesi (ön düzen ya da lastik kaynaklı olabilir, o alanın konusu), direksiyonun merkeze dönmemesi, yardım sisteminin düzensiz destek vermesi, ön takımda direksiyona yansıyan bir boşluk ve gevşek bir simit bağlantısı. Ayrıca sürücü yeni araca geçmiş olabilir; önceki aracı daha direkt hissettiriyorsa aynı sistem ona boş gelir. Buradaki ilke şu: ölçüm bir şüpheliyi eler, şikâyeti elemez. Şikâyet ancak sürücü aynı yolda aynı hissi bir daha yaşamadığında kapanır. Ölçümü öne sürüp müşteriyi 'sorun yok' diye göndermek, kısa yoldan geri gelen bir iştir." },
+          { "label": "Ölçüm sınırın içinde olduğu için şikâyet reddedilir", "verdict": "reddet", "explain": "Tek ölçüm bütün sebepleri elemez; şikâyet başka kaynaklı olabilir." },
+          { "label": "Rastgele parça değiştirilerek denenir", "verdict": "dene", "explain": "Deneme yanılma teşhis değildir ve pahalıya mal olur." },
+          { "label": "Boşluk sıfırlanana kadar kutu sıkılır", "verdict": "sifirla", "explain": "Sıfır boşluk hedeflenmez; sıkışan sistem ısınır ve aşınır." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Ölçüm bir şüpheliyi eler, şikâyeti elemez. Bu ayrım, müşteriyle kurulan güvenin de temeli."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Direksiyon boşluğu hangi koşullarda ölçülür?",
+        "a": "yerde-duz-motor-calisir",
+        "options": [
+          { "verdict": "yerde-duz-motor-calisir", "label": "Araç tekerlekleri üstünde, tekerlekler düz konumda ve yardımlı sistemlerde motor çalışır durumdayken", "explain": "Havada asılı tekerlek yüksüz olduğu için daha kolay döner ve boşluk olduğundan küçük ölçülür. Uç konumlarda diş kavraması değiştiği için ölçüm düz konumda yapılır, böylece farklı zamanların ölçümleri karşılaştırılabilir. Yardım devredeyken sistem ön yüklenir ve boşluk farklı çıkar; motor durmuşken ölçüp yargılamak sistemi çalışmadığı hâliyle değerlendirmektir." },
+          { "verdict": "havada", "label": "Araç kaldırılmış, tekerlekler havadayken", "explain": "Yüksüz tekerlek boşluğu küçük gösterir." },
+          { "verdict": "sagda", "label": "Tekerlekler tam sağa çevrilmişken", "explain": "Uç konumda kavrama değişir." },
+          { "verdict": "farketmez", "label": "Koşul fark etmez", "explain": "Üç koşul da sonucu değiştirir." }
+        ]
+      },
+      {
+        "q": "Boşluk sınırın üstünde çıktı. Sıradaki adım nedir?",
+        "a": "yer-tespiti",
+        "options": [
+          { "verdict": "yer-tespiti", "label": "Boşluğun zincirin hangi halkasında olduğu aranır", "explain": "Ölçüm ne kadar boşluk olduğunu söyler, nerede olduğunu söylemez; aynı sayı kutudan, mafsaldan, rot başından ya da üçünün toplamından çıkabilir. Sıra bozulmaz: önce miktar, sonra yer, en son müdahale. Yeri bilinmeden yapılan parça değişimi bu alanın en pahalı hatasıdır." },
+          { "verdict": "baski-sik", "label": "Kremayer baskı ayarı sıkılır", "explain": "Yer bilinmeden ayar sağlam kutuyu sıkıştırabilir." },
+          { "verdict": "rot-degistir", "label": "Rot başları değiştirilir", "explain": "Ölçüm yeri söylemez." },
+          { "verdict": "teslim", "label": "Araç teslim edilir", "explain": "Sınır üstü boşluk giderilmeden teslim edilmez." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 52 mm ve 38 mm SENARYO okumalarıdır; istenen FARKTIR (14 mm) ve gösterilen şey ölçüm koşulunun sonucu değiştirdiğidir. Bir boşluk sınırı verilmiyor.",
+    "sourceRequired": "Kabul edilen azami direksiyon boşluğu (derece ya da mm) bilinçle VERİLMEDİ; araca ve üreticiye özgüdür, ayrıca muayene mevzuatında da geçtiği için künyesiz yazılmaz. Ders ölçme yöntemini ve yorumlamayı öğretiyor.",
+    "kapsam": "Boşluğun YERİNİN bulunması bu ders değil, bir sonraki ders (direksiyon.bosluk-yeri). Ön takım boşluğu ve ön düzen Lastik ve Tekerlek alanında işlendi; burada yalnız ayırt edici olarak anıldı.",
+    "reviewedByMechanic": false
+  }
+}

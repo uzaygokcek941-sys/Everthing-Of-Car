@@ -1,0 +1,179 @@
+{
+  "id": "kaporta.kaynakli-parca",
+  "area": "kaporta",
+  "stage": 4,
+  "title": "Kaynaklı Parça: Punta Çözme, Kesim Hattı ve Sınır",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 45,
+  "prerequisites": ["kaporta.civatali-parca"],
+  "learningGoals": [
+    "Kaynaklı parça değişiminin neden kılavuza tabi olduğunu görmek",
+    "Punta çözmenin karşı sacı korumak demek olduğunu bilmek",
+    "Kaynak sonrası korumanın işin ayrılmaz parçası olduğunu içselleştirmek"
+  ],
+
+  "safety": [
+    { "rule": "Taşıyıcı parçalarda kaynaklı değişim üreticinin onarım kılavuzu olmadan yapılmaz", "why": "Kesim hattı, birleştirme yöntemi, nokta sayısı ve takviye şartları araca özgüdür; yanlış yapılan bir değişim aracın kaza davranışını değiştirir ve bu dışarıdan görünmez", "blocksStart": true },
+    { "rule": "Kesim ve kaynak öncesi enerji kesilir, arka taraf açılıp kontrol edilir, yakıt hattı ve deposu ile hava yastığı ve gergi birimleri güvenceye alınır", "why": "Kıvılcım ve ısı yanıcı malzemeleri tutuşturur; ısı sacın öbür yüzüne geçer ve için için yanma başlatabilir", "blocksStart": true },
+    { "rule": "Elektrikli araçlarda yüksek gerilim sistemi bulunan bölgelerde çalışılmaz", "why": "Bu sistem bu alanın kapsamı dışındadır ve yetkili birime bırakılır", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.punta-freze", "label": "Punta frezesi", "required": true },
+    { "id": "tool.kaynak-makinesi", "label": "Kaynak makinesi", "required": true },
+    { "id": "tool.olcum-mastari", "label": "Ölçüm mastarı", "required": true },
+    { "id": "tool.yangin-tupu", "label": "Yangın söndürücü", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Kaynaklı bir parça değişecek. Kılavuza bakmadan başlamak istiyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.esik-saci",
+        "question": "Kılavuz neden bu işte zorunlu?",
+        "options": [
+          { "label": "Kesim hattını, birleştirme yöntemini, nokta sayısını, takviye ve koruma şartlarını o belirler — bunlar parçanın kaza davranışını taşıyan bilgilerdir ve tahmin edilemez", "verdict": "kilavuz-zorunlu", "correct": true, "explain": "Kaynaklı parça değişimi, cıvatalı değişimden yalnız zorluk olarak değil, nitelik olarak ayrılır: burada fabrikanın kurduğu bir birleşimi bozup yeniden kuruyorsun ve o birleşim yapının bir parçası. Kılavuzun verdiği bilgiler tam da bu yüzden kritiktir. Kesim hattı: parçanın nereden kesileceği rastgele seçilmez; belirli bölgelerde kesim yasaktır ve bazı yerlerde üretici belirli bir mesafeye kadar kesime izin verir. Yanlış hattan kesmek, taşıyıcı bir kesiti zayıflatmak ya da bir takviyeyi ortadan kaldırmak demektir. Birleştirme yöntemi: bazı noktalarda punta, bazılarında belirli bir dikiş biçimi, bazılarında yapıştırma ve perçin şart koşulur. Nokta sayısı ve aralığı: birleşimin taşıyacağı yükü belirler ve onarımda genelde fabrikadan farklı bir değer istenir. Takviye: bazı değişimlerde ek bir sac ya da bağlantı elemanı gerekir. Koruma: kaynaktan sonra hangi yüzeyin nasıl korunacağı da orada yazar. Bunların hiçbiri gözle bakarak çıkarılamaz. Ve hata payı yoktur: yanlış yapılmış bir kaynaklı değişim teslimde kusursuz görünür — boya kapatır, fuga düzgündür, müşteri memnundur. Fark yalnız bir kazada ortaya çıkar. Bu yüzden bu işte kılavuzsuz başlamak bir cesaret değil, sonucu görülmeyen bir risktir." },
+          { "label": "Kılavuz bir öneridir", "verdict": "oneri", "explain": "Bu iş türünde kılavuz kaza davranışını taşıyan verinin kendisidir." },
+          { "label": "Deneyimli usta kılavuzsuz yapabilir", "verdict": "deneyim", "explain": "Deneyim kesim hattını ve nokta sayısını üretemez; onlar araca özgüdür." },
+          { "label": "Yalnız garantili araçlarda gerekir", "verdict": "garanti", "explain": "Gereklilik garantiden değil, yapının kendisinden gelir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Yanlış yapılmış bir kaynaklı değişim teslimde kusursuz görünür. Fark yalnız bir kazada ortaya çıkar."
+    },
+    {
+      "id": 2,
+      "instruction": "Kılavuz bu birleşim için onarımda 18 punta noktası istiyor; sen 12 nokta attın. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.punta-noktasi",
+        "unit": "nokta",
+        "acceptRange": [5.5, 6.5]
+      },
+      "camera": "kaporta",
+      "hint": "18 eksi 12.",
+      "teachingNote": "6 nokta eksik — yani birleşimin taşıma kapasitesinin üçte biri yok. Bu sayı bu alandaki en sessiz eksikliklerden biridir, çünkü hiçbir yerde görünmez: birleşim taktır, panel oturur, boya kapatır ve araç normal kullanımda hiçbir belirti vermez. Nokta sayısı, aracın normal yükünü taşımak için değil, bir çarpışmada kuvveti aktarmak için hesaplanır — yani eksikliğin bedeli günlük kullanımda değil, tam da hesabın işe yaraması gereken anda ödenir. Kılavuzların onarımda çoğu zaman fabrikadan farklı bir sayı istemesinin sebebi de budur: atölye kaynağı fabrika kaynağıyla birebir aynı koşullarda yapılmaz, bu yüzden eksik kalabilecek dayanım nokta sayısıyla telafi edilir. Uygulamada üç kural birlikte işler: sayı kılavuzdan alınır, noktalar eski noktaların üzerine değil arasına atılır ve aralık ne daraltılır ne genişletilir — çok yakın iki nokta arasında akım bir öncekinin üzerinden kaçar ve ikinci nokta zayıf çıkar. Bir de kalite kontrolü vardır: kaynak makinesinin ayarları ve sacın temizliği doğrulanır, ilk noktalar deneme parçası üzerinde denenir. Bu ders hiçbir araç için nokta sayısı, aralık ya da kaynak parametresi vermiyor; buradaki iki sayı senaryo okumasıdır."
+    },
+    {
+      "id": 3,
+      "instruction": "Eski parçayı ayıracaksın. Punta noktalarını çözmen gerekiyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.punta-noktasi",
+        "question": "Punta nasıl çözülür?",
+        "options": [
+          { "label": "Punta frezesiyle yalnız üstteki sac delinir, alttaki sac delinmeden bırakılır: amaç iki sacı ayırmak, ikisini birden kesmek değil — kalacak olan sac zarar görürse yeni birleşimin oturacağı yüzey bozulur", "verdict": "ustteki-sac", "correct": true, "explain": "Punta çözmenin bütün inceliği, hangi sacın kalacağını bilmekte ve onu korumaktadır. Punta kaynağı iki sacı üst üste birleştirir; sen bunlardan birini atacak, diğerini yerinde bırakacaksın. Doğru yöntem, punta frezesini yalnız atılacak sacın kalınlığı kadar daldırıp orada durdurmaktır — böylece o sac noktadan ayrılır, alttaki sac ise sağlam kalır. Alttaki sacın delinmesi üç sorun üretir. Birincisi, yeni parçanın kaynatılacağı yüzey artık delik ve düzensizdir; yeni puntalar aynı yerlere temiz oturmaz. İkincisi, açılan delikler kapatılmak zorunda kalır ve her kapatma ek ısı, ek gerilim ve ek koruma işi demektir. Üçüncüsü, kalınlık kaybı: delinip yeniden doldurulan bir bölge, fabrika kesitinin taşıdığını taşımaz. Uygulamada iki pratik ayrıntı belirleyicidir. Freze ucunun keskinliği: körelmiş bir uç ısı üretir, sacı yakar ve kontrolü zorlaştırır. Ve nokta merkezinin doğru bulunması: puntanın tam merkezinden girilmezse kenar kalır ve o kenarı zorlayarak ayırmak sacı yırtar. İş bitince ayrılan yüzeydeki kalıntılar temizlenir ve yeni kaynak yapılacak bölgenin boyası ile astarı sıyrılır — kaynak temiz metale yapılır, boyanın üzerinden yapılan kaynak zayıf ve gözenekli çıkar." },
+          { "label": "İki sac birden kesilir", "verdict": "iki-sac", "explain": "Kalacak sac zarar görür ve yeni birleşimin yüzeyi bozulur." },
+          { "label": "Taşlamayla kesilir", "verdict": "taslama", "explain": "Taşlama kontrolsüz ısı ve kalınlık kaybı üretir; punta frezesi kullanılır." },
+          { "label": "Zorlanarak koparılır", "verdict": "kopar", "explain": "Koparma sacı yırtar ve kalan yüzeyi deforme eder." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Amaç iki sacı ayırmak, ikisini birden kesmek değil. Hangi sacın kalacağını bil ve onu koru."
+    },
+    {
+      "id": 4,
+      "instruction": "Yeni parça yerine tutuldu. Kaynağa başlamadan önce.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.olcum-mastari",
+        "question": "Kaynaktan önce ne doğrulanır?",
+        "options": [
+          { "label": "Parçanın konumu ölçülerek doğrulanır ve geçici olarak sabitlenir: kaynatıldıktan sonra düzeltme şansı yoktur, ayrıca kaynak ısısı parçayı çekeceği için ölçü kaynak sırasında da takip edilir", "verdict": "once-olc", "correct": true, "explain": "Kaynaklı parça değişimi, cıvatalıdan ayrılan en sert özelliğini burada gösterir: geri dönüşü yoktur. Cıvatalı bir panel yanlış oturduysa gevşetip yeniden ayarlarsın; kaynatılmış bir parçayı yeniden konumlandırmak, bütün noktaları yeniden çözmek ve iki yüzeyi de yeniden hazırlamak demektir. Bu yüzden sıra değişmez: parça yerine alınır, kelepçe ve geçici bağlantılarla sabitlenir, konumu ölçülerek doğrulanır — fuga, komşu panellerle hiza ve varsa çapraz ölçüler — ve ancak her şey oturduğunda kaynağa başlanır. İkinci konu ısıdır. Kaynak sırasında ısınan metal genleşir, soğurken büzülür ve parçayı kendine doğru çeker; uzun bir hat boyunca art arda atılan noktalar parçayı yavaş yavaş kaydırabilir. Bunu önlemenin yolu, noktaları sırayla değil dağıtarak atmaktır: birbirinden uzak noktalarla başlanır, ısı bir bölgede toplanmadan yayılır ve aralarda ölçü kontrol edilir. Üçüncü konu, hareketli parçaların takılı olmasıdır — bazı işlerde kapı ya da kaput takılı hâlde fuga kontrol edilerek kaynak yapılır, çünkü boşluk kaynaktan sonra ayarlanamaz. Ve bir hatırlatma: bütün bunlar kılavuzun izin verdiği bir işte geçerlidir; taşıyıcı yapıda ölçü doğrulaması gövde ölçüm sistemiyle yapılır ve o iş bu alanın dışındadır." },
+          { "label": "Doğrudan kaynatılır, sonra ayarlanır", "verdict": "sonra-ayarla", "explain": "Kaynatıldıktan sonra ayar şansı yoktur." },
+          { "label": "Yalnız gözle hizalanır", "verdict": "gozle", "explain": "Göz milimetreleri görmez; ölçülerek doğrulanır." },
+          { "label": "Bütün noktalar sırayla hızlıca atılır", "verdict": "sirayla", "explain": "Isı bir bölgede toplanır ve parçayı çeker; noktalar dağıtılarak atılır." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Kaynatılmış parça geri alınmaz. Noktalar sırayla değil dağıtılarak atılır, aralarda ölçü kontrol edilir."
+    },
+    {
+      "id": 5,
+      "instruction": "Kaynak bitti. Birleşim bölgesi çıplak metal, bazı yerler ısıdan kararmış.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.zimpara-bolgesi",
+        "question": "Kaynak sonrası ne yapılır?",
+        "options": [
+          { "label": "Bölge temizlenir ve kat kat koruma geri kurulur: kaynak yüzeyi ve ulaşılabiliyorsa arka yüzü astarlanır, bindirme yerlerine sızdırmazlık macunu çekilir, kapalı kesitlere koruyucu uygulanır", "verdict": "koruma-geri", "correct": true, "explain": "Kaynak, fabrikanın o bölgede kurduğu korumanın tamamını yok eder: boya, astar, kimyasal ön işlem ve sacın kendi kaplaması ısıyla bozulur ve bindirme yerindeki sızdırmazlık macunu yanar. Yeni birleşim bu yüzden korozyon açısından aracın en savunmasız yeridir — üstelik iki sacın sıkıştığı kılcal bir aralık vardır ve orası nemi tutar. Koruma bu nedenle bir tamamlayıcı adım değil, işin parçasıdır ve sırası vardır. Önce temizlik: kaynak çapağı, oksit tabakası ve kalıntılar alınır, yüzey yağdan arındırılır. Sonra astar: kaynak yüzeyi uygun astarla kaplanır; ulaşılabiliyorsa arka yüz de yapılır, çünkü ısı oraya da geçmiştir. Sonra sızdırmazlık: fabrikada bindirme yerlerinde macun varsa aynı yerlere yeniden çekilir — bu hem su yolunu kapatır hem bindirmeye giren nemi engeller; şekli ve konumu fabrikadakine benzetilir, çünkü o macun aynı zamanda suyun akış yolunu belirler. Sonra kapalı kesit: içine ulaşılamayan boşluklara koruyucu balmumu püskürtülür. En son dış katmanlar: dolgu astarı, renk ve vernik. Korozyon dersinde söylenen şey burada da geçerli: bu adımların hiçbiri teslimde görünmez ve yapan da yapmayan da aynı faturayı keser." },
+          { "label": "Doğrudan macun ve boya uygulanır", "verdict": "boya", "explain": "Astar, sızdırmazlık ve kapalı kesit koruması atlanamaz." },
+          { "label": "Yalnız görünen yüz korunur", "verdict": "gorunen", "explain": "Isı arka yüze de geçmiştir ve bindirme aralığı nemi tutar." },
+          { "label": "Kaynak yeri zaten sızdırmaz", "verdict": "sizdirmaz", "explain": "Punta noktaları arasında kılcal aralık kalır ve nem oradan girer." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Yeni birleşim aracın en savunmasız yeri: iki sac arasında kılcal aralık var ve o aralık nemi tutuyor."
+    },
+    {
+      "id": 6,
+      "instruction": "Değişecek parça bir taşıyıcı bölgede ve kılavuza erişimin yok.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.direk-b",
+        "question": "Ne yapılır?",
+        "options": [
+          { "label": "İş yapılmaz: müşteriye durum açıkça anlatılır ve kılavuza ve donanıma sahip bir atölyeye yönlendirilir — bu bir yetersizlik değil, mesleğin sınırıdır", "verdict": "yonlendir", "correct": true, "explain": "Bu, bu alanın en zor ama en net kararıdır ve zorluğu teknik değil ticaridir: gelen işi geri çevirmek para kaybettirir ve müşteri çoğu zaman ısrar eder — 'idare et', 'nasıl olsa görünmez', 'başkası yapıyor'. Cevap yine de değişmez, çünkü burada riske giren şey senin itibarın değil, o araca binen insanların güvenliğidir. Taşıyıcı bir parçanın kaynaklı değişimi üç şey ister: üreticinin kesim hattını ve birleştirme şartlarını veren onarım kılavuzu, işi doğrulayacak gövde ölçüm sistemi, ve malzemeye uygun kaynak donanımı. Üçünden biri eksikse iş yapılamaz — 'dikkatli çalışırım' bunların yerini tutmaz, çünkü eksik olan beceri değil veridir. Doğru davranışın üç adımı var. Birincisi dürüst anlatım: müşteriye neyin neden yapılamadığı somut olarak söylenir; 'bu parça taşıyıcı, üreticinin kesim ve kaynak talimatı olmadan yapılırsa aracın bir kazadaki davranışı değişir ve bu dışarıdan görülmez'. İkincisi yönlendirme: bu donanıma sahip bir yere yönlendirilir; müşteriyi ortada bırakmak işi geri çevirmekten kötüdür. Üçüncüsü kayıt: aracın hangi durumda geldiği ve neyin yapılmadığı yazılır. Reddedilen bir iş kötü yapılmış bir işten her zaman ucuzdur — ve bu meslekte adı 'ustalık' olan şey tam olarak budur." },
+          { "label": "Dikkatli çalışılarak yapılır", "verdict": "dikkat", "explain": "Eksik olan beceri değil veridir; dikkat kesim hattını üretmez." },
+          { "label": "Benzer bir araca bakılarak yapılır", "verdict": "benzer", "explain": "Çelik sınıfı ve şartlar araca özgüdür; benzerlik yanıltır." },
+          { "label": "Müşteri kabul ederse yapılır", "verdict": "musteri-kabul", "explain": "Riske giren yalnız müşteri değil, araca binen herkes." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Eksik olan beceri değil veri. 'Dikkatli çalışırım' kesim hattını üretmez."
+    },
+    {
+      "id": 7,
+      "instruction": "Kaynaklı değişimin sınırlarını kurdun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.tasiyici-ayak",
+        "question": "Kaynaklı ve cıvatalı değişim arasındaki temel fark nedir?",
+        "options": [
+          { "label": "Cıvatalı değişim üreticinin öngördüğü bir işlem, kaynaklı değişim ise fabrikanın kurduğu birleşimi bozup yeniden kurmaktır — bu yüzden biri ayarla, diğeri kılavuzla yapılır", "verdict": "temel-fark", "correct": true, "explain": "İki iş dışarıdan benzer görünür — parça çıkar, yenisi girer — ama nitelikleri farklıdır ve bu fark kararların hepsini belirler. Cıvatalı parça, üretici tarafından değişmesi öngörülerek bağlanmıştır: bağlantı sökülebilir, ayar payı bırakılmıştır, işlem tersine çevrilebilir. Orada senin işin doğru ayarlamak ve doğru korumaktır. Kaynaklı parça ise değişmesi öngörülmemiş biçimde bağlanmıştır; onu ayırmak fabrikanın kurduğu birleşimi bozmak, yenisini takmak ise o birleşimi yeniden kurmaktır. Yeniden kurulan birleşimin fabrikanınki kadar iyi olması ise ancak üreticinin verdiği şartlara uyulursa mümkündür — kesim hattı, yöntem, nokta sayısı ve aralığı, takviye, koruma. Bu yüzden cıvatalı işte hata düzeltilebilir, kaynaklı işte hata kalıcıdır. Ve bir üçüncü kategori vardır: taşıyıcı yapıdaki kaynaklı değişim. Orada kılavuza ek olarak ölçüm sistemi ve donanım gerekir, doğrulama ölçümle yapılır ve bu alanın kapsamı dışındadır. Pratik özet şudur ve her işin başında sorulur: parça cıvatalı mı, kaynaklı mı — ve taşıyıcı mı. Birinci cevap yöntemi, ikincisi işin kimin olduğunu belirler. Sırada, bu ikisinin dışında kalan üçüncü malzeme grubu var: plastik parçalar." },
+          { "label": "Kaynaklı olan sadece daha zordur", "verdict": "zor", "explain": "Zorluk değil nitelik farkı: biri öngörülmüş, diğeri fabrika birleşimini bozuyor." },
+          { "label": "Fark yoktur, ikisi de parça değişimidir", "verdict": "fark-yok", "explain": "Birinde hata düzeltilebilir, diğerinde kalıcıdır." },
+          { "label": "Kaynaklı olan daha dayanıklıdır", "verdict": "dayanikli", "explain": "Dayanıklılık şartlara uyulursa sağlanır; mesele yöntemin kendisi değil." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Cıvatalı işte hata düzeltilebilir, kaynaklı işte hata kalıcıdır. Sırada plastik onarım."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Punta çözerken alttaki sac da delinirse ne olur?",
+        "a": "ustteki-sac",
+        "options": [
+          { "verdict": "ustteki-sac", "label": "Yeni birleşimin oturacağı yüzey bozulur: yeni puntalar temiz oturmaz, açılan delikler ek ısı ve gerilimle kapatılmak zorunda kalır ve o bölge kalınlık kaybeder", "explain": "Punta frezesi yalnız atılacak sacın kalınlığı kadar daldırılır. Körelmiş uç ısı üretir ve sacı yakar; nokta merkezinden girilmezse kenar kalır ve zorlamak sacı yırtar. İş bitince yeni kaynak bölgesinin boyası ve astarı sıyrılır — boya üzerinden yapılan kaynak zayıf ve gözenekli çıkar." },
+          { "verdict": "iki-sac", "label": "Sorun olmaz, ikisi birden kesilir", "explain": "Kalacak sac zarar görür." },
+          { "verdict": "taslama", "label": "Taşlamayla kesmek daha iyidir", "explain": "Kontrolsüz ısı ve kalınlık kaybı üretir." },
+          { "verdict": "kopar", "label": "Zorlanarak koparılır", "explain": "Koparma sacı yırtar." }
+        ]
+      },
+      {
+        "q": "Taşıyıcı bir parça değişecek ama kılavuza erişim yok. Ne yapılır?",
+        "a": "yonlendir",
+        "options": [
+          { "verdict": "yonlendir", "label": "İş yapılmaz: durum müşteriye açıkça anlatılır ve kılavuza, ölçüm sistemine ve uygun donanıma sahip bir atölyeye yönlendirilir", "explain": "Eksik olan beceri değil veridir — 'dikkatli çalışırım' kesim hattını, nokta sayısını ve çelik sınıfını üretmez. Müşteriyi ortada bırakmamak için yönlendirme yapılır ve aracın geldiği durum ile yapılmayan iş kayda geçer." },
+          { "verdict": "dikkat", "label": "Dikkatli çalışılarak yapılır", "explain": "Dikkat veriyi üretmez." },
+          { "verdict": "benzer", "label": "Benzer bir araca bakılır", "explain": "Şartlar araca özgüdür." },
+          { "verdict": "musteri-kabul", "label": "Müşteri kabul ederse yapılır", "explain": "Riske giren araca binen herkes." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2'deki 18 ve 12 nokta SENARYO değerleridir; istenen FARKTIR (6 nokta). Ders hiçbir araç için punta sayısı, aralığı ya da kaynak parametresi iddia etmiyor.",
+    "sourceRequired": "Kesim hatları ve kesim yasağı olan bölgeler, izin verilen birleştirme yöntemleri, onarımda istenen nokta sayısı ve aralığı, takviye şartları, kaynak parametreleri, kaynak sonrası koruma ürünleri ve sızdırmazlık macunu tipi bilinçle VERİLMEDİ; hepsi araca ve ürüne özgüdür ve üreticinin onarım kılavuzundan okunur.",
+    "kapsam": "Taşıyıcı yapıda kaynaklı değişim, şasi çekme, gövde ölçüm sistemiyle doğrulama ve elektrikli araçlarda yüksek gerilim bölgeleri KAPSAM DIŞIDIR — ders yöntemi, sınırı ve doğru yönlendirmeyi öğretiyor.",
+    "kaynak": "Bu alan kullanıcının açık talebiyle eklendi (talep birebir: 'birde alanlara kaportayı ekleyelim'); konu başlıkları MEB Otomotiv Gövde ve Boya dalının çerçevesini takip ediyor, kazanım numarası iddiası yok.",
+    "reviewedByMechanic": false
+  }
+}

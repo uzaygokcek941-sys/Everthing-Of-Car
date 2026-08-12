@@ -1,0 +1,177 @@
+{
+  "id": "kaporta.boya-kabardi",
+  "area": "kaporta",
+  "stage": 9,
+  "title": "Şikâyet: Boya Kabardı, Pas Geri Geldi",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 40,
+  "prerequisites": ["kaporta.renk-tutmadi"],
+  "learningGoals": [
+    "Kabarmanın yüzeyde değil, katmanın altında olan bir olayın belirtisi olduğunu görmek",
+    "Pasın geri gelmesinin 'tamamen alınmadığı' anlamına geldiğini bilmek",
+    "Suyun içeriden mi dışarıdan mı geldiğini ayırt etmek"
+  ],
+
+  "safety": [
+    { "rule": "Pas temizliği ve zımpara işleminde göz koruması, solunum koruması ve eldiven kullanılır", "why": "Pas ve boya tozu solunduğunda zararlıdır; keskin kenarlı çürük sac derin kesik açar", "blocksStart": false },
+    { "rule": "Taşıyıcı yapıda korozyon tespit edilirse iş üreticinin onarım kılavuzu olmadan sürdürülmez", "why": "Taşıyıcı bir elemandaki kesit kaybı aracın kaza davranışını değiştirir; kesme, ekleme ve ısıtma kararı kılavuza aittir", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.kalinlik-olcer", "label": "Kalınlık ölçer", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true },
+    { "id": "tool.zimpara", "label": "Zımpara", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Bir yıl önce onarılmış araç geldi: 'Boya kabardı, pas geri geldi.' Kabarma kapının alt kenarında.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.esik-saci",
+        "question": "Kabarma neyin belirtisidir?",
+        "options": [
+          { "label": "Katmanın altında bir şeyin olduğunun: boya kendi kendine kabarmaz — altında ya genişleyen bir korozyon ürünü, ya hapsolmuş çözücü, ya da yapışmanın hiç kurulmadığı bir yüzey vardır", "verdict": "altinda-bir-sey", "correct": true, "explain": "Kabarma her zaman bir yüzey olayı değil, bir alt katman olayıdır ve boyayı yerinden kaldıran bir kuvvet gerektirir. Üç ana sebep vardır ve üçü de farklı bir hikâye anlatır. Birincisi korozyondur ve en sık olanıdır: metalin paslanması hacim artışı üretir, yani pas kendi kapladığı yerden daha fazla yer kaplar ve üstündeki katmanı iterek kaldırır. Bu yüzden bir kabarmanın altında çoğu zaman düşünülenden geniş bir pas alanı bulunur — görünen kabarma, altındaki alanın yalnız merkezidir. İkincisi hapsolmuş çözücüdür: fazla kalın atılmış ya da erken kapatılmış bir katmanın içinde kalan çözücü, zamanla dışarı çıkmaya çalışır ve küçük kabarcıklar üretir; bunlar genellikle daha küçük, daha düzenli ve pas izi taşımaz. Üçüncüsü yapışma kaybıdır: yağlı, silikonlu ya da hiç hazırlanmamış bir yüzeye uygulanan katman zaten tutunmamıştır; nem araya girdiğinde katman ayrılır ve kabarır. Teşhis için kabarmanın açılması gerekir — altında turuncu kahverengi bir toz varsa korozyon, temiz metal ya da temiz astar varsa yapışma ya da çözücü sorunudur. Bir de konum bilgisi vardır: kapı alt kenarı, panel kenarları, dikişler ve taş darbesi bölgeleri korozyonun tipik başlangıç yerleridir." },
+          { "label": "Boyanın kalitesizliğidir", "verdict": "boya-kalitesi", "explain": "Kabarma, katmanı kaldıran bir alt katman olayı gerektirir." },
+          { "label": "Vernik atmasıdır, cilayla düzelir", "verdict": "cila", "explain": "Cila yüzeyden alır; altındaki kuvveti kaldırmaz." },
+          { "label": "Normal yaşlanmadır", "verdict": "yaslanma", "explain": "Bir yıllık bir onarımda kabarma normal değildir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Boya kendi kendine kabarmaz. Altında ya pas, ya hapsolmuş çözücü, ya hiç kurulmamış yapışma var."
+    },
+    {
+      "id": 2,
+      "instruction": "Kabaran bölgede kalınlık 340 mikron, panelin sağlam bölgesinde 155 mikron. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.kalinlik-olcer",
+        "unit": "mikron",
+        "acceptRange": [183, 187]
+      },
+      "camera": "kaporta",
+      "hint": "340 eksi 155.",
+      "teachingNote": "185 mikronluk fark — ve bu, kabarmanın hikâyesini geriye doğru anlatan ilk kanıttır. Bu büyüklükte bir fark tek bir boya işiyle açıklanamaz; orada üst üste binmiş katmanlar vardır. En olası senaryo şudur: bölge daha önce de onarılmıştır, üstüne bir kez daha macun ya da dolgu atılmıştır ve son onarım da bunun üzerine yapılmıştır. Bu bilgi üç şey söyler. Birincisi geçmiştir: aracın o bölgesi ilk kez ele alınmıyor ve muhtemelen ilk müdahalede de aynı sorun tam çözülmedi. İkincisi olası sebeptir — kalın katman yığını hem içeride çözücü hapsedebilir hem darbe ve titreşim altında daha kırılgan davranır; ayrıca kalın macunun altındaki sacın gerçek durumu görünmez hâle gelir, yani pas orada rahatça ilerleyebilir. Üçüncüsü karardır: bu kadar kalın bir yığının üstüne dördüncü bir katman eklemek anlamsızdır; doğru yol katmanları o bölgede tamamen almak ve sacın gerçek hâlini görmektir. Ölçümün bir faydası daha vardır — kabarmanın çevresini taramak, sorunun ne kadar geniş bir alana yayıldığını gözle görülenden daha doğru gösterir; kalınlığın anormal olduğu alan, gözle seçilen kabarma alanından genellikle belirgin biçimde büyüktür. Kabul edilebilir fabrika kalınlığı araca ve üreticiye özgüdür; buradaki iki sayı senaryo okumasıdır."
+    },
+    {
+      "id": 3,
+      "instruction": "Kabarmayı açtın: altından turuncu kahverengi toz ve pürüzlü bir yüzey çıktı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-camurluk",
+        "question": "'Pas geri geldi' ne demek?",
+        "options": [
+          { "label": "Pas geri gelmedi, hiç gitmemişti: korozyon bir leke değil devam eden bir süreçtir ve geride bırakılan en küçük bölge kaldığı yerden ilerler — üstünü kapatmak onu yalnız gözden gizler", "verdict": "hic-gitmemisti", "correct": true, "explain": "Bu, bu alanın en yanlış anlaşılan konusudur ve dilin kendisi yanıltır: 'pas geri geldi' cümlesi, pasın bir kez temizlendiğini ve sonra yeniden başladığını ima eder. Gerçekte olan şey genellikle daha basittir — pas hiç tamamen alınmamıştır. Korozyon bir yüzey lekesi değil, metalin kendisini tüketen ve kendi kendini besleyen bir süreçtir; geride bırakılan en küçük bir bölge, üstü boyayla kapatıldığında bile durmaz, çünkü ihtiyaç duyduğu nem ve oksijen katmanın altında ve metalin gözeneklerinde zaten vardır. Üstelik kapatılmış bir pas daha hızlı ilerler, çünkü artık kurumaz. İkinci bir ayrıntı, pasın nerede olduğudur: görünen kısım yüzeydeki toz olsa da asıl ilerleme metalin içinde ve çoğu zaman sacın arka yüzündedir. Bu yüzden bir bölgeyi 'temizledim' demek, yalnız görünen tarafa bakarak verilebilecek bir karar değildir — sacın arkası, kıvrımların içi ve bindirme yerleri de değerlendirilir. Üçüncüsü sınırdır: pas ilerlemiş ve sacın kesitini gerçekten azaltmışsa, o bölge temizlenerek değil değiştirilerek çözülür; ve eğer bölge taşıyıcı yapıya aitse karar tek başına ustanın değil, üreticinin onarım kılavuzunundur. Kabul edilebilir kesit kaybı ve onarım yöntemi araca özgüdür ve bu ders değer vermiyor." },
+          { "label": "Yeni bir pas oluşumudur, normaldir", "verdict": "yeni-pas", "explain": "Aynı yerde bir yıl içinde çıkması sürekliliği gösterir." },
+          { "label": "Boya altında nem yoğuşmuştur", "verdict": "yogusma", "explain": "Turuncu kahverengi toz korozyon ürünüdür." },
+          { "label": "Zımparalanıp üstü kapatılır", "verdict": "kapat", "explain": "Kapatılan pas kurumadığı için daha hızlı ilerler." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "'Pas geri geldi' değil, 'pas hiç gitmemişti'. Kapatılan pas kurumadığı için daha hızlı ilerler."
+    },
+    {
+      "id": 4,
+      "instruction": "Pasın nereden başladığını belirlemen gerekiyor. Sacın dış yüzü boyalı ve düzgün görünüyordu.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-kapi-paneli",
+        "question": "Pas içeriden mi dışarıdan mı gelmiş?",
+        "options": [
+          { "label": "Sacın iki yüzü karşılaştırılarak: dış yüz sağlamken iç yüz çürükse pas içeriden gelmiştir — bu durumda asıl sebep boya değil, suyun içeride durmasıdır ve tahliye ile sızdırmazlık kontrol edilir", "verdict": "iceriden-disaridan", "correct": true, "explain": "Pasın yönü, sebebi ve dolayısıyla çözümü belirler; bu yüzden onarıma başlamadan önce sorulur. Dışarıdan başlayan korozyonun tipik bir hikâyesi vardır: bir taş darbesi, çizik ya da kenar aşınması boyayı delmiş, metal açığa çıkmış ve oradan ilerlemiştir. Böyle bir pasın merkezi yüzeyde görünür ve çevreye yayılır. İçeriden başlayan korozyonun hikâyesi ise tamamen farklıdır: sacın arka yüzü sürekli nemli kalmıştır ve pas metalin içinden dışarı doğru ilerlemiştir. Bu durumda dış yüzey uzun süre kusursuz görünür — ta ki katman altındaki genişleme onu kaldırana kadar. Ayırt etmenin yolu iki yüzü de görmektir: iç yüzey ulaşılabiliyorsa fenerle bakılır, ulaşılamıyorsa kabarma açıldığında sacın kalan kalınlığı ve pasın yönü değerlendirilir. İçeriden gelen bir pasın sebebi neredeyse hiçbir zaman boya değildir; su bir yerde duruyordur. Bu da bizi bir önceki derse bağlar — tıkalı tahliye delikleri, yırtılmış nem bariyeri, yenilenmemiş dikiş sızdırmazlığı ya da onarımdan sonra geri konmamış gövde boşluğu koruması. Bu sebep giderilmeden yapılan her onarım, aynı yerde ve aynı biçimde geri gelir; tek fark, ikinci seferde sacın daha az kalmış olmasıdır. Sacın hangi bölgelerinin nasıl korunduğu ve boşluk korumasının nasıl yenileneceği araca özgüdür ve onarım kılavuzundadır." },
+          { "label": "Fark etmez, iki durumda da yüzey onarılır", "verdict": "farketmez", "explain": "Yön, sebebi ve çözümü belirler." },
+          { "label": "Her zaman dışarıdan gelir", "verdict": "disaridan", "explain": "Kapı ve eşik bölgesinde içeriden gelen pas çok yaygındır." },
+          { "label": "Boya kalitesizse içeriden gelir", "verdict": "boya", "explain": "İçeriden gelen pasın sebebi suyun durmasıdır." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "İçeriden gelen pasın sebebi boya değil, suyun durması. Tahliye ve sızdırmazlık kontrol edilmeden onarım tekrar eder."
+    },
+    {
+      "id": 5,
+      "instruction": "Pas alanı beklenenden geniş; eşik sacının taşıyıcı bölgesine doğru uzanıyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.direk-b",
+        "question": "Burada sınır nerede başlar?",
+        "options": [
+          { "label": "Korozyon taşıyıcı yapıya ulaştıysa iş üreticinin onarım kılavuzu olmadan sürdürülmez: kesit kaybı aracın kaza davranışını değiştirir ve kesme, ekleme, ısıtma kararları kılavuza aittir", "verdict": "kilavuz-sart", "correct": true, "explain": "Bu, bu alanın en baştaki kırmızı çizgisinin somut hâlidir. Gövde yapısı dersinde geçtiği gibi, aracın belirli bölgeleri enerjiyi taşımak ve yolcu bölümünü ayakta tutmak için tasarlanmıştır; direkler, eşikler, taşıyıcı ayaklar ve şasi bölgeleri bu gruba girer. Bu elemanlarda korozyonun anlamı kozmetik değildir — pas metalin kesitini azaltır ve azalmış bir kesit, tasarlandığı yükü tasarlandığı gibi taşımaz. Sorun, kaybın gözle ölçülememesidir: yüzeyde küçük görünen bir bölge, sacın arkasında çok daha geniş bir alanı tüketmiş olabilir ve kalan et kalınlığı ancak uygun bir yöntemle değerlendirilir. Bu yüzden karar zinciri şöyledir: taşıyıcı bir bölgede korozyon görüldüğünde iş durur, bölgenin gerçek durumu değerlendirilir ve nasıl onarılacağı üreticinin onarım kılavuzundan okunur. Kılavuz, hangi bölgenin onarılabileceğini, nerelerden kesilebileceğini, hangi birleştirme yönteminin kullanılacağını ve hangi bölgelerin hiç kesilemeyeceğini tarif eder. Kılavuz yoksa iş yapılmaz — kaynaklı parça dersindeki kural burada da aynen geçerlidir: eksik olan beceri değil, veridir. Bu kararın bir de dürüstlük tarafı vardır: müşteriye 'bu bölge taşıyıcı, kılavuz olmadan işlem yapmıyoruz' demek kısa vadede iş kaybı gibi görünür; ama gizlenerek yapılan bir taşıyıcı onarımı, aracın bir kazada nasıl davranacağını değiştirir ve bunun sonucunu ustanın kendisi taşımaz." },
+          { "label": "Aynı yöntemle devam edilir, taşıyıcı da sonuçta sactır", "verdict": "ayni-yontem", "explain": "Taşıyıcı elemanın kesiti aracın kaza davranışını belirler." },
+          { "label": "Kalın macunla dolgu yapılır", "verdict": "macun", "explain": "Macun mukavemet vermez; kaybı gizler." },
+          { "label": "Üstüne sac yamalanıp kaynatılır", "verdict": "yama", "explain": "Kesim hattı ve yöntem kılavuza aittir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Taşıyıcıda pas kozmetik değil, kesit kaybı. Kılavuz yoksa iş yapılmaz — eksik olan beceri değil veri."
+    },
+    {
+      "id": 6,
+      "instruction": "Sebep ve kapsam belli oldu. Müşteri 'şimdilik üstünü boyayın, sonra bakarız' diyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.punta-noktasi",
+        "question": "Bu istek karşılanır mı?",
+        "options": [
+          { "label": "Karşılanmaz: pasın üstünü kapatmak onu durdurmaz, hızlandırır — ve kapatıldığında hem ilerlemesi görünmez olur hem müşteri sorunun çözüldüğünü sanır; taşıyıcı bölgedeyse zaten kırmızı çizgidir", "verdict": "kapatilmaz", "correct": true, "explain": "Bu istek atölyede sık gelir ve mantıklı bir yanı vardır — müşteri bütçe ya da zaman sıkıntısındadır ve sorunu ertelemek ister. Ama pas ertelenemeyen bir süreçtir ve üstünü kapatmak üç ayrı zarar üretir. Birincisi hızlanmadır: kapatılan bölge artık kurumaz, nem içeride kalır ve korozyon daha hızlı ilerler. İkincisi görünmezliktir: kapatılmış bir pas, ilerlerken hiçbir işaret vermez; bir sonraki kabarma çıktığında kayıp çok daha büyüktür ve o zamana kadar geçen süre boyunca kimse bakmamıştır. Üçüncüsü yanlış güvendir: müşteri parayı ödemiş, aracı düzgün görmüş ve sorunun çözüldüğünü varsaymıştır — oysa yalnız görüntü satın almıştır. Bu üçü birleştiğinde ortaya, ustanın bilerek ürettiği bir gecikmeli hasar çıkar. Doğru davranış, isteği baştan reddetmek değil, gerçeği anlatıp seçenekleri açık koymaktır: 'pas ilerliyor ve kapatmak onu hızlandırır; bugün yapılabilecek en küçük iş şudur, tam çözüm şudur, hiçbir şey yapılmazsa şu olur.' Müşteri bilgilendirildikten sonra erteleme kararı verirse bu onun hakkıdır — ama o zaman yapılan iş 'boyandı' diye kayda geçmez, durumun ne olduğu yazılır. Ve bölge taşıyıcı yapıya aitse erteleme seçeneği zaten yoktur; orada konu görünüş değil güvenliktir. Bu alanın cümlesi burada da geçerlidir: reddedilen iş, kötü yapılan işten ucuzdur." },
+          { "label": "Karşılanır, müşteri kendi aracının sahibidir", "verdict": "karsilanir", "explain": "Kapatmak pası hızlandırır ve ilerlemesini gizler." },
+          { "label": "Karşılanır ama garanti verilmez", "verdict": "garantisiz", "explain": "Garanti vermemek üretilen gecikmeli hasarı ortadan kaldırmaz." },
+          { "label": "Kalın astar atılarak geçici çözüm sağlanır", "verdict": "kalin-astar", "explain": "Kalın katman pası durdurmaz, üstünü örter." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Müşteri görüntü satın alır sanır. Kapatılan pas ilerlerken hiçbir işaret vermez — bir sonraki kabarmada kayıp çok daha büyük."
+    },
+    {
+      "id": 7,
+      "instruction": "Teşhis tamamlandı: içeriden gelen su, tıkalı tahliye, geride bırakılmış korozyon.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kaput-kaporta",
+        "question": "Bu dersin özeti nedir?",
+        "options": [
+          { "label": "Kabarma bir yüzey arızası değil, altındaki sürecin ilk görünür işaretidir: pas geri gelmez, hiç gitmemiştir — ve sebebi çoğu zaman boya değil, suyun durduğu yerdir", "verdict": "surec", "correct": true, "explain": "Bu ders üç yanlış inancı birden düzeltiyor. Birincisi 'boya kabardı' cümlesinin boyayı suçlamasıdır; oysa boya yalnız altındaki olayın örtüsüdür ve kabarma o olayın ilk görünür işaretidir. İkincisi 'pas geri geldi' ifadesidir; korozyon bir leke değil devam eden bir süreçtir ve geride bırakılan en küçük bölge kaldığı yerden ilerler — kapatıldığında ise daha hızlı ilerler, çünkü artık kurumaz. Üçüncüsü sebebin yerinde aranmasıdır: kapı alt kenarında, eşikte ve dikişlerde çıkan korozyonun sebebi neredeyse hiçbir zaman yüzeydeki boya değil, suyun orada duruyor olmasıdır — tıkalı tahliye, yırtılmış nem bariyeri, yenilenmemiş dikiş sızdırmazlığı. Yani su dersiyle bu ders aynı arızayı iki farklı zamandan anlatıyor: biri ıslanma anını, diğeri bir yıl sonrasını. Onarım planı da buna göre kurulur — önce suyun yolu düzeltilir, sonra korozyon gerçekten alınır, sonra koruma yeniden kurulur ve en son boya yapılır. Sıra tersine çevrilirse iş aynı yerden geri döner. Bir de sınır vardır ve bu alanın kırmızı çizgisidir: korozyon taşıyıcı yapıya ulaştığında karar ustanın değil, üreticinin onarım kılavuzunundur. Sırada son teşhis dersi var: kapı zor kapanıyor, fuga bozuk — yani arızanın boyadan değil geometriden geldiği durum." },
+          { "label": "Kabarma boya kalitesiyle ilgilidir", "verdict": "boya-kalitesi", "explain": "Boya altındaki olayın örtüsüdür." },
+          { "label": "Pas temizlenip boyanırsa sorun biter", "verdict": "temizle-boya", "explain": "Su durmaya devam ediyorsa aynı yerden geri gelir." },
+          { "label": "Kabarma yalnız eski araçlarda olur", "verdict": "eski-arac", "explain": "Bir yıllık onarımda da çıkar; mesele işin kendisidir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Su dersi ile bu ders aynı arızayı iki zamandan anlatıyor: biri ıslanma anını, diğeri bir yıl sonrasını."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Bir yıl önce onarılan bölgede pas yeniden çıktı. En doğru okuma nedir?",
+        "a": "hic-gitmemisti",
+        "options": [
+          { "verdict": "hic-gitmemisti", "label": "Pas geri gelmedi, hiç gitmemişti: korozyon devam eden bir süreçtir ve geride bırakılan en küçük bölge kaldığı yerden ilerler", "explain": "Üstü kapatılan pas kurumadığı için daha hızlı ilerler. Asıl ilerleme çoğu zaman sacın arka yüzündedir, bu yüzden 'temizledim' kararı yalnız görünen yüze bakarak verilemez. Kesit gerçekten azaldıysa bölge temizlenerek değil değiştirilerek çözülür." },
+          { "verdict": "yeni-pas", "label": "Yeni bir oluşumdur, normaldir", "explain": "Aynı yerde bir yıl içinde çıkması sürekliliği gösterir." },
+          { "verdict": "yogusma", "label": "Nem yoğuşmasıdır", "explain": "Turuncu kahverengi toz korozyon ürünüdür." },
+          { "verdict": "kapat", "label": "Zımparalanıp üstü kapatılır", "explain": "Kapatmak süreci hızlandırır." }
+        ]
+      },
+      {
+        "q": "Kapı alt kenarında dış yüz sağlam, iç yüz çürük. Bu ne anlatır?",
+        "a": "iceriden-disaridan",
+        "options": [
+          { "verdict": "iceriden-disaridan", "label": "Pas içeriden gelmiş: sebebi boya değil, suyun içeride durmasıdır — tahliye ve sızdırmazlık kontrol edilir", "explain": "İçeriden gelen korozyonda dış yüzey uzun süre kusursuz görünür, ta ki alttaki genişleme katmanı kaldırana kadar. Tıkalı tahliye, yırtılmış nem bariyeri ya da yenilenmemiş dikiş sızdırmazlığı giderilmeden yapılan onarım aynı yerden geri gelir." },
+          { "verdict": "farketmez", "label": "Fark etmez, yüzey onarılır", "explain": "Yön sebebi ve çözümü belirler." },
+          { "verdict": "disaridan", "label": "Pas her zaman dışarıdan gelir", "explain": "Kapı ve eşikte içeriden gelen pas çok yaygındır." },
+          { "verdict": "boya", "label": "Boya kalitesizdir", "explain": "Sebep suyun durmasıdır." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2'deki 340 mikron ve 155 mikron SENARYO okumalarıdır; istenen FARKTIR (185 mikron). Ders hiçbir araç için fabrika kalınlığı ya da kabul edilebilir katman yığılması iddia etmiyor.",
+    "sourceRequired": "Kabul edilebilir kesit kaybı, korozyon onarım yöntemleri ve sınırları, taşıyıcı bölgelerde kesim hatları ve kesilemeyecek bölgeler, gövde boşluğu koruma malzemeleri ve yenileme yöntemi ile fabrika kalınlık dağılımı bilinçle VERİLMEDİ; hepsi araca özgüdür ve üreticinin onarım kılavuzundan okunur.",
+    "kapsam": "Taşıyıcı yapıda korozyon onarımı, şasi çekme ve gövde ölçüm sistemiyle yapısal doğrulama KAPSAM DIŞIDIR; ders yalnız teşhisi, sınırı ve sebep zincirini öğretiyor.",
+    "kaynak": "Bu alan kullanıcının açık talebiyle eklendi (talep birebir: 'birde alanlara kaportayı ekleyelim'); konu başlıkları MEB Otomotiv Gövde ve Boya dalının çerçevesini takip ediyor, kazanım numarası iddiası yok.",
+    "reviewedByMechanic": false
+  }
+}

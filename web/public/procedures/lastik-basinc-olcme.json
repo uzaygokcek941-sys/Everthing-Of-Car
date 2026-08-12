@@ -1,0 +1,176 @@
+{
+  "id": "lastik.basinc-olcme",
+  "area": "lastik-tekerlek",
+  "stage": 2,
+  "title": "Basıncı Doğru Ölçmek: Soğuk Lastik ve Doğru Referans",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 25,
+  "prerequisites": ["lastik.yanak-okuma"],
+  "learningGoals": [
+    "Doğru basıncın lastikten değil aracın kendi etiketinden okunduğunu bilmek",
+    "Soğuk lastik kuralının sebebini ve sıcak ölçümde ne yapılacağını açıklamak",
+    "Ölçüm aletinin kendisinin de doğrulanması gerektiğini kavramak"
+  ],
+
+  "safety": [
+    { "rule": "Şişirirken lastiğin karşısında değil yanında durulur", "why": "Topuk yerine otururken ya da hasarlı bir lastik şişirilirken açığa çıkan enerji doğrudan öne savrulur", "blocksStart": true },
+    { "rule": "Basınç, aracın kendi etiketindeki değere göre ayarlanır; lastiğin yanağındaki azami değere göre değil", "why": "Yanaktaki değer lastiğin dayanabileceği üst sınırdır, o araç için önerilen değer değildir", "blocksStart": true },
+    { "rule": "Hasarlı ya da topuğu oturmamış lastik kafes olmadan şişirilmez", "why": "Topuk ani oturduğunda açığa çıkan enerji ölümcül olabilir", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.manometre", "label": "Basınç manometresi", "required": true },
+    { "id": "tool.hava-tabancasi", "label": "Hava tabancası", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Araç geldi, basınçları ayarlayacaksın. Lastiğin yanağında MAX PRESS ile başlayan bir değer yazıyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik-yanagi",
+        "question": "Doğru basınç nereden okunur?",
+        "options": [
+          { "label": "Aracın kendi etiketinden: sürücü kapı pervazı, yakıt kapağı içi ya da kılavuz. Yanaktaki değer lastiğin azami sınırıdır", "verdict": "arac-etiketi", "correct": true, "explain": "Doğru basınç lastiğin değil aracın özelliğidir. Aynı ölçüdeki bir lastik hafif bir otomobile de, daha ağır bir araca da takılabilir; taşıdığı yük farklı olduğu için ihtiyaç duyduğu basınç da farklıdır. Bu yüzden değeri araç üreticisi belirler ve araca sabitlenmiş bir etikete yazar — genellikle sürücü kapısının pervazında, bazen yakıt kapağının içinde ya da torpido kapağında, her hâlükârda kullanım kılavuzunda. Etikette çoğu zaman birden fazla değer bulunur: ön ve arka aks için ayrı, normal yük ve tam yük için ayrı, bazen de yedek lastik için ayrı. Lastiğin yanağında yazan değer ise bambaşka bir şeydir: o lastiğin yapısal olarak dayanabileceği azami basınçtır, bir öneri değil bir üst sınırdır. Oraya kadar şişirilen lastik araca fazla gelir, ortadan aşınır ve yol tutuşu düşer." },
+          { "label": "Lastiğin yanağındaki MAX değerinden", "verdict": "yanak-max", "explain": "O değer lastiğin dayanma sınırıdır; araç için önerilen basınç değildir." },
+          { "label": "Bütün binek araçlarda aynı standart değerden", "verdict": "standart", "explain": "Araç ağırlığına ve aks yüküne göre değişir; standart bir değer yoktur." },
+          { "label": "Müşterinin alıştığı değerden", "verdict": "musteri", "explain": "Alışkanlık referans değildir; referans araç etiketidir." }
+        ]
+      },
+      "camera": "yanak",
+      "teachingNote": "Bu ayrım bu alandaki en yaygın hatayı önler: yanaktaki azami değeri hedef sanıp lastiği şişirmek. Sayı orada yazıyor diye doğru sayı olmaz."
+    },
+    {
+      "id": 2,
+      "instruction": "Araç atölyeye 40 km yol yaptıktan sonra girdi.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.valf",
+        "question": "Ölçüm şimdi yapılabilir mi?",
+        "options": [
+          { "label": "Yapılabilir ama okunan değer soğuk değer değildir: lastik ısınınca içindeki hava genleşir ve basınç yükselir", "verdict": "sicak-yuksek-okur", "correct": true, "explain": "Etiketteki değerler soğuk lastik içindir. Soğuk demek, aracın bir süre park hâlinde beklemiş ve yalnız çok kısa mesafe sürülmüş olması demektir. Araç yol yaptıkça lastik hem yolla sürtünmeden hem de yanağın sürekli bükülmesinden ısınır; içindeki hava genleşir ve basınç yükselir. Bu yükselme bir arıza değil, normal işleyiştir — üretici zaten bunu hesaba katarak soğuk değeri verir. Tehlike ölçümün kendisinde değil, sonrasında verilen kararda: sıcak lastikte yüksek okuyup 'fazla var' diye hava boşaltılırsa lastik soğuduğunda etiket değerinin altına düşer ve araç düşük basınçla yola çıkar. Bu, sahada en sık yapılan hatalardan biridir ve sonucu düşük basıncın bütün zararlarıdır. Doğru yol ya lastiğin soğumasını beklemek ya da sıcak ölçüldüğünü bilerek hareket etmektir." },
+          { "label": "Yapılamaz, ölçüm cihazı sıcakta çalışmaz", "verdict": "cihaz", "explain": "Cihaz çalışır; değişen, lastiğin içindeki havanın basıncıdır." },
+          { "label": "Yapılabilir, sıcaklığın basınca etkisi yoktur", "verdict": "etki-yok", "explain": "Isınan hava genleşir ve basıncı yükseltir; etkisi ölçülebilir düzeydedir." },
+          { "label": "Yapılabilir ve okunan değer doğrudan etiketle karşılaştırılır", "verdict": "dogrudan", "explain": "Etiket değeri soğuk lastik içindir; sıcak okuma onunla doğrudan karşılaştırılmaz." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bir ölçümü değerlendirmek, ölçümün hangi şartta alındığını bilmeyi gerektirir. Aynı sayı farklı şartta farklı anlama gelir."
+    },
+    {
+      "id": 3,
+      "instruction": "Aynı lastik sabah soğukken 2,3 bar okudu. 40 km sonra sıcakken 2,6 bar okuyor. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.manometre",
+        "unit": "bar",
+        "acceptRange": [0.28, 0.32]
+      },
+      "camera": "tekerlek",
+      "hint": "2,6 eksi 2,3.",
+      "teachingNote": "0,3 barlık bu fark tamamen ısınmadan geliyor. Şimdi hatayı gör: sıcakken 2,6 okuyup 2,3'e düşürmek için hava boşaltılırsa, lastik soğuduğunda 2,0 bara iner. Yani 'doğru ayar yaptım' denerek araç düşük basınçla yola çıkarılmış olur. Bu yüzden sıcak ölçümde hava BOŞALTILMAZ; ya soğuması beklenir ya da düzeltme sıcak olduğu bilinerek yapılır ve müşteriye söylenir."
+    },
+    {
+      "id": 4,
+      "instruction": "Lastikler sıcak ve müşteri beklemek istemiyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.manometre",
+        "question": "Ne yapılır?",
+        "options": [
+          { "label": "Eksikse hava eklenir, fazlaysa boşaltılmaz; soğuk kontrol için müşteri bilgilendirilir", "verdict": "eksikse-ekle", "correct": true, "explain": "İki yön simetrik değildir. Sıcak lastikte basınç zaten olması gerekenden yüksek okur; buna rağmen etiket değerinin altındaysa gerçekten ciddi biçimde düşük demektir ve hava eklemek doğru karardır — soğuduğunda daha da düşecektir. Ters yönde ise durum farklıdır: sıcak lastikte yüksek okumak beklenen şeydir, bu yüzden hava boşaltmak lastiği soğukken düşük bırakır. Doğru davranış boşaltmamak ve müşteriye durumu söylemektir: lastikler sıcaktı, ölçüm sıcak alındı, sabah araç beklemişken kontrol edilmesi gerekir. Bu cümle basit görünür ama işin kalitesini belirler. Aynı sebeple atölyeler basınç kontrolünü mümkün olduğunca aracın beklediği ilk anda yapar." },
+          { "label": "Fazla görünen hava boşaltılır, sayı etikete eşitlenir", "verdict": "bosalt", "explain": "Soğuduğunda etiket değerinin altına düşer; araç düşük basınçla yola çıkar." },
+          { "label": "Hiçbir şey yapılmaz, ölçüm anlamsızdır", "verdict": "hicbir-sey", "explain": "Sıcak ölçüm de bilgi verir: etiketin altındaysa gerçekten düşüktür." },
+          { "label": "Bütün lastikler eşit sayıya getirilir", "verdict": "esitle", "explain": "Ön ve arka aks değerleri farklı olabilir; hedef eşitlik değil etiket değeridir." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Ölçüm şartı bozuksa karar da şarta göre verilir. Burada doğru iş, eksik bilgiyle en az zararlı kararı almak ve bunu söylemektir."
+    },
+    {
+      "id": 5,
+      "instruction": "Elindeki manometre ile atölyedeki hava hortumunun ucundaki gösterge aynı lastikte farklı değer gösteriyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.manometre",
+        "question": "Hangisine güvenilir?",
+        "options": [
+          { "label": "Hiçbirine körü körüne güvenilmez: aletler bilinen bir referansla karşılaştırılır ve sapan alet kullanımdan kaldırılır", "verdict": "referansla-karsilastir", "correct": true, "explain": "Ölçü aleti de bir parçadır ve bozulur. Hava hortumunun ucundaki göstergeler atölyede en çok darbe gören, yere düşen ve en az kontrol edilen aletlerdir; zamanla sapar ve sapma fark edilmez çünkü kimse onu kontrol etmez. Kalem tipi manometreler de tıkanır ya da contası kaçırır. İki alet aynı lastikte farklı okuyorsa en az biri yanlıştır ve hangisinin yanlış olduğu tahminle bulunamaz. Doğru yol, atölyede güvenilir bir referans manometre bulundurmak, diğer aletleri belirli aralıklarla onunla karşılaştırmak ve sapan aleti düzeltilene kadar kullanımdan kaldırmaktır. Bu, bu meslekteki genel bir kuralın özel hâlidir: ölçüm sonucuna güvenmeden önce ölçen alete güvenmen gerekir. Aynı mantık tork anahtarı, diş mastarı ve komparatör için de aynen geçerlidir." },
+          { "label": "Hortum ucundaki göstergeye, çünkü atölye malıdır", "verdict": "hortum", "explain": "En çok darbe gören ve en az kontrol edilen alettir; sapması en olası olan odur." },
+          { "label": "Kalem manometreye, çünkü daha basittir", "verdict": "kalem", "explain": "Basitlik doğruluk garantisi değil; o da tıkanır ve kaçırır." },
+          { "label": "İkisinin ortalaması alınır", "verdict": "ortalama", "explain": "İki bilinmeyenin ortalaması da bilinmeyendir; referansla karşılaştırılır." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Aletin doğrulanması ölçümün bir parçasıdır. Doğrulanmamış aletle alınan sayı bir ölçüm değil, bir tahmindir."
+    },
+    {
+      "id": 6,
+      "instruction": "Müşteri tatile çıkıyor: araç dolu, bagaj yüklü, dört kişi.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik",
+        "question": "Basınç değişir mi?",
+        "options": [
+          { "label": "Evet: araç etiketinde tam yük için ayrı bir değer bulunur, yüklü araçta o değer kullanılır", "verdict": "tam-yuk-degeri", "correct": true, "explain": "Basıncın işi aracın ağırlığını taşımaktır; ağırlık artınca gereken basınç da artar. Araç üreticisi bunu bildiği için etikete genellikle iki takım değer koyar: normal kullanım ve tam yük. Yüklü araçta normal değerde kalmak fiilen düşük basınçla gitmek anlamına gelir — yanak fazla bükülür, ısınır, aşınma kenarlara kayar ve uzun yolda risk büyür. Bu yüzden tatil öncesi kontrolde ilk sorulacak şey aracın nasıl yükleneceğidir. İki ayrıntı daha var. Birincisi, tam yük değeri genellikle arka aksta daha belirgin artar, çünkü yük ve bagaj arkaya biner. İkincisi, yolculuk bitip yük indiğinde basınç normal değere geri alınmalıdır; yüksek kalan basınç bu kez ortadan aşınmaya ve sert bir sürüşe yol açar. Ayrıca yedek lastik de unutulmaz — ihtiyaç duyulduğunda dolu olması gerekir." },
+          { "label": "Hayır, basınç yükten bağımsızdır", "verdict": "bagimsiz", "explain": "Basıncın görevi ağırlığı taşımaktır; ağırlık artınca gereken basınç artar." },
+          { "label": "Değişir ama usta kendi kararıyla artırır", "verdict": "usta-artirir", "explain": "Ne kadar artırılacağını araç etiketi söyler, tahmin edilmez." },
+          { "label": "Yalnız ön lastikler etkilenir", "verdict": "yalniz-on", "explain": "Yük ve bagaj çoğunlukla arkaya biner; arka aks daha çok etkilenir." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Etiketi okumak, üzerindeki bütün satırları okumak demektir. Çoğu kişi tek bir sayı görür ve orada durur."
+    },
+    {
+      "id": 7,
+      "instruction": "Ayar bitti. Valf kapaklarından biri kayıp.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.valf",
+        "question": "Önemli mi?",
+        "options": [
+          { "label": "Önemli: kapak hem toz ve suyu dışarıda tutar hem de valf iğnesi kaçırırsa ikinci bir sızdırmazlık sağlar", "verdict": "ikinci-bariyer", "correct": true, "explain": "Valf kapağı süs değildir, iki işi vardır. Birincisi valfin içini kirden, tozdan ve sudan korumaktır; içeri giren kir valf iğnesinin tam kapanmasını engeller, biriken su ise kışın donarak iğneyi açık bırakabilir. İkincisi ve daha az bilineni, kapağın kendisinin bir sızdırmazlık elemanı olmasıdır: içinde küçük bir conta bulunan kapaklar, valf iğnesi hafifçe kaçırdığında havayı içeride tutar. Yani kapak sistemdeki ikinci bariyerdir — bu alanın kaldırma dersinde öğrenilen mantığın aynısı. Kapağı kayıp bir valf, yavaş ve fark edilmeyen basınç kaybının en sık sebeplerindendir; müşteri 'sürekli iniyor' der, oysa delik yoktur. Bu yüzden her basınç ayarından sonra dört valf kapağının da yerinde olduğu kontrol edilir ve eksik olan takılır. Metal kapaklarda ayrıca alüminyum valfle temasta korozyon oluşabileceği unutulmaz." },
+          { "label": "Önemsiz, hava valften kaçmaz", "verdict": "onemsiz", "explain": "Kirlenen ya da donan valf iğnesi kaçırır; kapak ikinci bariyerdir." },
+          { "label": "Yalnız görünüm meselesidir", "verdict": "gorunum", "explain": "Görünüm değil, sızdırmazlık ve koruma meselesi." },
+          { "label": "Yalnız TPMS'li araçlarda gereklidir", "verdict": "tpms", "explain": "Her valf için geçerli; TPMS'li valflerde ayrıca korozyon konusu da var." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "En ucuz parça, en sık atlanan kontrol. Bu alanda tekrar eden bir örüntü: küçük ve bedava olan şey, pahalı olanı koruyor."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Doğru lastik basıncı nereden okunur?",
+        "a": "arac-etiketi",
+        "options": [
+          { "verdict": "arac-etiketi", "label": "Aracın kendi etiketinden — kapı pervazı, yakıt kapağı ya da kılavuz; lastiğin yanağındaki değer azami sınırdır", "explain": "Doğru basınç lastiğin değil aracın özelliğidir: aynı lastik farklı ağırlıktaki araçlara takılabilir. Etikette çoğu zaman ön/arka ve normal/tam yük için ayrı değerler bulunur. Yanaktaki MAX değeri ise lastiğin dayanabileceği üst sınırdır; oraya kadar şişirmek lastiği ortadan aşındırır ve tutuşu düşürür." },
+          { "verdict": "yanak", "label": "Lastiğin yanağından", "explain": "Yanaktaki değer üst sınır, öneri değil." },
+          { "verdict": "standart", "label": "Bütün araçlar için geçerli bir standart değerden", "explain": "Araç ağırlığına ve aks yüküne göre değişir." },
+          { "verdict": "tecrube", "label": "Ustanın tecrübesinden", "explain": "Tecrübe uygulamada işe yarar; referans etikettir." }
+        ]
+      },
+      {
+        "q": "Sıcak lastikte basınç yüksek okuyorsa neden hava boşaltılmaz?",
+        "a": "sogukta-dusuk-kalir",
+        "options": [
+          { "verdict": "sogukta-dusuk-kalir", "label": "Isınmadan gelen yükseklik geçicidir; boşaltılırsa lastik soğuduğunda etiket değerinin altına düşer", "explain": "Etiket değerleri soğuk lastik içindir ve üretici ısınmayı zaten hesaba katmıştır. Sıcakken 2,6 okuyan bir lastiği 2,3'e düşürmek, soğuduğunda 2,0 bara inmesi demektir — yani ayar yapıldı denerek araç düşük basınçla yola çıkar. Doğrusu boşaltmamak ve soğuk kontrolü müşteriye söylemektir. Ters yön farklıdır: sıcakken bile etiketin altındaysa gerçekten düşüktür ve hava eklenir." },
+          { "verdict": "cihaz-yanlis", "label": "Ölçüm cihazı sıcakta yanlış okuduğu için", "explain": "Cihaz doğru okur; değişen havanın gerçek basıncı." },
+          { "verdict": "zaman", "label": "Zaman kaybı olduğu için", "explain": "Sebep zaman değil, soğuyunca oluşacak düşüklük." },
+          { "verdict": "bosaltilir", "label": "Boşaltılır, etikete eşitlenmesi gerekir", "explain": "Bu tam olarak yapılmaması gereken şey." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 2,3 bar ve 2,6 bar SENARYO okumalarıdır, üretici değeri değildir. İstenen FARKTIR (0,3 bar) ve dersin gösterdiği şey ısınmanın etkisidir. Hangi aracın kaç bara ayarlanacağı bilinçle VERİLMEDİ — ders zaten bunun araç etiketinden okunduğunu öğretiyor.",
+    "sourceRequired": "Künye gerektiren hiçbir üretici değeri kullanılmadı. Sıcaklık ile basınç arasındaki dönüşüm katsayısı da bilinçle verilmedi: sahada yaygın olarak tekrarlanan yaklaşık bir değerdir, künyesiz yazılırsa uydurma değer olur.",
+    "kapsam": "Azot dolumu, sızıntı arama ve TPMS uyarısı bu derste yok — sırasıyla basınç etkileri ve TPMS derslerinde işleniyor.",
+    "reviewedByMechanic": false
+  }
+}

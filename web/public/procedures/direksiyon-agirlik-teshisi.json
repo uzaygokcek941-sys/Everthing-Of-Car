@@ -1,0 +1,178 @@
+{
+  "id": "direksiyon.agirlik-teshisi",
+  "area": "direksiyon",
+  "stage": 8,
+  "title": "Direksiyon Ağırlaştı",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 40,
+  "prerequisites": ["direksiyon.yanal-kayma"],
+  "learningGoals": [
+    "Ağırlık şikâyetini koşullarıyla birlikte daraltmak",
+    "Yardım katmanı ile mekanik direnci ölçümle ayırmak",
+    "Kaynağı direksiyon sisteminin dışında olan vakaları tanımak"
+  ],
+
+  "safety": [
+    { "rule": "Motor çalışırken kayış ve kasnak bölgesinden uzak durulur", "why": "Hidrolik denemelerin bir kısmı motor çalışırken yapılır", "blocksStart": true },
+    { "rule": "Araç sehpaya alınmadan altında çalışılmaz", "why": "Mekanik direnç kontrolleri aracın altında yapılır", "blocksStart": true },
+    { "rule": "Destek kaybı süren araç, durum anlatılmadan teslim edilmez", "why": "Sürücü hafif direksiyon beklerken ağır direksiyonla karşılaşır", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.teshis-cihazi", "label": "Teşhis cihazı", "required": true },
+    { "id": "tool.manometre", "label": "Lastik basınç manometresi", "required": true },
+    { "id": "tool.kriko-sehpa", "label": "Kriko ve sehpa", "required": true },
+    { "id": "tool.basinc-test-cihazi", "label": "Hidrolik basınç test cihazı", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Müşteri 'direksiyon ağırlaştı' diyor. Henüz hiçbir şeye dokunmadın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.direksiyon-simidi",
+        "question": "Hangi sorularla başlanır?",
+        "options": [
+          { "label": "Ne zaman başladı, her hızda mı yoksa belirli koşulda mı, motor çalışırken de var mı, panelde uyarı yanıyor mu, iki yönde de aynı mı", "verdict": "bes-soru", "correct": true, "explain": "Bu beş soru, aracı sökmeden şüphelilerin çoğunu eleyen sorulardır ve her biri bir kolu keser. 'Ne zaman başladı' zaman eğrisini verir: bir anda başlayan ağırlık kopma, kesilme ya da sistemin kendini kapatmasıdır; haftalar içinde yavaşça artan ağırlık aşınma, sıvı kaybı ya da mekanik sıkışmadır. 'Her hızda mı' hıza duyarlılığı sınar — yalnız düşük hızda ağırlık normal olabilir ya da yardım zayıflamıştır; her hızda aynıysa mekanik direnç akla gelir. 'Motor çalışırken de var mı' hidrolikte belirleyicidir: motor durunca ağırlaşması sistemin doğasıdır, çalışırken de sürüyorsa yardım katmanında sorun vardır. 'Uyarı yanıyor mu' elektrikli sistemlerde kestirme yoldur — sistem kendi arızasını zaten bildirmiştir. 'İki yönde de aynı mı' ise en ayırt edici sorudur: tek yönde ağırlık, hidrolikte kumanda valfini, elektrikte sensör ya da yazılım tarafını, mekanikte tek taraflı bir sıkışmayı işaret eder. Beş cevap alınmadan kaput açılmaz; açılırsa iş gereksiz sökmeye ve yanlış parçaya gider." },
+          { "label": "Doğrudan pompa değiştirilir", "verdict": "pompa", "explain": "Aracın tipi bile bilinmeden parça değiştirilmez." },
+          { "label": "Hidrolik sıvısı eklenir", "verdict": "sivi", "explain": "Araç EPS olabilir; hidrolikse önce sebep bulunur." },
+          { "label": "Ön düzen ayarı yapılır", "verdict": "ayar", "explain": "Ayar ağırlığı çözmez." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Beş soru, aracı sökmeden şüphelilerin çoğunu eliyor. En ayırt edici olanı: iki yönde de aynı mı?"
+    },
+    {
+      "id": 2,
+      "instruction": "İlk elemeyi yapacaksın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.rot-basi-sol",
+        "question": "Kaputu açmadan önce ne kontrol edilir?",
+        "options": [
+          { "label": "Dört lastiğin basıncı ve durumu; düşük basınç ve yanlış lastik, tamamen sağlam bir sistemde bile direksiyonu ağırlaştırır", "verdict": "lastik-once", "correct": true, "explain": "Bu adım ücretsizdir, iki dakika sürer ve şaşırtıcı sayıda vakayı kapatır. Düşük basınçlı bir lastiğin zeminle temas alanı büyür ve tekerleği yerinde çevirmek için gereken kuvvet belirgin biçimde artar; sürücü bunu doğrudan 'direksiyon ağırlaştı' diye tarif eder, çünkü hissettiği şey tam olarak budur. Aynı etkiyi yanlış ölçüde ya da çok geniş bir lastik, aşırı yumuşak yanaklı bir lastik ve tek taraftaki belirgin bir basınç farkı da üretir. Ayrıca lastik değişimi yeni yapıldıysa şikâyetin başlangıç zamanı buna denk düşüyor olabilir ve bu, birinci adımdaki 'ne zaman başladı' sorusuyla birleştiğinde doğrudan cevabı verir. Bu kontrol atlandığında olan şey bellidir: hidrolik ya da elektronik tarafta saatler harcanır, hiçbir arıza bulunamaz ve sonunda basınç düzeltilince şikâyet geçer. Aynı mantık ön takım için de geçerlidir — sıkışmış bir rotil ya da yatak, sistemin ne kadar destek verdiğinden bağımsız olarak direnç üretir ve bu direnç elektronikte hiçbir iz bırakmaz." },
+          { "label": "Doğrudan hidrolik basınç ölçülür", "verdict": "basinc", "explain": "Ücretsiz ve hızlı olan önce elenir." },
+          { "label": "Kod okunur ve modül değiştirilir", "verdict": "modul", "explain": "Kod okunur ama parça en son." },
+          { "label": "Lastik bu şikâyetle ilgisizdir", "verdict": "ilgisiz", "explain": "Düşük basınç en sık ve en ucuz sebeplerden biri." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Ücretsiz olan önce elenir. Basınç düzeltilince geçen şikâyet için saatler harcanmasın."
+    },
+    {
+      "id": 3,
+      "instruction": "Aracı sehpaya aldın ve tekerlekleri serbest bıraktın. Direksiyonu çevirmek için gereken kuvveti ölçtün: sağa 42 N, sola 61 N.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.direksiyon-simidi",
+        "unit": "N",
+        "acceptRange": [18.5, 19.5]
+      },
+      "camera": "direksiyon",
+      "hint": "61 eksi 42.",
+      "teachingNote": "19 N'luk bu asimetri, ağırlığın iki yönde eşit olmadığını gösteriyor ve bu, mutlak değerden çok daha kullanışlı bir bulgu. Simetri kontrolü bu alanın tekrar eden aracı: üretici değeri bilinmese bile iki tarafın karşılaştırılması yorumlanabilir bir sonuç verir. Tek yöndeki fazla direnç, hidrolikte kumanda valfinin bir tarafa yeterince basınç göndermediğini, elektrikte sensör ya da yazılım tarafında bir asimetriyi, mekanikte ise tek taraflı bir sıkışmayı — yatak, mafsal ya da kutu içinde belirli bir bölgede aşınma — düşündürür. Ölçüm ayrıca tekerlekler havadayken yapıldığı için lastik ve zemin sürtünmesi devre dışı bırakılmıştır; yani ölçülen şey doğrudan sistemin kendi direnci. Kabul edilebilir çevirme kuvveti araca özgüdür ve bu ders bir sınır vermiyor."
+    },
+    {
+      "id": 4,
+      "instruction": "Araç hidrolik yardımlı ve ağırlık motor çalışırken de sürüyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.hidrolik-pompa",
+        "question": "Hidrolik tarafta sıra nasıl işler?",
+        "options": [
+          { "label": "Sıvı seviyesi ve köpük, kayış gerginliği ve durumu, hortumlarda kısıtlama, sonra basınç testiyle pompa ve kutu ayrımı", "verdict": "sivi-kayis-hortum-basinc", "correct": true, "explain": "Sıra ucuzdan pahalıya ve hızlıdan yavaşa doğru kurulur. Sıvı seviyesi ve köpük ilk bakıştır: düşük seviye ve köpük hem ağırlığın hem de sesin sebebi olabilir ve saniyeler sürer. Kayış ikinci sıradadır — gevşek ya da yağlanmış bir kayış yük altında kayar ve destek anlık olarak kaybolur; sürücü bunu 'bazen ağırlaşıyor' diye tarif eder. Üçüncü sırada hortumlar vardır: özellikle içten çökmüş bir dönüş hortumu ya da ezilmiş bir bölge akışı kısıtlar ve sistemin çalışmasını bozar; bu, elle ve gözle bakılarak bulunabilir. Dördüncü ve en pahalı adım basınç testidir ve en son yapılır çünkü hazırlık ister; ama en kesin ayrımı o verir — valf kapalıyken pompa normal basıyorsa pompa sağlamdır ve basınç kutunun içinde kayboluyordur. Bu sıranın atlanması hidrolik teşhiste en sık görülen hatayı üretir: pompa değiştirilir, şikâyet sürer. Sıra izlendiğinde çoğu vaka ilk üç adımda kapanır ve basınç testine hiç gerek kalmaz." },
+          { "label": "Doğrudan basınç testi yapılır", "verdict": "basinc-once", "explain": "Hazırlık ister; ucuz ve hızlı adımlar önce." },
+          { "label": "Pompa değiştirilip denenir", "verdict": "pompa-degistir", "explain": "En sık görülen hata; ölçmeden parça değişmez." },
+          { "label": "Kutu değiştirilir", "verdict": "kutu", "explain": "Basınç testi yapılmadan kutu suçlanamaz." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Bu sıra izlendiğinde çoğu vaka ilk üç adımda kapanıyor ve basınç testine hiç gerek kalmıyor."
+    },
+    {
+      "id": 5,
+      "instruction": "Araç elektrik yardımlı ve panelde uyarı yok.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.eps-kontrol-unitesi",
+        "question": "Uyarı yokken EPS nasıl değerlendirilir?",
+        "options": [
+          { "label": "Canlı veriden destek akımı ve araç hızı okunur; akım hıza göre değişiyor mu, iki yönde eşit mi ve modülün gördüğü hız gerçek mi diye bakılır", "verdict": "canli-veri", "correct": true, "explain": "Uyarı lambasının yanmaması EPS'in doğru çalıştığını kanıtlamaz; sistem yalnız kendi denetiminin yakaladığı sorunları bildirir. Örneğin modüle yanlış ama makul bir hız bilgisi geliyorsa sistem bunu arıza saymaz, yalnız desteği ona göre hesaplar — sonuç, uyarısız bir ağırlık şikâyetidir. Bu yüzden değerlendirme canlı veriyle yapılır ve üç şeye bakılır. Birincisi destek akımının hıza göre değişip değişmediğidir; her koşulda aynıysa hız bilgisi ulaşmıyor olabilir. İkincisi modülün gördüğü araç hızının gerçek hızla uyuşup uyuşmadığıdır — bu, arızayı EPS'ten çıkarıp fren/ABS ya da haberleşme tarafına taşıyan tek ölçümdür. Üçüncüsü simetridir: iki yönde çekilen akım ve verilen destek eşit mi? Buna ek olarak besleme kontrolü yapılır, çünkü yük altındaki gerilim düşümü desteği kısar ve çoğu zaman kod üretmez. Bu dört bakış, uyarı yanmayan bir EPS'i değerlendirmenin tek güvenilir yoludur; hissetmeye dayalı bir yargı burada yeterli değildir." },
+          { "label": "Uyarı yoksa EPS sağlamdır, başka yere bakılır", "verdict": "saglam", "explain": "Sistem yalnız kendi yakaladığı sorunları bildirir." },
+          { "label": "Modül değiştirilip denenir", "verdict": "modul", "explain": "Ölçmeden parça değişmez." },
+          { "label": "Yalnız kod okunur, canlı veri gerekmez", "verdict": "sadece-kod", "explain": "Kodsuz arızalar canlı veriyle yakalanır." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Uyarının yanmaması sistemin doğru çalıştığını kanıtlamaz. Yanlış ama makul bir veri arıza sayılmaz."
+    },
+    {
+      "id": 6,
+      "instruction": "Yardım katmanında hiçbir bulgu çıkmadı ama ağırlık sürüyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kremayer-baski-civatasi",
+        "question": "Mekanik tarafta ne aranır?",
+        "options": [
+          { "label": "Fazla sıkılmış baskı ayarı, sıkışmış mafsal ya da rotil, yataklarda direnç, kolonun bir yere sürtmesi ve yanlış toplanmış bir montaj", "verdict": "mekanik-direnc", "correct": true, "explain": "Yardım katmanı sağlamsa ve ağırlık sürüyorsa, sistem gereğinden fazla direnç üretiyordur ve bu direncin kaynağı mekaniktir. Adaylar sırayla değerlendirilir. Birincisi baskı ayarıdır: fazla sıkılmış bir kremayer baskısı direksiyonu ağırlaştırır ve merkeze dönmeyi de bozar — bu, aşama 2'de öğrenilen tuzağın sahadaki karşılığıdır ve daha önce o araca müdahale edilmişse ilk şüphelidir. İkincisi mafsallar ve rotillerdir; kuruyan ya da paslanan bir mafsal serbestçe dönmez. Üçüncüsü kolonun kendisidir — kolon yatağı bozulmuş ya da kolon bir yere sürtüyor olabilir; direksiyon çevrilirken elle kolonun bölgesine dokunmak bunu ortaya çıkarır. Dördüncüsü montajdır: daha önce bir iş yapılmışsa yanlış sıkılmış bir bağlantı, ters takılmış bir parça ya da körüğün burulmuş kalması direnç üretebilir. Ayırt etmenin en temiz yolu zinciri bölmektir — bağlantılar ayrılabiliyorsa parçalar tek tek elle hareket ettirilir ve direncin hangi bölümde olduğu bulunur. Bu, boşluk arama yönteminin ters yönde uygulanmış hâlidir: orada hareketin kaybolduğu yer, burada direncin doğduğu yer aranır." },
+          { "label": "Mekanik taraf ağırlığa sebep olmaz", "verdict": "olmaz", "explain": "Mekanik direnç en sık gözden kaçan sebeplerden." },
+          { "label": "Yalnız kutu değiştirilir", "verdict": "kutu", "explain": "Direncin kaynağı önce bulunur." },
+          { "label": "Yağ sıkılarak geçilir", "verdict": "yag", "explain": "Sebep bulunmadan yağlama geçici bir örtmedir." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Boşluk aramanın ters yönü: orada hareketin kaybolduğu yer, burada direncin doğduğu yer aranıyor."
+    },
+    {
+      "id": 7,
+      "instruction": "Sebep bulundu ve giderildi.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.basinc-test-cihazi",
+        "question": "İş nasıl kapanır?",
+        "options": [
+          { "label": "Aynı ölçüm aynı koşullarda tekrarlanıp iyileşme sayıyla gösterilir, yol testinde iki yönde ve iki hızda denenir, kodlar temiz okunur ve bulgular kaydedilir", "verdict": "olc-test-kaydet", "correct": true, "explain": "Ağırlık şikâyeti öznel bir histir; bu yüzden kapanışı da nesnel olmak zorundadır. Birincisi ölçümün tekrarıdır: onarım öncesi alınan çevirme kuvveti ya da basınç değeri aynı koşullarda yeniden ölçülür ve iyileşme sayıyla gösterilir. Aynı koşul şartı burada özellikle önemlidir — tekerlekler havadaydıysa yine havada, motor çalışıyorduysa yine çalışır durumda ölçülür. İkincisi yol testidir ve iki boyutta yapılır: iki yönde eşitlik ve iki hızda (düşük ve yüksek) farklılık; ikisi de bu dersin ayırt edici bulgularıydı ve düzeldiklerinin görülmesi gerekir. Üçüncüsü kodlardır — elektrikli sistemde işlem sırasında oluşmuş kayıtlar temizlenir ve geri gelmedikleri doğrulanır. Dördüncüsü kayıttır: hangi sebep bulundu, öncesi ve sonrası değerler ne oldu, hangi koşulda ölçüldü. Son olarak müşteriye sonuç somut cümlelerle anlatılır; 'düzeldi' demek yerine 'çevirme kuvveti iki yönde eşitlendi ve şu kadar azaldı' demek, hem güven verir hem de ileride bir tartışma çıkmasını önler." },
+          { "label": "His düzeldiyse yeterlidir", "verdict": "his", "explain": "Öznel his ölçümle desteklenir." },
+          { "label": "Yalnız bir yönde denenir", "verdict": "tek-yon", "explain": "Asimetri bu dersin ayırt edici bulgusuydu." },
+          { "label": "Kayıt tutulmaz", "verdict": "kayit-yok", "explain": "Öncesi/sonrası değerler ileride yol gösterir." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "'Düzeldi' yerine 'iki yönde eşitlendi ve şu kadar azaldı'. Öznel şikâyet, nesnel kapanış."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Ağırlık şikâyetinde kaputu açmadan önce ne kontrol edilir?",
+        "a": "lastik-once",
+        "options": [
+          { "verdict": "lastik-once", "label": "Dört lastiğin basıncı ve durumu", "explain": "Düşük basınçlı lastiğin temas alanı büyür ve tekerleği yerinde çevirmek için gereken kuvvet belirgin artar; sürücü bunu doğrudan 'direksiyon ağırlaştı' diye tarif eder. Aynı etkiyi yanlış ölçü lastik ve tek taraftaki basınç farkı da üretir. Ücretsiz, iki dakikalık bu kontrol atlandığında hidrolik ya da elektronik tarafta saatler harcanır ve sonunda basınç düzeltilince şikâyet geçer." },
+          { "verdict": "basinc", "label": "Doğrudan hidrolik basınç ölçülür", "explain": "Ucuz ve hızlı olan önce." },
+          { "verdict": "modul", "label": "Modül değiştirilir", "explain": "Parça en son." },
+          { "verdict": "ilgisiz", "label": "Lastik bu şikâyetle ilgisiz", "explain": "En sık sebeplerden biri." }
+        ]
+      },
+      {
+        "q": "EPS'li araçta uyarı lambası yanmıyor ama direksiyon ağır. Nasıl değerlendirilir?",
+        "a": "canli-veri",
+        "options": [
+          { "verdict": "canli-veri", "label": "Canlı veriden destek akımı, modülün gördüğü hız ve iki yön simetrisi okunur", "explain": "Uyarının yanmaması EPS'in doğru çalıştığını kanıtlamaz; sistem yalnız kendi denetiminin yakaladığı sorunları bildirir. Yanlış ama makul bir hız bilgisi arıza sayılmaz, yalnız destek ona göre hesaplanır. Akım hıza göre değişiyor mu, modülün gördüğü hız gerçek mi, iki yön eşit mi — buna yük altında besleme gerilimi kontrolü eklenir, çünkü gerilim düşümü desteği kısar ve çoğu zaman kod üretmez." },
+          { "verdict": "saglam", "label": "Uyarı yoksa EPS sağlamdır", "explain": "Sistem yalnız yakaladığını bildirir." },
+          { "verdict": "modul", "label": "Modül değiştirilir", "explain": "Ölçmeden parça değişmez." },
+          { "verdict": "sadece-kod", "label": "Yalnız kod okunur", "explain": "Kodsuz arızalar canlı veriyle yakalanır." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 42 N ve 61 N SENARYO okumalarıdır ve ölçüm tekerlekler havadayken alınmıştır; istenen FARKTIR (19 N) ve gösterilen şey asimetrinin mutlak değerden daha kullanışlı olduğudur. Kabul edilebilir çevirme kuvveti verilmiyor.",
+    "sourceRequired": "Çevirme kuvveti sınırları, hidrolik basınç değerleri, EPS akım değerleri ve lastik basınçları bilinçle VERİLMEDİ; araca ve üreticiye özgüdür.",
+    "kapsam": "Ön takım mafsalları ve lastik kaynaklı sebepler Lastik ve Tekerlek alanında işlendi; burada eleme adımı olarak anıldı. Fren sürtmesi kaynaklı ağırlık fren sisteminin konusu ve kapsam dışı. Basınç testinin ayrıntısı aşama 3'te.",
+    "reviewedByMechanic": false
+  }
+}

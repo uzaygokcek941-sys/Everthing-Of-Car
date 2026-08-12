@@ -1,0 +1,177 @@
+{
+  "id": "kaporta.boyasiz-gocuk",
+  "area": "kaporta",
+  "stage": 3,
+  "title": "Boyasız Göçük Düzeltme: Nerede Uygulanır, Nerede Uygulanmaz",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 40,
+  "prerequisites": ["kaporta.gocuk-analizi"],
+  "learningGoals": [
+    "Boyasız düzeltmenin hangi şartlar sağlandığında mümkün olduğunu bilmek",
+    "Yöntemin sınırını baştan görüp müşteriye doğru sözü vermek",
+    "Fabrika boyasının korunmasının bir araç için ne anlama geldiğini anlamak"
+  ],
+
+  "safety": [
+    { "rule": "Panel arkasına alet sokulmadan önce iç yapı görülür", "why": "Kapı ve yan panellerde kiriş, mekanizma, kablo demeti ve hava yastığı bileşenleri bulunur; körlemesine çalışmak bunlara zarar verir", "blocksStart": true },
+    { "rule": "Boya çatlamış ya da gerilmiş bir bölgede bu yöntem zorlanmaz", "why": "Boyasız düzeltmenin tek gerekçesi fabrika boyasını korumaktır; boya zaten zarar görmüşse yöntem amacını kaybeder ve zorlama boyayı tamamen kaldırır", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.pdr-cubugu", "label": "Boyasız düzeltme çubuğu", "required": true },
+    { "id": "tool.cizgi-lambasi", "label": "Çizgi lambası", "required": true },
+    { "id": "tool.kalinlik-olcer", "label": "Boya kalınlık ölçer", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Kapı panelinde dolu tanesi büyüklüğünde yayvan bir göçük var; boyası çizilmemiş.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-kapi-paneli",
+        "question": "Boyasız düzeltme neyi hedefler?",
+        "options": [
+          { "label": "Fabrika boyasını hiç bozmadan sacı arkadan yavaşça geri itmeyi: boya, macun ve zımpara aşamalarının tamamı atlanır ve panel fabrika katmanlarıyla kalır", "verdict": "fabrika-boyasi", "correct": true, "explain": "Bu yöntemin bütün değeri tek bir şeyden gelir: fabrika boyası yerinde kalır. Korozyon dersinde gördüğün gibi fabrika koruması kat kat kurulmuş bir sistemdir — sacın kendi kaplaması, kimyasal ön işlem, daldırma astar, dolgu astarı, renk ve vernik. Bir bölgeyi zımparalayıp yeniden boyadığında bu sistemin birkaç katmanını birden kaldırmış olursun ve ne kadar iyi çalışırsan çalış, atölyede kurulan katman fabrikanınkinin birebir aynısı olmaz. Boyasız düzeltme bu takası hiç yapmaz: sacın arkasına ulaşılır, özel çubuklarla çok sayıda küçük ve kontrollü baskı uygulanır ve metal yavaş yavaş yerine döner. Boya hiç dokunulmadığı için renk uyumu sorunu yoktur, macun yoktur, kuruma beklemesi yoktur ve iş çoğu zaman aynı gün biter. Aracın geçmişi açısından da fark yaratır: ölçme dersinde öğrendiğin boya kalınlık ölçeri bu panele tuttuğunda okuma fabrika değerinde çıkar, yani panel 'onarım görmemiş' okur. Bunun ikinci el değerine etkisi doğrudandır. Ama yöntemin dar bir uygulanabilirlik alanı vardır ve bu dersin asıl konusu o sınırdır: her göçük bu yöntemle çıkmaz ve zorlandığında hem boya hem sac zarar görür." },
+          { "label": "Daha hızlı boyama yapmayı", "verdict": "hizli-boya", "explain": "Boyama hiç yapılmaz; yöntemin amacı boyaya dokunmamaktır." },
+          { "label": "Macunu incelterek kullanmayı", "verdict": "ince-macun", "explain": "Macun da kullanılmaz." },
+          { "label": "Ucuz onarım yapmayı", "verdict": "ucuz", "explain": "Maliyet bir sonuç; amaç fabrika katmanlarını korumak." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Yöntemin bütün değeri tek şeyden: fabrika boyası yerinde kalır. Panel 'onarım görmemiş' okur."
+    },
+    {
+      "id": 2,
+      "instruction": "Boya kalınlığını iki noktada ölçtün: sağlam bölgede 112 mikron, göçüğün en gergin yerinde 74 mikron. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.kalinlik-olcer",
+        "unit": "mikron",
+        "acceptRange": [36, 40]
+      },
+      "camera": "kaporta",
+      "hint": "112 eksi 74.",
+      "teachingNote": "38 mikronluk bu düşüş, boyanın o noktada gerildiğini söylüyor — sac çökerken üzerindeki boya da esnemiş ve incelmiş. Bu okumanın iki ayrı anlamı var. Birincisi uygulanabilirlik: boya ne kadar gerilmişse geri itme sırasında çatlama riski o kadar yüksektir; belirgin biçimde incelmiş bir bölgede yöntem zorlanmaz, çünkü amaç zaten boyayı korumaktı. İkincisi teşhis: okuma sağlam bölgede beklenenden yüksek çıkarsa o panel daha önce boyanmış demektir ve bu, yöntemin uygulanabilirliğini doğrudan etkiler — sonradan atılmış boya fabrika boyası kadar esnek olmayabilir ve daha kolay çatlar; ayrıca altında macun varsa geri itme macunu sacdan ayırır ve dışarıdan görünmeyen bir boşluk bırakır. Bu yüzden işe başlamadan önce panelin kalınlık haritası çıkarılır. Kararın üçüncü girdisi elle kontroldür: gerilmiş boya bazen elle hafif mat ve farklı dokuda hissedilir. Bu ders hiçbir araç için fabrika boya kalınlığı ya da uygulanabilirlik eşiği vermiyor; buradaki iki sayı senaryo okumasıdır ve önemli olan farkın ne söylediğidir."
+    },
+    {
+      "id": 3,
+      "instruction": "İki farklı araçta iki göçük var: biri yayvan ve boyası sağlam, diğeri keskin kenarlı ve boyası çatlamış.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.gocuk-bolgesi",
+        "question": "Hangisi bu yöntemle çalışılır?",
+        "options": [
+          { "label": "Yayvan ve boyası sağlam olan: yöntem, boyanın bütünlüğü korunduğu ve metal aşırı gerilmediği sürece işler — boyası çatlamış ya da keskin katlanmış hasarda uygulanmaz", "verdict": "yayvan-saglam", "correct": true, "explain": "Bu yöntemin uygulanabilirliği dört şarta bakar ve dördü de baştan kontrol edilir. Birincisi boyanın durumu: boya çatlamış, kalkmış ya da çizilmişse yöntemin gerekçesi ortadan kalkar — zaten boyanacak bir panelde boyayı korumaya çalışmanın anlamı yoktur. İkincisi hasarın karakteri: yayvan çökmeler uygundur, keskin kenarlı katlanmalar değildir; katlanmada metal kapasitesini tüketmiştir ve arkadan itmek onu düzeltmez, çatlatır. Üçüncüsü erişim: sacın arkasına ulaşılabilmesi gerekir. Bazı bölgeler kapalı kesittir, bazı yerlerde iç destekler ya da yapıştırılmış takviyeler vardır ve oraya çubuk giremez; bu durumda ya erişim için parça sökülür ya yöntem uygulanamaz. Dördüncüsü konum: kıvrım hattı üzerindeki ve panel kenarındaki hasarlar bu yöntem için en zorlarıdır, çünkü metal oralarda daha serttir ve sonuç ışıkta hemen görünür. Bu dört şart sağlanıyorsa yöntem çok iyi sonuç verir; biri bile eksikse zorlamak, hem panelde kalıcı iz hem çatlamış boya bırakır ve iş klasik onarımdan daha pahalıya biter — çünkü artık düzeltilecek yeni bir hasar da vardır. Yöntemin bir sınırı daha var: uygulanabilir olması her zaman kusursuz sonuç anlamına gelmez; bazı hasarlar büyük ölçüde düzelir ama ışıkta hafif bir iz kalır. Müşteriye söylenecek söz bu ihtimali içermelidir." },
+          { "label": "İkisi de uygundur", "verdict": "ikisi", "explain": "Çatlamış boya ve keskin katlanma yöntemin dışındadır." },
+          { "label": "Keskin olan, çünkü daha belirgin", "verdict": "keskin", "explain": "Katlanmada metal kapasitesini tüketmiştir; itmek çatlatır." },
+          { "label": "Boya durumu önemsizdir", "verdict": "boya-onemsiz", "explain": "Yöntemin tek gerekçesi boyayı korumaktır." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Dört şart: boya sağlam, hasar yayvan, arkaya erişim var, konum kıvrım hattı değil. Biri eksikse zorlama."
+    },
+    {
+      "id": 4,
+      "instruction": "Çubuğu panelin arkasına yerleştirdin ve baskı uygulayacaksın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.gocuk-cektirme",
+        "question": "Baskı nasıl uygulanır?",
+        "options": [
+          { "label": "Çok sayıda küçük ve kontrollü baskıyla, dıştan içe doğru ve her baskıdan sonra ışıkla kontrol ederek — tek büyük itiş göçüğü tepeye çevirir ve boyayı çatlatır", "verdict": "kucuk-baski", "correct": true, "explain": "Bu yöntemin bütün hüneri kuvvetin küçüklüğünde ve sayısındadır. Her baskı, sacı yalnız birkaç mikron hareket ettirecek kadar olmalıdır; ilerleme yüzlerce küçük hamlenin toplamıdır. Sebebi ikilidir. Birincisi boya: fabrika boyası belirli bir esneme payına sahiptir ve ani bir hareket bu payı aşarak boyayı çatlatır — çatladığı anda yöntemin amacı ortadan kalkmıştır. İkincisi metal: tek büyük itiş göçüğü kaldırmaz, itilen noktayı dışarı fırlatır ve bir tepe bırakır. Tepe, göçükten daha zor bir sorundur çünkü artık gergin ve sertleşmiş bir bölgeyle uğraşırsın ve çevresi hâlâ çukurdur. Sıra, göçük analizi dersindeki ilkeyle aynıdır: dıştaki kilitlenmiş kuşaktan başlanır, daireler hâlinde merkeze doğru gidilir. Her baskıdan sonra çizgi lambasına bakılır — bu yöntemde ışık bir yardımcı değil, tek geri bildirim kaynağıdır; çubuk sacın arkasındadır ve ne kadar ittiğini yalnız yansımadan okursun. Uygulamada usta çoğu zaman ışığın yansımasını izleyerek, göremeden ve dokunarak çalışır; bu yüzden yöntem sabır ve çok tekrar ister. Aletin ucu da önemlidir: sert ve keskin bir uç sacın arkasında noktasal bir kabarma bırakır, bu da dışarıdan küçük bir tümsek olarak görünür. Uç, yüzeye ve kuvvete uygun seçilir ve gerektiğinde koruyucu başlıkla kullanılır." },
+          { "label": "Tek seferde güçlü bir itişle", "verdict": "tek-itis", "explain": "Tek itiş tepe bırakır ve boyayı çatlatır." },
+          { "label": "Merkezden başlayarak", "verdict": "merkez", "explain": "Kilitlenmiş kuşak önce çözülür." },
+          { "label": "Isıtarak", "verdict": "isit", "explain": "Isı boyayı ve malzemeyi etkiler; bu yöntemde amaç boyaya dokunmamaktır." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Çubuk sacın arkasında; ne kadar ittiğini yalnız yansımadan okursun. Işık burada yardımcı değil, tek geri bildirim."
+    },
+    {
+      "id": 5,
+      "instruction": "Göçük büyük ölçüde çıktı ama ışıkta hafif bir iz kalıyor. Müşteri bekliyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.arka-kapi-paneli",
+        "question": "Ne söylenir?",
+        "options": [
+          { "label": "Gerçek durum: 'Göçüğün büyük kısmı çıktı, belirli bir ışıkta hafif iz görünüyor — devam edersem boyayı riske atarım; isterseniz burada bırakırız, isterseniz klasik onarıma geçeriz' denir ve karar birlikte verilir", "verdict": "gercek-durum", "correct": true, "explain": "Bu yöntemde iş çoğu zaman keskin bir 'oldu' ya da 'olmadı' ile bitmez; bir noktadan sonra her ek hamlenin kazancı azalır ve riski artar. O noktayı görmek ve orada durabilmek, bu işin ustalık tarafıdır. Devam etmenin riski somuttur: boya çatlarsa yöntemin bütün gerekçesi ortadan kalkar ve panel artık boyanmak zorundadır — yani müşteri hem boyasız düzeltmenin ücretini hem boyamanın ücretini konuşur hâle gelir. Bu yüzden karar tek başına verilmez, müşteriye anlatılır. Anlatırken üç şey söylenir: şu an ne durumda, devam edilirse ne kazanılır ve ne riske girilir, alternatif ne. Alternatif genelde klasik onarımdır ve o da meşru bir yoldur — ama artık panel boyanacaktır ve boya kalınlık ölçümü ilerideki bir alıcıya bu paneli 'onarım görmüş' diye okutacaktır; müşterinin bunu bilmesi hakkıdır. Söylenmeyecek olan şey ise bellidir: 'yepyeni gibi oldu'. Işıkta görünen bir izi görmezden gelip teslim etmek, müşterinin ilk güneşli günde fark edeceği bir şeyi ertelemekten başka bir işe yaramaz — ve o gün güven kaybı, izin kendisinden büyük olur. Bu alandaki bütün derslerde tekrarlanan ilke burada da geçerli: baştan söylenen sınır iş kaybettirir, sonradan söylenen sınır müşteri kaybettirir." },
+          { "label": "'Yepyeni gibi oldu' denir", "verdict": "yepyeni", "explain": "Müşteri ilk güneşli günde fark eder; güven kaybı izden büyük olur." },
+          { "label": "İz görülene kadar zorlanır", "verdict": "zorla", "explain": "Boya çatlarsa yöntemin gerekçesi ortadan kalkar." },
+          { "label": "Hiçbir şey söylenmez, teslim edilir", "verdict": "sessiz", "explain": "Fark edilecek bir durumu ertelemek güveni bitirir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Her ek hamlenin kazancı azalır, riski artar. O noktayı görüp durabilmek bu işin ustalık tarafı."
+    },
+    {
+      "id": 6,
+      "instruction": "Aynı araçta ikinci bir göçük daha var ama kapalı bir kesitin üzerinde; arkasına ulaşılamıyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.esik-saci",
+        "question": "Ne yapılır?",
+        "options": [
+          { "label": "Erişim için parça sökümü mümkünse değerlendirilir, değilse bu yöntem uygulanmaz: alternatif yüzeyden çektirme ya da klasik onarımdır ve ikisi de boyayı gündeme getirir", "verdict": "erisim-yok", "correct": true, "explain": "Erişim, bu yöntemin en sert şartıdır çünkü teknik tamamen sacın arkasına dayanır. Bir bölgeye ulaşmanın üç yolu vardır. Birincisi mevcut açıklıklardan girmek: kapı iç döşemesi, lamba yuvası, tekerlek davlumbazı gibi noktalardan çubuk sokulabilir. İkincisi parça sökmek: kapı döşemesi, tavan kaplaması ya da bir iç panel söküldüğünde erişim açılabilir — bu işin süresini ve fiyatını artırır ama yöntemi mümkün kılar; sökümün kendisi de bir risktir, çünkü klips ve döşeme hasarı ihtimali vardır. Üçüncüsü hiçbiri: kapalı kesitler, yapıştırılmış takviyeler ve iç destekler bazı bölgeleri fiilen ulaşılamaz kılar. Üçüncü durumda yeni delik açmak akla gelir ve bazı uygulamalarda üreticinin izin verdiği servis delikleri kullanılır — ama sacda kendiliğinden delik açmak, korozyon dersinde gördüğün fabrika korumasını delmek demektir ve o delik sonradan kapatılıp korunmadıkça pasın başlangıç noktası olur. Kılavuz izin vermiyorsa yapılmaz. Geriye kalan yollar yüzeyden çektirme ve klasik onarımdır; ikisi de boyaya dokunur, yani artık 'boyasız' bir işten söz edilmiyordur ve müşteriye verilecek söz de buna göre değişir." },
+          { "label": "Sacda delik açılıp çubuk sokulur", "verdict": "delik", "explain": "Kılavuz izin vermiyorsa yapılmaz; açılan delik korozyonun başlangıç noktası olur." },
+          { "label": "Daha uzun çubukla zorlanır", "verdict": "uzun-cubuk", "explain": "Erişim yoksa alet uzunluğu çözmez." },
+          { "label": "Dışarıdan bastırılır", "verdict": "disaridan", "explain": "Göçük dışarıdan bastırılarak çıkmaz; daha da derinleşir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Sacda kendiliğinden delik açmak fabrika korumasını delmektir. Kılavuz izin vermiyorsa yapılmaz."
+    },
+    {
+      "id": 7,
+      "instruction": "Yöntemin sınırlarını kurdun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kaput-kaporta",
+        "question": "Bu yöntem işletme açısından ne değiştirir?",
+        "options": [
+          { "label": "Uygun hasarlarda hem müşteriye daha ucuz hem araca daha az müdahaleli bir çözüm sunar ve aynı gün biter — ama sınırı dar olduğu için ancak doğru seçilen işlerde kazandırır", "verdict": "dogru-secim", "correct": true, "explain": "Bu yöntem, kaporta işinde nadir görülen bir şeyi sunar: hem müşteri hem usta için aynı anda iyi olan bir sonuç. Müşteri açısından fabrika boyası korunur, araç 'onarım görmemiş' okumaya devam eder, iş çoğu zaman aynı gün biter ve maliyet klasik onarımın altındadır. Usta açısından malzeme maliyeti neredeyse sıfırdır, kuruma beklemesi yoktur, boya kabini gerekmez ve iş yoğunluğu kolay planlanır. Ama bu avantajlar yalnız doğru seçilmiş işlerde ortaya çıkar. Yanlış seçilmiş bir işte tablo tersine döner: saatler harcanır, sonuç orta kalır, boya çatlamışsa yeni bir hasar eklenmiştir ve iş yine boyaya gider — yani ikinci kez ödenen bir emek. Bu yüzden bu yöntemde asıl beceri çubuğu kullanmak değil, işi baştan doğru seçmektir. Seçim dört soruya bakar ve dördü de işe başlamadan cevaplanır: boya sağlam mı, hasar yayvan mı, arkaya erişim var mı, konum kıvrım hattı ya da panel kenarı mı. Bir de beşinci, sessiz soru vardır: bu iş benim bugünkü ustalığımla çıkar mı? Bu yöntem çok tekrar isteyen, uzun sürede oturan bir beceridir ve yeni başlayan biri için doğru yol, kolay hasarlarda çalışıp zoru reddetmektir. Reddedilen bir iş, kötü yapılmış bir işten her zaman ucuzdur." },
+          { "label": "Her göçükte tercih edilmelidir", "verdict": "her-gocuk", "explain": "Sınırı dardır; yanlış seçimde iş yine boyaya gider." },
+          { "label": "Yalnız ucuzluk sağlar", "verdict": "ucuz", "explain": "Asıl kazanç fabrika katmanlarının korunmasıdır." },
+          { "label": "Klasik onarımın yerini alır", "verdict": "yerine", "explain": "Farklı hasar türlerine bakarlar; biri diğerinin yerine geçmez." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Asıl beceri çubuğu kullanmak değil, işi baştan doğru seçmek. Reddedilen iş kötü yapılan işten ucuzdur. Sırada çekme ve ısı."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Boyası çatlamış keskin bir göçükte bu yöntem uygulanır mı?",
+        "a": "yayvan-saglam",
+        "options": [
+          { "verdict": "yayvan-saglam", "label": "Hayır: yöntemin tek gerekçesi fabrika boyasını korumaktır ve boya zaten zarar görmüştür; ayrıca keskin katlanmada metal kapasitesini tüketmiştir, arkadan itmek düzeltmez çatlatır", "explain": "Dört şart birlikte aranır: boya sağlam, hasar yayvan, arkaya erişim var, konum kıvrım hattı ya da panel kenarı değil. Biri eksikse zorlamak hem panelde kalıcı iz hem çatlamış boya bırakır ve iş klasik onarımdan pahalıya biter." },
+          { "verdict": "ikisi", "label": "Her göçükte uygulanır", "explain": "Sınırı dardır." },
+          { "verdict": "keskin", "label": "Keskin hasarda daha iyi sonuç verir", "explain": "Katlanmada metal çatlar." },
+          { "verdict": "boya-onemsiz", "label": "Boya durumu önemsizdir", "explain": "Yöntemin gerekçesi boyadır." }
+        ]
+      },
+      {
+        "q": "Göçük büyük ölçüde çıktı ama ışıkta hafif iz kaldı. Ne yapılır?",
+        "a": "gercek-durum",
+        "options": [
+          { "verdict": "gercek-durum", "label": "Durum olduğu gibi anlatılır ve karar müşteriyle birlikte verilir: devam etmek boyayı riske atar, alternatif klasik onarımdır ve o da paneli 'onarım görmüş' hâle getirir", "explain": "Bir noktadan sonra her ek hamlenin kazancı azalır, riski artar. Boya çatlarsa panel boyanmak zorunda kalır ve müşteri iki ücreti birden konuşur. 'Yepyeni gibi oldu' denmez — müşteri ilk güneşli günde fark eder." },
+          { "verdict": "yepyeni", "label": "'Yepyeni gibi oldu' denir", "explain": "Güven kaybı izden büyük olur." },
+          { "verdict": "zorla", "label": "İz kaybolana kadar zorlanır", "explain": "Boya çatlarsa gerekçe ortadan kalkar." },
+          { "verdict": "sessiz", "label": "Söylenmeden teslim edilir", "explain": "Ertelenen fark güveni bitirir." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2'deki 112 mikron ve 74 mikron SENARYO okumalarıdır; istenen FARKTIR (38 mikron). Ders hiçbir araç için fabrika boya kalınlığı ya da yöntem uygulanabilirlik eşiği iddia etmiyor.",
+    "sourceRequired": "Fabrika boya kalınlıkları, boyasız düzeltme için kabul edilebilir gerilme ve kalınlık düşüşü sınırları, üreticinin izin verdiği servis delikleri ve erişim noktaları, hangi panelde yöntemin onaylandığı bilinçle VERİLMEDİ; araca ve panele özgüdür ve üreticinin onarım kılavuzundan okunur.",
+    "kapsam": "Taşıyıcı yapıda uygulama, sacda yeni delik açma ve kapalı kesite müdahale KAPSAM DIŞIDIR; ders yöntemin uygulanabilirlik sınırını ve müşteriye verilecek sözü öğretiyor.",
+    "kaynak": "Bu alan kullanıcının açık talebiyle eklendi (talep birebir: 'birde alanlara kaportayı ekleyelim'); konu başlıkları MEB Otomotiv Gövde ve Boya dalının çerçevesini takip ediyor, kazanım numarası iddiası yok.",
+    "reviewedByMechanic": false
+  }
+}

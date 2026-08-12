@@ -1,0 +1,177 @@
+{
+  "id": "kaporta.renk-tutmadi",
+  "area": "kaporta",
+  "stage": 9,
+  "title": "Şikâyet: Renk Tutmadı",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 40,
+  "prerequisites": ["kaporta.su-sizdirmazligi"],
+  "learningGoals": [
+    "'Renk tutmadı' cümlesinin tek bir arıza değil, birkaç farklı arızanın ortak adı olduğunu görmek",
+    "Farkın nerede ve hangi koşulda göründüğünü sorarak sebebi daraltmak",
+    "Kalınlık ölçümünün renk teşhisinde neden kullanıldığını bilmek"
+  ],
+
+  "safety": [
+    { "rule": "Teşhis için yapılacak her zımpara ve polisaj denemesinde göz ve solunum koruması kullanılır", "why": "Kürlenmiş boya tozu solunduğunda zararlıdır", "blocksStart": false },
+    { "rule": "Sebep belirlenmeden panel yeniden boyanmaz", "why": "Yanlış sebeple yapılan ikinci boya aynı sonucu verir ve kalınlık payını bir kez daha harcar", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.kalinlik-olcer", "label": "Kalınlık ölçer", "required": true },
+    { "id": "tool.renk-karti", "label": "Deneme kartı", "required": true },
+    { "id": "tool.aydinlatma", "label": "Kontrol lambası", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Müşteri geldi: 'Boyadığınız kapı tutmamış, farklı duruyor.' Araç atölyenin içinde, lamba altında.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-kapi-paneli",
+        "question": "İlk yapılacak şey nedir?",
+        "options": [
+          { "label": "Koşulu sabitlemek: farkın nerede, hangi açıdan ve hangi ışıkta göründüğünü müşteriyle birlikte, gün ışığında görmek — çünkü aynı iki yüzey bir ışıkta aynı, başka bir ışıkta farklı görünebilir", "verdict": "kosulu-sabitle", "correct": true, "explain": "Renk şikâyetlerinde en çok zaman kaybettiren şey, tarafların farklı şeylere bakıyor olmasıdır. Müşteri farkı belirli bir koşulda görmüştür — belki güneşte, belki belirli bir açıdan, belki yalnız sabah ışığında — ve usta atölye lambası altına bakıp 'bir şey yok' der. İkisi de kendi koşulunda haklıdır, çünkü iki farklı boya bir ışık altında aynı, başka bir ışık altında farklı görünebilir. Bu yüzden teşhis, farkın hangi koşulda ortaya çıktığını sabitlemekle başlar ve bu iş müşteriyle birlikte, gün ışığında yapılır. Üç soru sorulur. Birincisi yer: fark panelin tamamında mı, yalnız bir bölgesinde mi, yoksa iki panelin birleştiği hatta mı görünüyor? İkincisi açı: dik bakışta mı, yandan mı, yoksa her açıdan mı? Üçüncüsü koşul: yalnız güneşte mi, gölgede de var mı, ıslakken değişiyor mu? Bu üç cevap sebebi büyük ölçüde daraltır ve dersin geri kalanı bunun üzerine kurulur. Bir de karşılaştırma yüzeyinin durumu vardır: üzerinde kir, oksitlenmiş katman ya da eski cila kalıntısı olan komşu panel gerçek renginden farklı görünür; karşılaştırmadan önce her iki yüzey de temizlenir. Bu adım atlandığında sık görülen bir sonuç şudur — panel yeniden boyanır, aynı fark kalır ve iki taraf da ikinci kez hayal kırıklığına uğrar." },
+          { "label": "Panel hemen yeniden boyanır", "verdict": "yeniden-boya", "explain": "Sebep bilinmeden yapılan ikinci boya aynı sonucu verir." },
+          { "label": "Cila yapılır, fark kapanır", "verdict": "cila", "explain": "Cila yüzeyi düzler; ton farkını değiştirmez." },
+          { "label": "Atölye lambası altında karar verilir", "verdict": "lamba", "explain": "Karar gün ışığında verilir; yapay ışık yanıltır." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "İki taraf farklı koşullara bakıyorsa ikisi de kendi koşulunda haklıdır. Önce koşulu sabitle: yer, açı, ışık."
+    },
+    {
+      "id": 2,
+      "instruction": "Onarılan panelde kalınlık 168 mikron, karşılaştırma yaptığın komşu panelde 124 mikron. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.kalinlik-olcer",
+        "unit": "mikron",
+        "acceptRange": [42, 46]
+      },
+      "camera": "kaporta",
+      "hint": "168 eksi 124.",
+      "teachingNote": "44 mikronluk fark — ve renk teşhisinde kalınlık ölçümünün neden kullanıldığı tam burada. Ölçüm rengi söylemez ama rengin karşılaştırıldığı zemin hakkında konuşur ve üç ayrı bilgi taşır. Birincisi referansın kimliğidir: karşılaştırma yaptığın komşu panelin kalınlığı, aracın genel dağılımından belirgin biçimde farklıysa o panel muhtemelen fabrika boyası değildir — yani başka bir zamanda, başka bir ustanın karıştırdığı bir renge bakarak eşleştirme yapıyor olabilirsin. Bu durumda 'renk tutmadı' şikâyeti aslında 'yanlış referansa tutturuldu' demektir ve panelini bir kez daha boyamak sorunu çözmez. İkincisi onarım bölgesinin kendisidir: ölçüm çok yüksekse orada katman yığılması vardır — kalın kat, üst üste onarım ya da geniş macun. Bu, hem rengin farklı görünmesine hem geçişin belli olmasına katkı verebilir. Üçüncüsü dağılımdır: tek nokta değil, panelin farklı yerlerinden ve komşu panellerden birkaç okuma alınır; asıl bilgi tek bir sayıda değil, sayıların birbirine göre durumundadır. Ölçümün son bir faydası kayıttır — şikâyet dosyasına yazılan bu değerler, ikinci bir tartışmada tarafların elinde nesnel bir veri bırakır. Kabul edilebilir fabrika kalınlığı ve dağılımı araca ve üreticiye özgüdür; buradaki iki sayı senaryo okumasıdır."
+    },
+    {
+      "id": 3,
+      "instruction": "Gün ışığında bakıyorsunuz: panel dik bakışta aynı, yandan bakınca daha açık görünüyor. Renk metalik.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-camurluk",
+        "question": "Bu ne söyler?",
+        "options": [
+          { "label": "Sorun büyük olasılıkla formülde değil uygulamada: metalikte parçacıkların yüzeye nasıl dizildiğini tabanca mesafesi, hava ve kat düzeni belirler — açıdan açıya değişen fark bu dizilimin farklı olduğunu gösterir", "verdict": "uygulama-farki", "correct": true, "explain": "Metalik ve sedefli renklerde farkın hangi açıda göründüğü, sebebi neredeyse tek başına söyler. Fark her açıda aynı ölçüde varsa sorun tonda, yani formüldedir; varyant yanlış seçilmiş ya da solma hesaba katılmamış olabilir. Ama fark dik bakışta yokken yandan bakışta ortaya çıkıyorsa, konuştuğumuz şey ton değil, ışığın nasıl döndüğüdür — ve bunu belirleyen şey büyük ölçüde uygulamadır. Renk dersinde geçtiği gibi, metalik parçacıkların yüzeye yatık ve düzenli dizilmesi ıslak ve düzgün bir uygulamayla olur; tabanca fazla uzak tutulduğunda, hava fazla verildiğinde ya da kat kuru indiğinde parçacıklar düzgün yatamaz, ışığı farklı döndürür ve renk daha açık ve benekli görünür. Yani aynı formül, iki farklı uygulamayla iki farklı renk verir. Teşhisi doğrulamanın yolu, aynı formülü işin koşullarıyla yeniden bir deneme kartına püskürtüp araca tutmaktır: fark uygulama düzeltilince kapanıyorsa sebep bulunmuştur ve panel doğru teknikle yeniden boyanır. Kapanmıyorsa formül varyantına dönülür. Üçüncü bir ihtimal de akılda tutulur — karşılaştırma yapılan komşu panel daha önce boyanmışsa, ona benzememek aslında beklenen sonuçtur. Uygulama parametrelerinin renge sayısal etkisi ürüne ve tabancaya özgüdür." },
+          { "label": "Formül kesinlikle yanlıştır", "verdict": "formul", "explain": "Her açıda görünen fark formülü işaret eder; açısal fark uygulamayı." },
+          { "label": "Metalikte bu normaldir, dikkate alınmaz", "verdict": "normal", "explain": "Aynı açıdan bakıldığında iki panel benzer davranmalıdır." },
+          { "label": "Vernik yeniden atılırsa düzelir", "verdict": "vernik", "explain": "Vernik parçacık dizilimini değiştirmez." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Her açıda fark = formül. Yalnız belirli açıda fark = uygulama. Bu ayrım tek başına teşhisin yarısı."
+    },
+    {
+      "id": 4,
+      "instruction": "Başka bir araçta fark farklı görünüyor: iki panelin birleştiği hat boyunca net bir çizgi var, panelin ortasında fark yok.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.arka-kapi-paneli",
+        "question": "Bu neyin işareti?",
+        "options": [
+          { "label": "Açılım yapılmamış: renk panel sınırında bitirilmiş ve iki ton keskin bir hat boyunca yan yana gelmiş — fark küçük olsa bile göz yan yana duran iki tonu her koşulda ayırt eder", "verdict": "acilim-yok", "correct": true, "explain": "Bu, renk şikâyetlerinin en sık ve en kolay teşhis edilen biçimidir, çünkü kendine özgü bir imzası vardır: fark panelin ortasında yok, yalnız birleşim hattında var. Bunun anlamı, rengin aslında yakın olduğu ama sınırda bitirildiğidir. Renk dersinde geçen ilke burada tersinden doğrulanır — hedef farkı sıfırlamak değil, gözün yakalayamayacağı bir dağılıma yaymaktır; sınırda bitirmek ise farkı tam olarak gözün en iyi yakaladığı biçime, yani bir hatta dönüştürür. Çözüm de bellidir: komşu panele açılım yapılarak geçiş yeniden kurulur. Bu, müşteriye önceden söylenmesi gereken bir şeydir çünkü bitişik panele dokunmak anlamına gelir. İki ayrıntı önemlidir. Birincisi, açılımın nerede biteceği: bir kıvrımda ya da doğal bir hatta bitirmek, düz yüzeyin ortasında bitirmekten her zaman daha iyi sonuç verir. İkincisi vernik sınırıdır — renk açılımı bir yerde biter ama verniğin de ortada bırakılmış bir sınırı varsa o da ışıkta kendini gösterir. Bir de bu teşhisin dürüstlük tarafı vardır: ilk işte açılım yapılmamışsa bunun sebebi çoğu zaman bilgisizlik değil, komşu panele dokunmamak için verilen bir karardır — ve o karar müşteriye söylenmemiştir. Açılım genişliği ve yöntemi ürüne ve renge özgüdür." },
+          { "label": "Renk tamamen yanlış karışmış", "verdict": "yanlis-renk", "explain": "Yanlış formül panelin ortasında da fark verir." },
+          { "label": "Fuga ayarı bozuktur", "verdict": "fuga", "explain": "Fuga mekanik bir konu; buradaki iz renk sınırı." },
+          { "label": "Cila ile hat yumuşatılır", "verdict": "cila", "explain": "Cila yüzeyi düzler; iki tonun sınırını kaldırmaz." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Fark yalnız birleşim hattında ise renk yakın, açılım yok. En kolay teşhis, en sık atlanan adım."
+    },
+    {
+      "id": 5,
+      "instruction": "Üçüncü araçta fark her açıda ve panelin her yerinde var; komşu panel fabrika boyası ve kalınlık dağılımı normal.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.tavan-paneli",
+        "question": "Şimdi sebep nedir?",
+        "options": [
+          { "label": "Ton farkı: ya kodun altındaki yanlış varyant seçilmiş ya da aracın solması hesaba katılmamış — doğrulama, yeni bir deneme kartını kurutup araca tutarak gün ışığında yapılır", "verdict": "ton-farki", "correct": true, "explain": "Fark her açıdan ve panelin her yerinde görünüyorsa, ışığın dönüşüyle değil rengin kendisiyle ilgili bir sorun vardır. İki ana sebep kalır. Birincisi varyanttır: aynı renk kodunun altında birden fazla formül bulunabilir ve doğru olanı seçmek yalnız kodla değil, ek bilgilerle ya da doğrudan araçla karşılaştırarak belirlenir; yanlış varyantla karışan bir renk 'yakın ama tutmayan' bir sonuç verir. İkincisi solmadır: fabrika kodunun bugünkü karşılığı, uzun süre güneş görmüş bir panelin rengi değildir; kod doğru olsa bile sonuç tutmaz. Bu ikisini ayırmak her zaman mümkün olmayabilir ve pratikte gerekmez de — çözüm ikisinde de aynıdır: yeni bir deneme kartı hazırlanır, kurutulur ve aracın kendi paneline tutularak gün ışığında değerlendirilir; gerekiyorsa formül araca göre ayarlanır ve kalan fark açılımla çözülür. Burada dikkat edilecek nokta, kartın işin koşullarıyla püskürtülmesidir; farklı ayarla hazırlanan kart yanıltır. Üçüncü ve daha az akla gelen bir ihtimal daha vardır: onarılan panelin altında kalan katman farklı bir zemin sunuyor olabilir — örneğin astar rengi farklıysa ve üstteki renk yeterince örtmediyse, aynı formül daha açık ya da daha koyu görünebilir. Bu yüzden kaç kat atıldığı da sorulur. Varyant tabloları ve formül düzeltmeleri boya üreticisinin veri tabanındadır." },
+          { "label": "Uygulama hatasıdır", "verdict": "uygulama", "explain": "Uygulama farkı tipik olarak açıya bağlı görünür." },
+          { "label": "Vernik matlaştırmıştır", "verdict": "vernik", "explain": "Vernik parlaklığı etkiler; ton farkını üretmez." },
+          { "label": "Zamanla oturur, beklenir", "verdict": "beklenir", "explain": "Ton farkı zamanla kapanmaz." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Varyant mı solma mı — ayırmak gerekmez, çözüm ikisinde de aynı: kart, gün ışığı, araca göre ayar, açılım."
+    },
+    {
+      "id": 6,
+      "instruction": "Sebep belirlendi. Müşteriye ne söyleyeceğine karar veriyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.boya-tabancasi",
+        "question": "Müşteriye ne söylenir?",
+        "options": [
+          { "label": "Sebep, yapılacak iş ve kapsamı: düzeltme komşu panele dokunmayı gerektiriyorsa bu önceden söylenir — ayrıca renk eşleştirmede tam eşitliğin her zaman mümkün olmadığı da baştan konuşulur", "verdict": "sebep-ve-kapsam", "correct": true, "explain": "Renk şikâyetlerinde iletişimin kendisi işin bir parçasıdır, çünkü bu, müşterinin en kolay denetleyebildiği ve en çok üzerinde durduğu konudur. Söylenmesi gereken üç şey vardır. Birincisi sebeptir ve sade bir dille anlatılır: 'sınırda bitirilmiş, komşu panele açarak geçiş yapmamız gerekiyor' ya da 'kartı yeniden hazırlayıp aracınıza göre ayarlayacağız'. İkincisi kapsamdır ve en kritik olanıdır — düzeltme bitişik panele dokunmayı gerektiriyorsa bu önceden söylenir, iş bittikten sonra değil; çünkü müşteri için 'bir panel boyandı' ile 'iki panel boyandı' aynı şey değildir ve sonradan öğrenilen bir müdahale güveni bozar. Üçüncüsü beklentidir: renk eşleştirmede hedef, farkı gözün yakalayamayacağı bir dağılıma yaymaktır; bu, çoğu durumda çok iyi bir sonuç verir ama laboratuvar ölçüsünde bir eşitlik vaadi değildir. Bunu baştan söylemek, sonunda tartışmaktan iyidir. Söylenmemesi gereken de bir şey vardır: uydurulmuş bir gerekçe. 'Boyalar zamanla oturur' ya da 'güneşte kaybolur' gibi cümleler kısa vadede tartışmayı kapatır ama fark kapanmaz ve müşteri geri döner — bu kez güveni de kaybolmuş olarak. Bu alanın tekrar eden cümlesi burada da geçerli: reddedilen ya da açıkça anlatılan iş, gizlenmiş işten ucuzdur." },
+          { "label": "Yalnız 'düzelteceğiz' denir, ayrıntı verilmez", "verdict": "ayrintisiz", "explain": "Kapsam, özellikle komşu panele dokunma, önceden söylenir." },
+          { "label": "'Boyalar zamanla oturur' denir", "verdict": "oturur", "explain": "Ton farkı zamanla kapanmaz; güveni bozan bir gerekçedir." },
+          { "label": "Fark normal karşılanmalıdır, açıklama gerekmez", "verdict": "normal", "explain": "Müşterinin en kolay denetlediği konu; açıklama işin parçası." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Uydurulmuş gerekçe tartışmayı kapatır, farkı kapatmaz. Müşteri geri döndüğünde güven de gitmiş olur."
+    },
+    {
+      "id": 7,
+      "instruction": "Üç farklı araç, üç farklı sebep, üç farklı çözüm.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kaput-kaporta",
+        "question": "Bu dersin özeti nedir?",
+        "options": [
+          { "label": "'Renk tutmadı' tek bir arıza değil, en az dört ayrı arızanın ortak adıdır: yanlış referans, uygulama farkı, açılım eksikliği ve ton farkı — hangisi olduğunu farkın nerede ve hangi açıda göründüğü söyler", "verdict": "dort-ariza", "correct": true, "explain": "Bu ders bir teşhis ağacı kurdu ve ağacın dalları birbirinden nesnel işaretlerle ayrılıyor. Fark yalnız birleşim hattında görünüyorsa açılım yapılmamıştır. Fark yalnız belirli bir açıda görünüyorsa uygulama farklıdır. Fark her açıda ve panelin her yerinde görünüyorsa ton meselesidir — varyant ya da solma. Ve bütün bunlardan önce, karşılaştırma yapılan komşu panelin gerçekten fabrika boyası olup olmadığı kontrol edilir; değilse şikâyet 'renk tutmadı' değil 'yanlış referansa tutturuldu' demektir. Dört sebebin dört farklı çözümü var ve yanlış sebeple yapılan bir düzeltme yalnız zaman ve kalınlık payı harcar. Bunun ötesinde bir de genel ders var: bu alandaki her şikâyet gibi, renk şikâyeti de görüldüğü yerden değil, yapıldığı adımdan gelir. Kartın atlanması, açılımın yapılmaması, ayarın denenmemesi, referansın kontrol edilmemesi — hepsi işin başında alınmış kararlar. Şikâyet, o kararların gecikmeli faturasıdır. Sırada başka bir şikâyet var: boya kabardı ve pas geri geldi — yani zamanla ortaya çıkan ve yüzeyden değil derinden gelen bir arıza." },
+          { "label": "Renk tutmaması her zaman formül hatasıdır", "verdict": "formul", "explain": "Formül dört sebepten yalnız biri." },
+          { "label": "Panel yeniden boyanırsa çözülür", "verdict": "yeniden-boya", "explain": "Sebep yanlışsa ikinci boya aynı sonucu verir." },
+          { "label": "Renk farkı öznel bir konudur, ölçülemez", "verdict": "oznel", "explain": "Nerede ve hangi açıda göründüğü nesnel bir bilgidir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Farkın konumu ve açısı teşhisi verir. Şikâyet, işin başında alınmış kararların gecikmeli faturası."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Fark yalnız iki panelin birleştiği hat boyunca görünüyor, panel ortasında yok. Teşhis?",
+        "a": "acilim-yok",
+        "options": [
+          { "verdict": "acilim-yok", "label": "Açılım yapılmamış: renk yakın ama panel sınırında bitirilmiş, iki ton keskin bir hat boyunca yan yana gelmiş", "explain": "Göz yan yana duran iki tonu her koşulda ayırt eder. Çözüm komşu panele açılım yaparak geçişi yeniden kurmaktır ve bu, bitişik panele dokunmak anlamına geldiği için müşteriye önceden söylenir. Açılım mümkünse bir kıvrımda bitirilir." },
+          { "verdict": "yanlis-renk", "label": "Renk tamamen yanlış karışmış", "explain": "Yanlış formül panelin ortasında da fark verir." },
+          { "verdict": "fuga", "label": "Fuga ayarı bozuk", "explain": "Buradaki iz renk sınırı, mekanik bir konu değil." },
+          { "verdict": "cila", "label": "Cila ile yumuşatılır", "explain": "Cila iki tonun sınırını kaldırmaz." }
+        ]
+      },
+      {
+        "q": "Metalik panelde fark dik bakışta yok, yandan bakışta var. Sebep nerede aranır?",
+        "a": "uygulama-farki",
+        "options": [
+          { "verdict": "uygulama-farki", "label": "Uygulamada: parçacıkların dizilimini tabanca mesafesi, hava ve kat düzeni belirler; açısal fark dizilimin farklı olduğunu gösterir", "explain": "Her açıda görünen fark formülü, yalnız belirli açıda görünen fark uygulamayı işaret eder. Doğrulama, aynı formülü işin koşullarıyla yeniden karta püskürtüp araca tutmaktır. Fark kapanmazsa varyanta dönülür." },
+          { "verdict": "formul", "label": "Formül kesinlikle yanlış", "explain": "Formül hatası her açıda görünür." },
+          { "verdict": "normal", "label": "Metalikte normaldir", "explain": "İki panel aynı açıdan benzer davranmalıdır." },
+          { "verdict": "vernik", "label": "Vernik yeniden atılır", "explain": "Vernik parçacık dizilimini değiştirmez." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2'deki 168 mikron ve 124 mikron SENARYO okumalarıdır; istenen FARKTIR (44 mikron). Ders hiçbir araç için fabrika kalınlığı ya da kabul edilebilir fark iddia etmiyor.",
+    "sourceRequired": "Varyant tabloları, formül düzeltmeleri, kabul edilebilir fabrika kalınlığı ve dağılımı, açılım genişliği ve yöntemi ile uygulama parametrelerinin renge sayısal etkisi bilinçle VERİLMEDİ; hepsi marka ve boya üreticisine özgüdür ve üreticinin renk veri tabanından okunur.",
+    "kapsam": "Renk ölçüm cihazlarının kullanımı ve kalibrasyonu KAPSAM DIŞIDIR; ders farkın konumundan ve açısından sebebe giden teşhis zincirini öğretiyor.",
+    "kaynak": "Bu alan kullanıcının açık talebiyle eklendi (talep birebir: 'birde alanlara kaportayı ekleyelim'); konu başlıkları MEB Otomotiv Gövde ve Boya dalının çerçevesini takip ediyor, kazanım numarası iddiası yok.",
+    "reviewedByMechanic": false
+  }
+}

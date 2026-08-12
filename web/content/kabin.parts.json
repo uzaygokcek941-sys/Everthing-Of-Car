@@ -1,0 +1,20 @@
+{
+  "model": "kabin",
+  "file": "/models/kabin.glb",
+  "license": {
+    "source": "scripts/build-models.mjs — kod ile üretildi",
+    "author": "Everything For My Car",
+    "license": "Proje içi üretim — üçüncü taraf lisans yükümlülüğü yok",
+    "url": ""
+  },
+  "parts": {
+    "part.yag-basinc-lambasi": "yag_basinc_lambasi"
+  },
+  "_notes": {
+    "kapsam": "Sürücünün gördüğü uyarı lambaları. Şimdilik yalnız yağ basınç lambası; aşama 9 teşhis dersleri geldiğinde diğer uyarılar buraya eklenir.",
+    "olcek": "Metre. Gösterge paneli y=1.00, lamba panelin ön yüzünde.",
+    "yapisal": "gosterge_paneli bir adımın hedefi değildir; lambanın üzerinde durduğu yüzeydir.",
+    "isik": "Lamba malzemesinde emissiveFactor var; yanık hâli sahnede bu değerin açılıp kapanmasıyla verilir, ayrı mesh gerekmez.",
+    "nokta-yasagi": "Mesh adlarında nokta yok: three.js GLTFLoader düğüm adındaki '.', ':', '/', '[', ']' karakterlerini siler."
+  }
+}

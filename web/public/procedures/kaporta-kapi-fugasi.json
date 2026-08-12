@@ -1,0 +1,178 @@
+{
+  "id": "kaporta.kapi-fugasi",
+  "area": "kaporta",
+  "stage": 9,
+  "title": "Şikâyet: Kapı Zor Kapanıyor, Fuga Bozuk",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 40,
+  "prerequisites": ["kaporta.boya-kabardi"],
+  "learningGoals": [
+    "Fuganın bir görünüş konusu değil, gövde geometrisinin okunabilir hâli olduğunu görmek",
+    "Kapı düşmesi ile gövde deformasyonunu birbirinden ayırmak",
+    "Kilidi zorlayarak kapatmanın neden bir çözüm değil yeni bir arıza olduğunu bilmek"
+  ],
+
+  "safety": [
+    { "rule": "Kapı ayarı yapılırken kapı desteklenir, menteşe cıvataları gevşetilmiş kapı serbest bırakılmaz", "why": "Gevşetilmiş menteşede kapı ağırlığıyla düşer; hem parçaya hem kişiye zarar verir", "blocksStart": false },
+    { "rule": "Gövde geometrisinde şüphe varsa taşıyıcı yapıya müdahale edilmez", "why": "Direk, eşik ve taşıyıcı ayak bölgelerinde düzeltme kararı üreticinin onarım kılavuzuna ve gövde ölçüm sistemine aittir", "blocksStart": true },
+    { "rule": "Sıkışma koruması ve kapı içi sistemler iptal edilerek belirti susturulmaz", "why": "Bir korumanın devre dışı bırakılması, arızayı gizlerken yeni bir yaralanma riski üretir", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.olcum-mastari", "label": "Ölçüm mastarı", "required": true },
+    { "id": "tool.anahtar-takimi", "label": "Anahtar takımı", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Müşteri: 'Kapı zor kapanıyor, itmek gerekiyor.' Onarım birkaç ay önce yapılmış.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-kapi-paneli",
+        "question": "İlk ayrım nedir?",
+        "options": [
+          { "label": "Sorun kapının kendisinde mi (menteşe, kilit, conta), yoksa gövdede mi (açıklık geometrisi bozuk) — bu ikisi aynı belirtiyi verir ama çözümleri tamamen farklıdır ve ikincisi bir yapı konusudur", "verdict": "kapi-mi-govde-mi", "correct": true, "explain": "'Kapı zor kapanıyor' tek bir arızanın adı değil, en az dört farklı sebebin ortak belirtisidir ve teşhis bunları ayırmakla başlar. Birinci grup kapının kendisiyle ilgilidir: menteşe ve pimlerinde aşınma, kapının kendi ağırlığıyla düşmesi, kilit karşılığının ayarının kayması ya da contanın sertleşmesi. İkinci grup montajla ilgilidir: bir onarımdan sonra kapı ya da komşu panel yerine tam oturmamıştır. Üçüncü grup kapı içindeki mekanizmadır: cam, kilit bağlantısı ya da iç düzenek kapının serbest hareketini engelliyordur. Dördüncü ve en önemlisi gövdedir: kapı açıklığının geometrisi bozulmuştur — yani sorun kapıda değil, kapının oturacağı çerçevededir. Bu dördü aynı cümleyle tarif edilir ama tamamen farklı işler gerektirir; üstelik dördüncüsü, ilk üçü gibi ayarla çözülemez ve taşıyıcı yapıyı ilgilendirdiği için bu alanın kırmızı çizgisine girer. Bu yüzden ilk adım tamir değil, ölçmedir. Ve teşhisin en değerli bilgisi çoğu zaman zaten oradadır: fuga. Kapı çevresindeki boşluk, gövdenin geometrisinin gözle okunabilir hâlidir — nerede daraldığı ve nerede açıldığı, sorunun hangi grupta olduğunu büyük ölçüde söyler." },
+          { "label": "Doğrudan menteşe ayarı yapılır", "verdict": "menteşe-ayar", "explain": "Sebep gövdeyse ayar sorunu gizler, çözmez." },
+          { "label": "Kilit karşılığı sıkılaştırılır", "verdict": "kilit", "explain": "Kilidi zorlamak belirtiyi susturur, geometriyi düzeltmez." },
+          { "label": "Conta değiştirilir", "verdict": "conta", "explain": "Conta bir ihtimal; önce ölçüm yapılır." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Aynı cümle, dört farklı arıza. İlk adım tamir değil ölçme — ve en değerli bilgi zaten fugada duruyor."
+    },
+    {
+      "id": 2,
+      "instruction": "Kapı fugasını iki noktadan ölçtün: üst kenarda 3,2 mm, alt kenarda 6,8 mm. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.olcum-mastari",
+        "unit": "mm",
+        "acceptRange": [3.4, 3.8]
+      },
+      "camera": "kaporta",
+      "hint": "6,8 eksi 3,2.",
+      "teachingNote": "3,6 mm fark — ve bu, fuganın paralel olmadığını, yani kapının çerçeveye eğri oturduğunu gösterir. Ölçme dersinde geçen ilke burada işliyor: fuga bir görünüş konusu değil, geometrinin okunabilir hâlidir. Boşluğun kendisi kadar önemli olan, boşluğun boyunca nasıl değiştiğidir — eşit ama geniş bir fuga genellikle bir ayar meselesidir; eşit olmayan bir fuga ise açıyı, yani bir şeyin döndüğünü ya da kaydığını gösterir. Bu farkın yönü de bilgi taşır. Üstte dar, altta genişse kapının üst tarafı çerçeveye yaklaşmış demektir; bu, kapının menteşe tarafından aşağı düşmesiyle ya da açıklığın kendisinin çarpılmasıyla açıklanabilir. Fark tek bir kenarda değil, birkaç kenarda birden ve tutarlı bir yönde artıyorsa şüphe gövdeye kayar. Ölçümün ikinci işlevi kayıttır: dört kenardan alınan değerler yazılır ve onarım sonrasında aynı noktalar tekrar ölçülerek işin gerçekten düzelip düzelmediği kanıtlanır — 'göz kararı düzgün duruyor' bir doğrulama değildir. Üçüncü işlevi karşılaştırmadır: aracın karşı tarafındaki aynı kapı ölçülür ve iki taraf birbirine göre değerlendirilir; simetri, aracın kendi içinde taşıdığı en güvenilir referanstır. Kabul edilebilir fuga aralığı ve düzlem farkı araca özgüdür ve üreticinin verisinden okunur; buradaki iki sayı senaryo okumasıdır."
+    },
+    {
+      "id": 3,
+      "instruction": "Kapıyı açıp dış ucundan hafifçe kaldırıyorsun; belirgin bir boşluk hissediliyor ve kapı yukarı oynuyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.direk-b",
+        "question": "Bu ne gösterir?",
+        "options": [
+          { "label": "Kapı düşmüş: menteşe ve pimlerindeki boşluk kapının kendi ağırlığıyla aşağı kaymasına yol açıyor — bu bir aşınma arızasıdır ve gövde geometrisinden ayrı ele alınır", "verdict": "kapi-dusmus", "correct": true, "explain": "Bu basit test, teşhis ağacının en kritik dalını ayırır: sorun kapıda mı, gövdede mi? Kapı açıkken dış ucundan hafifçe kaldırıldığında hissedilen boşluk, menteşe ve pim takımındaki aşınmayı gösterir. Menteşe, kapının bütün ağırlığını uzun bir kol üzerinden taşır; yıllar içinde pim ve burçlarında oluşan küçük bir boşluk, kapının ucunda çok daha büyük bir düşme olarak görünür. Sonuç tanıdıktır — kapı kapatılırken karşılığa hizalanmaz, alt kenarı sürter, kilide tam oturmaz ve kullanıcı iterek kapatmaya başlar. Burada önemli olan, bu bulgunun gövdeyi bir ölçüde aklamasıdır: boşluk menteşedeyse iş, aşınan parçanın yenilenmesiyle çözülebilir. Ama testin sınırı da vardır. Birincisi, menteşede boşluk olması gövdenin sağlam olduğunu kanıtlamaz; ikisi bir arada da olabilir, özellikle darbe görmüş bir araçta. İkincisi, menteşenin bağlandığı direk bölgesinin kendisi de kontrol edilir — menteşe sağlamken oturduğu sac deforme olmuş olabilir. Üçüncüsü, kapı düşmesinin sebebi her zaman aşınma değildir: kapının bir dayanağa çarpması ya da açıkken üzerine yük binmesi de aynı sonucu verir. Menteşe ve pim toleransları, yenileme yöntemi ve tork değerleri araca özgüdür ve onarım kılavuzundadır." },
+          { "label": "Gövde çarpılmıştır", "verdict": "govde", "explain": "Gövde kusuru kapı açıkken kaldırma boşluğu vermez." },
+          { "label": "Normaldir, her kapıda boşluk olur", "verdict": "normal", "explain": "Belirgin kaldırma boşluğu aşınmayı gösterir." },
+          { "label": "Conta sertleşmiştir", "verdict": "conta", "explain": "Conta kapalıyken direnç verir; açıkken boşluk vermez." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Kapı açıkken ucundan kaldır: boşluk varsa menteşe. Bu test teşhis ağacının en kritik dalını ayırır."
+    },
+    {
+      "id": 4,
+      "instruction": "Başka bir araçta menteşede boşluk yok ama fuga hem ön kapıda hem arka kapıda bozuk.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.arka-kapi-paneli",
+        "question": "Şimdi hangi ölçüm yapılır?",
+        "options": [
+          { "label": "Çapraz ölçü: fuga bozuk ama çaprazlar eşitse sorun ayardadır, çaprazlar da bozuksa gövde geometrisi değişmiştir — birden fazla açıklıkta bozukluk, yapıya işaret eden en güçlü belirtidir", "verdict": "capraz-olcu", "correct": true, "explain": "Ölçme dersinde kurulan ilke burada karar veriyor: fuga ve çapraz birlikte okunur. Fuga tek başına bir açıklığın o anki hâlini gösterir; çapraz ölçü ise o açıklığın dikdörtgenliğini, yani geometrisinin bozulup bozulmadığını gösterir. İki durum vardır. Birincisi, fuga bozuk ama karşılıklı köşeler arası çapraz ölçüler birbirine eşitse açıklık hâlâ düzgündür — sorun kapının o açıklığa oturuşundadır ve ayar, menteşe ya da kilit karşılığıyla çözülür. İkincisi, çaprazlar birbirinden farklıysa açıklığın kendisi çarpılmıştır; o durumda kapıyı ayarlamak yalnız hatayı bir kenardan diğerine taşır — bir yeri düzeltirken başka bir yer bozulur ve usta 'kapıyı bir türlü oturtamadım' der. Bu ikinci durum, hasar okuma dersinde geçen kuralın devamıdır: darbe enerjisi girdiği yerde kalmaz, yapı boyunca ilerler ve etkisini uzak bir açıklıkta gösterir. Bulgu birden fazla açıklıkta birden görünüyorsa — örneğin hem ön hem arka kapıda — şüphe kesinlikle gövdeye kayar. Karşı taraf da ölçülür ve simetri karşılaştırması yapılır. Ama burada bir sınır başlar: fuga ve çapraz ölçüm bir işaret verir, yapısal doğrulama vermez. Gövdenin gerçekten deforme olup olmadığı ve nasıl düzeltileceği, gövde ölçüm sistemi ve üreticinin onarım kılavuzu ile belirlenir; ikisi de bu dersin kapsamı dışındadır." },
+          { "label": "Yalnız fuga ölçülür, çapraza gerek yok", "verdict": "yalniz-fuga", "explain": "Fuga tek başına ayar ile yapı ayrımını yapmaz." },
+          { "label": "Kapı sökülüp yeniden takılır", "verdict": "sok-tak", "explain": "Geometri bozuksa yeniden takmak sonucu değiştirmez." },
+          { "label": "Kilit karşılığı kaydırılarak çözülür", "verdict": "kilit", "explain": "Kaydırma hatayı kenardan kenara taşır." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Fuga bozuk + çapraz eşit = ayar. Fuga bozuk + çapraz bozuk = yapı. Birden fazla açıklıkta bozukluk gövdeyi işaret eder."
+    },
+    {
+      "id": 5,
+      "instruction": "Kapıyı oturtamıyorsun. Kilit karşılığını içeri kaydırıp kapının çekilerek kapanmasını sağlamayı düşünüyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.esik-saci",
+        "question": "Bu bir çözüm müdür?",
+        "options": [
+          { "label": "Değildir, yeni bir arızadır: kapı zorla çekilerek kapanır, conta bir bölgede sürekli fazla ezilir ve kalıcı olarak bozulur, kilit ve menteşe tasarlanmadığı bir yükü taşır — birkaç ay sonra su, gürültü ve yeni şikâyet gelir", "verdict": "yeni-ariza", "correct": true, "explain": "Kilit karşılığını kaydırmak, kapıyı kapatan mekanizmayı bir düzeltme aracı olarak kullanmaktır ve bu, tasarımın niyetine aykırıdır. Cıvatalı parça dersinde geçtiği gibi, kapının yüksekliğini ve hizasını menteşe belirler; kilit yalnız kapalı konumu tutar. Karşılığı zorlayarak hizalama üç ayrı zarar üretir. Birincisi contadır: kapı doğru hizada olmadığı için conta çevresi boyunca dengeli basılmaz, bir bölgede sürekli fazla ezilir ve zamanla kalıcı olarak deforme olur; ezilmiş bir conta artık sızdırmazlık yapmaz ve bu, birkaç ay sonra su ve rüzgâr gürültüsü şikâyeti olarak döner. İkincisi mekanizmadır: kilit ve menteşe, kapının doğru hizada kapanacağı varsayımıyla tasarlanmıştır; sürekli çekerek kapanan bir kapıda bu parçalar taşımak üzere yapılmadıkları bir yükü taşır ve aşınmaları hızlanır. Üçüncüsü ve en önemlisi teşhisin kaybolmasıdır: belirti susturulduğu için gerçek sebep — belki gövde geometrisi, belki aşınmış menteşe — hiç görülmez ve olduğu yerde durur. Doğru yaklaşım sırayı korumaktır: önce menteşe ve gövde ayrımı yapılır, gerekiyorsa parça yenilenir, kapı doğru hizaya getirilir ve kilit karşılığı en son, yalnız kapalı konumu tutacak biçimde ayarlanır. Bu alanın kuralı burada da geçerli: belirtiyi susturmak arızayı çözmez, yalnız gecikmeli hâle getirir." },
+          { "label": "Çözümdür, kapı kapanıyorsa iş biter", "verdict": "cozum", "explain": "Kapanma sağlanır ama conta, kilit ve menteşe bedelini öder." },
+          { "label": "Geçici çözümdür, zararı yoktur", "verdict": "gecici", "explain": "Conta kalıcı olarak ezilir; zarar geçici değildir." },
+          { "label": "Conta değiştirilirse sorun kalmaz", "verdict": "conta", "explain": "Yeni conta da aynı biçimde ezilir; hiza düzelmemiştir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Hizayı menteşe belirler, kilit yalnız kapalı konumu tutar. Karşılığı zorlamak belirtiyi susturur, teşhisi öldürür."
+    },
+    {
+      "id": 6,
+      "instruction": "Çapraz ölçüler eşit değil ve fark iki açıklıkta birden görünüyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.tasiyici-ayak",
+        "question": "Burada ne yapılır?",
+        "options": [
+          { "label": "İş durur ve bulgular yazılır: gövde geometrisinin doğrulanması ve düzeltilmesi gövde ölçüm sistemi ile üreticinin onarım kılavuzuna aittir — ayarla kapatmaya çalışmak hatayı yalnız yer değiştirtir", "verdict": "kapsam-disi", "correct": true, "explain": "Bu, dersin sınır noktasıdır ve bu alanın kırmızı çizgilerinden biriyle örtüşür. Çaprazların eşit olmaması, açıklığın dikdörtgenliğini kaybettiğini gösterir; birden fazla açıklıkta birden görünmesi ise bunun tek bir panelin oturma sorunu olmadığını, gövdenin kendisinde bir değişim olduğunu düşündürür. Bu noktada üç şey doğrudur. Birincisi, elde kesin bir kanıt yoktur — fuga ve çapraz ölçüm bir işaret verir, yapısal doğrulama vermez; aracın referans noktalarına göre gerçekten ne kadar saptığı, ancak gövde ölçüm sistemiyle ve üreticinin verdiği referans değerlerle belirlenir. İkincisi, düzeltme yöntemi de aynı yerden gelir: hangi bölgeye nereden ve ne kadar kuvvet uygulanacağı, hangi elemanın düzeltilebileceği ve hangisinin değiştirilmesi gerektiği kılavuzda tarif edilir. Yüksek mukavemetli çelikte ısıtmanın çoğu zaman yasak olduğu ve sınıfın gözle ayırt edilemediği kuralı burada da geçerlidir. Üçüncüsü, ayarla ilerlemek zararlıdır: geometrisi bozuk bir açıklıkta kapıyı ayarlamak hatayı bir kenardan diğerine taşır, saatler harcatır ve sonunda kilidi zorlayarak kapatma noktasına götürür. Doğru davranış, ölçümleri yazmak, durumu müşteriye açıkça anlatmak ve işi gerekli donanımın bulunduğu yere yönlendirmektir. Bu, iş kaybı gibi görünür ama bu alanın cümlesi burada da geçerlidir: reddedilen iş, kötü yapılan işten ucuzdur." },
+          { "label": "Kapı ayarıyla toparlanmaya çalışılır", "verdict": "ayar", "explain": "Hata bir kenardan diğerine taşınır." },
+          { "label": "Menteşe delikleri büyütülerek pay açılır", "verdict": "delik", "explain": "Yapısal bir sapma ayar payıyla çözülmez." },
+          { "label": "Isıtılıp elle düzeltilir", "verdict": "isit", "explain": "Yüksek mukavemetli çelikte ısıtma çoğu zaman yasaktır ve sınıf gözle ayırt edilemez." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Fuga ve çapraz bir işaret verir, yapısal doğrulama vermez. Kanıt gövde ölçüm sistemiyle, karar kılavuzla."
+    },
+    {
+      "id": 7,
+      "instruction": "Teşhis tamamlandı ve sınır yazıldı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kaput-kaporta",
+        "question": "Bu dersin özeti nedir?",
+        "options": [
+          { "label": "Fuga bir görünüş konusu değil, gövde geometrisinin okunabilir hâlidir: kapı zor kapanıyorsa önce ölçülür, menteşe ile gövde ayrımı yapılır ve hiçbir belirti kilidi zorlayarak susturulmaz", "verdict": "fuga-geometri", "correct": true, "explain": "Bu ders üç şeyi birlikte kuruyor. Birincisi ayrımdır: aynı şikâyetin arkasında menteşe aşınması, montaj hatası, kapı içi mekanizma ya da gövde deformasyonu olabilir ve bunları ayırmanın yolu tamir değil ölçmedir — fuga dört kenardan, çapraz karşılıklı köşelerden, karşı taraf simetri için. İkincisi karar kuralıdır: fuga bozuk ama çapraz eşitse ayar, ikisi de bozuksa yapı; birden fazla açıklıkta bozukluk varsa şüphe kesinlikle gövdeye kayar. Üçüncüsü sınırdır: fuga ve çapraz bir işaret verir, yapısal doğrulama vermez; kanıt gövde ölçüm sisteminden, karar üreticinin onarım kılavuzundan gelir ve bu ikisi kapsam dışıdır. Bunların üstünde duran bir ilke var ve bu alanın bütün teşhis derslerinde tekrar ediyor: belirtiyi susturmak arızayı çözmez. Kilit karşılığını kaydırmak kapıyı kapatır ama contayı ezer, mekanizmayı yorar ve asıl sebebi görünmez kılar — tıpkı pasın üstünü boyamak ya da renk farkına 'zamanla oturur' demek gibi. Üçü de aynı hatanın farklı yüzleri. Bununla birlikte kaporta alanının teşhis aşaması tamamlandı; sırada ustalık sınavı var: yandan darbe almış bir araçta okuma, karar ve sınırın bir arada sınandığı iş." },
+          { "label": "Kapı zor kapanıyorsa menteşe ayarı yapılır", "verdict": "menteşe", "explain": "Menteşe dört sebepten yalnız biri." },
+          { "label": "Fuga estetik bir konudur", "verdict": "estetik", "explain": "Fuga geometrinin okunabilir hâlidir." },
+          { "label": "Kilit ayarı en pratik çözümdür", "verdict": "kilit", "explain": "Belirtiyi susturur, contayı ve mekanizmayı bozar." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Kilidi zorlamak, pası boyamak ve 'zamanla oturur' demek — üçü de aynı hatanın farklı yüzleri."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Fuga bozuk. Ayar sorunu mu yapı sorunu mu olduğunu ne söyler?",
+        "a": "capraz-olcu",
+        "options": [
+          { "verdict": "capraz-olcu", "label": "Çapraz ölçü: çaprazlar eşitse açıklık hâlâ düzgündür ve sorun ayardadır; çaprazlar farklıysa açıklığın geometrisi bozulmuştur", "explain": "Geometrisi bozuk bir açıklıkta kapıyı ayarlamak hatayı bir kenardan diğerine taşır. Birden fazla açıklıkta bozukluk gövdeye işaret eder. Karşı taraf da ölçülür; simetri aracın kendi içindeki en güvenilir referanstır. Yapısal doğrulama gövde ölçüm sistemine aittir." },
+          { "verdict": "yalniz-fuga", "label": "Yalnız fuga ölçmek yeterlidir", "explain": "Fuga tek başına ayar-yapı ayrımını yapmaz." },
+          { "verdict": "sok-tak", "label": "Kapı sökülüp yeniden takılır", "explain": "Geometri bozuksa sonuç değişmez." },
+          { "verdict": "kilit", "label": "Kilit karşılığı kaydırılır", "explain": "Hatayı kenardan kenara taşır." }
+        ]
+      },
+      {
+        "q": "Kilit karşılığını içeri kaydırıp kapıyı çekerek kapatmak neden yanlıştır?",
+        "a": "yeni-ariza",
+        "options": [
+          { "verdict": "yeni-ariza", "label": "Bir çözüm değil yeni bir arızadır: conta bir bölgede sürekli fazla ezilir, kilit ve menteşe tasarlanmadığı yükü taşır ve gerçek sebep görünmez olur", "explain": "Hizayı menteşe belirler, kilit yalnız kapalı konumu tutar. Ezilen conta sızdırmazlık yapmaz ve birkaç ay sonra su ve rüzgâr gürültüsü olarak döner. Doğru sıra: menteşe-gövde ayrımı, gerekiyorsa parça yenileme, hiza, en son kilit ayarı." },
+          { "verdict": "cozum", "label": "Kapanıyorsa iş biter", "explain": "Conta, kilit ve menteşe bedelini öder." },
+          { "verdict": "gecici", "label": "Geçici çözümdür, zararsızdır", "explain": "Conta kalıcı olarak ezilir." },
+          { "verdict": "conta", "label": "Conta değiştirilirse sorun kalmaz", "explain": "Yeni conta da aynı biçimde ezilir." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2'deki 3,2 mm ve 6,8 mm SENARYO okumalarıdır; istenen FARKTIR (3,6 mm). Ders hiçbir araç için kabul edilebilir fuga aralığı iddia etmiyor.",
+    "sourceRequired": "Kabul edilebilir fuga aralığı ve düzlem farkı, çapraz ölçüm referans noktaları ve toleransları, menteşe ve pim toleransları, yenileme yöntemi ve tork değerleri ile tek kullanımlık bağlantı elemanları bilinçle VERİLMEDİ; hepsi araca özgüdür ve üreticinin onarım kılavuzundan okunur.",
+    "kapsam": "Gövde ölçüm sistemiyle yapısal doğrulama, şasi çekme ve taşıyıcı yapı düzeltmesi KAPSAM DIŞIDIR; ders yalnız ayrımı, ölçüm mantığını ve sınırı öğretiyor. Sıkışma koruması ve kapı içi elektrikli sistemler iptal edilerek belirti susturulmaz.",
+    "kaynak": "Bu alan kullanıcının açık talebiyle eklendi (talep birebir: 'birde alanlara kaportayı ekleyelim'); konu başlıkları MEB Otomotiv Gövde ve Boya dalının çerçevesini takip ediyor, kazanım numarası iddiası yok.",
+    "reviewedByMechanic": false
+  }
+}

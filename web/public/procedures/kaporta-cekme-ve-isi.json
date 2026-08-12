@@ -1,0 +1,179 @@
+{
+  "id": "kaporta.cekme-ve-isi",
+  "area": "kaporta",
+  "stage": 3,
+  "title": "Çekme ve Isı: Sacın Hafızası ve Isının Sınırı",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 40,
+  "prerequisites": ["kaporta.boyasiz-gocuk"],
+  "learningGoals": [
+    "Gerilmiş sacın neden 'fazla' geldiğini ve nasıl toplandığını anlamak",
+    "Isının ne yaptığını ve hangi malzemede yasak olduğunu bilmek",
+    "Çekme işinde tepe oluşturmadan ilerlemeyi öğrenmek"
+  ],
+
+  "safety": [
+    { "rule": "Yüksek ve ultra yüksek mukavemetli çelikte ve alüminyumda ısıtma kılavuz olmadan yapılmaz", "why": "Isı bu malzemelerde mukavemeti kalıcı olarak düşürür; sınıf gözle ayırt edilemez ve zayıflama görünmez", "blocksStart": true },
+    { "rule": "Isı uygulanacak bölgenin arkası ve çevresi kontrol edilir, yanabilecek her şey uzaklaştırılır", "why": "Isı sacın öbür yüzüne geçer; kablo, yalıtım keçesi, yakıt hattı ve kapalı kesitteki koruyucu malzemeler yanıcıdır", "blocksStart": true },
+    { "rule": "Isı işlemi öncesi enerji kesilir; hava yastığı ve gergi birimlerinin bulunduğu bölgelerde çalışılmaz", "why": "Bu birimler ısı ve akımla tetiklenebilir", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.gocuk-cektirme", "label": "Göçük çektirme", "required": true },
+    { "id": "tool.cizgi-lambasi", "label": "Çizgi lambası", "required": true },
+    { "id": "tool.olcum-mastari", "label": "Ölçüm mastarı", "required": true },
+    { "id": "tool.sicaklik-olcer", "label": "Temassız sıcaklık ölçer", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Göçük çıktı ama bölge dalgalı; sac sanki 'fazla' gelmiş gibi duruyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.gocuk-bolgesi",
+        "question": "Sac neden fazla geliyor?",
+        "options": [
+          { "label": "Deformasyon sırasında metal esneyip incelerek yayıldı: aynı sac artık daha geniş bir alan kaplıyor ve göçük kalkınca o fazlalık dalga olarak ortaya çıkıyor", "verdict": "gerilmis-sac", "correct": true, "explain": "Bir sac ezildiğinde yalnız yer değiştirmez, biçim de değiştirir: darbenin en şiddetli olduğu yerde metal incelerek yayılır. Bu, hacmin korunmasının doğrudan sonucudur — metal bir yerden incelirse bir yerden genişlemek zorundadır. Göçük yerine itildiğinde ise o genişleme ortadan kalkmaz; sac artık kapladığı alandan biraz büyüktür ve fazlalık bir yere gitmek zorunda olduğu için dalga hâlinde kabarır. Ustanın diline bu 'sac fazla geldi' ya da 'sac uzadı' diye geçer. Bunun onarımdaki anlamı önemlidir: dalgalı bir bölgeyi düzeltmeye çalışıp üzerine daha fazla vurmak fazlalığı yok etmez, yalnız başka bir yere taşır. Fazlalığı gerçekten toplamanın iki yolu vardır. Birincisi soğuk yöntemdir: çekiç ve altlıkla, metalin fazla geldiği bölgede kontrollü biçimde çalışarak fazlalığı yaymak ve düzleştirmek — küçük dalgalarda çoğu zaman yeterlidir. İkincisi ısı ile büzdürmedir ve bu dersin asıl konusudur; ama çok dar bir uygulama alanı ve sert bir yasak listesi vardır. Üçüncü bir yol da her zaman masadadır: fazlalık küçükse ince bir dolgu ile kapatmak. Yanlış olan, fazlalığı görmezden gelip üstünü kalın macunla düzleştirmektir — o macunun altında gerilmiş bir sac vardır ve ısı değişimleriyle hareket eder." },
+          { "label": "Yanlış çekiç kullanıldı", "verdict": "cekic", "explain": "Alet bir etken ama asıl sebep metalin esneyip yayılması." },
+          { "label": "Sac fabrikada hatalı", "verdict": "fabrika", "explain": "Deformasyonun kendi sonucudur." },
+          { "label": "Macun eksikliğidir", "verdict": "macun", "explain": "Fazlalık macunla yok olmaz, gizlenir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Fazla gelen sac bir yere gitmek zorunda. Üstüne vurmak fazlalığı yok etmez, başka yere taşır."
+    },
+    {
+      "id": 2,
+      "instruction": "Çekme sonrası ölçtün: çekilen noktada 1,8 mm tepe var, hemen yanındaki sağlam yüzeyde 0,4 mm sapma. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.olcum-mastari",
+        "unit": "mm",
+        "acceptRange": [1.3, 1.5]
+      },
+      "camera": "kaporta",
+      "hint": "1,8 eksi 0,4.",
+      "teachingNote": "1,4 milimetrelik bir tepe, çekme işinde en sık yapılan hatanın ölçüsü: tek noktadan fazla çekmek. Göçük çekilirken kuvvet o tek noktada toplanır ve metal önce göçüğü değil, kendi tutunma noktasını dışarı taşır. Ortaya çıkan tepe göçükten daha zor bir sorundur, çünkü artık hem gergin hem sertleşmiş bir bölgeyle uğraşırsın ve çevresi hâlâ çukurdur — yani iki yönlü bir düzeltme gerekir. Önlemi yöntemdedir: tutunma noktaları göçüğün çevresine dağıtılır, her noktadan az çekilir ve turlar hâlinde ilerlenir; her turda ışıkla ve elle kontrol yapılır. Bir tepe oluştuysa çözüm onu geri dövmek değildir — geri dövmek metali üçüncü kez zorlar ve sertleştirir; doğru yol çevresindeki gerilimi çözerek tepenin kendiliğinden inmesini sağlamaktır. Ölçümün ikinci faydası kararı sayıya bağlamaktır: kalan sapma küçükse ince dolgu ile bitirilir, büyükse çalışmaya devam edilir. 'Gözüme normal geldi' bu aşamada kabul edilmez, çünkü boya bu farkı gizlemez, büyütür. Buradaki iki sayı senaryo okumasıdır; ders kabul edilebilir sapma ya da dolgu kalınlığı iddia etmiyor."
+    },
+    {
+      "id": 3,
+      "instruction": "Fazlalığı toplamak için ısı kullanmayı düşünüyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.zimpara-bolgesi",
+        "question": "Isı metale ne yapar?",
+        "options": [
+          { "label": "Isıtılan bölge genleşir ama çevresi soğuk ve sert olduğu için genleşemez; sıkışan metal orada kalıcı olarak toplanır ve soğurken büzülerek yüzeyi geri çeker", "verdict": "isi-buzme", "correct": true, "explain": "Isı ile büzdürmenin mantığı ilk bakışta ters gelir — ısıtınca genleşen bir şey nasıl küçülür. Cevap çevrede saklıdır. Küçük bir bölgeyi ısıttığında o bölge genleşmek ister ama etrafındaki soğuk metal onu sıkıca tutar; genleşecek yer bulamayan metal kendi içinde sıkışır ve bu sıkışma belirli bir noktadan sonra kalıcı bir biçim değişikliğine dönüşür. Bölge soğurken ise artık daha 'toplu' bir hâldedir ve büzülerek çevresindeki sacı kendine doğru çeker — fazla gelen sac böylece toplanmış olur. Bu tekniğin işe yaraması iki şeye bağlıdır: doğru bölgeye, doğru miktarda ısı vermek ve soğuma biçimini kontrol etmek. Fazla ısı, metalin özelliklerini değiştirir ve bölgeyi kalıcı olarak zayıflatır; yetersiz ısı hiçbir şey yapmaz. Bölgenin fazla büyük seçilmesi ise ters etki üretir — geniş bir alan ısınırsa çevre onu tutamaz ve genleşme serbest kalır, yani büzülme oluşmaz. Ve en önemlisi: bu teknik yumuşak çelik için tarif edilmiştir. Yüksek ve ultra yüksek mukavemetli çelikte, alüminyumda ve kaplamalı saclarda ısı bambaşka davranır — mukavemet düşer, kaplama bozulur, alüminyumda renk değişmediği için sıcaklık gözle takip bile edilemez. Bu yüzden karar malzeme sınıfı bilinmeden verilmez ve o sınıf gözle ayırt edilemez; kılavuzdan okunur." },
+          { "label": "Metali yumuşatır, o kadar", "verdict": "yumusatir", "explain": "Asıl etki büzülmedir; yumuşama ayrı ve çoğu zaman istenmeyen bir sonuçtur." },
+          { "label": "Hiçbir kalıcı etkisi yoktur", "verdict": "etkisiz", "explain": "Isı malzemenin özelliklerini kalıcı olarak değiştirebilir." },
+          { "label": "Boyayı korur", "verdict": "boya", "explain": "Isı boyayı yakar; o bölge yeniden boyanır." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Isıtılan metal genleşecek yer bulamaz, kendi içinde toplanır; soğurken sacı kendine çeker."
+    },
+    {
+      "id": 4,
+      "instruction": "Panelin malzemesi kesin olarak bilinmiyor. Kılavuza erişimin yok.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.direk-b",
+        "question": "Isı uygulanır mı?",
+        "options": [
+          { "label": "Uygulanmaz: çelik sınıfı gözle, mıknatısla ya da kalınlıkla ayırt edilemez ve yanlış malzemede ısı geri alınamayan, görünmeyen bir zayıflama bırakır — bilinmiyorsa yapılmaz", "verdict": "bilinmiyorsa-yapilmaz", "correct": true, "explain": "Bu, bu alanın en net kuralıdır ve tartışmaya açık değildir. Sebebi zararın niteliğidir: ısı kaynaklı mukavemet kaybı ölçülemez, görülemez ve kapatılabilir. Panel düzelir, macunlanır, boyanır ve kusursuz görünür; müşteri memnun ayrılır. Fark yalnız bir kazada, o parçanın taşıması gereken kuvveti taşımadığı anda ortaya çıkar — ve o gün kimse geri dönüp bu onarımı hatırlamaz. Yani bu, sonucu görülmeyen bir hatadır ve tam da bu yüzden en tehlikelisidir. Malzemeyi ayırt etme girişimlerinin hepsi güvenilmezdir: mıknatıs 'çelik mi değil mi' der ama sınıfını söylemez; kalınlık aldatır, çünkü bazı yüksek mukavemetli parçalar bilinçli olarak incedir; renk ve görünüm aynıdır. Geriye tek güvenilir kaynak kalır: üreticinin onarım kılavuzu. Kılavuza erişim yoksa doğru davranış ısıyı hiç gündeme almamaktır. Bu bir yetersizlik değil, meslek sınırıdır — ve o sınırı bilmek bu alanda ustalığın kendisidir. Alternatifler zaten vardır: soğuk yöntemlerle çalışmak, kalan farkı ince dolgu ile kapatmak, parça değişimini konuşmak ya da işi kılavuza ve donanıma sahip bir atölyeye yönlendirmek. Dördü de meşrudur; ısıyı 'idare eder' diyerek kullanmak değildir." },
+          { "label": "Dikkatli uygulanırsa olur", "verdict": "dikkatli", "explain": "Dikkat malzeme sınıfını değiştirmez; zayıflama görünmez." },
+          { "label": "Az ısıtılırsa sorun olmaz", "verdict": "az-isi", "explain": "Sınır malzemeye özgüdür ve bilinmiyorsa 'az' da bilinmiyor demektir." },
+          { "label": "Sıcaklık ölçerle takip edilerek uygulanır", "verdict": "olcerle", "explain": "Ölçer sıcaklığı söyler, o malzeme için sınırın ne olduğunu değil." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Sonucu görülmeyen hata, en tehlikeli hatadır. Bilinmiyorsa ısı gündeme bile alınmaz."
+    },
+    {
+      "id": 5,
+      "instruction": "Çekme işine devam ediyorsun; tutunma noktalarını yerleştireceksin.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.gocuk-cektirme",
+        "question": "Tutunma noktaları nasıl dağıtılır?",
+        "options": [
+          { "label": "Göçüğün çevresine yayılır ve her noktadan az çekilerek turlar hâlinde ilerlenir: yük tek noktaya binmez, tepe oluşmaz ve kilitlenmiş kuşak dıştan içe doğru çözülür", "verdict": "dagit-tur", "correct": true, "explain": "Çekme işinde başarı, kuvvetin dağıtılmasına bağlıdır. Tek bir noktadan çekmek üç sorun üretir: o nokta dışarı fırlar ve tepe olur, çevresi hâlâ çukur kalır, ve tutunma elemanının sacla temas ettiği yer aşırı zorlanır — yapıştırılmış bir pim kopar, kaynatılmış bir eleman ise sacı yırtabilir. Doğru yöntem, göçüğün çevresine yeterli sayıda tutunma noktası yerleştirmek ve her birinden az miktarda çekmektir. Çalışma turlar hâlinde ilerler: bir tur boyunca bütün noktalardan azar azar çekilir, sonra ışıkla ve elle kontrol edilir, sonra ikinci tur. Sıra da rastgele değildir — göçük analizi dersindeki ilke burada da geçerlidir: dıştaki kilitlenmiş kuşaktan başlanır, merkeze doğru gidilir. Kilitlenme çözüldükçe merkez kendiliğinden yükselir ve merkezden çekmek gereken miktar azalır. Tutunma elemanının türü de karar konusudur: yapıştırılan pimler ısı vermez ve boyaya zarar vermeyecek biçimde çıkarılabilir, ama daha az kuvvet taşır. Sacın üzerine kaynatılan elemanlar daha güçlüdür ama metale ısı verir; bu yüzden malzemeye ve kılavuza tabidir ve iş bitince o noktalar temizlenip mutlaka korunur — korumasız bırakılan bir kaynak izi korozyonun başlangıç noktasıdır." },
+          { "label": "Tek noktadan güçlü çekilir", "verdict": "tek-nokta", "explain": "Tepe oluşur ve tutunma elemanı sacı zorlar." },
+          { "label": "Yalnız merkeze yerleştirilir", "verdict": "merkez", "explain": "Kilitlenmiş kuşak çözülmeden merkez gelmez." },
+          { "label": "Rastgele, sayı önemli değil", "verdict": "rastgele", "explain": "Dağılım ve sıra sonucu belirler." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Turlar hâlinde ilerle: her noktadan az, her turdan sonra kontrol. Tek noktadan çok çekmek tepe üretir."
+    },
+    {
+      "id": 6,
+      "instruction": "Isı uygulanan bir bölgede iş bitti; boya yanmış, metal çıplak kalmış.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-camurluk",
+        "question": "Bundan sonra ne yapılır?",
+        "options": [
+          { "label": "Bölge temizlenir, yağdan arındırılır ve aynı gün astarlanır; ulaşılabiliyorsa arka yüzü de korunur ve kapalı kesit varsa koruyucu uygulanır — ısı fabrika korumasını da yaktı", "verdict": "koruma-geri", "correct": true, "explain": "Isı yalnız metale etki etmez; üzerindeki bütün katmanları da yok eder. Vernik ve renk yanar, dolgu astarı bozulur, daldırma astar ve kimyasal ön işlem tabakası o bölgede ortadan kalkar, sacın kendi kaplaması etkilenir. Yani ısı uyguladığın yerde korozyon dersinde gördüğün kat kat sistemin tamamını kaldırmış olursun — ve bu, çıplak metalden daha kötü bir durumdur, çünkü ısı görmüş yüzey kimyasal olarak daha da isteklidir. Bu yüzden ısı işleminden sonra koruma bir seçenek değil, işin zorunlu son adımıdır ve aynı gün yapılır: yüzey temizlenir, yağ ve kalıntıdan arındırılır, uygun astar uygulanır. İkinci bir nokta, ısının sacın öbür yüzüne de geçmiş olmasıdır — arka yüzdeki koruma da bozulmuştur ve ulaşılabiliyorsa oraya da müdahale edilir; ulaşılamıyorsa kapalı kesit koruyucusu devreye girer. Üçüncü nokta çevrede saklıdır: ısının etkisi ısıtılan noktayla sınırlı değildir, çevresine doğru azalarak yayılır; bu yüzden korunacak alan gözle görünen yanık bölgeden geniş tutulur. Ve bir hatırlatma: bütün bu adımlar teslim anında görünmez. Yapan da yapmayan da aynı faturayı keser; fark yıllar sonra o bölgede beliren kabarmayla ortaya çıkar." },
+          { "label": "Doğrudan boyanır", "verdict": "boya", "explain": "Astar ve koruma katmanları atlanamaz." },
+          { "label": "Ertesi gün ilgilenilir", "verdict": "ertesi", "explain": "Isı görmüş çıplak yüzey daha da isteklidir; aynı gün korunur." },
+          { "label": "Yalnız görünen yüz korunur", "verdict": "tek-yuz", "explain": "Isı öbür yüze de geçmiştir; arka yüz ve kapalı kesit de düşünülür." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Isı fabrika korumasını da yaktı. Isıtılan yerde koruma bir seçenek değil, işin zorunlu son adımı."
+    },
+    {
+      "id": 7,
+      "instruction": "Çekme ve ısı konusunu kurdun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.tasiyici-ayak",
+        "question": "Bu iki yöntemin ortak kuralı nedir?",
+        "options": [
+          { "label": "İkisi de malzemenin sınırlı bir kapasitesini harcar: her çekiş ve her ısıtma geri alınamaz — bu yüzden hamle sayısı azaltılır, sıra doğru seçilir ve malzeme bilinmiyorsa başlanmaz", "verdict": "kapasite-harcar", "correct": true, "explain": "Bu aşamanın bütün dersleri tek bir cümlede toplanır: metalin sana verdiği şans sınırlıdır. Her çekiş, her vuruş ve her ısıtma o şansın bir kısmını harcar ve harcanan geri gelmez. Bunun üç pratik sonucu var. Birincisi, hamle sayısı bir maliyet kalemidir: çok deneyerek doğruyu bulmaya çalışmak, bulduğunda malzemeyi tüketmiş olmak demektir. Bu yüzden usta önce okur — ışıkla, elle, ölçerek — sonra tek seferde doğru yerden başlar. İkincisi, sıra bir çarpandır: doğru sırayla yapılan az sayıda hamle, yanlış sırayla yapılan çok sayıda hamleden fazla iş görür. Kilitlenmiş kuşak önce, merkez sonra. Üçüncüsü, malzeme bilgisi bir izin belgesidir: neyle çalıştığını bilmeden yapılan her hamle kumar, ısı ise geri dönülemez bir kumardır. Ve bir sınır: bu aşamanın öğrettiği yöntemlerin hiçbiri taşıyıcı yapıda uygulanmaz. Direk, eşik, taşıyıcı ayak ve şasi bölgelerinde deformasyon düzeltmek kılavuz, ölçüm sistemi ve çoğu zaman farklı bir donanım ister; orada doğru davranış yönlendirmektir. Dış panelde ise elindeki üç yol nettir: soğuk düzelt, kalan farkı ince dolguyla kapat, ya da parçayı değiştir. Sonraki aşamada parça değişiminin nasıl yapıldığını göreceksin." },
+          { "label": "İkisi de her malzemede uygulanır", "verdict": "her-malzeme", "explain": "Isı yüksek mukavemetli çelikte ve alüminyumda kılavuzsuz uygulanmaz." },
+          { "label": "İkisi de sınırsız tekrarlanabilir", "verdict": "sinirsiz", "explain": "Her hamle malzemenin kapasitesini harcar." },
+          { "label": "İkisi de taşıyıcı yapıda serbesttir", "verdict": "tasiyici-serbest", "explain": "Taşıyıcı yapı kılavuz ve ölçüm sistemi ister; kapsam dışıdır." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Metalin sana verdiği şans sınırlı ve harcanan geri gelmiyor. Sırada parça değişimi."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Panelin malzemesi bilinmiyor ve kılavuza erişim yok. Isı uygulanır mı?",
+        "a": "bilinmiyorsa-yapilmaz",
+        "options": [
+          { "verdict": "bilinmiyorsa-yapilmaz", "label": "Uygulanmaz: çelik sınıfı gözle, mıknatısla ya da kalınlıkla ayırt edilemez ve yanlış malzemede ısı geri alınamayan, görünmeyen bir zayıflama bırakır", "explain": "Zarar ölçülemez, görülemez ve boyayla kapanır; fark yalnız bir kazada ortaya çıkar. Alternatifler meşrudur: soğuk yöntemle çalışmak, kalan farkı ince dolguyla kapatmak, parça değişimi ya da yönlendirme. Sıcaklık ölçer sıcaklığı söyler, o malzeme için sınırın ne olduğunu değil." },
+          { "verdict": "dikkatli", "label": "Dikkatli uygulanırsa olur", "explain": "Dikkat malzeme sınıfını değiştirmez." },
+          { "verdict": "az-isi", "label": "Az ısıtılırsa sorun olmaz", "explain": "Sınır bilinmiyorsa 'az' da bilinmiyor demektir." },
+          { "verdict": "olcerle", "label": "Sıcaklık ölçerle takip edilir", "explain": "Ölçer sınırı bilmez." }
+        ]
+      },
+      {
+        "q": "Göçük çıkarıldı ama bölge dalgalı, sac fazla gelmiş. Sebebi nedir?",
+        "a": "gerilmis-sac",
+        "options": [
+          { "verdict": "gerilmis-sac", "label": "Deformasyon sırasında metal esneyip incelerek yayıldı: aynı sac artık daha geniş bir alan kaplıyor ve fazlalık göçük kalkınca dalga olarak çıkıyor", "explain": "Üstüne vurmak fazlalığı yok etmez, başka yere taşır. Toplamanın yolları: soğuk yöntemle yayıp düzleştirmek, malzeme uygunsa ve kılavuz izin veriyorsa ısıyla büzdürmek, ya da fazlalık küçükse ince dolguyla kapatmak. Kalın macunla düzleştirmek gerilmiş sacı gizler, çözmez." },
+          { "verdict": "cekic", "label": "Yanlış çekiç kullanıldı", "explain": "Asıl sebep metalin yayılması." },
+          { "verdict": "fabrika", "label": "Sac fabrikada hatalı", "explain": "Deformasyonun sonucudur." },
+          { "verdict": "macun", "label": "Macun eksikliğidir", "explain": "Macun fazlalığı gizler." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2'deki 1,8 mm ve 0,4 mm SENARYO okumalarıdır; istenen FARKTIR (1,4 mm). Ders kabul edilebilir sapma ya da dolgu kalınlığı iddia etmiyor.",
+    "sourceRequired": "Isıtma izni, sıcaklık ve süre sınırları, hangi malzemede hangi bölgede ısıya izin verildiği, soğutma yöntemi, çelik sınıfları ve panel-malzeme eşleşmeleri, kaynatılan tutunma elemanlarının malzemeye uygunluğu bilinçle VERİLMEDİ; hepsi araca ve malzemeye özgüdür ve üreticinin onarım kılavuzundan okunur.",
+    "kapsam": "Taşıyıcı yapıda deformasyon düzeltme, şasi çekme, çekme sehpası ve gövde ölçüm sistemiyle doğrulama KAPSAM DIŞIDIR — ders dış panelde yöntem ve sınır öğretiyor.",
+    "kaynak": "Bu alan kullanıcının açık talebiyle eklendi (talep birebir: 'birde alanlara kaportayı ekleyelim'); konu başlıkları MEB Otomotiv Gövde ve Boya dalının çerçevesini takip ediyor, kazanım numarası iddiası yok.",
+    "reviewedByMechanic": false
+  }
+}

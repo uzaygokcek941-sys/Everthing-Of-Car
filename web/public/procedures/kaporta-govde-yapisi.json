@@ -1,0 +1,177 @@
+{
+  "id": "kaporta.govde-yapisi",
+  "area": "kaporta",
+  "stage": 0,
+  "title": "Gövde Bir Kabuk Değil: Taşıyıcı Yapı ve Ezilme Bölgeleri",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 35,
+  "prerequisites": ["kaporta.guvenlik"],
+  "learningGoals": [
+    "Modern gövdenin hem kabuk hem iskelet olduğunu görmek",
+    "Ezilerek enerji yutan bölge ile ezilmemesi gereken bölgeyi ayırmak",
+    "Bir parçanın nasıl birleştirildiğinin onarım yöntemini belirlediğini bilmek"
+  ],
+
+  "safety": [
+    { "rule": "Taşıyıcı parçalar üreticinin kılavuzu olmadan ısıtılmaz, çekilmez, kesilmez", "why": "Bu alanın değişmeyen sınırı; bu ders o sınırın hangi parçalar için geçerli olduğunu öğretiyor", "blocksStart": true },
+    { "rule": "Ezilme bölgesi 'zayıf yapılmış' sayılıp güçlendirilmez", "why": "O bölgenin ezilmesi bir kusur değil tasarımdır; güçlendirilen bir ezilme bölgesi enerjiyi yutmaz ve o enerji kabine ve içindeki insana gider", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true },
+    { "id": "tool.kalinlik-olcer", "label": "Kalınlık ölçer", "required": true },
+    { "id": "tool.kayit-formu", "label": "Kayıt formu", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Aracın yan kesitine bakıyorsun. Dış paneller sökülmüş, altındaki yapı görünüyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.esik-saci",
+        "question": "Modern bir binek aracın gövdesi nasıl kurulur?",
+        "options": [
+          { "label": "Gövdenin kendisi iskelettir: ayrı bir şasi yoktur, birbirine birleştirilmiş saclar hem kabuğu hem taşıyıcı yapıyı oluşturur — bu yüzden bir panelin onarımı yapıyı da ilgilendirir", "verdict": "govde-iskelet", "correct": true, "explain": "Eski araçlarda ve bugün hâlâ bazı ticari araçlarda ayrı bir şasi vardır: merdiven gibi bir çelik iskelet altta, gövde onun üzerine oturur. Orada gövde gerçekten bir kabuktur ve taşıma işini şasi yapar. Modern binek araçlarda ise böyle bir ayrım yoktur — gövdenin kendisi taşıyıcıdır. Onlarca sac parça birbirine birleştirilir ve ortaya hem hafif hem sert bir kutu çıkar; bu kutunun bazı bölgeleri kalın ve yüksek mukavemetli çelikten, bazıları ince ve yumuşak çelikten yapılır. Bunun onarım açısından iki büyük sonucu vardır. Birincisi, bir parçanın kesilip yenisinin eklenmesi 'sadece o parçayı' ilgilendirmez: o parça komşularıyla birlikte bir bütünün parçasıdır ve birleşme noktalarının sayısı, yeri ve yöntemi yapının sertliğini belirler. İkincisi, hasar tek bir noktada kalmaz — bir kutunun bir köşesine vurursan o darbe kutunun tamamına yayılır. Bu yüzden bu alanda hasar ölçümü tek bir panele bakarak yapılmaz; kapı boşlukları, çapraz ölçüler ve komşu panellerin oturuşu birlikte kontrol edilir. Üçüncü ve pratik bir sonuç daha var: gövdenin bu kutu yapısı içi boş kesitlerden oluşur ve o boşluklar hem suyun aktığı hem pasın başladığı yerlerdir; korozyon dersinde bunun sebebini göreceksin." },
+          { "label": "Ayrı bir şasi taşır, gövde sadece kabuktur", "verdict": "sasi", "explain": "Bazı ticari araçlarda öyle; modern binek araçta gövdenin kendisi taşıyıcıdır." },
+          { "label": "Paneller birbirinden bağımsızdır", "verdict": "bagimsiz", "explain": "Paneller bir bütün oluşturur; hasar da onarım da komşuyu ilgilendirir." },
+          { "label": "Taşıyıcı yalnız tabandır", "verdict": "taban", "explain": "Direkler, eşikler ve tavan kirişleri de taşıyıcıdır." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Gövde bir kutu. Bir köşesine vurursan darbe kutunun tamamına yayılır — hasar tek panelde kalmaz."
+    },
+    {
+      "id": 2,
+      "instruction": "İki parçanın sac kalınlığını ölçtün: dış panelde 0,7 mm, direk sacında 1,6 mm. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.kalinlik-olcer",
+        "unit": "mm",
+        "acceptRange": [0.85, 0.95]
+      },
+      "camera": "kaporta",
+      "hint": "1,6 eksi 0,7.",
+      "teachingNote": "0,9 milimetrelik bu fark, iki parçanın iki ayrı iş yaptığının en somut kanıtı. Dış panel ince olur ve bunun sebebi yalnız ekonomi değil tasarımdır: ince sac hafiftir, kolay şekil alır ve küçük bir darbede kendisi göçerek darbeyi yumuşatır. Taşıyıcı parça ise kalın ve çoğu zaman yüksek mukavemetli çeliktendir, çünkü onun işi göçmek değil ayakta kalmaktır. Ama kalınlık tek başına yanıltıcıdır ve bu ölçümün asıl dersi budur: bir parçanın taşıyıcı olup olmadığına kalınlığına bakarak karar verilmez. Bazı taşıyıcı parçalar ince ama çok yüksek mukavemetli çelikten yapılır — üretici ağırlığı düşürmek için tam da bunu ister; bu parçalar elle bakıldığında ince bir sac gibi görünür ama ısıtıldığında geri dönüşü olmayan biçimde zayıflar. Bir de tersi vardır: kalın ama yumuşak çelikten yapılmış, taşıyıcı olmayan parçalar. Yani kalınlık bir ipucudur, karar değil. Karar üreticinin onarım kılavuzundan verilir. Ölçümün pratik faydası başka bir yerdedir: bir panelin fabrika kalınlığından belirgin farklı çıkması, o panelin daha önce onarılmış ve macunlanmış olabileceğini söyler — bir sonraki derste bunu boya kalınlığı ölçerek yapacaksın. Fabrika sac kalınlıkları araca ve parçaya özgüdür; bu ders bir tablo vermiyor."
+    },
+    {
+      "id": 3,
+      "instruction": "Aracın önündeki taşıyıcı ayağa bakıyorsun. Üzerinde kıvrımlar ve delikler var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.tasiyici-ayak",
+        "question": "Bu kıvrımlar ve delikler ne işe yarar?",
+        "options": [
+          { "label": "Parçanın bir kazada nerede ve nasıl ezileceğini belirler: ön ve arka bölgeler kontrollü ezilerek enerjiyi yutar, kabin ise ezilmemek üzere tasarlanmıştır", "verdict": "kontrollu-ezilme", "correct": true, "explain": "Bir çarpışmada enerji yok olmaz; bir yere gitmek zorundadır. Aracın tasarımı bu enerjinin nereye gideceğini belirler ve mantık iki bölgeye ayrılır. Ön ve arka bölgeler kontrollü ezilecek biçimde yapılır: buradaki parçalar üzerlerindeki kıvrımlar, delikler ve kalınlık değişimleri sayesinde belirli bir sırayla ve belirli bir kuvvette katlanır. Katlanırken enerjiyi yutarlar ve içerideki insana ulaşan kuvveti düşürürler. Kabin ise tam tersidir: direkler, eşikler ve tavan kirişleri ezilmemek üzere yapılır, çünkü orada insan vardır. Bu tasarımın onarımda üç sonucu var. Birincisi, ezilmiş bir ön bölge 'kötü yapılmış' değildir — işini yapmıştır; bu parçalar onarılmaz, değişir, çünkü katlanma davranışları bir kez kullanılmıştır. İkincisi, bu bölgeler asla güçlendirilmez: 'sağlam olsun' diye takviye eklenen bir ezilme bölgesi enerjiyi yutmaz ve o enerji kabine gider — yani araç daha güvenli değil, daha tehlikeli hâle gelir. Üçüncüsü, kıvrımlar ve delikler onarımda korunur: doldurulan bir delik ya da düzeltilirken yok edilen bir kıvrım, parçanın katlanma sırasını değiştirir. Bu yüzden bu parçalarda yapılacak her iş kılavuza bağlıdır ve çoğu zaman cevap değişimdir." },
+          { "label": "Ağırlığı azaltmak için delinmiştir", "verdict": "hafiflik", "explain": "Ağırlık bir kazanç ama asıl işlev katlanma davranışını belirlemek." },
+          { "label": "Üretim kolaylığı içindir", "verdict": "uretim", "explain": "Bu kıvrımlar kaza davranışını belirler." },
+          { "label": "Süs amaçlıdır", "verdict": "sus", "explain": "Görünmeyen bir parçada süs olmaz." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Ezilme bölgesi 'zayıf' değil, tasarım. Güçlendirilen bir ezilme bölgesi enerjiyi kabine gönderir."
+    },
+    {
+      "id": 4,
+      "instruction": "İki sacın birleştiği yere bakıyorsun: sıra sıra küçük yuvarlak izler var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.punta-noktasi",
+        "question": "Bu izler ne ve neden önemli?",
+        "options": [
+          { "label": "Fabrika punta kaynağı noktaları: sayıları, aralıkları ve yerleri yapının sertliğini belirler — onarımda aynı sayıda ve aynı yerde yapılmaları gerekir", "verdict": "punta", "correct": true, "explain": "Fabrikada iki sac birleştirilirken en yaygın yöntem punta kaynağıdır: iki sac üst üste konur, elektrotlar arasında sıkıştırılır ve kısa bir akımla noktasal olarak birbirine kaynatılır. Ortaya çıkan küçük yuvarlak izler bir montaj ayrıntısı değil, yapının bir parçasıdır. Üretici o noktaların sayısını, aralığını ve yerini hesaplayarak koyar; birleşimin ne kadar sert olacağı, yükü nasıl aktaracağı ve bir kazada nasıl davranacağı buna bağlıdır. Onarımda bunun üç sonucu var. Birincisi, sökülen bir parça geri takılırken punta sayısı azaltılamaz — 'iki nokta atarım tutar' demek yapıyı zayıflatmaktır; kılavuz kaç nokta diyorsa o kadar yapılır ve aralıklar korunur. İkincisi, yeni puntalar eskilerin tam üzerine atılmaz; eski nokta zaten ısı görmüş bir bölgedir ve üzerine atılan yeni nokta orada zayıf bir birleşim üretir — yeni noktalar eskilerin arasına kaydırılır. Üçüncüsü, punta sayısını sayarak bir aracın daha önce onarım görüp görmediği anlaşılabilir: fabrika noktaları düzenli ve eşit aralıklıdır, sonradan atılanlar genelde düzensizdir. Bu, ikinci el bir aracın geçmişini okumanın en güvenilir yollarından biridir. Not: bazı araçlarda ve bazı parçalarda üretici punta yerine yapıştırma, perçin ya da bunların birleşimini şart koşar — bir sonraki aşamada bunları ayrı ayrı göreceksin." },
+          { "label": "Üretim hatası izleridir", "verdict": "hata", "explain": "Tersine, bilinçli ve hesaplanmış birleşim noktaları." },
+          { "label": "Yalnız görünüm için", "verdict": "gorunum", "explain": "Görünmeyen bir yerdeler ve yapısal işlevleri var." },
+          { "label": "Sayıları önemsizdir", "verdict": "sayi", "explain": "Sayı ve aralık birleşimin sertliğini belirler." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Punta sayısını saymak, aracın geçmişini okumanın en güvenilir yollarından biri: fabrika düzenli, sonradan atılan düzensiz."
+    },
+    {
+      "id": 5,
+      "instruction": "Kaputa ve çamurluğa bakıyorsun: cıvatalarla tutturulmuşlar.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-camurluk",
+        "question": "Cıvatalı olmaları ne anlama gelir?",
+        "options": [
+          { "label": "Bu parçalar taşıyıcı yapının değil kabuğun parçası: üretici değişmelerini öngörmüş, sökülüp takılacak biçimde bağlamıştır ve onarımları bu alanın günlük işidir", "verdict": "civatali-dis-panel", "correct": true, "explain": "Bir parçanın nasıl bağlandığı, üreticinin o parçadan ne beklediğini doğrudan söyler ve bu, hasar değerlendirmesinde ilk okunan bilgidir. Cıvatalı parçalar — kaput, çamurluk, kapılar, bagaj kapağı, tamponlar — dış paneldir: yapının sertliğine küçük bir katkıları olsa da asıl görevleri kabuk olmaktır. Üretici bunların değişeceğini baştan öngörmüştür, bu yüzden sökülüp takılacak biçimde bağlamıştır. Onarım stratejisi de buna göre kurulur: hasar küçükse düzeltilir ve boyanır, büyükse parça değiştirilir; ikisi de bu alanın olağan işidir. Kaynaklı parçalar ise farklıdır: üretici onların yerinden çıkarılmasını öngörmemiştir ve çıkarmak, fabrikanın kurduğu birleşimi bozmak demektir. Bu yüzden kaynaklı bir parçanın değişimi kılavuza tabidir — nereden kesileceği, kaç punta atılacağı, hangi koruma uygulanacağı orada yazar. Pratikte bu ayrım şu soruyu doğurur ve her işin başında sorulur: bu parça cıvatalı mı, kaynaklı mı? Cevap 'cıvatalı' ise iş büyük ölçüde senin alanındadır. Cevap 'kaynaklı' ise ikinci soru gelir: bu parça taşıyıcı mı? Taşıyıcıysa kılavuz olmadan başlanmaz. Bir uyarı daha: cıvatalı olmak parçanın hiçbir yapısal katkısı olmadığı anlamına gelmez — bazı araçlarda bu bağlantılar da kaza davranışına katkı yapar, bu yüzden cıvataları uygun biçimde sıkılır ve eksik bırakılmaz." },
+          { "label": "Ucuz üretim yöntemidir", "verdict": "ucuz", "explain": "Amaç maliyet değil, değişebilirlik." },
+          { "label": "Geçici olarak takılmışlardır", "verdict": "gecici", "explain": "Kalıcıdır; yalnız sökülebilir olacak biçimde tasarlanmıştır." },
+          { "label": "Taşıyıcıdırlar ama kolay söküldükleri için cıvatalıdır", "verdict": "tasiyici", "explain": "Asıl taşıyıcı parçalar kaynaklıdır ve sökülmeleri öngörülmemiştir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Her işin başındaki iki soru: cıvatalı mı kaynaklı mı, ve taşıyıcı mı? İkisi birlikte işi tarif eder."
+    },
+    {
+      "id": 6,
+      "instruction": "Kapı panelinin içine bakıyorsun: içinde enine kalın bir kiriş var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-kapi-paneli",
+        "question": "Kapının içindeki bu kiriş ne yapar?",
+        "options": [
+          { "label": "Yandan gelen darbede kuvveti karşılar ve direklere aktarır; kapı bu yüzden yalnız bir kapak değil, güvenlik yapısının parçasıdır", "verdict": "yan-darbe-kirisi", "correct": true, "explain": "Yandan çarpma, aracın en zor koruduğu kaza türüdür: önde ve arkada ezilecek uzun bir mesafe varken yanda insanla dış dünya arasında yalnız birkaç santim vardır. Bu yüzden kapının içine, enine uzanan kalın ve yüksek mukavemetli bir kiriş konur. İşi şudur: darbe geldiğinde kendisi fazla ezilmeden kuvveti alır ve A ile B direklerine, oradan da eşiğe ve tavana aktarır; yani kuvveti tek bir noktada tutmak yerine gövdenin geneline yayar. Bu tasarımın onarımda üç sonucu var. Birincisi, kapı sacı düzeltilirken bu kirişe zarar verilmemesi gerekir — kapı içine sokulan bir aletin kirişi ezmesi ya da bağlantısını gevşetmesi, dışarıdan hiç görünmeyen bir zayıflık üretir. İkincisi, darbe almış bir kapıda hasar sacla sınırlı olmayabilir: kiriş de deforme olmuşsa kapı düzeltilse bile yapısal işlevini kaybetmiştir ve bu, kılavuzun değişim istediği durumlardan biridir. Üçüncüsü, kapı takılırken menteşe ve kilit ayarı yalnız bir fuga meselesi değildir; kapı kapandığında kilidin direkteki karşılığına tam oturması, o kuvvet aktarım yolunun kurulması demektir — bu yüzden zorlanarak kapanan ya da tam oturmayan bir kapı hem konfor hem güvenlik sorunudur. Bu alanın arıza teşhis aşamasında tam bu şikâyeti işleyeceksin." },
+          { "label": "Kapıya ağırlık verip sağlam hissettirir", "verdict": "his", "explain": "İşlevi his değil, kuvveti direklere aktarmak." },
+          { "label": "Cam mekanizmasını tutar", "verdict": "cam", "explain": "Mekanizmanın kendi rayları var; kiriş yapısaldır." },
+          { "label": "Ses yalıtımı içindir", "verdict": "ses", "explain": "Yalıtım ayrı malzemelerle yapılır." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Kapı bir kapak değil, güvenlik yapısının parçası. Tam oturmayan kapı hem konfor hem güvenlik sorunu."
+    },
+    {
+      "id": 7,
+      "instruction": "Gövdenin haritasını çıkardın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.tavan-paneli",
+        "question": "Bu harita günlük işte ne işe yarar?",
+        "options": [
+          { "label": "Her işin başında üç soruyu cevaplatır: bu parça taşıyıcı mı, nasıl bağlanmış, hasar komşu parçalara gitmiş mi — üçünün cevabı işin kapsamını ve sınırını belirler", "verdict": "uc-soru", "correct": true, "explain": "Bu alanın bütün kararları bu üç sorunun cevabından çıkar ve harita bu yüzden ezberlenir. Birinci soru: bu parça taşıyıcı mı? Cevap evet ise kılavuz olmadan hiçbir şey yapılmaz ve çoğu zaman iş değişim ya da yönlendirmedir. Cevap hayır ise dış panel işlemleri — çekme, düzeltme, macun, boya — devreye girer. İkinci soru: nasıl bağlanmış? Cıvatalıysa sökülüp takılabilir ve iş nettir; kaynaklıysa fabrikanın kurduğu birleşim bozulacak demektir ve kılavuz devreye girer: kaç punta, hangi hat, hangi koruma. Üçüncü soru: hasar nereye gitti? Gövde bir kutu olduğu için darbe tek panelde kalmaz; kapı boşlukları, çapraz ölçüler ve komşu panellerin oturuşu kontrol edilir. Bu üçüncü soru en çok atlanandır ve en pahalı hataları üretir: yalnız görünen paneli onarıp teslim edilen bir araçta kapı sürtmeye başlar, cam sızdırır ya da lastik düzensiz aşınır — çünkü asıl hasar görünmeyen yerdeydi. Bir de dördüncü, sessiz bir soru vardır ve bu alanda ustayı belirler: bu iş benim atölyemin kapasitesinde mi? Çekme sehpası, gövde ölçüm sistemi ve uygun boya ortamı gerektiren bir işi bunlar olmadan almak, işi bitirememek ya da kötü bitirmek demektir." },
+          { "label": "Yalnız teoride kalır", "verdict": "teori", "explain": "Her işin kapsamı bu üç soruyla belirlenir." },
+          { "label": "Fiyat vermeye yarar", "verdict": "fiyat", "explain": "Fiyat bir sonuç; harita önce kapsamı belirler." },
+          { "label": "Müşteriye anlatmak için", "verdict": "anlat", "explain": "Anlatmak faydalı ama harita önce senin kararını kurar." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Üç soru: taşıyıcı mı, nasıl bağlanmış, hasar nereye gitti. Sırada hasarı okumak."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Aracın ön bölgesindeki taşıyıcı ayak ezilmiş. Bu ne demek?",
+        "a": "kontrollu-ezilme",
+        "options": [
+          { "verdict": "kontrollu-ezilme", "label": "İşini yapmış: o bölge kontrollü ezilerek enerjiyi yutmak üzere tasarlanmıştır ve bu parçalar onarılmaz, değişir", "explain": "Üzerindeki kıvrımlar ve delikler parçanın hangi sırayla ve hangi kuvvette katlanacağını belirler. Ezilme bölgesi asla güçlendirilmez — takviye edilen bir bölge enerjiyi yutmaz ve o enerji kabine gider. Onarımda kıvrımlar ve delikler de korunur; doldurulan bir delik katlanma sırasını değiştirir." },
+          { "verdict": "hafiflik", "label": "Ağırlık için delinmiş, önemsiz", "explain": "Kıvrımlar kaza davranışını belirler." },
+          { "verdict": "uretim", "label": "Üretim kolaylığı", "explain": "Yapısal bir tasarım." },
+          { "verdict": "sus", "label": "Süs", "explain": "Görünmeyen parçada süs olmaz." }
+        ]
+      },
+      {
+        "q": "Sökülen bir parça geri takılırken punta sayısı azaltılabilir mi?",
+        "a": "punta",
+        "options": [
+          { "verdict": "punta", "label": "Hayır: sayı, aralık ve yer yapının sertliğini belirler; kılavuz kaç nokta diyorsa o kadar yapılır", "explain": "Yeni puntalar eskilerin tam üzerine de atılmaz — eski nokta zaten ısı görmüştür ve üzerine atılan yeni nokta zayıf bir birleşim üretir; noktalar eskilerin arasına kaydırılır. Bazı parçalarda üretici punta yerine yapıştırma, perçin ya da bunların birleşimini şart koşar." },
+          { "verdict": "hata", "label": "Punta izleri üretim hatasıdır", "explain": "Hesaplanmış birleşim noktalarıdır." },
+          { "verdict": "gorunum", "label": "Görünüm içindir", "explain": "Görünmeyen yerdeler." },
+          { "verdict": "sayi", "label": "Sayıları önemsizdir", "explain": "Sertliği belirler." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2'deki 0,7 mm ve 1,6 mm SENARYO okumalarıdır; istenen FARKTIR (0,9 mm) ve ders hiçbir araç için fabrika sac kalınlığı iddia etmiyor.",
+    "sourceRequired": "Fabrika sac kalınlıkları, çelik sınıfları, punta sayısı ve aralıkları, kesim hatları, hangi parçanın onarılıp hangisinin değişeceği ve kapı kirişi değişim kriterleri bilinçle VERİLMEDİ; hepsi araca özgüdür ve üreticinin onarım kılavuzundan okunur.",
+    "kapsam": "Şasi çekme, gövde ölçüm sistemiyle yapısal doğrulama ve taşıyıcı parça değişimi KAPSAM DIŞIDIR — ders bu işlerin varlığını ve sınırını öğretiyor, yapılışını değil.",
+    "kaynak": "Bu alan kullanıcının açık talebiyle eklendi; konu başlıkları MEB Otomotiv Gövde ve Boya dalının çerçevesini takip ediyor, kazanım numarası iddiası yok.",
+    "reviewedByMechanic": false
+  }
+}

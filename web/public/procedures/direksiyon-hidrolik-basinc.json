@@ -1,0 +1,178 @@
+{
+  "id": "direksiyon.hidrolik-basinc",
+  "area": "direksiyon",
+  "stage": 3,
+  "title": "Basınç Testi ve Pompanın Değerlendirilmesi",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 40,
+  "prerequisites": ["direksiyon.hidrolik-sivi"],
+  "learningGoals": [
+    "Basınç test cihazını devreye doğru bağlamak ve güvenle kullanmak",
+    "Pompa arızası ile kutu içi kaçağı ölçümle ayırmak",
+    "Hat kaybını ve dönüş kısıtlamasını ölçüme dayanarak tespit etmek"
+  ],
+
+  "safety": [
+    { "rule": "Kapama valfi üreticinin belirttiği süreden uzun kapalı tutulmaz", "why": "Valf kapalıyken pompa sınıra dayanır; sıvı çok hızlı ısınır ve pompa zarar görür. Süre saniyelerle ölçülür", "blocksStart": true },
+    { "rule": "Test bağlantıları yapılırken sistem soğuk ve motor durmuş olur", "why": "Sıcak ve basınçlı bir hattı açmak yanık ve enjeksiyon yaralanması riskidir", "blocksStart": true },
+    { "rule": "Motor çalışırken hiç kimse kayış, kasnak ve hortum bölgesinde durmaz", "why": "Test sırasında basınç yükselir; zayıf bir hat tam o anda patlayabilir", "blocksStart": true },
+    { "rule": "Test sırasında direksiyon uç konumda tutulmaz, kısa denemelerle çalışılır", "why": "Uç konum zaten sınırlayıcı valfi açar ve sıvıyı ısıtır", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.basinc-test-cihazi", "label": "Hidrolik basınç test cihazı", "required": true },
+    { "id": "tool.anahtar-takimi", "label": "Anahtar takımı", "required": true },
+    { "id": "tool.termometre", "label": "Temassız termometre", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Cihazı devreye bağlayacaksın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.basinc-test-cihazi",
+        "question": "Cihaz nereye bağlanır?",
+        "options": [
+          { "label": "Pompa çıkışı ile kutu girişi arasına, hattın içine seri olarak; cihazın üzerinde bir manometre ve bir kapama valfi bulunur", "verdict": "seri-baglanir", "correct": true, "explain": "Basınç test cihazı devreye paralel bir dinleyici değil, hattın içine giren bir parçadır: basınç hortumu pompa çıkışından ayrılır, cihazın giriş ucu pompaya, çıkış ucu kutuya bağlanır. Böylece bütün akış cihazın içinden geçer ve manometre gerçekten hatta olan basıncı gösterir. Cihazın üzerindeki kapama valfi, testin ikinci yarısını mümkün kılar: valf kapatıldığında akış kesilir ve pompa kapalı bir hacme basmak zorunda kalır; manometrede okunan değer artık pompanın üretebildiği azami basınçtır — yani pompanın kendi kapasitesi ölçülmüş olur. Valf açıkken ise sistem normal çalışır ve devredeki gerçek çalışma basıncı görülür. Bağlantı yapılırken üç şeye dikkat edilir: hat açıkken ağızlar kapalı tutulur, bağlantılar doğru rakorlarla ve sızdırmaz biçimde yapılır, ve cihaz ile hortumlar sistemin basıncına uygun sınıfta olmalıdır. Bağlantıdan sonra sistem doldurulur, havası alınır ve ölçüme geçilir." },
+          { "label": "Depoya daldırılır", "verdict": "depoya", "explain": "Depoda basınç yoktur; ölçüm basınç hattında yapılır." },
+          { "label": "Dönüş hortumunun ucuna takılır", "verdict": "donuse", "explain": "Dönüş düşük basınçlıdır; test basınç hattında yapılır." },
+          { "label": "Hiçbir yere bağlanmaz, dışarıdan ölçülür", "verdict": "disaridan", "explain": "Hidrolik basınç dışarıdan ölçülemez; cihaz hatta seri girer." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Cihazın kapama valfi testin kalbi: kapalıyken pompanın kapasitesi, açıkken sistemin çalışma basıncı ölçülür."
+    },
+    {
+      "id": 2,
+      "instruction": "Kapama valfini kapatıp okuma alacaksın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.hidrolik-pompa",
+        "question": "Bu okuma nasıl yapılır?",
+        "options": [
+          { "label": "Motor belirtilen devirde çalışırken valf yalnız birkaç saniye kapatılır, tepe değer okunur ve valf hemen açılır", "verdict": "birkac-saniye", "correct": true, "explain": "Valf kapalıyken sistemde akış yoktur; pompanın bastığı bütün sıvı kapalı bir hacme dayanır ve sınırlayıcı valf üzerinden boşalmaya başlar. Bu durumda pompanın harcadığı enerjinin tamamı ısıya döner ve sıvı sıcaklığı çok hızlı yükselir — saniyeler mertebesinde. Bu yüzden ölçümün kuralı nettir: valf yalnız birkaç saniye kapalı tutulur, manometredeki değer okunur ve valf hemen açılır. Üreticiler bu süre için genellikle bir üst sınır verir ve o sınır aşılmaz; süre uzatıldığında pompa, keçeler ve hortumlar zarar görür, üstelik ölçüm de bozulur çünkü ısınan sıvının viskozitesi düşer. Ölçüm belirtilen motor devrinde yapılır — pompa debisi devre bağlı olduğu için farklı devirde alınan okuma karşılaştırılamaz. İyi bir uygulama, ölçümü tek seferde ve hazırlıklı yapmaktır: gözler manometrede, el valfte, motor devri sabit. Okunacak şey tepe değerdir. Ölçüm bir kez alınır, sistem soğumaya bırakılır ve gerekirse tekrarlanır." },
+          { "label": "Valf kapalı tutulup birkaç dakika beklenir", "verdict": "dakika", "explain": "Dakikalarca kapalı valf pompayı bitirir; süre saniyelerle ölçülür." },
+          { "label": "Motor durdurulup okunur", "verdict": "motor-durur", "explain": "Basıncı pompa üretir; motor durunca okunacak bir şey kalmaz." },
+          { "label": "Devir önemli değildir", "verdict": "devir-onemsiz", "explain": "Pompa debisi devre bağlıdır; belirtilen devirde ölçülür." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Bu testin tehlikesi ölçümde değil, ölçümü uzatmakta. El valfte, göz manometrede, tek seferde."
+    },
+    {
+      "id": 3,
+      "instruction": "Aynı anda iki noktadan okudun: pompa çıkışında 76 bar, kutu girişinde 71 bar. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.basinc-hortumu",
+        "unit": "bar",
+        "acceptRange": [4.8, 5.2]
+      },
+      "camera": "direksiyon",
+      "hint": "76 eksi 71.",
+      "teachingNote": "5 bar'lık bu düşüş pompa ile kutu arasında kayboluyor, yani hattın kendisinde. Sağlam bir basınç hortumunda kayıp çok küçüktür; belirgin bir fark hatta bir kısıtlama olduğunu söyler — içten çökmüş bir hortum, ezilmiş bir bölge ya da tıkanmış bir rakor. Bu ölçümün asıl değeri, aynı mantığın bütün akış sistemlerinde işlemesidir: iki nokta arasında beklenmedik bir basınç farkı varsa, aradaki bir şey akışı kısıtlıyordur. İçten çökmüş hortum özellikle sinsidir çünkü dışarıdan sağlam görünür ve elle sıkıldığında normal hissedilir. Kabul edilebilir hat kaybı ve sistem basınç değerleri araca özgüdür; bu ders bir sınır vermiyor, yalnız farkın nasıl yorumlanacağını gösteriyor."
+    },
+    {
+      "id": 4,
+      "instruction": "Valf kapalıyken pompa üreticinin verdiği basıncı üretiyor. Ama valf açılıp direksiyon çevrildiğinde destek zayıf.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kremayer-kutusu",
+        "question": "Bu ne anlama gelir?",
+        "options": [
+          { "label": "Pompa sağlam; basınç kutunun içinde kaybediliyordur — valf ya da piston keçesi iç kaçak yapıyor", "verdict": "kutu-ic-kacak", "correct": true, "explain": "Bu, basınç testinin var oluş sebebidir: pompa ile kutuyu ölçümle birbirinden ayırmak. Mantık şudur — valf kapalıyken akış yoktur ve pompa kapasitesini gösterir; bu değer normalse pompa basınç üretebiliyor demektir. Valf açıldığında ise sistem gerçek işini yapar ve basınç, iş yapılan yere kadar ulaşmak zorundadır. Destek zayıfsa ve pompa sağlamsa, üretilen basınç yolda ya da kutunun içinde kayboluyordur. Hat kaybı bir önceki adımda elendiyse geriye kutu kalır. Kutunun içinde iki tipik iç kaçak vardır. Birincisi kumanda valfindedir: valf aşındığında basıncı yalnız gereken tarafa yönlendiremez, bir kısmı diğer tarafa ya da doğrudan dönüşe sızar. Belirtisi çoğu zaman asimetriktir — bir yöne destek iyi, diğer yöne zayıf. İkincisi piston keçesidir: keçe geçirdiğinde basınç pistonun iki tarafında eşitlenmeye başlar ve itme kuvveti düşer; belirti genellikle iki yönde de eşit zayıflıktır. Bu ayrım önemlidir çünkü müşteriye söylenecek parça değişir. Ölçüm olmadan bu ayrım yapılamaz ve pompa boş yere değiştirilir — hidrolik teşhiste en sık görülen yanlış budur." },
+          { "label": "Pompa arızalıdır, değiştirilir", "verdict": "pompa", "explain": "Valf kapalıyken kapasitesini gösterdi; pompa basınç üretebiliyor." },
+          { "label": "Sıvı yanlış tiptir", "verdict": "sivi", "explain": "Mümkün ama bu tablo doğrudan iç kaçağı işaret ediyor." },
+          { "label": "Kayış gevşektir", "verdict": "kayis", "explain": "Kayış gevşek olsaydı valf kapalıyken de basınç düşük çıkardı." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Basınç testinin bütün amacı bu: pompayı kutudan ölçümle ayırmak. Yoksa pompa boş yere değişir."
+    },
+    {
+      "id": 5,
+      "instruction": "Başka bir araçta sistem soğukken basınç normal, ısındıkça belirgin düşüyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.hidrolik-pompa",
+        "question": "Bu tablo neyi gösterir?",
+        "options": [
+          { "label": "Pompanın iç boşlukları artmıştır; sıvı ısınıp inceldiğinde bu boşluklardan geri kaçar ve basınç düşer", "verdict": "ic-bosluk-artti", "correct": true, "explain": "Hidrolik pompa, içindeki hareketli parçalar ile gövde arasındaki çok küçük boşluklarla çalışır; bu boşluklar sıvının kendisiyle sızdırmaz hâle gelir. Parçalar aşındıkça boşluklar büyür. Soğuk sıvı koyu ve akmaya dirençli olduğu için büyümüş boşluklardan bile kolay geçemez ve pompa normal görünür. Sıvı ısındıkça incelir ve aynı boşluklardan geri kaçmaya başlar; sonuç, sıcakken düşen basınç ve sıcakken zayıflayan destektir. Bu, aşınmış bir pompanın en tanıdık imzasıdır ve sürücünün şikâyetiyle birebir örtüşür: 'sabah iyi, öğleden sonra ya da uzun yolda ağırlaşıyor.' Teşhiste bu yüzden ölçüm iki kez alınır — soğukken ve çalışma sıcaklığında — ve aradaki fark yorumlanır. Aynı belirtiyi üretebilecek iki şey daha vardır ve elenmeleri gerekir: sıcakken genleşerek gevşeyen bir kayış ve ısındıkça daha çok kaçıran bir kutu içi keçe. Kayış gerginliği elle ve gözle, kutu ise valf kapalı/açık karşılaştırmasıyla ayrılır. Belirtiyi tek ölçümle yakalamak mümkün değildir; sistemin ısınmasını beklemek testin parçasıdır." },
+          { "label": "Normaldir, her sistemde basınç sıcakken düşer", "verdict": "normal", "explain": "Küçük bir değişim beklenir ama belirgin düşüş aşınmayı gösterir." },
+          { "label": "Sıvı fazladır", "verdict": "fazla-sivi", "explain": "Fazla sıvı taşma yapar, basınç düşürmez." },
+          { "label": "Depo kapağı gevşektir", "verdict": "kapak", "explain": "Kapak sızıntı ve kirlenme yolu açar, bu tabloyu üretmez." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "'Sabah iyi, öğleden sonra ağır' cümlesi bir ölçüm planı demek: soğukken ve sıcakken iki okuma."
+    },
+    {
+      "id": 6,
+      "instruction": "Üçüncü bir araçta basınç normalden yüksek çıkıyor ve sıvı hızla ısınıyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.donus-hortumu",
+        "question": "Nereye bakılır?",
+        "options": [
+          { "label": "Dönüş tarafına: ezilmiş ya da içten çökmüş dönüş hortumu, tıkanmış süzgeç veya tıkalı soğutucu sıvının rahat dönmesini engeller", "verdict": "donus-kisitlamasi", "correct": true, "explain": "Basıncın yüksek çıkması ilk bakışta iyi bir haber gibi görünür ama değildir; sistemin tasarlandığından yüksek bir basınçta çalışması, sıvının devreyi rahat tamamlayamadığı anlamına gelir. Akış bir yerde kısıtlanmışsa pompa aynı sıvıyı daha zor iter, basınç yükselir ve harcanan fazladan enerji doğrudan ısıya döner — bu yüzden yüksek basınç ile hızlı ısınma birlikte görülür. Kısıtlama en çok dönüş tarafında aranır çünkü orası düşük basınçlı olduğu için hortumu daha ince ve takviyesizdir: yaşlandıkça içten çöker, bir yerde ezilmişse geri açılmaz ve dışarıdan bakınca sağlam görünür. İkinci aday depodaki ya da dönüş hattındaki süzgeçtir; aşınma parçacıklarıyla tıkandığında akışı boğar. Üçüncüsü, varsa sıvı soğutucusudur — çamur ve böcekle tıkanmış bir soğutucu hem akışı kısıtlar hem soğutmaz. Sonuçlar birikimlidir: yüksek basınç keçeleri ve hortumları zorlar, yüksek sıcaklık sıvıyı bozar ve bozulan sıvı aşınmayı hızlandırır. Bu yüzden 'basınç yüksek çıktı, sistem iyi' denip geçilmez; sebebi bulunur." },
+          { "label": "Yüksek basınç iyidir, sorun yok", "verdict": "iyi", "explain": "Tasarımın üstünde basınç, akışın kısıtlandığını gösterir." },
+          { "label": "Pompa çok güçlüdür, değiştirilir", "verdict": "pompa-guclu", "explain": "Pompa aynı pompa; değişen şey akışın önündeki direnç." },
+          { "label": "Sıvı azdır", "verdict": "az-sivi", "explain": "Az sıvı hava ve ses üretir, basıncı yükseltmez." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Yüksek basınç iyi haber değil. Akış kısıtlandıkça basınç yükselir ve fazla enerji ısıya döner."
+    },
+    {
+      "id": 7,
+      "instruction": "Test bitti.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.basinc-test-cihazi",
+        "question": "İş nasıl kapanır?",
+        "options": [
+          { "label": "Cihaz sistem soğuduktan sonra sökülür, hat kendi rakorlarıyla toplanır, sistem doldurulup havası alınır, okunan değerler koşullarıyla kaydedilir ve sızıntı kontrolü yapılır", "verdict": "sogut-sok-doldur-kaydet", "correct": true, "explain": "Kapanışın sırası güvenlikle başlar: cihaz sıcak ve basınçlı bir sistemden sökülmez; motor durdurulur, sistem soğur ve ancak sonra bağlantılar açılır. Sökme sırasında bir miktar sıvı kaybı olur, bu normaldir ve toplanır. Hat kendi rakorlarıyla, doğru sıkma değerinde toplanır — test için açılan bir bağlantı, işin en sık sızdıran yeridir. Ardından sistem doldurulur ve havası alınır, çünkü hat açıldığı anda hava girmiştir. Kayıt kısmı bu testin kalıcı değeridir: valf kapalı okuma, valf açık okuma, varsa iki nokta arası fark, motor devri ve sıvı sıcaklığı birlikte yazılır. Koşulsuz bir basınç değeri sonradan hiçbir işe yaramaz; aynı araç bir yıl sonra geldiğinde karşılaştırılabilir olması için koşul şart. Son olarak araç kısa bir sürüşten sonra bölge yeniden kontrol edilir ve seviye ısınmış sistemde doğrulanır. Testin sonucu bir parça değişimine yol açacaksa, değişimden sonra aynı test tekrarlanır — iyileşme ölçülerek gösterilir, tahmin edilmez." },
+          { "label": "Cihaz sıcakken hemen sökülür", "verdict": "sicakken", "explain": "Sıcak ve basınçlı sistemi açmak yanık ve enjeksiyon riski." },
+          { "label": "Değerler akılda tutulur, yazılmaz", "verdict": "yazma", "explain": "Koşulsuz ve kayıtsız ölçüm sonradan karşılaştırılamaz." },
+          { "label": "Hava alma gerekmez", "verdict": "hava-yok", "explain": "Hat açıldığı anda hava girmiştir." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Parça değiştiyse aynı test tekrarlanır. İyileşme ölçülerek gösterilir, tahmin edilmez."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Valf kapalıyken pompa normal basınç üretiyor ama valf açıkken destek zayıf. Sebep?",
+        "a": "kutu-ic-kacak",
+        "options": [
+          { "verdict": "kutu-ic-kacak", "label": "Pompa sağlam; basınç kutunun içinde kaybediliyor — kumanda valfi ya da piston keçesi iç kaçak yapıyor", "explain": "Valf kapalıyken akış olmadığı için okunan değer pompanın kapasitesidir; normalse pompa basınç üretebiliyor demektir. Valf açıkken basıncın iş yapılan yere ulaşması gerekir. Hat kaybı elendiyse geriye kutu kalır: aşınmış kumanda valfi genellikle asimetrik belirti verir (bir yöne iyi, diğerine zayıf), geçiren piston keçesi ise iki yönde eşit zayıflık. Ölçüm olmadan bu ayrım yapılamaz ve pompa boş yere değiştirilir." },
+          { "verdict": "pompa", "label": "Pompa arızalıdır", "explain": "Kapasitesini valf kapalıyken gösterdi." },
+          { "verdict": "sivi", "label": "Sıvı yanlış tiptir", "explain": "Tablo doğrudan iç kaçağı işaret ediyor." },
+          { "verdict": "kayis", "label": "Kayış gevşektir", "explain": "O hâlde valf kapalıyken de basınç düşük çıkardı." }
+        ]
+      },
+      {
+        "q": "Basınç normalden yüksek çıkıyor ve sıvı hızla ısınıyor. Nereye bakılır?",
+        "a": "donus-kisitlamasi",
+        "options": [
+          { "verdict": "donus-kisitlamasi", "label": "Dönüş tarafına: içten çökmüş dönüş hortumu, tıkanmış süzgeç veya tıkalı soğutucu", "explain": "Akış kısıtlandığında pompa aynı sıvıyı daha zor iter, basınç yükselir ve fazladan harcanan enerji ısıya döner — bu yüzden yüksek basınç ve hızlı ısınma birlikte görülür. Dönüş hortumu takviyesiz olduğu için içten çöker ve dışarıdan sağlam görünür. Yüksek basınç iyi haber değildir; keçeleri zorlar, sıvıyı bozar ve bozulan sıvı aşınmayı hızlandırır." },
+          { "verdict": "iyi", "label": "Yüksek basınç iyidir", "explain": "Tasarımın üstünde basınç kısıtlama demektir." },
+          { "verdict": "pompa-guclu", "label": "Pompa çok güçlüdür", "explain": "Değişen şey akışın önündeki direnç." },
+          { "verdict": "az-sivi", "label": "Sıvı azdır", "explain": "Az sıvı hava ve ses üretir." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 76 bar ve 71 bar SENARYO okumalarıdır; istenen FARKTIR (5 bar) ve gösterilen şey hattaki kısıtlamanın basınç farkı olarak görüleceğidir. Kabul edilebilir hat kaybı verilmiyor.",
+    "sourceRequired": "Sistem basınç değerleri, sınırlayıcı valfin açma basıncı, ölçüm devri, valfin kapalı tutulabileceği azami süre ve kabul edilebilir hat kaybı bilinçle VERİLMEDİ; araca ve üreticiye özgüdür. Kapalı valf süresi ayrıca doğrudan bir güvenlik değeridir ve künyesiz yazılmaz.",
+    "kapsam": "Pompanın sökülüp onarımı bu ders değil. Hava alma bir sonraki ders. Kutu içi valf ve piston keçesi ayrımı ölçüm düzeyinde işlendi; kutunun açılması kapsam dışı. Elektro-hidrolik sistemler kapsam dışı.",
+    "reviewedByMechanic": false
+  }
+}

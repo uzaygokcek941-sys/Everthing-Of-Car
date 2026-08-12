@@ -1,0 +1,176 @@
+{
+  "id": "lastik.asinma-deseni",
+  "area": "lastik-tekerlek",
+  "stage": 3,
+  "title": "Aşınma Deseninden Sebebe: Lastik Bir Rapordur",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 35,
+  "prerequisites": ["lastik.dis-derinligi"],
+  "learningGoals": [
+    "Tek kenar aşınması ile testere dişi görünümünü birbirinden ayırmak",
+    "Çevre boyunca değişen aşınmanın süspansiyona işaret ettiğini bilmek",
+    "Deseni sebebe çevirip sebep giderilmeden lastik değiştirmemek"
+  ],
+
+  "safety": [
+    { "rule": "Aşınma incelemesi araç sehpaya alınmış ve tekerlek serbestken yapılır", "why": "Yere basan lastiğin alt yüzeyi görülmez; incelemenin yarısı eksik kalır", "blocksStart": true },
+    { "rule": "Sırt yüzeyi elle taranırken dikkat edilir", "why": "Sırta batmış tel, cam ya da vida parmağı keser; tarama eldivenle ve avuç içiyle yapılır", "blocksStart": false },
+    { "rule": "Ön takımda boşluk tespit edilirse araç ayara gönderilmeden önce parça değiştirilir", "why": "Boşluklu bir ön takımda yapılan ayar tutmaz; araç ayarlı görünürken ayarsız kalır", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.dis-mastari", "label": "Diş derinliği mastarı", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Sol ön lastikte yalnız iç kenar aşınmış. Aşınma düzgün: kenardan ortaya doğru yumuşak bir eğimle azalıyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik",
+        "question": "İlk aday ne?",
+        "options": [
+          { "label": "Kamber: tekerlek düşeyle açı yapıyor, yükü tek kenar taşıyor", "verdict": "kamber", "correct": true, "explain": "Kamber, tekerleğin önden bakıldığında düşeyle yaptığı açıdır. Tekerleğin üstü içe yatıksa negatif, dışa yatıksa pozitif kamberden söz edilir. Açı büyüdükçe lastiğin yola basan yüzeyi eşit yüklenmez; ağırlığın büyük kısmını yatık taraftaki kenar taşır ve o kenar hızla aşınır. Ortaya çıkan desenin en ayırt edici özelliği düzgünlüğüdür: aşınma kenardan ortaya doğru yumuşak bir eğimle azalır, tırtıklı değildir, elle tarandığında iki yönde de aynı hissi verir. Sebep her zaman ayar olmayabilir — çukura girmiş bir araçta salıncak eğilmiş, rotil ya da burç yorulmuş olabilir. Bu yüzden kamber şüphesinde iki iş birlikte yapılır: ön takım boşluğu elle kontrol edilir ve açı cihazla ölçülür. Boşluk varken yapılan ayar tutmaz; parça değişmeden ayar yapan atölye aynı aracı birkaç ay sonra aynı şikâyetle geri alır." },
+          { "label": "Toe bozuk", "verdict": "toe", "explain": "Toe testere dişi görünümü bırakır; buradaki aşınma düzgün ve eğimli." },
+          { "label": "Basınç düşük", "verdict": "basinc", "explain": "Düşük basınç İKİ omuzu birden aşındırır." },
+          { "label": "Lastik yönü ters takılmış", "verdict": "ters-yon", "explain": "Ters yön ıslak performansı düşürür, tek kenar aşınması yapmaz." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Aşınma teşhisinde iki soru sorulur: hangi bölge aşınmış ve aşınma nasıl görünüyor? İkinci soru, aynı bölgeyi aşındıran farklı sebepleri birbirinden ayırır."
+    },
+    {
+      "id": 2,
+      "instruction": "Sağ ön lastikte aşınma yine iç tarafta ama görünüm farklı: bloklar bir kenarından yüksek, diğer kenarından alçak. Avucunu sırt üzerinde enine gezdirdiğinde bir yönde pürüzsüz, ters yönde tırtıklı hissediyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik",
+        "question": "Bu görünüm neyi gösterir?",
+        "options": [
+          { "label": "Toe bozukluğu: tekerlek hafifçe yan sürüklendiği için bloklar bir kenarından tıraşlanmış, testere dişi oluşmuş", "verdict": "toe", "correct": true, "explain": "Toe, tekerleklerin üstten bakıldığında birbirine göre içe ya da dışa bakma durumudur. Toe bozuksa tekerlek ileri giderken aynı anda hafifçe yana da sürüklenir. Bu sürüklenme her turda sırt bloklarının aynı kenarını tıraşlar; bloklar bir yandan yüksek, diğer yandan alçak kalır ve sırt üzerinde testere dişi denen basamaklı bir yapı oluşur. Bu deseni gözle görmek zordur ama elle bulmak çok kolaydır: avuç sırt üzerinde enine gezdirilir, bir yönde pürüzsüz, ters yönde tırtıklı hissedilir. Bu tek hareket kamber ile toe'yu birbirinden ayırır — kamberde aşınma düzgündür ve iki yönde de aynı hissi verir. Toe ayrıca aşınmanın en pahalı sebeplerinden biridir, çünkü lastiği yol boyunca sürükleyerek yer; bozuk bir toe, aksi hâlde uzun ömürlü olacak bir lastik takımını kısa sürede bitirir." },
+          { "label": "Kamber bozuk", "verdict": "kamber", "explain": "Kamber düzgün ve eğimli aşınma bırakır; testere dişi toe işaretidir." },
+          { "label": "Balans ağırlığı düşmüş", "verdict": "balans", "explain": "Balans titreşim ve noktasal aşınma yapar, blok kenarlarını tıraşlamaz." },
+          { "label": "Lastik yaşlı", "verdict": "yasli", "explain": "Yaşlanma çatlak bırakır, belirli bir aşınma deseni üretmez." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bu adımın öğrettiği hareket — avucu sırt üzerinde enine gezdirmek — bu alandaki en ucuz teşhis aletidir. Hiçbir cihaz gerektirmez ve saniyeler sürer."
+    },
+    {
+      "id": 3,
+      "instruction": "Sol arka lastiği çevre boyunca dört noktadan ölçtün: 5,1 — 5,0 — 3,4 — 5,2 mm. En yüksek ile en düşük arasındaki farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.dis-mastari",
+        "unit": "mm",
+        "acceptRange": [1.7, 1.9]
+      },
+      "camera": "tekerlek",
+      "hint": "5,2 eksi 3,4.",
+      "teachingNote": "1,8 mm'lik bu fark aynı lastiğin aynı şeridinde, yalnız çevre boyunca farklı noktalarda çıktı. Yani lastik enine değil boyuna düzensiz aşınmış. Bu, öncekilerden bambaşka bir sebebe işaret eder: lastik yol boyunca eşit basmıyor, bazı noktalarda zıplıyor. Ölçümün üç şeritten alınması kuralı burada da geçerli — ama asıl bilgiyi veren şey, tek şerit içindeki çevresel fark."
+    },
+    {
+      "id": 4,
+      "instruction": "Aşınmanın çevre boyunca dalgalı olduğunu gördün; el gezdirince yer yer kepçe gibi çukurlar hissediliyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik",
+        "question": "Sebep nerede aranır?",
+        "options": [
+          { "label": "Süspansiyonda ve balansta: tekerlek yolda zıpladığı için sırt bazı noktalarında daha çok yüklenmiş", "verdict": "suspansiyon-balans", "correct": true, "explain": "Sırtın çevre boyunca dalgalı aşınması, tekerleğin yola sürekli ve eşit basmadığını gösterir. Tekerlek zıplıyor demektir; her temas noktasında sırtın belirli bir bölgesi fazladan sürtünüyor ve orada kepçe biçimli çukurlar oluşuyor. Bunun iki tipik sebebi vardır. Birincisi süspansiyonun sönümleme yeteneğini kaybetmesidir: yorulmuş bir amortisör tekerleği yol yüzeyine bastıramaz, tekerlek yoldaki her düzensizlikten sonra birkaç kez sekerek dengelenir. İkincisi ağır bir balans hatasıdır: dengesiz dönen tekerlek belirli bir hızda titreşir ve bu titreşim aynı deseni üretir. Üçüncü ve daha seyrek sebep tekerlek rulmanındaki boşluktur. Ayrım için araç sehpaya alınır, tekerlek elle sallanır, amortisörler sızıntı ve tepki bakımından kontrol edilir ve balans makinede ölçülür. Bu desende dikkat edilmesi gereken şey şudur: sebep giderilmezse yeni lastik aynı deseni birkaç bin kilometrede tekrar üretir." },
+          { "label": "Basınç yüksek", "verdict": "basinc", "explain": "Yüksek basınç sırtın ORTASINI düzgün biçimde aşındırır, çevresel dalga yapmaz." },
+          { "label": "Toe bozuk", "verdict": "toe", "explain": "Toe enine testere dişi bırakır; buradaki desen çevre boyunca." },
+          { "label": "Lastik yönü ters", "verdict": "ters", "explain": "Yön hatası ıslak performansı düşürür, kepçe aşınması yapmaz." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Üç desen, üç yön: enine iki kenar = basınç, enine tek kenar = ön düzen, çevre boyunca dalga = süspansiyon veya balans. Bu üçlü, bu alanın teşhis iskeletidir."
+    },
+    {
+      "id": 5,
+      "instruction": "Şimdi simetriye bakıyorsun: desen tek tekerlekte mi, yoksa aynı aksın iki tekerleğinde de var mı?",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.jant",
+        "question": "Bu karşılaştırma neye yarar?",
+        "options": [
+          { "label": "Sebebi daraltır: iki tarafta simetrik desen ayar ya da kullanım kaynaklıdır, tek tarafta olan desen o köşeye özgü bir hasar ya da boşluğu gösterir", "verdict": "simetri", "correct": true, "explain": "Aşınma deseninin hangi tekerleklerde göründüğü, sebebin ne olduğu kadar bilgi verir. Aynı aksın iki tekerleğinde aynı desen varsa sebep büyük olasılıkla ikisini birden etkileyen bir şeydir: bir ayar değeri, aracın yük durumu, basınç alışkanlığı ya da sürüş biçimi. Desen yalnız tek tekerlekte varsa sebep o köşeye özgüdür — çukura girip eğilmiş bir salıncak, yorulmuş tek bir rotil, hasarlı bir jant, o tekerlekteki bir balans hatası ya da yalnız o lastikte kaçıran bir valf. Bu ayrım işi hem hızlandırır hem de gereksiz parça değişimini önler: tek taraflı bir bulguda dört tekerleğin ayarına girmek yerine önce o köşe incelenir. Karşılaştırma ayrıca ön ve arka aks arasında da yapılır; öndeki desen arkada yoksa bu, çeken ve yönlenen aksın kendi yüküyle ilgilidir." },
+          { "label": "Hiçbir şeye; her tekerlek ayrı değerlendirilir", "verdict": "ayri", "explain": "Ayrı ayrı ölçülür ama birlikte yorumlanır; simetri sebebi daraltan en hızlı bilgidir." },
+          { "label": "Yalnız hangi lastiğin değişeceğini gösterir", "verdict": "hangisi-degisecek", "explain": "Bu ikincil; asıl kazanç sebebin daralması." },
+          { "label": "Rotasyon yapılıp yapılmadığını gösterir", "verdict": "rotasyon", "explain": "Rotasyon geçmişi ayrı bir bilgi; simetri sorusu sebebi arıyor." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Teşhiste iki soru vardır: ne oluyor ve nerede oluyor. İkincisi çoğu zaman birincisinden daha hızlı sonuç verir."
+    },
+    {
+      "id": 6,
+      "instruction": "Müşteri şöyle diyor: yeni lastik tak, gerisiyle uğraşma.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik",
+        "question": "Ne yapılır?",
+        "options": [
+          { "label": "Sebep tespit edilip anlatılır ve kayda geçer; giderilmeden takılan yeni lastiğin aynı biçimde aşınacağı söylenir, karar müşteriye bırakılır", "verdict": "sebep-anlat", "correct": true, "explain": "Deseni okuyan usta artık bir bilgiye sahiptir ve bu bilgi müşterinin parasıyla doğrudan ilgilidir. Sebep giderilmeden takılan yeni lastik aynı sebebe maruz kalır ve aynı desende, çoğu zaman ilkinden daha hızlı aşınır — çünkü sebep bu arada ilerlemiştir. Bunu söylememek iki şekilde geri döner: müşteri birkaç ay sonra 'siz taktınız, bu da bitti' diye gelir, ya da hiç gelmez ve bir daha uğramaz. Doğru davranış üç adımdır: deseni müşteriye lastiği eline alarak göstermek, sebebin nerede olduğunu söylemek ve tespiti iş emrine yazmak. Karar müşterinindir; bütçe yetmiyorsa yalnız lastik değişebilir, ama bunun sonucu bilinerek seçilmiş olur. Ayrıca güvenlikle ilgili bir bulgu — mesela ön takımda hissedilir boşluk — varsa bu artık bir tercih meselesi değildir ve açıkça söylenir." },
+          { "label": "Denileni yapılır, lastik takılır, bir şey söylenmez", "verdict": "sessiz-tak", "explain": "Yeni lastik aynı biçimde aşınır; söylenmemesi ustanın eksiğidir." },
+          { "label": "Lastik takılmaz, iş reddedilir", "verdict": "reddet", "explain": "Güvenlikle ilgili bir engel yoksa karar müşterinindir; ustanın işi bilgilendirmek." },
+          { "label": "Sebep aranmadan ayar yapılır", "verdict": "ayar-yap", "explain": "Ölçülmeden yapılan ayar da tahmindir; önce boşluk kontrolü ve ölçüm gerekir." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bu alanın ticari değeri buradan çıkar: deseni okuyabilen usta, lastik satan değil arıza bulan kişidir. İkincisinin müşterisi geri gelir."
+    },
+    {
+      "id": 7,
+      "instruction": "Raporu yazıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.dis-mastari",
+        "question": "Raporda ne bulunmalı?",
+        "options": [
+          { "label": "Her tekerlek için ölçülen değerler, görülen desen, desenin işaret ettiği sebep ve önerilen iş — bu sırayla", "verdict": "olcum-desen-sebep-is", "correct": true, "explain": "İyi bir aşınma raporu bir zincir kurar ve zincirin her halkası bir öncekinden çıkar. Önce ölçüm: dört tekerlekten alınan değerler, hangi şeritten alındıkları belli olacak biçimde. Sonra desen: iki omuz mu, tek kenar mı, testere dişi mi, çevresel dalga mı. Sonra sebep: desenin işaret ettiği yer — basınç, kamber, toe, süspansiyon ya da ön takım boşluğu. En sonra önerilen iş: ölçüm, ayar, parça değişimi ya da yalnız takip. Bu sıra iki işe yarar. Müşteri için, önerilen işin nereden çıktığı görünür hâle gelir ve 'gereksiz iş yazmışlar' şüphesi ortadan kalkar. Usta için ise bir sonraki bakımda karşılaştırma zemini oluşur: aynı ölçümler tekrar alındığında sebebin gerçekten giderilip giderilmediği görülür. Rapor bu hâliyle bir satış belgesi değil, bir teşhis kaydıdır." },
+          { "label": "Yalnız değiştirilen lastiklerin listesi", "verdict": "liste", "explain": "Liste teşhisi göstermez ve bir sonraki bakıma bilgi bırakmaz." },
+          { "label": "Lastikler aşınmış cümlesi yeterli", "verdict": "kisa-cumle", "explain": "Hangi desende ve hangi sebeple aşındığı yazılmazsa rapor iş görmez." },
+          { "label": "Yalnız önerilen işler", "verdict": "oneriler", "explain": "Önerinin dayanağı ölçüm ve desendir; dayanaksız öneri satış gibi görünür." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bu alanın ustalık tanımı tek cümlede: aşınmış bir lastik, aracın altında neyin bozuk olduğunu yazan bir rapordur. Bu dersin işi o raporu okuyabilmek."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Kamber ile toe kaynaklı aşınma nasıl ayırt edilir?",
+        "a": "duzgun-vs-tirtikli",
+        "options": [
+          { "verdict": "duzgun-vs-tirtikli", "label": "Kamberde aşınma düzgün ve eğimlidir; toe'da bloklar bir kenarından tıraşlanır ve elle enine tarandığında tırtıklı hissedilir", "explain": "İkisi de tek kenarı aşındırabilir, bu yüzden yalnız bölgeye bakmak yetmez. Ayrım görünümdedir: kamber yükü tek kenara bindirir ve kenardan ortaya yumuşak bir eğim bırakır. Toe ise tekerleği yana sürüklediği için blokların aynı kenarını tıraşlar, testere dişi oluşur. Avucu sırt üzerinde enine gezdirmek bu ayrımı saniyeler içinde verir: bir yönde pürüzsüz, ters yönde tırtıklıysa toe." },
+          { "verdict": "renk", "label": "Aşınan bölgenin rengine bakılır", "explain": "Renk değil, aşınmanın biçimi ayırt eder." },
+          { "verdict": "basinc-olc", "label": "Basınç ölçülerek", "explain": "Basınç iki omzu birden etkiler; tek kenar sorusunu çözmez." },
+          { "verdict": "ayirt-edilemez", "label": "Ayırt edilemez, ikisi de aynı görünür", "explain": "Elle tarama ikisini net biçimde ayırır." }
+        ]
+      },
+      {
+        "q": "Sırtın çevre boyunca dalgalı, kepçe biçiminde aşınması neyi gösterir?",
+        "a": "ziplama",
+        "options": [
+          { "verdict": "ziplama", "label": "Tekerleğin yola eşit basmadığını: yorulmuş süspansiyon, ağır balans hatası ya da rulman boşluğu", "explain": "Çevresel dalga, tekerleğin zıpladığını ve her temasta sırtın belirli bölgelerinin fazladan sürtündüğünü gösterir. En sık sebep sönümleme yeteneğini kaybetmiş amortisördür; ikincisi ağır bir balans hatası, üçüncüsü rulman boşluğudur. Sebep giderilmezse yeni lastik aynı deseni kısa sürede tekrar üretir." },
+          { "verdict": "basinc", "label": "Basıncın yüksek olduğunu", "explain": "Yüksek basınç ortayı düzgün biçimde aşındırır." },
+          { "verdict": "toe", "label": "Toe bozukluğunu", "explain": "Toe enine testere dişi bırakır." },
+          { "verdict": "yas", "label": "Lastiğin yaşlandığını", "explain": "Yaşlanma çatlak bırakır, aşınma deseni üretmez." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki dört değer (5,1 / 5,0 / 3,4 / 5,2 mm) SENARYO okumalarıdır. İstenen, en yüksek ile en düşük arasındaki FARKTIR (1,8 mm); dersin gösterdiği şey çevresel düzensizliğin varlığıdır, belirli bir sınır değeri değil.",
+    "sourceRequired": "Künye gerektiren hiçbir değer kullanılmadı. Kamber ve toe için kabul edilebilir açı aralıkları bilinçle VERİLMEDİ — araca özgüdür ve ölçüm cihazının araç veritabanından okunur. Aşınma farkının hangi milimetreden sonra anormal sayılacağı da verilmedi: aracın kilometresine ve lastiğin yaşına bağlıdır.",
+    "kapsam": "Kamber, kaster ve toe'nun tanımı ve ölçümü 8. aşamada; balans 5. aşamada; onarım sınırı 9. aşamada. Bu ders yalnız DESENİ okumayı ve sebebi daraltmayı öğretiyor.",
+    "reviewedByMechanic": false
+  }
+}

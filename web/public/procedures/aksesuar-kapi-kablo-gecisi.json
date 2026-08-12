@@ -1,0 +1,176 @@
+{
+  "id": "aksesuar.kapi-kablo-gecisi",
+  "area": "aksesuar-ses",
+  "stage": 1,
+  "title": "Kapı Körüğü ve Kopan Kablolar",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 30,
+  "prerequisites": ["aksesuar.uzaktan-kumanda"],
+  "learningGoals": [
+    "Kapı körüğünün neden aracın en yorulan kablo geçişi olduğunu bilmek",
+    "Konuma bağlı arızayı tanımak ve doğru konumda ölçmek",
+    "Körükten kablo geçirmenin ve onarımın kurallarını uygulamak"
+  ],
+
+  "safety": [
+    { "rule": "Körük çalışması boyunca akü eksi ucu ayrılmış olur", "why": "Körükten geçen tellerin bir kısmı sürekli beslemelidir; çıplak uçların birbirine ya da sac kenarına değmesi kısa devre yapar", "blocksStart": true },
+    { "rule": "Kapı çalışırken kimse körüğün iki ucuna elini sokmaz", "why": "Kapı kapanırken menteşe ve körük bölgesi sıkışma noktasıdır", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.multimetre", "label": "Multimetre", "required": true },
+    { "id": "tool.plastik-sokme-spatulasi", "label": "Plastik söküm spatulası", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Kapı ile gövde arasındaki lastik körüğe bak. İçinden bütün kapının elektriği geçiyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kapi-korugu",
+        "question": "Bu geçiş neden aracın en çok arıza veren kablo noktasıdır?",
+        "options": [
+          { "label": "Araçtaki tek kablo geçişidir ki her kapı açılıp kapanışında bükülür; on binlerce çevrimde bakır telin damarları tek tek kopar", "verdict": "bukulme", "correct": true, "explain": "Aracın kablo demetlerinin neredeyse tamamı sabittir: bir kez döşenir, ömrü boyunca yerinden kıpırdamaz. Kapı körüğünden geçen demet ise istisnadır — kapı her açıldığında bükülür, her kapandığında geri toplanır. Ortalama bir araç günde on kez kapı açıyorsa yılda binlerce, ömrü boyunca on binlerce çevrim demektir. Bakır tel bu yorulmaya sonsuza kadar dayanmaz: telin içindeki ince damarlar tek tek kopar. Bu kopmanın en can sıkıcı yanı görünmez oluşudur — dıştaki yalıtım sağlam durur, tel bütün görünür, ama içeride iletken kesiti azalmıştır ya da tamamen ayrılmıştır. Belirtisi de bu yüzden tuhaftır: arıza kapının konumuna bağlıdır. Kopan damarlar kapı bir açıdayken birbirine değer, başka bir açıda ayrılır. Müşteri bunu 'bazen oluyor', 'kapıyı sertçe kapatınca düzeliyor' ya da 'kapı açıkken çalışıyor kapanınca kesiliyor' diye anlatır. Bu cümleler duyulduğu anda körük birinci şüphelidir. İkinci bir bilgi daha vardır: körük yalnız kablo taşımaz, aynı zamanda su ve toz bariyeridir; yırtık bir körük hem kabloyu hem kapının içini bozar." },
+          { "label": "Su aldığı için", "verdict": "su", "explain": "Yırtık körük su da alır ama asıl sebep mekanik yorulmadır." },
+          { "label": "En sıcak bölge olduğu için", "verdict": "sicak", "explain": "Kapı bölgesi motor bölgesi kadar sıcak değildir." },
+          { "label": "En çok kablo taşıdığı için", "verdict": "kablo-sayisi", "explain": "Modüller sayesinde kablo sayısı azaldı; sorun sayı değil hareket." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Aracın tek hareketli kablo geçişi. 'Bazen oluyor' cümlesinin bu alandaki bir numaralı adresi."
+    },
+    {
+      "id": 2,
+      "instruction": "Müşteri 'cam bazen çalışıyor, kapıyı çarpınca düzeliyor' diyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.cam-motoru",
+        "question": "Bu belirti neyi anlatıyor?",
+        "options": [
+          { "label": "Konuma ve titreşime bağlı bir temas kesilmesi — yani kopuk ya da gevşek bir bağlantı; parça arızası bu kadar seçici davranmaz", "verdict": "konuma-bagli", "correct": true, "explain": "Elektrikte belirtinin biçimi arızanın cinsini söyler ve bu ayrımı yapmak teşhisin yarısıdır. Bozulmuş bir motor ya da yanmış bir modül çıkışı çalışmaz, hepsi bu — kapı çarpınca düzelmez, hava soğuyunca değişmez, aracın duruşuna göre karar vermez. Buna karşılık kopuk bir damar, gevşemiş bir soket ya da oksitlenmiş bir uç tam olarak böyle davranır: temas bazen kurulur bazen kurulmaz. Bu yüzden 'bazen', 'çarpınca', 'sallanınca', 'soğukta', 'yokuşta' gibi her kelime arızayı temas kusuruna doğru iter. Müşteriden alınacak üç ek bilgi çok değerlidir. Birincisi hangi konumda: kapı açıkken mi kapalıyken mi çalışıyor? İkincisi hangi işlevler birlikte kesiliyor — yalnız cam mı, yoksa cam, ayna ve kilit aynı anda mı? Birden fazla işlev birlikte kesiliyorsa arıza tek tek cihazlarda değil, hepsinin paylaştığı geçişte, yani körüktedir. Üçüncüsü ne zaman başladı: yakın zamanda bir kaporta işi, cam değişimi ya da ses sistemi montajı yapıldıysa o iş sırasında körük zorlanmış olabilir." },
+          { "label": "Cam motoru bozulmuştur", "verdict": "motor", "explain": "Bozuk motor kapı çarpınca çalışmaz; belirti seçici değildir." },
+          { "label": "Cam krikosu sıkışmıştır", "verdict": "kriko", "explain": "Mekanik sıkışma her seferinde aynı yerde olur, konuma bağlı kesilme yapmaz." },
+          { "label": "Akü zayıftır", "verdict": "aku", "explain": "Zayıf akü tek bir kapının tek bir işlevini seçmez." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Belirtinin biçimi arızanın cinsini söyler: 'bazen' kelimesi neredeyse her zaman temas kusuru demek."
+    },
+    {
+      "id": 3,
+      "instruction": "Körüğü gövde tarafından çıkardın ve demeti ortaya aldın. Kapı KAPALI konumdayken bir telin direncini ölçüyorsun.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.multimetre-aksesuar",
+        "unit": "ohm",
+        "acceptRange": [4.5, 5.1]
+      },
+      "camera": "aksesuar",
+      "hint": "Kapı açıkken 0,3 ohm, kapalıyken 5,1 ohm okudun. Farkı gir.",
+      "teachingNote": "4,8 ohmluk bu fark kopuğun kanıtıdır ve kanıt olmasının sebebi ölçümün İKİ KONUMDA yapılmış olmasıdır. Tek konumda yapılan bir ölçüm bu arızayı bulamaz: kapı açıkken ölçen kişi 0,3 ohm görür, teli sağlam sanır ve başka yere bakar. Yöntem şudur — bir uç sabit kalacak şekilde bağlanır, kapı yavaşça açılıp kapatılır ve okuma izlenir. Değer zıplıyorsa, sonsuza gidip geri geliyorsa ya da elle demet bükülünce değişiyorsa o telde kopuk vardır. Aynı yöntemin gerilim düşümü hâli de kullanılabilir ve daha gerçekçidir: devre çalışırken ölçülür, çünkü kopan damarlar akım geçerken kendini gösterir. Kabul edilebilir direnç ve gerilim düşümü değerleri devreye ve kablo kesitine göre değişir; bu ders bir sınır vermiyor, ölçülen şey iki konum arasındaki farktır."
+    },
+    {
+      "id": 4,
+      "instruction": "Kopuk teli buldun. Onaracaksın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kapi-kablo-demeti",
+        "question": "Bu bölgede onarım nasıl yapılır?",
+        "options": [
+          { "label": "Yorulan bölge tamamen atlanacak kadar geniş kesilir, çok damarlı ve esnek kablo kullanılır, uçlar lehimlenip ya da uygun ek kovanıyla birleştirilip yalıtılır ve ekler ÜST ÜSTE GELMEYECEK şekilde kaydırılır", "verdict": "genis-kes", "correct": true, "explain": "Körük onarımının başarısı kaç yıl dayandığıyla ölçülür ve dört kural bu süreyi belirler. Birincisi kapsam: kopan tek noktayı ekleyip bırakmak yetmez, çünkü aynı yorulmayı yaşamış komşu bölge de bitmek üzeredir; ek, yorulan bölgenin tamamını dışarıda bırakacak kadar geniş yapılır. İkincisi kablo cinsi: bu bölgeye sert ya da az damarlı kablo konmaz. Çok damarlı ve esnek (ince tellerden örülü) kablo kullanılır, çünkü bükülme yükünü çok sayıda ince damar paylaşır; kalın az damarlı bir tel birkaç ayda kopar. Kesit de düşürülmez — daha ince kablo hem ısınır hem gerilim düşürür. Üçüncüsü ek biçimi: uçlar lehimlenip ısıyla daralan makaronla kapatılır ya da uygun ek kovanı kullanılır; burma yapıp bant sarmak bu bölgede birkaç ay ömürlüdür çünkü hareket burmayı açar. Lehim yapılıyorsa lehimin bittiği yer sert bir nokta oluşturur ve tel tam orada kırılır, bu yüzden ek noktasının iki yanı esnek kalacak şekilde desteklenir. Dördüncüsü ve en çok atlananı kaydırmadır: birden fazla tel ekleniyorsa ekler aynı hizada olmaz, birkaç santim kaydırılır — yoksa demet o noktada kalınlaşır, sertleşir ve bir sonraki kopma tam o sert noktanın kenarında olur. Son olarak demet körüğe fazladan pay bırakılarak yerleştirilir ve körüğün iki ucu düzgün oturtulur." },
+          { "label": "Kopuk uçlar burulup bant sarılır", "verdict": "burma", "explain": "Hareketli bölgede burma birkaç ayda açılır." },
+          { "label": "Kablo dışarıdan, körüğün yanından geçirilir", "verdict": "disaridan", "explain": "Kapı kenarından geçen kablo sıkışır, kesilir ve su yolu açar." },
+          { "label": "Tüm kapı demeti değiştirilir, tek çözüm budur", "verdict": "komple", "explain": "Bazen doğru olabilir ama doğru yapılmış bir ek uzun ömürlüdür ve çok daha ucuzdur." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Ekleri kaydırmak: küçük bir ayrıntı, işin ömrünü belirleyen ayrıntı."
+    },
+    {
+      "id": 5,
+      "instruction": "Bir ses sistemi için kapıya yeni kablo geçireceksin.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kapi-korugu",
+        "question": "Yeni kablo körükten nasıl geçirilir?",
+        "options": [
+          { "label": "Mevcut demetle birlikte, körüğün içinden; esnek kablo seçilir, fazladan pay bırakılır ve körüğün lastik ağızları geri tam oturtulur", "verdict": "icinden", "correct": true, "explain": "Aksesuar montajında en sık yapılan ve en pahalıya patlayan hatalardan biri kabloyu körüğün yanından, kapı kenarından geçirmektir. Görünürde işe yarar: kablo geçer, cihaz çalışır, iş biter. Ama o kablo artık kapının kapanma yüzeyinde ezilmektedir; birkaç ay içinde yalıtımı kesilir, ya kısa devre yapar ya kopar. Daha kötüsü, ezilen fitil su yolu açar ve kabinin içine su girer. Doğru yol tek: kablo mevcut demetin yanında, körüğün içinden geçer. Yöntem şudur — körüğün gövde tarafı çıkarılır, ince ve sert bir kılavuz tel körüğün içinden geçirilir, yeni kablo kılavuza bağlanıp çekilir. Kablo seçiminde iki şart vardır: çok damarlı ve esnek olacak, kesiti taşıyacağı akıma yetecek. Fazladan pay bırakılır — kapı tam açıkken kablo gergin olmamalı, aksi hâlde her açılışta çekilir ve en zayıf noktasından kopar; ama pay abartılmaz, çünkü sarkan kablo körüğün içinde katlanır ve orada yorulur. Son adım körüğün iki ağzının tam oturtulmasıdır; yarım oturan bir körük hem kabloyu korumaz hem su alır. Kapı kapatılıp açılarak kablonun hiçbir yere sürtmediği ve gerilmediği elle doğrulanır." },
+          { "label": "Kapı kenarından, fitilin altından geçirilir", "verdict": "fitil", "explain": "Kapanma yüzeyinde ezilir; kısa devre ve su sızıntısı üretir." },
+          { "label": "Körüğün lastiği delinip oradan geçirilir", "verdict": "del", "explain": "Delik su alır ve delinen nokta yırtılmanın başlangıcı olur." },
+          { "label": "Kablo kapıya değil, kablosuz bağlantı kullanılır", "verdict": "kablosuz", "explain": "Güç yine de gerekir; kaçınmak çözüm değildir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Fitilin altından geçen kablo bu meslekte bir imzadır — kötü bir imza. Körüğün içinden geçirmek beş dakika fazla sürer, yıllarca fark eder."
+    },
+    {
+      "id": 6,
+      "instruction": "Körüğün lastiğine bakıyorsun. Bir tarafında çatlak var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kapi-saci",
+        "question": "Çatlak körük ne yapar?",
+        "options": [
+          { "label": "İçeri su ve toz alır: teller oksitlenir, temas dirençleri artar ve arıza aylar içinde kendini gösterir — çatlak körük bir habercidir", "verdict": "haberci", "correct": true, "explain": "Körüğün lastiği yalnız kabloyu tutmaz, onu kapatır. Çatlak ya da yırtık bir körük içeri yağmur suyu, yıkama suyu ve yol tozu alır. Su bakır tel üzerinde oksit üretir; oksit iletken değildir ve temas direncini yükseltir. Sonuç kademelidir ve bu yüzden yanıltıcıdır: önce hiçbir şey olmaz, sonra bazı işlevler yavaşlar ya da zayıflar, en sonunda kesilir. Aynı su soketlerin içine de girer ve orada da aynı işi yapar. Bu yüzden çatlak bir körük gördüğünde, o kapıda henüz bir şikâyet olmasa bile bu bir bulgudur ve müşteriye söylenir. Değerlendirme üç kategoride yapılır: şimdi değişmeli (yırtık büyük, teller görünüyor, içeride oksit var), takip edilmeli (yüzeysel çatlak, iç kısım kuru), iyi durumda. Bir de sık görülen bir hata vardır: yırtık körüğü bantla sarmak. Bant lastiği eski hâline getirmez, üstelik altında nem hapseder ve durumu hızlandırır. Körük ucuz bir parçadır ve değiştirilirken demet zaten elde olduğu için işçilik de az olur; bir sonraki arızayı beklemek en pahalı seçenektir." },
+          { "label": "Bir şey olmaz, görsel bir kusurdur", "verdict": "gorsel", "explain": "İçeri giren su tellerin ömrünü belirler." },
+          { "label": "Yalnız gürültü yapar", "verdict": "gurultu", "explain": "Asıl sonucu oksitlenme ve temas kaybıdır." },
+          { "label": "Bantla sarılarak onarılır", "verdict": "bant", "explain": "Bant nemi altında hapseder ve bozulmayı hızlandırır." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Üç kategori yine burada: şimdi / takip / iyi. Bu alanın bakım dersleri de aynı sınıflandırmayı kullanacak."
+    },
+    {
+      "id": 7,
+      "instruction": "Onarım bitti, körük yerine oturdu.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kapi-modulu",
+        "question": "Son doğrulama nasıl yapılır?",
+        "options": [
+          { "label": "Kapının bütün işlevleri, kapı açıkken ve kapalıyken ayrı ayrı ve kapı yavaşça hareket ettirilirken denenir; ayrıca demet elle bükülürken izlenir", "verdict": "iki-konum", "correct": true, "explain": "Konuma bağlı bir arızayı tek konumda denemek, arızayı bulmamayı garanti eder. Doğrulama üç aşamalıdır. Birincisi iki uç konum: kapı tam açıkken ve tam kapalıyken bütün işlevler ayrı ayrı denenir — cam yukarı aşağı, kilit aç kapa, ayna dört yön, hoparlör ve varsa ısıtma. İkincisi ara konumlar: bir kişi işlevi çalıştırırken diğeri kapıyı yavaşça açıp kapatır; kesinti varsa tam bu geçişte ortaya çıkar. Üçüncüsü elle zorlamadır: demet körüğün iki ucundan tutulup nazikçe bükülürken cihaz çalıştırılır — hâlâ bir yerde zayıf temas varsa burada görünür. Bu üç aşama geçildikten sonra iki fiziksel kontrol kalır: körüğün her iki ağzının tam oturduğu ve kablonun kapı tam açıkken gergin olmadığı. Son olarak müşteriye söylenecek bir şey vardır: aynı körükten geçen diğer teller de aynı yaşta ve aynı yorulmayı yaşamıştır; bugün onarılan tel bitti diye diğerleri yeni olmadı. Bunu söylemek işi küçültmek değil, dürüst olmaktır — ve müşteri bir sonraki arızada nereye geleceğini bilir." },
+          { "label": "Kapı kapalıyken bir kez denenir", "verdict": "tek-deneme", "explain": "Konuma bağlı arıza tek konumda saklanır." },
+          { "label": "Panel takılıp müşteriye teslim edilir", "verdict": "teslim", "explain": "Doğrulama yapılmadan teslim, ikinci söküm demektir." },
+          { "label": "Multimetre okuması yeterlidir", "verdict": "olcum", "explain": "Ölçüm gerekli ama işlevsel deneme onun yerini tutmaz." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Aşama 1 burada bitiyor. Kapı sistemleri anlaşıldı; aşama 2 aynı kapının camını ve aynasını alıyor."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "'Cam bazen çalışıyor, kapıyı çarpınca düzeliyor' belirtisi neyi anlatır?",
+        "a": "konuma-bagli",
+        "options": [
+          { "verdict": "konuma-bagli", "label": "Konuma ve titreşime bağlı temas kesilmesi — kopuk ya da gevşek bir bağlantı", "explain": "Bozulmuş bir motor ya da yanmış bir modül çıkışı seçici davranmaz: çalışmaz, hepsi bu. 'Bazen', 'çarpınca', 'soğukta' gibi kelimeler arızayı temas kusuruna iter ve bu alanda bir numaralı adres kapı körüğüdür. Birden fazla işlev birlikte kesiliyorsa arıza tek tek cihazlarda değil, hepsinin paylaştığı geçiştedir." },
+          { "verdict": "motor", "label": "Cam motoru bozulmuştur", "explain": "Bozuk motor kapı çarpınca çalışmaz." },
+          { "verdict": "kriko", "label": "Kriko sıkışmıştır", "explain": "Mekanik sıkışma konuma bağlı kesilme yapmaz." },
+          { "verdict": "aku", "label": "Akü zayıftır", "explain": "Zayıf akü tek işlevi seçmez." }
+        ]
+      },
+      {
+        "q": "Aksesuar için kapıya yeni kablo nasıl geçirilir?",
+        "a": "icinden",
+        "options": [
+          { "verdict": "icinden", "label": "Mevcut demetle birlikte körüğün içinden; çok damarlı esnek kablo, fazladan pay ve körük ağızlarının tam oturtulması", "explain": "Kapı kenarından ya da fitilin altından geçen kablo kapanma yüzeyinde ezilir: yalıtımı kesilir, kısa devre yapar ya da kopar, ayrıca ezilen fitil kabine su yolu açar. Doğru yöntem körüğün gövde tarafını çıkarıp kılavuz telle kabloyu içeriden çekmektir. Kapı tam açıkken kablo gergin olmamalı ama sarkmamalı da; körük ağızları tam oturtulur ve kapı açılıp kapatılarak elle doğrulanır." },
+          { "verdict": "fitil", "label": "Kapı kenarından, fitilin altından", "explain": "Ezilir ve su yolu açar." },
+          { "verdict": "del", "label": "Körük delinip oradan", "explain": "Delik su alır ve yırtılmayı başlatır." },
+          { "verdict": "kablosuz", "label": "Kablosuz bağlantı kullanılır", "explain": "Güç yine de kablo ister." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 0,3 ohm ve 5,1 ohm SENARYO okumalarıdır; istenen FARKTIR (4,8 ohm) ve ders bir kabul edilebilir direnç sınırı vermiyor. Sınır devreye ve kablo kesitine göre değişir.",
+    "sourceRequired": "Kabul edilebilir hat direnci ve gerilim düşümü, kablo kesiti, körük parça numarası ve ek kovanı tipi bilinçle VERİLMEDİ; hepsi araca ve devreye özgüdür.",
+    "kapsam": "Kapı hizası ve menteşe ayarı ayrı bir iştir ve bu derste yok. Kapı içi hava yastığı bulunan araçlarda söküm öncesi güvenli durum ilkesi aşama 0'daki dersten geçerlidir; modüle müdahale öğretilmiyor. Sahnede kapı körüğü tek bir hortum parçası olarak temsil edildi, iç demet ayrıntısı modellenmedi.",
+    "reviewedByMechanic": false
+  }
+}

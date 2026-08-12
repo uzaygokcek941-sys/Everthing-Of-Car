@@ -1,0 +1,181 @@
+{
+  "id": "kaporta.guvenlik",
+  "area": "kaporta",
+  "stage": 0,
+  "title": "Bu Alanın Kırmızı Çizgileri: Taşıyıcı Yapı, Kaynak, Boya ve Solunum",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 30,
+  "prerequisites": [],
+  "learningGoals": [
+    "Bu alanda hangi işin yapılmayacağını ve neden yapılmayacağını bilmek",
+    "Kaynak öncesi hazırlığı bir alışkanlık hâline getirmek",
+    "Boyanın sağlık riskini bir tercih değil bir şart olarak görmek"
+  ],
+
+  "safety": [
+    { "rule": "Taşıyıcı yapıya (direk, eşik, taşıyıcı ayak, şasi bölgeleri) üreticinin onarım kılavuzu olmadan ısı, çekme ya da kesim uygulanmaz", "why": "Bu parçalar bir kazada kabinin ayakta kalmasını sağlar; yanlış onarılan bir taşıyıcı parça normal görünür ama kazada beklendiği gibi davranmaz", "blocksStart": true },
+    { "rule": "Kaynak öncesi enerji kesilir ve kesildiği ölçülerek doğrulanır; yakıt hattı, hava yastığı ve gergi birimleri güvenceye alınır", "why": "Kaynak akımı beklenmedik yollardan döner ve elektronik birimleri yakabilir; kıvılcım yakıt buharını tutuşturabilir; ısı ve akım gergi birimlerini tetikleyebilir", "blocksStart": true },
+    { "rule": "Uygun solunum koruması ve havalandırma olmadan boya, astar ya da sertleştirici uygulanmaz", "why": "Boya sistemlerindeki sertleştiriciler solunum yoluyla kalıcı akciğer hasarı ve kalıcı duyarlılık yapabilir; kokuya alışmak korunduğun anlamına gelmez", "blocksStart": true },
+    { "rule": "Zımpara ve kesim işlerinde göz koruması ve toz maskesi takılır", "why": "Fırlayan metal parçacığı göze girdiğinde kalıcı hasar verir; solunan macun ve dolgu tozu akciğerde birikir", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.solunum-maskesi", "label": "Solunum koruması", "required": true },
+    { "id": "tool.is-gozlugu", "label": "İş gözlüğü", "required": true },
+    { "id": "tool.eldiven", "label": "Eldiven", "required": true },
+    { "id": "tool.multimetre", "label": "Multimetre", "required": true },
+    { "id": "tool.yangin-sondurucu", "label": "Yangın söndürücü", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Atölyeye girdin. Bu alanda öğreneceğin ilk şey ne yapmayacağın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.direk-a",
+        "question": "Bu direk neden diğer panellerden farklı?",
+        "options": [
+          { "label": "Taşıyıcıdır: aracın ağırlığını ve bir kazadaki kuvvetleri taşır, kabinin ezilmemesini sağlar — bu yüzden üreticinin kılavuzu olmadan ısıtılmaz, çekilmez, kesilip eklenmez", "verdict": "tasiyici", "correct": true, "explain": "Bir aracın gövdesine bakınca hepsi sac görünür, ama parçalar iki ayrı işi yapar. Dış paneller — kaput, çamurluk, kapı sacı, bagaj kapağı — aracın kabuğudur: hava akışını, görünüşü ve hafif darbelere karşı korumayı sağlar. Bunlar göçtüğünde araç yine güvenlidir ve onarımları bu alanın günlük işidir. Taşıyıcı yapı ise apayrı bir şeydir: A ve B direkleri, eşik sacı, taşıyıcı ayaklar ve tavan kirişleri aracın iskeletidir. Bunlar aracın ağırlığını taşır, kapıların ve camların ölçüsünü sabit tutar ve en önemlisi bir kazada kuvvetin nasıl dağılacağını belirler. Üretici bu parçaları rastgele seçmez: her birinin çelik sınıfı, kalınlığı ve birleştirme yöntemi bir hesabın sonucudur ve araç bu hesapla çarpışma testinden geçmiştir. Bir taşıyıcı parça yanlış onarıldığında iki şey olur ve ikisi de görünmez: parça beklenenden zayıf ya da beklenenden sert hâle gelir, ve kaza anında enerji tasarlandığı yerde değil başka bir yerde yutulur. Araç dışarıdan kusursuz görünür. Bu yüzden bu alanın ilk kuralı şudur: bir parçaya dokunmadan önce o parçanın taşıyıcı olup olmadığını bil. Emin değilsen üreticinin onarım kılavuzuna bak; kılavuz yoksa o işi alma." },
+          { "label": "Daha kalın olduğu için sağlamdır", "verdict": "kalin", "explain": "Kalınlık bir sonuç; asıl fark parçanın taşıyıcı olması." },
+          { "label": "Sadece kapıyı tutar", "verdict": "kapi", "explain": "Kapıyı tutmak işlevlerinden biri; asıl işi kabini ayakta tutmak." },
+          { "label": "Fark yok, hepsi sac", "verdict": "fark-yok", "explain": "Dış panel ile taşıyıcı yapı iki ayrı iş yapar." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Bir parçaya dokunmadan önce taşıyıcı olup olmadığını bil. Emin değilsen kılavuza bak; kılavuz yoksa işi alma."
+    },
+    {
+      "id": 2,
+      "instruction": "Kaynak yapacaksın. Akü ucunu ayırdın ve ölçtün: ayırmadan önce 12,4 V, ayırdıktan sonra 0,05 V. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.kaynak-makinesi",
+        "unit": "volt",
+        "acceptRange": [12.3, 12.4]
+      },
+      "camera": "kaporta",
+      "hint": "12,4 eksi 0,05.",
+      "teachingNote": "12,35 voltluk bu fark, elektrik alanından beri tekrarlanan disiplinin kaportadaki karşılığıdır: kes–bekle–doğrula. Kesmek bir niyettir, doğrulamak bir ölçümdür. Kaynakta bu disiplin daha da kritiktir, çünkü kaynak makinesi araca çok yüksek bir akım basar ve o akım geri dönmek için bir yol arar. Dönüş kablosu doğru yere bağlanmazsa akım aracın kendi kablolarından, rulmanlarından ya da elektronik birimlerinin içinden dönmeye çalışır; sonuç, kaynağın yapıldığı yerden metrelerce uzakta yanmış bir modül olabilir ve bu arıza kaynakla ilişkilendirilmez. Bu yüzden kaynak öncesi liste dörttür ve hiçbiri atlanmaz. Birincisi enerjidir: akü ayrılır ve ayrıldığı ölçülerek doğrulanır. İkincisi dönüş kablosudur: kaynak yapılan noktaya mümkün olduğunca YAKIN ve temiz metale bağlanır — böylece akım aracın içinden dolaşmaz. Üçüncüsü çevredir: yakıt hattı ve deposu, fren ve yakıt boruları, kablo demetleri, hava yastığı ve gergi birimleri kaynak bölgesinden korunur ya da sökülür; ısı ve kıvılcım metrelerce sıçrar. Dördüncüsü yangındır: kıvılcımın ulaşacağı yerdeki halı, döşeme ve yalıtım malzemeleri yanıcıdır, korunur ve yakında bir söndürücü bulunur. Kaynak bittikten sonra da bir kural vardır: iş bölgesi bir süre gözlenir, çünkü için için başlayan bir yanma dakikalar sonra ortaya çıkar."
+    },
+    {
+      "id": 3,
+      "instruction": "Panelin çelik sınıfını öğrenmeden ısıtmak istiyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.esik-saci",
+        "question": "Neden önce çelik sınıfı öğrenilir?",
+        "options": [
+          { "label": "Yüksek mukavemetli çeliklerde ısıtma malzemenin gücünü kalıcı olarak düşürür; bu parçalarda ısıtarak doğrultma çoğu araçta yasaktır ve hangi parçanın hangi sınıf olduğu kılavuzda yazar", "verdict": "isi-mukavemeti-dusurur", "correct": true, "explain": "Modern araçlarda tek tip sac yoktur. Dış paneller görece yumuşak çelikten yapılır: kolay şekil alır, göçüğü çekilebilir, gerekirse ısıtılıp düzeltilebilir. Taşıyıcı parçalarda ise çok daha yüksek mukavemetli çelikler kullanılır ve bunların gücü, üretim sırasında verilen özel bir ısıl işlemden gelir. Bu tür bir çeliği ısıtmak, o ısıl işlemi geri almak demektir — parça ısıtıldığı bölgede kalıcı olarak zayıflar ve bu zayıflık gözle görülmez, ölçülemez, boyayla kapanır. Araç kusursuz görünür ama bir kazada o bölge tasarlandığı gibi davranmaz. Bu yüzden birçok üretici belirli parçalarda ısıtarak doğrultmayı açıkça yasaklar ve o parçanın onarılmayıp DEĞİŞTİRİLMESİNİ şart koşar; bazı parçalarda ise izin verilen bir ısı ve süre sınırı vardır. Bu bilginin kaynağı tektir: üreticinin onarım kılavuzu. Hangi parçanın hangi sınıf olduğunu gözle ayırt etmek mümkün değildir — kalınlığa, sertliğe ya da tecrübeye bakarak karar vermek bu alanda en tehlikeli alışkanlıktır. Alüminyum gövdeli araçlarda tablo tamamen değişir: farklı alet, farklı yöntem ve çelik tozundan ayrı bir çalışma alanı gerekir. Bu ders hiçbir sıcaklık ya da süre değeri vermiyor; o değerler araca özgüdür." },
+          { "label": "Isıtmak her sacı güçlendirir", "verdict": "guclendirir", "explain": "Tersine: yüksek mukavemetli çelikte ısı gücü kalıcı düşürür." },
+          { "label": "Sınıf yalnız fiyatı belirler", "verdict": "fiyat", "explain": "Sınıf, onarım yönteminin yapılabilir olup olmadığını belirler." },
+          { "label": "Tecrübeyle gözle anlaşılır", "verdict": "gozle", "explain": "Gözle ayırt edilemez; kılavuzdan okunur." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Isıyla zayıflayan çelik gözle görülmez, ölçülmez, boyayla kapanır. Araç kusursuz görünür — kazaya kadar."
+    },
+    {
+      "id": 4,
+      "instruction": "Boya bölümüne geçtin.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.boya-tabancasi",
+        "question": "Boya yaparken asıl risk nedir?",
+        "options": [
+          { "label": "Solunum: boya ve özellikle sertleştiriciler solunduğunda kalıcı akciğer hasarı ve kalıcı duyarlılık yapabilir — uygun solunum koruması ve havalandırma olmadan boya yapılmaz", "verdict": "solunum", "correct": true, "explain": "Kaportacılık işinde en çok kaybedilen şey parmak değil akciğerdir ve bu, işin en az konuşulan yanıdır. Modern boya sistemleri iki bileşenlidir: boyanın kendisi ve onu sertleştiren madde. Sertleştiriciler solunum yoluyla ciddi zarar verir ve iki tür hasar üretir. Birincisi doğrudan tahriştir. İkincisi ve asıl tehlikelisi duyarlılıktır: kişi bir kez duyarlı hâle geldikten sonra çok küçük miktarlara bile ağır tepki verir ve bu duyarlılık genelde KALICIDIR — yani o kişi bir daha o ortamda çalışamaz. Meslek hayatının ortasında iş değiştirmek zorunda kalan kaportacıların hikâyesi buradan gelir. Korunmanın üç katmanı vardır ve üçü birden gerekir. Birincisi ortamdır: boya, havanın sürekli değiştiği ve boya sisinin dışarı atıldığı uygun bir alanda yapılır; kapalı bir garajda yapılan boya, koruyucu takılsa bile riskli kalır. İkincisi solunum korumasıdır ve burada bir yanılgı vardır — sıradan bir toz maskesi bu maddelere karşı hiçbir şey yapmaz; uygun tipte ve filtresi zamanında değişen bir koruma gerekir, en güvenlisi temiz hava beslemeli sistemlerdir. Üçüncüsü deri ve gözdür: bu maddeler deriden de emilir, bu yüzden eldiven ve tulum kullanılır. Bir de en tehlikeli alışkanlık vardır: kokuya alışmak. Kokuyu artık almıyor olmak korunduğun anlamına gelmez, tam tersine uyarı sisteminin körelmiş olabileceği anlamına gelir. Ürünlerin kendi güvenlik bilgi formları vardır ve hangi korumanın gerektiği orada yazar; bu ders bir ürün ya da filtre tipi önermiyor." },
+          { "label": "Boyanın elbiseye bulaşması", "verdict": "elbise", "explain": "Rahatsızlık verir ama sağlık riski solunumdadır." },
+          { "label": "Rengin tutmaması", "verdict": "renk", "explain": "İş kalitesi sorunu; can güvenliği değil." },
+          { "label": "Risk yok, kokuya alışılır", "verdict": "alisilir", "explain": "Kokuyu almamak korunduğun anlamına gelmez." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Bu işte en çok kaybedilen şey akciğer. Duyarlılık kalıcıdır: bir kez oluşunca o kişi bir daha o ortamda çalışamaz."
+    },
+    {
+      "id": 5,
+      "instruction": "Atölyede zımpara ve kesim yapılıyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.zimpara-bolgesi",
+        "question": "Zımpara ve kesimde neye dikkat edilir?",
+        "options": [
+          { "label": "Göz koruması ve toz maskesi takılır, kıvılcımın gideceği yön kontrol edilir ve toz ortamda birikmeyecek biçimde toplanır", "verdict": "goz-toz-kivilcim", "correct": true, "explain": "Bu işlerin riski üç başlıkta toplanır. Birincisi gözdür ve en ani olanıdır: kesim ve taşlamada fırlayan metal parçacığı göze girdiğinde kalıcı hasar verir; gözlük takmanın alternatifi yoktur ve 'bir saniyelik iş' bahanesi bu alanda en çok göz kaybettiren cümledir. İkincisi tozdur ve en sinsi olanıdır: zımparalanan macun, astar ve boya tozu havada asılı kalır, solunur ve akciğerde birikir; etkisi yıllar sonra görülür. Bu yüzden zımpara mümkünse toz emişli makinelerle yapılır, ortam havalandırılır ve maske takılır. Üçüncüsü kıvılcımdır: kesim ve taşlama kıvılcımı beklenenden çok daha uzağa sıçrar ve gittiği yerde bir yakıt hattı, bir kablo demeti, bir döşeme ya da bir çözücü kabı varsa yangın çıkarır. Bu yüzden kıvılcımın yönü çalışmaya başlamadan önce belirlenir ve gerekirse bir perde ya da örtüyle sınırlandırılır; yakınlarda çözücü, tiner ve boya bulunan bir alanda kesim yapılmaz. Dördüncü ve unutulan bir madde daha var: aracın camları ve boyalı yüzeyleri. Sıcak kıvılcım cama yapışır ve cam üzerinde kalıcı benek bırakır, boyaya yapışırsa oradan pas başlar — bu yüzden çalışma bölgesinin çevresi örtülür. Bu, müşteriye geri dönen işlerin sessiz sebeplerinden biridir." },
+          { "label": "Yalnız hızlı çalışmaya", "verdict": "hiz", "explain": "Hız korumanın yerine geçmez." },
+          { "label": "Kıvılcım zararsızdır", "verdict": "kivilcim-zararsiz", "explain": "Kıvılcım uzağa sıçrar ve yangın çıkarır." },
+          { "label": "Toz zamanla dağılır", "verdict": "toz", "explain": "Solunan toz akciğerde birikir; dağılması korumaz." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Kıvılcım cama yapışır ve kalıcı benek bırakır, boyaya yapışırsa oradan pas başlar. Çevre örtülür."
+    },
+    {
+      "id": 6,
+      "instruction": "Elektrikli bir araç geldi ve arka kapı panelinde hasar var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.arka-kapi-paneli",
+        "question": "Ne değişir?",
+        "options": [
+          { "label": "Yüksek gerilim sistemi devreye girer: batarya ve turuncu kablo bulunan bölgelerde çalışmak ayrı bir yetki ve prosedür ister; iş kapsamı buna göre belirlenir ya da yetkili yere yönlendirilir", "verdict": "yuksek-gerilim", "correct": true, "explain": "Elektrikli ve hibrit araçlarda gövde işine bir katman daha eklenir ve bu katman ölümcül olabilir. Bu araçlarda batarya paketi genelde tabanda, eşiklerin arasında bulunur ve yüksek gerilim kabloları — çoğunlukla turuncu renkli — aracın altından ve içinden geçer. Üç sonuç doğar. Birincisi, bu bölgelerde kesim, delme ve kaynak yapmak doğrudan yasaktır: bir kesme diski turuncu bir kabloya değdiğinde ya da bir vida batarya paketine girdiğinde sonuç ölümcül bir elektrik çarpması ya da kontrolsüz bir yangındır. İkincisi, batarya paketi bulunan bölgede çalışmadan önce sistemin usulüne uygun devre dışı bırakılması gerekir ve bu işlem ayrı bir eğitim ve yetki ister; 'akünün ucunu ayırdım' demek burada hiçbir şey ifade etmez, çünkü yüksek gerilim sistemi ayrı bir sistemdir. Üçüncüsü, kaza görmüş bir elektrikli aracın bataryası darbe almış olabilir ve darbe almış batarya günler sonra bile ısınıp tutuşabilir; bu yüzden böyle araçlar için ayrı bekletme ve gözlem kuralları vardır. Kaportacının doğru davranışı nettir: hasarın yüksek gerilim bölgesine yakın olup olmadığını belirlemek, uzaksa ve turuncu hiçbir bileşene dokunulmayacaksa işi kapsamı belirleyerek almak, yakınsa ya da şüphedeyse yetkili bir yere yönlendirmek. Bu yönlendirme bir eksiklik değildir; bu alanın en pahalı hatası, bilmediği bir sistemin yanında çalışmayı denemektir." },
+          { "label": "Hiçbir şey değişmez, sac sactır", "verdict": "degismez", "explain": "Yüksek gerilim sistemi ayrı bir tehlike ve ayrı bir yetki alanı." },
+          { "label": "Yalnız akü ucu ayrılır", "verdict": "aku", "explain": "Yüksek gerilim sistemi ayrı bir sistemdir; 12 voltluk akü onu kesmez." },
+          { "label": "Turuncu kablolar da normal kablodur", "verdict": "turuncu", "explain": "Turuncu renk yüksek gerilimi işaret eder; dokunulmaz." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "'Akünün ucunu ayırdım' yüksek gerilim sisteminde hiçbir şey ifade etmez. Turuncu gördüğün yerde dur."
+    },
+    {
+      "id": 7,
+      "instruction": "Müşteri geldi: 'B direği ezildi, düzeltiver' diyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.direk-b",
+        "question": "Ne yapılır?",
+        "options": [
+          { "label": "İş bu hâliyle alınmaz: taşıyıcı parça hasarı üreticinin onarım kılavuzuna göre değerlendirilir; kılavuz onarıma izin vermiyorsa parça değişir ve gerekiyorsa gövde ölçümü yapabilen bir yere yönlendirilir", "verdict": "kilavuz-ya-da-yonlendir", "correct": true, "explain": "Bu, bu alanın en önemli tek kararıdır ve müşteriyle en çok tartışılan yerdir. B direği yandan gelen bir darbede kabini ayakta tutan ana parçadır; ezilmişse iki şey birden olmuştur — parçanın kendisi deforme olmuştur ve o darbenin enerjisi gövdenin başka noktalarına da gitmiştir. Bu yüzden görünen ezik, hasarın tamamı değildir. Doğru yol üç adımdır. Birincisi, hasarın gerçek boyutunu belirlemektir: kapı boşlukları ölçülür, çapraz ölçüler alınır, tavan ve eşik kontrol edilir; bunlar aracın hâlâ kare olup olmadığını söyler. İkincisi kılavuzdur: üretici bu parça için ne diyor — onarılabilir mi, hangi bölgeden kesilip eklenebilir, hangi birleştirme yöntemiyle, hangi ısı sınırıyla? Birçok araçta cevap 'onarılmaz, değişir' olur ve bu cevap tartışmaya kapalıdır. Üçüncüsü kapasitedir: bu iş çekme sehpası ve gövde ölçüm sistemi gerektiriyorsa ve atölyede bunlar yoksa iş alınmaz, yönlendirilir. Müşteriye söylenecek cümle şudur ve dürüsttür: bu parça aracın iskeleti; düzeltirsem araç düzgün görünür ama bir kazada seni tasarlandığı gibi korumaz, o yüzden ya kılavuzun izin verdiği biçimde yapılır ya hiç yapılmaz. Bu cümleyi kuran usta iş kaybetmez — kazandığı şey, bir gün o araçta biri yaralandığında sorumluluğunun temiz olmasıdır." },
+          { "label": "Isıtılıp düzeltilir, müşteri acele ediyor", "verdict": "isit", "explain": "Isı, taşıyıcı parçanın mukavemetini kalıcı düşürebilir." },
+          { "label": "Üstünden macun çekilip boyanır", "verdict": "macun", "explain": "Hasarı gizlemek; araç kazada tasarlandığı gibi davranmaz." },
+          { "label": "Görünmüyorsa sorun yok", "verdict": "gorunmez", "explain": "Bu alanın hatalarının hepsi görünmez; sorun tam da bu." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Bu alanın bütün hataları görünmez. Sırada gövdenin haritası: hangi parça taşıyor, enerji nereye gidiyor."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Bir taşıyıcı parçaya neden üreticinin kılavuzu olmadan dokunulmaz?",
+        "a": "tasiyici",
+        "options": [
+          { "verdict": "tasiyici", "label": "Bu parçalar bir kazada kuvvetin nasıl dağılacağını belirler; yanlış onarım görünmez ama aracın kaza davranışını değiştirir", "explain": "Üretici her taşıyıcı parçanın çelik sınıfını, kalınlığını ve birleştirme yöntemini bir hesapla seçmiştir ve araç bu hesapla test edilmiştir. Yanlış onarılan parça beklenenden zayıf ya da sert olur, enerji tasarlandığı yerde yutulmaz. Araç dışarıdan kusursuz görünür — sorun tam da budur." },
+          { "verdict": "kalin", "label": "Daha kalın olduğu için", "explain": "Kalınlık bir sonuç, sebep değil." },
+          { "verdict": "kapi", "label": "Kapıyı tuttuğu için", "explain": "Asıl işi kabini ayakta tutmak." },
+          { "verdict": "fark-yok", "label": "Fark yok, hepsi sac", "explain": "Dış panel ile taşıyıcı yapı iki ayrı iş yapar." }
+        ]
+      },
+      {
+        "q": "Boya yaparken asıl risk nedir?",
+        "a": "solunum",
+        "options": [
+          { "verdict": "solunum", "label": "Solunum: sertleştiriciler kalıcı akciğer hasarı ve kalıcı duyarlılık yapabilir", "explain": "Duyarlılık bir kez oluştuğunda genelde kalıcıdır ve kişi bir daha o ortamda çalışamaz. Korunma üç katmanlıdır: uygun ortam ve havalandırma, uygun tipte solunum koruması (sıradan toz maskesi işe yaramaz), eldiven ve tulum. En tehlikeli alışkanlık kokuya alışmaktır — kokuyu almamak korunduğun anlamına gelmez." },
+          { "verdict": "elbise", "label": "Boyanın elbiseye bulaşması", "explain": "Sağlık riski solunumdadır." },
+          { "verdict": "renk", "label": "Rengin tutmaması", "explain": "İş kalitesi sorunu, can güvenliği değil." },
+          { "verdict": "alisilir", "label": "Risk yok, alışılır", "explain": "Alışmak korunmak değildir." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2'deki 12,4 V ve 0,05 V SENARYO okumalarıdır; istenen FARKTIR (12,35 V) ve ders bir gerilim sınırı vermiyor.",
+    "sourceRequired": "Çelik sınıflarının onarım kuralları, izin verilen ısı ve süre sınırları, hangi parçanın hangi sınıf olduğu, solunum koruması tipi ve filtre değişim aralığı, yüksek gerilim devre dışı bırakma prosedürü ve kaza görmüş batarya bekletme kuralları bilinçle VERİLMEDİ; hepsi araca ve ürüne özgüdür, üreticinin onarım kılavuzundan ve ürünün güvenlik bilgi formundan okunur.",
+    "kapsam": "Şasi çekme, gövde ölçüm sistemiyle yapısal doğrulama, hava yastığı ve gergi birimlerine müdahale, elektrikli araçlarda yüksek gerilim sistemine müdahale KAPSAM DIŞIDIR — ders yalnız sınırı ve yönlendirmeyi öğretiyor.",
+    "kaynak": "Bu alan kullanıcının açık talebiyle eklendi. Konu başlıkları MEB Otomotiv Gövde ve Boya dalının çerçevesini takip ediyor ama kazanım numarası iddiasında bulunulmuyor; kaynak proje olarak işaretli.",
+    "reviewedByMechanic": false
+  }
+}

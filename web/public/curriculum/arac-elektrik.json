@@ -1,0 +1,353 @@
+{
+  "area": "arac-elektrik",
+  "title": "Araç Elektrik ve Elektronik Sistemleri",
+  "goal": "Kabloya bakıp tahmin eden çıraktan, devreyi ölçüp arızanın hangi noktada olduğunu söyleyen ustaya.",
+  "framework": {
+    "meb": "Motorlu Araçlar Teknolojisi — Araç Teknolojisi Atölyesi (9. sınıf) öğrenme birimleri 9-11: Araçlarda Temel Elektrik İşlemleri, Araçlarda Temel Elektronik İşlemleri, Otomotiv Aküleri · Otomotiv Elektromekanik Atölyesi Dersi",
+    "myk": "11UY0021-4/B1 — motorun elektrik ve elektronik sisteminde arıza tespiti ve onarım",
+    "note": "MEB programı elektriği ölçme ile başlatıyor: gerilim, akım, direnç ölçmek ve seri-paralel devre. Aşama sırası bu sırayı izler, uydurulmadı. Bkz. docs/MUFREDAT.md"
+  },
+  "ustalikTanimi": [
+    "Elektrikte parça değiştirmek çıraklıktır: bozuk olabilecek her şeyi sırayla denemek para ister, bilgi istemez.",
+    "Ustalık ölçmektir: gerilimin devrede nerede kaybolduğunu bulmak, arızalı parçayı ölçüm sonucundan çıkarmaktır.",
+    "Bu yüzden her aşama bir ölçüm becerisiyle başlar ve o beceriyle çözülen bir arıza ile biter."
+  ],
+  "stages": [
+    {
+      "no": 0,
+      "title": "Elektrik güvenliği ve akü",
+      "why": "Akü hem patlayıcı gaz üretir hem de kısa devrede anahtarı kızıl kora çevirecek akım verir. Elektriğe buradan girilir.",
+      "gate": "Kutup sırasını ve neden o sırayla söküldüğünü bilmeden hiçbir elektrik işine başlanmaz.",
+      "mebUnit": "Otomotiv Aküleri",
+      "ustalikIsareti": "Akünün durumunu marş öncesi ve marş anındaki gerilim farkından okur.",
+      "procedures": [
+        {
+          "id": "elektrik.aku-guvenlik",
+          "title": "Akü güvenliği ve kutup sökme sırası",
+          "status": "yazildi",
+          "teaches": [
+            "kutup-sirasi",
+            "kisa-devre",
+            "aku-gazi"
+          ]
+        },
+        {
+          "id": "elektrik.aku-degisim-sarj",
+          "title": "Akü değişimi, şarj ve takviye",
+          "status": "yazildi",
+          "teaches": [
+            "sarj-akimi",
+            "takviye-sirasi"
+          ],
+          "kapsamNotu": "Akü değiştirmeden önce şarj edip yeniden ölçmek, şarj cihazını enerjisizken bağlayıp en son çalıştırmak, takviyede son kelepçenin şaseye bağlanması, atık akünün dik ve yalıtılmış teslimi, teslimden önce şarj sistemi ve kaçak akım kontrolü."
+        }
+      ]
+    },
+    {
+      "no": 1,
+      "title": "Ölçü aleti: multimetre",
+      "why": "Elektrik görünmez. Ölçmeyi öğrenmeden elektrik arızası aranmaz, tahmin edilir.",
+      "gate": "Aleti yanlış kademede bağlamak hem aleti hem devreyi bozar; kademe seçimi bu aşamada oturur.",
+      "mebUnit": "Araçlarda Temel Elektrik İşlemleri",
+      "ustalikIsareti": "Ölçmeden önce ne okuması gerektiğini söyler; okuduğu sayıyı beklentisiyle karşılaştırır.",
+      "procedures": [
+        {
+          "id": "elektrik.multimetre-gerilim",
+          "title": "Gerilim ölçme ve akü durumunu okuma",
+          "status": "yazildi",
+          "teaches": [
+            "kademe-secimi",
+            "paralel-baglama",
+            "yuk-altinda-olcum"
+          ]
+        },
+        {
+          "id": "elektrik.multimetre-direnc",
+          "title": "Direnç ve süreklilik ölçme",
+          "status": "yazildi",
+          "teaches": [
+            "devre-disi-olcum",
+            "kopukluk-tespiti"
+          ],
+          "kapsamNotu": "Direnç ölçümünün enerjisiz devrede ve parça sökülü yapılması, prob direncinin ölçümden düşülmesi, süreklilik sesinin yük altındaki taşıma kapasitesini göstermemesi, sigortanın gözle değil ölçümle kontrolü, kardeş parça karşılaştırması."
+        },
+        {
+          "id": "elektrik.multimetre-akim",
+          "title": "Akım ölçme: devreye seri girmek",
+          "status": "yazildi",
+          "teaches": [
+            "seri-baglama",
+            "sigorta-yakma-hatasi"
+          ],
+          "kapsamNotu": "Ampermetrenin seri bağlanması ve paralel bağlamanın kısa devre olması, akım yuvası ile aletin kendi sigortası, sigorta yuvasından devreye seri girmek, paralel tüketicilerde akımların toplanması, sigortanın kabloyu koruması, probun gerilim yuvasına geri alınması."
+        }
+      ]
+    },
+    {
+      "no": 2,
+      "title": "Devrenin kuralları",
+      "why": "Seri ve paralel farkını bilmeyen usta, ölçtüğü sayının ne anlama geldiğini bilemez.",
+      "gate": "Ohm yasası ve devre okuma olmadan sonraki aşamaların ölçümleri yorumlanamaz.",
+      "mebUnit": "Araçlarda Temel Elektrik İşlemleri",
+      "ustalikIsareti": "Devre şemasına bakıp arızanın hangi noktada olabileceğini önceden söyler.",
+      "procedures": [
+        {
+          "id": "elektrik.devre-elemanlari",
+          "title": "Devrenin dört parçası: kaynak, koruma, iletken, tüketici",
+          "status": "yazildi",
+          "teaches": [
+            "devre-kavrami"
+          ],
+          "kapsamNotu": "Her devrenin dört parçası ve dönüş yolu, açık devre ile kısa devrenin sigortadan okunan ayrımı, anahtarın artı tarafa konması, kaynak ile tüketici arasındaki gerilim kaybının ölçülmesi, şase noktasının çıplak metale yapılması, onarımın aynı ölçümle doğrulanması."
+        },
+        {
+          "id": "elektrik.seri-paralel",
+          "title": "Seri ve paralel devre",
+          "status": "yazildi",
+          "teaches": [
+            "gerilim-bolunmesi",
+            "akim-bolunmesi"
+          ],
+          "kapsamNotu": "Seride akımın aynı kalıp gerilimin bölünmesi, paralelde gerilimin aynı kalıp akımların toplanması, araçta neden paralel bağlandığı, arızanın kapsamının yerini söylemesi, kötü bağlantının istenmeyen seri direnç gibi davranması, ölçülen sayının anlamının bağlantı biçiminden gelmesi."
+        },
+        {
+          "id": "elektrik.sema-okuma",
+          "title": "Araç devre şeması okuma",
+          "status": "yazildi",
+          "teaches": [
+            "sembol",
+            "kablo-kodu"
+          ],
+          "kapsamNotu": "Şemanın yer değil bağlantı gösterdiği, kablo kodu ve kesitin kimlik olduğu, pin numarasının ölçüm noktasını tek anlamlı kıldığı, soketin tırnaktan ayrılması, şemanın ölçümden önce beklenti üretmesi, ortak şase numarasının arıza kapsamını açıklaması."
+        }
+      ]
+    },
+    {
+      "no": 3,
+      "title": "Kablo, soket ve şase",
+      "why": "Araç elektrik arızalarının büyük kısmı parçada değil, parçaya giden yoldadır.",
+      "gate": "Kötü bir ek yeri, sağlam parçayı arızalı gösterir.",
+      "mebUnit": "Otomotiv Elektromekanik Atölyesi",
+      "ustalikIsareti": "Şase noktasını gözle değil ölçümle doğrular.",
+      "procedures": [
+        {
+          "id": "elektrik.kablo-onarimi",
+          "title": "Kablo ekleme, lehim ve makaron",
+          "status": "yazildi",
+          "teaches": [
+            "ek-direnci",
+            "yalitim"
+          ],
+          "kapsamNotu": "Kesitin en az orijinali olması ve ince ekin sigortasız zayıf halka yaratması, sıkma veya lehim artı yapışkanlı makaron, ek yerinin hareketli noktadan uzağa konması, ezilmiş bölümün bantlanmayıp kesilmesi, onarım öncesi-sonrası kayıp farkının kanıt olması."
+        },
+        {
+          "id": "elektrik.soket-temizligi",
+          "title": "Soket, pin gevşemesi ve korozyon",
+          "status": "yazildi",
+          "teaches": [
+            "temas-direnci"
+          ],
+          "kapsamNotu": "Titreşimle gelip giden belirtinin temas arızası olması, oynatma testiyle koşulun üretilmesi, sokete bastırınca gerilimin yükselmesinin yeri kanıtlaması, zımpara yerine kontak temizleyici, gevşek dişi pinin değiştirilmesi, kapanışta iki testin birden tekrarlanması."
+        },
+        {
+          "id": "elektrik.sase-arizasi",
+          "title": "Şase noktası arızası",
+          "status": "yazildi",
+          "teaches": [
+            "sase-teshisi"
+          ],
+          "kapsamNotu": "Kaybın gidişte değilse dönüşte olması, iki şase noktasının karşılaştırılmasıyla kılavuzsuz referans üretme, köprü kablosunun teşhis aracı olup onarım olmaması, çıplak metale temizlik artı doğru sıkma artı nem koruması, ortak şasede pabuç dizilimi, doğrulamanın yük altında yapılması."
+        }
+      ]
+    },
+    {
+      "no": 4,
+      "title": "Koruma: sigorta ve röle",
+      "why": "Sigorta arıza değil, arızanın haberidir. Atan sigortayı değiştirip geçmek arızayı büyütür.",
+      "gate": "Sigortanın neden attığını bulmadan yenisi takılmaz.",
+      "mebUnit": "Araçlarda Temel Elektrik İşlemleri",
+      "ustalikIsareti": "Sigortayı değiştirmeden önce hangi tüketicinin fazla çektiğini ölçerek bulur.",
+      "procedures": [
+        {
+          "id": "elektrik.sigorta",
+          "title": "Sigorta: değeri, atma sebebi ve doğru kontrolü",
+          "status": "yazildi",
+          "teaches": [
+            "sigorta-degeri",
+            "atma-sebebi"
+          ],
+          "kapsamNotu": "Sigortanın tüketiciyi değil kabloyu koruması, yüksek amperli takmanın yangın riski, kararmış gövde ile temiz kopmanın kısa devre-aşırı yük ayrımı, devrenin akımını bilinen normal değerle karşılaştırma, böl-ve-ölç ile kısa devreyi daraltma, sebebi gidermeden sigorta değiştirmemek."
+        },
+        {
+          "id": "elektrik.role-testi",
+          "title": "Röle çalışma mantığı ve testi",
+          "status": "yazildi",
+          "teaches": [
+            "bobin-kontak-ayrimi"
+          ],
+          "kapsamNotu": "Rölenin kumanda ve güç devrelerini ayırması, röle soketindeki dört ayrı sorunun ölçülmesi, aynı tip röleyle yer değiştirme testi, tıklama sesinin kontak kalitesini söylememesi, giriş-çıkış gerilim farkıyla kontak aşınmasını görmek, kontağı yıpratan sebebi aramak."
+        }
+      ]
+    },
+    {
+      "no": 5,
+      "title": "Aydınlatma devreleri",
+      "why": "En çok arıza gelen ve en çok yanlış onarılan devre budur.",
+      "gate": "Ampul değiştirip geçen usta, üç ay sonra aynı soketle geri gelir.",
+      "mebUnit": "Otomotiv Elektromekanik Atölyesi",
+      "ustalikIsareti": "Yanmayan ampulün sebebini soket, kablo ve şase arasında ölçerek ayırır.",
+      "procedures": [
+        {
+          "id": "elektrik.far-degisimi",
+          "title": "Far ampulü değişimi ve soket kontrolü",
+          "status": "yazildi",
+          "teaches": [
+            "ampul-tutma",
+            "soket-isinmasi"
+          ],
+          "kapsamNotu": "Soketi tırnaktan ayırmak, ampulü tabanından tutmak ve cama dokunmanın ısı dağılımını bozması, ampul tabanı ile soket ucunun birlikte kararmasının temas ısınmasını göstermesi, orijinal tip ve güç, sağlam farın referans ve ömür öngörüsü olması, iki huzmenin ayrı denenmesi."
+        },
+        {
+          "id": "elektrik.aydinlatma-arizasi",
+          "title": "Yanmayan lamba teşhisi",
+          "status": "yazildi",
+          "teaches": [
+            "besleme-sase-ayrimi"
+          ],
+          "kapsamNotu": "Arıza kapsamının yeri söylemesi, besleme-dönüş-tüketici üçlü ölçümü, şase ucundaki kaybın komşu lambayla karşılaştırılması, voltmetrenin yüksüz ölçümde yanıltması ve test lambasının yük uygulaması, ampul tipi değişiminin akım imzasını değiştirmesi, ortak şaseye dokununca komşu devrelerin denenmesi."
+        }
+      ]
+    },
+    {
+      "no": 6,
+      "title": "Şarj sistemi",
+      "why": "Aküyü bitiren çoğu zaman akü değildir; şarj eden ya da tüketen taraftır.",
+      "gate": "Akü değiştirmeden önce şarj sistemi ölçülür.",
+      "mykUnit": "11UY0021-4/B1 — şarj sistemi arıza tespiti",
+      "ustalikIsareti": "Akü mü alternatör mü sorusunu tek ölçümle cevaplar.",
+      "procedures": [
+        {
+          "id": "elektrik.alternator-testi",
+          "title": "Alternatör çıkışını ölçmek",
+          "status": "yazildi",
+          "teaches": [
+            "sarj-gerilimi",
+            "dalgalanma"
+          ],
+          "kapsamNotu": "Sahneye alternatör gövdesi, kasnağı, B+ ucu ve regülatör kapağı eklendi. Kayış motor sahnesinde olduğu için mekanik kontrol seçimle öğretiliyor; şarj gerilimi ve AC dalgalanma eşikleri araca özgü olduğundan verilmedi."
+        },
+        {
+          "id": "elektrik.sarj-arizasi",
+          "title": "Akü mü, alternatör mü, kablo mu?",
+          "status": "yazildi",
+          "teaches": [
+            "eleme-yontemi"
+          ],
+          "kapsamNotu": "Ölçümlerin kendisini değil sırasını öğretiyor; her ölçümün ayrıntısı kendi dersinde. Akü yük testi cihazı sahnede yok, metinde anlatılıyor."
+        }
+      ]
+    },
+    {
+      "no": 7,
+      "title": "Marş sistemi",
+      "why": "Marş devresi az sayıda parçadan oluşur ama en yüksek akımı çeker; küçük bir direnç burada büyük sonuç verir.",
+      "gate": "Marş basmıyor şikâyeti, marş motoru değiştirilerek çözülmez.",
+      "mykUnit": "11UY0021-4/B1 — marş sistemi arıza tespiti",
+      "ustalikIsareti": "Marş anındaki gerilim düşümünü ölçerek arızanın aküde mi kabloda mı marşta mı olduğunu söyler.",
+      "procedures": [
+        {
+          "id": "elektrik.mars-devresi",
+          "title": "Marş devresinin okunması",
+          "status": "yazildi",
+          "teaches": [
+            "kumanda-guc-ayrimi"
+          ],
+          "kapsamNotu": "Sahneye marş gövdesi, selenoidi, B+ ucu ve tetik ucu eklendi. Dişli, çatal, volan ve güvenlik müşirleri modelde yok, metinde anlatılıyor; ders sayısal ölçüm değil devre okuması öğretiyor."
+        },
+        {
+          "id": "elektrik.mars-arizasi",
+          "title": "Marş basmıyor teşhisi",
+          "status": "yazildi",
+          "teaches": [
+            "gerilim-dusumu"
+          ],
+          "kapsamNotu": "Gerilim düşümü testinin marş devresindeki hâli; iki bacak da marş anında ölçülüyor. Pens ampermetre sahnede yok, çekiş akımı metinde anlatılıyor."
+        }
+      ]
+    },
+    {
+      "no": 8,
+      "title": "Sensörler ve elektronik",
+      "why": "Modern araçta arızanın çoğu bir sensörün yanlış bilgi vermesinden çıkar; sensör okumadan motor da teşhis edilemez.",
+      "gate": "Hata kodunun işaret ettiği parçayı değiştirmek teşhis değildir.",
+      "mebUnit": "Araçlarda Temel Elektronik İşlemleri",
+      "ustalikIsareti": "Hata kodunu bir sonuç değil, bir soru olarak okur.",
+      "procedures": [
+        {
+          "id": "elektrik.sensor-turleri",
+          "title": "Sensör türleri ve verdikleri sinyal",
+          "status": "yazildi",
+          "teaches": [
+            "direncli-sensor",
+            "gerilimli-sensor"
+          ],
+          "kapsamNotu": "Sahneye iki uçlu bir sensör ve soketi eklendi. Sıcaklık, devir ve oksijen sensörleri arasındaki fiziksel farklar metinde; osiloskop sahnede yok, üreten sensörün dalga biçimi anılıyor ama uygulanmıyor."
+        },
+        {
+          "id": "elektrik.hata-kodu-okuma",
+          "title": "Hata kodunu doğru okumak",
+          "status": "yazildi",
+          "teaches": [
+            "kod-belirti-ayrimi"
+          ],
+          "kapsamNotu": "Hiçbir kod numarası ve eşik verilmedi; ders kodun ne anlama geldiği, nasıl toplandığı ve nasıl doğrulandığı üzerine kuruldu. Teşhis cihazı sahnede yok, ölçüm multimetre üzerinden yapılıyor."
+        }
+      ]
+    },
+    {
+      "no": 9,
+      "title": "Arıza teşhis — ustalık sınavı",
+      "why": "Buraya kadar ölçmeyi öğrendi. Burada ölçümle arızayı bulacak.",
+      "gate": "Teşhis, arıza kendi koşulunda tekrarlanıp kaybolduğu görülmeden kapanmaz.",
+      "mykUnit": "11UY0021-4/B1 — arıza tespit",
+      "ustalikIsareti": "Devreyi sökmeden, gerilimin nerede kaybolduğunu ölçerek arızalı noktayı gösterir.",
+      "procedures": [
+        {
+          "id": "elektrik.gerilim-dusumu",
+          "title": "Gerilim düşümü testi: arızalı noktayı bulmak",
+          "status": "yazildi",
+          "teaches": [
+            "yuk-altinda-olcum",
+            "nokta-tespiti"
+          ],
+          "kapsamNotu": "Probların tek bir parçanın iki ucuna konması, ölçümün yalnız yük altında anlam taşıması, besleme ve dönüş bacaklarının ayrı ölçülmesi, kaybı böl-ve-ölç ile tek bağlantıya indirmek, kötü bağlantının sigortayı attırmadan tüketiciyi zayıflatması ve ısınması, onarımın aynı iki bacaklı ölçümle doğrulanması."
+        },
+        {
+          "id": "elektrik.parazit-akim",
+          "title": "Aküyü bitiren kaçak akım",
+          "status": "yazildi",
+          "teaches": [
+            "kacak-akim",
+            "sigorta-cekme-yontemi"
+          ],
+          "kapsamNotu": "Kaçak akım ölçümü mevcut sahnedeki akü, multimetre ve sigorta kutusuyla kuruldu. Modül uyku süresi ve kabul edilebilir kaçak sınırı araca özgü olduğu için verilmedi; ders sağlam bir örnekle karşılaştırma üzerine kuruldu."
+        },
+        {
+          "id": "elektrik.aralikli-ariza",
+          "title": "Ara ara ortaya çıkan arıza",
+          "status": "yazildi",
+          "teaches": [
+            "kosul-uretme"
+          ],
+          "kapsamNotu": "Titreşim koşulu üzerinden kuruldu; ısı, nem ve soğuk koşulları metinde anlatıldı. Oynatma testinin hareket karşılığı yok, seçim olarak öğretiliyor."
+        }
+      ]
+    }
+  ],
+  "_notes": {
+    "status": "yazildi = prosedür dosyası var ve oynanabilir. planlandi = yalnız başlık; uygulamada kilitli görünmeli, açılmamalı.",
+    "kapsam": "Sahne web/public/models/elektrik.glb: akü, multimetre, sigorta kutusu, kablo demeti, far ve şase noktası. Alternatör, marş motoru ve sensörler modelde yok; aşama 6-8 yazılmadan önce eklenmeli.",
+    "olcumDegerleri": "Bu alanda değerler motor alanındakinden daha az araca özgüdür ama yine de sayı verilen her yerde kaynak aranır. Dinlenmiş akü ve şarj gerilimi aralıkları sourceRequired ile işaretlenir; kaynaksız yayına çıkmaz.",
+    "sira": "MEB programı elektriği 9. sınıfın son üç biriminde veriyor. Burada ayrı bir alan olarak açıldı çünkü uygulamanın altı alanından biri; aşama 0 ve 1, motor alanındaki güvenlik ve ölçü aleti aşamalarının elektrik karşılığıdır."
+  }
+}

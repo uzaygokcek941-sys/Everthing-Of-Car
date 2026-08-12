@@ -1,0 +1,177 @@
+{
+  "id": "elektrik.sarj-arizasi",
+  "area": "arac-elektrik",
+  "stage": 6,
+  "title": "Akü mü, Alternatör mü, Kablo mu?",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 30,
+  "prerequisites": ["elektrik.alternator-testi", "elektrik.aku-degisim-sarj"],
+  "learningGoals": [
+    "Şarj şikâyetini testleri belirli bir sıraya koyarak elemek",
+    "Akünün durumu ölçülmeden yapılan diğer ölçümlerin neden yanıltıcı olduğunu açıklamak",
+    "Sonucu üç adaydan birine indirip kararı ölçümle vermek"
+  ],
+
+  "safety": [
+    { "rule": "Akü üzerinde çalışırken kıvılcım üretilmez, gözlük takılır", "why": "Şarj olan akü patlayıcı gaz çıkarır; ayrıca elektrolit sıçraması gözü kalıcı olarak yakar", "blocksStart": true },
+    { "rule": "Motor çalışırken kutup ayrılarak test yapılmaz", "why": "Modern araçta bu yöntem modülleri ve regülatörü yakar. Eleme, kutup ayırarak değil ölçerek yapılır", "blocksStart": true },
+    { "rule": "Takviye kablolarının son bağlantısı gövdeye yapılır", "why": "Son bağlantı kıvılcım üretir; bu kıvılcımın akünün gaz çıkaran ağzından uzakta olması gerekir", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.multimetre", "label": "Dijital multimetre", "required": true },
+    { "id": "tool.aku-sarj", "label": "Akü şarj cihazı", "required": true },
+    { "id": "tool.pense-anahtar", "label": "Kutup anahtarı", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Şikâyet: sabahları marş zor basıyor, bazen hiç basmıyor. Üç aday var: akü, alternatör, kablolar.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.aku",
+        "question": "Eleme neden akünün durumuyla başlar?",
+        "options": [
+          { "label": "Boşalmış ya da bozuk bir akü diğer bütün ölçümleri bozar; sağlam bir referans olmadan hiçbir sonuç güvenilir değildir", "verdict": "aku-once", "correct": true, "explain": "Şarj sisteminin bütün ölçümleri akü kutuplarından yapılır ve akünün kendi durumu okunan sayıların içindedir. Yarı boş bir akü, sağlam bir alternatörün altında bile düşük gerilim gösterir — çünkü boş akü akımı yutar ve gerilimi aşağı çeker. Aynı akü, iç direnci bozulmuşsa şarj kabul etmediği için sürekli düşük okur ve alternatör suçlanır. Bu yüzden eleme her zaman aynı yerden başlar: akü tam şarj edilir, dinlendirilir ve gerilimi ölçülür. Ancak sağlam bir akü elde edildikten sonra yapılan şarj ve kayıp ölçümleri anlam taşır. Sıra bozulursa bütün teşhis güvenilmez bir zemine kurulmuş olur." },
+          { "label": "Akü en ucuz parçadır, önce o değiştirilir", "verdict": "ucuz", "explain": "Fiyat teşhis sırasını belirlemez. Ayrıca sebep dururken yeni akü de biter." },
+          { "label": "Alternatörle başlanır, aküye sonra bakılır", "verdict": "alternator-once", "explain": "Alternatör ölçümü akü kutuplarından yapılır; bozuk akü o ölçümü yanıltır." },
+          { "label": "Kablolarla başlanır", "verdict": "kablo-once", "explain": "Kablo ölçümü yük altında yapılır ve yükü akünün beslemesi gerekir; sıra yine akü." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Eleme yöntemi, testlerin hangi sırayla yapıldığıyla ilgilidir. Yanlış sırayla yapılan doğru testler yanlış sonuç verir."
+    },
+    {
+      "id": 2,
+      "instruction": "Akü şarj cihazına bağlanıp tam dolduruldu ve bir süre dinlendirildi. Ölçüm: 12,55 V. Şarjdan önce aynı ölçüm 11,95 V idi. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.multimetre-ekran",
+        "unit": "V",
+        "acceptRange": [0.55, 0.65]
+      },
+      "camera": "tezgah",
+      "hint": "12,55 eksi 11,95.",
+      "teachingNote": "Akü şarjı kabul etti ve dinlendikten sonra da tuttu: iki bilgi birden. Kabul etmeseydi ya da şarjdan hemen sonra hızla düşseydi arıza akünün kendisinde olurdu ve eleme burada biterdi. Dinlendirme şarttır: şarj sonrası yüzey şarjı gerçek durumu olduğundan iyi gösterir, bu yüzden ölçüm cihaz ayrıldıktan bir süre sonra ya da kısa bir yük uygulanarak yapılır."
+    },
+    {
+      "id": 3,
+      "instruction": "Akü sağlam bir referans oldu. Şimdi ikinci soruya geçiyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.alternator",
+        "question": "Sıradaki ölçüm ne olmalı?",
+        "options": [
+          { "label": "Motor çalışırken kutuplardaki gerilim: sistem şarj ediyor mu, etmiyor mu", "verdict": "sarj-var-mi", "correct": true, "explain": "Elemenin ikinci adımı tek bir soruyu yanıtlar: araç çalışırken aküye enerji gidiyor mu? Motor çalıştırılır ve aynı kutuplardan ölçülür. Gerilim akünün dinlenmiş seviyesinin üstüne çıkmışsa şarj vardır, çıkmamışsa yoktur. Bu tek ölçüm elemeyi ikiye böler. Şarj yoksa suç üreten ya da taşıyan taraftadır: alternatör, kayışı, B+ kablosu ya da gövde bağlantısı. Şarj varsa üretim tamamdır ve sorun başka yerdedir — ya araç kapalıyken bir şey tüketiyordur, ya üretilen miktar tüketimi karşılamıyordur, ya da akü aldığını tutmuyordur. İki dal da buradan sonra kendi ölçümleriyle daralır." },
+          { "label": "Marş motoru sökülüp tezgâhta denenir", "verdict": "mars-sok", "explain": "Marş zorluğu belirtidir; sebebi bulunmadan parça sökmek gereksiz iş." },
+          { "label": "Bütün kablolar değiştirilir", "verdict": "kablo-degistir", "explain": "Hangi kabloda kayıp olduğu ölçülmeden değiştirmek tahmindir." },
+          { "label": "Akü yenisiyle değiştirilir", "verdict": "aku-degistir", "explain": "Akü az önce sağlam bulundu; değiştirmek sebebi bulmaz." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "İyi bir eleme adımı, olasılıkları ikiye bölen adımdır. \"Şarj var mı\" sorusu tam olarak bunu yapar."
+    },
+    {
+      "id": 4,
+      "instruction": "Ölçüm: motor çalışırken kutuplardaki gerilim akünün dinlenmiş seviyesinin üstüne çıkıyor. Şarj var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.multimetre-ekran",
+        "question": "Bu sonuç neyi eler, neyi bırakır?",
+        "options": [
+          { "label": "Üretimin tamamen durduğu ihtimalini eler; geriye yetersiz üretim, kablo kaybı ve kaçak akım kalır", "verdict": "uretim-var", "correct": true, "explain": "Şarj görülmesi \"alternatör sağlam\" demek değildir; yalnızca \"hiç üretmiyor\" ihtimalini eler. Geriye üç ihtimal kalır. Birincisi yetersiz üretim: alternatör boşta yeterli, yük altında değil — tüketiciler açılıp ölçüm tekrarlanınca ortaya çıkar. İkincisi kablo kaybı: üretim yeterli ama B+ hattında ya da gövde bağlantısında düşen gerilim yüzünden aküye eksik ulaşıyor — iki bacaklı gerilim düşümü ölçümüyle görülür. Üçüncüsü kaçak akım: üretim ve iletim tamam ama araç park hâlindeyken bir şey aküyü boşaltıyor — ampermetre seri bağlanıp ölçülür. Üçü de ayrı ölçümlerle kesin olarak ayrılır; hiçbiri tahminle elenmez." },
+          { "label": "Bütün şarj sistemini temize çıkarır", "verdict": "temize-cikar", "explain": "Yalnız \"hiç üretmiyor\" ihtimalini eler; yetersiz üretim hâlâ mümkün." },
+          { "label": "Arızanın aküde olduğunu kanıtlar", "verdict": "aku-sucu", "explain": "Akü ilk adımda sağlam bulundu; bu ölçüm onu suçlamaz." },
+          { "label": "Hiçbir şeyi elemez", "verdict": "elemez", "explain": "Elemeyi ikiye böldü; bu, tek ölçümden alınabilecek en büyük kazanç." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Bir ölçümün ne elediğini bilmek, ne gösterdiğini bilmek kadar önemlidir. Eleme yöntemi bu iki bilgiyle yürür."
+    },
+    {
+      "id": 5,
+      "instruction": "Tüketiciler açıldı, şarj tutunuyor. Kablo ölçümü de temiz. Geriye tek dal kaldı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sigorta-kutusu",
+        "question": "Kalan dal nasıl ölçülür?",
+        "options": [
+          { "label": "Araç kapatılıp modüller uyuduktan sonra ampermetre eksi hatta seri bağlanır; kaçak akım ölçülür", "verdict": "kacak-olc", "correct": true, "explain": "Üretim var, iletim temiz, akü sağlam — o hâlde akü park hâlindeyken boşalıyor demektir. Bu, kaçak akım ölçümünün konusudur: araç kapatılır, modüllerin uyuması beklenir, ampermetre akünün eksi hattına seri bağlanır ve çekilen akım okunur. Değer sağlam bir örneğe göre yüksekse kaçak vardır ve sigortalar teker teker çekilerek hangi devrede olduğu bulunur. Şikâyetin biçimi de zaten bunu söylüyordu: araç sabahları zor basıyorsa gece boyunca bir şey aküyü yiyor demektir. Şarj sisteminin bütün ölçümleri temiz çıktığında geriye kalan dal budur ve onun da kendi ölçümü vardır; yani hiçbir aşamada tahmine gerek kalmaz." },
+          { "label": "Alternatör yine de değiştirilir", "verdict": "alternator-degistir", "explain": "Üç ölçüm de alternatörü temize çıkardı; değiştirmek sebebi bulmaz." },
+          { "label": "Akü yenilenir", "verdict": "aku-yenile", "explain": "Akü sağlam bulunmuştu; yenisi de aynı kaçak yüzünden bitecektir." },
+          { "label": "Araç müşteriye teslim edilir", "verdict": "teslim", "explain": "Arıza duruyor. Eleme son dala geldi, ölçüm yapılmadan kapatılmaz." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Eleme yöntemi ancak son dal da ölçülebiliyorsa işe yarar. Elenmeyen bir dal, teşhisin sonunda tahmin bırakır."
+    },
+    {
+      "id": 6,
+      "instruction": "Kaçak bulundu ve giderildi. Ama akü aylarca yetersiz şarjla dolaştı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.aku",
+        "question": "Akü için ne yapılır?",
+        "options": [
+          { "label": "Şarj edilip durumu tekrar ölçülür; kalıcı hasar aldıysa bu ölçümde görülür ve değiştirilmesi gerekir", "verdict": "tekrar-olc", "correct": true, "explain": "Uzun süre yetersiz şarjla dolaşan akü kalıcı hasar alabilir; bu durumda sebep giderilse bile akü eski kapasitesine dönmez ve araç kısa sürede yine zor basar. Karar tahminle değil ölçümle verilir: akü tam şarj edilir, dinlendirilir, gerilimi ölçülür ve yük altındaki davranışına bakılır. Sağlamsa yerinde kalır, şarjı tutmuyorsa değiştirilir. Bu ayrım müşteriye de açıkça anlatılır — kaçak giderildi, akü ayrı bir karar. Aksi hâlde iki hatadan biri yapılır: ya sağlam akü boşuna değiştirilir, ya bitmiş akü yerinde bırakılır ve arıza giderilmemiş gibi görünür." },
+          { "label": "Kaçak giderildi, aküye dokunulmaz", "verdict": "dokunma", "explain": "Hasarlı akü sebep giderilse de sorun çıkarır; ölçülmeden karar verilmez." },
+          { "label": "Her durumda yenisi takılır", "verdict": "her-durumda", "explain": "Sağlam akü boşuna değiştirilmiş olur; karar ölçüme dayanır." },
+          { "label": "Müşteri karar versin", "verdict": "musteri-karar", "explain": "Müşteri karar verir ama ölçüm sonucunu bilerek verir; ustanın işi o bilgiyi sağlamaktır." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Sebebi gidermekle sonucu düzeltmek ayrı işlerdir. İkisini karıştırmamak, işin geri gelip gelmeyeceğini belirler."
+    },
+    {
+      "id": 7,
+      "instruction": "İş kapanıyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.multimetre-ekran",
+        "question": "Kayıtta ne bulunmalı?",
+        "options": [
+          { "label": "Yapılan ölçümlerin sırası ve değerleri: akü durumu, şarj gerilimi, kablo kaybı, kaçak akım", "verdict": "olcum-sirasi", "correct": true, "explain": "Şarj şikâyetlerinde kayıt, hangi adayın hangi ölçümle elendiğini gösterir. Dört satır yeter: akü şarjdan sonra ne okudu, motor çalışırken kutuplarda ne okundu, B+ ve gövde hattında ne kadar kayıp vardı, kaçak akım kaçtı. Bu liste iki işe yarar. Arıza geri gelirse bir sonraki kişi elenmiş dalları tekrar elemez, doğrudan kalan yere bakar. Ve müşteriye neyin neden değiştirildiği somut olarak anlatılabilir — şarj arızalarında en sık duyulan şikâyet \"parça değiştirdiler ama geçmedi\" cümlesidir, çünkü çoğu zaman eleme hiç yapılmamıştır." },
+          { "label": "Yalnız değiştirilen parça yazılır", "verdict": "parca", "explain": "Elemenin kendisi asıl bilgidir; parça listesi onu göstermez." },
+          { "label": "\"Şarj sistemi kontrol edildi\" yazmak yeterli", "verdict": "kontrol-edildi", "explain": "Hangi ölçümün ne verdiğini söylemeyen bir cümle, geri gelişte hiçbir işe yaramaz." },
+          { "label": "Müşterinin şikâyeti yazılır", "verdict": "sikayet", "explain": "Kaydın başlangıcıdır ama sonucu ve sayıları içermez." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Eleme yöntemi bir düşünme biçimidir: adayları say, ikiye bölen ölçümü yap, elenen dalı bir daha açma, kalan dalı da ölç. Aynı biçim motor, fren ve şanzıman teşhisinde de çalışır."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Şarj şikâyetinde eleme neden akünün durumuyla başlar?",
+        "a": "referans-gerek",
+        "options": [
+          { "verdict": "referans-gerek", "label": "Bütün ölçümler akü kutuplarından yapılır; bozuk akü diğer bütün sonuçları yanıltır", "explain": "Yarı boş bir akü, sağlam bir alternatörün altında bile düşük gerilim gösterir, çünkü akımı yutar ve gerilimi aşağı çeker. İç direnci bozulmuş bir akü ise şarjı kabul etmediği için sürekli düşük okur ve alternatör suçlanır. Bu yüzden akü önce tam şarj edilir, dinlendirilir ve ölçülür; sağlam bir referans elde edilmeden yapılan şarj ve kayıp ölçümleri güvenilmez bir zemine kurulur." },
+          { "verdict": "ucuz", "label": "En ucuz parça olduğu için", "explain": "Fiyat teşhis sırasını belirlemez." },
+          { "verdict": "kolay", "label": "En kolay ulaşılan parça olduğu için", "explain": "Erişim kolaylığı değil, ölçümlerin akü üzerinden yapılması belirleyici." },
+          { "verdict": "onemsiz", "label": "Sıranın önemi yok", "explain": "Yanlış sırayla yapılan doğru testler yanlış sonuç verir." }
+        ]
+      },
+      {
+        "q": "\"Motor çalışırken gerilim yükseliyor\" ölçümü neyi eler?",
+        "a": "hic-uretmiyor",
+        "options": [
+          { "verdict": "hic-uretmiyor", "label": "Yalnız \"hiç üretmiyor\" ihtimalini; yetersiz üretim, kablo kaybı ve kaçak akım hâlâ mümkündür", "explain": "Şarj görülmesi alternatörü temize çıkarmaz. Geriye üç ihtimal kalır: yük altında yetersiz kalan bir alternatör, B+ ya da gövde hattında gerilim yiyen bir bağlantı, ve araç park hâlindeyken aküyü boşaltan bir kaçak. Üçü de ayrı ölçümlerle ayrılır — yük altında şarj ölçümü, iki bacaklı gerilim düşümü ve seri bağlı ampermetre." },
+          { "verdict": "hepsini", "label": "Şarj sisteminin tamamını temize çıkarır", "explain": "Yetersiz üretim boşta normal okur; tek ölçüm sistemi temize çıkarmaz." },
+          { "verdict": "akuyu", "label": "Akü ihtimalini", "explain": "Akü zaten ilk adımda ayrı bir ölçümle değerlendirildi." },
+          { "verdict": "hicbirini", "label": "Hiçbir şeyi", "explain": "Olasılıkları ikiye böldü; bu tek bir ölçümden alınabilecek en büyük kazanç." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2'deki 12,55 V ve 11,95 V SENARYO okumalarıdır. Öğrenciden istenen bir üretici sınırı değil, şarj öncesi ile sonrası arasındaki FARKTIR (0,60 V). sourceRequired bu yüzden gerekmedi.",
+    "sourceRequired": "Dinlenmiş akünün sağlıklı gerilim değeri, kabul edilebilir şarj gerilimi aralığı ve azami kaçak akım araca ve aküye özgüdür; bu derste bilinçle VERİLMEDİ. Ders eleme sırası ve karşılaştırma üzerine kuruldu.",
+    "kapsam": "Bu ders ölçümlerin kendisini değil sırasını öğretiyor; her adımın ayrıntılı ölçümü kendi dersinde (alternatör testi, gerilim düşümü, kaçak akım) yapılıyor. Sahnede akü yük testi cihazı yok; akünün yük altındaki davranışı metinde anlatılıyor.",
+    "reviewedByMechanic": false
+  }
+}

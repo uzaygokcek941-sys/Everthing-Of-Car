@@ -1,0 +1,179 @@
+{
+  "id": "motor.kompresyon-testi",
+  "area": "motor-mekanik",
+  "stage": 9,
+  "title": "Kompresyon ve Silindir Kaçak Testi: Motorun Kendi İfadesini Almak",
+  "vehicleClass": "binek-arac",
+  "estimatedMinutes": 30,
+  "prerequisites": ["motor.buji-degisimi", "motor.piston-biyel", "motor.kapak-contasi"],
+  "learningGoals": [
+    "Kompresyon testini doğru koşullarda yapmak ve silindirler arası farkı kanıt olarak kullanmak",
+    "Yaş test ile kaçağın segmanda mı supapta mı olduğunu ayırmak",
+    "Kaçak testinde havanın nereden çıktığını dinleyerek arızanın yerini tek seferde bulmak"
+  ],
+
+  "safety": [
+    { "rule": "Test öncesi yakıt ve ateşleme devresi devre dışı bırakılır", "why": "Marş sırasında enjektörler püskürtmeye devam ederse silindire ve egzoza ham yakıt dolar; ateşleme açık kalırsa sökülü buji kablosunun ucundan yüksek gerilim atlar. İkisi bir arada yangın koşuludur", "blocksStart": true },
+    { "rule": "Kaçak testinde krank mili kilitlenmeden silindire basınç verilmez", "why": "Üst ölü noktada duran pistona basınçlı hava verildiğinde motor kendi kendine dönmeye başlar; elin kayış veya kasnak bölgesindeyse ciddi yaralanma olur", "blocksStart": true },
+    { "rule": "Sıcak motorda buji sökerken eldiven kullanılır", "why": "Kompresyon testi sıcak motorda yapılır; silindir kapağı ve manifolt yüzeyleri saniyeler içinde yakacak sıcaklıktadır", "blocksStart": false },
+    { "rule": "Marş süresi kısa tutulur, aralarında beklenir", "why": "Arka arkaya uzun marş, marş motorunu ısıtır ve aküyü boşaltır; düşen marş hızı bütün ölçümleri aşağı çeker ve testi kullanılamaz hâle getirir", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.kompresyon-test-cihazi", "label": "Kompresyon test cihazı", "required": true },
+    { "id": "tool.lokma-16", "label": "Buji lokması", "required": true },
+    { "id": "tool.kacak-test-cihazi", "label": "Silindir kaçak test cihazı", "required": false },
+    { "id": "tool.yagdanlik", "label": "Yağdanlık", "required": false },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Araç güç kaybı ve rölanti titremesiyle geldi. Kompresyon testi yapacaksın, hazırlık aşamasındasın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.silindir-1",
+        "question": "Test hangi koşullarda yapılır?",
+        "options": [
+          { "label": "Motor çalışma sıcaklığında, bütün bujiler sökülü, gaz kelebeği tam açık, akü dolu; yakıt ve ateşleme devre dışı", "verdict": "dogru-kosul", "correct": true, "explain": "Bu dört koşulun her biri ölçümü doğrudan değiştirir. Sıcak motorda parçalar genleşmiş ve boşluklar çalışma hâlindeki değerine gelmiştir; soğuk motorda ölçülen sayı gerçeği yansıtmaz. Bütün bujiler sökülünce motor sürtünmesiz döner ve marş hızı yükselir; tek buji sökülüyken yapılan ölçüm hep düşük çıkar. Gaz kelebeği kapalıyken silindir yeterince hava alamaz ve bütün silindirler yanlış biçimde düşük okur. Akünün zayıflığı marş hızını düşürerek aynı hatayı yapar. Yakıt ve ateşlemenin kesilmesi ise güvenlik gereğidir. Kısacası ölçtüğün şey yalnız silindirin sızdırmazlığı değil, koşulların toplamıdır; koşulları sabitlemezsen sayılar birbiriyle karşılaştırılamaz." },
+          { "label": "Soğuk motorda, yalnız test edilen silindirin bujisi sökülü", "verdict": "soguk-tek-buji", "explain": "İki hata birden: soğuk motorda boşluklar farklıdır ve diğer bujiler yerindeyken motor zorlanarak döner, marş hızı düşer, bütün değerler aşağı kayar." },
+          { "label": "Motor çalışırken ölçülür", "verdict": "calisirken", "explain": "Kompresyon testi marşla, motor çalışmadan yapılır. Çalışan motorda silindire test cihazı takılamaz." },
+          { "label": "Koşul önemli değil, önemli olan cihazın gösterdiği rakam", "verdict": "kosul-onemsiz", "explain": "Bu testte rakamı üreten şey koşullardır. Aynı motor, koşulu değiştirilince tamamen farklı sayılar verir." }
+        ]
+      },
+      "camera": "motor-ust",
+      "teachingNote": "Ölçüm aletinin gösterdiği sayı, ölçüm koşullarından daha doğru olamaz. Bu cümle bu meslekteki bütün ölçümler için geçerlidir."
+    },
+    {
+      "id": 2,
+      "instruction": "1. silindirin bujisini sök; test cihazı buji yuvasına takılacak.",
+      "interaction": {
+        "type": "unscrew",
+        "target": "part.buji.1",
+        "count": 1,
+        "turns": 6,
+        "tool": "tool.lokma-16"
+      },
+      "camera": "motor-ust",
+      "hint": "Sökme yönü saat yönünün tersidir.",
+      "teachingNote": "Sökülen bujileri silindir numarasıyla birlikte diz. Test bittiğinde elinde iki ayrı kanıt olur: basınç sayıları ve o silindirin buji rengi. İkisi çoğu zaman aynı silindiri gösterir."
+    },
+    {
+      "id": 3,
+      "instruction": "Dört silindir ölçüldü: 13,1 — 12,9 — 13,0 — 9,5 bar. En yüksek ile en düşük arasındaki farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.silindir-1",
+        "unit": "bar",
+        "acceptRange": [3.4, 3.8]
+      },
+      "camera": "motor-ust",
+      "hint": "13,1 eksi 9,5.",
+      "teachingNote": "Bu testte asıl bilgi tek tek sayılarda değil, sayıların dağılımındadır. Dört silindir aynı motorda, aynı malzemeyle, aynı ölçüde üretildi; hepsinin aynı basıncı üretmesi beklenir. Üçü birbirine yakın, biri belirgin biçimde düşükse, sorunun hangi silindirde olduğunu kılavuza bakmadan bilirsin. Kılavuzun asgari değeri işin ikinci yarısıdır ve motorun genel durumunu anlatır; hangi silindir sorusunu ise fark cevaplar."
+    },
+    {
+      "id": 4,
+      "instruction": "Dördüncü silindirin buji deliğinden bir tatlı kaşığı motor yağı verip ölçümü tekrarladın. Basınç 9,5'ten 12,4 bara çıktı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.piston",
+        "question": "Yağ verince basıncın yükselmesi ne anlama gelir?",
+        "options": [
+          { "label": "Kaçak segman ve gömlek tarafındadır; yağ segmanların boşluğunu geçici olarak kapattı", "verdict": "segman", "correct": true, "explain": "Silindire verilen yağ, segmanla gömlek arasındaki boşluğa yerleşip geçici bir sızdırmazlık yaratır. Basınç bu yüzden yükseldiyse, kaçan hava daha önce oradan kaçıyordu demektir: aşınmış segman, aşınmış ya da çizilmiş gömlek, kırık segman. Bu teste yaş test denir ve tek kaşık yağla kaçağın yönünü belirler. Yağ supap oturma yüzeyine ulaşamaz; bu yüzden basınç yükselmiyorsa kaçak yukarıdadır. Böylece motoru açmadan, arızanın alt tarafta mı üst tarafta mı olduğunu ayırmış olursun." },
+          { "label": "Supap sızdırıyor", "verdict": "supap", "explain": "Verilen yağ supap yüzeyine ulaşmaz. Supap kaçağında yaş testte basınç kayda değer biçimde yükselmez; burada yükseldi." },
+          { "label": "Kapak contası patlak", "verdict": "conta", "explain": "Conta kaçağında da yağ yardımcı olmaz. Ayrıca conta kaçağının kendine ait ayrı belirtileri vardır: soğutma suyunda kabarcık, komşu iki silindirin birlikte düşmesi." },
+          { "label": "Ölçüm hatalı", "verdict": "hata", "explain": "Yaş testte basıncın yükselmesi beklenen ve tanımlı bir davranıştır; hata değil, bilgidir." }
+        ]
+      },
+      "camera": "motor-ust",
+      "teachingNote": "Yaş test, elindeki en ucuz ayırt etme aracıdır: bir kaşık yağ ve bir tekrar ölçüm. Motoru açmadan önce her zaman yapılır."
+    },
+    {
+      "id": 5,
+      "instruction": "Kesin yer için kaçak testine geçtin. Dördüncü piston üst ölü noktada, krank kilitli, silindire basınçlı hava veriliyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.silindir-1",
+        "question": "Hava nereden duyuluyorsa arıza nerededir?",
+        "options": [
+          { "label": "Yağ çubuğu ve karter havalandırmasından geliyorsa segman, emme manifoltundan geliyorsa emme supabı, egzozdan geliyorsa egzoz supabı, genleşme deposunda kabarcık varsa kapak contası", "verdict": "dinleme-haritasi", "correct": true, "explain": "Kaçak testinin gücü, kaçan havanın çıktığı yerin arızanın yerini doğrudan söylemesidir. Silindirin sızdırmazlığı dört yerden bozulabilir ve her birinin ayrı bir çıkışı vardır: segman aşınmışsa hava pistonun yanından kartere geçer ve yağ çubuğu deliğinden duyulur; emme supabı tam oturmuyorsa hava emme manifoltundan geri kaçar; egzoz supabı oturmuyorsa egzoz borusundan gelir; kapak contası delinmişse hava soğutma devresine geçer ve genleşme deposunda kabarcık yapar. Tek bir testle hem yeri hem miktarı öğrenirsin. Kompresyon testi 'hangi silindir' der; kaçak testi 'o silindirde tam olarak neresi' der." },
+          { "label": "Ses her durumda egzozdan gelir, ayırt edilemez", "verdict": "ayirt-edilemez", "explain": "Dört çıkış birbirinden ayrıdır ve elle, kulakla kolayca ayırt edilir. Testin bütün değeri bu ayrımdadır." },
+          { "label": "Sesin yeri önemli değil, önemli olan kaçak yüzdesi", "verdict": "yuzde", "explain": "Yüzde ne kadar kötü olduğunu söyler; nereden kaçtığı ise ne yapılacağını söyler. İkisi birlikte kullanılır." },
+          { "label": "Bu test yalnız motor sökülüyken yapılır", "verdict": "sokulu", "explain": "Tam tersine, motor araç üzerindeyken yapılır; sökmeden karar verebilmek için vardır." }
+        ]
+      },
+      "camera": "motor-ust",
+      "hint": "Sırayla dinle: yağ çubuğu deliği, emme ağzı, egzoz ucu, genleşme deposu.",
+      "teachingNote": "Bu dört adres, motoru sökmeden aklında tutman gereken haritadır. Kompresyon testi soruyu daraltır, kaçak testi bitirir."
+    },
+    {
+      "id": 6,
+      "instruction": "Kaçak testinde hava yağ çubuğu deliğinden geliyor; emme, egzoz ve soğutma tarafı temiz.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.piston",
+        "question": "İki test birlikte ne söylüyor?",
+        "options": [
+          { "label": "Dördüncü silindirde segman ve gömlek aşınması var; motorun açılması gerekiyor", "verdict": "segman-asinmasi", "correct": true, "explain": "Üç bulgu aynı yönü gösteriyor: kompresyon yalnız dördüncü silindirde düşük, yaş testte yağ verilince yükseliyor, kaçak testinde hava kartere geçiyor. Üçü birden segman-gömlek çiftini işaret eder ve bu artık bir tahmin değil, birbirinden bağımsız üç kanıtın kesişimidir. Bu noktada söylenecek şey nettir: sorun alt taraftadır, silindir kapağını sökmek çözmez. Karar müşteriye açık verilir; motorun açılması gerekir." },
+          { "label": "Bujiyi değiştirip tekrar bakılır", "verdict": "buji", "explain": "Buji ateşlemeyi etkiler, sızdırmazlığı değil. Kompresyon düşüklüğünü buji açıklamaz." },
+          { "label": "Yağ katkısı kullanılır", "verdict": "katki", "explain": "Katkı ölçülebilir bir aşınmayı geri getirmez; yalnız belirtiyi bir süre örtebilir. Teşhis konmuşken belirtiyi örtmek işi zorlaştırır." },
+          { "label": "Silindir kapağı sökülüp supaplar alıştırılır", "verdict": "supap-alistirma", "explain": "Supaplar temiz çıktı; üst tarafa yapılan iş bu arızayı çözmez ve müşterinin parası boşa gider." }
+        ]
+      },
+      "camera": "motor-ust",
+      "teachingNote": "Bir teşhisi güçlü yapan şey tek bir ölçüm değil, birbirinden bağımsız üç bulgunun aynı yeri göstermesidir. Üçü aynı yönü göstermiyorsa dur ve tekrar bak."
+    },
+    {
+      "id": 7,
+      "instruction": "Müşteriye anlatacaksın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.silindir-1",
+        "question": "Kompresyon testinin söyleyemediği şey nedir?",
+        "options": [
+          { "label": "Aşınmanın sebebini söylemez; yalnız nerede olduğunu söyler", "verdict": "sebep-degil-yer", "correct": true, "explain": "Test sana hangi silindirin sızdırdığını ve nereden sızdırdığını verir. Ama o segmanı neyin aşındırdığını vermez: geciken yağ değişimleri mi, tıkalı hava filtresi kutusundan giren toz mu, aşırı ısınma mı, gömleği yıkayan zengin karışım mı. Sebep bulunmadan yapılan onarım aynı yerden geri gelir. Bu yüzden motor açıldığında yalnız parça değiştirilmez; yağ geçmişi sorulur, hava filtresi kutusu kontrol edilir, soğutma sistemi gözden geçirilir. Ölçüm arızayı bulur, sebebi usta bulur." },
+          { "label": "Hangi silindirin sorunlu olduğunu söylemez", "verdict": "silindir-yok", "explain": "Tam da onu söyler; silindirler arası fark testin ana çıktısıdır." },
+          { "label": "Aşınmanın miktarı hakkında fikir vermez", "verdict": "miktar-yok", "explain": "İyi bir fikir verir; kaçak testi bunu yüzde olarak da netleştirir." },
+          { "label": "Hiçbir şey söylemez, sadece fikir verir", "verdict": "fikir", "explain": "Doğru koşullarda yapılmış kompresyon ve kaçak testi, motor mekaniğinin en kesin ölçümlerinden biridir." }
+        ]
+      },
+      "camera": "motor-ust",
+      "teachingNote": "Teşhis, arızayı bulmakla bitmez; arızayı üreten koşulu bulmakla biter. Bu cümle bu müfredatın dokuzuncu aşamasının özetidir."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Kompresyon testinde kılavuz değerin elinde olmaması seni durdurur mu?",
+        "a": "fark-yeter",
+        "options": [
+          { "verdict": "fark-yeter", "label": "Hayır; silindirler arası fark tek başına hangi silindirin sorunlu olduğunu söyler", "explain": "Aynı motorun bütün silindirleri aynı ölçüde üretilir ve aynı basıncı üretmeleri beklenir. Üçü birbirine yakın, biri belirgin biçimde düşükse, sorunlu silindiri hiçbir kılavuza bakmadan bulmuş olursun. Kılavuzun asgari değeri motorun genel durumu hakkında ikinci bir bilgi verir, ama 'hangi silindir' sorusunu dağılım cevaplar. Bu, kam mili ve krank muylusu derslerinde kullandığın karşılaştırma yönteminin aynısıdır." },
+          { "verdict": "durdurur", "label": "Evet, değer olmadan yorum yapılamaz", "explain": "Yapılabilir; dağılım kılavuzdan bağımsız bir kanıttır." },
+          { "verdict": "tahmin", "label": "Tahmin edilir", "explain": "Tahmin gerekmez; ölçüm zaten karşılaştırmalı kanıt üretir." },
+          { "verdict": "internet", "label": "İnternetteki ortalama değer kullanılır", "explain": "Başka motorun değeri bu motorun ölçüsü değildir. Elindeki dört silindir birbirinin en doğru referansıdır." }
+        ]
+      },
+      {
+        "q": "Yaş testte basınç yükselmiyorsa kaçak nerededir?",
+        "a": "ust-taraf",
+        "options": [
+          { "verdict": "ust-taraf", "label": "Üst tarafta: supaplar ya da kapak contası", "explain": "Silindire verilen yağ yalnız segman bölgesine ulaşır ve oradaki boşluğu geçici olarak kapatır. Basınç yükseldiyse kaçak oradaydı. Yükselmediyse yağın ulaşamadığı bir yerden kaçıyor demektir: oturmayan emme veya egzoz supabı ya da delinmiş kapak contası. Bu ayrım, motoru açmadan önce silindir kapağını mı yoksa alt takımı mı hedefleyeceğini belirler. Kesin yeri kaçak testindeki dinleme haritası verir." },
+          { "verdict": "segman", "label": "Segmanda", "explain": "Segman kaçağında yağ boşluğu kapatır ve basınç yükselir; yükselmemesi segmanı eler." },
+          { "verdict": "yagda", "label": "Yağ miktarı yetersizdir, tekrar denenir", "explain": "Tekrar denemek makul bir kontroldür ama bir kaşık yağ segman kaçağını göstermeye yeter; sonuç değişmiyorsa bilgi gerçektir." },
+          { "verdict": "belirsiz", "label": "Anlaşılmaz", "explain": "Anlaşılır: yaş test tam olarak bu ayrımı yapmak için vardır." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 13,1 / 12,9 / 13,0 / 9,5 bar ve adım 4'teki 12,4 bar SENARYO okumalarıdır. Öğrenciden istenen bir üretici sınırı değil, verilen iki okuma arasındaki FARKTIR (13,1 - 9,5 = 3,6 bar). Bu yüzden sourceRequired gerekmedi: ortaya çıkan sayı bizim ürettiğimiz bir iddia değil, verilen okumaların çıkarmasıdır. Aynı desen motor.kam-mili, motor.piston-biyel ve motor.krank-yatak derslerinde de kullanıldı.",
+    "sourceRequired": "Asgari kompresyon basıncı, silindirler arası kabul edilebilir azami fark ve kaçak testi yüzde eşikleri araca özgüdür; bu derste bilinçli olarak verilmedi. Ders, kılavuzdan bağımsız çalışan dağılım okuma ve kaçak dinleme yöntemleri üzerine kuruldu. Bu eşikler kullanılacaksa aracın servis kılavuzundan alınmalıdır.",
+    "kapsam": "Kompresyon ve kaçak test cihazları modelde yok; ölçüm sayısal giriş ile yapılıyor. Kaçak testinin dinleme adımı ses değil seçim olarak öğretiliyor — sahnede ses katmanı henüz yok.",
+    "readGauge": "Müfredatta bu ders 'read-gauge' adlı yeni bir etkileşim tipiyle işaretliydi. Gerek kalmadı: gösterge okuma, verilen iki okumanın farkını girmekten ibaret ve bunu mevcut measure tipi karşılıyor. Yeni tip yalnız gerçek bir davranış farkı varsa açılır (bkz. rotate-to-angle).",
+    "reviewedByMechanic": false
+  }
+}

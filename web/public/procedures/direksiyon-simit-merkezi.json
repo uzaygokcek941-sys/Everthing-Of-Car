@@ -1,0 +1,177 @@
+{
+  "id": "direksiyon.simit-merkezi",
+  "area": "direksiyon",
+  "stage": 1,
+  "title": "Direksiyon Merkezi ve Düz Gitme",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 35,
+  "prerequisites": ["direksiyon.bosluk-yeri"],
+  "learningGoals": [
+    "Simidin eğri durması ile aracın düz gitmemesinin farklı iki şikâyet olduğunu bilmek",
+    "Simit merkezinin rot çubuklarıyla nasıl ilişkili olduğunu kavramak",
+    "Simidi yerinden sökerek düzeltmenin neden yanlış olduğunu açıklamak"
+  ],
+
+  "safety": [
+    { "rule": "Simidin sökülmesi gereken hiçbir işlem bu derste yapılmaz", "why": "Simit sökümü airbag ve spiral kablo işlemidir; alanın ilk dersinde konan sınır burada da geçerlidir", "blocksStart": true },
+    { "rule": "Yol testi trafiğe uygun, düz ve boş bir yolda yapılır", "why": "Direksiyonu bırakarak yapılan gözlem yalnız güvenli koşulda ve kısa süre yapılır", "blocksStart": true },
+    { "rule": "Rot ayar somunları gevşetilirken körük burulmasına dikkat edilir", "why": "Serbest kalmayan körük, çubuk çevrildiğinde burulup yırtılır", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.anahtar-takimi", "label": "Anahtar takımı", "required": true },
+    { "id": "tool.cetvel", "label": "Cetvel veya şerit metre", "required": true },
+    { "id": "tool.tebesir", "label": "İşaretleme kalemi", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "İki müşteri geldi. Biri 'direksiyonum eğri duruyor' diyor, diğeri 'araç sağa çekiyor' diyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.direksiyon-simidi",
+        "question": "Bu iki şikâyet aynı şey mi?",
+        "options": [
+          { "label": "Hayır; biri simidin konumuyla, diğeri aracın gittiği yönle ilgili. İkisi birlikte de olabilir, ayrı ayrı da", "verdict": "farkli-sikayet", "correct": true, "explain": "Bu ayrım, bu dersin tamamının üzerine kurulduğu ayrımdır ve karıştırıldığında yanlış iş yapılır. Birinci şikâyet şudur: araç düz gidiyor, sürücü direksiyonu düzeltmek zorunda değil, ama simit ortada durmuyor — hafifçe sağa ya da sola yatık. Bu bir KONUM sorunudur ve aracın yönetiminde bir bozukluk yoktur. İkinci şikâyet ise şudur: sürücü simidi bıraktığında ya da düz tuttuğunda araç bir tarafa kayıyor. Bu bir YÖN sorunudur ve sebebi çoğu zaman direksiyon sisteminin dışındadır — lastik basıncı, lastik farkı, tekerlek açıları, fren sürtmesi ya da yolun eğimi. Dördüncü bir ihtimal de vardır ve en çok yanıltan odur: araç düz gidiyor ama simit eğri; bu, tekerleklerin doğru konumda olduğu ama simidin onlarla hizalanmadığı durumdur. Doğru davranış, müşterinin cümlesini olduğu gibi kabul etmek yerine hangi durumun yaşandığını sormak ve yolda görmektir. 'Direksiyon bozuk' cümlesi dört farklı işi işaret edebilir." },
+          { "label": "Evet, ikisi de aynı arızanın farklı anlatımı", "verdict": "ayni", "explain": "Biri konum, diğeri yön sorunudur; sebepleri farklıdır." },
+          { "label": "İkisi de yalnız lastik basıncıyla ilgilidir", "verdict": "basinc", "explain": "Basınç yön şikâyetinin sebebi olabilir, konum şikâyetinin değil." },
+          { "label": "İkisi de simidin sökülüp düz takılmasıyla çözülür", "verdict": "simidi-sok", "explain": "Bu, sorunu görünmez kılan yanlış çözümdür; ilerideki adımda ele alınıyor." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Aynı cümle dört farklı işi işaret edebiliyor. Bu yüzden şikâyet dinlenirken 'tam olarak ne oluyor' sorulur."
+    },
+    {
+      "id": 2,
+      "instruction": "Aracı yol testine çıkardın: düz gidiyor, çekme yok, ama simit yaklaşık bir avuç kadar sağa yatık duruyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.rot-cubugu-sol",
+        "question": "Bu durum ne anlama gelir?",
+        "options": [
+          { "label": "Tekerlekler doğru konumda ama simit onlarla hizalanmamış; iki rot çubuğunun uzunlukları toplamı doğru, aralarındaki dağılım yanlış", "verdict": "dagilim-yanlis", "correct": true, "explain": "Kremayerin iki ucundaki rot çubukları vidalıdır ve uzunlukları ayarlanabilir. Bu iki uzunluk iki ayrı şeyi belirler. TOPLAMLARI toplam toe açısını, yani iki ön tekerleğin birbirine göre duruşunu belirler — araç bu yüzden düz gider ya da gitmez, lastikler bu yüzden düzgün ya da düzensiz aşınır. DAĞILIMLARI ise, yani sağ çubuğun mu sol çubuğun mu daha uzun olduğu, kremayerin hangi konumdayken tekerleklerin düz durduğunu belirler; simidin ortada olup olmadığını işte bu belirler. Sonuç şudur: toplam doğru, dağılım yanlışsa araç düz gider ama simit eğri durur. Tam da bu vakada olan budur. Çözüm iki çubuğu birlikte, ters yönde ayarlamaktır: biri kısaltılırken diğeri aynı miktarda uzatılır. Böylece toplam değişmez — yani düz gitme bozulmaz — ama kremayerin merkez konumu kayar ve simit ortalanır. Tek çubuğu ayarlamak ise hem simidi düzeltmeye çalışırken toplam toe'yu bozar, hem de lastik aşınmasını başlatır. Bu, ön düzen ayarında en sık yapılan hatadır ve Lastik ve Tekerlek alanında da aynı uyarı geçmişti." },
+          { "label": "Kremayer bozulmuştur, değiştirilmelidir", "verdict": "kremayer-boz", "explain": "Ayar sorunu; kutuda arıza olduğunu gösteren bir bulgu yok." },
+          { "label": "Simidin bağlantısı gevşemiştir", "verdict": "simit-gevsek", "explain": "Mümkün ama önce ayar dağılımına bakılır; gevşeklik ayrı bir bulgudur." },
+          { "label": "Bu normaldir, hiçbir şey yapılmaz", "verdict": "normal", "explain": "Simit ortada olmalı; ayrıca eğri simit açı sensörü için de sorundur." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Toplam düz gitmeyi, dağılım simidin konumunu belirler. İki çubuk ters yönde birlikte ayarlanır."
+    },
+    {
+      "id": 3,
+      "instruction": "Ayar öncesi sol rot çubuğunun açıkta kalan diş boyu 27 mm, sağınki 22 mm. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.rot-cubugu-sag",
+        "unit": "mm",
+        "acceptRange": [4.8, 5.2]
+      },
+      "camera": "direksiyon",
+      "hint": "27 eksi 22.",
+      "teachingNote": "5 mm'lik bu fark, iki çubuğun eşit dağılmadığının doğrudan kanıtıdır ve simidin neden eğri durduğunu açıklar. Ölçümün asıl değeri şudur: ayara başlamadan önce mevcut durumu sayıyla kaydetmiş olursun. Ayar sırasında kaç tur çevirdiğini sayarsın, sonunda tekrar ölçer ve gerçekten ne yaptığını görürsün. Bu kayıt olmadan yapılan ayar deneme yanılmadır; bir şey bozulduğunda geri dönecek nokta kalmaz. Açıkta kalan diş boyu araca ve parçaya göre değişir ve bir üretici değeri değildir; burada yalnız iki tarafın karşılaştırılması için kullanılıyor."
+    },
+    {
+      "id": 4,
+      "instruction": "Ayar yapmadan önce kremayerin gerçekten ortada olduğundan emin olman gerekiyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kremayer-kutusu",
+        "question": "Kremayer merkezi nasıl bulunur?",
+        "options": [
+          { "label": "Direksiyon kilitten kilide çevrilip toplam tur sayılır, sonra yarısı kadar geri çevrilir; bu konum kremayerin merkezidir", "verdict": "kilitten-kilide-yari", "correct": true, "explain": "Simidi ortalamanın ön koşulu, kremayerin gerçekten orta konumda olduğunu bilmektir — yoksa yanlış bir referansa göre ayar yapılır. Yöntem basittir ve hiçbir alet gerektirmez: direksiyon önce bir yönde sonuna kadar çevrilir, sonra diğer yönde sonuna kadar çevrilirken tur sayılır. Bu toplam, aracın kilitten kilide tur sayısıdır. Sonra yarısı kadar geri çevrilir; ulaşılan konum kremayerin tam ortasıdır. Bu konumda simidin nerede durduğuna bakılır ve varsa kremayer üzerindeki merkez işareti doğrulanır — birçok kutuda ve milde üretici bir hizalama işareti bırakır. Bu adımın atlanması, bu dersteki en sinsi hatadır: kremayer merkezde değilken simidi 'düz' görünecek biçimde takmak ya da ayarlamak, aracın sağa ve sola dönüş kabiliyetini eşitsiz hâle getirir. Bir yöne kremayer sonuna gelmeden direksiyon biter, diğer yöne fazla yol kalır; park manevrasında sürücü bunu fark eder ve daha kötüsü, elektrikli sistemlerde açı sensörü de yanlış bir merkez öğrenir. Ayrıca kremayer uç konuma dayanmışken direksiyon zorlanmaz; sistem o noktada tutulursa hidrolik pompa aşırı basınca girer ve ısınır." },
+          { "label": "Simit düz görünüyorsa kremayer ortadadır", "verdict": "simide-bak", "explain": "Simit yanlış konumda takılmış olabilir; referans kremayerin kendisidir." },
+          { "label": "Araç düz gidiyorsa kremayer ortadadır", "verdict": "duz-gidiyor", "explain": "Düz gitme toplam toe ile ilgili; merkez ayrı bir şeydir." },
+          { "label": "Kremayer merkezi bulunamaz", "verdict": "bulunamaz", "explain": "Kilitten kilide sayıp yarıya gelmek basit ve güvenilir yöntemdir." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Kremayer merkezi bulunmadan yapılan her ayar, yanlış bir referansın üstüne kuruluyor demektir."
+    },
+    {
+      "id": 5,
+      "instruction": "Bir usta 'simidi söküp düz takarım, olur biter' diyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.aci-sensoru",
+        "question": "Bu yaklaşım neden yanlış?",
+        "options": [
+          { "label": "Sorunun sebebini gizler, spiral kablo ve açı sensörünün merkezini bozar ve simit sökümü airbag işlemidir", "verdict": "sebebi-gizler", "correct": true, "explain": "Bu kısayol üç ayrı sebeple yanlıştır ve üçü de birbirinden bağımsız olarak yeterlidir. Birincisi teşhis sebebidir: simit eğriyse bunun bir sebebi vardır — rot dağılımı, bir çarpma sonrası kaymış geometri ya da daha önce yanlış yapılmış bir ayar. Simidi döndürerek takmak sebebi ortadan kaldırmaz, yalnız görünmez kılar; altta yatan geometri hatası lastikleri aşındırmaya devam eder ve bir sonraki usta da yanlış bir referansla karşılaşır. İkincisi elektroniktir: simidin arkasındaki spiral kablo, direksiyon düzken tam ortada olacak biçimde ayarlanmıştır; simit kaydırılarak takılınca kablonun iki yöndeki hareket payı eşitsizleşir ve bir yönde sonuna gelip kopabilir. Aynı şekilde direksiyon açı sensörü merkezini simide göre öğrenir; kaydırılmış bir simit, kararlılık kontrolü ve sürücü destek sistemlerine yanlış bir 'düz' bildirir. Üçüncüsü güvenliktir ve bu alanın kırmızı çizgisidir: simidi sökmek airbag ve spiral kablo işlemidir, ayrı prosedür ve yetki gerektirir. Doğru yol ayarı doğru yerden, yani rot çubuklarından yapmaktır." },
+          { "label": "Doğrudur, en hızlı çözüm budur", "verdict": "dogru", "explain": "Hızlıdır ama sebebi gizler ve iki sistemi bozar." },
+          { "label": "Yalnız estetik bir tercih meselesidir", "verdict": "estetik", "explain": "Açı sensörü ve spiral kablo için teknik bir mesele." },
+          { "label": "Sadece eski araçlarda yanlıştır", "verdict": "eski-arac", "explain": "Sebebi gizlemesi her araçta geçerli; elektronik etkisi yeni araçlarda ek olarak var." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Bir belirtiyi görünmez kılmakla gidermek arasındaki fark, bu projede sürekli tekrarlanan ayrım."
+    },
+    {
+      "id": 6,
+      "instruction": "Ayar yapıldı, simit ortalandı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.koruk-sag",
+        "question": "Ayar sonrası atlanmaması gereken ne var?",
+        "options": [
+          { "label": "Körüklerin burulmadığı kontrol edilir, kilit somunları sıkılır ve toplam toe ölçülerek düz gitmenin bozulmadığı doğrulanır", "verdict": "koruk-somun-olcum", "correct": true, "explain": "Rot çubuğu çevrilirken çubuğun iç ucu kremayere bağlıdır ve körük de o bölgeyi sarar. Çubuk serbest bırakılmadan çevrilirse körük kendi ekseninde burulur; ilk bakışta bir şey olmamış gibi görünür ama burulmuş körük kısa sürede yırtılır ve önceki derste öğrenilen sonuç başlar — toz ve su içeri girer. Bu yüzden ayar bittiğinde körüğün düz oturduğu gözle doğrulanır, gerekirse serbest bırakılıp düzeltilir. İkinci iş kilit somunlarının sıkılmasıdır: gevşek kalan bir ayar somunu, çubuğun yolda kendi kendine dönmesine ve ayarın bozulmasına yol açar; bu, düz giden bir aracın haftalar içinde çekmeye başlamasının sebeplerinden biridir. Üçüncüsü ve en önemlisi ölçümdür. Simidi ortalamak için yapılan ayar, iki çubuk eşit ve ters yönde çevrildiyse toplam toe'yu değiştirmemiş olmalıdır — ama bu bir varsayımdır ve doğrulanması gerekir. Ölçüm yapılmadan 'değişmemiştir' demek, bu alandaki en pahalı varsayımdır; birkaç bin kilometre sonra lastiklerin iç ya da dış omzu yenmiş olarak geri gelir." },
+          { "label": "Hiçbir şey; simit ortalandıysa iş bitmiştir", "verdict": "bitti", "explain": "Körük, somun ve toplam toe doğrulaması yapılmadan kapanmaz." },
+          { "label": "Yalnız simide bakılır", "verdict": "simit", "explain": "Simit sonucun bir kısmı; asıl doğrulama ölçümle yapılır." },
+          { "label": "Kilit somunları gevşek bırakılır ki tekrar ayar kolay olsun", "verdict": "gevsek-birak", "explain": "Gevşek somun yolda ayarın bozulmasına yol açar." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Varsayılan değil, ölçülen sonuç kaydedilir. 'Değişmemiştir' bu alandaki en pahalı cümle."
+    },
+    {
+      "id": 7,
+      "instruction": "Başka bir araçta simit düz duruyor ama araç sürekli sağa çekiyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.direksiyon-simidi",
+        "question": "Nereden başlarsın?",
+        "options": [
+          { "label": "Önce basit ve ücretsiz olanlardan: dört lastiğin basıncı ve durumu, sonra aynı yolun iki yönünde sürüş; ancak bunlar elendikten sonra geometri ve fren aranır", "verdict": "basitten-basla", "correct": true, "explain": "Çekme şikâyeti direksiyon sisteminin şikâyeti gibi görünür ama sebeplerinin çoğu başka yerdedir ve bu, sıralamayı belirler. İlk bakılacak şey lastik basıncıdır: tek bir tekerlekte düşük basınç, aracı o tarafa çeken en yaygın ve en ucuz sebeptir. Hemen ardından lastiklerin kendisi gelir — farklı marka, farklı desen, farklı aşınma ya da tek bir lastikteki iç yapı bozukluğu aynı sonucu verir. İkinci adım yolun kendisini elemektir: yollar suyun akması için genellikle kenara doğru eğimlidir ve bu eğim aracı kenara çeker; aynı yol iki yönde sürülüp çekme yön değiştiriyorsa suçlu yoldur, araç değil. Bu iki adım hiçbir alet ve hiçbir para gerektirmez ama vakaların büyük bölümünü kapatır. Bunlar elendikten sonra sıra tekerlek açılarına gelir — özellikle iki taraf arasındaki camber ve caster farkı — ve bir de fren sürtmesine: sürüş sonrası bir tekerleğin diğerlerinden belirgin sıcak olması freni işaret eder ve o iş fren sisteminindir. Bu sıralama Lastik ve Tekerlek alanındaki çekme teşhisi dersiyle aynıdır; iki alan burada aynı vakada buluşuyor." },
+          { "label": "Doğrudan ön düzen ayarına alınır", "verdict": "ayar", "explain": "Basınç ve lastik elenmeden yapılan ayar, yanlış duruma göre ayar olur." },
+          { "label": "Kremayer değiştirilir", "verdict": "kremayer", "explain": "Çekme şikâyetinin kutuyla ilgisi olduğunu gösteren bir bulgu yok." },
+          { "label": "Simit sökülüp döndürülür", "verdict": "simit-dondur", "explain": "Simit zaten düz; çekme yön sorunudur, konum sorunu değil." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Ücretsiz ve hızlı olan önce elenir. Bu sıra, hem müşterinin parasını hem senin zamanını korur."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Araç düz gidiyor ama simit eğri duruyor. Sebep nedir?",
+        "a": "dagilim-yanlis",
+        "options": [
+          { "verdict": "dagilim-yanlis", "label": "İki rot çubuğunun uzunlukları toplamı doğru, aralarındaki dağılım yanlış", "explain": "Rot çubuklarının uzunluk TOPLAMI toplam toe'yu, yani düz gitmeyi belirler; DAĞILIMLARI ise kremayerin hangi konumdayken tekerleklerin düz durduğunu, yani simidin nerede olacağını belirler. Toplam doğru, dağılım yanlışsa araç düz gider ama simit eğri kalır. Çözüm iki çubuğu eşit ve ters yönde ayarlamaktır; tek çubuğu ayarlamak toplam toe'yu bozar ve lastik aşındırır." },
+          { "verdict": "kremayer-boz", "label": "Kremayer bozulmuştur", "explain": "Kutuda arıza olduğunu gösteren bulgu yok; bu bir ayar sorunudur." },
+          { "verdict": "simit-gevsek", "label": "Simit bağlantısı gevşemiştir", "explain": "Mümkün ama önce dağılıma bakılır." },
+          { "verdict": "normal", "label": "Normaldir", "explain": "Simit ortada olmalı; eğri simit açı sensörü için de sorundur." }
+        ]
+      },
+      {
+        "q": "Simidi söküp düz takmak neden yanlıştır?",
+        "a": "sebebi-gizler",
+        "options": [
+          { "verdict": "sebebi-gizler", "label": "Sebebi gizler, spiral kablo ve açı sensörünün merkezini bozar, ayrıca simit sökümü airbag işlemidir", "explain": "Üç bağımsız sebep: altta yatan geometri hatası sürmeye ve lastik aşındırmaya devam eder; spiral kablo direksiyon düzken ortada olacak biçimde ayarlıdır ve kaydırılmış simit onun hareket payını eşitsizleştirip kopmaya götürür; açı sensörü merkezini simide göre öğrendiği için destek sistemlerine yanlış 'düz' bildirilir. Ayarın doğru yeri rot çubuklarıdır." },
+          { "verdict": "dogru", "label": "Doğrudur, en hızlı çözümdür", "explain": "Hızlı ama sebebi gizler ve iki sistemi bozar." },
+          { "verdict": "estetik", "label": "Estetik bir tercihtir", "explain": "Teknik sonuçları var." },
+          { "verdict": "eski-arac", "label": "Yalnız eski araçlarda yanlıştır", "explain": "Sebebi gizlemesi her araçta geçerli." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 27 mm ve 22 mm SENARYO okumalarıdır; istenen FARKTIR (5 mm) ve gösterilen şey iki çubuğun eşit dağılmadığıdır. Açıkta kalan diş boyu bir üretici değeri değildir, yalnız iki tarafın karşılaştırılması için kullanılıyor.",
+    "sourceRequired": "Toplam toe değeri, camber ve caster sınırları ile kilitten kilide tur sayısı bilinçle VERİLMEDİ; araca özgüdür ve ön düzen ölçüm değerleri Lastik ve Tekerlek alanında da künyesiz verilmemişti.",
+    "kapsam": "Ön düzen ayarının kendisi (cihaz kullanımı, runout dengeleme, açı okuma) Lastik ve Tekerlek alanında işlendi; bu ders yalnız simit merkezi ile rot dağılımı ilişkisini öğretiyor. Simit SÖKÜMÜ öğretilmiyor ve öğretilmeyecek — alanın kırmızı çizgisi. Çekme teşhisinin tamamı Lastik ve Tekerlek alanındaki dersle ortak.",
+    "reviewedByMechanic": false
+  }
+}

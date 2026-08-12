@@ -1,0 +1,177 @@
+{
+  "id": "direksiyon.hidrolik-devre",
+  "area": "direksiyon",
+  "stage": 3,
+  "title": "Pompa, Hortum, Depo: Devrenin Okunması",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 35,
+  "prerequisites": ["direksiyon.kutu-bosluk-ayari"],
+  "learningGoals": [
+    "Hidrolik devreyi kapalı bir çevrim olarak okumak",
+    "Her parçanın devredeki görevini ve arıza belirtisini eşleştirmek",
+    "Basınç sınırlayıcı valfin neden var olduğunu bilmek"
+  ],
+
+  "safety": [
+    { "rule": "Motor çalışırken kayış ve kasnak bölgesine el uzatılmaz", "why": "Pompayı motor kayışı döndürür; dönen kasnak eli anında kapar", "blocksStart": true },
+    { "rule": "Basınç altındaki hatlarda kaçak elle aranmaz, karton gezdirilir", "why": "İnce jet hâlindeki sıvı deriyi delip dokuya girebilir", "blocksStart": true },
+    { "rule": "Direksiyon uç konuma dayanmışken orada tutulmaz", "why": "Sistem o noktada basınç sınırına dayanır, sıvı hızla ısınır ve pompa zarar görür", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true },
+    { "id": "tool.basinc-test-cihazi", "label": "Hidrolik basınç test cihazı", "required": false },
+    { "id": "tool.temizlik-bezi", "label": "Temizlik bezi", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Devreyi bir çevrim olarak takip et.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.hidrolik-deposu",
+        "question": "Sıvı hangi yolu izler?",
+        "options": [
+          { "label": "Depodan pompaya, pompadan basınç hortumuyla kutuya, kutudan dönüş hortumuyla tekrar depoya", "verdict": "kapali-cevrim", "correct": true, "explain": "Hidrolik direksiyon devresi kapalı bir çevrimdir ve bu tek cümle, sistemin bütün teşhisinin çerçevesini kurar. Sıvı depodan pompanın emiş ağzına gelir; buradaki hortum basınçlı değildir, dolayısıyla genellikle daha yumuşaktır ve sadece bir kelepçeyle tutturulmuştur. Pompa sıvıyı basınçlandırır ve basınç hortumuyla dişli kutusuna gönderir; bu hortum yüksek basınca dayanacak biçimde takviyelidir ve uçları rakorludur. Kutunun içindeki valf, sürücünün hareketine göre basıncı pistonun bir tarafına yönlendirir; diğer taraftaki sıvı serbest kalır ve dönüş hortumuyla depoya döner. Depo yalnız bir kap değildir: sıvının dinlendiği, içindeki havanın ayrıldığı ve genellikle bir süzgeçle süzüldüğü yerdir. Çevrimin kapalı olmasının iki büyük sonucu vardır. Birincisi teşhis içindir — kapalı bir devre sıvı tüketmez, seviye düşüyorsa sızıntı vardır. İkincisi bakım içindir: devreye giren her kir, çevrim boyunca dolaşarak bütün parçalara uğrar; bu yüzden hat açıldığında ağızlar kapatılır ve devreye yalnız temiz ve doğru sıvı konur." },
+          { "label": "Pompadan doğrudan tekerleğe", "verdict": "tekerlege", "explain": "Sıvı tekerleğe gitmez; kutudaki pistona etki eder." },
+          { "label": "Depodan kutuya, oradan dışarı atılır", "verdict": "disari", "explain": "Devre kapalıdır; sıvı depoya döner." },
+          { "label": "Yakıt sistemiyle ortak dolaşır", "verdict": "yakit", "explain": "Tamamen ayrı bir devredir." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Kapalı çevrim iki şey söyler: sistem sıvı tüketmez, ve devreye giren kir her parçaya uğrar."
+    },
+    {
+      "id": 2,
+      "instruction": "Pompaya bak: motorun kayışıyla dönüyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.pompa-kasnagi",
+        "question": "Pompanın motora bağlı olmasının teşhisteki karşılığı ne?",
+        "options": [
+          { "label": "Yardım yalnız motor çalışırken vardır ve destek motor devrine bağlıdır; rölantide zayıf, devir yükselince güçlü olabilir", "verdict": "devire-bagli", "correct": true, "explain": "Pompa motor kayışıyla döndüğü için debisi motor devrine bağlıdır: motor yavaş dönerken pompa da yavaş döner ve daha az sıvı basar. Bunun sürücüye yansıması şudur — park manevrası gibi rölantiye yakın devirde ve direksiyonun hızlı çevrildiği anlarda destek en çok gerektiği hâlde en zayıftır. Bu yüzden birçok araçta rölanti devri direksiyon zorlandığında biraz yükseltilir ya da pompaya akış düzenleyici bir valf eklenir. Teşhis açısından bu bilgi doğrudan kullanılır: 'direksiyon park hâlinde ağır ama yolda normal' şikâyeti sistemin doğasının bir parçası olabileceği gibi, zayıflamış bir pompayı da işaret edebilir; ayırt etmenin yolu motor devrini bir miktar yükseltip desteğin belirgin şekilde düzelip düzelmediğine bakmaktır. İkinci sonuç kayışla ilgilidir: gevşemiş, yağlanmış ya da yıpranmış bir kayış pompayı tam çeviremez ve yük altında kayar. Belirtisi tanıdıktır — direksiyon çevrilirken duyulan ıslık ya da cıyaklama sesi ve destekte anlık kayıplar. Kayış kontrolü bu yüzden hidrolik teşhisin ilk adımlarındandır; ucuzdur ve hızlıdır." },
+          { "label": "Destek her devirde tamamen aynıdır", "verdict": "sabit", "explain": "Pompa debisi motor devrine bağlıdır; rölantide en zayıftır." },
+          { "label": "Motor durunca da destek sürer", "verdict": "surer", "explain": "Pompayı motor döndürür; motor durunca yardım kesilir." },
+          { "label": "Pompa aküden beslenir", "verdict": "aku", "explain": "Klasik hidrolik pompa kayışla döner, elektrikle değil." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "'Park hâlinde ağır, yolda normal' bazen arıza değil sistemin doğasıdır. Ayırmak için devir yükseltilip bakılır."
+    },
+    {
+      "id": 3,
+      "instruction": "İki hortumu elle karşılaştırdın: birinin dış çapı 18 mm, diğerininki 14 mm. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.basinc-hortumu",
+        "unit": "mm",
+        "acceptRange": [3.8, 4.2]
+      },
+      "camera": "direksiyon",
+      "hint": "18 eksi 14.",
+      "teachingNote": "4 mm'lik bu fark iki hortumun aynı iş için yapılmadığını gösteriyor. Kalın olan basınç hortumudur: içinde çelik örgü takviyesi vardır, uçları rakorludur ve yüksek basınca dayanır. İnce olan dönüş hortumudur; düşük basınçlı olduğu için takviyesizdir ve genellikle kelepçeyle bağlanır. Buradan çıkan pratik kural şudur: bu iki hortum birbirinin yerine kullanılmaz. Dönüş hortumunu basınç hattına takmak, kısa sürede patlayan bir hat ve bir anda kaybolan destek demektir — üstelik dışarı püsküren sıcak sıvı sıcak yüzeylere damlar. Değiştirilecek hortum daima kendi tipinde ve kendi ölçüsünde olur. Çaplar araca özgüdür; buradaki sayılar yalnız iki tipin karşılaştırılması için."
+    },
+    {
+      "id": 4,
+      "instruction": "Depoya bak: içinde bir süzgeç ve kapağında bir havalandırma var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.hidrolik-deposu",
+        "question": "Depo yalnız bir kap mı?",
+        "options": [
+          { "label": "Hayır; sıvının dinlendiği, havasının ayrıldığı, süzüldüğü ve ısı ile genleşmesine yer bırakılan bir bölmedir", "verdict": "dinlenme-hava-suzme", "correct": true, "explain": "Depo dört ayrı iş yapar. Birincisi hacim sağlar: sistem çalışırken sıvının bir kısmı hatlarda ve kutuda bulunur, seviye buna göre oynar; ayrıca sıvı ısındıkça genleşir ve deponun üstündeki boşluk buna yer bırakır. Bu yüzden fazla doldurmak zararlıdır — ısınan sıvı taşar. İkincisi dinlendirmedir: kutudan dönen sıvı içinde kabarcıklar taşır ve depoda kalan kısa süre içinde bu kabarcıklar yüzeye çıkıp ayrılır. Havası alınmamış bir sistemde depoda köpük görülmesinin sebebi budur ve bu, hava alma dersinin de çıkış noktasıdır. Üçüncüsü süzmedir: birçok depoda dönüş hattında bir süzgeç vardır ve devrede dolaşan aşınma parçacıklarını tutar; tıkanan bir süzgeç dönüşü zorlaştırır ve sistemin davranışını bozar. Dördüncüsü havalandırmadır: kapaktaki delik ya da valf, seviyenin oynamasıyla değişen hacme izin verir. Tıkalı bir havalandırma depoda basınç ya da vakum oluşturur; sonuç ya kapak çevresinden sızıntı ya da pompanın emişte zorlanmasıdır. Depoya bakarken üç şeye birden bakılır: seviye, sıvının rengi ve köpük olup olmadığı." },
+          { "label": "Evet, yalnız sıvı biriktirir", "verdict": "sadece-kap", "explain": "Dinlendirme, hava ayırma, süzme ve genleşme payı da görevleri." },
+          { "label": "Basıncı depo üretir", "verdict": "basinc", "explain": "Basıncı pompa üretir." },
+          { "label": "Depo sıvıyı soğutmaz, ısıtır", "verdict": "isitir", "explain": "Depo sıvının bir miktar soğuduğu ve dinlendiği yerdir." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Depoya bakarken üç şey birden görülür: seviye, renk ve köpük. Üçü de ayrı bir arızayı işaret ediyor."
+    },
+    {
+      "id": 5,
+      "instruction": "Direksiyon uç konuma dayandığında sistem ne yapıyor?",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.hidrolik-pompa",
+        "question": "Pompa basmayı sürdürüyorsa basınç nereye gidiyor?",
+        "options": [
+          { "label": "Pompadaki basınç sınırlayıcı valf açılır ve sıvıyı dönüşe boşaltır; bu koruma olmasa hatlar ve pompa zarar görürdü", "verdict": "sinirlayici-valf", "correct": true, "explain": "Direksiyon sonuna kadar çevrildiğinde kremayer mekanik olarak dayanır ve piston artık hareket edemez. Ama pompa motor döndüğü sürece basmaya devam eder; kapalı bir hacme basılan sıvının basıncı çok hızlı yükselir. Bu yüzden pompanın içinde bir basınç sınırlayıcı valf bulunur: belirli bir değere ulaşıldığında açılır ve sıvıyı dönüş tarafına boşaltır. Sistem böylece kendini korur — ama bu bir çalışma hâli değil, bir kurtarma hâlidir. Valf açıkken pompa boşuna iş yapar ve harcadığı enerji ısıya döner; sıvı sıcaklığı hızla yükselir, keçeler ve hortumlar bundan zarar görür. Bu yüzden temel bir kural vardır: direksiyon uç konumda tutulmaz. Park ederken sonuna kadar çevrilip öyle bırakılan bir direksiyon, motor çalıştığı sürece sistemi ısıtır. Aynı sebeple atölyede yapılan denemelerde de uçta bekletilmez; birkaç saniye yeterlidir. Sürücüye söylenecek pratik tavsiye de budur — manevra bitince direksiyon uçtan biraz geri alınır. Sınırlayıcı valfin açtığı basınç değeri araca özgüdür ve basınç testi dersinde kullanılır." },
+          { "label": "Basınç sonsuza kadar yükselir", "verdict": "sonsuz", "explain": "Sınırlayıcı valf devreye girer; sistem kendini korur." },
+          { "label": "Pompa durur", "verdict": "durur", "explain": "Motor döndüğü sürece pompa döner." },
+          { "label": "Sıvı dışarı atılır", "verdict": "disari", "explain": "Devre kapalı; sıvı dönüş tarafına boşaltılır." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Sınırlayıcı valf bir çalışma hâli değil kurtarma hâlidir. Uçta bekletilen direksiyon, sistemi boşuna ısıtır."
+    },
+    {
+      "id": 6,
+      "instruction": "Şikâyet: direksiyon çevrilirken ıslık sesi geliyor ve destek zaman zaman zayıflıyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.donus-hortumu",
+        "question": "Adaylar hangi sırayla elenir?",
+        "options": [
+          { "label": "Önce sıvı seviyesi ve köpük, sonra kayış gerginliği ve durumu, sonra emiş tarafındaki hava kaçağı, en son pompanın kendisi", "verdict": "seviye-kayis-emis-pompa", "correct": true, "explain": "Islık sesi hidrolik sistemin en tanıdık şikâyetidir ve neredeyse her zaman havayla ilgilidir; bu yüzden sıralama havanın nereden girebileceğini takip eder. İlk bakılacak şey seviyedir: sıvı azaldığında pompa emişte hava çeker ve ses hemen başlar. Aynı bakışta depodaki köpük görülür — köpük, sistemde hava olduğunun doğrudan kanıtıdır. İkinci sırada kayış vardır: gevşek ya da yağlanmış kayış yük altında kayar, hem ses hem de destek kaybı üretir; kayış sesi ile hava sesi birbirine benzer ama kayış sesi genellikle motor devri yükseldiğinde belirginleşir. Üçüncü sırada emiş tarafı gelir. Bu, en çok gözden kaçan yerdir: emiş hortumu basınçlı olmadığı için oradaki küçük bir çatlak ya da gevşek bir kelepçe dışarı sıvı sızdırmaz, içeri HAVA çeker. Yani ortada damlayan bir sızıntı olmadan sistem havalanır ve seviye de belirgin düşmez. Bu yüzden emiş hortumu ve kelepçesi elle yoklanır, hortumun yumuşayıp yumuşamadığına bakılır. Ancak bunlar elendikten sonra pompanın kendisi şüpheli olur ve basınç testiyle değerlendirilir — o da bir sonraki derste." },
+          { "label": "Doğrudan pompa değiştirilir", "verdict": "pompa-degistir", "explain": "En pahalı aday en son; ucuz ve hızlı olanlar önce elenir." },
+          { "label": "Kutu değiştirilir", "verdict": "kutu", "explain": "Islık sesi genellikle hava kaynaklıdır; kutu ilk aday değil." },
+          { "label": "Sıvı takviyesi yapılır ve iş biter", "verdict": "sivi-ekle", "explain": "Seviye neden düştü sorusu yanıtsız kalır; sebep aranır." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Emiş tarafındaki çatlak sıvı sızdırmaz, hava çeker. Bu yüzden 'sızıntı yok ama sistem havalı' mümkündür."
+    },
+    {
+      "id": 7,
+      "instruction": "Devre üzerinde bir iş yapıldı ve hatlar açıldı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kremayer-kutusu",
+        "question": "Kapanışta neye dikkat edilir?",
+        "options": [
+          { "label": "Yalnız üreticinin belirttiği sıvı kullanılır, açık ağızlar iş boyunca kapalı tutulur, sistem doldurulup havası alınır ve seviye ısındıktan sonra tekrar kontrol edilir", "verdict": "dogru-sivi-temiz-hava", "correct": true, "explain": "Hidrolik devrede kapanışın üç kuralı vardır. Birincisi sıvı tipidir ve pazarlıksızdır: bu devrede kullanılacak sıvı üreticinin belirttiğidir. Yanlış sıvı, keçeleri ya şişirip sıkıştırır ya da sertleştirip sızdırır; ikisi de birkaç ay içinde yeni bir arıza olarak geri gelir. 'Benzer' bir sıvı koymak, ucuz bir işi pahalı hâle getirmenin en sessiz yoludur. İkincisi temizliktir: hat açıkken içeri giren toz, kapalı çevrimde dolaşarak valfe ve pompaya ulaşır ve bu parçalar çok küçük toleranslarla çalışır. Bu yüzden sökülen hortumların ve kutu ağızlarının uçları iş boyunca kapatılır, temizlik bezi tüy bırakmayan cinsten seçilir. Üçüncüsü havadır: her açılan devre hava almıştır ve doldurmak yetmez, havasının alınması gerekir; bu ayrı bir işlemdir ve bir sonraki derslerde ele alınıyor. Son adım seviyenin ISINDIKTAN sonra tekrar kontrolüdür — soğukken doğru görünen seviye, sıvı genleşince farklı okunur ve hava çıktıkça da bir miktar düşer. İş, tek bir okumayla değil, ısınmış sistemde doğrulanmış bir okumayla kapanır." },
+          { "label": "Eldeki herhangi bir hidrolik sıvı kullanılabilir", "verdict": "herhangi", "explain": "Yanlış sıvı keçeleri bozar; yalnız belirtilen sıvı konur." },
+          { "label": "Ağızlar açık bırakılabilir, kısa sürede toplanacak", "verdict": "acik-birak", "explain": "Giren toz valfi ve pompayı bitirir." },
+          { "label": "Doldurmak yeter, hava kendiliğinden çıkar", "verdict": "kendiliginden", "explain": "Hava alma ayrı bir işlemdir; aksi hâlde ses ve düzensiz destek kalır." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Seviye ısındıktan sonra doğrulanır. Soğuk okuma tek başına işi kapatmaz."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Direksiyon uç konuma dayandığında basınç ne oluyor?",
+        "a": "sinirlayici-valf",
+        "options": [
+          { "verdict": "sinirlayici-valf", "label": "Pompadaki basınç sınırlayıcı valf açılır ve sıvıyı dönüşe boşaltır", "explain": "Kremayer mekanik olarak dayandığında piston hareket edemez ama pompa basmayı sürdürür; sınırlayıcı valf olmasa basınç hatları ve pompayı zorlardı. Ancak bu bir çalışma hâli değil kurtarma hâlidir: valf açıkken pompanın harcadığı enerji ısıya döner ve sıvı hızla ısınır. Bu yüzden direksiyon uç konumda tutulmaz." },
+          { "verdict": "sonsuz", "label": "Basınç sonsuza kadar yükselir", "explain": "Sınırlayıcı valf devreye girer." },
+          { "verdict": "durur", "label": "Pompa durur", "explain": "Motor döndüğü sürece pompa döner." },
+          { "verdict": "disari", "label": "Sıvı dışarı atılır", "explain": "Devre kapalıdır." }
+        ]
+      },
+      {
+        "q": "Sızıntı yok ama sistem havalanıyor. Nereye bakılır?",
+        "a": "emis-tarafi",
+        "options": [
+          { "verdict": "emis-tarafi", "label": "Emiş hortumuna ve kelepçesine: orası basınçlı olmadığı için sıvı sızdırmaz, içeri hava çeker", "explain": "Emiş hattı düşük basınçlı olduğu için küçük bir çatlak ya da gevşek kelepçe dışarı sıvı vermez ama içeri hava alır; seviye belirgin düşmeden sistem havalanır ve ıslık sesi başlar. Bu yüzden emiş hortumu elle yoklanır, yumuşaklığı ve kelepçesi kontrol edilir. Pompa ancak seviye, köpük, kayış ve emiş elendikten sonra şüpheli olur." },
+          { "verdict": "basinc-hortumu", "label": "Basınç hortumuna", "explain": "Orada bir açıklık sıvıyı dışarı püskürtür, hava çekmez." },
+          { "verdict": "kutu", "label": "Kutuya", "explain": "Kutu bu belirtinin ilk adayı değil." },
+          { "verdict": "depo", "label": "Yalnız depoya", "explain": "Depo bakılır ama emiş tarafı asıl gözden kaçan yerdir." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 18 mm ve 14 mm SENARYO okumalarıdır; istenen FARKTIR (4 mm) ve gösterilen şey basınç ile dönüş hortumunun aynı iş için yapılmadığıdır. Hortum çapları araca özgüdür.",
+    "sourceRequired": "Sıvı tipi, sistem basınç değerleri, sınırlayıcı valfin açma basıncı, kayış gerginliği ve doğru seviye aralığı bilinçle VERİLMEDİ; araca ve üreticiye özgüdür. Sıvı tipi özellikle kritiktir ve künyesiz yazılmaz.",
+    "kapsam": "Basınç testinin yapılışı bir sonraki ders (direksiyon.hidrolik-basinc). Havanın alınması aşama 3'ün son dersi. Sıvı seviyesi ve durumu ayrı ders. Elektro-hidrolik (elektrik motorlu pompa) sistemler kapsam dışı.",
+    "reviewedByMechanic": false
+  }
+}

@@ -1,0 +1,178 @@
+{
+  "id": "direksiyon.ses-teshisi",
+  "area": "direksiyon",
+  "stage": 8,
+  "title": "Direksiyon Çevrilirken Ses Geliyor",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 40,
+  "prerequisites": ["direksiyon.agirlik-teshisi"],
+  "learningGoals": [
+    "Sesi tarif ederek sınıflandırmak ve koşulunu belirlemek",
+    "Sesin kaynağını devre, mekanik ve temas olarak üç aileye ayırmak",
+    "Ses avında dinlemenin kendisini bir yöntem hâline getirmek"
+  ],
+
+  "safety": [
+    { "rule": "Motor çalışırken kayış ve kasnak bölgesine el uzatılmaz, kıyafet ve saç toparlanır", "why": "Ses avında baş ve el motor bölgesine yaklaşır", "blocksStart": true },
+    { "rule": "Araç sehpaya alınmadan altında dinleme yapılmaz", "why": "Tekerlek serbestken direksiyon çevrilir ve altta çalışılır", "blocksStart": true },
+    { "rule": "Direksiyon uç konumda tutularak ses aranmaz", "why": "Uç konum sınırlayıcı valfi açar, sıvıyı ısıtır ve zaten ses üretir", "blocksStart": true },
+    { "rule": "Dinleme sırasında simidi çeviren kişi ile dinleyen kişi haberleşir", "why": "Habersiz hareket el sıkışmasına yol açar", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true },
+    { "id": "tool.kriko-sehpa", "label": "Kriko ve sehpa", "required": true },
+    { "id": "tool.dinleme-cubugu", "label": "Dinleme çubuğu", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Müşteri 'direksiyonu çevirince ses geliyor' diyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.direksiyon-simidi",
+        "question": "Sesi nasıl tarif ettirirsin?",
+        "options": [
+          { "label": "Cinsi (tık, gıcırtı, ıslık, gurultu, takırtı), ne zaman çıktığı, hangi hızda, tek yönde mi iki yönde mi ve motor devriyle değişip değişmediği", "verdict": "bes-boyut", "correct": true, "explain": "Ses teşhisinde en büyük kayıp, 'ses var' cümlesiyle yola çıkılmasıdır; bu cümle hiçbir şeyi elemez. Sesin beş boyutu sorulur ve her biri bir aileyi ayırır. Cinsi: metalik bir tık genellikle boşluk ya da gevşek bir bağlantıdır; gıcırtı sürtünen bir kauçuk ya da plastiği, ıslık ve gurultu hidrolik devreyi, takırtı ise tekrarlı bir mekanik teması işaret eder. Ne zaman: yalnız çevirirken mi, dururken de mi, yalnız soğukken mi? Soğukken çıkıp ısınınca geçen sesler kauçuk ve gres kaynaklıdır. Hangi hızda: park manevrasında çıkan ses ile yolda çıkan ses farklı ailelere aittir. Yön: tek yönde çıkan ses hidrolikte valfi, mekanikte tek taraflı bir teması ya da aşınmayı düşündürür. Motor devri: devirle değişen ses kayış ve pompa kaynaklıdır, değişmeyen ses mekaniktir. Bu beş cevap alındığında şüpheli listesi çoğu zaman iki üç maddeye iner ve dinleme ona göre planlanır. Müşterinin tarifi yetersizse ses birlikte dinlenir — araca binilir ve o anı yakalamak beklenir." },
+          { "label": "Tarif gereksiz, araç dinlenir", "verdict": "tarif-gereksiz", "explain": "Ses her zaman istendiğinde çıkmaz; tarif şüpheli listesini daraltır." },
+          { "label": "Yalnız cinsini sormak yeter", "verdict": "sadece-cins", "explain": "Koşul ve yön en az cins kadar ayırt edici." },
+          { "label": "Doğrudan pompa değiştirilir", "verdict": "pompa", "explain": "Ses tek başına parça kararı vermez." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "'Ses var' hiçbir şeyi elemez. Beş boyut sorulunca şüpheli listesi iki üç maddeye iniyor."
+    },
+    {
+      "id": 2,
+      "instruction": "Dinleme ortamını kuracaksın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kremayer-kutusu",
+        "question": "Nasıl dinlenir?",
+        "options": [
+          { "label": "Sessiz bir yerde, motor durmuş ve çalışır iki hâlde ayrı ayrı, camlar açık, radyo ve fan kapalı, direksiyon yavaşça çevrilerek", "verdict": "sessiz-ortam", "correct": true, "explain": "Dinleme bir ortam işidir ve doğru kurulmadığında en belirgin ses bile kaçar. Sessiz bir yer seçilir; atölyenin ortasında, kompresör çalışırken ses avı yapılmaz. Radyo, fan ve klima kapatılır, camlar açılır. Direksiyon YAVAŞÇA çevrilir — hızlı çevirmek sesi kısaltır ve kaynağını belirsizleştirir; yavaş hareket sesin tam olarak hangi noktada çıktığını gösterir. En değerli ayrım motor durmuş ve çalışır iki hâlin karşılaştırılmasıdır: motor dururken de duyulan bir ses hidrolik ya da kayış olamaz, mekaniktir; yalnız motor çalışırken duyulan ses ise devreyi işaret eder. Bu tek karşılaştırma, şüphelilerin yarısını eler ve hiçbir alet gerektirmez. İki kişiyle çalışmak ayrıca hızlandırır: biri çevirir, diğeri sırayla kabin içinde, motor bölgesinde ve tekerlek başında dinler. Dinleme çubuğu ya da uzun bir tornavida sapı, sesin hangi parçadan geldiğini daraltmak için kullanılabilir ama dönen parçalara asla yaklaştırılmaz." },
+          { "label": "Atölyenin ortasında, radyo açıkken", "verdict": "gurultulu", "explain": "Ortam gürültüsü sesi örter." },
+          { "label": "Direksiyon hızlıca çevrilerek", "verdict": "hizli", "explain": "Hızlı hareket sesi kısaltır ve yerini gizler." },
+          { "label": "Yalnız motor çalışırken dinlenir", "verdict": "sadece-calisir", "explain": "İki hâlin karşılaştırılması şüphelilerin yarısını eler." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Motor durmuş ve çalışır iki hâl. Bu tek karşılaştırma şüphelilerin yarısını eliyor ve alet gerektirmiyor."
+    },
+    {
+      "id": 3,
+      "instruction": "Sesin şiddetini iki koşulda ölçtün: rölantide 63 dB, motor devri yükseltildiğinde 71 dB.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.pompa-kasnagi",
+        "unit": "dB",
+        "acceptRange": [7.8, 8.2]
+      },
+      "camera": "direksiyon",
+      "hint": "71 eksi 63.",
+      "teachingNote": "8 dB'lik bu artış sesin motor devriyle değiştiğini gösteriyor ve bu, mekanik kaynakları büyük ölçüde eliyor: direksiyon zincirindeki bir boşluk ya da temas, motor devrinden etkilenmez. Geriye kayışla dönen parçalar kalıyor — kayışın kendisi, pompa ve gergi düzeneği. Ayrım devam eder: kayış sesi genellikle yük bindiği anda ve devir değişimlerinde belirginleşir, pompa sesi ise daha süreklidir ve sıvı ile hava durumuna bağlıdır. Ölçüm burada bir alet gerektiriyor gibi görünse de asıl öğretilen şey yöntemdir: sesi bir koşuldan diğerine geçerek karşılaştırmak. Kulakla da aynı yargı verilebilir; önemli olan iki koşulu bilinçli olarak oluşturmaktır. Ses seviyesi sınırları araca özgü değildir ve bu ders bir eşik vermiyor."
+    },
+    {
+      "id": 4,
+      "instruction": "Ses motor durduğunda da duyuluyor ve tek noktada bir tık şeklinde.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.mil-mafsali",
+        "question": "Nereye bakılır?",
+        "options": [
+          { "label": "Zincirdeki boşluklar ve gevşek bağlantılar: mafsal ve cıvatası, kolon bağlantıları, kutu gövde cıvataları ve rot başları", "verdict": "bosluk-ve-gevseklik", "correct": true, "explain": "Motor dururken de duyulan bir ses hidrolik olamaz; kaynak mekaniktir ve tek noktada çıkan bir tık, boşluğun imzasıdır. Boşluk, hareketin yönü değiştiği anda parçanın kendi boşluğunu kat edip karşı yüzeye çarpmasıyla ses üretir; bu yüzden ses direksiyon yön değiştirirken çıkar ve tekrarlanabilir. Aranacak yerler boşluk arama dersindeki sırayla aynıdır: simit-mil bağlantısı, mafsal ve onun cıvatası, kolon yatakları, kutunun gövdeye bağlandığı cıvatalar ve takozlar, rot çubukları ve rot başları. Burada bir ayrıntı işi hızlandırır — sesin geldiği yer elle de hissedilebilir: parmak şüpheli bağlantının üstündeyken tık anında küçük bir hareket ya da darbe hissedilir. Bu, sesin nereden geldiğini duymaya çalışmaktan daha güvenilirdir, çünkü ses metal gövde boyunca yayılır ve kulağa geldiği yer kaynağı değildir. Gevşek kutu cıvatası bu şikâyetin en sık ve en ucuz sebeplerinden biridir ve bakım dersinde de aynı uyarı geçmişti." },
+          { "label": "Hidrolik pompa", "verdict": "pompa", "explain": "Motor dururken pompa dönmüyor; ses ondan gelemez." },
+          { "label": "Kayış", "verdict": "kayis", "explain": "Kayış da motor dururken dönmüyor." },
+          { "label": "Sıvı seviyesi", "verdict": "sivi", "explain": "Motor dururken devre çalışmıyor." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Ses metal gövde boyunca yayılır; kulağa geldiği yer kaynağı değildir. Parmakla hissetmek duymaktan güvenilir."
+    },
+    {
+      "id": 5,
+      "instruction": "Ses yalnız motor çalışırken ve direksiyon çevrilirken duyuluyor, ıslık gibi.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.hidrolik-pompa",
+        "question": "Hangi sıra izlenir?",
+        "options": [
+          { "label": "Sıvı seviyesi ve köpük, emiş tarafında hava girişi, kayış gerginliği ve yağ bulaşığı, sonra pompanın kendisi", "verdict": "hava-once", "correct": true, "explain": "Islık sesi hidrolik sistemin en tanıdık şikâyetidir ve neredeyse her zaman havayla ilgilidir; bu yüzden sıra havanın nereden girebileceğini takip eder. Önce depoya bakılır: düşük seviye ve köpük ikisi de doğrudan kanıttır ve saniyeler sürer. Sonra emiş tarafı gelir ve bu, en sinsi noktadır — basınçsız olduğu için oradaki bir çatlak ya da gevşek kelepçe dışarı sıvı vermez, içeri hava çeker; yani ortada damlayan bir sızıntı olmadan sistem havalanır. Emiş hortumu elle yoklanır, sertleşmiş ya da uçları genişlemiş mi bakılır. Üçüncü sırada kayış vardır: gevşek ya da yağlanmış kayış hem cıyaklama üretir hem de destekte kayıp yapar; ayrıca üzerindeki yağ nereden geliyor sorusu bir sızıntıyı işaret eder. Ancak bunlar elendikten sonra pompa şüpheli olur ve basınç testiyle değerlendirilir. Bu sıra izlenmediğinde en sık görülen sonuç şudur: pompa değiştirilir, ses birkaç gün sonra geri gelir — çünkü hava girmeye devam etmektedir." },
+          { "label": "Doğrudan pompa değiştirilir", "verdict": "pompa-degistir", "explain": "Hava girişi sürüyorsa ses yeni pompayla da döner." },
+          { "label": "Kutu değiştirilir", "verdict": "kutu", "explain": "Islık sesi genellikle hava kaynaklı." },
+          { "label": "Sıvı takviye edilip geçilir", "verdict": "sivi-ekle", "explain": "Seviye neden düştü sorusu yanıtsız kalır." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Pompa değişip ses birkaç gün sonra dönüyorsa hava girmeye devam ediyordur. Emiş tarafı en sinsi nokta."
+    },
+    {
+      "id": 6,
+      "instruction": "Ses gıcırtı şeklinde, soğuk havada belirgin, ısınınca azalıyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.rot-basi-sol",
+        "question": "Bu tarif neyi düşündürür?",
+        "options": [
+          { "label": "Kauçuk ve plastik parçaların sürtünmesini ya da kurumuş bir mafsalı; körükler, takozlar, kolon burçları ve gres kaybı incelenir", "verdict": "kaucuk-ve-gres", "correct": true, "explain": "Sıcaklığa bağlı sesler bir aileye işaret eder: kauçuk, plastik ve gres. Kauçuk soğukta sertleşir ve temas ettiği yüzeyde kayarken gıcırdar; ısındığında yumuşar ve ses azalır. Aranacak yerler bellidir — kolonun gövdeden geçtiği yerdeki keçe ve burç, kutunun takozları, körüklerin bağlandığı bölgeler ve süspansiyon tarafındaki kauçuk burçlar. İkinci aday grestir: mafsalın içindeki gres zamanla sertleşir ya da körük yırtığından kaybolur; kuru bir mafsal soğukta belirgin bir gıcırtı verir ve bu, o mafsalın ömrünün sonuna yaklaştığının işaretidir. Üçüncü aday temastır — kolonun ya da bir hortumun sürtündüğü bir nokta soğukta farklı ses verebilir. Bu ailedeki seslerin ortak özelliği motor devriyle değişmemesi ve genellikle direksiyon hareketiyle senkron olmasıdır. Önemli bir uyarı: gıcırdayan bir noktayı gelişigüzel bir sprey ile yağlamak sesi geçici olarak keser ve teşhisi bozar; hangi parçanın hangi maddeyle yağlanacağı bellidir ve kauçuğa uygun olmayan bir madde kauçuğu bozar. Sesin kaynağı bulunmadan yağlanmaz." },
+          { "label": "Kesinlikle pompa arızasıdır", "verdict": "pompa", "explain": "Pompa sesi motor devriyle değişir ve sıcaklıkla bu kadar belirgin azalmaz." },
+          { "label": "Elektrik arızasıdır", "verdict": "elektrik", "explain": "Tarif kauçuk ve gres ailesine uyuyor." },
+          { "label": "Gelişigüzel sprey sıkılır, geçer", "verdict": "sprey", "explain": "Sesi geçici keser, teşhisi bozar ve yanlış madde kauçuğu bozabilir." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Sesin kaynağı bulunmadan yağlanmaz. Sprey sesi keser, teşhisi bozar, yanlış madde kauçuğu yer."
+    },
+    {
+      "id": 7,
+      "instruction": "Kaynak bulundu ve giderildi.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.direksiyon-simidi",
+        "question": "İş nasıl kapanır?",
+        "options": [
+          { "label": "Ses aynı koşullarda tekrar aranır — aynı sıcaklık, aynı hız, aynı yön — ve çıkmadığı görülür; bulgu ve giderilen sebep kaydedilir", "verdict": "ayni-kosulda-ara", "correct": true, "explain": "Ses şikâyetlerinde en sık görülen başarısızlık, aracın 'ses gitti' diye teslim edilip birkaç gün sonra geri gelmesidir; sebebi neredeyse her zaman doğrulamanın yanlış koşulda yapılmasıdır. Ses soğukken çıkıyorduysa, sıcak bir araçta yapılan deneme hiçbir şey kanıtlamaz; park manevrasında çıkıyorduysa yolda yapılan test onu göstermez. Bu yüzden doğrulama, sesin ilk tarif edildiği koşullar birebir kurularak yapılır — gerekirse araç soğuyana kadar beklenir. İkinci nokta, giderilen sebebin kaydıdır: hangi parça, hangi bağlantı, hangi yağlama. Bu kayıt, ses geri gelirse ikinci turda nereye bakılmayacağını söyler ve zaman kazandırır. Üçüncüsü, sesin tek bir kaynağı olmayabileceğidir; bir ses giderildikten sonra altından ikinci bir ses çıkabilir — bu, ilk teşhisin yanlış olduğu anlamına gelmez, yalnız yüksek sesin küçüğünü örttüğü anlamına gelir ve müşteriye baştan söylenmesi doğru olur. Son olarak, bulunamayan bir ses için 'yok' denmez; ne arandığı ve neyin elendiği yazılır." },
+          { "label": "Sıcak araçta denenip kapatılır", "verdict": "sicak", "explain": "Soğukta çıkan ses sıcakta çıkmaz; doğrulama olmaz." },
+          { "label": "Ses gitti denip teslim edilir", "verdict": "teslim", "explain": "Aynı koşulda doğrulanmadan kapanmaz." },
+          { "label": "Bulunamayan ses yok sayılır", "verdict": "yok-say", "explain": "Ne arandığı ve neyin elendiği yazılır." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Bir ses giderilince altından ikincisi çıkabilir. Yüksek ses küçüğünü örter — bu baştan söylenir."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Ses motor durduğunda da duyuluyorsa hangi aile elenir?",
+        "a": "bosluk-ve-gevseklik",
+        "options": [
+          { "verdict": "bosluk-ve-gevseklik", "label": "Hidrolik ve kayış elenir; kaynak mekaniktir — boşluklar ve gevşek bağlantılar aranır", "explain": "Motor dururken pompa ve kayış dönmez, dolayısıyla ses onlardan gelemez. Tek noktada çıkan tık, boşluğun imzasıdır: hareket yön değiştirdiğinde parça kendi boşluğunu kat edip karşı yüzeye çarpar. Mafsal ve cıvatası, kolon bağlantıları, kutu gövde cıvataları ve rot başları sırayla kontrol edilir. Ses metal gövde boyunca yayıldığı için kulağa geldiği yer kaynağı değildir — parmakla tık anındaki hareketi hissetmek daha güvenilirdir." },
+          { "verdict": "pompa", "label": "Hidrolik pompa", "explain": "Motor dururken dönmüyor." },
+          { "verdict": "kayis", "label": "Kayış", "explain": "O da dönmüyor." },
+          { "verdict": "sivi", "label": "Sıvı seviyesi", "explain": "Devre çalışmıyor." }
+        ]
+      },
+      {
+        "q": "Soğukta belirgin, ısınınca azalan gıcırtı neyi düşündürür?",
+        "a": "kaucuk-ve-gres",
+        "options": [
+          { "verdict": "kaucuk-ve-gres", "label": "Kauçuk/plastik sürtünmesini ya da kurumuş bir mafsalı", "explain": "Kauçuk soğukta sertleşir ve temas ettiği yüzeyde kayarken gıcırdar, ısınınca yumuşar. Kolon burçları, kutu takozları, körük bölgeleri ve süspansiyon burçları aranır. İkinci aday grestir: körük yırtığından gres kaybetmiş kuru bir mafsal soğukta gıcırdar ve bu, ömrünün sonuna yaklaştığının işaretidir. Bu ailenin ortak özelliği motor devriyle değişmemesidir. Kaynak bulunmadan yağlanmaz — sprey sesi geçici keser ve yanlış madde kauçuğu bozar." },
+          { "verdict": "pompa", "label": "Pompa arızası", "explain": "Pompa sesi devirle değişir." },
+          { "verdict": "elektrik", "label": "Elektrik arızası", "explain": "Tarif kauçuk/gres ailesine uyuyor." },
+          { "verdict": "sprey", "label": "Sprey sıkılır", "explain": "Teşhisi bozar." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 63 dB ve 71 dB SENARYO okumalarıdır; istenen FARKTIR (8 dB) ve gösterilen şey sesin motor devriyle değişmesinin mekanik kaynakları elediğidir. Ses seviyesi eşiği verilmiyor; ölçüm aleti olmadan kulakla da aynı karşılaştırma yapılabilir.",
+    "sourceRequired": "Ses seviyesi eşikleri, kayış gerginliği, sıvı seviyesi ve basınç değerleri bilinçle VERİLMEDİ; araca ve üreticiye özgüdür. Yağlama maddesi seçimi de künyesiz verilmedi — yanlış madde kauçuğu bozar ve bu doğrudan bir hasar riskidir.",
+    "kapsam": "Süspansiyon ve fren kaynaklı sesler bu alanın konusu değil; ayırt edici olarak anıldı. Tekerlek/balans kaynaklı sesler Lastik ve Tekerlek alanında işlendi. Basınç testi aşama 3'te, hava alma da orada.",
+    "reviewedByMechanic": false
+  }
+}

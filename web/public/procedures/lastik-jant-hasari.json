@@ -1,0 +1,177 @@
+{
+  "id": "lastik.jant-hasari",
+  "area": "lastik-tekerlek",
+  "stage": 7,
+  "title": "Eğrilik, Çatlak ve Salgı Ölçümü",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 30,
+  "prerequisites": ["lastik.jant-olculeri", "lastik.balans-hazirlik"],
+  "learningGoals": [
+    "Radyal ve yanal salgıyı birbirinden ayırmak",
+    "Salgının kaynağının jant mı lastik mi olduğunu ölçerek ayırmak",
+    "Çatlak bulunan bir jantta kararın neden onarım olmadığını bilmek"
+  ],
+
+  "safety": [
+    { "rule": "Çatlak tespit edilen jant kullanılmaz ve şişirilmez", "why": "Çatlak basınç altında ilerler; jant şişirme sırasında ya da yolda ani olarak kırılabilir", "blocksStart": true },
+    { "rule": "Jant düzeltme kararı üreticinin izni ve mevzuat çerçevesinde verilir", "why": "Isı ve soğuk şekillendirme alüminyumun malzeme özelliklerini değiştirir; görünürde düzelen bir jant içeriden zayıflamış olabilir", "blocksStart": true },
+    { "rule": "Salgı ölçümü tekerlek serbestken ve elle döndürülerek yapılır", "why": "Yere basan tekerlekte ölçüm alınamaz; makinede ölçülüyorsa koruma kapağı kuralı geçerlidir", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.komparator", "label": "Salgı komparatörü", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true },
+    { "id": "tool.tel-firca", "label": "Tel fırça", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Araç çukura girmiş. Dıştan bakınca jantta belirgin bir hasar görünmüyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.jant",
+        "question": "Nereye bakılır?",
+        "options": [
+          { "label": "Öncelikle jantın İÇ kenarına: çukur darbesi çoğunlukla iç tarafı ezer ve orası araç üzerindeyken görünmez", "verdict": "ic-kenar", "correct": true, "explain": "Bir çukura girildiğinde darbe lastiğin yanağını ezerek jantın kenarına ulaşır ve bu kenar çoğu zaman aracın iç tarafına bakan kenardır — yani tekerlek araçtayken görülmeyen taraf. Dıştan bakan bir kişi jantı sapasağlam görür, oysa iç kenar ezilmiş, kıvrılmış ya da çatlamış olabilir. Bu yüzden çukur şikâyetiyle gelen bir araçta tekerlek sökülür ve jantın iki kenarı da fenerle incelenir. İncelenecek üç bölge vardır: iç ve dış kenar profili, lastiğin topuğunun oturduğu yüzey, ve jantın kollarıyla göbek çevresi. Kenar ezilmesi hem havanın yavaşça kaçmasına yol açar hem de balansla geçmeyen bir titreşim üretir. Topuk yüzeyindeki bir ezik doğrudan sızdırmazlığı bozar. Göbek çevresindeki çatlak en tehlikelisidir, çünkü yükü taşıyan bölgededir. Çukur sonrası şikâyette lastiğin iç yüzeyi de kontrol edilir: yanağın sıkışıp ezildiği yerde iç yapı ayrılmış olabilir." },
+          { "label": "Yalnız dış yüze; hasar görünürdür", "verdict": "dis-yuz", "explain": "Çukur darbesi çoğunlukla iç kenarı ezer ve dıştan görünmez." },
+          { "label": "Yalnız lastiğe; jant dayanıklıdır", "verdict": "lastik", "explain": "Jant da ezilir ve çatlar; ikisi birlikte incelenir." },
+          { "label": "Hiçbir yere; titreşim yoksa sorun yok", "verdict": "titresim-yok", "explain": "Ezik ve çatlak başlangıçta titreşim yapmadan da bulunabilir." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Görünmeyen tarafa bakmayı alışkanlık hâline getirmek, bu alanda en çok iş kurtaran davranışlardan biri."
+    },
+    {
+      "id": 2,
+      "instruction": "Komparatörü jant kenarına dayadın ve tekerleği elle çevirdin.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.komparator",
+        "question": "Radyal ve yanal salgı nedir?",
+        "options": [
+          { "label": "Radyal salgı yukarı–aşağı sapma, yanal salgı sağa–sola sapmadır; ikisi ayrı ölçülür çünkü farklı kusurları gösterir", "verdict": "iki-yon", "correct": true, "explain": "Salgı, dönen bir parçanın kusursuz bir daire çizmemesidir ve iki yönde ölçülür. Radyal salgı, komparatör ucu jantın dış çevresine dik dayandığında okunur ve tekerleğin yuvarlaklığındaki sapmayı verir — yani her turda yukarı aşağı hareket. Yanal salgı ise uç jantın yan yüzeyine dayandığında okunur ve tekerleğin düzlemindeki sapmayı verir, yani her turda sağa sola hareket. İkisi ayrı ölçülür çünkü ayrı sebeplere işaret ederler: radyal salgı çoğunlukla jantın çevresel ezikliğinden ya da lastiğin merkezsiz oturmasından gelir, yanal salgı ise kenarın kıvrılmasından ve jantın eğilmesinden. Sürücü için de farklı hissedilirler — radyal sapma yukarı aşağı bir zıplama, yanal sapma direksiyonda sağa sola bir oynama üretir. Ölçüm tekerlek serbestken, elle yavaşça çevrilerek ve komparatör ucu temiz bir yüzeye dayanarak yapılır: boya kabarcığı ya da çamur kalıntısı ölçümü uydurma bir sapmayla bozar." },
+          { "label": "İkisi aynı şeydir, farklı adlandırılır", "verdict": "ayni", "explain": "Farklı yönler ve farklı sebepler; ayrı ölçülür." },
+          { "label": "Radyal jantta, yanal lastikte ölçülür", "verdict": "jant-lastik", "explain": "İkisi de hem jantta hem lastikte ölçülebilir; ayrım yön." },
+          { "label": "Yalnız balans makinesi ölçebilir", "verdict": "makine", "explain": "Komparatörle elle de ölçülür; bazı makineler ayrıca ölçer." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Ölçümün yönü, ölçümün anlamını belirler. Aynı alet iki farklı yerde dayandığında iki farklı kusuru gösteriyor."
+    },
+    {
+      "id": 3,
+      "instruction": "Lastik takılıyken tekerleğin yanal salgısı 1,5 mm ölçüldü. Lastik janttan söküldü ve jant tek başına ölçüldü: 0,4 mm. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.komparator",
+        "unit": "mm",
+        "acceptRange": [1.05, 1.15]
+      },
+      "camera": "tekerlek",
+      "hint": "1,5 eksi 0,4.",
+      "teachingNote": "1,1 mm'lik bu fark jantta değil, lastiğin jant üzerine oturuşunda. Ölçüm tek bir işlemle iki adayı ayırdı: jant kendi başına ölçüldüğünde büyük ölçüde düzgün çıktığına göre sorun montajdadır — topuk bir bölgede tam oturmamıştır. Çözüm de buna göre değişir: jantı düzeltmeye ya da değiştirmeye gerek yok, lastik sökülüp kayganlaştırıcı yenilenerek yeniden oturtulur. Ayırmadan verilen karar burada pahalı bir jant değişimi olurdu."
+    },
+    {
+      "id": 4,
+      "instruction": "Salgının kaynağı ayrıldı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik-yanagi",
+        "question": "Sıradaki iş ne?",
+        "options": [
+          { "label": "Lastik sökülüp topuk yüzeyi temizlenir, kayganlaştırıcı yenilenerek yeniden oturtulur ve salgı tekrar ölçülür", "verdict": "yeniden-otur", "correct": true, "explain": "Lastiğin jant üzerine merkezsiz oturması, montaj sırasında topuğun bir bölgede tam yerine geçmemesinden kaynaklanır; sebebi çoğunlukla kirli topuk yüzeyi, kuruyup tutmuş kayganlaştırıcı ya da yetersiz kayganlaştırmadır. Düzeltmesi de buna göredir: basınç boşaltılır, lastik janttan ayrılır, jantın topuk oturma yüzeyi temizlenir, kayganlaştırıcı yenilenir ve lastik yeniden şişirilerek oturtulur. Ardından iki kontrol yapılır — yanaktaki oturma çizgisinin jant kenarına çepeçevre eşit mesafede olduğu gözle görülür ve salgı komparatörle yeniden ölçülür. Değer düştüyse sebep gerçekten oturmaydı ve iş bitmiştir. Düşmediyse aday listesi ilerler: lastiğin kendi imalat kusuru olabilir, ya da jantın ölçülen değeri başka bir düzlemde daha büyük olabilir. Bu adımın asıl dersi şu: ölçümle bulunan sebep, aynı ölçümle doğrulanır." },
+          { "label": "Jant düzeltmeye gönderilir", "verdict": "jant-duzelt", "explain": "Jant tek başına ölçüldüğünde büyük ölçüde düzgün; sorun montajda." },
+          { "label": "Ağırlık takılarak dengelenir", "verdict": "agirlik", "explain": "Salgı geometrik bir kusurdur; kütleyle düzeltilmez." },
+          { "label": "Lastik değiştirilir", "verdict": "lastik-degistir", "explain": "Önce doğru oturtma denenir; lastik kusuru ancak ondan sonra düşünülür." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "En ucuz çözüm çoğu zaman en son akla gelen çözümdür: sökmeden, değiştirmeden, yalnız doğru oturtarak."
+    },
+    {
+      "id": 5,
+      "instruction": "Başka bir jantta, kollardan birinin göbeğe yakın yerinde ince bir çatlak var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.jant",
+        "question": "Ne yapılır?",
+        "options": [
+          { "label": "Jant kullanılmaz: çatlak basınç ve yük altında ilerler, kaynak ya da düzeltme kararı ancak üretici izni ve mevzuat çerçevesinde olur", "verdict": "kullanilmaz", "correct": true, "explain": "Çatlak bir yorulma belirtisidir: malzeme o noktada zaten sınırına gelmiştir ve çatlak her yük çevriminde biraz daha ilerler. Tekerlek ise sürekli yük alan bir parçadır — her turda yön değiştiren kuvvetler, her frende ek zorlanma, her çukurda darbe. Bu yüzden çatlaklı bir jantın ne kadar dayanacağı öngörülemez ve kırılma çoğunlukla ani olur. Kaynak yapmak ilk bakışta çözüm gibi görünür ama alüminyum jantta ısı, malzemenin ısıl işlemle kazandığı dayanımı bozar; kaynağın çevresindeki bölge görünürde sağlam, gerçekte zayıflamış olur. Bu yüzden birçok üretici jant kaynağını ve ısıyla düzeltmeyi onaylamaz, birçok yerde de mevzuat sınırlar. Karar bu çerçevede verilir ve şüphe hâlinde jant kullanılmaz. Aynı jantta çatlak olmasa bile ezik bölgeler tekrar tekrar düzeltilmişse benzer bir yorulma birikmiş olabilir; geçmişi bilinmeyen ucuz jantlarda bu yaygındır." },
+          { "label": "Kaynak yapılır, sorun kalmaz", "verdict": "kaynak", "explain": "Isı alüminyumun dayanımını bozar; kaynak çevresi zayıflar." },
+          { "label": "İç tarafa yama yapılır", "verdict": "yama", "explain": "Yama yükü taşımaz; çatlak ilerlemeye devam eder." },
+          { "label": "Yalnız arka aksta kullanılır", "verdict": "arka", "explain": "Arka aks da yük taşır; çatlaklı jant hiçbir yerde kullanılmaz." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Yorulma çatlağı, malzemenin verdiği son uyarıdır. Bu uyarıdan sonra yapılacak tek şey parçayı devre dışı bırakmaktır."
+    },
+    {
+      "id": 6,
+      "instruction": "Müşteri soruyor: kaç milimetre salgıya kadar sorun yok?",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.komparator",
+        "question": "Nasıl cevap verilir?",
+        "options": [
+          { "label": "Sınır araca ve jant tipine göre değişir; değer araç üreticisinin belgesinden okunur ve radyal ile yanal için ayrı değerlendirilir", "verdict": "belgeden", "correct": true, "explain": "Kabul edilebilir salgı miktarı evrensel bir sayı değildir. Araç üreticileri, jant tipine ve tekerlek ölçüsüne göre radyal ve yanal salgı için ayrı sınırlar yayınlar; çelik ve alüminyum jantlarda değerler farklı olabilir. Bu yüzden doğru cevap bir sayı söylemek değil, hangi belgeye bakılacağını bilmektir. Bunun yanında ölçümün kendisinin de doğru yapılmış olması gerekir: komparatör ucu temiz bir yüzeye dayanmalı, tekerlek serbest ve elle yavaşça çevrilmeli, ölçüm hem jant hem lastik üzerinde alınmalıdır. Bir de pratik bir kural vardır: ölçülen değer sınırın altında olsa bile müşteri titreşimden şikâyetçiyse iş bitmemiştir — sınır bir kabul eşiğidir, şikâyetin yokluğunun garantisi değil. Tersi de doğrudur: şikâyet yokken sınırın üstünde bir salgı bulunursa bu, ilerleyen bir hasarın habercisi olabilir ve kayda geçer." },
+          { "label": "Bütün araçlar için tek bir sınır vardır", "verdict": "tek-sinir", "explain": "Sınır araca, jant tipine ve ölçüye göre değişir." },
+          { "label": "Titreşim hissedilmiyorsa sınır yoktur", "verdict": "titresim-yok", "explain": "Hissedilmeyen salgı da ilerleyen bir hasarın işareti olabilir." },
+          { "label": "Balans yapılabiliyorsa sorun yoktur", "verdict": "balans-yapilir", "explain": "Balans kütle hatasını düzeltir; salgı geometrik bir kusurdur." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bu alandaki cevapların çoğu bir sayı değil, bir kaynak. Sayıyı ezberleyen usta bir sonraki araçta yanılır; kaynağı bilen yanılmaz."
+    },
+    {
+      "id": 7,
+      "instruction": "İnceleme bitti: bir jantta düzeltilebilir bir oturma sorunu, bir jantta çatlak var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.jant",
+        "question": "Müşteriye ne anlatılır?",
+        "options": [
+          { "label": "İki bulgu ayrı ayrı: hangi jantta ne bulundu, hangisi düzeltildi, hangisi kullanılamaz ve neden — çatlaklı jant için karar tercih değil güvenlik meselesidir", "verdict": "ayri-ayri", "correct": true, "explain": "İki bulgu aynı torbaya konmaz, çünkü sonuçları farklıdır. Oturma sorunu bir montaj kusuruydu; ölçüldü, düzeltildi ve düzeltildiği yine ölçülerek doğrulandı. Bu, müşteriye maliyetsiz bir kazanç olarak anlatılır. Çatlak ise farklı bir kategoridir: o jant kullanılamaz ve bu, müşterinin bütçesine göre esneyecek bir tavsiye değildir. İkisi arasındaki farkı açıkça koymak, ustanın gereksiz iş yazmadığını da gösterir — bir sorunu ücretsiz çözerken diğerinde ısrar etmek, tavsiyeyi inandırıcı kılar. Kayda üç şey geçer: ölçülen salgı değerleri (jantla ve lastikle ayrı ayrı), yapılan işlem ve sonrasındaki ölçüm, ve çatlaklı jant için verilen karar ile gerekçesi. Bu kayıt bir sonraki bakımda karşılaştırma zemini olur; çatlak konusunda ise hem müşteriyi hem ustayı korur." },
+          { "label": "Yalnız çatlak söylenir, diğeri önemsiz", "verdict": "yalniz-catlak", "explain": "Düzeltilen sorun da kayda geçer; bir sonraki bakımın karşılaştırma verisi." },
+          { "label": "İki jant da değiştirilsin denir", "verdict": "ikisi-de", "explain": "Biri düzeltildi; gereksiz değişim önerisi güveni bozar." },
+          { "label": "Karar tamamen müşteriye bırakılır", "verdict": "musteriye-birak", "explain": "Oturma sorununda karar müşterinin; çatlakta güvenlik sınırı geçerli." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bulguları ayırmak güveni kurar: birinde para istemeyen usta, diğerinde ısrar ettiğinde dinlenir."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Lastikli tekerlekte salgı 1,5 mm, jant tek başına 0,4 mm çıkıyorsa ne yapılır?",
+        "a": "otur-sorunu",
+        "options": [
+          { "verdict": "otur-sorunu", "label": "Sorun jantta değil lastiğin oturmasında: topuk yüzeyi temizlenip kayganlaştırıcı yenilenerek lastik yeniden oturtulur ve salgı tekrar ölçülür", "explain": "Jant kendi başına büyük ölçüde düzgün ölçüldüğüne göre farkın kaynağı montajdır — topuk bir bölgede tam yerine geçmemiştir. Sebebi genellikle kirli topuk yüzeyi ya da kurumuş kayganlaştırıcıdır. Düzeltmeden sonra iki kontrol yapılır: oturma çizgisinin jant kenarına çepeçevre eşit mesafede olduğu gözle, salgının düştüğü komparatörle. Ayırmadan verilen karar burada gereksiz bir jant değişimi olurdu." },
+          { "verdict": "jant-degistir", "label": "Jant değiştirilir", "explain": "Jant tek başına düzgün ölçüldü; değiştirmek sorunu çözmez." },
+          { "verdict": "agirlik", "label": "Ağırlık takılarak dengelenir", "explain": "Salgı geometrik kusurdur, kütleyle düzeltilmez." },
+          { "verdict": "normal", "label": "Normaldir, bir şey yapılmaz", "explain": "1,1 mm'lik fark montaj kusurunu gösteriyor ve düzeltilebilir." }
+        ]
+      },
+      {
+        "q": "Kollarında çatlak bulunan bir alüminyum jant kaynakla onarılır mı?",
+        "a": "onarilmaz",
+        "options": [
+          { "verdict": "onarilmaz", "label": "Hayır: çatlak yorulma belirtisidir ve yük altında ilerler; ısı ayrıca alüminyumun dayanımını bozar. Karar üretici izni ve mevzuat çerçevesindedir", "explain": "Malzeme o noktada sınırına gelmiştir ve tekerlek sürekli yük alan bir parçadır — her turda yön değiştiren kuvvetler, her frende zorlanma, her çukurda darbe. Ne kadar dayanacağı öngörülemez ve kırılma ani olur. Kaynak çözüm gibi görünse de ısı, alüminyumun ısıl işlemle kazandığı dayanımı bozar ve kaynak çevresi görünürde sağlam, gerçekte zayıf kalır. Şüphe hâlinde jant kullanılmaz." },
+          { "verdict": "kaynak", "label": "Kaynakla onarılır", "explain": "Isı dayanımı bozar; birçok üretici onaylamaz." },
+          { "verdict": "arka", "label": "Onarılıp arka aksta kullanılır", "explain": "Arka aks da yük taşır." },
+          { "verdict": "yama", "label": "İç yüzeyine yama yapılır", "explain": "Yama yükü taşımaz; çatlak ilerler." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 1,5 mm ve 0,4 mm SENARYO okumalarıdır ve kabul edilebilir salgı SINIRI değildir. İstenen FARKTIR (1,1 mm); dersin gösterdiği şey salgının kaynağının jant ile lastik arasında ölçümle ayrılabildiğidir.",
+    "sourceRequired": "Kabul edilebilir azami radyal ve yanal salgı bilinçle VERİLMEDİ: araca, jant tipine ve tekerlek ölçüsüne göre değişir ve araç üreticisinin belgesinden okunur. Ders sayıyı değil, ölçüm yöntemini ve kaynağı öğretiyor.",
+    "kapsam": "Jant düzeltme işleminin kendisi kapsam dışı ve mevzuata bağlı olduğu belirtiliyor. Çok parçalı jantlar ve ticari araç jantları kapsam dışı.",
+    "reviewedByMechanic": false
+  }
+}

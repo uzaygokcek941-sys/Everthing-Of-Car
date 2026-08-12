@@ -1,0 +1,177 @@
+{
+  "id": "kaporta.cila",
+  "area": "kaporta",
+  "stage": 7,
+  "title": "Cila ve Polisaj: Nereye Kadar",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 35,
+  "prerequisites": ["kaporta.vernik-kurutma"],
+  "learningGoals": [
+    "Cilanın malzeme eklemediğini, aldığını ve bu yüzden sınırlı bir kaynak olduğunu bilmek",
+    "Hangi kusurun cilayla alınabileceğini, hangisinin alınamayacağını ayırt etmek",
+    "Kenar, kıvrım ve ısının cilada neden ayrı bir başlık olduğunu görmek"
+  ],
+
+  "safety": [
+    { "rule": "Kürlenmesi tamamlanmamış vernik cilalanmaz", "why": "Yumuşak katman makinenin altında yerinden kayar, ısınır ve kalıcı iz alır; sertleşince bu izler sabitlenir", "blocksStart": true },
+    { "rule": "Makineli polisajda koruyucu gözlük ve toz maskesi kullanılır, uzun saç ve giysi ucu toplanır", "why": "Dönen ped hem parçacık savurur hem giysiyi kapabilir", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.polisaj-makinesi", "label": "Polisaj makinesi", "required": true },
+    { "id": "tool.kalinlik-olcer", "label": "Kalınlık ölçer", "required": true },
+    { "id": "tool.aydinlatma", "label": "Kontrol lambası", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Vernik sertleşti. Yüzeyde hafif bir portakal kabuğu ve birkaç ince iz var. Cilaya başlıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-kapi-paneli",
+        "question": "Cila yüzeye ne yapar?",
+        "options": [
+          { "label": "Malzeme ALIR, eklemez: verniğin üstünden çok ince bir tabakayı aşındırarak yüzeyi düzler ve ışığı düzenli yansıtır hâle getirir — yani her cila, verniğin payından bir miktar harcar", "verdict": "alir", "correct": true, "explain": "Cila kelimesi yanıltıcıdır; kulağa bir şey sürmek, yüzeye bir koruma eklemek gibi gelir. Oysa polisaj bir aşındırma işlemidir: aşındırıcı içeren bir macun ve dönen bir ped, verniğin en üst tabakasından çok ince bir katmanı alır. Neden işe yaradığını anlamak için kusurun ne olduğuna bakmak gerekir — ince çizikler, portakal kabuğu ve mat bölgeler aslında yüzeyin düzgün olmamasıdır; ışık düzensiz bir yüzeye çarpınca dağılır ve göz bunu donukluk, iz ya da doku olarak görür. Cila, bu düzensizliğin tepe noktalarını alarak yüzeyi tek düzleme indirir; sonuç, ışığın düzenli yansıması, yani parlaklıktır. Buradan üç sonuç çıkar. Birincisi cila sınırlı bir kaynaktır: her uygulama verniğin kalınlığından bir miktar yer ve aynı panel sonsuz kez cilalanamaz. İkincisi, cila yalnız verniğin içinde kalan kusurları alabilir — verniği aşan bir çizik ne kadar cilalanırsa cilalansın çıkmaz, yalnız çevresindeki sağlam vernik incelir. Üçüncüsü, cila bir onarım değil bir bitirme işlemidir; alttaki işi düzeltmez, yalnız görünür yüzeyi düzler. Aşındırıcı kademeleri, ped tipleri, macun ürünleri ve devir aralıkları ürüne ve sisteme özgüdür; bu ders ürün ya da devir vermiyor." },
+          { "label": "Yüzeye koruyucu bir katman ekler", "verdict": "ekler", "explain": "Polisaj aşındırma işlemidir; koruyucu ürünler ayrı bir konudur." },
+          { "label": "Verniği yumuşatıp çizikleri kapatır", "verdict": "yumusatir", "explain": "Çizik kapanmaz; çevresindeki malzeme alınarak seviyeye inilir." },
+          { "label": "Rengi canlandırır", "verdict": "renk", "explain": "Renk değişmez; düzelen yüzey ışığı düzenli yansıtır." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Cila eklemez, alır. Parlaklık yeni bir katman değil, düzelen yüzeyin ışığı düzenli yansıtması."
+    },
+    {
+      "id": 2,
+      "instruction": "Cila öncesi kalınlık 148 mikron, cila sonrası 141 mikron. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.kalinlik-olcer",
+        "unit": "mikron",
+        "acceptRange": [6, 8]
+      },
+      "camera": "kaporta",
+      "hint": "148 eksi 141.",
+      "teachingNote": "7 mikron eksildi — ve bu sayı, cilanın neden ölçülerek yapılan bir iş olduğunu tek başına anlatır. Cila hiçbir zaman malzeme eklemediği için her uygulama bir hesaptan düşer; o hesabın büyüklüğünü ise yalnız ölçüm gösterir. Bu yüzden ciddi bir polisaj işi kalınlık ölçümüyle başlar, ölçümle ilerler ve ölçümle biter. Üç kullanım yeri vardır. Birincisi karar: yüzeydeki kusuru almak için gereken aşındırma, kalan vernik payından fazlaysa o kusur cilayla alınmaz — ısrar etmek verniği delip renk katını açar ve o noktada iş geri dönülemez biçimde bozulur. İkincisi kontrol: cila sırasında ara ölçümler alınır, çünkü aşındırma hızını gözle kestirmek mümkün değildir; özellikle makineyle çalışırken birkaç saniyelik fazla temas beklenenden çok daha fazla malzeme alır. Üçüncüsü kayıt: aracın daha önce kaç kez cilalandığı bilinmiyorsa mevcut kalınlık, bugünkü işin ne kadar pay bırakacağını gösteren tek veridir — ikinci el bir araçta bu bilgi hiç yoktur ve ölçüm o boşluğu doldurur. Bir de dağılım vardır: tek noktadan alınan bir ölçüm yanıltır, panelin farklı yerlerinden ve özellikle kenarlara yakın noktalardan okuma alınır. Kabul edilebilir kalan kalınlık, aşındırma kademeleri ve ürün verileri sisteme özgüdür ve teknik belgeden okunur; buradaki iki sayı senaryo okumasıdır."
+    },
+    {
+      "id": 3,
+      "instruction": "Panelde bir çizik var. Tırnağını üzerinden geçirdiğinde tırnağın takılıyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-camurluk",
+        "question": "Bu çizik cilayla alınır mı?",
+        "options": [
+          { "label": "Alınmaz: tırnağın takılması çiziğin verniği aştığını gösterir — cila onu kaldırmaz, yalnız çevresindeki sağlam verniği inceltir; bu bölge yeniden boyanır", "verdict": "vernigi-asiyor", "correct": true, "explain": "Tırnak testi, bu alanın en basit ve en güvenilir kararlarından biridir. Cila yalnız verniğin içinde kalan düzensizlikleri alabilir; çünkü yaptığı iş, çiziğin çevresindeki yüzeyi çiziğin dibine kadar indirmektir. Çizik verniğin içinde kalıyorsa bu mümkündür — üstten birkaç mikron alınır ve yüzey tek düzleme iner. Ama çizik verniği aşıp renk katına ya da astara ulaşmışsa, o dibe inmek için verniğin tamamını almak gerekir; yani kusuru düzeltmek için katmanı yok etmek zorunda kalırsın. Bu yüzden karar basittir: tırnak takılıyorsa cila değil, boya konuşulur. Testin sınırlarını da bilmek gerekir. Birincisi, tırnak takılmaması çiziğin mutlaka alınabileceği anlamına gelmez — sığ ama geniş bir alana yayılmış izler, kalan vernik payına göre yine de riskli olabilir; karar ölçümle desteklenir. İkincisi, ışık altında bakmak şarttır: bazı izler yalnız belirli bir açıda görünür ve düz aydınlatmada hiç fark edilmez. Üçüncüsü, çiziğin içinde farklı renk görünüyorsa — başka bir aracın boyası ya da altındaki astarın rengi — karar zaten verilmiştir. Dürüstlük tarafı şudur: 'cilayla çıkarırım' demek ve çıkaramamak, hem müşteriyle sorun üretir hem verniği boşuna harcar. Alınamayacak bir çizik en baştan söylenir." },
+          { "label": "Alınır, yeterince uzun cilalanırsa çıkar", "verdict": "uzun-cila", "explain": "Uzun cila yalnız çevredeki sağlam verniği tüketir." },
+          { "label": "Alınır ama iki kademe aşındırıcı gerekir", "verdict": "iki-kademe", "explain": "Kademe sayısı değil, çiziğin derinliği belirleyicidir." },
+          { "label": "Önce belli olmaz, denenip görülür", "verdict": "dene", "explain": "Deneme vernik harcar; tırnak testi ve ölçüm önce yapılır." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Tırnak takılıyorsa cila değil boya konuşulur. 'Cilayla çıkarırım' deyip çıkaramamak verniği boşuna harcar."
+    },
+    {
+      "id": 4,
+      "instruction": "Makineyle panelin kenarına ve kıvrım hattına yaklaşıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.bagaj-kapagi",
+        "question": "Kenar ve kıvrımlarda ne yapılır?",
+        "options": [
+          { "label": "Basınç azaltılır, gerekiyorsa maskelenir ya da elle geçilir: püskürtülen katman keskin kenarda doğal olarak incedir, makine ise en çok oraya basar — vernik ilk olarak kenardan delinir", "verdict": "kenar-dikkat", "correct": true, "explain": "Kenar ve kıvrımlar cilada ayrı bir başlıktır ve sebebi iki olgunun üst üste binmesidir. Birincisi astar dersinde geçen gerçektir: püskürtülen bir katman keskin bir kenarda tutunmakta zorlanır ve orada doğal olarak incelir; yani kenar, sistemin zaten en ince olduğu yerdir. İkincisi makinenin kendisidir: düz bir ped bir kıvrımın üzerinden geçerken bütün baskısını o dar hatta yükler, çünkü temas alanı küçülür. Sonuç bellidir — vernik neredeyse her zaman ilk olarak kenardan ve kıvrımdan delinir, panelin ortasından değil. Delinen yerde renk katı açığa çıkar, o bölge matlaşır ve düzeltmenin tek yolu yeniden boyamaktır. Üç önlem vardır. Birincisi basıncı azaltmak ve pedi kenara paralel, sabit hareketle geçirmektir. İkincisi maskelemedir: keskin kıvrımlar ve panel kenarları banda alınarak makinenin oraya doğrudan basması engellenir. Üçüncüsü elle geçmektir — kenarlarda el, makineden hem daha yavaş hem daha kontrollü aşındırır. Bir de ısı boyutu vardır: aynı noktada uzun kalan ped verniği ısıtır, yumuşatır ve o bölgeyi hem daha hızlı aşındırır hem yüzeyde kalıcı bir mat leke bırakabilir. Bu yüzden ped sürekli hareket hâlinde tutulur ve panel bölgelere ayrılarak çalışılır. Ped tipleri, devir aralıkları ve basınç önerileri sisteme özgüdür." },
+          { "label": "Basınç artırılır, kenarlar zor parlar", "verdict": "basinc-artir", "explain": "Vernik zaten kenarda en ince; artan basınç oradan deler." },
+          { "label": "Kenarlar atlanır, görünmezler", "verdict": "atla", "explain": "Kenar görünür ve pas da oradan başlar; atlanmaz." },
+          { "label": "Aynı noktada bekletilerek ısıtılır", "verdict": "isit", "explain": "Isınan vernik hızlı aşınır ve mat leke bırakır." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Vernik her zaman önce kenardan delinir. Katman orada en ince, makine ise en çok oraya basar."
+    },
+    {
+      "id": 5,
+      "instruction": "Cila bitti. Belirli bir açıda ışık tuttuğunda yüzeyde dairesel, bulanık izler görünüyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.tavan-paneli",
+        "question": "Bu izler nedir?",
+        "options": [
+          { "label": "Cilanın kendi bıraktığı ince izler: kaba aşındırıcıda kalınıp ince kademeye geçilmemiş ya da ped ve yüzey temiz değilmiş — yani kusuru alan işlem kendi kusurunu bırakmış", "verdict": "cila-izi", "correct": true, "explain": "Polisaj kademeli bir iştir: önce kusuru alacak kadar aşındıran bir kademe, sonra o kademenin bıraktığı izleri alan daha ince bir kademe, gerekiyorsa bir tane daha. Her aşındırıcı, aldığı kusurun yerine kendi ölçeğinde daha küçük izler bırakır; işlem ancak bu izler gözün ayırt edemeyeceği inceliğe indiğinde biter. Kaba kademede durulursa sonuç, belirli açılarda ortaya çıkan dairesel ve bulanık bir izdir — düz aydınlatmada görünmez, güneşte ya da tek noktadan gelen bir ışıkta hemen belli olur. Bu yüzden kontrol, atölye tavan lambası altında değil, yönlü bir ışıkla ve birden çok açıdan yapılır. İkinci sebep temizliktir ve en sinsi olanıdır: pedin içinde kalan önceki kademenin kaba parçacıkları ya da yüzeyde kalan bir kum tanesi, ince kademede bile derin çizikler üretir. Bu yüzden kademeler arasında hem yüzey hem ped temizlenir, her kademe için ayrı ped kullanılır. Üçüncü sebep aşırı ısıdır — ısınan vernik geçici olarak yumuşar, işlem sırasında düzgün görünür ama soğuduğunda izler geri çıkar; buna atölyede 'cila oturmadı' denir ve aslında yüzey hiç düzelmemiştir. Dördüncüsü macun kalıntısıdır: kuruyan macun bir sonraki kademede aşındırıcı gibi davranır. Aşındırıcı kademeleri, ped eşleşmeleri ve ürün verileri sisteme özgüdür." },
+          { "label": "Vernik kusurudur, ürün hatalıdır", "verdict": "urun", "explain": "İzler işlemin kendisinden gelir; kademe ve temizlik meselesidir." },
+          { "label": "Normaldir, zamanla kaybolur", "verdict": "kaybolur", "explain": "İzler yüzeyde kalır; kaybolmaz." },
+          { "label": "Daha kaba aşındırıcıyla tekrar geçilir", "verdict": "kaba", "explain": "Kaba kademe izi büyütür; ince kademeye geçilir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Kusuru alan işlem kendi kusurunu bırakır. Kontrol tavan lambasında değil, yönlü ışıkta ve birden çok açıdan."
+    },
+    {
+      "id": 6,
+      "instruction": "İş sıkışık; vernik daha bugün atıldı ama cila yapıp aracı teslim etmek istiyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.zimpara-bolgesi",
+        "question": "Cila ne zaman yapılır?",
+        "options": [
+          { "label": "Kürlenme tamamlandıktan sonra: yumuşak katman ped altında kayar, ısınır ve iz alır — üstelik o anda düzgün görünen yüzey sertleştikçe izleri geri verir", "verdict": "kurulme-sonrasi", "correct": true, "explain": "Kürlenmemiş vernikte polisaj yapmak, bu aşamanın en pahalı hatasıdır ve iki katmanlı bir tuzak taşır. Birinci katman fiziksel: henüz nihai sertliğine ulaşmamış katman, dönen pedin altında aşınmaz — kayar, yayılır ve ısınınca daha da yumuşar. Aldığın malzeme kontrolsüzdür; birkaç saniye içinde beklediğinden çok daha fazlasını alabilirsin ve yüzey dalgalanır. İkinci katman zamansal ve daha sinsidir: işlem bittiğinde yüzey parlak ve düzgün görünebilir, çünkü yumuşak katman geçici olarak izlerin üstünü örtmüştür. Kürlenme ilerledikçe katman büzülür ve altında kalan izler yüzeye çıkar; araç teslim edildikten günler sonra 'cila oturmadı' ya da 'boya iz yaptı' diye geri döner. O noktada yapılacak şey yeniden cilalamak değildir, çünkü bir kez daha kalınlık harcamak gerekir ve harcanacak pay her seferinde azalır. Bir de üçüncü konu var: kürlenmemiş katmanın içinde hâlâ çözücü vardır ve polisaj ısısı bunun çıkışını bozabilir, sonuç ilerleyen haftalarda görünen matlık ya da küçük kabarcıklardır. Doğru davranış, cilayı işin son adımı olarak planlamak ve gerekiyorsa aracı cilasız teslim edip müşteriyi belirli bir süre sonra çağırmaktır — bu, işi geciktirmek değil, iki kez yapmamaktır. Kürlenme ve cila öncesi bekleme süreleri ürüne özgüdür ve teknik belgede yazar." },
+          { "label": "Vernik dokunma kuruluğuna gelince yapılır", "verdict": "dokunma", "explain": "Dokunma kuruluğu kürlenme değildir." },
+          { "label": "Hemen yapılır, yumuşakken daha kolay parlar", "verdict": "yumusak", "explain": "Yumuşak katman aşınmaz, kayar ve kontrolsüz malzeme kaybı olur." },
+          { "label": "Fark etmez, cila yüzeyseldir", "verdict": "farketmez", "explain": "Cila aşındırma işlemidir; katmanın sertliği belirleyicidir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Yumuşak katmanda cila 'oturmuş' görünür, sertleşince izleri geri verir. Cilasız teslim, iki kez yapmaktan iyidir."
+    },
+    {
+      "id": 7,
+      "instruction": "Panel bitti, kalınlık kaydı tutuldu.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kaput-kaporta",
+        "question": "Cila hakkındaki temel kural nedir?",
+        "options": [
+          { "label": "Cila bir onarım değil bir bitirmedir ve tükenen bir kaynaktır: her uygulama verniğin payından yer, bu yüzden ne zaman yapılacağı kadar ne zaman YAPILMAYACAĞI da bilinir", "verdict": "tukenen-kaynak", "correct": true, "explain": "Bu dersin bütün adımları tek bir kavrama bağlanıyor: cila, elindeki verniğin kalınlığından harcayarak çalışan bir işlemdir. Buradan üç kural çıkar. Birincisi ölçmeden başlamamaktır — kalan payı bilmeden yapılan cila, iyi niyetli bir tahminle verniği delme riskidir; ve delinen vernik cilayla değil, yeniden boyayla düzelir. İkincisi kusuru doğru sınıflandırmaktır: verniğin içinde kalan izler cilanın işidir, verniği aşan çizikler değildir, alttaki hazırlıktan gelen dalgalanmalar hiç değildir. Cila alttaki işi düzeltmez; onu yalnız daha parlak ve dolayısıyla daha görünür yapar. Üçüncüsü sırayı korumaktır: cila işin son adımıdır ve kürlenmeden önce yapılamaz. Bu üç kural birlikte şu davranışı doğurur — usta bazı işlerde cilayı reddeder. 'Bu çizik cilayla çıkmaz, o bölgeyi boyamak gerekir' demek ya da 'aracı bugün cilasız teslim edeyim, on gün sonra gelin' demek, işten kaçmak değil, iki kez iş yapmamaktır. Bu alanın diğer derslerinde tekrar eden cümle burada da geçerli: reddedilen iş, kötü yapılan işten ucuzdur. Sırada boya kusurları var — krater, sarkma, toz ve portakal kabuğu; yani cilanın hangisini alabildiği, hangisinde geri dönmek gerektiği." },
+          { "label": "Cila her kusuru alır, yeter ki sabırlı olunsun", "verdict": "her-kusur", "explain": "Verniği aşan kusurlar ve alttaki dalgalanmalar alınmaz." },
+          { "label": "Cila koruma ekler, sık yapılmalıdır", "verdict": "sik", "explain": "Her uygulama kalınlıktan yer; sık polisaj payı tüketir." },
+          { "label": "Cila alttaki hazırlık hatalarını gizler", "verdict": "gizler", "explain": "Parlaklık artınca alttaki dalgalanma daha görünür olur." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Cila tükenen bir kaynak. Ne zaman yapılacağı kadar ne zaman yapılmayacağı da ustalığın parçası."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Çiziğin üzerinden geçirdiğin tırnağın takılıyor. Karar nedir?",
+        "a": "vernigi-asiyor",
+        "options": [
+          { "verdict": "vernigi-asiyor", "label": "Çizik verniği aşmış: cila onu almaz, yalnız çevresindeki sağlam verniği inceltir — o bölge yeniden boyanır", "explain": "Cila, çiziğin çevresindeki yüzeyi çiziğin dibine indirerek çalışır; dip verniğin altındaysa katmanı yok etmek gerekir. Karar ölçümle desteklenir ve alınamayacak bir çizik en baştan söylenir." },
+          { "verdict": "uzun-cila", "label": "Uzun cilalanırsa çıkar", "explain": "Yalnız sağlam vernik tükenir." },
+          { "verdict": "iki-kademe", "label": "İki kademe aşındırıcı yeterlidir", "explain": "Belirleyici olan kademe sayısı değil, derinlik." },
+          { "verdict": "dene", "label": "Denenip görülür", "explain": "Deneme vernik harcar; test ve ölçüm önce yapılır." }
+        ]
+      },
+      {
+        "q": "Cila sonrası belirli açıda dairesel bulanık izler görünüyor. Sebep nedir?",
+        "a": "cila-izi",
+        "options": [
+          { "verdict": "cila-izi", "label": "İşlemin kendisi bırakmış: kaba kademede durulmuş ya da ped/yüzey temiz değilmiş", "explain": "Her aşındırıcı kendi ölçeğinde iz bırakır; iş ancak izler gözün ayırt edemeyeceği inceliğe indiğinde biter. Kademeler arasında ped ve yüzey temizlenir, her kademeye ayrı ped kullanılır. Aşırı ısı da izleri geçici olarak gizler, soğuyunca geri verir." },
+          { "verdict": "urun", "label": "Vernik ürün hatası", "explain": "İz işlemden gelir." },
+          { "verdict": "kaybolur", "label": "Zamanla kaybolur", "explain": "Yüzeyde kalır." },
+          { "verdict": "kaba", "label": "Daha kaba aşındırıcıyla geçilir", "explain": "Kaba kademe izi büyütür." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2'deki 148 mikron ve 141 mikron SENARYO okumalarıdır; istenen FARKTIR (7 mikron). Ders hiçbir sistem için cilada alınan kalınlık ya da kabul edilebilir kalan kalınlık iddia etmiyor.",
+    "sourceRequired": "Aşındırıcı kademeleri, macun ve ped ürünleri, devir aralıkları, basınç önerileri, kabul edilebilir kalan vernik kalınlığı ve cila öncesi bekleme süresi bilinçle VERİLMEDİ; hepsi ürüne ve sisteme özgüdür ve teknik belgeden okunur.",
+    "kapsam": "Seramik ve koruyucu kaplama ürünleri ile uygulama talimatları KAPSAM DIŞIDIR; ders polisajın ne yaptığını, sınırını ve kusur ayrımını öğretiyor.",
+    "kaynak": "Bu alan kullanıcının açık talebiyle eklendi (talep birebir: 'birde alanlara kaportayı ekleyelim'); konu başlıkları MEB Otomotiv Gövde ve Boya dalının çerçevesini takip ediyor, kazanım numarası iddiası yok.",
+    "reviewedByMechanic": false
+  }
+}

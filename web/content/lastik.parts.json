@@ -1,0 +1,42 @@
+{
+  "model": "lastik",
+  "file": "/models/lastik.glb",
+  "license": {
+    "source": "scripts/build-models.mjs — kod ile üretildi",
+    "author": "Everything For My Car",
+    "license": "Proje içi üretim — üçüncü taraf lisans yükümlülüğü yok",
+    "url": ""
+  },
+  "parts": {
+    "part.gobek": "gobek",
+    "part.bijon.1": "bijon_1",
+    "part.bijon.2": "bijon_2",
+    "part.bijon.3": "bijon_3",
+    "part.bijon.4": "bijon_4",
+    "part.bijon.5": "bijon_5",
+    "part.jant": "jant",
+    "part.lastik": "lastik",
+    "part.lastik-yanagi": "lastik_yanagi",
+    "part.valf": "valf",
+    "part.tpms-sensoru": "tpms_sensoru",
+    "part.balans-agirligi": "balans_agirligi",
+    "part.dis-mastari": "dis_derinligi_mastari",
+    "part.manometre": "basinc_manometresi",
+    "part.komparator": "salgi_komparatoru",
+    "part.rot-basi": "rot_basi",
+    "part.rot-kolu": "rot_kolu",
+    "part.rotil": "rotil",
+    "part.kriko-lastik": "kriko",
+    "part.sehpa-lastik": "sehpa",
+    "part.bijon-anahtari": "bijon_anahtari",
+    "part.balans-makinesi": "balans_makinesi",
+    "part.balans-mili": "balans_mili"
+  },
+  "_notes": {
+    "kapsam": "Lastik ve Tekerlek alanının sahnesi: araca takılı bir tekerlek (göbek, 5 bijon, jant, lastik, valf, TPMS sensörü, balans ağırlığı) ile yanında ölçü aletleri, ön takım parçaları, kaldırma ekipmanı ve balans makinesi.",
+    "olcek": "Metre. Zemin y=0, tekerlek merkezi y=0.32 — lastik zemine değer. X = aks ekseni (+X izleyiciye doğru dış yüz), Z = derinlik.",
+    "yanak": "lastik_yanagi ayrı bir mesh çünkü bu alanın ilk teşhis dersi yanak yazısını OKUTUR. Yazının kendisi geometri değil, dersin metnindedir; sahne yalnız nereye bakılacağını gösterir.",
+    "nokta-yasagi": "Mesh adlarında nokta yok: GLTFLoader düğüm adındaki '.' karakterini siler. part.bijon.1 -> bijon_1 eşlemesi bu yüzden var.",
+    "eksik": "Lastik sökme makinesi (demonte) ve ön düzen ayar cihazı henüz yok; o dersler cihazı metinde anlatıyor. Marka/model yok — jenerik tekerlek."
+  }
+}

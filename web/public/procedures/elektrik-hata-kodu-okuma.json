@@ -1,0 +1,177 @@
+{
+  "id": "elektrik.hata-kodu-okuma",
+  "area": "arac-elektrik",
+  "stage": 8,
+  "title": "Hata Kodunu Doğru Okumak",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 30,
+  "prerequisites": ["elektrik.sensor-turleri", "elektrik.aralikli-ariza", "elektrik.gerilim-dusumu"],
+  "learningGoals": [
+    "Hata kodunun bir parçayı değil, bir devreyi ve bir sapmayı adlandırdığını kavramak",
+    "Kodu silmeden önce kayıtlı koşulları ve diğer kodları toplamak",
+    "Sensörün yanıldığı durum ile doğruyu söylediği durumu ölçümle ayırmak"
+  ],
+
+  "safety": [
+    { "rule": "Kod silme işlemi, kodlar ve kayıtlı koşullar yazıya geçirilmeden yapılmaz", "why": "Silme geri alınamaz; silinen kayıt arızanın hangi şartta oluştuğuna dair tek kanıttır ve yeniden oluşması günler alabilir", "blocksStart": true },
+    { "rule": "Yol testi gerekiyorsa cihaz sabitlenir ve ikinci kişi kullanılır", "why": "Sürerken ekrana bakmak dikkat dağıtır; canlı veri okunacaksa aracı bir kişi kullanır, veriyi başka biri izler", "blocksStart": true },
+    { "rule": "Cihaz bağlantısı kontak kapalıyken yapılır", "why": "Bağlantı sırasında oluşan ani gerilim değişimi gereksiz hata kaydı üretebilir ve teşhisi karıştırır", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.teshis-cihazi", "label": "Teşhis cihazı", "required": true },
+    { "id": "tool.multimetre", "label": "Dijital multimetre", "required": true },
+    { "id": "tool.sema", "label": "Araç devre şeması", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Cihaz bağlandı, bir sensör devresine ait hata kodu okundu.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sensor",
+        "question": "Bu kod tam olarak neyi söyler?",
+        "options": [
+          { "label": "Kontrol ünitesinin o devrede beklediğinin dışında bir değer gördüğünü; hangi parçanın bozuk olduğunu değil", "verdict": "devre-ve-sapma", "correct": true, "explain": "Hata kodu bir teşhis değil, bir gözlem kaydıdır. Kontrol ünitesi girişlerini sürekli izler ve bir değer beklediği sınırların dışına çıktığında, hangi devrede ve nasıl bir sapma gördüğünü kaydeder. Kodun adında bir sensörün geçmesi, o sensörün bozuk olduğu anlamına gelmez; yalnızca o devreden gelen bilginin makul olmadığını söyler. Aynı kod dört ayrı sebepten oluşabilir: sensörün kendisi bozuktur, sensöre giden ya da ondan dönen kablo arızalıdır, sensörün şase referansı kaymıştır, ya da sensör doğru çalışmaktadır ve gerçekten anormal olan bir durumu bildirmektedir. Kodun işaret ettiği parçayı ölçmeden değiştirmek, bu dört ihtimalden üçünü görmezden gelmektir; bu yüzden arıza çoğu zaman parça değiştikten sonra da durur." },
+          { "label": "Hangi parçanın değişeceğini söyler", "verdict": "parca", "explain": "Kod bir devreyi adlandırır; o devrede dört ayrı sebep olabilir." },
+          { "label": "Arızanın ne zaman başladığını söyler", "verdict": "zaman", "explain": "Kayıtlı koşullar bilgi verir ama kodun kendisi bir tarih değildir." },
+          { "label": "Aracın sürülemeyeceğini söyler", "verdict": "surulemez", "explain": "Bazı kodlar ciddi, bazıları değil; ciddiyet ayrı bir değerlendirmedir." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Kod bir adres verir, bir suçlu vermez. Bu ayrımı yapmayan usta, kodun adındaki parçayı değiştirip durur."
+    },
+    {
+      "id": 2,
+      "instruction": "Cihazda başka kodlar da var ve kayıtlı koşullar görünüyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sensor-soketi",
+        "question": "Silmeden önce ne toplanır?",
+        "options": [
+          { "label": "Bütün kodlar, oluşma sıraları ve kaydedildikleri andaki çalışma koşulları yazıya geçirilir", "verdict": "hepsini-kaydet", "correct": true, "explain": "Kod silme geri alınamaz ve silinen şey arızanın tek kanıtıdır. Bu yüzden silme düğmesine basmadan önce üç şey toplanır. Birincisi bütün kodların listesi: tek bir koda odaklanıp diğerlerini görmezden gelmek, ortak bir sebebi kaçırmanın en kolay yoludur. İkincisi sıralama: hangi kodun önce oluştuğu, hangisinin diğerinin sonucu olduğunu gösterebilir. Üçüncüsü, kod kaydedildiği anda kontrol ünitesinin sakladığı çalışma şartlarıdır — motor sıcaklığı, devir, yük, hız, yakıt düzeltmeleri. Bu kayıt, aralıklı arıza dersinde peşine düşülen koşulun kontrol ünitesi tarafından bizim yerimize yazılmış hâlidir; arızayı tekrar üretmek için hangi şartı kurman gerektiğini doğrudan söyler. Silmek, bu bilgiyi elinin tersiyle itmektir." },
+          { "label": "Yalnız en son kod not edilir", "verdict": "son-kod", "explain": "Diğer kodlar ortak bir sebebi gösteriyor olabilir; hepsi alınır." },
+          { "label": "Hemen silinip yeniden oluşması beklenir", "verdict": "sil-bekle", "explain": "Silme kanıtı yok eder ve arızanın tekrar kaydedilmesi günler alabilir." },
+          { "label": "Kod numarası internette aratılır", "verdict": "internet", "explain": "Yararlı olabilir ama önce kendi aracının kaydı toplanır; teşhis başkasının vakasıyla yapılmaz." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Kontrol ünitesi arızanın koşulunu senin yerine yazmış durumda. Aralıklı arıza dersinde saatler harcanan iş, burada bir ekran görüntüsü kadar yakın."
+    },
+    {
+      "id": 3,
+      "instruction": "Kod bir sıcaklık sensörü devresini işaret ediyor. Canlı veride o sensör 1,20 V gösteriyor. Aynı koşulda sağlam bir araçta 3,10 V. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.multimetre-ekran",
+        "unit": "V",
+        "acceptRange": [1.85, 1.95]
+      },
+      "camera": "tezgah",
+      "hint": "3,10 eksi 1,20.",
+      "teachingNote": "Cihazın gösterdiği değer, kontrol ünitesinin o girişte gördüğü gerilimdir. Aynı noktayı multimetreyle de ölçmek gerekir, çünkü iki sayı birbirini ya doğrular ya yalanlar. İkisi aynıysa devrede gerçekten o gerilim vardır ve arama sensörle kablosunda sürer. Cihaz farklı, multimetre farklı okuyorsa arıza sensörle kontrol ünitesi arasındaki hattadır. Bu karşılaştırma, teşhis cihazının söylediğine körü körüne inanmayı engelleyen basit bir alışkanlıktır."
+    },
+    {
+      "id": 4,
+      "instruction": "Cihazda üç kod birden var ve üçü de farklı sensörlere ait.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sase-noktasi",
+        "question": "Bu tablo ne düşündürür?",
+        "options": [
+          { "label": "Ortak bir sebep aranır: paylaşılan şase ya da paylaşılan besleme üç sensörü birden yanıltıyor olabilir", "verdict": "ortak-sebep", "correct": true, "explain": "Üç ayrı sensörün aynı anda bozulması olası değildir; çok daha olası olan, üçünün ortak bir şeyi paylaşmasıdır. Sensörler genellikle aynı besleme hattından beslenir ve aynı şase noktasına döner. O şase noktası bozulduğunda üç sensörün de sıfır noktası kayar, üçü birden anlamsız değer bildirir ve kontrol ünitesi üç ayrı kod kaydeder. Şema burada devreye girer: kodların işaret ettiği devrelerin nerede birleştiğine bakılır ve o ortak nokta ölçülür. Ortak sebep bulunup giderildiğinde üç kod birden kaybolur. Kodları tek tek ele alıp üç sensör birden değiştiren usta ise hem parayı hem arızayı yerinde bırakır. Kod sayısının çokluğu bir felaket değil, bir ipucudur." },
+          { "label": "Üç sensör birden değiştirilir", "verdict": "uc-sensor", "explain": "Üçünün aynı anda bozulması olası değil; ortak nokta aranır." },
+          { "label": "Kontrol ünitesi bozulmuştur", "verdict": "ecu", "explain": "Mümkün ama en son aday; önce ortak besleme ve şase ölçülür." },
+          { "label": "Kodlar silinip tek tek geri gelmesi beklenir", "verdict": "sil-bekle", "explain": "Kayıt yok edilir ve zaman kaybedilir; şema okumak daha hızlı." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Birden çok kod, çoğu zaman birden çok arıza değil tek bir ortak sebep demektir. Şema o ortak noktayı gösterir."
+    },
+    {
+      "id": 5,
+      "instruction": "Başka bir araçta kod, karışımın uzun süre fakir kaldığını bildiriyor. Sensörler ölçüldü, hepsi doğru okuyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sensor",
+        "question": "Bu durumda ne yapılır?",
+        "options": [
+          { "label": "Sensörün doğru söylediği kabul edilir; bildirdiği fiziksel durumun gerçek sebebi aranır", "verdict": "sensor-dogru", "correct": true, "explain": "Kodların bir kısmı bir devrenin elektriksel arızasını değil, ölçülen bir büyüklüğün beklenenden sapmasını bildirir. Böyle bir kodda sensörler doğru çalışıyorsa, kod aslında doğru bilgi vermektedir ve arıza elektrik dışındadır: kaçak yapan bir hava hattı, tıkanmış bir filtre, zayıf bir yakıt beslemesi, sızdıran bir egzoz bağlantısı. Bu ayrım kod okumanın en önemli yeridir. Kodun adında geçen parçayı değiştirmek burada tam bir israftır, çünkü o parça zaten görevini yapmakta ve gerçeği bildirmektedir. Ustanın işi, sensörün yanıldığı durum ile sensörün doğruyu söylediği durumu ayırmaktır; bu ayrım da ancak sensörün kendisi ölçülüp doğrulandıktan sonra yapılabilir." },
+          { "label": "Kodun adındaki sensör değiştirilir", "verdict": "sensor-degistir", "explain": "Sensör doğru okuyor; değiştirmek arızayı yerinde bırakır." },
+          { "label": "Kod silinip yok sayılır", "verdict": "sil", "explain": "Kod gerçek bir durumu bildiriyor; silmek yalnız uyarıyı susturur." },
+          { "label": "Kontrol ünitesi yazılımı güncellenir", "verdict": "yazilim", "explain": "Bazı vakalarda gerekebilir ama fiziksel sebep aranmadan başvurulmaz." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Sensörün yanıldığı durum ile doğruyu söylediği durum aynı kodla görünebilir. İkisini ayıran şey, sensörün ölçülmüş olmasıdır."
+    },
+    {
+      "id": 6,
+      "instruction": "İlk araçta arıza bulundu ve giderildi. Kodlar silinecek.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sensor-soketi",
+        "question": "Silmeden sonra ne yapılır?",
+        "options": [
+          { "label": "Kaydedilmiş koşullar tekrar üretilir ve kodun geri gelmediği görülür", "verdict": "kosulu-tekrarla", "correct": true, "explain": "Kod silmek onarımın doğrulaması değildir; yalnız hafızayı temizler. Doğrulama, kodun kaydedildiği koşulların yeniden kurulmasıyla yapılır. Kayıtlı şartlar bunu zaten söylüyordu: motor şu sıcaklıkta, şu devirde, şu yükte iken. Aynı şartlar sağlanır — gerekirse yol testiyle — ve kodun geri gelmediği görülür. Ayrıca kontrol ünitesinin bazı denetimleri belli şartlar oluşmadan hiç çalışmaz; bu denetimlerin tamamlandığı cihazın hazırlık göstergelerinden takip edilir. Kod hemen geri gelmedi diye iş kapatılırsa arıza müşterinin yolunda ortaya çıkar. Doğrulama koşul üretilerek yapılır, bekleyerek değil — aralıklı arıza dersindeki kuralın aynısı." },
+          { "label": "Kod silindiyse iş bitmiştir", "verdict": "silindi-bitti", "explain": "Silmek yalnız kaydı temizler; arızanın giderildiğini göstermez." },
+          { "label": "Araç müşteriye verilir, geri gelirse bakılır", "verdict": "musteri", "explain": "Koşul atölyede üretilebiliyorken müşteriyi denek yapmak olur." },
+          { "label": "Bütün kodlar tekrar okunup listelenir", "verdict": "tekrar-oku", "explain": "Gerekli ama yeterli değil; koşul üretilmeden liste boş görünür." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Kod silmek bir onarım değil, bir sayfa silmektir. Onarımın kanıtı, aynı koşulda kodun geri gelmemesidir."
+    },
+    {
+      "id": 7,
+      "instruction": "İş kapanıyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.multimetre-ekran",
+        "question": "Kayıtta ne bulunmalı?",
+        "options": [
+          { "label": "Bulunan kodlar, kayıtlı koşullar, yapılan ölçümler ve kodun adındaki parçanın neden değişmediği", "verdict": "kod-kosul-olcum", "correct": true, "explain": "Elektronik arızalarda kayıt, teşhisin nasıl yürüdüğünü gösterir. Dört şey yazılır: hangi kodlar vardı, kod hangi şartlarda kaydedilmişti, hangi ölçümler yapıldı ve ne çıktı, sonuçta neyin sebep olduğu bulundu. Dördüncüsü özellikle önemlidir, çünkü kodun adındaki parça değiştirilmediğinde müşteri çoğu zaman kuşkulanır; ölçüm değerleri bu kararı açıklayan tek kanıttır. Kayıt aynı zamanda bir sonraki kişiye yol gösterir: arıza geri gelirse elenmiş dallar tekrar elenmez. Bu alanın başından beri tekrarlanan cümle burada da geçerlidir — parça değiştirmek çıraklıktır, ölçmek ve ölçtüğünü yazmak ustalıktır." },
+          { "label": "Yalnız kod numarası yazılır", "verdict": "kod-no", "explain": "Kod adres verir; teşhisin kendisini göstermez." },
+          { "label": "\"Arıza giderildi, kodlar silindi\" yazmak yeterli", "verdict": "silindi", "explain": "Geri gelişte hiçbir işe yaramayan bir cümle." },
+          { "label": "Değiştirilen parça yazılır", "verdict": "parca", "explain": "Bu işlerde çoğu zaman kodun adındaki parça değişmez; asıl bilgi ölçümlerdir." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Araç Elektrik alanı burada kapanıyor. Başlarken kurulan cümle sonunda kanıtlanmış oluyor: elektrikte parça değiştirmek çıraklıktır, ustalık ölçmektir."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Hata kodu neyi adlandırır?",
+        "a": "devre-ve-sapma",
+        "options": [
+          { "verdict": "devre-ve-sapma", "label": "Bir devreyi ve kontrol ünitesinin orada gördüğü sapmayı; arızalı parçayı değil", "explain": "Kontrol ünitesi girişlerini izler ve bir değer beklediği sınırların dışına çıktığında hangi devrede nasıl bir sapma gördüğünü kaydeder. Kodun adında bir sensörün geçmesi o sensörün bozuk olduğunu göstermez. Aynı kod dört sebepten oluşabilir: sensör bozuktur, kablo arızalıdır, şase referansı kaymıştır, ya da sensör doğru çalışıp gerçekten anormal bir durumu bildirmektedir. Ölçmeden parça değiştirmek bu dördünden üçünü görmezden gelmektir." },
+          { "verdict": "parca", "label": "Değiştirilecek parçayı", "explain": "Kod bir adres verir, bir suçlu vermez." },
+          { "verdict": "tarih", "label": "Arızanın tarihini", "explain": "Kayıtlı koşullar bilgi verir ama kodun kendisi bir tarih değildir." },
+          { "verdict": "ciddiyet", "label": "Arızanın ne kadar ciddi olduğunu", "explain": "Ciddiyet ayrı bir değerlendirmedir ve kodun tanımı değildir." }
+        ]
+      },
+      {
+        "q": "Kod silindikten sonra onarım nasıl doğrulanır?",
+        "a": "kosulu-uret",
+        "options": [
+          { "verdict": "kosulu-uret", "label": "Kodun kaydedildiği koşullar tekrar üretilir ve kodun geri gelmediği görülür", "explain": "Silmek yalnız hafızayı temizler, arızanın giderildiğini göstermez. Kontrol ünitesinin kaydettiği çalışma şartları — sıcaklık, devir, yük, hız — arızanın hangi koşulda oluştuğunu zaten söylüyordur; aynı şartlar gerekirse yol testiyle sağlanır ve kod geri gelmez. Ayrıca bazı denetimler belli şartlar oluşmadan hiç çalışmaz; bunların tamamlandığı cihazın hazırlık göstergelerinden takip edilir." },
+          { "verdict": "silindi", "label": "Kod silindiyse iş bitmiştir", "explain": "Silmek bir onarım değil, bir sayfa silmektir." },
+          { "verdict": "musteri", "label": "Müşteri kullanır, geri gelirse bakılır", "explain": "Koşul atölyede üretilebiliyorken müşteriyi denek yapmak olur." },
+          { "verdict": "yeni-parca", "label": "Yeni parça takıldıysa doğrulama gerekmez", "explain": "Yeni parça da arızayı gidermemiş olabilir; kanıt koşul altındaki sonuçtur." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 1,20 V ve 3,10 V SENARYO okumalarıdır. Öğrenciden istenen üretici sınırı değil, arızalı araç ile sağlam araç arasındaki FARKTIR (1,90 V). sourceRequired bu yüzden gerekmedi.",
+    "sourceRequired": "Hata kodu numaraları, kod tanımları, sensör gerilim tabloları ve denetim hazırlık şartları araca ve üreticiye özgüdür; bu derste hiçbir kod numarası ve eşik VERİLMEDİ. Ders kodun ne anlama geldiği ve nasıl doğrulandığı üzerine kuruldu.",
+    "kapsam": "Teşhis cihazı sahnede yok; ekranda görülenler metinde anlatılıyor ve ölçüm multimetre üzerinden yapılıyor. Cihazın parça olarak modellenmesi ileride eklenebilir ama dersin mantığı buna bağlı değil.",
+    "reviewedByMechanic": false
+  }
+}

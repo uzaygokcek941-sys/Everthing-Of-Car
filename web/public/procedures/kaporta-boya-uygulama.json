@@ -1,0 +1,178 @@
+{
+  "id": "kaporta.boya-uygulama",
+  "area": "kaporta",
+  "stage": 6,
+  "title": "Tabanca Ayarı, Kat Sayısı ve Ortam Koşulları",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 45,
+  "prerequisites": ["kaporta.renk-ve-kod"],
+  "learningGoals": [
+    "Tabancanın üç ayarının yüzeye ne yaptığını ve neden deneme yüzeyinde belirlendiğini bilmek",
+    "Kat sayısının kalınlık değil örtme ve geçiş meselesi olduğunu görmek",
+    "Ortam koşullarının bir bahane değil bir uygulama parametresi olduğunu anlamak"
+  ],
+
+  "safety": [
+    { "rule": "Boya püskürtme uygun solunum koruması ve havalandırma olmadan yapılmaz", "why": "Boya ve sertleştirici buharı ile aerosolün solunması kalıcı sağlık zararı verir; maske ve havalandırma tercih değil şarttır", "blocksStart": true },
+    { "rule": "Püskürtme alanında ateş, kıvılcım ve sıcak yüzey bulunmaz", "why": "Boya çözücülerinin buharı yanıcıdır ve ortamda birikir", "blocksStart": true },
+    { "rule": "Aracın enerjisi ve boyanmayacak bölgeler işe başlamadan güvenceye alınır ve maskelenir", "why": "Sonradan temizlenmeye çalışılan boya, temizlenmeye çalışılan yüzeye zarar verir", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.boya-tabancasi", "label": "Boya tabancası", "required": true },
+    { "id": "tool.kalinlik-olcer", "label": "Kalınlık ölçer", "required": false },
+    { "id": "tool.maskeleme", "label": "Maskeleme malzemesi", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Tabancayı eline aldın. Üç ayar var: hava, malzeme miktarı ve yelpaze genişliği.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.boya-tabancasi",
+        "question": "Bu ayarlar nasıl belirlenir?",
+        "options": [
+          { "label": "Deneme yüzeyinde denenerek: ayarlar birbirini etkiler, üstelik ürüne, sıcaklığa ve tabancaya göre değişir — doğru ayar bir sayı değil, deneme yüzeyinde görülen düzgün ve eşit bir desendir", "verdict": "denenerek", "correct": true, "explain": "Tabancanın üç ayarı birbirinden bağımsız değildir ve her biri yüzeyde farklı bir sonuç üretir. Hava, boyayı ne kadar ince zerrelere ayıracağını belirler: az hava iri zerre ve pürüzlü yüzey, çok hava aşırı incelme, kuru inme ve boşa giden malzeme demektir. Malzeme miktarı, aynı sürede yüzeye ne kadar boya gittiğini belirler: az olursa kat kuru iner ve örtmez, çok olursa akar. Yelpaze genişliği, tek geçişte ne kadar alanın kaplandığını belirler ve doğrudan geçiş sayısını değiştirir. Bu üçü birbirini etkilediği için biri değiştiğinde diğerleri de gözden geçirilir. Üstelik doğru ayar sabit bir sayı değildir: ürünün akışkanlığına, ortam sıcaklığına, tabancanın modeline ve meme ölçüsüne göre değişir. Bu yüzden ayar kitaptan değil, deneme yüzeyinden okunur — bir kartona ya da deneme paneline püskürtülür ve desene bakılır. Aranan şey, kenarları yumuşak, ortası ve kenarları dengeli, damlasız ve boşluksuz bir yelpazedir. Desen bir kenarda yoğunlaşıyorsa ya da ortada boşluk varsa çoğu zaman sorun ayar değil, tabancanın kendisidir: tıkalı meme ya da hasarlı hava başlığı. Ayarların sayısal karşılıkları, meme ölçüleri, hava basıncı ve akışkanlık değerleri ürüne ve tabancaya özgüdür ve teknik belgede yazar; bu ders sayı vermiyor." },
+          { "label": "Üreticinin verdiği sabit değerlerle, denemeye gerek yoktur", "verdict": "sabit", "explain": "Teknik belge aralık verir; ortam ve tabanca farkı denemeyle kapanır." },
+          { "label": "Tecrübeyle, ayarlara bakmadan", "verdict": "tecrube", "explain": "Tecrübe deseni okumaya yarar; denemenin yerini tutmaz." },
+          { "label": "En yüksek basınç her zaman en iyi sonucu verir", "verdict": "yuksek-basinc", "explain": "Aşırı hava kuru inme ve malzeme kaybı üretir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Doğru ayar bir sayı değil, deneme yüzeyinde görülen desen. Desen bozuksa önce tabancaya bak — tıkalı meme ayarla düzelmez."
+    },
+    {
+      "id": 2,
+      "instruction": "Kat sayısını planlıyorsun. İki plan var: onarım bölgesinde 3 kat, geçiş bölgesinde 5 kat. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.kalinlik-olcer",
+        "unit": "kat",
+        "acceptRange": [2, 2]
+      },
+      "camera": "kaporta",
+      "hint": "5 eksi 3.",
+      "teachingNote": "2 kat fark — ve bu fark, kat sayısının neden tek bir sayı olmadığını anlatır. Kat sayısı bir kalınlık hedefi değildir; iki işi birden yapar. Birincisi örtmedir: alttaki astarın rengi tamamen kapanana kadar kat atılır ve bu, rengin örtücülüğüne göre değişir — bazı renkler az katta örter, bazıları belirgin biçimde daha çok ister. Bu yüzden 'kaç kat' sorusunun cevabı renkten renge değişir ve deneme kartı bunu da gösterir. İkincisi geçiştir: açılım bölgesinde katlar giderek daha geniş ve daha ince atılır, yani orada geçiş sayısı artar ama her geçişin taşıdığı malzeme azalır. Bu yüzden geçiş bölgesindeki kat sayısı onarım bölgesindekinden farklı olabilir. Buradan iki hata çıkar. Birincisi kat sayısını kalınlıkla karıştırmaktır: 'daha kalın atarsam daha iyi örter' düşüncesi akmaya, kuruma sorununa ve metalikte renk kaymasına yol açar. İkincisi katlar arası beklemeyi atlamaktır — her katın çözücüsünün uçması için bir süre gerekir ve bu süre atlanınca alttaki kat hapsolur, sonuç sarkma ya da sonradan ortaya çıkan kusurdur. Kaç kat uygulanacağı, katlar arası bekleme, kuru film kalınlığı ve akışkanlık ürünün teknik belgesinde yazar; buradaki iki sayı senaryo planıdır."
+    },
+    {
+      "id": 3,
+      "instruction": "Panel üzerinde ilerlerken her geçişi bir öncekinin kenarına değdirerek atıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-kapi-paneli",
+        "question": "Geçişler nasıl bindirilir?",
+        "options": [
+          { "label": "Her geçiş bir öncekinin üzerine belirli bir oranda binecek biçimde: yelpazenin kenarı ortasından daha ince iner, bindirmezsen iki geçiş arasında ince kalan bir şerit kalır ve o şerit ışıkta çizgi olarak görünür", "verdict": "bindirme", "correct": true, "explain": "Tabancanın yelpazesi yüzeye eşit inmez: ortası en yoğun, kenarları giderek incedir. Bu, kusur değil yelpazenin doğasıdır ve uygulama tekniği tam da bunun üzerine kuruludur. İki geçiş kenar kenara getirilirse, her ikisinin de ince olan kenarları yan yana gelir ve orada diğer yerlerden daha ince bir şerit oluşur. Bu şerit tek katta görünmeyebilir ama katlar üst üste binince birikir ve sonuçta panel boyunca uzanan açık ya da mat çizgiler olarak ortaya çıkar — metalik renklerde çok daha belirgindir, çünkü parçacık yoğunluğu da değişir. Çözüm, her geçişi bir öncekinin üzerine belirli bir oranda bindirmektir; böylece bir geçişin ince kenarı bir sonrakinin yoğun kısmıyla tamamlanır ve yüzey boyunca dengeli bir kalınlık dağılımı oluşur. Bindirmenin yanında üç şey daha aynı ölçüde belirleyicidir. Birincisi mesafe: tabanca yüzeye hep aynı uzaklıkta tutulur; yaklaşınca kat kalınlaşır ve akar, uzaklaşınca kuru iner. İkincisi açı: tabanca yüzeye dik tutulur; bilekten çevirerek yapılan yay hareketi geçişin ortasını kalın, uçlarını ince bırakır. Üçüncüsü hızdır ve sabit olmalıdır. Bindirme oranı, mesafe ve hız ürüne ve tabancaya özgüdür; bu ders sayı vermiyor." },
+          { "label": "Kenar kenara getirilir, üst üste binmez", "verdict": "kenar-kenara", "explain": "İnce kenarlar yan yana gelince aralarında ince bir şerit kalır." },
+          { "label": "Rastgele, nasıl olsa katlar eşitler", "verdict": "rastgele", "explain": "Katlar birikir; düzensizlik büyür, eşitlenmez." },
+          { "label": "Tabanca bilekten çevrilerek yay çizilir", "verdict": "yay", "explain": "Yay hareketi ortayı kalın, uçları ince bırakır." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Yelpazenin kenarı ortasından ince iner. Bindirmezsen aradaki ince şerit katlarla birikir ve çizgi olur."
+    },
+    {
+      "id": 4,
+      "instruction": "Atölye bugün soğuk ve nemli. İşi ertelemeyip başlamayı düşünüyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.zimpara-bolgesi",
+        "question": "Ortam koşulları işi nasıl etkiler?",
+        "options": [
+          { "label": "Doğrudan etkiler: sıcaklık kurumayı ve akışkanlığı, nem yüzeyde yoğuşmayı ve mat/bulanık sonucu belirler — koşullar bir bahane değil bir uygulama parametresidir, ya düzeltilir ya iş ertelenir", "verdict": "ortam-parametre", "correct": true, "explain": "Boya, kabın içinde bittiğinde değil yüzeyde kuruduğunda iş olur; ve kuruma büyük ölçüde ortamın kontrolündedir. Sıcaklık iki yönde etki eder: düşük sıcaklıkta çözücü yavaş uçar, kat uzun süre yaş kalır, akma ve toz tutma riski artar, kürlenme uzar; yüksek sıcaklıkta çözücü çok hızlı uçar, boya yüzeye varmadan kurumaya başlar ve kuru inme, portakal kabuğu ve zayıf yapışma çıkar. Nem ayrı bir konudur: havadaki nem yüksekken çözücünün uçması yüzeyi yerel olarak soğutur ve o soğuk yüzeyde su yoğuşabilir; sonuç, verniğin ya da boyanın içinde kalan mat, bulanık, sütlü bir görünümdür — bu kusur cilayla geçmez, katmanın içindedir. Üçüncü etken hava hareketi ve tozdur: hareketsiz havada asılı toz yaş katmana iner, aşırı hava hareketi ise yüzeyi erken kurutur. Doğru yaklaşım, koşulları bir bahane olarak değil bir parametre olarak görmektir: ortam düzeltilebiliyorsa düzeltilir, ürünün koşula uygun bir varyantı varsa o kullanılır, hiçbiri olmuyorsa iş ertelenir. En kötü seçenek, koşulları görmezden gelip başlamaktır — çünkü bu kusurların çoğu düzeltmeyle değil, katmanları geri alarak çözülür. Uygun sıcaklık ve nem aralıkları ile ürünün hangi koşulda hangi varyantla kullanılacağı teknik belgesinde yazar; bu ders aralık vermiyor." },
+          { "label": "Etkilemez, boya her koşulda kurur", "verdict": "etkilemez", "explain": "Sıcaklık ve nem kurumayı ve yüzey kalitesini doğrudan belirler." },
+          { "label": "Yalnız çok soğukta sorun olur", "verdict": "sadece-soguk", "explain": "Yüksek sıcaklık kuru inme, yüksek nem yoğuşma üretir." },
+          { "label": "Kalın kat atarak telafi edilir", "verdict": "kalin-kat", "explain": "Kalın kat soğukta akmayı, nemde yoğuşmayı artırır." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Koşullar bahane değil parametre. Nemde yoğuşan su katmanın içinde kalır — cilayla geçmez."
+    },
+    {
+      "id": 5,
+      "instruction": "Boyanın bitmesi gereken hattı belirliyorsun. Panelin ortasından geçen düz bir çizgide bitirmeyi düşünüyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-camurluk",
+        "question": "Maskeleme ve bitiş hattı nereden geçer?",
+        "options": [
+          { "label": "Doğal bir sınırdan: kıvrım, hat, panel kenarı ya da bir parçanın ayrıldığı yer — düz yüzeyin ortasında bırakılan bir sınır, ne kadar yumuşatılırsa yumuşatılsın ışıkta kendini gösterme riski taşır", "verdict": "dogal-sinir", "correct": true, "explain": "Boyanın nerede biteceği, boyanın kendisi kadar belirleyicidir. Göz, düz ve sürekli bir yüzeyde en küçük ton ya da parlaklık değişimini yakalar; ama bir kıvrımda, bir hatta ya da iki parçanın ayrıldığı yerde aynı değişimi doğal sayar, çünkü orada ışık zaten kırılmaktadır. Bu yüzden bitiş hattı mümkün olan her durumda doğal bir sınıra taşınır: gövde kuşağı, panelin kıvrımı, kapı kenarı, bir çıtanın ya da tamponun ayrım yeri. Bunun pratik bedeli bazen daha geniş bir alan boyamaktır ve bu bilinçli bir tercihtir — daha az boya kullanıp ortada bir sınır bırakmak, kısa vadede tasarruf gibi görünen ama teslimde geri dönen bir karardır. Maskelemenin kendisi de iş kalitesinin bir parçasıdır. Keskin bir bant kenarı, boyanın orada birikip bir basamak yapmasına yol açar; bu yüzden geçiş gereken yerlerde bandın kenarı kıvrılarak yumuşak bir sınır oluşturulur. Maskelenmesi gereken bir başka grup da hareketli ve hassas parçalardır: cam kenarları, contalar, lastik yüzeyler, havalandırma açıklıkları ve elektrik bağlantıları. Bir de sonradan temizlemenin bedeli vardır — kuruyan boyayı bir contadan ya da plastikten sökmeye çalışmak, çoğu zaman o parçaya zarar verir. Hangi hatların bitiş için uygun olduğu araca özgüdür ve panel geometrisine bakılarak karar verilir." },
+          { "label": "Düz yüzeyin ortasında bitirilir, yumuşatılır", "verdict": "duz-yuzey", "explain": "Yumuşatılsa bile göz düz yüzeyde değişimi yakalar." },
+          { "label": "Nereye denk gelirse, önemi yok", "verdict": "onemsiz", "explain": "Bitiş hattı sonucun görünürlüğünü doğrudan belirler." },
+          { "label": "Maskeleme sonradan temizlemekten kolaydır ama şart değildir", "verdict": "sonra-temizle", "explain": "Kuruyan boyayı sökmek çoğu zaman o parçaya zarar verir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Göz düz yüzeyde her değişimi yakalar, kıvrımda doğal sayar. Bitiş hattı her zaman doğal sınıra taşınır."
+    },
+    {
+      "id": 6,
+      "instruction": "İlk kattan sonra yüzeyde ince, kuru ve pütürlü bir doku görüyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.bagaj-kapagi",
+        "question": "İlk teşhis ne olmalı?",
+        "options": [
+          { "label": "Boya yüzeye varmadan kurumaya başlamış: tabanca fazla uzak, hava fazla ya da ortam çok sıcak — üçünden biri, boyanın yüzeyde yayılıp düzleşecek zamanı bulamamasına yol açıyor", "verdict": "kuru-inme", "correct": true, "explain": "Yüzeyde kuru, pütürlü ve mat bir doku görülüyorsa boya oraya yeterince ıslak varmamış demektir ve bunun anlamı şudur: zerreler yüzeye ulaştığında çözücülerinin bir kısmını yolda kaybetmiş, bu yüzden birleşip düzleşemeden yerinde kalmışlardır. Üç ana sebep var ve üçü de yolculuk süresini ya da buharlaşma hızını artırır. Birincisi mesafedir: tabanca ne kadar uzaksa zerre havada o kadar uzun kalır ve o kadar çok çözücü kaybeder. İkincisi hava miktarıdır: aşırı hava zerreyi çok küçültür, küçük zerre yüzey alanı oranla büyük olduğu için daha hızlı kurur. Üçüncüsü ortamdır: yüksek sıcaklıkta ya da güçlü hava akımında aynı mesafe bile fazla gelir. Doğru tepki bu üçünü sırayla gözden geçirmektir — kat kalınlaştırmak değil. Kalın kat atarak kuru dokuyu bastırmaya çalışmak tipik bir hatadır ve yeni bir kusur üretir: alt tarafta kuru bir katmanın üstüne ıslak bir kat gelir, bu ikisi eşit kürlenmez ve sonuç sarkma, iz ya da sonradan ortaya çıkan yapışma sorunudur. Metalik renklerde kuru inmenin ek bir bedeli daha vardır: parçacıklar düzgün yatamadığı için renk daha açık ve benekli çıkar — yani sorun yalnız dokuda değil, tonda da görünür. Uygun mesafe, hava basıncı ve sıcaklık aralığı ürüne ve tabancaya özgüdür." },
+          { "label": "Normaldir, vernik kapatır", "verdict": "vernik-kapatir", "explain": "Vernik alttaki kuru dokuyu düzeltmez, üzerine oturur." },
+          { "label": "Kalın kat atılarak bastırılır", "verdict": "kalin-kat", "explain": "Kuru katın üstüne ıslak kat eşit kürlenmez; yeni kusur üretir." },
+          { "label": "Renk yanlıştır", "verdict": "renk", "explain": "Doku sorunu; renk kayması bunun sonucudur, sebebi değil." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Kuru inme = mesafe, hava ya da ortam. Üçünü gözden geçir; kat kalınlaştırma yeni kusur üretir."
+    },
+    {
+      "id": 7,
+      "instruction": "Renk katları tamamlandı, vernik sırada.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.tavan-paneli",
+        "question": "Bu dersin ana fikri nedir?",
+        "options": [
+          { "label": "Boya bir malzeme değil bir uygulamadır: aynı kutu, farklı ayar ve farklı ortamda farklı sonuç verir — sonucu belirleyen mesafe, hız, bindirme, kat düzeni ve koşullardır", "verdict": "uygulama-belirler", "correct": true, "explain": "Bu dersin bütün adımları tek bir noktaya çıkıyor: elindeki kutu sonucu belirlemiyor, o kutuyu yüzeye nasıl taşıdığın belirliyor. Aynı ürün, aynı renk ve aynı araç; tabancanın mesafesi değişince doku değişiyor, hız değişince kalınlık değişiyor, bindirme atlanınca çizgi çıkıyor, ortam soğuyunca akıyor, ısınınca kuru iniyor. Bu yüzden 'iyi boya aldım' cümlesi bir garanti değil, yalnızca bir başlangıçtır. Buradan üç pratik sonuç çıkıyor. Birincisi, her iş kendi denemesiyle başlar — deneme yüzeyi hem rengi hem ayarı doğrular ve bu adım hiçbir zaman zaman kaybı değildir. İkincisi, bir kusur görüldüğünde ilk soru 'hangi parametre?' olur, 'hangi ürün?' değil; kuru doku, çizgi, akma ve mat bölge parametrelerin imzasıdır ve her biri belirli bir sebebi işaret eder. Üçüncüsü, koşullar uygun değilse iş ertelenir; bu bir zayıflık değil, geri dönüşü zor bir hatayı önlemektir — boya kusurlarının çoğu düzeltmeyle değil, katmanları geri alarak çözülür. Sırada vernik ve kurutma var: işin görünen yüzeyini ve dayanımını kuran katman, ve bu alanın sabrı en çok ölçtüğü yer." },
+          { "label": "İyi ürün alınırsa sonuç iyi olur", "verdict": "urun", "explain": "Ürün başlangıç; sonucu uygulama parametreleri belirler." },
+          { "label": "Kat sayısı arttıkça kalite artar", "verdict": "kat-sayisi", "explain": "Fazla kat akma, kuruma sorunu ve renk kayması üretir." },
+          { "label": "Ortam koşulları deneyimli ustayı etkilemez", "verdict": "usta", "explain": "Deneyim koşulu okur; koşulun fiziğini değiştirmez." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Kutu değil uygulama belirler. Kusur görünce ilk soru 'hangi parametre', 'hangi ürün' değil."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Panel boyunca uzanan açık çizgiler çıktı. En olası sebep nedir?",
+        "a": "bindirme",
+        "options": [
+          { "verdict": "bindirme", "label": "Geçişler yeterince bindirilmemiş: yelpazenin ince kenarları yan yana gelmiş ve aralarında kalan ince şerit katlarla birikmiş", "explain": "Her geçiş bir öncekinin üzerine belirli bir oranda bindirilir; bir geçişin ince kenarı bir sonrakinin yoğun kısmıyla tamamlanır. Metalik renklerde parçacık yoğunluğu da değiştiği için çizgi çok daha belirgin çıkar. Mesafe ve hız da sabit tutulur." },
+          { "verdict": "kenar-kenara", "label": "Geçişler kenar kenara getirilmiş, bu doğrudur", "explain": "Kenar kenara getirmek tam da bu çizgiyi üretir." },
+          { "verdict": "renk", "label": "Renk yanlış karışmış", "explain": "Renk hatası panel boyunca düzenli çizgi vermez." },
+          { "verdict": "vernik-kapatir", "label": "Vernik kapatır", "explain": "Vernik alttaki dağılım farkını gidermez." }
+        ]
+      },
+      {
+        "q": "Atölye soğuk ve nemli. Ne yapılır?",
+        "a": "ortam-parametre",
+        "options": [
+          { "verdict": "ortam-parametre", "label": "Ortam düzeltilir, ürünün koşula uygun varyantı varsa o kullanılır, hiçbiri olmuyorsa iş ertelenir", "explain": "Soğukta çözücü yavaş uçar, kat uzun süre yaş kalır, akma ve toz tutma riski artar. Nemde yüzeyde su yoğuşabilir ve sonuç katmanın içinde kalan mat, bulanık bir görünümdür — bu cilayla geçmez. Uygun sıcaklık ve nem aralığı ürünün teknik belgesindedir." },
+          { "verdict": "etkilemez", "label": "Etkilemez, başlanır", "explain": "Kuruma büyük ölçüde ortamın kontrolündedir." },
+          { "verdict": "sadece-soguk", "label": "Yalnız soğuk sorun olur", "explain": "Yüksek sıcaklık kuru inme, yüksek nem yoğuşma üretir." },
+          { "verdict": "kalin-kat", "label": "Kalın kat atılarak telafi edilir", "explain": "Kalın kat soğukta akmayı artırır." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2'deki 3 kat ve 5 kat SENARYO planlarıdır; istenen FARKTIR (2 kat). Ders hiçbir ürün için kat sayısı önermiyor.",
+    "sourceRequired": "Hava basıncı, meme ölçüsü, akışkanlık, tabanca mesafesi, bindirme oranı, kat sayısı, katlar arası bekleme, kuru film kalınlığı, uygun sıcaklık ve nem aralıkları ile ürün adları bilinçle VERİLMEDİ; hepsi ürüne ve tabancaya özgüdür ve teknik belgeden okunur.",
+    "kapsam": "Boya kabini kurulumu, havalandırma tasarımı, atık ve emisyon mevzuatı KAPSAM DIŞIDIR; ders uygulama parametrelerinin yüzeyde ne yaptığını öğretiyor.",
+    "kaynak": "Bu alan kullanıcının açık talebiyle eklendi (talep birebir: 'birde alanlara kaportayı ekleyelim'); konu başlıkları MEB Otomotiv Gövde ve Boya dalının çerçevesini takip ediyor, kazanım numarası iddiası yok.",
+    "reviewedByMechanic": false
+  }
+}

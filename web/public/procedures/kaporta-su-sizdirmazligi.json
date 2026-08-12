@@ -1,0 +1,177 @@
+{
+  "id": "kaporta.su-sizdirmazligi",
+  "area": "kaporta",
+  "stage": 8,
+  "title": "Su Kaçağı ve Tahliye Kanalları",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 40,
+  "prerequisites": ["kaporta.cam-ve-conta"],
+  "learningGoals": [
+    "Aracın bazı bölümlerinin tasarım gereği ıslandığını, asıl işin suyu dışarı vermek olduğunu bilmek",
+    "Islak yerin giriş yeri olmadığını, suyun bir yol izlediğini görmek",
+    "Su kaçağı testinin nasıl sıralı ve kontrollü yapıldığını öğrenmek"
+  ],
+
+  "safety": [
+    { "rule": "Su testine başlamadan önce aracın elektrik ve elektronik bileşenleri korunur, ıslanan bölgede enerji verilmez", "why": "Su ile temas eden bağlantı hem kısa devre hem kalıcı korozyon üretir; ayrıca ıslak bir ortamda enerjili çalışmak tehlikelidir", "blocksStart": true },
+    { "rule": "Islanan iç döşeme kurutulmadan araç kapalı bırakılmaz", "why": "Islak kalan döşeme ve yalıtım küf ve koku üretir, altındaki sacın korozyonunu hızlandırır", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.su-hortumu", "label": "Su hortumu", "required": true },
+    { "id": "tool.olcum-mastari", "label": "Ölçüm mastarı", "required": false },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Müşteri 'kapının içinde su var, sızdırıyor' diyor. Kapı iç kaplamasını söktün, gerçekten ıslak.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-kapi-paneli",
+        "question": "Kapının içinin ıslak olması arıza mıdır?",
+        "options": [
+          { "label": "Tek başına arıza değildir: kapının içine su girmesi tasarımın kabul ettiği bir durumdur — cam çevresinden sızan su içeride akar ve alttaki tahliye deliklerinden çıkar; arıza, suyun ÇIKAMAMASIDIR", "verdict": "tahliye-sorunu", "correct": true, "explain": "Kapı, su geçirmez bir kutu olarak tasarlanmamıştır. Camın çevresinden ve fitillerin kenarından bir miktar suyun içeri girmesi normaldir; sistem bunu engellemeye değil, yönetmeye göre kurulmuştur. İçeride su, kapının iç sacı ile döşeme arasındaki bir engelle ayrılır ve aşağı doğru yönlendirilir; kapının alt kenarındaki tahliye delikleri suyu dışarı bırakır. Yani sistemin üç parçası vardır: suyun içeri girdiği yer, suyun izlediği yol ve suyun çıktığı yer. Şikâyet geldiğinde bakılacak ilk yer, sızdığı sanılan yer değil, çıkış yeridir. Tahliye delikleri çamur, yaprak, böcek yuvası ya da eski sızdırmazlık malzemesi kalıntısıyla tıkanırsa su içeride birikir; seviye yükseldiğinde döşemeye ve ayak boşluğuna taşar ve müşteri bunu 'kapı sızdırıyor' olarak tarif eder. Korozyon dersinde geçen kural burada tam olarak işler — kapı alt kenarı içeriden dışarıya çürür, çünkü su orada durur. İkinci parça yönlendirmedir: kapı içindeki nem bariyeri yırtılmış, kenarından ayrılmış ya da bir onarımdan sonra düzgün yapıştırılmamışsa su yolunu şaşırır ve doğrudan döşemeye geçer; bu, kapı içi işi yapılmış her araçta ilk bakılacak yerlerden biridir. Tahliye deliklerinin yeri ve sayısı araca özgüdür ve onarım kılavuzundan okunur." },
+          { "label": "Evet, kapının içi hiçbir zaman ıslanmamalıdır", "verdict": "hic-islanmamali", "explain": "Bir miktar su girişi tasarımın kabul ettiği durumdur." },
+          { "label": "Cam fitili değişmelidir", "verdict": "fitil", "explain": "Fitil bir ihtimal; önce çıkış yolu kontrol edilir." },
+          { "label": "Kapı içi macunla tamamen kapatılır", "verdict": "macunla-kapat", "explain": "Kapatılan tahliye, suyu içeride hapseder ve korozyonu hızlandırır." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Kapı su geçirmez bir kutu değil. Arıza suyun girmesi değil, çıkamaması — ilk bakılacak yer tahliye."
+    },
+    {
+      "id": 2,
+      "instruction": "Kapı içine 500 ml su döktün, alttan 380 ml çıktı. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.olcum-mastari",
+        "unit": "ml",
+        "acceptRange": [118, 122]
+      },
+      "camera": "kaporta",
+      "hint": "500 eksi 380.",
+      "teachingNote": "120 ml içeride kaldı — ve bu, tahliyenin tamamen tıkalı değil KISMEN tıkalı olduğunu gösteren bir bulgudur. Kısmi tıkanma, tam tıkanmadan daha sinsidir çünkü gözle bakıldığında delikten su damlar ve 'çalışıyor' izlenimi verir; oysa gelen suyun bir kısmı her yağmurda içeride kalır ve orada birikir. Sonuç, kapı alt kenarında sürekli nemli bir bölge — yani korozyonun en sevdiği koşul. Bu basit döküp toplama denemesi üç şey söyler. Birincisi tıkanmanın derecesi: hiç çıkmıyorsa delik tamamen kapalıdır, azı çıkıyorsa kısmen dolmuş ya da yol bir yerde daralmıştır. İkincisi konumu: hangi delikten ne kadar çıktığına bakılarak suyun içeride nerede takıldığı daraltılır. Üçüncüsü doğrulamadır — temizlik yapıldıktan sonra aynı deneme tekrarlanır ve dökülenle çıkan arasındaki farkın kapandığı görülür; yani iş 'temizledim' diyerek değil, ölçerek bitirilir. Temizlikte dikkat edilecek bir nokta vardır: delikleri sert bir telle zorlamak, hem içerideki koruma katmanını çizer hem tıkacı daha derine iter. Yumuşak ve kontrollü bir temizlik, ardından su ile doğrulama tercih edilir. Aynı yöntem sunroof tahliye hatlarında ve bagaj bölgesinde de kullanılır. Tahliye deliklerinin yeri, sayısı ve temizlik yöntemi araca özgüdür ve onarım kılavuzundan okunur; buradaki iki sayı senaryo değeridir."
+    },
+    {
+      "id": 3,
+      "instruction": "Başka bir araçta şikâyet farklı: yağmurdan sonra ön yolcu ayak boşluğu ıslanıyor. Cam sağlam ve yeni takılmış.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.tavan-paneli",
+        "question": "İlk nereye bakılır?",
+        "options": [
+          { "label": "Suyun geldiği yola: tavandaki ya da ön cam çevresindeki bir tahliye hattı tıkalıysa su direğin içinden inip ayak boşluğuna varır — ıslanan yer, girdiği yerden metrelerce uzakta olabilir", "verdict": "yolu-izle", "correct": true, "explain": "Su kaçağı teşhisinde en çok yapılan hata, ıslak yerin hemen üstüne bakmaktır. Oysa su yerçekimiyle hareket eder ve önüne çıkan her boşluğu, kanalı ve kablo demetini bir yol olarak kullanır; girdiği nokta ile göründüğü nokta arasında metrelerce mesafe ve birkaç kat olabilir. Tipik örnek şudur: tavanda toplanan su, normalde köşelerdeki tahliye hattıyla dışarı verilir; bu hat tıkanır ya da bir onarımda yerinden çıkarsa su direğin içine dolar, aşağı iner ve ayak boşluğunda ortaya çıkar. Müşteri 'cam sızdırıyor' der, oysa cam kuru ve sağlamdır. Aynı mantık başka yollar için de geçerlidir: ön cam alt bölgesindeki su toplama kanalı, havalandırma girişleri, kablo geçiş lastikleri, anten ve tavan aksesuar delikleri, arka lamba çevresi ve bagaj sızdırmazlıkları. Doğru yöntem, ıslaklığın izini yukarı doğru sürmektir: döşeme kaldırılır, sacın üstündeki kuru ve ıslak sınır bulunur, o sınır yukarı doğru takip edilir ve suyun aşağı bıraktığı iz — çoğu zaman ince bir kir çizgisi — okunur. Bu iz, hangi kanaldan geldiğini gösteren en güvenilir kanıttır. Kablo geçiş lastikleri özellikle kontrol edilir; bir onarım sırasında yerinden oynatılmış ya da tam oturmamış bir lastik, aylar sonra ortaya çıkan bir kaçağın en sık sebeplerindendir. Tahliye hatlarının yeri ve güzergâhı araca özgüdür." },
+          { "label": "Cam yeniden sökülüp yapıştırılır", "verdict": "cami-sok", "explain": "Cam kuruysa kaynak başka; önce yol izlenir." },
+          { "label": "Döşeme kurutulur, tekrar bakılır", "verdict": "kurut", "explain": "Kurutmak belirtiyi siler, sebebi bulmaz." },
+          { "label": "Sızdırmazlık malzemesi kenarlara sürülür", "verdict": "macun", "explain": "Kaynak bilinmeden yapılan uygulama suyu başka yola çevirir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Su yerçekimiyle hareket eder ve her boşluğu yol yapar. Islanan yer, girdiği yerden metrelerce uzakta olabilir."
+    },
+    {
+      "id": 4,
+      "instruction": "Yandan darbe onarımı yapılmış bir araçta, kaynaklı parça değişiminin ardından su kaçağı başlamış.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.direk-a",
+        "question": "En olası sebep nedir?",
+        "options": [
+          { "label": "Onarımda kesilen birleşim yerindeki fabrika sızdırmazlığı yenilenmemiş: kaynak dikişleri ve bindirme yerleri fabrikada ayrıca sızdırmazlık malzemesiyle kapatılır ve bu, kesildiğinde geri konmazsa su doğrudan içeri girer", "verdict": "dikis-sizdirmazligi", "correct": true, "explain": "Gövde, sacların birleştirilmesiyle kurulur ve her birleşim yeri suyun içeri girebileceği bir hattır. Fabrika bunu iki katmanla çözer: birleşim önce kaynakla mekanik olarak bağlanır, sonra dikiş boyunca bir sızdırmazlık malzemesi uygulanarak su ve toz yolu kapatılır. Kaynaklı parça değişiminde bu hat kesilir; yeni parça kaynaklandıktan sonra sızdırmazlığın da yenilenmesi gerekir. Yenilenmezse iki sorun birden doğar — su içeri girer ve dikişin içine giren nem, korunmasız kaynak bölgesinde korozyonu başlatır. Yani atlanan bu adım hem bir sızıntı hem bir çürüme sebebidir ve ikisi de aylar sonra ortaya çıkar. Kaynaklı parça dersinde geçen ilke burada tekrar eder: kaynaklı işte yapılan hata kalıcıdır, çünkü düzeltmek için işi geri almak gerekir. İkinci bir konu daha var — gövde boşluklarına fabrikada uygulanan koruma da bu işlemlerde zarar görebilir ve onarım kılavuzu bunun nasıl yenileneceğini tarif eder. Üçüncüsü, dikiş sızdırmazlığının uygulanma biçimi görünüşü de etkiler: fabrika dikişinin dokusu ve profili bellidir ve onarımda buna benzemeyen bir uygulama, aracın sonradan işlem görmüş olduğunu ilk bakışta gösterir; bu, işin kalitesinin görünen kısmıdır. Hangi malzemenin nereye ve hangi kesitte uygulanacağı araca özgüdür ve onarım kılavuzundan okunur; bu ders ürün ya da ölçü vermiyor." },
+          { "label": "Kaynak sızdırıyordur, yeniden kaynak yapılır", "verdict": "kaynak", "explain": "Kaynak mekanik bağı kurar; su yolunu sızdırmazlık kapatır." },
+          { "label": "Yeni parça hatalıdır", "verdict": "parca", "explain": "En olası sebep atlanan dikiş sızdırmazlığıdır." },
+          { "label": "Boya kalınlığı yetersizdir", "verdict": "boya", "explain": "Boya dikiş boşluğunu kapatmaz." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Kaynak mekanik bağı kurar, sızdırmazlık su yolunu kapatır. Kesilen dikiş yenilenmezse hem su hem pas gelir."
+    },
+    {
+      "id": 5,
+      "instruction": "Kaçağı bulmak için hortumu alıp aracın tavanından başlayarak her yeri ıslatmayı düşünüyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.esik-saci",
+        "question": "Su testi nasıl yapılır?",
+        "options": [
+          { "label": "Aşağıdan yukarıya, bölge bölge ve iki kişiyle: bir kişi belirli bir bölgeyi ıslatır, diğeri içeriden fenerle izler — her yeri birden ıslatmak hangi bölgenin sorumlu olduğunu tamamen belirsiz bırakır", "verdict": "kademeli-test", "correct": true, "explain": "Su testi, doğru yapıldığında kesin sonuç veren, yanlış yapıldığında saatler harcatan bir yöntemdir ve farkı yöntemin disiplini yaratır. Üç kural vardır. Birincisi sıradır: test aşağıdan başlar ve yukarı doğru ilerler. Önce eşik ve kapı alt bölgesi, sonra kapı ortası ve cam çevresi, sonra tavan ve son olarak arka bölge. Sebebi basit — yukarıdan başlanırsa su bütün alt bölgeleri de ıslatır ve kaynağı ayırt etmek imkânsız hâle gelir. İkincisi bölgeselliktir: her seferinde yalnız bir bölge ıslatılır, birkaç dakika beklenir ve içeriden gözlem yapılır; sızıntı görünmezse bir sonraki bölgeye geçilir. Bu sayede sızıntı görüldüğü anda hangi bölgenin sorumlu olduğu bilinir. Üçüncüsü gözlemdir ve iki kişi gerektirir: içeride oturan kişi fenerle döşemeyi, direk içlerini ve kenarları izler; suyun ilk göründüğü nokta ve akış yönü not edilir. Dört ayrıntı işi kolaylaştırır — döşeme ve kaplamalar önceden sökülür, kuru bölgeler kâğıtla kaplanarak ilk ıslanma yeri görünür kılınır, elektrik bileşenleri korunur ve basınçlı yıkama kullanılmaz. Basınçlı su, normal koşullarda hiç sızdırmayacak bir contayı zorlayarak yanlış bir sonuç üretir; test, yağmurun yaptığını taklit etmelidir, ondan fazlasını değil. Yöntemin bir de dürüstlük tarafı vardır: kaçak bulunmadan yapılan bir sızdırmazlık uygulaması suyu yalnız başka bir yola çevirir ve şikâyet birkaç hafta sonra başka bir yerden döner." },
+          { "label": "Yukarıdan aşağıya, hepsi birden ıslatılır", "verdict": "yukaridan", "explain": "Alt bölgeler de ıslanır; kaynak ayırt edilemez." },
+          { "label": "Basınçlı yıkama ile hızlıca test edilir", "verdict": "basincli", "explain": "Basınçlı su sağlam contayı da zorlar; yanlış sonuç verir." },
+          { "label": "Yağmuru beklemek en doğrusudur", "verdict": "yagmur", "explain": "Yağmur kontrollü değildir; bölge ayrımı yapılamaz." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Aşağıdan yukarı, bölge bölge, iki kişi. Basınçlı su yağmurun yapmayacağını yapar ve yanlış sonuç üretir."
+    },
+    {
+      "id": 6,
+      "instruction": "Kaçak bulundu ve giderildi. Döşeme hâlâ ıslak.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.bagaj-kapagi",
+        "question": "İş burada biter mi?",
+        "options": [
+          { "label": "Bitmez: ıslanan döşeme, yalıtım ve altındaki sac kurutulur, gerekiyorsa sökülerek kurutulur — bırakılan nem koku ve küf üretir, altındaki sacı ise içeriden çürütür", "verdict": "kurutma-sart", "correct": true, "explain": "Su kaçağı işlerinde en çok yarım bırakılan kısım budur: kaynak bulunur, kapatılır ve araç teslim edilir — ama içeride kalan su hâlâ oradadır. Halının ve altındaki yalıtım keçesinin emdiği su kendiliğinden kurumaz; keçe bir sünger gibi davranır ve nemi haftalarca tutar. Bunun üç sonucu vardır. Birincisi kokudur ve müşterinin ilk fark ettiği şeydir; küf, kaçak giderilmiş olsa bile devam eder ve iş 'yapılmamış' sayılır. İkincisi sağlık ve konfor tarafıdır — kapalı bir kabinde küf gelişimi istenmeyen bir durumdur. Üçüncüsü ve en pahalısı korozyondur: nemli keçe, sacın üstünde sürekli ıslak bir ortam kurar ve taban sacı içeriden dışarıya doğru çürür. Bu, kapı alt kenarındaki mekanizmanın aynısıdır ve fark edildiğinde genellikle geç kalınmıştır. Doğru yaklaşım, ıslanan bölgede döşemeyi kaldırmak, keçeyi çıkarıp ayrı kurutmak ya da gerekiyorsa değiştirmek, sacı kurulayıp durumunu kontrol etmek ve pas başlamışsa onu ayrıca ele almaktır. Bir ayrıntı daha önemlidir: ıslanan bölgede elektrik bağlantısı ya da kontrol ünitesi varsa, bunların durumu ayrıca değerlendirilir — su temas etmiş bir bağlantı, o an çalışıyor olsa bile korozyona başlamış olabilir. Kurutma yöntemi ve süresi araca ve hasarın büyüklüğüne bağlıdır." },
+          { "label": "Biter, kaçak kapandıysa döşeme kendiliğinden kurur", "verdict": "kendi-kurur", "explain": "Yalıtım keçesi nemi haftalarca tutar." },
+          { "label": "Koku spreyi ile çözülür", "verdict": "sprey", "explain": "Koku bir belirti; sebebi nemdir." },
+          { "label": "Yalnız görünen su silinir", "verdict": "sil", "explain": "Asıl su döşemenin altındaki keçededir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Kaçağı kapatmak işin yarısı. Keçede kalan nem koku, küf ve içeriden çürüme üretir."
+    },
+    {
+      "id": 7,
+      "instruction": "Test tekrarlandı, araç kuru.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kaput-kaporta",
+        "question": "Bu dersin ana fikri nedir?",
+        "options": [
+          { "label": "Su bir yol izler: ıslak yer giriş yeri değildir ve arıza çoğu zaman suyun girmesi değil, çıkamamasıdır — teşhis izi yukarı doğru sürerek yapılır, üstünü kapatarak değil", "verdict": "su-yol-izler", "correct": true, "explain": "Bu dersin bütün örnekleri aynı yanılgıyı düzeltiyor: insan ıslak yeri görünce oraya bakıyor, oysa su oraya bir yolculuğun sonunda varmış oluyor. Kapının içi zaten ıslanır ve önemli olan tahliyedir; ayak boşluğundaki su tavandan gelmiş olabilir; onarım sonrası başlayan kaçak, kesilen dikişin sızdırmazlığından geliyordur. Üçünde de sorun, görüldüğü yerde değil. Bu yüzden yöntem sabittir — izi yukarı doğru sür, testi aşağıdan yukarı ve bölge bölge yap, kaynağı gördükten sonra müdahale et. Bunun tersi, yani kaynağı bulmadan sızdırmazlık malzemesi sürmek, bu alanın en tanıdık hatasıdır: su o an kesilir, müşteri memnun gider ve birkaç hafta sonra aynı su başka bir yerden çıkar; üstelik artık kapatılmış iki yol vardır ve teşhis daha zordur. İkinci bir ana fikir kurutmadır: kaçağı kapatmak işin yarısıdır, içeride kalan nem giderilmezse iş koku, küf ve içeriden çürüme olarak geri döner. Üçüncüsü de bu alanın genel ilkesiyle örtüşür — su kaçağı, yapılan kaporta işinin dürüstlük sınavlarından biridir; tahliye delikleri, dikiş sızdırmazlığı ve nem bariyeri teslim gününde hiç görünmez, ama bir yıl sonra aracın hangi hâlde olacağını onlar belirler. Sırada arıza teşhis aşaması var: müşterinin cümlesinden yola çıkıp sebebe ulaşmak." },
+          { "label": "İyi sızdırmazlık malzemesi her kaçağı çözer", "verdict": "macun", "explain": "Kaynak bulunmadan yapılan uygulama suyu başka yola çevirir." },
+          { "label": "Islak yerin hemen üstü kaynaktır", "verdict": "ustu", "explain": "Su metrelerce yol alabilir." },
+          { "label": "Kapı içine su girmesi her zaman arızadır", "verdict": "kapi-arizasi", "explain": "Bir miktar giriş normaldir; arıza çıkamamasıdır." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Kaynağı bulmadan yapılan kapatma suyu başka yola çevirir. Şikâyet haftalar sonra başka yerden döner."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Kapının içi ıslak. İlk bakılacak yer neresi?",
+        "a": "tahliye-sorunu",
+        "options": [
+          { "verdict": "tahliye-sorunu", "label": "Alt kenardaki tahliye delikleri: kapının içine bir miktar su girmesi tasarımın kabul ettiği durumdur, arıza suyun çıkamamasıdır", "explain": "Tahliye çamur, yaprak ya da eski malzeme kalıntısıyla tıkanırsa su içeride birikir ve döşemeye taşar. Kapı alt kenarı içeriden dışarıya çürür. Yırtılmış ya da düzgün yapıştırılmamış nem bariyeri de suyu doğrudan döşemeye geçirir." },
+          { "verdict": "hic-islanmamali", "label": "Kapının içi hiç ıslanmamalı", "explain": "Bir miktar giriş normaldir." },
+          { "verdict": "fitil", "label": "Cam fitili değişir", "explain": "Önce çıkış yolu kontrol edilir." },
+          { "verdict": "macunla-kapat", "label": "Kapı içi macunla kapatılır", "explain": "Kapatılan tahliye suyu içeride hapseder." }
+        ]
+      },
+      {
+        "q": "Su kaçağı testi nasıl yapılır?",
+        "a": "kademeli-test",
+        "options": [
+          { "verdict": "kademeli-test", "label": "Aşağıdan yukarıya, bölge bölge, iki kişiyle: biri ıslatır, diğeri içeriden fenerle izler", "explain": "Yukarıdan başlanırsa alt bölgeler de ıslanır ve kaynak ayırt edilemez. Döşemeler önceden sökülür, elektrik bileşenleri korunur ve basınçlı yıkama kullanılmaz — basınçlı su sağlam bir contayı da zorlayıp yanlış sonuç üretir." },
+          { "verdict": "yukaridan", "label": "Yukarıdan aşağıya, hepsi birden", "explain": "Kaynak ayırt edilemez." },
+          { "verdict": "basincli", "label": "Basınçlı yıkamayla hızlıca", "explain": "Yağmurun yapmayacağını yapar." },
+          { "verdict": "yagmur", "label": "Yağmur beklenir", "explain": "Kontrollü değildir, bölge ayrımı yapılamaz." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2'deki 500 ml ve 380 ml SENARYO değerleridir; istenen FARKTIR (120 ml). Ders hiçbir araç için tahliye debisi ya da kabul edilebilir kalıntı miktarı iddia etmiyor.",
+    "sourceRequired": "Tahliye deliklerinin yeri ve sayısı, tahliye hatlarının güzergâhı, nem bariyeri ürünü, dikiş sızdırmazlığı ve gövde boşluğu koruma malzemelerinin adı ile uygulama kesiti ve yerleri, kurutma yöntemi ve süresi bilinçle VERİLMEDİ; hepsi araca özgüdür ve üreticinin onarım kılavuzundan okunur.",
+    "kapsam": "Su temas etmiş elektrik ve elektronik bileşenlerin teşhisi ve onarımı KAPSAM DIŞIDIR; ders suyun yolunu, tahliyeyi ve test disiplinini öğretiyor.",
+    "kaynak": "Bu alan kullanıcının açık talebiyle eklendi (talep birebir: 'birde alanlara kaportayı ekleyelim'); konu başlıkları MEB Otomotiv Gövde ve Boya dalının çerçevesini takip ediyor, kazanım numarası iddiası yok.",
+    "reviewedByMechanic": false
+  }
+}

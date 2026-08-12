@@ -1,0 +1,174 @@
+{
+  "id": "aksesuar.bas-unite-montaj",
+  "area": "aksesuar-ses",
+  "stage": 8,
+  "title": "Baş Ünite Değişimi: Adaptör, Direksiyon Kumandası ve Anten",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 45,
+  "prerequisites": ["aksesuar.parazit-teshisi"],
+  "learningGoals": [
+    "Aracın kendi soketini kesmeden yeni ünite bağlamak",
+    "Direksiyon kumandasının nasıl çalıştığını ölçerek anlamak",
+    "Ünitenin araç ağına bağlı olduğu durumu tanımak ve sınırı bilmek"
+  ],
+
+  "safety": [
+    { "rule": "Aracın kendi kablo demeti KESİLMEZ; bağlantı araca özgü adaptör demetiyle yapılır", "why": "Kesilen fabrika soketi geri dönüşü olmayan bir hasardır: araç bir gün orijinal üniteye dönmek istediğinde ya da başka bir usta baktığında hiçbir referans kalmaz, ayrıca kesim noktaları zamanla oksitlenip arıza üretir", "blocksStart": true },
+    { "rule": "Ünite sökülmeden önce enerji kesilir ve kesildiği ölçülerek doğrulanır", "why": "Kes–bekle–doğrula bu alanın ilk dersinden beri geçerli; ünitenin arkasındaki soketlerde sürekli beslemeli uçlar bulunur", "blocksStart": true },
+    { "rule": "Araç haberleşme hattına müdahale edilmez; hat delinmez, güç alınmaz, kesilmez", "why": "Bu alanın değişmeyen kırmızı çizgisi; bazı araçlarda ses ünitesi ağa bağlıdır ve yanlış müdahale birden fazla sistemi birden düşürür", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.multimetre", "label": "Multimetre", "required": true },
+    { "id": "tool.plastik-sokme-spatulasi", "label": "Plastik söküm spatulası", "required": true },
+    { "id": "tool.tornavida-seti", "label": "Tornavida seti", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Müşteri baş ünite değiştirmek istiyor. Söküme başlamadan önce.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.bas-unite",
+        "question": "İlk olarak ne yapılır?",
+        "options": [
+          { "label": "Mevcut ünitenin araçla nasıl bağlandığı araştırılır: basit bir soketle mi bağlı, yoksa araç ağına ve ekranına bağlı bir sistemin parçası mı — bu cevap işin yapılabilir olup olmadığını belirler", "verdict": "once-arastir", "correct": true, "explain": "Baş ünite değişimi iki tamamen farklı iş olabilir ve hangisi olduğunu söküme başlamadan bilmek gerekir. Birinci durum basittir: ünite aracın kablo demetine standart bir soketle bağlıdır, kendi başına çalışır ve çıkarıldığında araçta başka hiçbir şey etkilenmez. Bu durumda iş, uygun bir adaptör demetiyle rahatça yapılır. İkinci durum zordur: modern birçok araçta ses ünitesi yalnız müzik çalmaz — aracın ayar menülerini taşır, klima göstergesini gösterir, park sensörü uyarısını verir, geri görüş kamerasını ekrana basar ve bunları araç ağı üzerinden yapar. Böyle bir üniteyi çıkarmak, o işlevleri de çıkarmak demektir; ayrıca ünitenin yokluğu ağda bir eksiklik olarak görülüp uyarı üretebilir. Bu ikinci durumda ya işten vazgeçilir, ya araca özgü bir arayüz kullanılır, ya da ekran korunup yalnız ses tarafı iyileştirilir. Araştırmanın üç adımı vardır: ünitenin arkasındaki soket sayısı ve tipine bakılır, aracın hangi işlevlerinin ekran üzerinden yürüdüğü müşteriyle birlikte listelenir ve o araç için uygun adaptörün var olup olmadığı kontrol edilir. Bu araştırma yapılmadan sökülen araç, yarım sökülmüş hâlde beklemeye başlar. Ayrıca bazı ünitelerin güvenlik kodu vardır ve besleme kesilince kod ister; kod müşteride yoksa iş orada durur — bu, sökümden ÖNCE sorulur." },
+          { "label": "Doğrudan sökülür, bakılır", "verdict": "sok", "explain": "Yarım sökülmüş araç bekler; önce araştırılır." },
+          { "label": "Kablolar kesilip yeni ünite bağlanır", "verdict": "kes", "explain": "Fabrika soketi kesilmez; bu geri dönüşü olmayan hasardır." },
+          { "label": "Müşteriye sorulmadan karar verilir", "verdict": "karar", "explain": "Hangi işlevlerin kaybolacağı müşterinin kararıdır." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Kod sorusu sökümden önce sorulur: besleme kesilince kod isteyen bir ünitede kod müşteride yoksa iş orada durur."
+    },
+    {
+      "id": 2,
+      "instruction": "Ünite basit soketle bağlıymış. Bağlantı yöntemini seçiyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.ana-kablo-demeti",
+        "question": "Yeni ünite araca nasıl bağlanır?",
+        "options": [
+          { "label": "Araca özgü adaptör demetiyle: bir ucu aracın kendi soketine, diğer ucu yeni ünitenin soketine takılır; aracın hiçbir kablosu kesilmez", "verdict": "adaptor", "correct": true, "explain": "Adaptör demeti bu işin standardıdır ve üç sebeple kullanılır. Birincisi geri dönebilmektir: araç bir gün orijinal üniteye dönmek isterse ya da satılırsa fabrika soketi el değmemiş hâlde durur; kesilmiş bir demette bu imkân yoktur. İkincisi güvenilirliktir: kesilip birleştirilen her nokta bir arıza adayıdır — kötü bir birleştirme zamanla oksitlenir, gerilim düşümü üretir ve sistem arada kesilmeye başlar; bu belirti aylar sonra çıkar ve sebebi kolay bulunmaz. Üçüncüsü hızdır: adaptör kullanan usta işi kısa sürede bitirir. Adaptörle çalışırken de dikkat edilecek noktalar var. Birincisi, adaptörün araç tarafındaki ucu ile ünite tarafındaki ucun uyumu — aynı araç ailesinde bile farklı soketler kullanılır, bu yüzden adaptör araca göre seçilir. İkincisi, birleştirme gereken yerde kaliteli bir bağlantı yapılmasıdır: sıkma, lehim ya da uygun bir bağlantı elemanı kullanılır ve her ek yalıtılır. Üçüncüsü, kutup ve işlev eşleşmesi: renk kodları üreticiden üreticiye değişebilir, bu yüzden adaptörün kendi şemasına bakılır, ezberden bağlanmaz. Dördüncüsü, bazı araçlarda sürekli besleme ile kontakla kesilen besleme uçları beklenenin tersi bağlanmıştır — bu durumda ünite ya hafızasını tutmaz ya araç kapanınca kapanmaz; iki uç ölçülerek doğrulanır." },
+          { "label": "Kablolar kesilip renklerine göre birleştirilir", "verdict": "kes-renk", "explain": "Renk kodları değişebilir ve kesim geri dönüşsüzdür." },
+          { "label": "Uçlar birbirine bükülüp bantlanır", "verdict": "bant", "explain": "Bantlanmış ek zamanla gevşer ve oksitlenir." },
+          { "label": "Yalnız besleme bağlanır, gerisi bırakılır", "verdict": "yarim", "explain": "Yarım bağlantı yarım çalışan bir sistem üretir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Sürekli ve kontakla kesilen uçlar bazı araçlarda ters bağlıdır: ünite ya hafızasını tutmaz ya araç kapanınca kapanmaz. İkisi ölçülür."
+    },
+    {
+      "id": 3,
+      "instruction": "Direksiyon kumandasının hattını ölçtün: bir tuşta 1,2 kiloohm, başka tuşta 3,9 kiloohm okudun. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.multimetre-aksesuar",
+        "unit": "kiloohm",
+        "acceptRange": [2.6, 2.8]
+      },
+      "camera": "aksesuar",
+      "hint": "3,9 eksi 1,2.",
+      "teachingNote": "2,7 kiloohmluk bu fark, direksiyon kumandasının nasıl çalıştığını doğrudan gösteriyor. Birçok araçta direksiyondaki tuşların her biri ayrı bir kabloya bağlı değildir — bu, direksiyonun içinden geçmesi gereken kablo sayısını gereksiz yere artırırdı. Bunun yerine bütün tuşlar tek bir hat üzerinde farklı dirençlere bağlanır: hangi tuşa basılırsa hat üzerinde o tuşun direnci görünür ve ünite, gördüğü direnç değerine bakarak hangi tuşa basıldığını anlar. Bu yüzden ölçüm teşhisin kendisidir — her tuşa tek tek basılıp okunan değerler not edilir; iki tuş aynı değeri veriyorsa ya kumanda bozulmuştur ya ölçüm yanlış noktadan yapılmıştır. Yeni ünite takılırken bu bilginin iki kullanımı vardır. Birincisi, çoğu satış sonrası ünite bu direnç hattını doğrudan anlamaz ve araya bir çevirici gerekir; çevirici hattı okur ve ünitenin anladığı komuta çevirir. İkincisi, çeviricinin öğretilmesi gerekir: her tuşa basılırken hangi işlevin atanacağı bir öğrenme işlemiyle tanımlanır. Bu iş atlandığında sonuç şudur — sistem çalışır, ses gelir ama direksiyondaki tuşlar ölüdür ve müşteri bunu ilk gün fark eder. Not: bazı araçlarda kumanda direnç yerine haberleşme hattı üzerinden çalışır ve o zaman iş değişir; hat üzerinden çalışan sistemlere müdahale bu alanın kırmızı çizgisidir, araca özgü arayüz kullanılır. Tuş direnç değerleri araca özgüdür; bu ders bir tablo vermiyor."
+    },
+    {
+      "id": 4,
+      "instruction": "Başka bir araçta ünite ayrıca araç ağına bağlıymış.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.haberlesme-hatti",
+        "question": "Ne yapılır?",
+        "options": [
+          { "label": "Araca özgü bir arayüz kullanılır ya da iş yapılmaz; hatta doğrudan bağlantı yapılmaz, hat delinmez ve kesilmez", "verdict": "arayuz-ya-da-yapma", "correct": true, "explain": "Araç ağı bu alanın değişmeyen kırmızı çizgisidir ve ses montajında en çok bu noktada ihlal edilir. Bir aracın ses ünitesi ağa bağlıysa üzerinden yalnız müzik değil başka bilgiler de geçer: hız bilgisi, geri vites durumu, park sensörü uyarısı, klima ayarları, araç menüleri. Bu üniteyi çıkarmak ağda bir boşluk bırakır ve boşluk sessiz kalmaz — gösterge panelinde uyarı çıkabilir, başka birimler beklediği bilgiyi bulamayabilir. Doğru yol araca özgü bir arayüz kullanmaktır: bu arayüz ağın beklediği yerde durur, gerekli bilgileri sağlar ve yeni ünitenin anladığı sinyalleri üretir. Yapılmayacaklar nettir ve ciddidir: hattan güç almak, hattı delerek sinyal okumaya çalışmak, hattı kesmek ya da uygunsuz bir adaptörle bağlanmak. Bunların hepsi tek bir cihazı değil, ağa bağlı bütün birimleri etkileyebilir ve ortaya çıkan arıza ses sistemiyle hiç ilgisi yokmuş gibi görünür. İkinci doğru yol işi yapmamaktır: uygun arayüz yoksa müşteriye açıkça söylenir. 'Bir şekilde bağlarız' cümlesi bu alanda kabul edilmez. Üçüncü bir yol daha vardır ve çoğu zaman en akıllıcasıdır: fabrika ünitesi yerinde bırakılır, ses tarafı bir işlemci ya da yükseltici eklenerek iyileştirilir; böylece bütün araç işlevleri korunur ve ses de düzelir." },
+          { "label": "Hattan güç alınır", "verdict": "guc-al", "explain": "Haberleşme hattından güç alınmaz; bu kırmızı çizgi." },
+          { "label": "Hat kesilip yeni ünite bağlanır", "verdict": "kes", "explain": "Ağa bağlı bütün birimler etkilenir." },
+          { "label": "Uygunsuz bir adaptörle denenir", "verdict": "uygunsuz", "explain": "Yanlış adaptör ağı bozar ve alakasız arızalar üretir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Çoğu zaman en akıllı yol: fabrika ünitesini yerinde bırak, sesi işlemci ya da yükselticiyle düzelt. Bütün araç işlevleri korunur."
+    },
+    {
+      "id": 5,
+      "instruction": "Basit soketli araca dönüyorsun. Üniteyi yuvasından çıkarıyorsun.",
+      "interaction": {
+        "type": "press-and-pull",
+        "target": "part.bas-unite",
+        "requiresGesture": true
+      },
+      "camera": "aksesuar",
+      "hint": "Yuvanın kilit dillerini bastır ve üniteyi düz çek.",
+      "teachingNote": "Ünitenin çıkarılması, söküm tekniği dersindeki kuralın bir uygulamasıdır: kuvvetten önce nasıl tutunduğunu bil. Üniteler üç farklı biçimde tutunur. Birincisi yanlardaki vidalardır ve çevre çerçevesi söküldüğünde görünür. İkincisi yuvanın içindeki yaylı dillerdir — bu tipte özel çıkarma anahtarları ünitenin yan yuvalarına sokulur, diller açılır ve ünite düz çekilir; anahtar yerine tornavida zorlamak hem üniteyi hem yuvayı çizer. Üçüncüsü, gömülü sistemlerde çevre panelinin klipslerle sökülmesi ve arkadaki vidalara ulaşılmasıdır. Üç ortak kural var. Birincisi, çevre paneli sökülürken klipsin tam üstünden ve dik kuvvet uygulanır; söküm dersindeki kural burada da geçerli. İkincisi, ünite çekilirken arkasındaki soketler henüz takılıdır — ünite tamamen dışarı çekilip asılmaz, elle desteklenir ve soketler tek tek ayrılır; asılan bir ünite kendi soketlerini ve anten ucunu koparır. Üçüncüsü, soketler ayrılırken hepsi fotoğraflanır ya da işaretlenir; geri takarken hangi soketin nereye gittiğini hatırlamak zorunda kalmazsın. Bir de yuvaya düşen vidalar için kural: sökülen her vida ve klips ayrı bir kaba konur — yuvanın içine düşen bir vida bir gün orada tıkırdamaya başlar ve müşteri o sesin sebebini asla bulamaz."
+    },
+    {
+      "id": 6,
+      "instruction": "Yeni üniteyi bağlıyorsun. Anten ucuna geldin.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.anten",
+        "question": "Anten bağlantısında ne kontrol edilir?",
+        "options": [
+          { "label": "Soket tipinin uyumu, gerekiyorsa doğru adaptör ve anten yükselticisinin beslemesi; ayrıca anten kablosunun güç kablolarıyla birlikte toplanmadığı", "verdict": "adaptor-ve-besleme", "correct": true, "explain": "Bu adım, anten dersinde önceden görülen sorunun montaj tarafıdır ve baş ünite değişiminden sonra radyo çekiminin kötüleşmesinin en yaygın sebebidir. Üç kontrol yapılır. Birincisi soket uyumudur: araç tarafındaki anten soketi ile ünite tarafındaki soket farklı tiplerde olabilir ve arada bir adaptör gerekir; kalitesiz ya da gevşek bir adaptör hem sinyal kaybı hem temassızlık üretir. İkincisi anten yükselticisinin beslemesidir: birçok araçta anten sinyalini güçlendiren bir devre vardır ve beslemesi baş üniteden gelen ince bir uçla sağlanır. Yeni ünite bu ucu sürmüyorsa ya da bağlanmamışsa yükseltici çalışmaz ve sonuç, anten hiç yokmuş gibi zayıf bir çekimdir. Bu uç genelde ünitenin demetinde ayrı bir renktedir ve adaptörün şemasından bulunur. Üçüncüsü güzergâhtır: anten kablosu ünitenin arkasında güç kablolarıyla sarılıp bir tarafa sıkıştırılmaz, ayrı tutulur — parazit dersinde sebebini gördün. Dördüncü ve unutulan kontrol: bütün kablolar toplandıktan sonra ünite yuvaya itilir ve o sırada kablolar sıkışabilir; sıkışan bir anten kablosu hem sinyali düşürür hem zamanla kopar. Ünitenin arkasında kalan kablo fazlası düzgünce toplanır, ünite zorla itilmez." },
+          { "label": "Yalnız takılıp geçilir", "verdict": "tak-gec", "explain": "Adaptör ve yükseltici beslemesi kontrol edilmezse radyo kötüleşir." },
+          { "label": "Anten bağlanmasa da olur", "verdict": "bagla-ma", "explain": "Radyo çalışmaz." },
+          { "label": "Güç kablolarıyla birlikte toplanır", "verdict": "birlikte", "explain": "Paralel giden kablo gürültü üretir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Ünite değişiminden sonra 'radyo kötüleşti' şikâyeti: adaptör, yükseltici beslemesi ya da güzergâh. Üçü de bu adımda çözülür."
+    },
+    {
+      "id": 7,
+      "instruction": "Ünite yuvasına oturmadan önce.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sigorta-kutusu-aksesuar",
+        "question": "Ünite itilmeden önce ne denenir?",
+        "options": [
+          { "label": "Bütün işlevler denenir: ses her hoparlörden geliyor mu, radyo zayıf bir istasyonu da çekiyor mu, direksiyon kumandası çalışıyor mu, araç kapanınca ünite kapanıp hafızasını tutuyor mu", "verdict": "once-dene", "correct": true, "explain": "Panel takılmadan önce dene kuralı bu alanın omurgası ve baş ünitede beş maddeye dönüşüyor. Birincisi ses dağılımıdır: ses dengesi tek tek her yöne kaydırılarak hangi hoparlörün ses verdiği doğrulanır; bir hoparlör sessizse ya bağlantı yarımdır ya adaptör şeması yanlış okunmuştur. İkincisi radyodur: hem güçlü hem zayıf bir istasyon denenir, çünkü güçlü istasyon kötü bir anten bağlantısında bile çeker ve yanlış güven verir. Üçüncüsü direksiyon kumandasıdır: bütün tuşlar tek tek denenir ve çevirici gerekiyorsa öğretme işlemi tamamlanır. Dördüncüsü besleme davranışıdır — araç kapatılır, ünitenin kapandığı, sonra tekrar açılıp saatini, istasyonlarını ve ayarlarını koruduğu görülür; koruyamıyorsa sürekli besleme ucu yanlış bağlanmıştır ve bu tam olarak adım 2'de uyarılan durumdur. Beşincisi kabloların sıkışmadığıdır: ünite yuvaya itilirken arkadaki kablolar toplanmış ve hiçbiri ezilmiyor olmalıdır. Bu beş madde tamamlandıktan sonra ünite yuvasına oturtulur, çerçeve takılır ve sökülen bütün paneller yerine tam oturtulur. Teslimde bir şey daha söylenir: bir güvenlik kodu varsa kodun müşteride durması gerektiği — kod kaybolursa ve besleme bir gün kesilirse ünite kilitlenir." },
+          { "label": "Ünite itilir, sonra denenir", "verdict": "sonra", "explain": "Sorun çıkarsa her şey yeniden sökülür." },
+          { "label": "Ses geliyorsa yeterlidir", "verdict": "ses", "explain": "Radyo, kumanda ve hafıza ayrıca denenir." },
+          { "label": "Müşteri denesin", "verdict": "musteri", "explain": "Doğrulama teslimden önce ustanın işidir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Beş madde: ses dağılımı, radyo (zayıf istasyonla), kumanda, kapanış ve hafıza, kablo sıkışması. Sırada hoparlör montajı."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Yeni ünite araca nasıl bağlanır?",
+        "a": "adaptor",
+        "options": [
+          { "verdict": "adaptor", "label": "Araca özgü adaptör demetiyle; aracın kendi soketi ve hiçbir kablosu kesilmez", "explain": "Adaptör üç şey sağlar: araç bir gün orijinal üniteye dönebilir, kesip birleştirmenin ürettiği oksitlenme ve gerilim düşümü riski doğmaz, iş hızlanır. Adaptörün kendi şemasına bakılır — renk kodları üreticiye göre değişir. Sürekli ve kontakla kesilen uçlar bazı araçlarda ters bağlıdır; ikisi ölçülerek doğrulanır." },
+          { "verdict": "kes-renk", "label": "Kablolar kesilip renklerine göre birleştirilir", "explain": "Renkler değişebilir ve kesim geri dönüşsüzdür." },
+          { "verdict": "bant", "label": "Uçlar bükülüp bantlanır", "explain": "Bantlanmış ek gevşer ve oksitlenir." },
+          { "verdict": "yarim", "label": "Yalnız besleme bağlanır", "explain": "Yarım bağlantı yarım çalışan sistem üretir." }
+        ]
+      },
+      {
+        "q": "Ünite araç ağına bağlıysa ne yapılır?",
+        "a": "arayuz-ya-da-yapma",
+        "options": [
+          { "verdict": "arayuz-ya-da-yapma", "label": "Araca özgü arayüz kullanılır, yoksa iş yapılmaz; hatta doğrudan bağlantı yapılmaz", "explain": "Ağa bağlı bir ünite yalnız müzik çalmaz — hız, geri vites, park sensörü, klima ve araç menüleri de oradan geçer. Çıkarılması ağda boşluk bırakır ve uyarı üretebilir. Hattan güç almak, hattı delmek ya da kesmek ağa bağlı bütün birimleri etkiler. En akıllı yol çoğu zaman fabrika ünitesini yerinde bırakıp sesi işlemci ya da yükselticiyle düzeltmektir." },
+          { "verdict": "guc-al", "label": "Hattan güç alınır", "explain": "Kırmızı çizgi." },
+          { "verdict": "kes", "label": "Hat kesilir", "explain": "Bütün birimler etkilenir." },
+          { "verdict": "uygunsuz", "label": "Uygunsuz adaptörle denenir", "explain": "Alakasız arızalar üretir." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 1,2 kiloohm ve 3,9 kiloohm SENARYO okumalarıdır; istenen FARKTIR (2,7 kiloohm) ve ders hiçbir araç için tuş direnç tablosu vermiyor.",
+    "sourceRequired": "Direksiyon kumandası tuş direnç değerleri, adaptör ve arayüz parça numaraları, soket pin dizilimleri, güvenlik kodu prosedürü ve anten yükselticisi besleme gerilimi bilinçle VERİLMEDİ; hepsi araca ve ürüne özgüdür.",
+    "kapsam": "Araç haberleşme ağına müdahale ve ağ üzerinden çalışan kumanda/ekran sistemlerine bağlantı KAPSAM DIŞIDIR — bu alanın kırmızı çizgisi. Hava yastığı bileşenleri ve direksiyon içi spiral kablo kapsam dışı; direksiyon alanının konusu.",
+    "kaynak": "Ses dersleri MEB çerçeve programının aksesuar modülüyle birebir eşleşmiyor; bu aşama proje kararıyla kuruldu. Söküm tekniği ve anten kuralları bu alanın önceki derslerinden geliyor.",
+    "reviewedByMechanic": false
+  }
+}

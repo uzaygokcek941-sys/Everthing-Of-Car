@@ -1,0 +1,145 @@
+{
+  "id": "temel.dis-acma",
+  "area": "motor-mekanik",
+  "stage": 2,
+  "title": "Kılavuz ve Pafta ile Diş Açma, Helicoil",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 18,
+  "prerequisites": ["temel.el-aletleri", "temel.civata-sokme-takma", "temel.sikismis-civata"],
+  "learningGoals": [
+    "Sıyrılmış dişte onarım yöntemini hasarın derecesine göre seçmek",
+    "Çap ve hatveyi birlikte belirleyip doğru kılavuzu seçmek",
+    "Kılavuzu eksende ve talaş kırarak ilerletmek"
+  ],
+
+  "safety": [
+    { "rule": "Kılavuz zorlanmaz, dönmüyorsa geri çevrilir", "why": "Kılavuz çeliği serttir ve gevrektir; zorlanınca bükülmeden kırılır. Delik içinde kırılan kılavuz normal matkapla delinemez", "blocksStart": true },
+    { "rule": "Talaşa çıplak elle dokunulmaz", "why": "Kesilen metal talaşı jilet gibi keskindir ve avuç içine gömülür", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.dis-taragi", "label": "Diş tarağı (hatve mastarı)", "required": true },
+    { "id": "tool.kilavuz-m10", "label": "M10x1.5 kılavuz takımı", "required": true },
+    { "id": "tool.kilavuz-kolu", "label": "Kılavuz kolu", "required": true },
+    { "id": "tool.kesme-yagi", "label": "Kesme yağı", "required": true },
+    { "id": "tool.helicoil-seti", "label": "Helicoil (diş onarım) seti", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Cıvata dönüyor ama hiç sıkmıyor. Deliğin dişi gitmiş. Ne yaparsın?",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.egzersiz-dis-deligi",
+        "question": "Sıyrılmış dişte doğru onarım hangisi?",
+        "options": [
+          { "label": "Hasara bakarım: diş duruyorsa kılavuzla temizlerim, taşınmışsa helicoil takarım", "verdict": "hasara-gore", "correct": true, "explain": "Kılavuz var olan dişi düzeltir, yeni diş üretmez. Diş tamamen taşınmışsa kılavuz çekmek deliği büsbütün büyütür; orada helicoil orijinal cıvata ölçüsünü geri verir." },
+          { "label": "Bir üst ölçü cıvataya geçerim", "verdict": "ust-olcu", "explain": "Bazı işlerde kabul edilir ama artık o noktada farklı bir cıvata vardır; bir sonraki tamirci bunu bilmez ve orijinal cıvatayı zorlar. Ayrıca her delikte daha büyük çapa yer yoktur." },
+          { "label": "Daha uzun cıvata takarım, derinde sağlam diş bulur", "verdict": "uzun-civata", "explain": "Delik kör ise dip yoktur, geçiyorsa arkadan çıkar. Sağlam dişe ulaşsa bile yük yalnız birkaç dişe biner ve o dişler de sıyrılır." },
+          { "label": "Yapıştırıcı ya da sıvı conta ile sabitlerim", "verdict": "yapistirici", "explain": "Yapıştırıcı gevşemeyi önlemek içindir, kaybolan dişin yükünü taşımaz. Cıvata gevşek kalır ve titreşimde çıkar." }
+        ]
+      },
+      "camera": "bench-close",
+      "teachingNote": "Diş onarımında karar hasarın derecesiyle verilir. Önce bakılır, sonra alet seçilir."
+    },
+    {
+      "id": 2,
+      "instruction": "Diş tarağıyla hatveyi ölç. Kılavuz çap ve hatveyle birlikte seçilir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.egzersiz-dis-deligi",
+        "unit": "mm",
+        "bookValue": 1.5,
+        "acceptRange": [1.45, 1.55]
+      },
+      "camera": "bench-close",
+      "hint": "Tarağın dişleri cıvatanın dişine boşluksuz oturmalı. Bir kademe yanlış taraf, dişi bozan kılavuz demektir.",
+      "teachingNote": "M10 tek başına bir ölçü değildir. Aynı çapta 1.5 ve 1.25 hatveli cıvata vardır; yanlış hatveli kılavuz dişi ilk turda keser. Buradaki 1.5 mm egzersiz değeridir."
+    },
+    {
+      "id": 3,
+      "instruction": "Kesme yağını sürüp kılavuzu çevir.",
+      "interaction": {
+        "type": "rotate",
+        "target": "part.egzersiz-dis-deligi",
+        "direction": "cw",
+        "turns": 3,
+        "tool": "tool.kilavuz-m10",
+        "requiresGesture": true
+      },
+      "camera": "bench-close",
+      "commonMistake": {
+        "if": "yanlis-alet",
+        "feedback": "Elindeki alet kılavuz değil. Diş açma yalnız kılavuzla yapılır; başka bir aletle zorlamak deliği bitirir."
+      },
+      "hint": "İlk yarım turda kılavuzun deliğe dik girdiğini gözle kontrol et. Eğik başlayan diş sonradan düzelmez.",
+      "teachingNote": "Her yarım tur ileri, çeyrek tur geri. Geri çevirme talaşı kırar; kırılmayan talaş kılavuzun önünde birikip onu kilitler, sonra da kırar."
+    },
+    {
+      "id": 4,
+      "instruction": "Kılavuz yarı yolda ağırlaştı. Ne yaparsın?",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.egzersiz-dis-deligi",
+        "question": "Kılavuz zorlanmaya başladı, doğru davranış?",
+        "options": [
+          { "label": "Geri çevirip talaşı kırarım, yağ ekleyip devam ederim", "verdict": "geri-cevir", "correct": true, "explain": "Ağırlaşmanın nedeni genelde biriken talaştır. Geri çevirmek onu koparır, yağ hem sürtünmeyi hem ısıyı düşürür. Bu iki hareket kılavuz kırılmalarının çoğunu önler." },
+          { "label": "Kola boru takıp bastırırım", "verdict": "kol-uzat", "explain": "Kılavuz gevrektir; artan moment onu bükmez, kırar. Kırılan kılavuz deliğin içinde matkaptan sert bir tıkaç bırakır." },
+          { "label": "Matkapla deliği biraz büyütürüm", "verdict": "delik-buyut", "explain": "Delik çapı hatveye göre hesaplanır; büyütülen delikte diş sığ kalır ve ilk yüklemede sıyrılır." },
+          { "label": "Ters çevirip kılavuzu tamamen çıkarır, cıvatayı zorlarım", "verdict": "civata-zorla", "explain": "Yarım açılmış dişe cıvata zorlamak cıvatanın kendisini kılavuz gibi kullanmaktır; cıvatanın dişi bunun için sertleştirilmemiştir, ikisi birden bozulur." }
+        ]
+      },
+      "camera": "bench-close"
+    },
+    {
+      "id": 5,
+      "instruction": "Diş açıldı. Yeni cıvatayı elinle çevirip kontrol et.",
+      "interaction": {
+        "type": "rotate",
+        "target": "part.egzersiz-civata.1",
+        "direction": "cw",
+        "turns": 4,
+        "requiresGesture": true
+      },
+      "camera": "bench-close",
+      "commonMistake": {
+        "if": "ters-yon",
+        "feedback": "Takmak saat yönündedir."
+      },
+      "hint": "Elle kolayca dönmeli. Elle dönmeyen cıvata dişin hâlâ düzgün olmadığını söyler.",
+      "teachingNote": "Usta işi bitirmez, kontrol eder. Onarılan diş, üstüne tork uygulanmadan önce elle doğrulanır."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Helicoil, bir üst ölçü cıvataya geçmekten neden genellikle daha iyidir?",
+        "a": "orijinal-olcu-korunur",
+        "options": [
+          { "verdict": "orijinal-olcu-korunur", "label": "Orijinal cıvata ölçüsü korunur", "explain": "Onarım görünmez olur: sonraki tamirci kılavuzdaki cıvatayı takar ve tutar. Üst ölçüye geçmek ise parçayı kalıcı olarak farklı kılar ve bunu kimse bilmez." },
+          { "verdict": "daha-ucuz", "label": "Daha ucuz olduğu için", "explain": "Helicoil seti genelde daha pahalıdır. Tercih sebebi maliyet değil." },
+          { "verdict": "daha-hizli", "label": "Daha hızlı olduğu için", "explain": "Helicoil ek adımlar ister: özel kılavuz, yay yerleştirme, kılavuz ucunu kırma." },
+          { "verdict": "yag-sizdirmaz", "label": "Yağ sızdırmazlığı sağladığı için", "explain": "Sızdırmazlıkla ilgisi yok; sorun dişin taşıma kapasitesidir." }
+        ]
+      },
+      {
+        "q": "Kılavuz deliğe eğik girerse ne olur?",
+        "a": "civata-eksende-durmaz",
+        "options": [
+          { "verdict": "civata-eksende-durmaz", "label": "Cıvata eksende oturmaz, uygulanan tork gerçek sıkma üretmez", "explain": "Eğik diş cıvatayı yan yükler. Tork anahtarı doğru değeri gösterse bile parça yüzeye tam basmaz; bağlantı gevşek kalır ya da cıvata yorulup kırılır. Eğik açılmış diş sonradan düzeltilemez." },
+          { "verdict": "sadece-cirkin", "label": "Sadece görüntü bozulur", "explain": "Görüntüyle ilgili bir kusur değil, taşıma kapasitesiyle ilgili." },
+          { "verdict": "kilavuz-korur", "label": "Kılavuz kendini düzeltir", "explain": "Kılavuz açtığı dişi takip eder; ilk turlarda eğik başladıysa o eğriliği sonuna kadar götürür." },
+          { "verdict": "sorun-yok", "label": "Cıvata girdiyse sorun yoktur", "explain": "Cıvatanın girmesi bağlantının sağlam olduğunu göstermez." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "sourceRequired": "1.5 mm hatve egzersiz değeridir. Gerçek işte hatve parçadan ölçülür ya da üretici kılavuzunda yazar.",
+    "reviewedByMechanic": false
+  }
+}

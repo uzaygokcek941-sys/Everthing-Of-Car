@@ -1,0 +1,172 @@
+{
+  "id": "direksiyon.sistem-haritasi",
+  "area": "direksiyon",
+  "stage": 0,
+  "title": "Simitten Tekerleğe: Zincirin Halkaları",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 30,
+  "prerequisites": ["direksiyon.guvenlik-airbag"],
+  "learningGoals": [
+    "Direksiyon sistemini bir kumanda değil bir zincir olarak görmek",
+    "Zincirin her halkasının hangi hareketi hangi harekete çevirdiğini bilmek",
+    "Bir şikâyette zinciri bölerek arama alışkanlığını kazanmak"
+  ],
+
+  "safety": [
+    { "rule": "Araç kaldırılmadan tekerlek çevrilerek deneme yapılmaz", "why": "Yerde duran tekerleği zorlamak hem sistemi hem lastiği yorar; serbest hareket ancak araç güvenli biçimde kaldırıldığında görülür", "blocksStart": true },
+    { "rule": "Direksiyon çevrilirken kimsenin eli tekerlek veya rot çubuğu yakınında olmaz", "why": "Zincirin her halkası aynı anda hareket eder; sıkışma yaralanması bu alanın en sık kazasıdır", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true },
+    { "id": "tool.kriko-sehpa", "label": "Kriko ve sehpa", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Sürücü direksiyonu çeviriyor ve tekerlek dönüyor. Arada ne var?",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.direksiyon-simidi",
+        "question": "Direksiyon sistemi en doğru nasıl tarif edilir?",
+        "options": [
+          { "label": "Simitten tekerleğe uzanan, her halkası bir öncekinin hareketini aktaran bir zincir", "verdict": "zincir", "correct": true, "explain": "Direksiyon bir düğme ya da kumanda değildir; sürücünün elindeki hareketi tekerleğe taşıyan fiziksel bir zincirdir. Halkalar sırayla şunlardır: simit, direksiyon mili, mil üzerindeki mafsal, dişli kutusu (çoğu binek araçta kremayer), kremayerin iki ucundaki rot çubukları, rot başları ve nihayet tekerleğin bağlı olduğu döner parça. Bu zinciri görmek bir kolaylık değil, bu alanın bütün teşhisinin temelidir. Çünkü sürücünün getirdiği hiçbir şikâyet 'direksiyon bozuk' değildir; şikâyet her zaman zincirin belirli bir halkasında oluşur. Boşluk hissi bir halkadaki aşınmadır, ses başka bir halkadan gelir, ağırlık genellikle zincire eklenmiş yardım katmanının sorunudur. Usta ile parça değiştiren arasındaki fark burada başlar: usta zinciri bölerek boşluğun nerede olduğunu bulur, diğeri en pahalı halkayı değiştirip umut eder." },
+          { "label": "Tekerleği elektronik olarak yönlendiren bir kumanda", "verdict": "elektronik", "explain": "Elektrik yardımlı sistemlerde bile mekanik bağlantı vardır; hareket fiziksel olarak taşınır." },
+          { "label": "Yalnız ön düzen ayarının bir parçası", "verdict": "on-duzen", "explain": "Ön düzen ayrı bir konudur; direksiyon hareketi taşıyan bağımsız bir sistemdir." },
+          { "label": "Süspansiyonun bir alt parçası", "verdict": "suspansiyon", "explain": "Süspansiyon ayrı bir sistemdir; yolları kesişir ama görevleri farklıdır." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Bu alanın tek cümlelik özeti: direksiyon bir zincirdir. Sonraki her ders bu zincirin bir halkasını açıyor."
+    },
+    {
+      "id": 2,
+      "instruction": "Simidi yarım tur çevir ve zincirin nerelerinin hareket ettiğine bak.",
+      "interaction": {
+        "type": "rotate",
+        "target": "part.direksiyon-simidi",
+        "turns": 0.5,
+        "direction": "cw",
+        "requiresGesture": true
+      },
+      "camera": "direksiyon",
+      "hint": "Simidi tutup yarım tur çevir; gözünü kremayerin uçlarına dik.",
+      "teachingNote": "Çevirirken görülen şey önemlidir: simit dönüyor, mil dönüyor, ama kremayerin çıkışı DÖNMÜYOR — yana kayıyor. Zincirin ortasında bir yerde dönme hareketi doğrusal harekete çevriliyor. Bu dönüşümün nerede olduğunu bilmek, boşluğun nereden gelebileceğini de anlatır."
+    },
+    {
+      "id": 3,
+      "instruction": "Milin üzerinde bir mafsal var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.mil-mafsali",
+        "question": "Bu mafsal neden var?",
+        "options": [
+          { "label": "Simit ile dişli kutusu aynı doğrultuda değildir; mafsal açılı iki mil arasında dönmeyi aktarır", "verdict": "aci", "correct": true, "explain": "Direksiyon simidi sürücünün rahat tutabileceği bir açıda, dişli kutusu ise aracın ön tarafında ve genellikle çok daha aşağıdadır. İkisini düz tek bir mille birleştirmek mümkün olmazdı; arada bir açı vardır ve bu açı hem araçtan araca hem de kolon ayarına göre değişir. Mafsal (kardan mafsalı ya da esnek bağlantı) tam olarak bu işi yapar: iki mil arasında açı varken bile dönmeyi aktarır. İkinci bir görevi daha vardır ve bu görev güvenlikle ilgilidir: çarpışmada kolonun sürücüye doğru itilmesini sınırlamak üzere birçok araçta mil ve mafsal düzeneği kontrollü biçimde kısalacak ya da açılanacak biçimde tasarlanır. Teşhis açısından mafsal önemli bir halkadır çünkü aşındığında ya da bağlantı cıvatası gevşediğinde tam olarak 'direksiyon boşluğu' hissi verir — hâlbuki kremayer sağlamdır. Bu yüzden boşluk aranırken mafsal, kutudan önce bakılan yerdir." },
+          { "label": "Direksiyonun daha yumuşak dönmesi için", "verdict": "yumusak", "explain": "Yumuşaklık yardım sisteminin işi; mafsalın görevi açılı aktarım." },
+          { "label": "Ses yalıtımı için", "verdict": "ses", "explain": "Bazı esnek bağlantılar ses de keser ama varlık sebebi açıdır." },
+          { "label": "Süsleme parçasıdır", "verdict": "sus", "explain": "Taşıyıcı bir aktarma elemanıdır." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Mafsal küçük ve ucuz bir parça olduğu için sıkça atlanır; oysa boşluk şikâyetlerinin gözden kaçan sebeplerinden biridir."
+    },
+    {
+      "id": 4,
+      "instruction": "Zincirin ortasındaki kutuya bak.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kremayer-kutusu",
+        "question": "Kremayer dönme hareketini nasıl yanal harekete çeviriyor?",
+        "options": [
+          { "label": "Milin ucundaki küçük dişli (pinyon), dişli bir çubuğun (kremayer) üstünde yürür; pinyon döndükçe çubuk yana kayar", "verdict": "pinyon-kremayer", "correct": true, "explain": "Kremayer tipi dişli kutusunun bütün fikri iki parçadan ibarettir. Direksiyon milinin ucunda pinyon adı verilen küçük bir dişli vardır. Bu dişli, araç enine uzanan dişli bir çubuğun — kremayerin — üstündeki dişlere geçer. Pinyon döndüğünde dişler kremayeri iter ve çubuk yana kayar. Yani dönme hareketi burada doğrusal harekete çevrilir. Çubuğun iki ucu rot çubuklarına, onlar da rot başlarına ve tekerleklere bağlıdır; çubuk sola kayınca iki tekerlek birlikte sola döner. Bu düzenin iki büyük avantajı vardır: az parça ve doğrudan his. Az parça, zincirde boşluk üretecek daha az bağlantı demektir; doğrudan his ise sürücünün yolu daha net duymasını sağlar. Bu yüzden binek araçların neredeyse tamamı kremayer kullanır. Eski ve ağır araçlarda görülen sonsuz dişli tipi kutular ise daha çok halka içerir ve boşluk ayarı için ayrı bir düzenekleri vardır." },
+          { "label": "Hidrolik basınç tekerleği doğrudan iter", "verdict": "hidrolik", "explain": "Hidrolik yalnız yardım katmanıdır; hareketi mekanik dişli taşır." },
+          { "label": "Elektrik motoru tekerleği doğrudan çevirir", "verdict": "elektrik", "explain": "EPS motoru da yardım verir; dönüşümü yapan pinyon ve kremayerdir." },
+          { "label": "Zincir ve dişli takımıyla", "verdict": "zincir-disli", "explain": "Burada gerçek bir zincir yok; pinyon doğrudan kremayer dişlerine geçer." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Kutu, zincirin dönmeyi kayma hareketine çevirdiği yer. Bir sonraki aşamanın tamamı bu kutuya ayrılmış durumda."
+    },
+    {
+      "id": 5,
+      "instruction": "İki araç ölçüyorsun. Birinin direksiyonu kilitten kilide 3,2 tur, diğerininki 2,6 tur. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.rot-cubugu-sol",
+        "unit": "tur",
+        "acceptRange": [0.55, 0.65]
+      },
+      "camera": "direksiyon",
+      "hint": "3,2 eksi 2,6.",
+      "teachingNote": "0,6 turluk bu fark direksiyon oranını anlatıyor: aynı tekerlek açısına ulaşmak için biri daha çok, diğeri daha az simit turu istiyor. Az turlu araç daha çevik hissedilir ama simide binen kuvvet artar; çok turlu araç daha ağır ama daha hassas kumanda edilir. Buradaki asıl ders bir sayı değil, bir alışkanlık: bir aracın direksiyonunun 'ağır' ya da 'çevik' olması her zaman bir arıza değildir, çoğu zaman tasarımın kendisidir. Şikâyet dinlerken normalin ne olduğunu bilmek gerekir. Turun kaç olması gerektiği araca özgüdür ve bu ders bir sınır vermiyor."
+    },
+    {
+      "id": 6,
+      "instruction": "Zincirin son halkasına, tekerleğe bağlanan yere bak.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.rot-basi-sol",
+        "question": "Boşluk neden en çok bu bölgede aranır?",
+        "options": [
+          { "label": "Rot başı küresel bir mafsaldır, sürekli yük ve titreşim altında çalışır ve aşındığında oluşan boşluk zincirin tamamına yansır", "verdict": "kuresel-asinma", "correct": true, "explain": "Rot başı, rot çubuğunu tekerleğin döner parçasına bağlayan küresel bir mafsaldır. Görevi hareketi aktarırken aynı anda süspansiyonun aşağı yukarı hareketine ve tekerleğin dönmesine izin vermektir; yani sürekli üç yönde birden çalışır. Üstelik yolun bütün darbeleri bu küçük mafsalın üzerinden geçer. Bu yüzden zincirin en çok yıpranan halkalarından biridir. Aşındığında küre ile yatağı arasında bir boşluk oluşur ve bu boşluk zincirin en ucunda olduğu için sürücü tarafından en net hissedilen boşluktur: simit bir miktar çevrilir, tekerlek daha hareket etmez. Buradaki kritik nokta şudur — boşluğun HİSSEDİLDİĞİ yer simit, OLDUĞU yer rot başıdır. Boşluk zincirin herhangi bir halkasında oluşabilir ve hepsi aynı hissi verir. Bu yüzden hisse bakarak parça seçilmez; zincir bölünerek boşluğun hangi halkada olduğu bulunur. Rot başının koruyucu körüğü yırtılmışsa içeri giren toz ve su aşınmayı hızlandırır; yırtık körük tek başına o mafsalı şüpheli hâle getirir." },
+          { "label": "En pahalı parça olduğu için", "verdict": "pahali", "explain": "Fiyat teşhis ölçütü değil; sebep yük ve hareket altında çalışması." },
+          { "label": "En kolay ulaşılan parça olduğu için", "verdict": "kolay", "explain": "Ulaşım kolaylığı sıralama sebebi değil." },
+          { "label": "Boşluk yalnız burada olur, başka halkada olmaz", "verdict": "yalniz-burada", "explain": "Boşluk her halkada olabilir; bu yüzden zincir bölünerek aranır." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Hissedilen yer ile olduğu yer aynı değil. Bu ayrım bu alanın bütün teşhis derslerinin temeli."
+    },
+    {
+      "id": 7,
+      "instruction": "Müşteri 'direksiyonda boşluk var' diyor. Zincir haritası elinde.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.direksiyon-mili",
+        "question": "İlk hamle ne?",
+        "options": [
+          { "label": "Zincir bölünür: bir kişi simidi küçük hareketlerle sağa sola oynatırken diğeri her halkayı sırayla tutup hareketin nerede kaybolduğuna bakar", "verdict": "zinciri-bol", "correct": true, "explain": "Boşluk aramanın yöntemi tahmin değil, ayırmadır. İki kişilik bir işlemdir: biri simidi tekerlek hareket etmeyecek kadar küçük bir açıyla sağa sola oynatır, diğeri zincirin halkalarını sırayla eline alır. Amaç tek bir soruyu yanıtlamaktır — hareket hangi halkaya kadar geliyor ve hangisinde kayboluyor? Simit oynarken mil oynamıyorsa boşluk simit bağlantısındadır. Mil oynayıp mafsalın öbür tarafı oynamıyorsa mafsaldadır. Kutuya giren hareket kremayer ucundan çıkmıyorsa kutunun içindedir. Kremayer ucu hareket edip rot başının öbür tarafı hareket etmiyorsa rot başındadır. Bu yöntemin güzelliği hiçbir parça sökmeden, hiçbir tahmin yapmadan boşluğu tek bir halkaya indirmesidir. Ayrıca birden fazla halkada aynı anda küçük boşluklar olabilir; toplandıklarında büyük bir boşluk hissi verirler ve tek parça değişince şikâyet geçmez. Bu yüzden hareket zincirin sonuna kadar takip edilir, ilk bulunan boşlukta durulmaz." },
+          { "label": "Rot başları değiştirilir, en sık bozulan onlardır", "verdict": "rot-degistir", "explain": "En sık bozulan olması bu araçta bozuk olduğunu göstermez; ölçmeden parça değişmez." },
+          { "label": "Kremayer kutusu komple değiştirilir", "verdict": "kutu-degistir", "explain": "En pahalı halkayı önce değiştirmek teşhis değil, tahmindir." },
+          { "label": "Ön düzen ayarı yapılır", "verdict": "on-duzen", "explain": "Boşluk varken ayar yapılmaz; ayar boşluğun üstüne oturmaz." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Bu adım bir sonraki aşamanın kapısı: boşluğun ölçülmesi ve yerinin bulunması iki ayrı ders olarak geliyor."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Kremayer tipi dişli kutusu dönme hareketini nasıl yanal harekete çevirir?",
+        "a": "pinyon-kremayer",
+        "options": [
+          { "verdict": "pinyon-kremayer", "label": "Milin ucundaki pinyon dişlisi, dişli bir çubuğun üstünde yürür ve çubuğu yana kaydırır", "explain": "Direksiyon milinin ucundaki pinyon, araç enine uzanan dişli çubuğun (kremayerin) dişlerine geçer. Pinyon döndükçe kremayer yana kayar; çubuğun iki ucundaki rot çubukları iki tekerleği birlikte çevirir. Az parça içerdiği için hem boşluk üretecek daha az bağlantı vardır hem de sürücü yolu daha net hisseder." },
+          { "verdict": "hidrolik", "label": "Hidrolik basınç tekerleği doğrudan iter", "explain": "Hidrolik yalnız yardım katmanıdır." },
+          { "verdict": "elektrik", "label": "Elektrik motoru tekerleği doğrudan çevirir", "explain": "EPS de yardım verir; dönüşümü pinyon ve kremayer yapar." },
+          { "verdict": "zincir-disli", "label": "Zincir ve dişli takımıyla", "explain": "Gerçek bir zincir yoktur." }
+        ]
+      },
+      {
+        "q": "Direksiyonda boşluk şikâyetinde ilk hamle nedir?",
+        "a": "zinciri-bol",
+        "options": [
+          { "verdict": "zinciri-bol", "label": "Zincir bölünür; simit küçük hareketlerle oynatılırken hareketin hangi halkada kaybolduğu bulunur", "explain": "Boşluk zincirin herhangi bir halkasında oluşabilir ve hepsi sürücüye aynı hissi verir; hissedilen yer simit, olduğu yer başka bir halkadır. İki kişiyle hareket halka halka takip edilir ve nerede kaybolduğu bulunur. Birden fazla halkada küçük boşluklar toplanmış olabileceği için ilk bulunanda durulmaz, zincirin sonuna kadar bakılır." },
+          { "verdict": "rot-degistir", "label": "Rot başları değiştirilir", "explain": "Ölçmeden parça değiştirmek teşhis değildir." },
+          { "verdict": "kutu-degistir", "label": "Kremayer komple değiştirilir", "explain": "En pahalı halkayla başlamak tahmindir." },
+          { "verdict": "on-duzen", "label": "Ön düzen ayarı yapılır", "explain": "Boşluk varken ayar yapılmaz." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 5'teki 3,2 tur ve 2,6 tur SENARYO okumalarıdır; istenen FARKTIR (0,6 tur) ve ders bir direksiyon oranı sınırı vermiyor. Kilitten kilide tur sayısı araca özgüdür.",
+    "sourceRequired": "Direksiyon boşluğu sınırı, rot başı azami boşluk değeri ve direksiyon oranı bilinçle VERİLMEDİ; bunlar araç ve üretici belgesine aittir. Ders zincirin haritasını ve ayırma yöntemini öğretiyor.",
+    "kapsam": "Sonsuz dişli tipi kutular ve iş makinelerine özgü orbitrollü sistemler metinde anıldı ama kapsam dışı. Süspansiyon ve ön düzen ayrı alanlardır. Yardım sistemleri (hidrolik ve EPS) bir sonraki derste ayrı ele alınıyor.",
+    "reviewedByMechanic": false
+  }
+}

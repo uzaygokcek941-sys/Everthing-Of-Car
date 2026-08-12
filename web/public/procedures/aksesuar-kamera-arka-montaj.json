@@ -1,0 +1,169 @@
+{
+  "id": "aksesuar.kamera-arka-montaj",
+  "area": "aksesuar-ses",
+  "stage": 6,
+  "title": "Arka Cam ve Arka Kamera: Kablonun Araç Boyunca Çekilmesi",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 45,
+  "prerequisites": ["aksesuar.kamera-on-montaj"],
+  "learningGoals": [
+    "Arka kamerayı doğru yere ve doğru yöne oturtmak",
+    "Kabloyu aracın boyunca, hareketli parçalardan ve yastık bölgelerinden uzak bir güzergâhtan çekmek",
+    "Uzun hattaki gerilim düşümünü ölçüp yorumlamak"
+  ],
+
+  "safety": [
+    { "rule": "Kablo hiçbir direk kaplamasında hava yastığının şişme yolundan geçirilmez", "why": "Ön, orta ve arka direklerin herhangi birinde perde tipi hava yastığı bulunabilir; bu sınır ders boyunca değişmez", "blocksStart": true },
+    { "rule": "Bagaj kapağına ya da arka kapıya geçen kablo mutlaka mevcut körüğün İÇİNDEN geçirilir", "why": "Körük aracın hareketli kablo geçişidir; fitilin altından ya da menteşe kenarından geçirilen kablo her açılıp kapanmada bükülür ve iç telleri kopar", "blocksStart": true },
+    { "rule": "Arka cam ısıtma şeritlerinin ve gömülü anten yüzeylerinin üzerine yapıştırma yapılmaz", "why": "Arka camın iç yüzeyindeki iletken şeritler hem ısıtmayı hem birçok araçta anteni taşır; üzerine yapıştırılan ya da kazınan bir taban bu şeritleri koparır ve ısıtma ile radyo birlikte bozulur", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.multimetre", "label": "Multimetre", "required": true },
+    { "id": "tool.plastik-sokme-spatulasi", "label": "Plastik söküm spatulası", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true },
+    { "id": "tool.tornavida-seti", "label": "Tornavida seti", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Arka kamerayı yerleştireceksin. Arka cama bakıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.arka-cam",
+        "question": "Arka kamera nereye konur?",
+        "options": [
+          { "label": "Arka camın üst orta bölgesine, içeriden, ısıtma şeritlerinin ve anten yüzeylerinin arasına gelecek biçimde; arka silecek yoksa camın kirlenmeye açık olacağı müşteriye önceden söylenir", "verdict": "ust-orta", "correct": true, "explain": "Arka kameranın yerleşimi ön kameradan üç noktada ayrılır. Birincisi camın kendisidir: arka camın iç yüzeyinde ısıtma şeritleri vardır ve birçok araçta anten de bu camın içine gömülüdür. Bu şeritlerin üzerine taban yapıştırmak ya da yapıştırıcıyı sökerken kazımak şeridi koparır; sonuç, arka cam ısıtmasının bir bölümünün çalışmaması ve radyo çekiminin bozulmasıdır — üstelik müşteri bu iki arızayı kamerayla ilişkilendirmez. Bu yüzden taban, iki şerit arasındaki boşluğa oturtulur ve şeritlerin izi montajdan önce belirlenir. İkincisi silecektir: arka silecek olan araçlarda kamera süpürme alanının içine denk getirilir; arka silecek olmayan araçlarda böyle bir imkân yoktur ve arka cam çamurlu havada hızla kirlenir — bu, müşteriye önceden söylenen bir sınırdır, sonradan çıkan bir şikâyet değil. Üçüncüsü yükseklik ve açıdır: kamera camın üst bölgesine konur ki kadrajın çoğunu yol ve arkadaki araç kaplasın. Ayrıca birçok arka kameranın görüntüsü ters ya da ayna gelebilir ve cihazın ayarından çevrilir; taban sökülmez. Renkli filmli camlarda gece görüntüsünün belirgin biçimde koyulaşacağı da baştan söylenir." },
+          { "label": "Bagaj kapağının dışına, plaka üstüne", "verdict": "dis", "explain": "Dışarısı su, çamur ve darbeye açıktır; kayıt kamerası içeriden takılır." },
+          { "label": "Arka camın alt köşesine", "verdict": "alt", "explain": "Kadrajı bagaj kapağı ve pencere çerçevesi kapatır." },
+          { "label": "Arka koltuğun arkalığına", "verdict": "koltuk", "explain": "Camdan bakmayan bir kamera dışarıyı göremez." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Isıtma şeritleri ve gömülü anten arka camın içinde. Taban iki şerit arasına oturur; kazınırsa ısıtma ve radyo birlikte gider."
+    },
+    {
+      "id": 2,
+      "instruction": "Kamerayı camın belirlenen noktasına oturtuyorsun.",
+      "interaction": {
+        "type": "press-and-pull",
+        "target": "part.arka-kamera",
+        "requiresGesture": true
+      },
+      "camera": "aksesuar",
+      "hint": "Şeritlerin arasındaki boşluğa bastır ve birkaç saniye tut.",
+      "teachingNote": "Yapıştırma kuralları ön camdakiyle aynı: yüzey temizlenir, kurumaya bırakılır, soğukta ısıtılır, bastırılıp beklenir. Arka camda iki ek özen var. Birincisi, taban yapıştırılmadan önce kamera elde tutulup kadraj denenir ve kablonun hangi yönden çıkacağı kararlaştırılır — kablo çıkış yönü tabanın yönünü belirler ve ters yapıştırılan bir taban kabloyu camın ortasından geçirmek zorunda bırakır; bu hem çirkin durur hem görüntüye girer. İkincisi, kablonun cam üzerindeki ilk kaç santimidir: kablo camdan tavan kaplamasına en kısa ve en düz yoldan geçirilir, gerekiyorsa küçük ve şeffaf tutucularla camın kenarına sabitlenir. Kablonun camın ortasından sarkması, işin kalitesini tek başına sıfırlar. Bir de sık yapılan bir hata var: kamera ile cam arasında boşluk kalacak biçimde takılırsa gece kabin içindeki her ışık o boşlukta yansır ve kayda hayalet bir görüntü düşer; kamera cama mümkün olduğunca yakın oturur."
+    },
+    {
+      "id": 3,
+      "instruction": "Kabloyu aracın boyunca çekeceksin. Güzergâhı planlıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kamera-kablosu",
+        "question": "Kablo hangi yoldan gider?",
+        "options": [
+          { "label": "Tavan kaplamasının kenarı boyunca arkadan öne, aracın kendi kablo demetinin izlediği yoldan; hareketli parçalardan, yastık şişme yollarından ve koltuk raylarından uzak durarak", "verdict": "tavan-kenari", "correct": true, "explain": "Aracın boyunca kablo çekmek bu işin en uzun süren ve kaliteyi en çok belirleyen kısmıdır. Standart güzergâh şudur: arka kameradan çıkan kablo arka camın kenarından tavan kaplamasına girer, kaplamanın kenarı boyunca — genellikle yolcu tarafından — öne doğru gider, ön direkten iner ve ön kameranın kablosuyla aynı noktada birleşir. Bu yolun tercih edilme sebebi basittir: aracın kendi kablo demeti zaten oradan gider ve üretici o yolu hareketli parçalardan, ısı kaynaklarından ve yastık bölgelerinden uzak seçmiştir. Kendi demetini takip et — bu tek cümle kablo çekmenin bütün kuralını özetler. Uygulamada dikkat edilecek dört nokta var. Birincisi, kaplama tamamen sökülmez; kenarından açılıp kablo içeri sokulur ve ince bir kılavuzla ilerletilir. İkincisi, kablo direklerin içinden geçirilirken yastığın olduğu taraf boş bırakılır. Üçüncüsü, koltuk raylarının, emniyet kemeri toplayıcısının ve kapı fitillerinin altından geçilmez — bunların hepsi hareketlidir ya da kritik bir işlevi vardır. Dördüncüsü, kablo fazlası kesilmez; kesip eklemek yerine fazlalık düzgünce toplanıp bir yere sabitlenir, çünkü kablonun ucundaki soket çoğu zaman kesilip yeniden yapılamaz. Bagaj kapağına ya da arka kapıya geçiş varsa kablo mutlaka mevcut körüğün içinden geçirilir; bu kural kapı kablo geçişi dersinde öğrenildi ve burada aynen geçerli." },
+          { "label": "Yerden, halının altından ve koltuk raylarının yanından", "verdict": "yer", "explain": "Koltuk rayları hareketlidir ve halı altı ıslanır." },
+          { "label": "Kapı fitillerinin altından", "verdict": "fitil", "explain": "Kapı her kapandığında kabloyu ezer." },
+          { "label": "En kısa yoldan, tavanı delerek", "verdict": "delme", "explain": "Gövdeyi delmek bu iş için gerekmez ve pas riski üretir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Kendi demetini takip et. Bu tek cümle kablo çekmenin bütün kuralını özetliyor."
+    },
+    {
+      "id": 4,
+      "instruction": "Bagaj kapağına geçiş gerekiyor. Körüğü açıyorsun.",
+      "interaction": {
+        "type": "pull",
+        "target": "part.kapi-korugu",
+        "requiresGesture": true
+      },
+      "camera": "aksesuar",
+      "hint": "Körüğün ucunu gövdeden yavaşça çıkar; kabloyu içinden geçireceksin.",
+      "teachingNote": "Körük, aracın gövdesi ile hareketli bir kapağı arasındaki tek doğru kablo geçişidir ve kapı kablo geçişi dersinin bütün kuralları burada aynen geçerlidir. Kablo körüğün İÇİNDEN geçer — fitilin altından, menteşe kenarından ya da körüğü delerek değil. Uygulama şudur: körüğün bir ucu yerinden çıkarılır, ince bir kılavuz telle kablo içeriden geçirilir ve körük yerine tam oturtulur. Üç ayrıntı işi kalıcı yapar. Birincisi, kablo körüğün içinde gergin bırakılmaz; kapak açıldığında körük uzar ve gergin bir kablo o anda çekilir, aylar içinde iç telleri kopar. Doğrusu, kapak açıkken bile kabloda hafif bir pay bulunmasıdır. İkincisi, körüğün ucu yerine tam oturmazsa oradan su girer ve bagaj içine sızar; körük takıldıktan sonra iki ucu da elle kontrol edilir. Üçüncüsü, aynı körükten geçen mevcut kablolarla yeni kablonun ekleri üst üste gelmez — ekler kaydırılır, çünkü aynı noktada toplanan ekler körüğü şişirir ve o nokta bükülmenin merkezi hâline gelir. Bu montajın 'iyi usta' işareti tam burasıdır: kapağı birkaç kez açıp kapatıp kablonun nasıl hareket ettiğini izlemek bir dakikalık iştir ve sonraki iki yılı belirler."
+    },
+    {
+      "id": 5,
+      "instruction": "Hat bağlandı. Gerilimi iki noktada ölçtün: ön ünitede 12,4 V, arka kameranın besleme ucunda 12,1 V. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.multimetre-aksesuar",
+        "unit": "volt",
+        "acceptRange": [0.25, 0.35]
+      },
+      "camera": "aksesuar",
+      "hint": "12,4 eksi 12,1.",
+      "teachingNote": "0,3 voltluk bu fark uzun bir hatta beklenen bir kayıptır ve adı gerilim düşümüdür: bir kablo, üzerinden akım geçtiğinde uçları arasında küçük bir gerilim farkı üretir. Kablo uzadıkça ve kesiti inceldikçe bu fark büyür. Neden önemli: arka kamera besleme ve veriyi aynı hattan alır ve bu hattaki gerilim yeterince düşerse belirti cihaz arızası gibi görünür — arka görüntü arada kaybolur, kayıtta yalnız ön kamera vardır, ekranda 'kamera bağlı değil' yazısı gelip gider. Bu belirtiyi görünce yeni kamera almak yaygın ve pahalı bir hatadır; önce hat ölçülür. Ölçümün doğru yapılışı da önemlidir ve elektrik alanından bilinir: gerilim düşümü, devre ÇALIŞIRKEN ve akım geçerken ölçülür; ölü bir devrede iki ucun gerilimi eşit çıkar ve hiçbir şey söylemez. Sebepler sırayla elenir: soketler tam oturmuş mu, kablo bir yerde ezilmiş mi, ek yapıldıysa ek kalitesi nasıl, kablo boyu gereğinden uzun mu. Kabul edilebilir gerilim düşümü sınırı cihaza ve kablo kesitine özgüdür; bu ders bir sınır vermiyor, cihazın kendi belgesindeki değer kullanılır."
+    },
+    {
+      "id": 6,
+      "instruction": "Kablo çekildi. Kaplamaları kapatmadan önce hattı denetliyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.tavan-kaplamasi",
+        "question": "Kaplamalar kapatılmadan önce kabloda ne kontrol edilir?",
+        "options": [
+          { "label": "Hiçbir yerde ezilmediği, sıkışmadığı ve gergin olmadığı; aralıklarla sabitlendiği; hareketli parçalara ve yastık bölgelerine temas etmediği ve kaplamaların kablo sıkışmadan kapandığı", "verdict": "tam-denetim", "correct": true, "explain": "Bu denetim beş maddeliktir ve montajın kalan ömrünü belirler. Birincisi ezilmedir: kablonun kaplamanın klipsleri arasına, bir vidanın altına ya da metal bir kenarın üzerine gelip gelmediği elle takip edilerek kontrol edilir; keskin bir sac kenarının üzerinden geçen kablo, aylar içinde titreşimle yalıtımını kaybeder ve gövdeye kısa devre yapar. İkincisi gerginliktir: kablo hiçbir noktada gergin olmamalı, özellikle körük ve kapı geçişlerinde pay bulunmalıdır. Üçüncüsü sabitlemedir — kablo aralıklarla mevcut demete bağlanır; sabitlenmeyen kablo kaplamanın içinde yer değiştirir, zamanla bir hareketli parçaya sarkar ve gıcırdamaya başlar; müşterinin 'tavandan ses geliyor' şikâyeti çoğu zaman budur. Dördüncüsü yastık sınırıdır ve tekrar kontrol edilir: direk kaplamalarının içinde kablonun yastığın önünü kesip kesmediği gözle doğrulanır. Beşincisi, kaplamanın kablo sıkışmadan kapanmasıdır: kaplama yerine oturtulurken zorlanıyorsa altında bir kablo sıkışıyordur ve zorlanarak kapatılan kaplama hem klipsini kırar hem kabloyu ezer. Bu beş maddenin tamamı kaplamalar kapatılmadan yapılır; kapatıldıktan sonra hepsi yeniden söküm demektir." },
+          { "label": "Yalnız görüntünün geldiğine bakılır", "verdict": "goruntu", "explain": "İlk gün gelen görüntü, ezilen bir kablonun altı ay sonra kopmasını engellemez." },
+          { "label": "Hiçbir şey; kaplama kapatılır", "verdict": "kapat", "explain": "Sıkışan kablo kaplamayı da kırar." },
+          { "label": "Kablo boyu kısaltılır", "verdict": "kisalt", "explain": "Fazlalık kesilmez, toplanıp sabitlenir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "'Tavandan ses geliyor' şikâyetinin sebebi genelde sabitlenmemiş bir kablo. Beş maddenin hepsi kaplama kapanmadan yapılır."
+    },
+    {
+      "id": 7,
+      "instruction": "Ön ve arka bağlandı. Sistem denetimi.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.arka-kamera",
+        "question": "İki kameralı sistemde teslim öncesi ne doğrulanır?",
+        "options": [
+          { "label": "İki görüntünün de geldiği, arka görüntünün ters olmadığı, iki kaydın aynı zaman etiketini taşıdığı ve bir deneme kaydının açılıp izlendiği", "verdict": "iki-goruntu-tek-zaman", "correct": true, "explain": "İki kameralı sistemde doğrulama tek kameralıdan farklıdır, çünkü iki görüntünün birbirine bağlı olması işin asıl değeridir. Liste şudur. Birincisi, iki görüntü de geliyor mu — ekranda ya da telefonda ikisi birden izlenir; arka kamera 'bağlı değil' diyorsa soket ve hat kontrol edilir, cihaz değiştirilmez. İkincisi, arka görüntü doğru yönde mi — birçok kurulumda arka görüntü ters ya da ayna gelir ve cihazın ayarından düzeltilir; bu ayar yapılmadan teslim edilen bir sistemde müşteri her kaydı ters izler. Üçüncüsü ve en önemlisi zamandır: iki kayıt aynı zaman etiketini taşımalıdır. Tek sistemde bu kendiliğinden sağlanır çünkü saat tektir; iki ayrı cihaz kullanıldıysa iki saat de aynı gerçek saate ayarlanır. Bir olayda kanıtın gücü tam olarak buradan gelir — ön ve arka kaydın aynı ana ait olduğunun görülmesi. Dördüncüsü, deneme kaydıdır: araç birkaç dakika sürülür, kayıt durdurulur ve dosya açılıp izlenir; iki kameranın da yazdığı gözle görülür. Beşincisi, hattın davranışıdır: araç sürülürken arka görüntü arada kesiliyorsa gerilim düşümü ya da soket teması vardır ve bu teslimden önce çözülür. Kayıt gelmiyorsa şüphe sırası nettir — soket, hat, kart, en son cihaz." },
+          { "label": "Ön görüntü geliyorsa yeterlidir", "verdict": "on", "explain": "Arka kamera işin yarısı; ayrıca doğrulanır." },
+          { "label": "Cihaz açılıyorsa yeterlidir", "verdict": "acilis", "explain": "Açılan cihaz kaydettiğini göstermez." },
+          { "label": "Zaman ayarı önemli değildir", "verdict": "zaman", "explain": "İki kaydın eşleşmesi kanıtın gücünü belirler." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Kayıt gelmiyorsa şüphe sırası: soket, hat, kart, en son cihaz. Sırada park modu ve akünün korunması."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Arka cama taban yapıştırılırken hangi sınıra dikkat edilir?",
+        "a": "seritler",
+        "options": [
+          { "verdict": "seritler", "label": "Isıtma şeritlerinin ve gömülü anten yüzeylerinin üzerine yapıştırılmaz; taban şeritlerin arasındaki boşluğa oturur", "explain": "Arka camın iç yüzeyindeki iletken şeritler hem ısıtmayı hem birçok araçta anteni taşır. Üzerine yapıştırıp sonra kazımak şeridi koparır; sonuç, ısıtmanın bir bölümünün çalışmaması ve radyo çekiminin bozulmasıdır. Müşteri bu iki arızayı kamerayla ilişkilendirmez." },
+          { "verdict": "yukseklik", "label": "Yalnız yüksekliğe bakılır", "explain": "Şerit konumu belirleyicidir." },
+          { "verdict": "renk", "label": "Cam rengine bakılır", "explain": "Renk gece görüntüsünü etkiler ama yapıştırma sınırı şeritlerdir." },
+          { "verdict": "yok", "label": "Herhangi bir yere yapıştırılabilir", "explain": "Şeritler koparsa iki sistem birden bozulur." }
+        ]
+      },
+      {
+        "q": "Arka görüntü sürüş sırasında arada kesiliyor. İlk ne yapılır?",
+        "a": "hat-olcumu",
+        "options": [
+          { "verdict": "hat-olcumu", "label": "Hat ölçülür: soketler, ezilme ve gerilim düşümü kontrol edilir; cihaz en son şüphedir", "explain": "Arka kamera besleme ve veriyi aynı hattan alır; hattaki gerilim düşerse belirti cihaz arızası gibi görünür — görüntü kaybolur, 'kamera bağlı değil' yazısı gelip gider. Gerilim düşümü devre çalışırken ölçülür; ölü devrede iki uç eşit çıkar. Sırayla elenir: soket, ezilme, ek kalitesi, kablo boyu." },
+          { "verdict": "cihaz", "label": "Yeni arka kamera takılır", "explain": "Yaygın ve pahalı bir hata; önce hat ölçülür." },
+          { "verdict": "kart", "label": "Kart değiştirilir", "explain": "Kart görüntünün kesilmesini açıklamaz." },
+          { "verdict": "yazilim", "label": "Cihaz sıfırlanır", "explain": "Fiziksel hat elenmeden yazılıma geçilmez." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 5'teki 12,4 V ve 12,1 V SENARYO okumalarıdır; istenen FARKTIR (0,3 V) ve ders kabul edilebilir bir gerilim düşümü sınırı vermiyor.",
+    "sourceRequired": "Kablo kesiti, kabul edilebilir gerilim düşümü, arka cam ısıtma şeritlerinin konumu, körük tipi, yapıştırıcı bandın koşulları ve cihazın görüntü çevirme ayarı bilinçle VERİLMEDİ; hepsi araca ve ürüne özgüdür.",
+    "kapsam": "Hava yastığı bileşenlerine müdahale ve arka cam ısıtma şeridi onarımı KAPSAM DIŞIDIR. Gövdeye yeni delik açma, cam sökme ve bagaj kapağı menteşe işleri kapsam dışı.",
+    "kaynak": "Bu aşama MEB çerçeve programında YOKTUR; proje kararıyla eklendi. Körük kuralı bu alanın kapı kablo geçişi dersinden, gerilim düşümü ölçümü elektrik alanından geliyor.",
+    "reviewedByMechanic": false
+  }
+}

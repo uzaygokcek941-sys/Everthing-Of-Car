@@ -1,0 +1,180 @@
+{
+  "id": "lastik.tekerlek-degisimi",
+  "area": "lastik-tekerlek",
+  "stage": 4,
+  "title": "Tekerleği Araca Takmak: Temiz Yüzey ve Doğru Merkezleme",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 30,
+  "prerequisites": ["lastik.somun-torku"],
+  "learningGoals": [
+    "Göbek yüzeyinin temizliğinin ölçülebilir bir etkisi olduğunu görmek",
+    "Göbek merkezli ile somun merkezli jantı ayırt etmek",
+    "Somun tipinin jantla eşleşmesi gerektiğini bilmek"
+  ],
+
+  "safety": [
+    { "rule": "Jantla göbek arasına hiçbir ara parça, pul ya da conta konmaz", "why": "Bu yüzey metal metale ve tam temas etmelidir; araya giren her şey somunların gevşemesine yol açar", "blocksStart": true },
+    { "rule": "Jantın somun tipiyle eşleştiği doğrulanmadan tekerlek takılmaz", "why": "Yanlış tip somun jantla tam temas etmez; sıkılmış görünürken tutmaz ve tekerlek yolda çıkabilir", "blocksStart": true },
+    { "rule": "Bijon dişine ve somun oturma yüzeyine yağ ya da gres sürülmez", "why": "Sürtünme düşünce aynı tork saplamayı aşırı gerer ve saplama kopar", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.tel-firca", "label": "Tel fırça", "required": true },
+    { "id": "tool.bijon-anahtari", "label": "Bijon anahtarı", "required": true },
+    { "id": "tool.tork-anahtari", "label": "Tork anahtarı", "required": true },
+    { "id": "tool.komparator", "label": "Salgı komparatörü", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Tekerlek söküldü. Göbeğin jantla temas eden yüzeyinde pas ve kir tabakası var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.gobek",
+        "question": "Ne yapılır?",
+        "options": [
+          { "label": "Yüzey tel fırçayla temizlenir: jant göbeğe tam oturmazsa salgı yapar ve somunlar gevşer", "verdict": "temizle", "correct": true, "explain": "Jant göbeğe oturduğu yüzeyden merkezlenir ve o yüzeyden yük alır. Aradaki pas kabuğu ya da kurumuş çamur bu temasın tam olmasını engeller; jant milimetrenin altında da olsa eğik oturur ve tekerlek dönerken yalpalar. Bunun iki sonucu vardır. Birincisi salgıdır: hızla birlikte artan bir titreşim ortaya çıkar ve balans yaptırılmasına rağmen geçmez, çünkü sorun balans değil oturmadır. İkincisi ve daha tehlikelisi gevşemedir: pas kabuğu ilk kilometrelerde ezilip dağılır, aradaki mesafe kapanır ve saplamalardaki germe düşer; somunlar torkla sıkılmış olsa da gevşek kalır. Bu yüzden temizlik bir titizlik değil, işin zorunlu adımıdır: göbeğin yüzeyi ve jantın oturma yüzeyi tel fırçayla metale kadar temizlenir. Aynı yüzeye pul, conta ya da ara parça konmaz; temas metal metale olmalıdır." },
+          { "label": "Doğrudan takılır, somunlar nasılsa sıkıştırır", "verdict": "dogrudan-tak", "explain": "Pas ilk kilometrelerde ezilir, germe düşer ve somunlar gevşer." },
+          { "label": "Araya ince bir pul konur", "verdict": "pul", "explain": "Bu yüzeye hiçbir ara parça konmaz; temas metal metale olmalıdır." },
+          { "label": "Üzerine gres sürülüp takılır", "verdict": "gres", "explain": "Kirin üstüne gres sürmek temizlik değildir; yüzey metale kadar temizlenir." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bu adım, sonradan bulunması çok zor bir arızayı baştan önler: 'balans yaptırdım geçmedi' şikâyetlerinin önemli bir kısmı kirli göbek yüzeyinden çıkar."
+    },
+    {
+      "id": 2,
+      "instruction": "Jantın ortasındaki delik göbeğin çıkıntısına tam oturuyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.jant",
+        "question": "Bu jant nasıl merkezleniyor?",
+        "options": [
+          { "label": "Göbek merkezli: jantı ortalayan şey göbeğin çıkıntısıdır, somunlar yalnız sıkıştırır", "verdict": "gobek-merkezli", "correct": true, "explain": "İki merkezleme yöntemi vardır ve ikisi farklı parçaya güvenir. Göbek merkezli sistemde jantın orta deliği göbeğin çıkıntısına tam oturur; tekerleği ortalayan bu temastır ve yükün önemli bir kısmını da o yüzey taşır. Somunların işi ortalamak değil, jantı göbeğe bastırmaktır. Somun merkezli sistemde ise orta delik boldur ve jantı ortalayan şey somunların konik yüzeyleridir; orada somunların sırayla ve kademeli sıkılması merkezleme açısından daha da kritiktir. Ayrım pratikte şu yüzden önemlidir: göbek merkezli bir araca orta deliği daha büyük bir jant takılacaksa arada merkezleme halkası kullanılması gerekir, yoksa jant asılı kalır ve titreşim yapar. Halka bir süs parçası değil, merkezlemenin kendisidir. Hangi sistemin geçerli olduğu araca ve janta bakılarak anlaşılır, tahmin edilmez." },
+          { "label": "Somun merkezli: somunların konik yüzeyi ortalar", "verdict": "somun-merkezli", "explain": "Orta delik göbeğe tam oturuyorsa merkezleme göbekten yapılıyordur." },
+          { "label": "Merkezleme diye bir şey yoktur", "verdict": "yok", "explain": "Tekerleğin ortalanması yapısal bir gerekliliktir; ortalanmayan tekerlek titrer." },
+          { "label": "Balans ağırlıkları merkezler", "verdict": "balans", "explain": "Balans kütle dengesini düzeltir, konum merkezlemesi yapmaz." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Sonradan takılan jantlarda en sık atlanan parça merkezleme halkasıdır. Yokluğu her zaman aynı şikâyeti üretir: hızla artan ve balansla geçmeyen titreşim."
+    },
+    {
+      "id": 3,
+      "instruction": "Tekerleği önce temizlemeden taktın ve komparatörle jant kenarındaki salgıyı ölçtün: 0,9 mm. Sonra söküp yüzeyleri temizleyip tekrar taktın: 0,3 mm. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.komparator",
+        "unit": "mm",
+        "acceptRange": [0.58, 0.62]
+      },
+      "camera": "tekerlek",
+      "hint": "0,9 eksi 0,3.",
+      "teachingNote": "0,6 mm'lik bu fark yalnız bir tel fırçayla kazanıldı — hiçbir parça değişmedi, hiçbir ayar yapılmadı. Ölçünün gösterdiği şey şu: temizlik bir alışkanlık değil, ölçülebilir sonuç üreten bir adım. Aynı ölçü kirli yüzeyin ne yaptığını da gösteriyor; bu tekerlek temizlenmeden takılsaydı yolda titreşim yapacak ve muhtemelen balansa gönderilecekti."
+    },
+    {
+      "id": 4,
+      "instruction": "Jantı takarken göbeğin merkezleme çıkıntısı paslı ve jant zor geçiyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.gobek",
+        "question": "Ne yapılır?",
+        "options": [
+          { "label": "Çıkıntı temizlenir; üretici izin veriyorsa yalnız o merkezleme yüzeyine çok ince bir pas önleyici sürülebilir — dişe ve somun oturma yüzeyine asla", "verdict": "yuzeyi-temizle", "correct": true, "explain": "Alüminyum jant ile çelik göbek arasında zamanla korozyon oluşur ve jant göbeğe yapışır; bir sonraki sökmede tekerlek elle çıkmaz, zorlanır. Bunu önlemenin doğru yolu merkezleme çıkıntısını temizlemek ve gerekiyorsa oraya çok ince bir pas önleyici film uygulamaktır. Ancak burada iki sınır vardır ve ikisi de kesindir. Birincisi, uygulanan şey yalnız merkezleme yüzeyine gider; jantın göbeğe bastığı düz temas yüzeyi kuru ve temiz kalmalıdır. İkincisi, bijon dişine ve somunun oturduğu koniye kesinlikle hiçbir şey sürülmez — orada sürtünmenin düşmesi, aynı tork değerinde saplamanın aşırı gerilmesi demektir ve saplama kopar. Üretici bu konuda ne diyorsa o geçerlidir; bir şey demiyorsa kuru montaj esastır. Uygulanan miktar da önemlidir: görünür bir gres tabakası değil, silinmiş gibi duran ince bir film." },
+          { "label": "Bütün temas yüzeyine bol gres sürülür", "verdict": "bol-gres", "explain": "Düz temas yüzeyi kuru olmalı; gres oradaki teması bozar." },
+          { "label": "Jant çekiçle zorlanarak geçirilir", "verdict": "cekicle", "explain": "Zorlama jantı ve göbeği bozar; önce temizlenir." },
+          { "label": "Dişlere gres sürülür ki somunlar kolay dönsün", "verdict": "dise-gres", "explain": "Bu tam olarak yapılmaması gereken şey: aynı torkta saplama aşırı gerilir." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "İki yüzey, iki farklı kural: merkezleme yüzeyi korozyona karşı korunabilir, yük taşıyan ve sıkma yapan yüzeyler kuru kalır."
+    },
+    {
+      "id": 5,
+      "instruction": "Elinde iki farklı somun var: birinin oturma yüzeyi konik, diğerininki küresel.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.bijon.1",
+        "question": "Hangisi kullanılır?",
+        "options": [
+          { "label": "Jantın somun yuvasının biçimine uyan; koni koniye, küre küreye oturur", "verdict": "yuvaya-uyan", "correct": true, "explain": "Somunun jantla temas ettiği yüzey yalnız sıkıştırmaz, somun merkezli jantlarda aynı zamanda tekerleği ortalar. Bu yüzden somunun oturma yüzeyi jantın yuvasının biçimiyle aynı olmak zorundadır. Konik yuvaya küresel somun takılırsa temas geniş bir yüzey yerine ince bir çizgi üzerinde olur; uygulanan tork gerçek germeye dönüşmez, somun ilk kilometrelerde yuvasına gömülerek gevşer ve yuvayı da bozar. Aynı şey tersinde de geçerlidir. Üçüncü bir tip olan düz pullu somunlarda ise pul jantın düz yüzeyine basar ve genelde saplama boyu farklıdır. Bu yüzden jant değiştirildiğinde somunlar da o jantın istediği tipte olmalıdır — 'çapı uyuyor, dönüyor' yeterli değildir. Kontrol basittir: somun elle takılır, yuvaya tam oturduğu ve saplamadan yeterli diş tuttuğu görülür." },
+          { "label": "Konik olan, çünkü daha yaygındır", "verdict": "konik-yaygin", "explain": "Yaygınlık ölçüt değil; belirleyici olan jantın yuva biçimi." },
+          { "label": "İkisi de olur, çapları aynı", "verdict": "ikisi-de", "explain": "Çap aynı olsa da yanlış yüzey biçimi teması çizgiye indirir ve somun gevşer." },
+          { "label": "Küresel olan, çünkü daha geniş temas eder", "verdict": "kuresel", "explain": "Geniş temas ancak yuvası küreselse oluşur." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bu, sonradan alınan jantlarda en sık yapılan hatadır. Somun dönüyor diye uyduğu sanılır; oysa oturma yüzeyi uymuyorsa bağlantı yoktur."
+    },
+    {
+      "id": 6,
+      "instruction": "Tekerlek göbeğe takıldı, somunlar elle çevrildi. Yıldız sırasıyla ön sıkma yap.",
+      "interaction": {
+        "type": "rotate",
+        "target": "part.bijon.1",
+        "direction": "cw",
+        "turns": 5,
+        "tool": "tool.bijon-anahtari",
+        "requiresGesture": true
+      },
+      "camera": "tekerlek",
+      "hint": "Saat yönünde.",
+      "commonMistake": {
+        "if": "ters-yon",
+        "feedback": "Ters çeviriyorsun. Bijon somunları saat yönünde sıkılır."
+      },
+      "teachingNote": "Somunlar önce elle çevrilir: elle dönmeyen bir somun ya çapraz diş atmıştır ya da yanlış tiptir. Anahtarla zorlamak bu iki hatayı da gizler ve saplamayı bozar. Ön sıkma yıldız sırasıyla yapılır, tam tork araç yere indikten sonra."
+    },
+    {
+      "id": 7,
+      "instruction": "Araç indirildi, tork uygulandı. İş bitiyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.valf",
+        "question": "Son kontrol listesinde ne var?",
+        "options": [
+          { "label": "Tork, basınç, valf kapağı, TPMS uyarısının sönmesi ve müşteriye kısa yol sonrası tork kontrolünün söylenmesi", "verdict": "kontrol-listesi", "correct": true, "explain": "Tekerlek takmak tek bir işlem değil, birbirine bağlı birkaç işlemin sonuncusudur ve her biri ayrı ayrı doğrulanır. Tork: dört tekerleğin de somunları tork anahtarıyla ve yıldız sırasıyla sıkıldı mı. Basınç: tekerlekler yer değiştirdiyse ya da yeni lastik takıldıysa değerler aracın etiketine göre ayarlandı mı. Valf kapakları: dördü de yerinde mi — ikinci sızdırmazlık bariyeri onlar. TPMS: araçta uyarı sistemi varsa panelde uyarı kaldı mı, sensör konumlarının tanıtılması gereken bir araçsa yapıldı mı. Ve son olarak müşteriye söylenecek cümle: yeni takılan tekerleğin somunları kısa bir yol sonrasında tekrar kontrol edilmelidir, çünkü ilk kilometrelerdeki oturma germeyi bir miktar düşürür. Bu liste ezberden değil, sırayla ve fiilen bakılarak uygulanır; 'yaptım herhâlde' bu işte yeterli bir kontrol değildir." },
+          { "label": "Yalnız torkun uygulanmış olması yeterli", "verdict": "yalniz-tork", "explain": "Basınç, valf kapağı ve TPMS de işin parçası." },
+          { "label": "Aracı yıkamak", "verdict": "yikama", "explain": "Görünüm işi; teknik kontrol listesi ayrı." },
+          { "label": "Hiçbir şey; müşteri zaten kontrol ettirir", "verdict": "musteri-kontrol", "explain": "Kontrol ustanın işidir ve tekerlek bağlantısı en kritik bağlantılardan biridir." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bu alanın işleri kısa ama zincirlidir. Zincirin son halkası kontroldür ve atlandığında önceki halkaların doğru yapıldığı bilinemez."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Göbeğin jantla temas eden yüzeyi neden temizlenir?",
+        "a": "otur-ve-gevseme",
+        "options": [
+          { "verdict": "otur-ve-gevseme", "label": "Jant tam oturmazsa salgı yapar; ayrıca pas kabuğu ilk kilometrelerde ezilince somunlardaki germe düşer ve gevşerler", "explain": "Jant göbeğe oturduğu yüzeyden merkezlenir ve yük alır. Aradaki pas ya da kir jantı milimetrenin altında da olsa eğik oturtur; ortaya hızla artan ve balansla geçmeyen bir titreşim çıkar. Daha tehlikelisi, o kabuk ezilip dağıldığında aradaki mesafe kapanır ve saplamalardaki germe düşer — somunlar torkla sıkılmış olsa da gevşek kalır. Bu yüzden yüzey metale kadar temizlenir ve araya hiçbir ara parça konmaz." },
+          { "verdict": "gorunum", "label": "Görünüm için", "explain": "Görünmeyen bir yüzey; sebep tamamen teknik." },
+          { "verdict": "kolay-soksun", "label": "Bir dahaki sefere kolay sökülsün diye", "explain": "Bu bir yan fayda; asıl sebep oturma ve germe." },
+          { "verdict": "gereksiz", "label": "Gerekmez, somunlar zaten sıkıştırır", "explain": "Somunlar pası kalıcı olarak sıkıştıramaz; kabuk ezilince germe düşer." }
+        ]
+      },
+      {
+        "q": "Konik yuvalı bir janta küresel oturma yüzeyli somun takılırsa ne olur?",
+        "a": "cizgi-temas",
+        "options": [
+          { "verdict": "cizgi-temas", "label": "Temas geniş yüzey yerine ince bir çizgiye iner; tork gerçek germeye dönüşmez, somun yuvasına gömülerek gevşer", "explain": "Somunun oturma yüzeyi hem sıkıştırır hem de somun merkezli jantlarda tekerleği ortalar. Yüzey biçimi yuvayla aynı değilse temas çizgiye iner, uygulanan tork beklenen germeyi üretmez ve somun ilk kilometrelerde yuvaya gömülerek gevşer; yuvayı da bozar. Çapın uyması ve somunun dönmesi yeterli değildir." },
+          { "verdict": "sorun-yok", "label": "Sorun olmaz, çap aynıysa uyar", "explain": "Çap değil, oturma yüzeyinin biçimi belirleyici." },
+          { "verdict": "daha-iyi", "label": "Daha geniş temas eder, daha iyi tutar", "explain": "Geniş temas ancak yuvası küreselse oluşur." },
+          { "verdict": "tork-artir", "label": "Tork artırılarak telafi edilir", "explain": "Tork artırmak çizgi temasını yüzeye çevirmez, saplamayı zorlar." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 0,9 mm ve 0,3 mm SENARYO okumalarıdır; azami kabul edilebilir salgı değeri DEĞİLDİR. İstenen FARKTIR (0,6 mm) ve dersin gösterdiği şey temizliğin ölçülebilir etkisidir. Azami salgı sınırı 7. aşamadaki jant dersinde ele alınacak ve orada da araca özgü olduğu belirtilecek.",
+    "sourceRequired": "Bijon sıkma torku yine bilinçle VERİLMEDİ (bkz. lastik.somun-torku); adım 6 rotate ile yazıldı çünkü hedef değer olmadan tolerans tanımlanamaz.",
+    "kapsam": "Saplama değişimi, kırık saplama çıkarma ve jant adaptörleri kapsam dışı. Lastiğin janttan sökülmesi bir sonraki derste.",
+    "reviewedByMechanic": false
+  }
+}

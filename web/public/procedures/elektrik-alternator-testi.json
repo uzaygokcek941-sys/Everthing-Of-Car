@@ -1,0 +1,170 @@
+{
+  "id": "elektrik.alternator-testi",
+  "area": "arac-elektrik",
+  "stage": 6,
+  "title": "Alternatör Çıkışını Ölçmek",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 30,
+  "prerequisites": ["elektrik.multimetre-gerilim", "elektrik.gerilim-dusumu"],
+  "learningGoals": [
+    "Şarj gerilimini akü kutuplarından, motor çalışırken ve yük altında ölçmek",
+    "Alternatör çıkışındaki dalgalanmayı AC kademesiyle ölçüp diyot arızasını tanımak",
+    "Kayış, B+ kablosu ve alternatörün kendisini birbirinden ayırmak"
+  ],
+
+  "safety": [
+    { "rule": "Motor çalışırken eller kayış, kasnak ve fandan uzak tutulur", "why": "Alternatör kayışla tahrik edilir; fan ise motor dururken bile elektrikli olarak dönebilir. Bu bölgeye giren el ya da bez saniyeler içinde çekilir", "blocksStart": true },
+    { "rule": "Motor çalışırken akü kutbu ayrılmaz", "why": "Eski bir alışkanlıktır ve modern araçta elektronik modülleri yakar, ayrıca regülatörü bozar. Şarj testi kutup ayrılarak değil, ölçülerek yapılır", "blocksStart": true },
+    { "rule": "B+ ucu ile gövde arasına asla köprü kurulmaz", "why": "Bu uç doğrudan aküye bağlıdır ve sigortasızdır; gövdeye temas eden bir anahtar ya da prob anında ark ve yangın üretir", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.multimetre", "label": "Dijital multimetre (DC ve AC kademeli)", "required": true },
+    { "id": "tool.uzatma-prob", "label": "Uzatma prob kablosu", "required": false },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Şikâyet: akü sık sık bitiyor. Ölçüme başlamadan önce mekanik tarafa bakıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.alternator-kasnagi",
+        "question": "Neden önce kayış ve kasnak kontrol edilir?",
+        "options": [
+          { "label": "Alternatör tahrikini kayıştan alır; kayış gevşek, yağlı ya da aşınmışsa alternatör sağlamken de yetersiz şarj eder", "verdict": "kayis-once", "correct": true, "explain": "Alternatör kendi kendine dönmez; krank kasnağından kayışla tahrik alır. Kayış gevşemişse, yağlanmışsa ya da kasnak kanalları parlamışsa kayış yük altında kayar. Bu durumda alternatör motor devrine göre yavaş döner ve tam çıkışını veremez. Ölçümde düşük şarj gerilimi görülür ve alternatör suçlu sanılır; oysa takılan yeni alternatör de aynı kayışla aynı sonucu verecektir. Kontrol basittir: kayışın gerginliği, yüzeyindeki çatlaklar, kasnak kanallarındaki aşınma ve varsa gergi elemanının durumu. Yük bindiğinde duyulan ıslık sesi de aynı şeyi söyler. Mekanik taraf temiz olmadan elektriksel ölçüme geçmek, yanlış parçayı suçlamanın en kısa yoludur." },
+          { "label": "Kayış elektrikle ilgili değildir, atlanır", "verdict": "atla", "explain": "Alternatörün dönme hızını kayış belirler; doğrudan çıkışı etkiler." },
+          { "label": "Kayış yalnız ses yapıyorsa bakılır", "verdict": "ses-varsa", "explain": "Kayan bir kayış her zaman ses vermez; gerginlik ve yüzey elle kontrol edilir." },
+          { "label": "Kayış değiştirilip sonuca bakılır", "verdict": "degistir", "explain": "Kontrol etmeden değiştirmek de tahmindir. Önce bakılır, sonra karar verilir." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Şarj sistemi hem mekanik hem elektriksel bir sistemdir. Elektrik ölçümü, mekanik taraf temiz olduğunda anlam kazanır."
+    },
+    {
+      "id": 2,
+      "instruction": "Kayış sağlam. Aleti DC gerilim kademesine alıp akü kutuplarına bağlıyorsun.",
+      "interaction": {
+        "type": "rotate",
+        "target": "part.multimetre-secici",
+        "turns": 0.25,
+        "direction": "cw",
+        "requiresGesture": true
+      },
+      "camera": "tezgah",
+      "hint": "Seçiciyi DC gerilim kademesine çevir.",
+      "teachingNote": "Şarj gerilimi akünün kutuplarından ölçülür, alternatörün çıkışından değil. Sebep şu: akünün gördüğü gerilim önemlidir. Alternatör doğru üretiyor ama arada bir kablo kaybı varsa akü yine de yeterince şarj almaz; kutuptan ölçüm bu ikisini birlikte değerlendirir."
+    },
+    {
+      "id": 3,
+      "instruction": "Motor durgunken kutuplarda 12,60 V okundu. Motor çalıştırıldığında 14,35 V. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.multimetre-ekran",
+        "unit": "V",
+        "acceptRange": [1.70, 1.80]
+      },
+      "camera": "tezgah",
+      "hint": "14,35 eksi 12,60.",
+      "teachingNote": "Şarj sisteminin çalıştığının ilk kanıtı bu artıştır: motor çalışınca kutuplardaki gerilim, akünün kendi geriliminin üstüne çıkar. Çıkmıyorsa alternatör ya hiç üretmiyordur ya da ürettiği aküye ulaşmıyordur. Artış çok büyükse — akünün gerilimini fazlasıyla aşıyorsa — bu kez regülatör çıkışı sınırlamıyor demektir ve akü aşırı şarjdan bozulur. İki uçta da arıza vardır; sağlam sistem ölçülü bir artış gösterir."
+    },
+    {
+      "id": 4,
+      "instruction": "Şarj var. Şimdi sistemi zorlayacaksın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.far-ampulu",
+        "question": "Neden yük altında tekrar ölçülür?",
+        "options": [
+          { "label": "Boştaki çıkış yeterli görünebilir; zayıf bir alternatör ancak tüketiciler devreye girince yetersiz kaldığını gösterir", "verdict": "yuk-altinda", "correct": true, "explain": "Boşta araç çok az akım çeker, o kadarını yarı ölü bir alternatör bile üretebilir. Gerçek soru şudur: araç kendi tüketicilerini beslerken de üretebiliyor mu? Farlar, kalorifer fanı, arka cam rezistansı ve silecek birlikte açılır, ölçüm tekrarlanır. Sağlam sistemde gerilim biraz düşer ama akünün kendi geriliminin üstünde kalır; yani alternatör hem tüketicileri besler hem aküyü şarj eder. Gerilim akünün kendi seviyesinin altına inerse üretim tüketimi karşılamıyordur ve araç aküden yer: bu, uzun yolda bile aküyü bitiren tipik arızadır. Aynı ölçüm rölantide ve yükseltilmiş devirde ayrı ayrı yapılır, çünkü bazı alternatörler yalnız düşük devirde yetersiz kalır." },
+          { "label": "Gerekmez, boştaki değer yeterlidir", "verdict": "gerekmez", "explain": "Zayıf alternatör boşta normal okur; arıza yalnız yük altında görünür." },
+          { "label": "Yük altında ölçüm aleti bozar", "verdict": "alet-bozulur", "explain": "Voltmetre paralel bağlıdır ve kayda değer akım çekmez; bu ölçümde alet için risk yok." },
+          { "label": "Yalnız kışın gerekir", "verdict": "kis", "explain": "Kışın tüketim artar ama test her mevsim aynı şekilde yapılır." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Yük altında ölçüm, şarj testini gerçek çalışma şartına yaklaştırır. Gerilim düşümü dersindeki ilkeyle aynı düşünce: yük yoksa gerçek yoktur."
+    },
+    {
+      "id": 5,
+      "instruction": "Yük altında da şarj sürüyor. Aleti AC gerilim kademesine alıp aynı noktadan ölçtün: 0,42 V. Sağlam bir sistemde aynı ölçüm 0,02 V. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.multimetre-ekran",
+        "unit": "V",
+        "acceptRange": [0.38, 0.42]
+      },
+      "camera": "tezgah",
+      "hint": "0,42 eksi 0,02.",
+      "teachingNote": "Alternatör aslında alternatif akım üretir; içindeki diyotlar bunu doğru akıma çevirir. Bir diyot delindiğinde ya da açık kaldığında çevirme işi eksik kalır ve doğru akımın üstüne bir dalgalanma biner. Alet AC kademesine alınıp aynı kutuplardan ölçüldüğünde bu dalgalanma görünür hâle gelir: sağlam sistemde neredeyse sıfır, diyot arızasında ölçülebilir bir değer. Belirtisi tuhaftır — akü şarj oluyor görünür ama tam dolmaz, radyoda uğultu duyulur, bazı modüller anlamsız hata kaydeder. DC ölçümü tek başına bu arızayı çoğu zaman kaçırır."
+    },
+    {
+      "id": 6,
+      "instruction": "Dalgalanma yüksek çıktı. Ama önce başka bir şeyi elemen gerek.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.alternator-b-ucu",
+        "question": "B+ kablosu neden ayrıca ölçülür?",
+        "options": [
+          { "label": "Üretilen akım aküye bu kablodan gider; üzerinde kayıp varsa alternatör sağlamken de akü yeterince şarj almaz", "verdict": "b-kablosu", "correct": true, "explain": "Alternatörün B+ ucu ile akünün artı kutbu arasındaki kablo, üretilen bütün akımı taşır. Bu yolda gevşek bir somun, kararmış bir pabuç ya da yeşermiş bir uç varsa üzerinde gerilim düşer ve aküye ulaşan gerilim, alternatörün ürettiğinden düşük olur. Ölçüm tanıdık: motor yük altında çalışırken bir prob B+ ucuna, diğeri akünün artı kutbuna konur ve aradaki kayıp okunur. Aynı test dönüş tarafında da yapılır — alternatör gövdesi ile akünün eksi kutbu arasında. İki ölçüm de temizse kayıp yok demektir ve suç gerçekten alternatörün kendisindedir. Bu adım atlanırsa sağlam bir alternatör, gevşek bir somun yüzünden değiştirilir." },
+          { "label": "Gerekmez, alternatör ölçüldü", "verdict": "gerekmez", "explain": "Alternatör doğru üretse de kayıp aradaki kabloda olabilir; ikisi ayrı sorular." },
+          { "label": "Kablo gözle kontrol edilir", "verdict": "gozle", "explain": "Kararma pabucun içinde olur ve dışarıdan görünmez; ölçüm gerekir." },
+          { "label": "Kablo doğrudan değiştirilir", "verdict": "degistir", "explain": "Ölçüm dakikalar sürerken parça değiştirmek gereksiz masraf." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Şarj sisteminde üç aday vardır: üreten (alternatör), taşıyan (kablolar) ve depolayan (akü). Ölçüm bu üçünü ayırır; tahmin ayıramaz."
+    },
+    {
+      "id": 7,
+      "instruction": "Kablolar temiz, dalgalanma yüksekti. Alternatör değiştirildi.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.multimetre-ekran",
+        "question": "Doğrulama nasıl yapılır?",
+        "options": [
+          { "label": "Aynı üç ölçüm tekrarlanır: boşta şarj gerilimi, yük altında şarj gerilimi ve AC dalgalanma", "verdict": "uc-olcum", "correct": true, "explain": "Doğrulama teşhisin aynısıdır. Motor çalışırken kutuplardaki gerilimin akünün kendi seviyesinin üstüne çıktığı görülür; tüketiciler açılıp aynı ölçüm tekrarlanır ve gerilimin tutunduğu doğrulanır; son olarak AC kademesinde dalgalanmanın sağlam sisteme yakışan küçük değere indiği ölçülür. Üçü birden temizse şarj sistemi tamamdır. Ayrıca akünün durumu tekrar değerlendirilir: aylarca yetersiz şarjla dolaşmış bir akü kalıcı hasar almış olabilir ve yeni alternatörle de kısa sürede biter. Değerler kayda geçirilir; şarj arızasının en sık geri dönme sebebi, ikinci bir zayıf halkanın hiç ölçülmemiş olmasıdır." },
+          { "label": "Akü şarj oluyorsa yeterli", "verdict": "sarj-oluyor", "explain": "Diyot arızası varken de akü şarj olur görünür; AC ölçümü olmadan doğrulama eksiktir." },
+          { "label": "Uyarı lambası sönüyorsa yeterli", "verdict": "lamba", "explain": "Lamba çoğu sistemde yalnız üretimin varlığına bakar; yetersiz üretimde de sönebilir." },
+          { "label": "Müşteri birkaç gün kullanıp söyler", "verdict": "musteri", "explain": "Dakikalar içinde ölçülebilecek bir şey için müşteriyi beklemeye bırakmak olur." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "\"Şarj ediyor\" cümlesi üç ayrı ölçümün kısaltmasıdır: var mı, yük altında da var mı, temiz mi. Üçünden biri eksikse cümle de eksiktir."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "AC kademesinde yapılan ölçüm neyi arar?",
+        "a": "diyot-dalgalanmasi",
+        "options": [
+          { "verdict": "diyot-dalgalanmasi", "label": "Doğru akımın üstüne binen dalgalanmayı; yani alternatör diyotlarının arızasını", "explain": "Alternatör alternatif akım üretir, içindeki diyotlar bunu doğru akıma çevirir. Bir diyot delindiğinde ya da açık kaldığında çevirme eksik kalır ve doğru akımın üstüne bir dalgalanma biner. AC kademesinde akü kutuplarından ölçüldüğünde bu dalgalanma görünür: sağlam sistemde neredeyse sıfır, arızada ölçülebilir bir değer. Belirtisi yanıltıcıdır — akü şarj oluyor görünür ama tam dolmaz, radyoda uğultu olur, modüller anlamsız hata kaydeder. DC ölçümü bu arızayı çoğu zaman kaçırır." },
+          { "verdict": "aku-gerilimi", "label": "Akünün kendi gerilimini", "explain": "Akü doğru akım kaynağıdır ve DC kademesinde ölçülür." },
+          { "verdict": "kacak", "label": "Kaçak akımı", "explain": "Kaçak akım ampermetreyle ve araç kapalıyken ölçülür." },
+          { "verdict": "kayis", "label": "Kayış kaymasını", "explain": "Kayış mekanik olarak kontrol edilir; AC ölçümü diyotlara bakar." }
+        ]
+      },
+      {
+        "q": "Şarj şikâyetinde birbirinden ayrılması gereken üç aday nedir?",
+        "a": "ureten-tasiyan-depolayan",
+        "options": [
+          { "verdict": "ureten-tasiyan-depolayan", "label": "Üreten alternatör, taşıyan kablolar, depolayan akü", "explain": "Alternatör üretiyor mu — motor çalışırken kutuplardaki gerilim akünün kendi seviyesinin üstüne çıkıyor mu. Kablolar taşıyor mu — B+ ucu ile akü artı kutbu, alternatör gövdesi ile akü eksi kutbu arasında kayıp var mı. Akü tutuyor mu — şarj edilen enerjiyi saklıyor mu. Bu üçü ayrı ölçümlerle ayrılır; ayrılmazsa sağlam bir alternatör gevşek bir somun yüzünden değiştirilir." },
+          { "verdict": "aku-mars-far", "label": "Akü, marş motoru, farlar", "explain": "Marş ve farlar tüketicidir; şarj sisteminin parçası değil." },
+          { "verdict": "sigorta-role-kablo", "label": "Sigorta, röle, kablo", "explain": "Bunlar koruma ve anahtarlama elemanlarıdır; şarj üçlüsü farklıdır." },
+          { "verdict": "kayis-diyot-regulator", "label": "Kayış, diyot, regülatör", "explain": "Üçü de alternatörün içindeki ya da tahrikindeki ayrıntılar; teşhis önce üç büyük adayı ayırır." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 12,60 V / 14,35 V ve adım 5'teki 0,42 V / 0,02 V SENARYO okumalarıdır. Öğrenciden istenen üretici sınırı değil, iki okuma arasındaki FARKTIR. sourceRequired bu yüzden gerekmedi.",
+    "sourceRequired": "Kabul edilebilir şarj gerilimi aralığı, azami AC dalgalanma değeri ve kayış gerginliği araca ve alternatöre özgüdür; bu derste bilinçle VERİLMEDİ. Ders artış ve karşılaştırma üzerine kuruldu; eşik kullanılacaksa servis kılavuzundan alınır.",
+    "kapsam": "Sahnede alternatör gövdesi, kasnağı, B+ ucu ve regülatör kapağı var; kayış ve krank kasnağı bu sahnede değil, motor sahnesinde bulunuyor. Kayış kontrolü bu derste seçimle öğretiliyor.",
+    "reviewedByMechanic": false
+  }
+}

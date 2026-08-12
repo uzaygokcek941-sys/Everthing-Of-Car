@@ -1,0 +1,178 @@
+{
+  "id": "kaporta.vernik-kurutma",
+  "area": "kaporta",
+  "stage": 6,
+  "title": "Vernik ve Kurutma: Sabrın Ölçülebildiği Yer",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 40,
+  "prerequisites": ["kaporta.boya-uygulama"],
+  "learningGoals": [
+    "Verniğin süs değil koruma katmanı olduğunu ve renk katının onsuz korunmasız kaldığını bilmek",
+    "Dokunma kuruluğu ile kürlenmenin aynı şey olmadığını görmek",
+    "Kürlenme süresinin işin bir parçası olduğunu ve müşteriye söylenmesi gerektiğini anlamak"
+  ],
+
+  "safety": [
+    { "rule": "Vernik ve sertleştirici püskürtme uygun solunum koruması ve havalandırma olmadan yapılmaz", "why": "Sertleştirici içeren ürünlerin aerosolü solunduğunda kalıcı solunum yolu hasarı ve duyarlılık geliştirebilir; bu ürünlerde koruma tercih değil şarttır", "blocksStart": true },
+    { "rule": "Kurutma için ısı kullanılıyorsa yüzey sıcaklığı kontrol edilir ve plastik parçalar korunur", "why": "Aşırı ısı plastik ve conta gibi parçaları kalıcı olarak deforme eder; ayrıca verniğin içinde çözücü hapsedebilir", "blocksStart": false },
+    { "rule": "Kürlenme tamamlanmadan araç teslim edilecekse müşteriye bekleme talimatı yazılı verilir", "why": "Erken yıkama, cilalama ya da örtü, henüz sertleşmemiş katmanda kalıcı iz bırakır", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.boya-tabancasi", "label": "Boya tabancası", "required": true },
+    { "id": "tool.kalinlik-olcer", "label": "Kalınlık ölçer", "required": false },
+    { "id": "tool.kurutma", "label": "Kurutma düzeneği", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Renk katı tamam. Müşteri 'parlaklık yeterli, vernik atmasak da olur' diyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-kapi-paneli",
+        "question": "Vernik ne işe yarar?",
+        "options": [
+          { "label": "Koruma katmanıdır: renk katı tek başına güneşe, yıkamaya, taş darbesine ve kimyasala dayanacak biçimde yapılmamıştır — vernik dayanımı ve morötesi korumasını sağlar, parlaklık bunun yan ürünüdür", "verdict": "koruma", "correct": true, "explain": "Modern boya sistemleri iş bölümü üzerine kuruludur ve bu bölünmede renk katının işi rengi vermek, verniğin işi ise sistemi ayakta tutmaktır. Renk katı, özellikle metalik ve sedefli sistemlerde, dışarıdaki koşullara doğrudan maruz kalacak biçimde tasarlanmamıştır: yüzeyi mat ya da yarı mat kalır, mekanik dayanımı düşüktür ve güneşin morötesi ışınları altında pigmentleri hızla bozulur. Vernik bunların hepsini üstlenir. Birincisi fiziksel dayanım: yıkama fırçası, toz, ince taş ve tırnak izleri verniğin üstünde kalır, rengin üstünde değil. İkincisi kimyasal dayanım: kuş pisliği, ağaç reçinesi, yol tuzu ve deterjan doğrudan renk katına gelseydi çok daha hızlı zarar verirdi. Üçüncüsü ve en önemlisi morötesi korumasıdır — vernik, altındaki rengin yıllarca solmadan kalmasını sağlayan filtredir; verniksiz bırakılmış bir renk katı kısa sürede matlaşır, tozlanır ve elle silindiğinde renk bırakmaya başlar. Parlaklık ise bütün bunların yan ürünüdür: düz ve sert bir yüzey ışığı düzenli yansıtır. Yani 'vernik atmayalım' demek, 'korumayı atlayalım' demektir ve bunun bedeli birkaç ay içinde değil ama birkaç yıl içinde mutlaka görünür. Hangi vernik tipinin hangi sistemle kullanılacağı, kaç kat ve hangi karışım oranıyla uygulanacağı ürünün teknik belgesinde yazar; bu ders ürün ya da oran vermiyor." },
+          { "label": "Yalnız parlaklık içindir, isteğe bağlıdır", "verdict": "parlaklik", "explain": "Parlaklık yan üründür; asıl iş dayanım ve morötesi korumasıdır." },
+          { "label": "Rengin tonunu ayarlar", "verdict": "ton", "explain": "Ton renk katının işidir; vernik onu korur." },
+          { "label": "Yalnız metalik renklerde gerekir", "verdict": "metalik", "explain": "Koruma ihtiyacı renk tipinden bağımsızdır." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Vernik süs değil filtre ve zırh. 'Vernik atmayalım' demek 'korumayı atlayalım' demektir."
+    },
+    {
+      "id": 2,
+      "instruction": "Vernikten önce ve sonra kalınlık ölçtün: önce 96 mikron, sonra 148 mikron. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.kalinlik-olcer",
+        "unit": "mikron",
+        "acceptRange": [50, 54]
+      },
+      "camera": "kaporta",
+      "hint": "148 eksi 96.",
+      "teachingNote": "52 mikron eklendi — ve astardan farklı olarak bu katmanın hiçbiri geri alınmayacak; bu, sistemin en dış ve kalıcı tabakasıdır. Buradan üç şey çıkar. Birincisi, verniğin kalınlığı doğrudan koruma süresidir: çok ince uygulanan vernik hem morötesi filtresi olarak zayıf kalır hem de ileride bir kusur çıktığında cilalanacak malzeme bırakmaz. Cila, verniğin üstünden çok ince bir tabaka alarak çalışır; ortada alınacak malzeme yoksa cila verniği delip renk katını açar ve o noktada iş geri dönülemez biçimde bozulur. İkincisi, kalın da bir sınırdır: gereğinden fazla vernik akmaya, portakal kabuğuna ve içeride hapsolan çözücüye yol açar; hapsolan çözücü haftalar sonra yüzeyde küçük kabarcıklar ya da matlık olarak kendini gösterebilir. Üçüncüsü, toplam sistem kalınlığıdır — astar, renk ve verniğin toplamı çevredeki fabrika kalınlığından çok uzaklaşırsa hem geçiş belli olur hem katman yığını darbeye karşı daha kırılgan davranır. Bu yüzden ölçüm işin sonunda da yapılır ve bir kayıt olarak tutulur. Kaç kat vernik uygulanacağı, kuru film kalınlığı, karışım oranı ve katlar arası bekleme ürünün teknik belgesinde yazar; buradaki iki sayı senaryo okumasıdır."
+    },
+    {
+      "id": 3,
+      "instruction": "Panelin dik yüzeyinde vernik aşağı doğru sarkmaya başladı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-camurluk",
+        "question": "Ne yapılır?",
+        "options": [
+          { "label": "Kurumaya bırakılır ve sertleştikten sonra düzeltilir: yaş verniğe müdahale etmek sarkmayı yaymaktan ve daha büyük bir kusur üretmekten başka işe yaramaz — asıl iş sebebi bulmaktır", "verdict": "kurut-sonra-duzelt", "correct": true, "explain": "Sarkma görüldüğünde ilk refleks bezle ya da fırçayla müdahale etmektir ve bu, yapılabilecek en kötü şeydir: yaş vernik yayılır, doku bozulur, lif bırakır ve düzeltilecek alan birkaç kat büyür. Doğru davranış, o katmanın tamamen sertleşmesini beklemek ve sonra kontrollü biçimde düzeltmektir; sertleşmiş bir sarkma alınıp yüzey yeniden düzlenebilir, ama bu ancak yeterli vernik kalınlığı varsa mümkündür. Asıl mesele sebebi bulmaktır, çünkü sarkma her zaman bir parametrenin imzasıdır. Birinci sebep tek seferde çok kalın uygulamadır: dik yüzeyde malzeme kendi ağırlığını taşıyamaz ve akar. İkincisi tabancanın fazla yakın ya da fazla yavaş hareket ettirilmesidir; ikisi de aynı sonucu verir — birim alana fazla malzeme. Üçüncüsü ortam sıcaklığının düşük olmasıdır: çözücü yavaş uçar, katman uzun süre akışkan kalır ve akmaya zaman bulur. Dördüncüsü karışım oranıdır: ürün fazla inceltilmişse akar. Beşincisi katlar arası beklemenin atlanmasıdır — alttaki kat henüz akışkanken üstüne yeni kat gelirse toplam ağırlık akmaya yeter. Doğru yaklaşım, dik yüzeylerde kat düzenini buna göre planlamak ve ilk katı örtücü değil tutunma amaçlı, daha ince atmaktır. Uygun karışım oranı, kat sayısı ve bekleme süreleri ürünün teknik belgesindedir." },
+          { "label": "Hemen bezle silinip düzeltilir", "verdict": "sil", "explain": "Yaş vernik yayılır ve lif bırakır; alan büyür." },
+          { "label": "Üstüne bir kat daha atılarak kapatılır", "verdict": "kat-ekle", "explain": "Ağırlık artar, sarkma büyür." },
+          { "label": "Normaldir, kuruyunca kendiliğinden düzelir", "verdict": "kendi-duzelir", "explain": "Sarkma kuruyunca yerinde sertleşir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Sarkma bir parametrenin imzası: kalın kat, yakın/yavaş tabanca, soğuk ortam, fazla incelme ya da atlanan bekleme."
+    },
+    {
+      "id": 4,
+      "instruction": "Vernik kuruduktan sonra yüzeyde tek tek batmış toz zerreleri görüyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.tavan-paneli",
+        "question": "Toz nereden geliyor olabilir?",
+        "options": [
+          { "label": "Çoğu zaman ortamdan ve ustanın kendisinden: zemin, hava akımı, giysi ve önceki zımpara işi — toz kaynağı iş başlamadan önce yok edilir, çünkü yaş verniğe inen zerre artık katmanın içindedir", "verdict": "ortam-ve-usta", "correct": true, "explain": "Yaş vernik, havadaki her şeyi yakalayan bir yüzeydir ve oraya inen bir toz zerresi artık yüzeyin üstünde değil, katmanın içindedir. Bu yüzden toz sorunu işten sonra değil işten önce çözülür. Kaynaklar sırayla şunlardır. Birincisi zemin ve ortam: kuru bir zeminden kalkan toz hava akımıyla yükselir; bu yüzden püskürtmeden önce zemin ıslatılır ya da temizlenir ve bir süre havanın durulması beklenir. İkincisi önceki işin kendisidir — zımpara tozu atölyede asılı kalır ve hemen ardından boyaya geçilirse doğrudan yüzeye iner; hazırlık ile püskürtme arasında temizlik ve bekleme olmalıdır. Üçüncüsü ustanın kendisidir ve en çok atlanan kaynak budur: tüylü bir kazak, cebinde toz taşıyan bir tulum, temizlenmemiş bir maske ya da saç, panelin üstüne eğildiğinde doğrudan zerre bırakır. Bu yüzden boya işinde tüy bırakmayan iş kıyafeti bir kural haline gelmiştir. Dördüncüsü aracın kendisidir: kaportanın içinde, kanallarda ve açıklıklarda kalan toz, hava akımıyla dışarı taşınır — bu yüzden araç püskürtmeden önce iyice üflenir ve silinir. Kuruduktan sonra tek tük zerre için kontrollü bir düzeltme mümkündür, ama bu ancak yeterli vernik kalınlığı varsa yapılır ve sınırsız sayıda tekrarlanamaz. Kabin havalandırma ve filtre gereklilikleri kapsam dışıdır." },
+          { "label": "Verniğin içinden gelir, ürün kusurudur", "verdict": "urun", "explain": "Kaynak neredeyse her zaman ortam ve hazırlıktır." },
+          { "label": "Önemsizdir, cila hepsini alır", "verdict": "cila", "explain": "Cila sınırlıdır ve vernik kalınlığı tüketir." },
+          { "label": "Kalın kat atılırsa zerreler gömülür", "verdict": "kalin-kat", "explain": "Zerre gömülse de yüzeyde kabartı olarak kalır." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Toz kaynağının en çok atlananı ustanın kendisi: tüylü kıyafet, temizlenmemiş maske, saç. Yaş verniğe inen zerre artık katmanın içinde."
+    },
+    {
+      "id": 5,
+      "instruction": "Birkaç saat sonra yüzeye dokunuyorsun, kuru. Aracı yıkayıp teslim etmeyi düşünüyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.bagaj-kapagi",
+        "question": "Dokunma kuruluğu teslim için yeterli mi?",
+        "options": [
+          { "label": "Yeterli değil: elle kuru hissedilen yüzeyin altında kürlenme sürüyor — katman tam sertliğine ulaşana kadar yıkama, cila, bant, örtü ve baskı iz bırakır", "verdict": "kurulme-devam", "correct": true, "explain": "Boya ve vernikte iki ayrı olay vardır ve bunlar aynı anda bitmez. Birincisi çözücünün uçmasıdır; bu görece hızlıdır ve yüzeyi elle kuru hissettiren şey budur. İkincisi kürlenmedir: katmanın kimyasal olarak bağlanıp nihai sertliğine ve dayanımına ulaşması. Kürlenme yüzeyin altında ve içinde devam eder ve dokunma kuruluğundan çok daha uzun sürer. Bu ayrımı bilmeyen usta, tam da işin en kırılgan olduğu anda ona baskı uygular ve şunlar olur: yıkama fırçası ince çizikler bırakır, cila henüz yumuşak katmanı yerinden kaydırır, maskeleme bandı sökülürken kenardan kaldırır, aracın üstüne atılan örtü desenini yüzeye basar, kapı contası kapatılan kapıda kendi izini bırakır, hatta üstüne konan bir alet kalıcı bir iz yapar. Hepsinin ortak yanı, o anda küçük görünüp katman sertleştiğinde kalıcı hale gelmesidir. Doğru davranış üç adımdır. Birincisi, kürlenme süresi boyunca araca dokunulmaz ve üstüne hiçbir şey konmaz. İkincisi, kürlenme hızlandırılacaksa bu ürünün izin verdiği yöntemle yapılır — kontrolsüz ısı yüzeyi erken kapatıp içeride çözücü hapsedebilir, sonuç haftalar sonra çıkan matlık ya da kabarcıktır. Üçüncüsü, araç kürlenme tamamlanmadan teslim ediliyorsa müşteriye ne yapmaması gerektiği yazılı olarak söylenir. Kürlenme süreleri, sıcaklığa bağlı değişimi ve hızlandırılmış kurutma koşulları ürüne özgüdür ve teknik belgesinde yazar; bu ders süre vermiyor." },
+          { "label": "Yeterlidir, kuruysa iş bitmiştir", "verdict": "kuruysa-biter", "explain": "Dokunma kuruluğu kürlenmenin bittiği anlamına gelmez." },
+          { "label": "Yıkamak zararsızdır, yalnız cila beklenir", "verdict": "yikama-zararsiz", "explain": "Yıkama fırçası yumuşak katmanda ince çizik bırakır." },
+          { "label": "Isıyı yükseltip süreç kısaltılır", "verdict": "isi-yukselt", "explain": "Kontrolsüz ısı yüzeyi kapatıp içeride çözücü hapseder." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Çözücünün uçması ile kürlenme aynı şey değil. Yüzey kuruyken katman hâlâ en kırılgan hâlinde."
+    },
+    {
+      "id": 6,
+      "instruction": "Araç kürlenme tamamlanmadan teslim edilecek. Müşteri 'yarın yıkatırım' diyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.boya-tabancasi",
+        "question": "Müşteriye ne söylenir?",
+        "options": [
+          { "label": "Ne yapmaması gerektiği açıkça ve yazılı olarak söylenir: belirli bir süre yıkama, cilalama, örtü serme ve etiket/bant yapıştırma yok — çünkü bu süre işin bir parçasıdır, müşterinin bilmediği bir teknik ayrıntı değil", "verdict": "yazili-talimat", "correct": true, "explain": "Kürlenme süresi, atölyenin içinde kalan teknik bir ayrıntı değil, işin teslim edilen kısmının bir parçasıdır — çünkü o süre boyunca yapılacak yanlış bir şey, yapılan bütün işi görünür biçimde bozar. Müşteri bunu bilmez ve bilmesi de beklenmez; söylemek ustanın işidir. Söylenmesi gerekenler bellidir: belirli bir süre boyunca araç yıkanmaz, özellikle fırçalı yıkamaya sokulmaz; cila ve koruyucu ürün uygulanmaz; araç örtüsü serilmez, çünkü örtü hem deseni basar hem altında nem tutar; yeni boyalı yüzeye etiket, bant ya da vantuz yapıştırılmaz; ağaç altında ve kuş yoğun bir yerde park edilmemesi önerilir, çünkü henüz sertleşmemiş katman kimyasal etkilere çok daha açıktır. Bunu sözlü söylemek yetmez, yazılı verilir — hem müşteri unutmasın diye hem de sonradan çıkacak bir tartışmada tarafların elinde net bir kayıt olsun diye. Bunun bir de dürüstlük tarafı var: bekleme süresini söylememek kısa vadede işi kolaylaştırır, araç hemen teslim edilir ve kimse soru sormaz. Ama bir hafta sonra fırçalı yıkamadan çizik dönen araçta suçlanacak olan boya olur, yıkama değil. Söylemek, hem işi hem ustayı korur. Süreler ürüne, kat yapısına ve sıcaklığa göre değişir ve ürünün teknik belgesinden okunur; bu ders süre vermiyor." },
+          { "label": "Bir şey söylenmez, nasılsa kurumuştur", "verdict": "sessiz", "explain": "Erken yıkama izleri sonradan boyanın kabahati sayılır." },
+          { "label": "Yalnız sözlü olarak hatırlatılır", "verdict": "sozlu", "explain": "Yazılı talimat hem unutmayı hem tartışmayı önler." },
+          { "label": "Araç örtüsü serilmesi önerilir", "verdict": "ortu", "explain": "Örtü desenini basar ve altında nem tutar." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Bekleme süresi işin teslim edilen kısmı. Söylemeyen usta, bir hafta sonra kendi işini savunmak zorunda kalır."
+    },
+    {
+      "id": 7,
+      "instruction": "Boya aşamasının üç dersi tamamlandı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kaput-kaporta",
+        "question": "Bu aşamanın ortak sonucu nedir?",
+        "options": [
+          { "label": "Boya, doğru karışan rengin doğru uygulanıp doğru sertleşmesidir: üçünden biri eksikse diğer ikisi sonucu kurtarmaz — ve üçü de zaman ister, malzeme değil", "verdict": "renk-uygulama-kurulme", "correct": true, "explain": "Bu aşama üç halkalı bir zincirdi ve zincirin gücü en zayıf halkası kadardı. Renk doğru karışmazsa en iyi uygulama bile tutmayan bir panel verir. Renk doğru karışsa da uygulama bozuksa çizgi, kuru doku ya da akma çıkar. İkisi de doğruysa ama kürlenmeye zaman tanınmazsa iş teslimden sonra bozulur. Üçünün ortak yanı şudur: hiçbiri daha pahalı malzeme alarak çözülmez. Renk kartla, uygulama parametreyle, kürlenme sabırla çözülür — üçü de zaman ister ve üçü de tam olarak zaman baskısı altında kısa kesilir. Bu alanın en çok tekrarlanan cümlesi burada da geçerli: yapan usta ile yapmayan usta aynı gün aynı görünen aracı teslim eder; fark, aracın altı ay sonra nasıl göründüğüdür. Bir de aşamanın kendine özgü tarafı var — boya, önceki bütün aşamaların üstüne oturur. Taşıyıcı yapı doğru okunmadıysa, sac doğru düzeltilmediyse, macun kalın atıldıysa ya da astar delindiyse, en iyi boya bile bunları yalnızca daha parlak gösterir. Boya bir kapak değil, altındaki işin görüntüsüdür. Sırada cila ve boya kusurları var: verniğin üstünde ne düzeltilebilir, nerede sınır başlar." },
+          { "label": "İyi ürün alınırsa üçü de halledilir", "verdict": "urun", "explain": "Üçü de zaman ister; hiçbiri malzemeyle satın alınmaz." },
+          { "label": "Boya, altındaki işin eksiklerini kapatır", "verdict": "kapatir", "explain": "Boya kapatmaz, altındaki işi daha görünür kılar." },
+          { "label": "Kürlenme süresi esnetilebilir bir tavsiyedir", "verdict": "esnek", "explain": "Erken müdahale kalıcı iz bırakır." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Renk kartla, uygulama parametreyle, kürlenme sabırla çözülür. Üçü de tam olarak zaman baskısı altında kısa kesilir."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Dik yüzeyde vernik sarkmaya başladı. Ne yapılır?",
+        "a": "kurut-sonra-duzelt",
+        "options": [
+          { "verdict": "kurut-sonra-duzelt", "label": "Kurumaya bırakılır, sertleştikten sonra kontrollü biçimde düzeltilir; asıl iş sebebi bulmaktır", "explain": "Yaş verniğe müdahale sarkmayı yayar ve lif bırakır. Sebep genellikle beştir: tek seferde kalın kat, fazla yakın ya da yavaş tabanca, düşük ortam sıcaklığı, fazla inceltilmiş karışım, atlanan katlar arası bekleme. Düzeltme ancak yeterli vernik kalınlığı varsa mümkündür." },
+          { "verdict": "sil", "label": "Hemen bezle silinir", "explain": "Yaş vernik yayılır, alan büyür." },
+          { "verdict": "kat-ekle", "label": "Üstüne bir kat daha atılır", "explain": "Ağırlık artar, sarkma büyür." },
+          { "verdict": "kendi-duzelir", "label": "Kuruyunca düzelir", "explain": "Sarkma yerinde sertleşir." }
+        ]
+      },
+      {
+        "q": "Yüzey elle kuru. Araç yıkanıp teslim edilebilir mi?",
+        "a": "kurulme-devam",
+        "options": [
+          { "verdict": "kurulme-devam", "label": "Edilemez: çözücünün uçması ile kürlenme aynı şey değildir, katman hâlâ nihai sertliğine ulaşmamıştır", "explain": "Bu sürede yıkama fırçası çizik, cila kayma, bant kenar kaldırma, örtü desen basma ve conta iz bırakır — hepsi katman sertleşince kalıcı olur. Araç erken teslim edilecekse ne yapılmaması gerektiği yazılı verilir. Kürlenme süreleri ürünün teknik belgesindedir." },
+          { "verdict": "kuruysa-biter", "label": "Kuruysa iş bitmiştir", "explain": "Dokunma kuruluğu kürlenmeyi göstermez." },
+          { "verdict": "yikama-zararsiz", "label": "Yıkamak zararsızdır", "explain": "Fırça yumuşak katmanda ince çizik bırakır." },
+          { "verdict": "isi-yukselt", "label": "Isı yükseltilip süreç kısaltılır", "explain": "Kontrolsüz ısı içeride çözücü hapseder." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2'deki 96 mikron ve 148 mikron SENARYO okumalarıdır; istenen FARKTIR (52 mikron). Ders hiçbir ürün için vernik kuru film kalınlığı ya da toplam sistem kalınlığı iddia etmiyor.",
+    "sourceRequired": "Vernik tipleri ve ürün adları, karışım oranları, kat sayısı, kuru film kalınlığı, katlar arası bekleme, dokunma kuruluğu ve kürlenme süreleri, sıcaklığa bağlı değişimleri, hızlandırılmış kurutma koşulları ve yüzey sıcaklığı sınırları ile teslim öncesi bekleme süresi bilinçle VERİLMEDİ; hepsi ürüne özgüdür ve ürünün teknik belgesinden okunur.",
+    "kapsam": "Boya kabini kurulumu, havalandırma ve filtre gereklilikleri, atık ve emisyon mevzuatı KAPSAM DIŞIDIR; ders verniğin işlevini, kusur teşhisini ve kürlenme disiplinini öğretiyor.",
+    "kaynak": "Bu alan kullanıcının açık talebiyle eklendi (talep birebir: 'birde alanlara kaportayı ekleyelim'); konu başlıkları MEB Otomotiv Gövde ve Boya dalının çerçevesini takip ediyor, kazanım numarası iddiası yok.",
+    "reviewedByMechanic": false
+  }
+}

@@ -1,0 +1,176 @@
+{
+  "id": "aksesuar.govde-agi",
+  "area": "aksesuar-ses",
+  "stage": 0,
+  "title": "Modüller ve Haberleşme Hattı: Aksesuar Nereye Bağlanır",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 30,
+  "prerequisites": ["aksesuar.guvenlik-elektrik"],
+  "learningGoals": [
+    "Gövde konfor sistemlerinin tek tek anahtarlarla değil modüller üzerinden çalıştığını görmek",
+    "Güç yolu ile veri yolunu birbirinden ayırmak",
+    "Bir aksesuar için besleme, şase ve tetik noktasını doğru seçmek"
+  ],
+
+  "safety": [
+    { "rule": "Bağlantı noktası seçilirken enerji kesik olur; ölçüm gerekiyorsa yalnız ölçüm için verilir ve iş bittiğinde tekrar kesilir", "why": "Canlı hat üzerinde bağlantı denemesi kısa devre ve modül arızası üretir", "blocksStart": true },
+    { "rule": "Sarı konektör ve sarı bantlı demet görülen yerde durulur", "why": "Bu işaret hava yastığı sistemine aittir ve bu uygulamanın kırmızı çizgisidir", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.multimetre", "label": "Multimetre", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true },
+    { "id": "tool.plastik-sokme-spatulasi", "label": "Plastik söküm spatulası", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Kapı içindeki kutuya bak. Kapının bütün işlevleri buradan geçiyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kapi-modulu",
+        "question": "Kapı modülü ne işe yarar?",
+        "options": [
+          { "label": "Kapıdaki bütün kumandaları toplar, kararı verir ya da iletir ve kapıdaki motorları sürer; böylece kapıya giden kablo sayısı düşer", "verdict": "toplayici", "correct": true, "explain": "Eski araçlarda kapıdaki her işlev kendi kablosunu taşırdı: cam düğmesinden cam motoruna kalın bir çift, kilit düğmesinden kilit motoruna bir çift, ayna düğmesinden aynaya beş altı ince tel. Bütün bu teller kapı ile gövde arasındaki körükten geçmek zorundaydı ve körük kapı her açılıp kapandığında bükülüyordu; kopma noktası buydu. Modül bu sorunu çözer. Kapı içindeki bütün düğmeler modüle girer, bütün motorlar modülden beslenir ve modül gövdedeki diğer modüllerle ince bir veri hattı üzerinden konuşur. Sonuç: körükten geçen kablo sayısı ondan birkaça iner. Ama bir bedeli vardır ve o bedel bu alanın teşhis mantığını belirler — düğme artık motoru doğrudan beslemiyor. Düğmeye bastığında modül bunu bir istek olarak alır, kararı verir ve motoru kendisi sürer. Bu yüzden 'cam çalışmıyor' şikâyetinde artık üç ihtimal değil beş ihtimal vardır: düğme, modül girişi, modül çıkışı, motor ve besleme. Zincir uzamıştır." },
+          { "label": "Yalnız kabloların birleştiği bir bağlantı kutusudur", "verdict": "baglanti-kutusu", "explain": "İçinde karar veren ve motor süren devre vardır; pasif bir kutu değildir." },
+          { "label": "Kapı kilidinin mekanik parçasıdır", "verdict": "kilit-mekanik", "explain": "Kilit motoru ayrı bir parçadır; modül onu süren elektronik birimdir." },
+          { "label": "Ses sisteminin yükselticisidir", "verdict": "anfi", "explain": "Anfi ayrı bir cihazdır ve genelde kapıda değildir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Bu alanın teşhis derslerinin tamamı bu cümleye dayanıyor: düğme artık motoru doğrudan beslemiyor, arada karar veren bir birim var."
+    },
+    {
+      "id": 2,
+      "instruction": "Kabin içinden bagaja doğru uzanan iki hat var. Kalın olanı takip et.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.ana-kablo-demeti",
+        "question": "Bir aracın elektrik sisteminde kaç ayrı yol vardır?",
+        "options": [
+          { "label": "İki ayrı yol: güç yolu (besleme ve şase) ve veri yolu (modüllerin konuşması); ikisi aynı demetin içinde gider ama işleri farklıdır", "verdict": "iki-yol", "correct": true, "explain": "Aksesuar işinde en çok karışan şey budur ve karıştığı anda araç bozulur. Güç yolu enerji taşır: aküden sigortaya, sigortadan tüketiciye ve tüketiciden gövde şasesine döner. Kalın kablolar, sigortalar, röleler ve şase noktaları bu yolun parçalarıdır. Veri yolu ise enerji taşımaz, bilgi taşır: modüller arasında ince ve birbirine burulmuş bir tel çifti üzerinden 'kapı açıldı', 'düğmeye basıldı', 'motor çalışıyor' gibi mesajlar geçer. Bu iki yol çoğu zaman aynı kablo demetinin içinde, yan yana yürür — ve bu yüzden bir aksesuar takarken doğru yolu seçmek gözle değil bilgiyle olur. Kalın olduğu için güç sanılan bir kablo koruyucu kılıflı bir veri hattı olabilir; ince olduğu için önemsiz sanılan bir tel, aracın yarısını taşıyan hat olabilir. Kuralı basittir: aksesuarın gücü güç yolundan alınır, tetiği ise ya kendi anahtarından ya da üretici arayüzünden gelir. Veri yolu hiçbir işin kaynağı değildir." },
+          { "label": "Tek bir yol vardır, hepsi elektriktir", "verdict": "tek-yol", "explain": "İkisi de elektriktir ama biri enerji, diğeri bilgi taşır; müdahale kuralları farklıdır." },
+          { "label": "Üç yol: artı, eksi ve toprak", "verdict": "uc-yol", "explain": "Eksi ile şase aynı yolun parçalarıdır; ayrı olan veri yoludur." },
+          { "label": "Her tüketicinin kendi bağımsız yolu vardır", "verdict": "bagimsiz-yollar", "explain": "Modern araçlarda tüketiciler kaynağı ve şaseyi paylaşır." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Güç yolu / veri yolu ayrımı bu alanda gözle yapılamaz. Kalınlık, renk ve konum yanıltıcıdır; bilgi araca ait belgeden gelir."
+    },
+    {
+      "id": 3,
+      "instruction": "Aksesuarın eksi ucunu bağlayacaksın. Gövdede bir vida görüyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sase-noktasi-aksesuar",
+        "question": "Şase noktası nasıl seçilir?",
+        "options": [
+          { "label": "Fabrikanın şase için ayırdığı, boyası sıyrılmış ve gövdeye doğrudan basan bir nokta kullanılır; rastgele bir vida şase değildir", "verdict": "fabrika-noktasi", "correct": true, "explain": "Şase, devrenin dönüş yoludur ve devrenin en çok ihmal edilen yarısıdır. Bir tüketici artı ucundan ne kadar iyi beslenirse beslensin, dönüş yolu kötüyse düzgün çalışmaz. Kötü şasenin belirtileri şunlardır: cihaz düşük yükte çalışır ama yük artınca kapanır, seste uğultu duyulur, gösterge yanlış okur, aksesuar başka bir tüketici devreye girdiğinde etkilenir. Doğru şase noktası üç şeye sahiptir. Birincisi gövdeye doğrudan basar — arada boya, kataforez, conta ya da ikinci bir sac katmanı yoktur; temas yüzeyi sıyrılmış ve temizdir. İkincisi mekanik olarak sağlamdır — titreşimle gevşemeyecek, tercihen dişli bir kaynak somunudur. Üçüncüsü akım için yeterlidir — küçük bir sensörün şasesine bir anfinin dönüşünü bağlamak, o küçük devreye anfinin gürültüsünü yükler. Kesinlikle yapılmayacak şey gövdeye yeni bir delik delmektir: delik açılan yer kaplamasını kaybeder, oradan pas başlar ve pas bir yıl sonra hem gövdenin hem de o şasenin sorunu olur. Fabrikanın hazır bıraktığı şase noktalarını kullan; yoksa mevcut bir cıvatayı kullan, delme." },
+          { "label": "En yakın vida uygundur, hepsi metaldir", "verdict": "en-yakin", "explain": "Metal olması iletken temas anlamına gelmez; boya ve conta akımı geçirmez." },
+          { "label": "Gövdeye yeni bir delik delip vida takmak en sağlamıdır", "verdict": "delik-del", "explain": "Delinen yer kaplamasını kaybeder; pas oradan başlar." },
+          { "label": "Şase gerekmez, artı ucu yeterlidir", "verdict": "sase-gereksiz", "explain": "Devre kapanmadan akım geçmez; şase devrenin yarısıdır." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Ses bölümündeki uğultu dersinin cevabı büyük ölçüde bu adımda. Kötü şase bu alandaki şikâyetlerin ortak paydası."
+    },
+    {
+      "id": 4,
+      "instruction": "Aynı aksesuarı iki farklı şase noktasına bağlayıp yük altında gerilim düşümünü ölçtün: birinde 0,42 V, diğerinde 0,09 V. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.multimetre-aksesuar",
+        "unit": "V",
+        "acceptRange": [0.31, 0.35]
+      },
+      "camera": "aksesuar",
+      "hint": "0,42 eksi 0,09.",
+      "teachingNote": "0,33 voltluk bu fark iki şase noktasının kalitesi arasındaki farktır ve ölçüm yük altında yapıldığı için gerçektir. Gerilim düşümü ölçümünün gücü şurada: kötü bir bağlantı boştayken mükemmel görünür, çünkü akım geçmiyorken direnç kendini göstermez. Cihaz çalışırken problanın bir ucu şase noktasına, diğeri akü eksi kutbuna değdirilir ve aradaki fark okunur; okunan şey doğrudan o dönüş yolunun kaybettiği enerjidir. Kabul edilebilir azami gerilim düşümü devreye ve akıma göre değişir ve bu ders bir sınır vermiyor; öğretilen şey yöntemdir — iki adayı ölç, iyi olanı seç, tahmin etme."
+    },
+    {
+      "id": 5,
+      "instruction": "Aksesuar yalnız kontak açıkken çalışsın istiyorsun. Sigorta kutusuna dönüyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sigorta-kutusu-aksesuar",
+        "question": "Bir aksesuarın beslemesi nereden alınır?",
+        "options": [
+          { "label": "İstenen davranışa göre seçilir: sürekli beslemeli hat kontak kapalıyken de canlıdır, kontak beslemeli hat yalnız kontak açıkken; ikisi karıştırılırsa ya cihaz uyumaz ya hafızasını kaybeder", "verdict": "davranisa-gore", "correct": true, "explain": "Aksesuar bağlarken sorulacak ilk soru şudur: bu cihaz araç uykudayken ne yapmalı? Üç cevap vardır ve üçü ayrı bağlantı ister. Tamamen kapanmalıysa yalnız kontak beslemeli hattan beslenir; kontak kapanınca cihaz da kapanır ve aküyü hiç yormaz. Ayarlarını hatırlamalı ama çalışmamalıysa iki uç kullanılır — hafıza için küçük bir sürekli besleme, çalışma gücü için kontak beslemesi. Ses sistemlerinin klasik iki uçlu bağlantısı tam olarak budur ve ikisi yanlışlıkla ters bağlandığında ortaya çıkan tablo şudur: baş ünite kontak kapanınca kapanmaz, geceyi açık geçirir ve sabah araç çalışmaz. Üçüncü ihtimal araç uyurken de çalışması gerekenlerdir (alarm, takip cihazı); bunlar sürekli beslemeden alınır ama uykudaki akımları bilinerek alınır. Hangi hattın hangisi olduğu tahminle değil ölçümle bulunur: multimetre bağlanır, kontak açılıp kapatılır, gerilimin kaybolup kaybolmadığına bakılır. Ayrıca aksesuarın kendi sigortası olur ve o sigorta besleme noktasına mümkün olduğunca yakın konur — sigorta cihazı değil, kabloyu korur." },
+          { "label": "Her zaman sürekli beslemeli hattan alınır", "verdict": "hep-surekli", "explain": "Kapanması gereken bir cihaz o zaman hiç kapanmaz ve aküyü boşaltır." },
+          { "label": "Her zaman kontak beslemeli hattan alınır", "verdict": "hep-kontak", "explain": "Hafıza tutması gereken cihaz her seferinde ayarlarını kaybeder." },
+          { "label": "Doğrudan akü kutbundan alınır, en temizi budur", "verdict": "aku-kutbu", "explain": "Sigortasız ve kontrolsüz bir besleme yangın riskidir; sigorta besleme noktasına yakın olur." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Bu ayrım ses sistemi montajı dersinde tekrar karşımıza çıkacak; kırmızı ve sarı uç meselesinin arkasındaki mantık burada."
+    },
+    {
+      "id": 6,
+      "instruction": "Aksesuarın gövdeden bir bilgi alması gerekiyor: 'kapı açıldı' bilgisi. Veri hattına dokunmuyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.haberlesme-hatti",
+        "question": "Bu bilgi nereden alınır?",
+        "options": [
+          { "label": "Ya o bilginin sürüldüğü fiziksel bir çıkıştan (lamba, röle, anahtar ucu) ya da o araca uygun bir üretici arayüzü/adaptör üzerinden", "verdict": "fiziksel-ya-adaptor", "correct": true, "explain": "Modern araçta bilgilerin çoğu veri hattında dolaşır ve o hatta doğrudan bağlanmak yasaktır. Ama aynı bilgiler genellikle bir yerde fiziksel bir çıkışa da dönüşür: kapı açıldığında iç aydınlatma yanar, o lambanın ucunda bir gerilim değişimi vardır ve bu değişim okunabilir. Aynı şekilde park lambası, geri vites lambası, korna ve kontak beslemesi hepsi fiziksel çıkışlardır. Bu tür bir uçtan bilgi almanın kuralı şudur: bilgi okunur, akım çekilmez. Çekilecek akım varsa araya bir röle konur; çünkü modern araçlarda o çıkışı süren şey bir modüldür ve modül çıkışları küçük akımlar için tasarlanmıştır, üzerine yeni bir yük bindirmek modülü bozar. İkinci yol adaptördür: birçok araç için üretici ya da yetkin üçüncü taraflar, veri hattını okuyup fiziksel çıkışlara çeviren hazır arayüzler üretir. Bunlar hattı bozmadan bilgiyi alır. Yapılmayacak olan üçüncü yol ise bir kabloyu delip 'deneyerek' bilgi aramaktır; delme hem yalıtımı hem hattı bozar ve bulunan bilginin doğruluğu da garanti değildir." },
+          { "label": "Veri hattına bir prob değdirilip okunur", "verdict": "prob", "explain": "Hattın dengesini bozar; ayrıca okunan sinyal doğrudan bir gerilim bilgisi değildir." },
+          { "label": "En yakın kablo delinip denenir", "verdict": "dene", "explain": "Deneme yöntemi hem yalıtımı bozar hem yanlış hatta denk gelir." },
+          { "label": "Böyle bir bilgi alınamaz", "verdict": "alinamaz", "explain": "Alınır; doğru yolu fiziksel çıkış ya da uygun adaptördür." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Bilgi okunur, akım çekilmez — bu cümle modül çıkışlarını korur ve bu alandaki en pahalı hataların önüne geçer."
+    },
+    {
+      "id": 7,
+      "instruction": "Üç noktayı da seçtin: besleme, şase, tetik. Kabloları çekmeden önce güzergâhı belirle.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kapi-kablo-demeti",
+        "question": "Kablo güzergâhı nasıl belirlenir?",
+        "options": [
+          { "label": "Fabrikanın kendi demetini takip eder, hareketli parçadan ve ısıdan uzak durur, keskin sac kenarından geçerken korunur ve her yerde sabitlenir", "verdict": "fabrika-guzergahi", "correct": true, "explain": "Kablo çekmek işin görünmeyen ama en belirleyici kısmıdır, çünkü bir aksesuarın günler ya da aylar sonra ortaya çıkan arızalarının çoğu güzergâh hatasıdır. Dört kural vardır. Birincisi fabrikanın demetini takip et: mühendisler o yolu zaten hareketli parçalardan, ısıdan ve keskin kenarlardan uzak seçmiştir; yeni bir yol icat etmek yerine var olanın yanına bağlamak en güvenli seçimdir. İkincisi hareketli parçadan uzak dur: kapı menteşesi, koltuk rayı, direksiyon kolonu, sunroof mekanizması ve pedal takımı zamanla kabloyu keser; pedal bölgesinde sıkışan bir kablo doğrudan bir güvenlik sorunudur. Üçüncüsü keskin sac kenarından geçerken koru: gövdede kablo geçirmek için zaten lastik geçme parçaları vardır, yoksa kenar bir koruyucuyla kaplanır — çıplak sac kenarı titreşimle yalıtımı kesip kısa devre yapar ve bu kısa devre haftalar sonra oluşur. Dördüncüsü sabitle: her yirmi otuz santimde bir sabitlenmemiş kablo titreşir, titreşen kablo hem sürtünür hem ses yapar. Beşinci ve sık atlanan not: kapı ile gövde arasındaki körükten geçen kabloya fazladan pay bırakılır ve körüğün lastiği geri düzgün oturtulur; aksi hâlde ilk soğukta ya kablo kopar ya körükten su girer." },
+          { "label": "En kısa yol seçilir, kablo israfı olmaz", "verdict": "en-kisa", "explain": "En kısa yol genelde en riskli yoldur; hareketli parça ve keskin kenardan geçer." },
+          { "label": "Halının altından geçirmek yeterlidir", "verdict": "hali-alti", "explain": "Halının altı sabitleme değildir; ayrıca pedal bölgesine kaçabilir." },
+          { "label": "Görünmediği sürece güzergâh önemli değildir", "verdict": "gorunmez", "explain": "Görünmeyen güzergâh kontrol edilemeyen güzergâhtır; arızalar oradan çıkar." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Bu adım aynı zamanda bir söz: bir sonraki ders sökme tekniği, yani bu güzergâha ulaşmak için paneli nasıl zarar vermeden açacağın."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Bir araçta güç yolu ile veri yolu arasındaki fark nedir?",
+        "a": "iki-yol",
+        "options": [
+          { "verdict": "iki-yol", "label": "Güç yolu enerji, veri yolu bilgi taşır; aynı demette yürürler ama müdahale kuralları farklıdır", "explain": "Güç yolu aküden sigortaya, oradan tüketiciye ve şaseye döner; kalın kablolar, sigortalar ve şase noktaları bu yola aittir. Veri yolu ince, birbirine burulmuş bir tel çiftidir ve modüller arasında mesaj taşır. Aksesuarın gücü güç yolundan alınır; veri yolu hiçbir işin kaynağı değildir. Kalınlık ve renk gözle ayırt etmeye yetmez, bilgi araca ait belgeden gelir." },
+          { "verdict": "tek-yol", "label": "Fark yok, hepsi elektriktir", "explain": "İkisi de elektriktir ama biri enerji biri bilgi taşır." },
+          { "verdict": "uc-yol", "label": "Artı, eksi ve toprak diye üç yol vardır", "explain": "Eksi ile şase aynı yolun parçalarıdır." },
+          { "verdict": "bagimsiz-yollar", "label": "Her tüketicinin bağımsız yolu vardır", "explain": "Kaynak ve şase paylaşılır." }
+        ]
+      },
+      {
+        "q": "Aksesuar için şase noktası nasıl seçilir?",
+        "a": "fabrika-noktasi",
+        "options": [
+          { "verdict": "fabrika-noktasi", "label": "Fabrikanın ayırdığı, gövdeye doğrudan basan ve akım için yeterli bir nokta kullanılır; yeni delik delinmez", "explain": "Şase devrenin dönüş yoludur; kötü şase yük altında cihazı kapatır, seste uğultu yapar, göstergeyi yanıltır. Doğru nokta boyası sıyrılmış temiz temas yüzeyine sahiptir, titreşimle gevşemez ve o akımı taşıyacak kadar sağlamdır. Gövdeye yeni delik delmek kaplamayı bozar ve pas başlatır." },
+          { "verdict": "en-yakin", "label": "En yakın vida uygundur", "explain": "Metal olmak iletken temas anlamına gelmez." },
+          { "verdict": "delik-del", "label": "Yeni delik delmek en sağlamıdır", "explain": "Pas oradan başlar." },
+          { "verdict": "sase-gereksiz", "label": "Şase gerekmez", "explain": "Devre kapanmadan akım geçmez." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 4'teki 0,42 V ve 0,09 V SENARYO okumalarıdır; istenen FARKTIR (0,33 V) ve ders kabul edilebilir azami gerilim düşümü sınırı vermiyor. Sınır devreye ve akıma göre değişir.",
+    "sourceRequired": "Azami gerilim düşümü sınırı, sigorta amperi, kablo kesiti, kablo sabitleme aralığı ve modül çıkışlarının azami yük değerleri bilinçle VERİLMEDİ; hepsi araç ve üretici belgesine aittir. Ders yöntemi ve seçim mantığını öğretiyor.",
+    "kapsam": "Haberleşme protokolünün kendisi (çerçeve yapısı, hız, sonlandırma direnci), teşhis cihazıyla veri okuma ve modül kodlama KAPSAM DIŞIDIR. Ders yalnız 'hangi yola dokunulur, hangisine dokunulmaz' ayrımını öğretiyor. Adaptör seçimi araç ve ürüne özgüdür, marka önerisi verilmiyor.",
+    "reviewedByMechanic": false
+  }
+}

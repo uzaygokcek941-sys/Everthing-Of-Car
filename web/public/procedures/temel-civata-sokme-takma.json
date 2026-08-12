@@ -1,0 +1,147 @@
+{
+  "id": "temel.civata-sokme-takma",
+  "area": "motor-mekanik",
+  "stage": 2,
+  "title": "Cıvata Sökme ve Takma",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 15,
+  "prerequisites": ["temel.el-aletleri", "temel.tork-anahtari"],
+  "learningGoals": [
+    "Cıvatayı elle başlatma alışkanlığını kazanmak",
+    "Çapraz sıkma sırasını uygulamak",
+    "Sökülen cıvatanın dişine bakıp durumunu teşhis etmek"
+  ],
+
+  "safety": [
+    { "rule": "Kişisel koruyucu donanım takılı", "why": "Sıkışan cıvata anahtarı sıçratır, el yaralanması en sık atölye kazasıdır", "blocksStart": true },
+    { "rule": "Çalışma alanı düzenli ve aydınlık", "why": "Düşen cıvatayı bulamamak, kaybolan cıvatadan daha büyük sorun çıkarır", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.lokma-13", "label": "13 mm lokma", "required": true },
+    { "id": "tool.lokma-12", "label": "12 mm lokma", "required": false },
+    { "id": "tool.circir", "label": "1/2\" cırcır kolu", "required": true },
+    { "id": "tool.tork-anahtari", "label": "Tork anahtarı (5-60 Nm)", "required": true },
+    { "id": "tool.pense", "label": "Pense", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Cıvata başını ölç ve doğru lokmayı seç. Bu egzersizde cıvata başı 13 mm.",
+      "interaction": { "type": "unscrew", "target": "part.egzersiz-civata.1", "count": 1, "turns": 1, "tool": "tool.lokma-13" },
+      "camera": "bench-close",
+      "hint": "Bol gelen lokma cıvata başını yuvarlatır. Lokma başa oturmuyorsa bir küçüğünü dene, zorlama.",
+      "commonMistake": {
+        "if": "kucuk-lokma",
+        "feedback": "12 mm lokmayı 13 mm başa zorlarsan köşeleri sıyırırsın. Yuvarlanmış cıvata başı artık normal aletle sökülmez, ekstraktör işidir."
+      }
+    },
+    {
+      "id": 2,
+      "instruction": "Cıvatayı saat yönünün tersine çevirerek sök.",
+      "interaction": {
+        "type": "rotate",
+        "target": "part.egzersiz-civata.1",
+        "direction": "ccw",
+        "turns": 6,
+        "tool": "tool.lokma-13",
+        "requiresGesture": true
+      },
+      "camera": "bench-close",
+      "teachingNote": "Sağ diş kuralı: sökmek için sola, sıkmak için sağa. İstisnalar vardır (sol diş) ve üzerlerinde işareti bulunur."
+    },
+    {
+      "id": 3,
+      "instruction": "Sökülen cıvatanın dişini incele ve durumunu teşhis et.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.egzersiz-civata.1",
+        "question": "Diş yüzeyi ne söylüyor?",
+        "options": [
+          { "label": "Diş düzgün, keskin ve temiz", "verdict": "saglam", "correct": true, "explain": "Cıvata tekrar kullanılabilir. Yine de yağ ve kir temizlenmeli; kirli diş yanlış tork verir." },
+          { "label": "Diş tepeleri yatmış, parlak sürtünme izi var", "verdict": "turlamis", "explain": "Aşırı sıkmadan diş uzamış. Bu cıvata atılır; tekrar takılırsa aynı torkta kopar." },
+          { "label": "Diş aralarında pas ve kabuk", "verdict": "pasli", "explain": "Pas sürtünmeyi artırır; tork anahtarı doğru gösterse bile gerçek germe kuvveti düşük kalır. Temizlenmeden takılmaz." },
+          { "label": "Diş bir bölgede tamamen ezilmiş", "verdict": "ezik", "explain": "Çapraz takılmış. Asıl tehlike cıvatada değil: karşı taraftaki dişli delik de büyük ihtimalle zarar görmüştür, onu da kontrol et." }
+        ]
+      },
+      "camera": "inspect-hand",
+      "teachingNote": "Sökülen cıvata bir rapordur. Ustayı çıraktan ayıran şey, cıvatayı çöpe atmadan önce ona bakmasıdır."
+    },
+    {
+      "id": 4,
+      "instruction": "Yeni cıvatayı alet kullanmadan, yalnız elinle çevirerek yerine başlat.",
+      "interaction": {
+        "type": "rotate",
+        "target": "part.egzersiz-civata-yeni.1",
+        "direction": "cw",
+        "turns": 3,
+        "requiresGesture": true
+      },
+      "camera": "bench-close",
+      "hint": "Elle rahat dönmüyorsa dur. Zorlarsan çapraz diş atar ve karşı parçayı da bozarsın.",
+      "teachingNote": "Elle başlatma kuralı tek başına, atölyede en çok masrafa yol açan hatayı önler."
+    },
+    {
+      "id": 5,
+      "instruction": "Dört cıvatayı çapraz sırayla ön sıkma yap: 1-3-2-4.",
+      "interaction": { "type": "unscrew", "target": "part.flans-civata", "count": 4, "turns": 2, "tool": "tool.circir" },
+      "camera": "bench-wide",
+      "hint": "Sırayla yan yana sıkarsan parça bir taraftan yatar ve conta düzgün oturmaz.",
+      "commonMistake": {
+        "if": "sirali-sikma",
+        "feedback": "Yan yana sıktın. Flanş bir taraftan yattı, conta bir yerden fazla bir yerden az ezildi. Böyle bir bağlantı kısa sürede sızdırır."
+      }
+    },
+    {
+      "id": 6,
+      "instruction": "Aynı çapraz sırayla, egzersiz için verilen 20 Nm değerinde tork anahtarıyla son sıkmayı yap.",
+      "interaction": {
+        "type": "rotate-to-torque",
+        "target": "part.flans-civata",
+        "direction": "cw",
+        "targetTorqueNm": 20,
+        "toleranceNm": 2,
+        "tool": "tool.tork-anahtari",
+        "requiresGesture": true
+      },
+      "camera": "bench-wide",
+      "commonMistake": {
+        "if": "asiri-sikma",
+        "feedback": "Fazla sıktın. Cıvata elastik sınırını geçti; şimdi kopmasa da bir sonraki söküp takmada kopar. Tork anahtarı klik sesinden sonra çevrilmez."
+      },
+      "teachingNote": "Buradaki 20 Nm bu egzersizin verisidir; evrensel bir cıvata torku yoktur. Gerçek işte değer parçanın kendi kılavuzundan alınır."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru", "torkToleransIcinde"],
+    "questions": [
+      {
+        "q": "Cıvatayı neden önce elle çeviririz?",
+        "a": "capraz-dis-onlemek",
+        "options": [
+          { "verdict": "capraz-dis-onlemek", "label": "Çapraz diş atmasını önlemek için", "explain": "Elle çevirirken direnç hissedilir; anahtarla bu his kaybolur ve cıvata yanlış açıyla dişi keser." },
+          { "verdict": "hizli-olsun", "label": "Daha hızlı olduğu için", "explain": "Elle çevirmek daha yavaştır. Amaç hız değil, hissi kaybetmemek." },
+          { "verdict": "alet-yipranmasin", "label": "Alet yıpranmasın diye", "explain": "Aleti korumak öncelik değil; korunması gereken şey karşı parçanın dişidir." },
+          { "verdict": "tork-dogru-olsun", "label": "Tork anahtarı doğru ölçsün diye", "explain": "Tork son sıkmada devreye girer. Elle başlatmanın amacı ondan önce gelir." }
+        ]
+      },
+      {
+        "q": "Dört cıvatalı bir flanşı yan yana sırayla sıkarsan ne olur?",
+        "a": "flans-yatar",
+        "options": [
+          { "verdict": "flans-yatar", "label": "Parça bir taraftan yatar, conta eşit ezilmez ve sızdırır", "explain": "Bu yüzden çapraz sıra vardır: yük yüzeye dengeli dağılır." },
+          { "verdict": "fark-etmez", "label": "Hiçbir şey olmaz, sonuç aynıdır", "explain": "Tork değerleri sonunda eşit olsa bile parça yatmış hâlde sabitlenir; eşit tork eşit baskı demek değildir." },
+          { "verdict": "civata-kopar", "label": "Cıvatalar kopar", "explain": "Kopma aşırı sıkmadan olur, sıradan değil. Buradaki hasar sızdırmadır." },
+          { "verdict": "dis-siyrilir", "label": "Dişler sıyrılır", "explain": "Diş sıyrılması çapraz takma ve aşırı torkun sonucudur, sıkma sırasının değil." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "sourceRequired": "Bu prosedürde kaynak gerektiren teknik değer yoktur. 20 Nm egzersiz verisidir, sourceRequired taşımaz ve gerçek bir araca ait tork iddiası içermez.",
+    "reviewedByMechanic": false
+  }
+}

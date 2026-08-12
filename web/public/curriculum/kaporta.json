@@ -1,0 +1,217 @@
+{
+  "area": "kaporta",
+  "title": "Kaporta ve Boya",
+  "goal": "Aracın gövdesini bir kabuk değil bir TAŞIYICI YAPI olarak görmek; hangi parçanın taşıdığını, hangi çeliğin onarılabildiğini ve hangi işin sınırın ötesinde olduğunu bilmek. Göçüğü okuyup düzeltmek, yüzeyi hazırlamak, boyayı tutturmak ve yapılan işin bir kazada aracın davranışını değiştirdiğini asla unutmamak.",
+  "framework": "MEB Motorlu Araçlar Teknolojisi alanı, Otomotiv Gövde ve Boya dalı — gövde onarımı, yüzey hazırlığı ve boya öğrenme birimleri. Bu müfredat çerçeve programın konu başlıklarını takip ediyor ama kazanım numarası ve saat dağılımı iddiasında BULUNMUYOR: proje bu dalın resmî kazanım listesini birebir doğrulamadı ve doğrulanana kadar 'MEB kazanımıdır' diye sunulmayacak.",
+  "ustalikTanimi": "Kaporta işinde ustalık, sacı düzeltmek değil NEYİ düzeltmeyeceğini bilmektir. Aracın gövdesi bir kabuk değildir: bir kazada enerjiyi belirli bölgelerde ezilerek yutar ve kabini deforme olmadan ayakta tutmaya çalışır. Bu davranış, belirli parçaların belirli çelik sınıflarından ve belirli birleştirme yöntemleriyle yapılmış olmasına bağlıdır. Bu yüzden bu alanın bilgisi ikiye ayrılır: dış paneller — göçüğü çekilir, düzeltilir, boyanır — ve taşıyıcı yapı — üreticinin onarım kılavuzu olmadan ısıtılmaz, düzeltilmez, kesilip eklenmez. İkinci ustalık yüzeydedir: boyanın tutması boyanın kendisiyle değil altındaki hazırlıkla belirlenir; iyi boya kötü hazırlığı kurtarmaz ama kötü boya iyi hazırlığı öldürür. Üçüncü ustalık dürüstlüktür — bu alanda yapılan işin kalitesi aylarca görünmez ve müşteri farkı ancak pas geri geldiğinde, renk soldüğünde ya da bir kazada anlar.",
+  "stages": [
+    {
+      "title": "Güvenlik ve gövdenin haritası",
+      "procedures": [
+        {
+          "id": "kaporta.guvenlik",
+          "title": "Bu alanın kırmızı çizgileri: taşıyıcı yapı, kaynak, boya ve solunum",
+          "status": "yazildi"
+        },
+        {
+          "id": "kaporta.govde-yapisi",
+          "title": "Gövde bir kabuk değil: taşıyıcı yapı ve ezilme bölgeleri",
+          "status": "yazildi"
+        },
+        {
+          "id": "kaporta.hasar-okuma",
+          "title": "Hasarı okumak: darbe nereden geldi, enerji nereye gitti",
+          "status": "yazildi"
+        }
+      ]
+    },
+    {
+      "title": "Malzeme ve birleştirme bilgisi",
+      "procedures": [
+        {
+          "id": "kaporta.sac-turleri",
+          "title": "Sac türleri: yumuşak, yüksek mukavemetli, alüminyum ve plastik",
+          "status": "yazildi"
+        },
+        {
+          "id": "kaporta.birlestirme",
+          "title": "Punta, gazaltı kaynağı, yapıştırma ve perçin: hangisi nerede",
+          "status": "yazildi"
+        },
+        {
+          "id": "kaporta.korozyon",
+          "title": "Pas nasıl başlar, fabrika koruması nasıl çalışır",
+          "status": "yazildi"
+        }
+      ]
+    },
+    {
+      "title": "Alet ve ölçüm",
+      "procedures": [
+        {
+          "id": "kaporta.el-aletleri",
+          "title": "Kaporta aletleri: çekiç, altlık, kaldıraç ve çektirme",
+          "status": "yazildi"
+        },
+        {
+          "id": "kaporta.olcme",
+          "title": "Ölçmek: çapraz ölçü, fuga ve boya kalınlığı",
+          "status": "yazildi"
+        },
+        {
+          "id": "kaporta.sokme-takma",
+          "title": "Söküm sırası: hangi parça önce, hangi bağlantı sonra",
+          "status": "yazildi"
+        }
+      ]
+    },
+    {
+      "title": "Göçük onarımı",
+      "procedures": [
+        {
+          "id": "kaporta.gocuk-analizi",
+          "title": "Göçüğün merkezi ve kilitlenmesi: nereden başlanır",
+          "status": "yazildi"
+        },
+        {
+          "id": "kaporta.boyasiz-gocuk",
+          "title": "Boyasız göçük düzeltme: nerede uygulanır, nerede uygulanmaz",
+          "status": "yazildi"
+        },
+        {
+          "id": "kaporta.cekme-ve-isi",
+          "title": "Çekme ve ısı: sacın hafızası ve ısı sınırı",
+          "status": "yazildi"
+        }
+      ]
+    },
+    {
+      "title": "Parça değişimi",
+      "procedures": [
+        {
+          "id": "kaporta.civatali-parca",
+          "title": "Cıvatalı parça değişimi ve fuga ayarı",
+          "status": "yazildi"
+        },
+        {
+          "id": "kaporta.kaynakli-parca",
+          "title": "Kaynaklı parça: punta çözme, kesim hattı ve sınır",
+          "status": "yazildi"
+        },
+        {
+          "id": "kaporta.plastik-onarim",
+          "title": "Tampon ve plastik parça onarımı",
+          "status": "yazildi"
+        }
+      ]
+    },
+    {
+      "title": "Boya öncesi hazırlık",
+      "procedures": [
+        {
+          "id": "kaporta.yuzey-hazirligi",
+          "title": "Yüzey hazırlığı: zımpara kademeleri ve temizlik",
+          "status": "yazildi"
+        },
+        {
+          "id": "kaporta.macun",
+          "title": "Macun: ince kat, doğru kuruma, aşırı macunun bedeli",
+          "status": "yazildi"
+        },
+        {
+          "id": "kaporta.astar",
+          "title": "Astar: yapışma, dolgu ve çıplak metal bırakmama",
+          "status": "yazildi"
+        }
+      ]
+    },
+    {
+      "title": "Boya",
+      "procedures": [
+        {
+          "id": "kaporta.renk-ve-kod",
+          "title": "Renk kodu, varyant ve deneme kartı",
+          "status": "yazildi"
+        },
+        {
+          "id": "kaporta.boya-uygulama",
+          "title": "Tabanca ayarı, kat sayısı ve ortam koşulları",
+          "status": "yazildi"
+        },
+        {
+          "id": "kaporta.vernik-kurutma",
+          "title": "Vernik ve kurutma: sabrın ölçülebildiği yer",
+          "status": "yazildi"
+        }
+      ]
+    },
+    {
+      "title": "Cila ve kusur",
+      "procedures": [
+        {
+          "id": "kaporta.cila",
+          "title": "Cila ve polisaj: nereye kadar",
+          "status": "yazildi"
+        },
+        {
+          "id": "kaporta.boya-kusurlari",
+          "title": "Boya kusurları: krater, sarkma, toz ve portakal kabuğu",
+          "status": "yazildi"
+        }
+      ]
+    },
+    {
+      "title": "Cam, conta ve su",
+      "procedures": [
+        {
+          "id": "kaporta.cam-ve-conta",
+          "title": "Yapıştırma cam ve conta: bekleme süresi bir güvenlik konusudur",
+          "status": "yazildi"
+        },
+        {
+          "id": "kaporta.su-sizdirmazligi",
+          "title": "Su kaçağı ve tahliye kanalları",
+          "status": "yazildi"
+        }
+      ]
+    },
+    {
+      "title": "Arıza teşhis",
+      "procedures": [
+        {
+          "id": "kaporta.renk-tutmadi",
+          "title": "Şikâyet: Renk tutmadı",
+          "status": "yazildi"
+        },
+        {
+          "id": "kaporta.boya-kabardi",
+          "title": "Şikâyet: Boya kabardı, pas geri geldi",
+          "status": "yazildi"
+        },
+        {
+          "id": "kaporta.kapi-fugasi",
+          "title": "Şikâyet: Kapı zor kapanıyor, fuga bozuk",
+          "status": "yazildi"
+        }
+      ]
+    },
+    {
+      "title": "Ustalık sınavı",
+      "procedures": [
+        {
+          "id": "kaporta.entegrasyon",
+          "title": "Ustalık sınavı: yandan darbe almış araç",
+          "status": "yazildi"
+        }
+      ]
+    }
+  ],
+  "_notes": {
+    "status": "Mufredat tamamlandi. 29/29 prosedur yazildi - butun asamalar (0-10) tamam.",
+    "kaynak": "Bu alan kullanıcının açık talebiyle eklendi (talep birebir: 'birde alanlara kaportayı ekleyelim'). Gerekçesi saha gerçeğidir: kaporta ve boya, sanayi sitesinin en yoğun dallarından biri ve MEB'de kendi dalı olarak yer alıyor. Çerçeve programın konu başlıkları takip edildi ama kazanım numarası ve saat dağılımı DOĞRULANMADI; doğrulanana kadar bu alan 'MEB kazanımıdır' diye sunulmayacak, kaynağı proje olarak işaretli kalacak.",
+    "kirmizi-cizgiler": "Bu alanın kırmızı çizgileri diğerlerinden daha serttir ve dört başlıkta toplanır. (1) TAŞIYICI YAPI: direk, eşik, taşıyıcı ayak ve şasi bölgeleri üreticinin onarım kılavuzu olmadan ısıtılmaz, düzeltilmez, kesilip eklenmez — bu parçaların davranışı bir kazada kabinin ayakta kalmasını belirler. (2) ÇELİK SINIFI: yüksek ve ultra yüksek mukavemetli çeliklerde ısıtma ve doğrultma çoğu zaman YASAKTIR, çünkü ısı malzemenin mukavemetini kalıcı olarak düşürür; hangi parçanın hangi sınıf olduğu araca özgüdür ve kılavuzdan okunur. (3) KAYNAK ÖNCESİ: enerji kesilir; yakıt hattı ve deposu, hava yastığı ve gergi birimleri, elektrikli araçlarda yüksek gerilim sistemi güvenceye alınır; kaynak akımının dönüş yolu kontrol edilir. (4) SOLUNUM VE ORTAM: boya ve sertleştiriciler solunum yoluyla ciddi zarar verir — uygun solunum koruması, havalandırma ve uygun ortam olmadan boya yapılmaz; bu bir tercih değil sağlık şartıdır.",
+    "olcum-deseni": "Bu alanda da 'fark deseni' geçerli: her measure adımı iki senaryo okuması verip FARKINI istiyor. Boya kalınlığı, fuga aralığı, çapraz ölçü farkı gibi değerler karşılaştırma içindir; hiçbir araç için kabul edilebilir sınır İDDİA EDİLMEZ — o değerler üreticinin verisidir ve sourceRequired altında bilinçle boş bırakılır.",
+    "kapsam-disi": "Şasi çekme (bankoda doğrultma), gövde ölçüm sistemleriyle yapısal doğrulama, hava yastığı ve gergi birimlerine müdahale, elektrikli araçlarda yüksek gerilim sistemi, boya kabini kurulumu ve atık yönetimi mevzuatı bu alanın KAPSAMI DIŞINDA. Dersler bu işlerin varlığını ve sınırını öğretiyor, yapılışını değil.",
+    "sahne": "Alanın sahnesi web/content/kaporta.parts.json — aracın sol ön köşesi. Taşıyıcı parçalar çelik, dış paneller boya malzemesiyle üretildi ki öğrenci ikisini görsel olarak ayırt edebilsin."
+  }
+}

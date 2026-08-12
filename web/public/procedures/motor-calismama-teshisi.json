@@ -1,0 +1,181 @@
+{
+  "id": "motor.calismama-teshisi",
+  "area": "motor-mekanik",
+  "stage": 9,
+  "title": "Çalışmayan Motor: Yakıt mı, Ateşleme mi, Kompresyon mu?",
+  "vehicleClass": "binek-arac",
+  "estimatedMinutes": 30,
+  "prerequisites": ["motor.terimler-ve-cevrim", "motor.triger-degisimi", "motor.kompresyon-testi"],
+  "learningGoals": [
+    "Marş dönmüyor ile motor tutmuyor arızasını ilk soruda ayırmak",
+    "Yakıt, ateşleme ve kompresyonu ucuzdan pahalıya doğru sırayla elemek",
+    "Kopan triger bağlantısını krankı çevirip kam işaretini izleyerek dakikalar içinde doğrulamak"
+  ],
+
+  "safety": [
+    { "rule": "Yakıt kokusu varken ateşleme denemesi yapılmaz", "why": "Önceki marş denemelerinde silindire ve emme yoluna yakıt dolmuş olabilir. Kıvılcım testi ya da yeni bir marş denemesi bu ortamda tutuşmaya yol açar; önce alan havalandırılır ve kaynak aranır", "blocksStart": true },
+    { "rule": "Kıvılcım kontrolü çıplak elle, kabloyu tutarak yapılmaz", "why": "Ateşleme devresinde on binlerce volt vardır. Kıvılcım test cihazı ya da yalıtımlı sap kullanılır; çarpılma ani kas kasılmasına ve elin dönen parçalara çarpmasına yol açar", "blocksStart": true },
+    { "rule": "Motor bölmesinde çalışırken kontak açık bırakılmaz", "why": "Kontak açıkken soğutma fanı motor durmuş olsa bile kendi kendine dönebilir; elin fan bölgesindeyse haber vermeden çalışır", "blocksStart": true },
+    { "rule": "Arka arkaya uzun marş verilmez", "why": "Marş motoru kısa süreli çalışmaya göre üretilmiştir; art arda uzun denemeler sargıyı ısıtır ve aküyü boşaltır. Ayrıca egzoz sistemine ham yakıt gönderir", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.kivilcim-test-cihazi", "label": "Kıvılcım test cihazı", "required": false },
+    { "id": "tool.lokma-16", "label": "Buji lokması", "required": false },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true },
+    { "id": "tool.kompresyon-test-cihazi", "label": "Kompresyon test cihazı", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Araç çekiciyle geldi: dün akşam sorunsuz park edilmiş, sabah çalışmamış. Kaputu daha açmadın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kaput",
+        "question": "İlk soru ne olmalı?",
+        "options": [
+          { "label": "Marş dönüyor mu? Motor dönmüyorsa arıza marş ve akü tarafındadır, motorun içinde değildir", "verdict": "mars-donuyor-mu", "correct": true, "explain": "Bu tek soru arızayı ikiye böler ve yanlış tarafta saatler harcamanı önler. Marş dönmüyorsa motorun içinde arayacak bir şey yoktur: akü, marş motoru, kontak, immobilizer ya da gevşemiş kablo. Marş dönüyor ama motor tutmuyorsa, motorun çalışması için gereken üç şeyden biri eksiktir: yakıt, ateşleme, kompresyon. Bu ayrımı yapmadan buji sökmeye başlamak, bu meslekteki en sık zaman kaybıdır. Teşhis her zaman en geniş ayrımdan başlar ve daralarak ilerler." },
+          { "label": "Bujiler ne durumda?", "verdict": "buji", "explain": "Buji üç ihtimalden yalnız birine bakar; daha ilk adımda diğer ikisini görmezden gelmiş olursun. Ayrıca sökmeyle başlayan teşhis pahalıdır." },
+          { "label": "Yakıt deposu dolu mu?", "verdict": "yakit", "explain": "İyi ve ucuz bir kontrol ama sırası ikinci ayrımda. Marş dönmüyorsa yakıtın hiçbir önemi yoktur." },
+          { "label": "Hata kodu okunur", "verdict": "kod", "explain": "Kod yardımcı olur ama sebebi değil belirtiyi söyler. Ayrıca kopan bir kayış çoğu zaman hiç kod üretmez." }
+        ]
+      },
+      "camera": "motor-ust",
+      "teachingNote": "Teşhis, ihtimalleri tek tek denemek değildir; her adımda ihtimallerin yarısını elemektir. İyi bir ilk soru işin yarısını bitirir."
+    },
+    {
+      "id": 2,
+      "instruction": "Marş dönüyor. Ama sesi tuhaf: motor alışılmadık biçimde hızlı ve hafif dönüyor, o bildiğin ritmik zorlanma sesi hiç yok.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.krank-kasnagi",
+        "question": "Bu marş sesi neyi anlatır?",
+        "options": [
+          { "label": "Silindirlerde kompresyon oluşmuyor; motor sıkıştırma direncine takılmadan boşta dönüyor", "verdict": "kompresyon-yok", "correct": true, "explain": "Sağlıklı bir motor marşta her silindirin sıkıştırma zamanında marş motoruna direnç gösterir; duyduğun ritmik iniş çıkış budur. Bu direnç yoksa ses düzleşir, hızlanır ve hafifler; marş motoru artık yalnız kendi yükünü çeviriyordur. Ses, kompresyonun bütün silindirlerde birden kaybolduğunu söyler ve dört silindirde birden kompresyon kaybettirecek çok az sebep vardır. Başta geleni supapları çeviren düzenin durmasıdır: kopan triger kayışı ya da atlamış zincir. Tek bir sesle, üç daldan birini daha ilk dakikada seçmiş olursun." },
+          { "label": "Akü zayıf", "verdict": "aku", "explain": "Zayıf akü marşı yavaşlatır ve ağırlaştırır; burada tersi var, marş fazla hızlı ve fazla hafif dönüyor." },
+          { "label": "Yakıt bitmiş", "verdict": "yakit", "explain": "Yakıtsız motor da normal marş sesi verir; sıkıştırma direnci yerinde durur, ses değişmez." },
+          { "label": "Marş dişlisi kaymış", "verdict": "disli", "explain": "Kayan dişli metalik taciz sesi ve düzensiz kavrama yapar; burada motor düzgün ama dirençsiz dönüyor." }
+        ]
+      },
+      "camera": "motor-ust",
+      "hint": "Motor sesi bir ölçü aletidir: ritmi, hızı ve ağırlığı ayrı ayrı bilgi taşır.",
+      "teachingNote": "Ustalık çoğu zaman aletle değil kulakla başlar. Marş sesindeki ritmi bir kez öğrendiğinde, kompresyon kaybını kaputu açmadan duyarsın."
+    },
+    {
+      "id": 3,
+      "instruction": "Doğrulamak için elle çevireceksin: kam kasnağındaki işareti gözle, krank kasnağını motorun dönüş yönünde iki tam tur çevir.",
+      "interaction": {
+        "type": "rotate",
+        "target": "part.krank-kasnagi",
+        "direction": "cw",
+        "turns": 2,
+        "requiresGesture": true
+      },
+      "camera": "motor-on",
+      "hint": "Krank iki tam tur dönerken kam mili bir tur döner; işaret yarı hızda ilerlemeli.",
+      "teachingNote": "Krankı her zaman motorun normal dönüş yönünde çevir. Ters çevirmek gergiyi kayışın gevşek tarafından zorlar ve zincirli motorlarda diş atlatabilir."
+    },
+    {
+      "id": 4,
+      "instruction": "Krank iki tur döndü. Kam kasnağındaki işaret hiç kımıldamadı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.triger-isareti",
+        "question": "Bu ne demek?",
+        "options": [
+          { "label": "Krank ile kam arasındaki bağ kopmuş: triger kayışı kopmuş ya da zincir atlamış", "verdict": "baglanti-kopuk", "correct": true, "explain": "Krank ile kam mili birbirine sabit bir oranla bağlıdır: krank iki tur atarken kam bir tur atar. Krankı çevirirken kam hiç kımıldamıyorsa aradaki bağ fiziksel olarak kopmuştur. Supaplar artık hareket etmiyor demektir; hareket etmeyen supapla silindir ne emiş yapabilir ne sıkıştırabilir, marşta duyduğun dirençsiz ses tam olarak budur. Bu doğrulama beş dakika sürer, hiçbir parça sökmez ve teşhisi kesinleştirir: ikinci bir kanıt, birinci kanıtla aynı yeri gösterdi." },
+          { "label": "Kam mili sıkışmış", "verdict": "kam-sikismis", "explain": "Sıkışan kam mili kayışı gerer ve krankı çevirmeyi zorlaştırır; burada krank rahat dönüyor, yani bağ kopuk." },
+          { "label": "İşareti göremedin, tekrar bakılır", "verdict": "gorulmedi", "explain": "Tekrar bakmak her zaman iyidir, ama iki tur boyunca hiç hareket etmeyen bir işaret zaten yeterince açık bir bulgudur." },
+          { "label": "Normaldir, kam yavaş döner", "verdict": "yavas", "explain": "Yavaş döner ama döner: krankın iki turu kamın tam bir turudur. Sıfır hareket normal değildir." }
+        ]
+      },
+      "camera": "motor-on",
+      "teachingNote": "Her teşhis en az iki bağımsız kanıtla kapanır. Buradaki iki kanıt marş sesi ile kam işaretidir; ikisi de aynı yeri gösterdi."
+    },
+    {
+      "id": 5,
+      "instruction": "Teşhis netleşti. Yanındaki çırak kontağa uzanıp 'bir daha deneyelim' diyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.supap",
+        "question": "Kayışı kopmuş bu motora tekrar marş verilir mi?",
+        "options": [
+          { "label": "Verilmez; girişimli motorda duran supapla yükselen piston çarpışır ve her marş hasarı büyütür", "verdict": "mars-verme", "correct": true, "explain": "Birçok motor girişimli tasarlanmıştır: pistonun yükseldiği yol ile açık supabın indiği yol aynı hacimde kesişir. Kayış sağlamken bu ikisi asla aynı anda orada olmaz, çünkü zaman ayarı bunu engeller. Kayış koptuğunda kam durur, supapların bir kısmı açık kalır ve marşla dönen pistonlar o supaplara çarpar. İlk kopmada bir iki supap eğilmiş olabilir; her ek marş denemesi hasarı büyütür. Bu yüzden kopmuş kayış teşhisi konduğu anda marş denemeleri durur ve hasarın boyutu, kayış değişmeden önce kompresyon testiyle ölçülür. Motorun girişimli olup olmadığı bilinmiyorsa girişimli kabul edilir; yanılmanın bedeli o tarafta çok daha ağırdır." },
+          { "label": "Bir kere daha denenir, belki tutar", "verdict": "bir-kere", "explain": "Tutması mümkün değil: supapları çeviren düzen duruyor. Deneme yalnız hasarı büyütür." },
+          { "label": "Kayış takılır, sonra bakılır", "verdict": "kayis-tak", "explain": "Kayışı takmak doğru yönde bir adım ama sıra yanlış: önce hasar var mı bilinmeli, yoksa yeni kayışla birlikte eğik supap da yerinde kalır." },
+          { "label": "Zarar görmez, supaplar yaylıdır", "verdict": "yayli", "explain": "Yay supabı kapatır ama pistonun kuvvetine karşı koyamaz. Girişimli motorda temas doğrudan hasardır." }
+        ]
+      },
+      "camera": "motor-ust",
+      "teachingNote": "Teşhis konduktan sonra yapılan gereksiz bir deneme, teşhisten önce yapılandan çok daha pahalıdır. Bildiğin andan itibaren dur."
+    },
+    {
+      "id": 6,
+      "instruction": "Kopan kayış çıkarıldı. Yeni kayış ve gergi rulmanı elinde.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.gergi-rulmani",
+        "question": "Kayışı takmadan önce ne yapılır?",
+        "options": [
+          { "label": "Kayışın neden koptuğu bulunur: sıkışan gergi rulmanı veya devirdaim, yağ bulaşması, kaçırılmış değişim aralığı", "verdict": "sebep-bul", "correct": true, "explain": "Bir triger kayışı çoğu zaman kendiliğinden kopmaz. En sık sebep, kayışın üzerinde dönen bir rulmanın sıkışmasıdır: gergi rulmanı ya da kayışla tahrik edilen devirdaim. Sıkışan rulman kayışı ısıtır, aşındırır ve keser. İkinci sebep yağ bulaşmasıdır: sızdıran bir kam mili keçesi kayışın kauçuğunu yumuşatır. Üçüncüsü değişim aralığının kaçırılmasıdır. Sebep bulunmadan takılan yeni kayış aynı rulman yüzünden kısa sürede aynı yerden kopar ve bu sefer müşteri seni suçlar. Bu yüzden bütün rulmanlar elle çevrilerek dinlenir, keçeler kontrol edilir." },
+          { "label": "Doğrudan takılır, kayış zaten yenisi", "verdict": "dogrudan", "explain": "Yeni kayış, onu kesen sebebi ortadan kaldırmaz. Aynı sebep aynı sonucu üretir." },
+          { "label": "Yalnız gergi kuvveti ayarlanır", "verdict": "gergi-ayari", "explain": "Gergi ayarı şarttır ama tek başına yetmez; sıkışan bir rulman doğru gergide de kayışı keser." },
+          { "label": "Motor yağı değiştirilir", "verdict": "yag", "explain": "Yağ değişimi bakımın parçasıdır ama triger kayışını kesen sebebi bulmaz." }
+        ]
+      },
+      "camera": "motor-on",
+      "teachingNote": "Dokuzuncu aşamada üçüncü kez tekrarlanan cümle: parçayı değiştirip sebebi bırakan usta, aynı arızayı ikinci kez ücretsiz onarır."
+    },
+    {
+      "id": 7,
+      "instruction": "Kayış ve rulman değişti, zaman ayarı yapıldı. Motoru çalıştırmadan önce son bir kontrol.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.silindir-1",
+        "question": "Çalıştırmadan önce hangi ölçüm yapılır?",
+        "options": [
+          { "label": "Kompresyon testi: kayış koptuğunda supap eğilip eğilmediğini yalnız bu gösterir", "verdict": "kompresyon", "correct": true, "explain": "Kayış koptuğunda pistonlar duran supaplara çarpmış olabilir ve eğilen bir supap dışarıdan görünmez. Motoru çalıştırıp anlamaya çalışmak yerine, kompresyon testi bu soruyu birkaç dakikada cevaplar: bütün silindirler birbirine yakınsa hasar yoktur, bir ya da birkaç silindir belirgin biçimde düşükse o silindirlerde eğilmiş supap vardır ve silindir kapağı sökülecektir. Ayrıca elle iki tur çevirip hiçbir yerde takılma olmadığını doğrulamak, zaman ayarının doğruluğunu da teyit eder. Bu iki kontrol, ilk çalıştırmayı tahminden çıkarıp bilinen bir işleme çevirir." },
+          { "label": "Doğrudan çalıştırılır, ses dinlenir", "verdict": "calistir", "explain": "Ses bilgi verir ama eğik supabı geç gösterir. Ucuz ölçüm dururken pahalı denemeye geçilmez." },
+          { "label": "Yalnız yağ seviyesi kontrol edilir", "verdict": "yag-seviye", "explain": "Doğru bir alışkanlık ama bu arızanın sorusunu cevaplamaz." },
+          { "label": "Hata kodları silinir", "verdict": "kod-sil", "explain": "Kod silmek belirtiyi siler, arızayı değil. Ölçümün yerini tutmaz." }
+        ]
+      },
+      "camera": "motor-ust",
+      "teachingNote": "Dokuzuncu aşamanın dersleri birbirine bağlanır: burada elediğin dal, kompresyon testiyle kapanır. Teşhis dersleri tek başına değil, birbirini çağırarak çalışır."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Çalışmayan bir motorda sorulacak ilk soru nedir?",
+        "a": "mars-donuyor-mu",
+        "options": [
+          { "verdict": "mars-donuyor-mu", "label": "Marş dönüyor mu?", "explain": "Bu soru arızayı iki büyük gruba böler. Marş dönmüyorsa sorun motorun kendisinde değil, onu döndüren devrededir: akü, marş motoru, kontak, immobilizer, kablo bağlantıları. Marş dönüyor ama motor tutmuyorsa, çalışmak için gereken üç şeyden biri eksiktir: yakıt, ateşleme, kompresyon. Bu ayrım yapılmadan atılan her adım, ihtimallerin yarısında boşa gider. Teşhis her zaman en geniş ayrımdan başlar." },
+          { "verdict": "yakit-var-mi", "label": "Depoda yakıt var mı?", "explain": "Ucuz ve iyi bir kontrol ama sırası ikinci ayrımdadır; marş dönmüyorsa anlamsızdır." },
+          { "verdict": "kod", "label": "Hata kodu ne diyor?", "explain": "Kod belirtiyi söyler, sebebi değil; kopan kayış çoğu zaman kod bile üretmez." },
+          { "verdict": "buji", "label": "Bujiler nasıl?", "explain": "Üç ihtimalden yalnız birine bakar ve sökmeyle başlar. Teşhis en ucuz kontrolden başlar." }
+        ]
+      },
+      {
+        "q": "Marşta motorun alışılmadık biçimde hızlı ve hafif dönmesi neyi gösterir?",
+        "a": "kompresyon-yok",
+        "options": [
+          { "verdict": "kompresyon-yok", "label": "Silindirlerde kompresyon oluşmadığını; büyük ihtimalle triger bağlantısı kopmuştur", "explain": "Sağlıklı motorda marş, her silindirin sıkıştırma zamanında dirençle karşılaşır ve bu direnç sese ritim verir. Direnç kaybolduğunda ses düzleşir, hızlanır ve hafifler. Dört silindirde birden kompresyon kaybettirebilecek sebep azdır ve en başta geleni supapları çeviren düzenin durmasıdır: kopan triger kayışı ya da atlamış zincir. Doğrulaması ücretsizdir: krank çevrilir, kam işaretinin dönüp dönmediğine bakılır." },
+          { "verdict": "aku-zayif", "label": "Akünün zayıf olduğunu", "explain": "Zayıf akü marşı yavaşlatır; buradaki bulgu hızlanmadır." },
+          { "verdict": "yakit-yok", "label": "Yakıt olmadığını", "explain": "Yakıtsız motorda sıkıştırma direnci sürer, marş sesi normaldir." },
+          { "verdict": "onemsiz", "label": "Ses teşhiste kullanılmaz", "explain": "Kullanılır; marş sesi bu arızada ilk ve en hızlı kanıttır." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "sourceRequired": "Bu derste hiçbir üretici değeri kullanılmadı: tork, boşluk, basınç ya da direnç sayısı yok. Ders tamamen sıra, ses ve gözle doğrulama üzerine kuruldu, bu yüzden sourceRequired alanı gerekmedi.",
+    "senaryoNotu": "Girişimli motor kabulü senaryo gereğidir. Bütün motorlar girişimli değildir; girişimsiz motorda kopan kayış supabı eğmez. Adım 5'in öğrettiği kural, motorun tipi bilinmeden marş verilmemesi ve bilinmiyorsa girişimli kabul edilmesidir.",
+    "kapsam": "Marş motoru, akü ve enjeksiyon devresi modelde yok; adım 1'in ayırdığı elektrik dalı Araç Elektrik ve Elektronik Sistemleri alanında işlenecek. Bu ders o dalı bilinçli olarak eledikten sonra motor tarafında kalıyor.",
+    "reviewedByMechanic": false
+  }
+}

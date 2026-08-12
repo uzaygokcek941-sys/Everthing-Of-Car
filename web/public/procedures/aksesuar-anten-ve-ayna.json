@@ -1,0 +1,174 @@
+{
+  "id": "aksesuar.anten-ve-ayna",
+  "area": "aksesuar-ses",
+  "stage": 5,
+  "title": "Anten ve Dış Dikiz Aynası Değişimi",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 30,
+  "prerequisites": ["aksesuar.dis-aksesuar-montaj"],
+  "learningGoals": [
+    "Antenin bir parça değil bir zincir olduğunu ve zayıf sinyalin çoğu zaman kabloda başladığını görmek",
+    "Gövdeyi delen her montajın su ve pas riski taşıdığını bilmek",
+    "Ayna değişiminde işlev ve sızdırmazlık kontrolünü birlikte yapmak"
+  ],
+
+  "safety": [
+    { "rule": "Tavan anteni sökülürken kaplama indirilecekse enerji kesilir ve sarı konektörlü hiçbir birime dokunulmaz", "why": "Tavan kaplamasının içinde ve direklerde perde tipi hava yastığı bulunabilir; bu kırmızı çizgi aşama 0'dan itibaren geçerlidir", "blocksStart": true },
+    { "rule": "Anten deliği açıldıysa ya da genişletildiyse kesim kenarı korunmadan montaj tamamlanmaz", "why": "Tavanda korunmayan bir kesim kenarı hem pas hem su sızıntısı üretir ve sızan su tavan kaplamasını ve elektroniği bozar", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.multimetre", "label": "Multimetre", "required": true },
+    { "id": "tool.plastik-sokme-spatulasi", "label": "Plastik söküm spatulası", "required": true },
+    { "id": "tool.tornavida-seti", "label": "Tornavida seti", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Müşteri 'radyo cızırtılı çekiyor' diyor. Antene bakıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.anten",
+        "question": "Anten sistemi neyden oluşur?",
+        "options": [
+          { "label": "Bir zincirden: anten çubuğu ya da yüzeyi → tabanı ve şase teması → anten kablosu → varsa yükseltici → alıcının girişi; zayıf sinyalin sebebi çoğu zaman çubukta değil bu zincirin ortasındadır", "verdict": "zincir", "correct": true, "explain": "Anten denince akla dışarıdaki çubuk gelir ama sistem bir zincirdir ve her halkası sinyali kaybedebilir. Zincirin başı antenin kendisidir: bir çubuk, tavandaki kısa bir kaide ya da arka camın içine gömülmüş iletken bir yüzey olabilir. İkinci halka tabanın gövdeyle temasıdır ve en çok atlanan noktadır — anten, gövdeyi bir karşı ağırlık gibi kullanır; taban ile sac arasındaki temas pas ya da boya yüzünden bozulduğunda sinyal düşer, üstelik anten yerinde ve sağlam görünür. Üçüncü halka anten kablosudur; bu kablo özel yapılıdır, ortada bir iletken ve çevresinde bir örgü kılıf bulunur ve bu yapının korunması şarttır. Ezildiğinde, keskin katlandığında ya da soketi gevşediğinde sinyal zayıflar. Dördüncüsü yükselticidir: birçok araçta anten sinyali küçük bir devreyle güçlendirilir ve bu devrenin kendi beslemesi vardır — beslemesi kesilmiş bir yükseltici, anten hiç yokmuş gibi bir sonuç verir. Beşincisi alıcının girişidir. Teşhis bu zinciri sırayla bölerek yapılır ve neredeyse hiçbir zaman ilk hamle çubuğu değiştirmek değildir." },
+          { "label": "Yalnız anten çubuğundan", "verdict": "cubuk", "explain": "Çubuk zincirin yalnız ilk halkasıdır." },
+          { "label": "Radyonun içindeki devreden", "verdict": "radyo", "explain": "Alıcı zincirin sonudur; önündeki halkalar da sinyali belirler." },
+          { "label": "Anten kablosu gereksizdir, sinyal havadan gelir", "verdict": "kablosuz", "explain": "Sinyal antenden alıcıya kabloyla taşınır." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Anten tabanının gövdeyle teması sinyalin görünmeyen yarısı: anten sağlam görünürken sinyal orada kaybolur."
+    },
+    {
+      "id": 2,
+      "instruction": "Anten kablosunun soketini ayırıp direncini ölçtün: sağlam kabloda 0,4 ohm, bu kabloda 62 ohm okudun. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.multimetre-aksesuar",
+        "unit": "ohm",
+        "acceptRange": [61.4, 61.8]
+      },
+      "camera": "aksesuar",
+      "hint": "62 eksi 0,4.",
+      "teachingNote": "61,6 ohmluk bu fark kablonun iç iletkeninde ya da soket temasında bir bozulma olduğunu söylüyor. Anten kablosu ölçümünde iki şey ayrı ayrı bakılır: ortadaki iletkenin uçtan uca sürekliliği ve iletken ile dış örgü arasında kısa devre olup olmadığı — ikisi birbirine değiyorsa sinyal tamamen kaybolur. Bu ölçüm kabloyu bulmanın hızlı yoludur ama tek başına yeterli değildir; çünkü ezilmiş bir kablo elektriksel olarak sürekli görünüp yine de sinyali zayıflatabilir. Bu yüzden ölçümün yanında gözle kontrol yapılır: kablonun ezik, keskin kıvrımlı ya da bir vidayla sıkışmış bir yeri var mı, soketleri tam oturuyor mu. Kablonun döşenmesinde bir kural vardır ve montajlarda sık ihlal edilir — anten kablosu, güç kablolarıyla yan yana ve paralel uzun mesafe gitmez; birlikte gitmesi gereken yerlerde araya mesafe konur ya da dik açıyla kesiştirilir, çünkü güç kablosundaki değişimler anten kablosuna gürültü olarak biner. Kablo tipi ve kabul edilebilir direnç araca özgüdür; bu ders bir sınır vermiyor."
+    },
+    {
+      "id": 3,
+      "instruction": "Anten tabanını söktün. Altındaki sac boyalı ve hafif paslı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.anten",
+        "question": "Ne yapılır?",
+        "options": [
+          { "label": "Temas yüzeyi pastan ve boyadan temizlenip metale kadar açılır, taban oturtulur ve çevresi sızdırmaz hâle getirilir; temiz temas hem sinyali hem su yalıtımını belirler", "verdict": "temas-ve-sizdirmazlik", "correct": true, "explain": "Anten tabanının altındaki yüzey iki işi birden yapar: elektriksel temas ve su yalıtımı. Elektriksel temas antenin karşı ağırlığıdır — gövde metali antenin bir parçası gibi çalışır ve arada boya ya da pas varsa bu bağ zayıflar; sinyal düşer, cızırtı artar, uzak istasyonlar kaybolur. Bu yüzden temas yüzeyi metale kadar temizlenir. Ama aynı yüzey aracın dış kabuğudur ve su geçirmemesi gerekir; işte bu iki gereklilik birlikte düşünülür. Doğru sıra şudur: yüzey pastan ve boyadan arındırılır, temizlenen alan tabanın oturacağı bölgeyle sınırlı tutulur, tabanın contası ya da o parça için öngörülen sızdırmaz eleman kullanılarak montaj yapılır ve çevre gerekiyorsa uygun bir sızdırmazla kapatılır. Sızdırmazlığın atlanması aracın tavanından su almasıyla sonuçlanır ve tavandan giren su, tavan kaplamasını lekeler, direklerden aşağı inip halının altına birikir ve orada soketleri oksitler — sunroof dersinde görülen zincirin aynısı. İkinci not: temizlenen metal yüzey açıkta bırakılmaz; taban ile sac arasında kalan alan zaten korunur ama kenarlar boyanın açıldığı yerdir ve orada koruma gerekir. Üçüncü not: farklı bir anten takılacaksa delik ölçüsü çoğu zaman uymaz ve delik genişletmek gerekir — o durumda kesim kenarı çapaktan arındırılıp korunmadan hiçbir montaj tamamlanmaz." },
+          { "label": "Doğrudan yeni taban takılır, temizlik gereksizdir", "verdict": "direkt-tak", "explain": "Boya ve pas hem teması hem sinyali bozar." },
+          { "label": "Yalnız üstten silikonla kapatılır", "verdict": "silikon", "explain": "Üstten kapatmak elektriksel temas sorununu çözmez." },
+          { "label": "Pas kazınıp açık bırakılır", "verdict": "acik-birak", "explain": "Açık metal ve kenar korunmazsa pas geri gelir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Aynı yüzey iki iş yapıyor: elektriksel temas ve su yalıtımı. İkisini birlikte çözmek bu montajın tamamı."
+    },
+    {
+      "id": 4,
+      "instruction": "Dış dikiz aynasını komple değiştireceksin. Kapı iç döşemesinin üst köşesini açtın.",
+      "interaction": {
+        "type": "unscrew",
+        "target": "part.dis-dikiz-aynasi",
+        "turns": 3,
+        "direction": "ccw",
+        "requiresGesture": true
+      },
+      "camera": "aksesuar",
+      "hint": "Ayna gövdesinin üç cıvatasını saat yönünün tersine çevir.",
+      "teachingNote": "Ayna değişiminde iki nokta işin kalitesini belirler. Birincisi kablo geçişidir: aynanın soketi kapının içindedir ve kablo, kapı sacındaki bir delikten lastik bir geçme parçasıyla girer. Yeni ayna takılırken bu lastik geçme mutlaka yerine tam oturtulur — yarım oturan geçme kapı içine su alır ve kapı içi zaten ıslak bir bölgedir, fazladan su cam mekanizmasını ve modülü bulur. İkincisi contadır: ayna gövdesi ile kapı sacı arasında bir conta ya da köpük vardır; eskisi yapışıp yırtıldıysa yenisi kullanılır, gerekiyorsa uygun bir sızdırmazla desteklenir. Üçüncü ve sık atlanan nokta ayna tipidir — aynı araçta ısıtmalı, ışıklı, sinyalli, katlanır ve kör nokta uyarılı gibi farklı donanımlar bulunur ve soket pin sayıları farklıdır; yanlış tip ayna takıldığında bazı işlevler hiç çalışmaz ve bu bir arıza değil, yanlış parçadır. Cıvata sıkma torku araca özgüdür ve bu ders bir değer vermiyor; ama ayna gövdesi plastik olduğu için aşırı sıkma kulakları çatlatır."
+    },
+    {
+      "id": 5,
+      "instruction": "Yeni ayna takıldı, sinyal ve ısıtma çalışıyor ama katlama işlevi yok.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.ayna-motoru",
+        "question": "İlk şüphe nedir?",
+        "options": [
+          { "label": "Yanlış tip parça: katlama motoru olmayan bir ayna takılmış ya da soket pin sayısı uyuşmuyor olabilir; bu bir arıza değil, uyumsuzluktur", "verdict": "yanlis-tip", "correct": true, "explain": "Ayna değişiminden sonra 'bir işlev eksik' şikâyeti geldiğinde ilk bakılacak yer arıza değil, uyumdur. Aynı model araçta donanım seviyesine göre farklı aynalar kullanılır: temel ayna yalnız ayar motorlarını taşır, üst seviyeler ısıtma, sinyal, zemin aydınlatması, katlama motoru, kör nokta uyarı birimi ve hatta kamera içerebilir. Her ek işlev sokete bir ya da iki pin ekler. Takılan ayna daha az donanımlıysa fiziksel olarak oturur, soketi de takılabilir ama eksik işlev hiç çalışmaz. Bu yüzden kontrol sırası şudur: önce eski ve yeni aynanın soketleri yan yana konup pin sayıları ve dizilimleri karşılaştırılır, sonra parça numarası ya da donanım kodu kontrol edilir. İkinci ihtimal soketin yarım takılmasıdır — çok pinli soketlerde kilit tam oturmadığında bazı pinler temas eder bazıları etmez ve tam olarak bu tablo çıkar: bir kısmı çalışır, bir kısmı çalışmaz. Üçüncü ihtimal aracın kendi ayarıdır; katlama işlevi bazı araçlarda kullanıcı ayarıyla ya da kumandayla ilişkilendirilmiştir ve kapalı olabilir. Dördüncü ve son ihtimal gerçek bir arızadır. Doğru sıra ucuzdan pahalıya: soket, parça uyumu, ayar, sonra arıza." },
+          { "label": "Kapı modülü bozulmuştur", "verdict": "modul", "explain": "Diğer işlevler çalışıyorsa modül ve besleme büyük ölçüde sağlamdır." },
+          { "label": "Körükteki kablo kopmuştur", "verdict": "koruk", "explain": "Kopuk olsaydı diğer işlevler de etkilenirdi." },
+          { "label": "Ayna motoru yanmıştır", "verdict": "motor", "explain": "Yeni parçada ilk şüphe uyumsuzluktur." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Yeni parçada 'bir işlev eksik' demek çoğu zaman arıza değil, uyumsuzluk demek. Soketleri yan yana koymak beş saniye."
+    },
+    {
+      "id": 6,
+      "instruction": "Müşteri ayrıca 'radyo yeni takılan ses sisteminden sonra kötüleşti' diyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.bas-unite",
+        "question": "Ne olmuş olabilir?",
+        "options": [
+          { "label": "Anten yükselticisinin beslemesi eksik kalmış ya da anten uyum adaptörü takılmamış olabilir; ayrıca anten kablosu güç kablolarının yanına döşenmişse gürültü binmiştir", "verdict": "yukseltici-ve-guzergah", "correct": true, "explain": "Baş ünite değişiminden sonra radyo çekiminin kötüleşmesi çok yaygındır ve üç sebebi vardır. Birincisi yükseltici beslemesidir: birçok araçta anten sinyalini güçlendiren bir devre vardır ve bunun beslemesi baş üniteden gelen ince bir uçla sağlanır. Yeni ünite bu ucu sürmüyorsa ya da bağlanmamışsa yükseltici çalışmaz; sonuç, anten hiç yokmuş gibi zayıf bir çekimdir. İkincisi anten soketinin uyumudur — araç tarafındaki soket ile ünite tarafındaki soket farklı tiplerde olabilir ve arada bir adaptör gerekir; yanlış ya da kalitesiz bir adaptör hem sinyal kaybı hem temassızlık üretir. Üçüncüsü kablo güzergâhıdır ve montajı yapanın elindedir: anten kablosu, güç kablolarıyla ve özellikle anfinin besleme hattıyla uzun mesafe yan yana gitmemelidir. Aynı şey sinyal (RCA) kabloları için de geçerlidir ve bir sonraki aşamada parazit dersinde ayrıntısıyla ele alınacaktır. Dördüncü, daha basit bir ihtimal de unutulmaz: montaj sırasında anten kablosunun soketi hiç takılmamış ya da yarım takılmış olabilir. Sıra yine ucuzdan pahalıya: soket takılı mı, adaptör doğru mu, yükseltici beslemesi var mı, güzergâh uygun mu." },
+          { "label": "Yeni ünite bozuktur", "verdict": "unite-bozuk", "explain": "Önce bağlantı, adaptör ve güzergâh elenir." },
+          { "label": "Anten çubuğu değiştirilmelidir", "verdict": "cubuk", "explain": "Şikâyet montajdan sonra başladıysa şüphe montajdadır." },
+          { "label": "Radyo yayınları zayıflamıştır", "verdict": "yayin", "explain": "Değişim aracın kendisinde olduğu için önce araç aranır." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Şikâyet bir montajdan sonra başlıyorsa şüphe önce o montajdadır. Bu cümle aşama 9'daki ustalık sınavının da temeli."
+    },
+    {
+      "id": 7,
+      "instruction": "İş bitti.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kapi-ic-dosemesi",
+        "question": "Teslim öncesi ne doğrulanır?",
+        "options": [
+          { "label": "Aynanın bütün işlevleri (ayar, ısıtma, katlama, sinyal, varsa aydınlatma) denenir, radyo çekimi birkaç istasyonda kontrol edilir ve su geçen bütün noktaların sızdırmazlığı gözle doğrulanır", "verdict": "islev-ve-su", "correct": true, "explain": "Bu iki iş küçük görünür ama ikisinin de teslim listesi su içerir, çünkü ikisi de aracın dış kabuğunu deler. Ayna tarafında liste şudur: dört yönde ayar, ısıtma (arka cam ısıtmasıyla birlikte çalışıyor mu), katlama, sinyal ve varsa zemin aydınlatması; ardından kapı sacındaki lastik geçmenin tam oturduğu ve ayna gövdesi ile sac arasındaki contanın eksiksiz olduğu gözle kontrol edilir. Anten tarafında liste şudur: birkaç istasyonda çekim dinlenir — biri güçlü, biri zayıf istasyon olmalı, çünkü güçlü istasyon kötü bir antende bile çekebilir ve yanlış güven verir; sonra tabanın çevresi ve varsa genişletilmiş delik kenarının sızdırmazlığı kontrol edilir. Üçüncü ortak kontrol iç kısımdır: sökülen tavan ya da kapı kaplamaları tam oturmuş mu, hiçbir klips açık ya da kırık kalmış mı, kablolar hareketli parçanın yoluna girmiyor mu. Son olarak müşteriye söylenecek bir şey vardır: yeni yapılan sızdırmaz uygulamalar ürünün istediği süre boyunca yıkanmamalıdır ve basınçlı su doğrudan yeni montajın kenarına tutulmamalıdır." },
+          { "label": "Ayna hareket ediyorsa iş tamamdır", "verdict": "hareket", "explain": "Isıtma, katlama, sinyal ve sızdırmazlık ayrıca doğrulanır." },
+          { "label": "Radyo bir istasyonda çekiyorsa yeterlidir", "verdict": "tek-istasyon", "explain": "Güçlü istasyon kötü antende de çeker; zayıf istasyon da denenir." },
+          { "label": "Su kontrolü ilk yağmurda yapılır", "verdict": "yagmur", "explain": "Sızdırmazlık teslimden önce gözle doğrulanır." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Aşama 5 bitti. Sırada kamera aşaması: ön ve arka kayıt sistemi — bu alanın en çok para kazandıran işi."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Radyo zayıf ve cızırtılı çekiyor. Arama nereden başlar?",
+        "a": "zincir",
+        "options": [
+          { "verdict": "zincir", "label": "Zincir bölünür: anten → tabanın gövdeyle teması → kablo → yükseltici → alıcı girişi", "explain": "Zayıf sinyalin sebebi çoğu zaman çubukta değil, zincirin ortasındadır. Anten gövdeyi karşı ağırlık olarak kullanır; tabanın altındaki temas pas ya da boya yüzünden bozulduğunda anten sağlam görünse de sinyal düşer. Kablo ezilmiş ya da soketi gevşemiş olabilir, yükselticinin beslemesi kesilmişse anten hiç yokmuş gibi bir sonuç verir." },
+          { "verdict": "cubuk", "label": "Anten çubuğu değiştirilir", "explain": "Çubuk zincirin ilk halkasıdır." },
+          { "verdict": "radyo", "label": "Radyo değiştirilir", "explain": "Alıcı zincirin sonudur." },
+          { "verdict": "kablosuz", "label": "Anten kablosu gereksizdir", "explain": "Sinyal alıcıya kabloyla taşınır." }
+        ]
+      },
+      {
+        "q": "Yeni takılan aynada sinyal ve ısıtma çalışıyor ama katlama yok. İlk şüphe nedir?",
+        "a": "yanlis-tip",
+        "options": [
+          { "verdict": "yanlis-tip", "label": "Yanlış tip parça ya da yarım takılmış çok pinli soket — arıza değil, uyumsuzluk", "explain": "Aynı model araçta donanım seviyesine göre farklı aynalar kullanılır ve her ek işlev sokete pin ekler; daha az donanımlı bir ayna fiziksel olarak oturur ama eksik işlev hiç çalışmaz. Çok pinli soket yarım takıldığında da bir kısmı çalışır bir kısmı çalışmaz. Sıra: soket, parça uyumu, aracın kendi ayarı, sonra gerçek arıza." },
+          { "verdict": "modul", "label": "Kapı modülü bozuktur", "explain": "Diğer işlevler çalışıyor." },
+          { "verdict": "koruk", "label": "Körükteki kablo kopmuştur", "explain": "Diğer işlevler de etkilenirdi." },
+          { "verdict": "motor", "label": "Ayna motoru yanmıştır", "explain": "Yeni parçada ilk şüphe uyumsuzluktur." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2'deki 0,4 ohm ve 62 ohm SENARYO okumalarıdır; istenen FARKTIR (61,6 ohm) ve ders bir kabul edilebilir kablo direnci vermiyor.",
+    "sourceRequired": "Anten kablosu tipi ve empedansı, kabul edilebilir direnç, yükseltici besleme gerilimi, ayna cıvatası sıkma torku ve sızdırmaz ürün tipi bilinçle VERİLMEDİ; hepsi araca ve ürüne özgüdür.",
+    "kapsam": "Tavan kaplaması içindeki ve direklerdeki hava yastığı bileşenlerine müdahale KAPSAM DIŞIDIR. Ayna içindeki kör nokta uyarı birimi ve kamera sistemlerinin kalibrasyonu kapsam dışı — ders yalnız işlevsel denemeyi ve uyum kontrolünü öğretiyor. Gövde delme, boya ve pas onarımı ayrı uzmanlıklardır.",
+    "reviewedByMechanic": false
+  }
+}

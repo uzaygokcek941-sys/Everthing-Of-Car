@@ -1,0 +1,178 @@
+{
+  "id": "aksesuar.ses-zinciri",
+  "area": "aksesuar-ses",
+  "stage": 7,
+  "title": "Ses Zinciri: Kaynaktan Hoparlöre Sinyalin Yolu",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 35,
+  "prerequisites": ["aksesuar.kamera-teslim"],
+  "learningGoals": [
+    "Ses sisteminin bir zincir olduğunu ve her halkanın sesi belirlediğini görmek",
+    "Sinyal ile gücü ayırt etmek",
+    "Hoparlörün elektriksel karakterini ölçüp yorumlamak"
+  ],
+
+  "safety": [
+    { "rule": "Yüksek güçlü ses sistemi bağlanırken enerji kesilir ve kesildiği ölçülerek doğrulanır", "why": "Ses sisteminin güç kablosu doğrudan aküye bağlanan kalın bir hattır; kısa devrede akım çok yüksektir ve kablo saniyeler içinde kızarır", "blocksStart": true },
+    { "rule": "Kapı döşemesi sökülürken sarı konektörlü hiçbir birime dokunulmaz", "why": "Kapı içinde yan darbe hava yastığı bulunabilir; bu sınır bu alanın ilk dersinden beri geçerli", "blocksStart": true },
+    { "rule": "Test sırasında ses kademeli açılır", "why": "Kapalı bir kabinde yüksek ses seviyesi işitmeye kalıcı zarar verir; ayrıca bozuk bir bağlantı yüksek seviyede hoparlörü anında bitirir", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.multimetre", "label": "Multimetre", "required": true },
+    { "id": "tool.plastik-sokme-spatulasi", "label": "Plastik söküm spatulası", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Müşteri 'sesim kötü, hoparlör değiştirelim' diyor. Önce sistemi anlıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.bas-unite",
+        "question": "Ses sistemi neyden oluşur?",
+        "options": [
+          { "label": "Bir zincirden: kaynak → yükseltici → kablo → hoparlör → kabin; sesin kalitesini en zayıf halka belirler ve bu halka çoğu zaman hoparlör değildir", "verdict": "zincir", "correct": true, "explain": "Ses sistemi, anten gibi, bir zincirdir ve her halkası sesi belirler. Birinci halka kaynaktır: baş ünite, telefon ya da radyo. Kaynağın ürettiği şey küçük bir elektrik sinyalidir — hoparlörü sürecek gücü yoktur, yalnız sesin şeklini taşır. İkinci halka yükselticidir: bu sinyali hoparlörü hareket ettirecek güce çıkarır. Birçok araçta yükseltici baş ünitenin içindedir ve dışarıdan görünmez; donanımlı araçlarda ise ayrı bir kutu hâlinde bagajda ya da koltuk altındadır. Üçüncü halka kablodur ve genelde hiç düşünülmez — oysa ince, uzun ya da kötü bağlanmış bir kablo gücün bir kısmını yolda harcar. Dördüncü halka hoparlördür: elektriği havanın hareketine çeviren parça. Beşinci halka kabinin kendisidir ve en çok küçümsenendir — aynı hoparlör, sağlam bir kapıda ile titreşen bir kapıda tamamen farklı ses verir. Müşteri 'ses kötü' dediğinde hoparlör değiştirmek en pahalı ve en sık yanlış çıkan hamledir; doğru yaklaşım zinciri sırayla elemektir. Not: birçok araçta baş ünite ile hoparlörler arasında ayrıca bir işlemci vardır ve sesi araca göre şekillendirir." },
+          { "label": "Yalnız hoparlörden", "verdict": "hoparlor", "explain": "Hoparlör zincirin bir halkası; ondan önce kaynak, yükseltici ve kablo var." },
+          { "label": "Yalnız baş üniteden", "verdict": "unite", "explain": "Baş ünite sinyali üretir; sesi tek başına belirlemez." },
+          { "label": "Ses seviyesinden", "verdict": "seviye", "explain": "Seviye bir ayardır, sistemin kendisi değil." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Ses kötüyse ilk hamle hoparlör değiştirmek değil, zinciri sırayla elemek. En zayıf halka çoğu zaman kablo ya da kapının kendisi."
+    },
+    {
+      "id": 2,
+      "instruction": "İki hoparlörü ölçtün: kapı hoparlöründe 3,8 ohm, arka hoparlörde 7,6 ohm okudun. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.multimetre-aksesuar",
+        "unit": "ohm",
+        "acceptRange": [3.7, 3.9]
+      },
+      "camera": "aksesuar",
+      "hint": "7,6 eksi 3,8.",
+      "teachingNote": "3,8 ohmluk bu fark, iki hoparlörün farklı sınıfta olduğunu söylüyor ve bu ölçüm hoparlör işinin ilk aletidir. Hoparlörün bobini bir dirençtir ve multimetreyle okunan bu değer, hoparlörün üzerinde yazan nominal değerinden bir miktar düşük çıkar — çünkü multimetre duran bir bobini ölçer, oysa hoparlörün gerçek karakteri ses varken değişir. Yine de bu ölçüm üç şeyi hemen söyler. Birincisi, hoparlörün sağ olup olmadığı: bobini kopmuş bir hoparlör sonsuz direnç gösterir, yani multimetre hiçbir bağlantı görmez; kendi içinde birbirine değmiş bir bobin ise sıfıra yakın okunur ve bu, yükselticiyi zorlayan tehlikeli bir durumdur. İkincisi, iki hoparlörün aynı sınıfta olup olmadığı — farklı değerdeki hoparlörler aynı yükselticiden farklı güç çeker ve ses dengesi bozulur. Üçüncüsü, bağlantının doğru olup olmadığı: iki hoparlör yanlışlıkla birbirine paralel bağlanmışsa okunan değer beklenenin yarısına iner ve yükseltici gereğinden fazla zorlanır. Bir hoparlörün nominal değeri, dayanabileceği güç ve yükselticinin kaç ohma kadar inebileceği ürüne özgüdür; bu ders bir sınır vermiyor, cihazların kendi belgelerinden okunur."
+    },
+    {
+      "id": 3,
+      "instruction": "Baş üniteden çıkan iki farklı kablo grubunu inceliyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.rca-kablosu",
+        "question": "Sinyal kablosu ile hoparlör kablosunun farkı nedir?",
+        "options": [
+          { "label": "Sinyal kablosu sesin şeklini ve çok küçük bir gerilimi taşır; hoparlör kablosu hoparlörü hareket ettiren gücü taşır — ikisi aynı işi yapmaz ve birbirinin yerine kullanılmaz", "verdict": "sinyal-vs-guc", "correct": true, "explain": "Bu ayrım bütün ses montajının temelidir ve karıştırıldığında sistem ya hiç çalışmaz ya da cızırtıyla çalışır. Sinyal kablosu, kaynaktan yükselticiye giden yoldur ve üzerinde çok küçük bir gerilim vardır — sesin bilgisi burada taşınır, gücü değil. Küçük olduğu için de dış etkilere açıktır: yanından geçen bir güç kablosundaki değişim bu kabloya gürültü olarak biner. Bu yüzden sinyal kabloları korumalı yapılır, yani içteki iletkenin çevresi bir kılıfla sarılır ve bu kılıf gürültüyü karşılar. Hoparlör kablosu ise yükselticiden hoparlöre gider ve üzerinde gerçek güç vardır; korumaya ihtiyacı yoktur ama kesiti önemlidir, çünkü ince bir kablo gücün bir kısmını ısıya çevirir. İki pratik sonuç çıkar. Birincisi, sinyal kablosu ile güç kabloları aracın içinde uzun mesafe yan yana gitmez — araya mesafe konur ya da dik kesiştirilir; anten dersinde aynı kural anlatılmıştı ve bir sonraki iki derste ayrıntısıyla işlenecek. İkincisi, bir hoparlör çıkışını doğrudan yükselticinin sinyal girişine vermek hasar verir; bunun için özel bir dönüştürücü kullanılır. Kablo tipi, kesiti ve dönüştürücü seçimi cihaza özgüdür; bu ders bir değer vermiyor." },
+          { "label": "Aynı şeydir, ikisi de ses taşır", "verdict": "ayni", "explain": "Biri bilgi, diğeri güç taşır; birbirinin yerine kullanılmaz." },
+          { "label": "Sinyal kablosu daha kalındır", "verdict": "kalin", "explain": "Tersine: güç taşıyan kablo daha kalın olur." },
+          { "label": "Hoparlör kablosu korumalı olmalıdır", "verdict": "korumali", "explain": "Koruma sinyal kablosunda gerekir; güç kablosunda gerekmez." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Sinyal bilgiyi taşır, güç hareketi üretir. Bu iki kablo yan yana uzun mesafe gitmez."
+    },
+    {
+      "id": 4,
+      "instruction": "Sistemde ayrı bir yükseltici var mı diye bakıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.anfi",
+        "question": "Yükseltici ne yapar ve neden ayrı olur?",
+        "options": [
+          { "label": "Küçük sinyali hoparlörü sürecek güce çıkarır; ayrı olduğunda daha çok güç verebilir ve ısısını dağıtabilir, ama kendi beslemesini, şasesini ve 'açıl' ucunu ister", "verdict": "guc-ve-besleme", "correct": true, "explain": "Yükselticinin işi tek cümleyle anlatılır: kaynağın ürettiği küçük sinyali, hoparlörün konisini hareket ettirecek güce çevirmek. Baş ünitenin içinde de bir yükseltici vardır ama sınırlıdır, çünkü küçük bir kutunun içinde hem yer hem ısı dağıtma imkânı azdır. Ayrı bir yükseltici üç şey kazandırır: daha çok güç, ısıyı dağıtacak gövde ve kanal başına ayrı ayarlar. Bir bedeli vardır ve montajın zorluğu buradan gelir — ayrı yükseltici kendi beslemesini doğrudan aküden ister, bu kalın bir kablo demektir, ayrıca kendi şasesine ihtiyaç duyar ve baş üniteden 'açıl' komutu alacak ince bir uca bağlanır. Bu son uç sık atlanır: yükseltici o komutu almazsa hiç açılmaz ve sistem sessiz kalır; müşteri de 'ses gelmiyor' der. Yükselticinin kaç kanallı olduğu da işin planını değiştirir — her kanal bir hoparlör grubunu sürer ve subwoofer genelde ayrı bir kanal ister. Güç değerleri konusunda tek bir uyarı vardır ve satın alma kararını belirler: kutunun üzerindeki büyük rakam çoğu zaman en iyimser koşulda ölçülmüş anlık değerdir; işe yarayan değer, sürekli verilebilen güçtür. Hangi yükselticinin ne verdiği ürüne özgüdür ve belgesinden okunur." },
+          { "label": "Sesi güzelleştirir", "verdict": "guzel", "explain": "Güç verir; güzellik hoparlör, kabin ve ayarın işi." },
+          { "label": "Baş ünitenin yerine geçer", "verdict": "yerine", "explain": "Kaynağı değil, gücü sağlar." },
+          { "label": "Yalnız subwoofer için gerekir", "verdict": "sub", "explain": "Bütün kanallar için kullanılabilir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Yükselticinin 'açıl' ucu bağlanmazsa sistem hiç açılmaz. 'Ses gelmiyor' şikâyetinin klasik sebebi."
+    },
+    {
+      "id": 5,
+      "instruction": "Kapı hoparlörünü inceliyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.hoparlor-kapi",
+        "question": "Aynı hoparlör neden farklı kapılarda farklı ses veriyor?",
+        "options": [
+          { "label": "Hoparlör havayı iki yönde iter ve arka tarafından çıkan ses öne dolanıp kendi sesini bastırır; kapının sızdırmazlığı ve sağlamlığı bu yüzden sesin yarısını belirler", "verdict": "kabin", "correct": true, "explain": "Hoparlörün konisi ileri gittiğinde önündeki havayı iter, aynı anda arkasındaki havayı çeker. Yani her hoparlör iki ses üretir ve bu iki ses birbirinin tersidir. Arkadan çıkan ses hoparlörün kenarından dolanıp öne ulaşırsa öndeki sesi zayıflatır — en çok da kalın seslerde, çünkü uzun dalgalar kolayca dolanır. Bas sesin zayıf olmasının en yaygın sebebi budur ve hoparlörün kalitesiyle hiç ilgisi yoktur. Araçta hoparlörün arkası kapının içidir; kapı sacındaki delikler, açık kalan boşluklar ve yerinden çıkmış su bariyeri bu dolanmayı serbest bırakır. Bu yüzden iyi bir montajda hoparlörün arkası mümkün olduğunca ayrılır: hoparlörün oturduğu yüzey boşluk bırakmayacak biçimde kapatılır, kapı sacındaki büyük açıklıklar uygun malzemeyle örtülür ve su bariyeri eksiksiz yerine konur. İkinci etken kapının titremesidir: sac ince ve boşsa hoparlörün ürettiği enerji sacı titretmeye harcanır, ses hem zayıflar hem uğultulu olur; sac yüzeyine yapıştırılan sönümleyici malzeme bunu azaltır. Üçüncüsü hoparlörün nereye baktığıdır — kapı hoparlörü çoğu zaman ayaklara bakar ve yüksek sesler yolda kaybolur; bu yüzden birçok sistemde tiz hoparlör ayrı ve daha yukarıya konur. Su bariyerinin bozulmaması bu alanın söküm dersinde de vurgulanmıştı." },
+          { "label": "Hoparlörün gücü kapıya göre değişir", "verdict": "guc", "explain": "Hoparlör aynı gücü verir; kabin sonucu değiştirir." },
+          { "label": "Kablonun rengi etkiler", "verdict": "renk", "explain": "Renk yalnız işaretleme içindir." },
+          { "label": "Fark yoktur, aynı ses gelir", "verdict": "fark-yok", "explain": "Aynı hoparlör farklı kabinlerde belirgin farklı ses verir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Zayıf bas şikâyetinin en yaygın sebebi hoparlör değil, hoparlörün arkasının önüne dolanması."
+    },
+    {
+      "id": 6,
+      "instruction": "Arka hoparlör ve subwoofer bağlantısına bakıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.subwoofer",
+        "question": "Hoparlör bağlarken en çok yapılan hata nedir?",
+        "options": [
+          { "label": "Kutupların ters bağlanması: bir hoparlör diğerinin tersine hareket eder ve ikisi birbirinin sesini bastırır — özellikle kalın seslerde belirgin bir zayıflama olur", "verdict": "ters-kutup", "correct": true, "explain": "Her hoparlörün iki ucu vardır ve bunların bir yönü bulunur. Doğru bağlandığında bütün hoparlörler aynı anda ileri hareket eder; biri ters bağlandığında o hoparlör diğerleri havayı iterken çeker ve ikisi birbirinin işini bozar. Sonuç hoparlör arızasına benzemez — sistem çalışır, bütün hoparlörler ses verir ama kalın sesler kaybolur, ses ince ve boş duyulur ve müşteri neyin eksik olduğunu tarif edemez. Bu yüzden bu hata aylarca fark edilmeden kalabilir. Uygulamada üç kural işi çözer. Birincisi, hoparlör kablolarının iki teli farklıdır — biri işaretlidir, çizgilidir ya da farklı renktedir; montaj boyunca aynı tel aynı uca bağlanır ve bu disiplin bozulmaz. İkincisi, hoparlörün uçları da işaretlidir ve genelde bir uç diğerinden geniştir. Üçüncüsü, şüphe varsa basit bir kontrol vardır: hoparlöre çok kısa süreli ve çok küçük bir gerilim uygulandığında koni ya ileri ya geri hareket eder; bütün hoparlörlerde aynı yönde hareket olmalıdır. Aynı kural subwoofer için bir kat daha önemlidir, çünkü zaten kalın sesle uğraşır ve ters bağlanan bir subwoofer neredeyse hiç duyulmaz. Bir ek uyarı: iki hoparlörü aynı kanala keyfî bağlamak yükselticiyi zorlar ve bu, izin verilen sınır bilinmeden yapılmaz." },
+          { "label": "Kablonun kısa kesilmesi", "verdict": "kisa", "explain": "Sorun olur ama sesi bastırmaz." },
+          { "label": "Hoparlörün büyük seçilmesi", "verdict": "buyuk", "explain": "Yerleşim sorunu olur; ses bastırma sebebi değil." },
+          { "label": "Bağlantı yönü önemsizdir", "verdict": "onemsiz", "explain": "Ters bağlanan hoparlör diğerinin sesini bastırır." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Ters kutup arıza gibi görünmez: sistem çalışır ama bas kaybolur. Aylarca fark edilmeyebilir."
+    },
+    {
+      "id": 7,
+      "instruction": "Zinciri anladın. Müşterinin 'sesim kötü' şikâyetine dönüyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.hoparlor-arka",
+        "question": "Teşhis hangi sırayla yapılır?",
+        "options": [
+          { "label": "Ucuzdan pahalıya: ayarlar ve kaynak, kutup ve bağlantılar, kablo ve şase, kapının sızdırmazlığı, en son hoparlörün kendisi", "verdict": "ucuzdan", "correct": true, "explain": "Ses şikâyetlerinde sıra, bu alanın bütün derslerindeki mantığın aynısıdır: önce bedava olanı ele, sonra ucuz olanı, en son pahalı olanı. Birinci basamak ayarlardır ve şaşırtıcı sıklıkla sorunu çözer — ses dengesi bir tarafa kaymış, tiz ve bas ayarları uçlarda bırakılmış, telefonun kendi ses ayarı kısık ya da kaynak düşük kalitede çalıyor olabilir; kaynak değiştirilerek dinlenir. İkinci basamak bağlantılardır: kutupların doğru, soketlerin tam oturmuş, hiçbir telin gövdeye değmiyor olması kontrol edilir. Üçüncü basamak kablo ve şasedir — ince ya da kötü bağlanmış bir kablo gücü yolda harcar, kötü bir şase hem gücü düşürür hem gürültü üretir; bu, bir sonraki iki dersin konusu. Dördüncü basamak kapının kendisidir: hoparlörün arkası ayrılmış mı, su bariyeri yerinde mi, sac titriyor mu. Beşinci ve son basamak hoparlördür; buraya gelene kadar dört basamak elenmiş olur ve çoğu işte sorun zaten daha önce bulunur. Bir de dinleme disiplini vardır: her değişiklikten sonra aynı parça, aynı seviyede ve aynı koltuktan dinlenir — kulak hızla alışır ve peş peşe yapılan değişiklikler karşılaştırılamaz hâle gelir. Bu, ölçüm aletinin olmadığı yerde ustanın tek güvenilir yöntemidir." },
+          { "label": "Doğrudan hoparlör değiştirilir", "verdict": "hoparlor", "explain": "En pahalı hamleyle başlamak; dört basamak atlanmış olur." },
+          { "label": "Yükseltici eklenir", "verdict": "anfi", "explain": "Güç eklemek zayıf halkayı düzeltmez." },
+          { "label": "Baş ünite değiştirilir", "verdict": "unite", "explain": "Kaynak zincirin başı; önce ayar ve bağlantı elenir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Her değişiklikten sonra aynı parça, aynı seviye, aynı koltuk. Sırada ses kablolaması: kesit, sigorta ve şase."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Sistem çalışıyor, bütün hoparlörler ses veriyor ama bas kayıp. İlk şüphe nedir?",
+        "a": "ters-kutup",
+        "options": [
+          { "verdict": "ters-kutup", "label": "Bir hoparlör ters kutupla bağlanmış olabilir; hoparlörler birbirinin sesini bastırıyordur", "explain": "Ters bağlanan hoparlör diğerleri havayı iterken çeker ve iki ses birbirini götürür — en çok kalın seslerde. Sistem çalışır göründüğü için aylarca fark edilmez. Kontrol: kablonun işaretli teli montaj boyunca aynı uca bağlanmalı; şüphede koninin hareket yönü bütün hoparlörlerde aynı olmalıdır." },
+          { "verdict": "hoparlor-ariza", "label": "Hoparlörlerden biri arızalıdır", "explain": "Arızalı hoparlör ses vermez; burada hepsi ses veriyor." },
+          { "verdict": "anfi", "label": "Yükseltici zayıftır", "explain": "Güç eksikliği bütün sesi zayıflatır, yalnız bası değil." },
+          { "verdict": "ayar", "label": "Bas ayarı kısıktır", "explain": "Elenecek ilk basamak ama tek başına bu tabloyu açıklamaz." }
+        ]
+      },
+      {
+        "q": "'Sesim kötü' şikâyetinde teşhis sırası nedir?",
+        "a": "ucuzdan",
+        "options": [
+          { "verdict": "ucuzdan", "label": "Ayarlar ve kaynak → kutup ve bağlantılar → kablo ve şase → kapının sızdırmazlığı → en son hoparlör", "explain": "Ses dengesi kaymış, tiz-bas uçlarda bırakılmış ya da kaynak düşük kaliteli olabilir; bunlar bedava elenir. Sonra bağlantılar, sonra kablo ve şase, sonra kapı — hoparlörün arkası ayrılmamışsa bas zaten kaybolur. Hoparlör en son sırada. Her değişiklikten sonra aynı parça, aynı seviye, aynı koltuktan dinlenir." },
+          { "verdict": "hoparlor", "label": "Doğrudan hoparlör değiştirilir", "explain": "En pahalı hamleyle başlamak." },
+          { "verdict": "anfi", "label": "Yükseltici eklenir", "explain": "Güç eklemek zayıf halkayı düzeltmez." },
+          { "verdict": "unite", "label": "Baş ünite değiştirilir", "explain": "Önce ayar ve bağlantı elenir." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2'deki 3,8 ohm ve 7,6 ohm SENARYO okumalarıdır; istenen FARKTIR (3,8 ohm) ve ders bir hoparlörün nominal empedansını ya da kabul edilebilir aralığını iddia etmiyor.",
+    "sourceRequired": "Hoparlör nominal empedansı, dayanabileceği güç, yükselticinin inebileceği en düşük empedans, sürekli güç değerleri, kablo kesiti ve sönümleme malzemesi bilinçle VERİLMEDİ; hepsi ürüne özgüdür ve cihazların kendi belgelerinden okunur.",
+    "kapsam": "Fabrika ses işlemcisi ve haberleşme hattı üzerinden çalışan ses sistemlerine müdahale KAPSAM DIŞIDIR — araç ağı bu alanın kırmızı çizgisi. Akustik ölçüm, kabin ayarı ve yarışma seviyesi kurulum kapsam dışı.",
+    "kaynak": "Ses dersleri MEB çerçeve programının aksesuar modülüyle birebir eşleşmiyor; bu aşama proje kararıyla kuruldu. Besleme, şase ve kablo güzergâhı bilgisi bu alanın aşama 0 derslerinden geliyor.",
+    "reviewedByMechanic": false
+  }
+}

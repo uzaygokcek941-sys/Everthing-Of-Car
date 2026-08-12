@@ -1,0 +1,180 @@
+{
+  "id": "lastik.somun-torku",
+  "area": "lastik-tekerlek",
+  "stage": 0,
+  "title": "Bijon Somunu: Yıldız Sırası, Kuru Diş ve Tork",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 30,
+  "prerequisites": ["lastik.guvenlik-kaldirma"],
+  "learningGoals": [
+    "Yıldız sırasının jantı neden düzgün oturttuğunu açıklamak",
+    "Havalı tabancanın neden son sıkma aleti olmadığını ölçüyle görmek",
+    "Bijon dişine yağ sürülmemesinin sebebini bilmek"
+  ],
+
+  "safety": [
+    { "rule": "Son sıkma araç yere indikten sonra yapılır", "why": "Havadaki tekerleğe uygulanan sıkma kuvveti aracı sehpa üzerinde iter; ayrıca tekerlek döndüğü için tork anahtarı doğru okumaz", "blocksStart": true },
+    { "rule": "Hasarlı, ezik dişli ya da paslı somun tekrar kullanılmaz", "why": "Hasarlı diş doğru torkta doğru germe üretmez; sıkılmış görünürken gevşek kalır", "blocksStart": true },
+    { "rule": "Tork anahtarı sökmede kullanılmaz", "why": "Sökme kuvveti anahtarın ayar mekanizmasını bozar; bozuk anahtar yanlış değeri doğruymuş gibi gösterir", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.bijon-anahtari", "label": "Bijon anahtarı", "required": true },
+    { "id": "tool.tork-anahtari", "label": "Tork anahtarı", "required": true },
+    { "id": "tool.tel-firca", "label": "Tel fırça", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Tekerlek göbeğe takıldı. Beş somun da elle çevrilerek yerine oturdu.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.bijon.1",
+        "question": "Somunlar hangi sırayla sıkılır?",
+        "options": [
+          { "label": "Yıldız sırasıyla: her seferinde karşıdaki somuna geçilerek", "verdict": "yildiz", "correct": true, "explain": "Jant, göbeğe tam paralel oturmak zorundadır. Somunlar sırayla, yani saat yönünde birbiri ardına sıkılırsa ilk sıkılan somun jantı kendi tarafından çeker ve jant o noktadan göbeğe yapışırken karşı taraf hafifçe açık kalır. Sonraki somunlar bu eğik oturmayı düzeltmez, üzerine kilitler. Sonuç görünmez ama ölçülebilir bir salgıdır: tekerlek dönerken hafifçe yalpalar, direksiyonda titreşim olarak hissedilir ve zamanla somunlar gevşer. Yıldız sırasında ise her somundan sonra karşı tarafa geçilir; jant her adımda iki karşıt noktadan eşit çekilir ve göbeğe paralel iner. Beş somunlu bir tekerlekte sıra bir somun atlayarak ilerler, dörtlüde çapraz geçilir. Sıra yalnız sıkmada değil gevşetmede de aynıdır." },
+          { "label": "Saat yönünde sırayla, birinden başlayıp devam ederek", "verdict": "sirayla", "explain": "Jant tek taraftan çekilir ve eğik oturur; sonuç titreşim ve gevşeyen somundur." },
+          { "label": "Önce hepsi elle, sonra rastgele sırayla", "verdict": "rastgele", "explain": "Elle oturtmak doğru, ama sıkma sırası rastgele olamaz — jantın paralel inmesi sıraya bağlıdır." },
+          { "label": "Sıranın önemi yok, sonunda hepsi aynı torkta olacak", "verdict": "onemsiz", "explain": "Son tork aynı olsa da jantın hangi konumda kilitlendiği sıraya bağlıdır." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Aynı mantık silindir kapağı, kampana ve flanşlarda da geçerlidir: yüzeyi paralel oturtman gereken her yerde sıkma sırası vardır."
+    },
+    {
+      "id": 2,
+      "instruction": "Somunları yıldız sırasıyla ön sık: her birine karşıdakine geçerek birer tur.",
+      "interaction": {
+        "type": "rotate",
+        "target": "part.bijon.1",
+        "direction": "cw",
+        "turns": 5,
+        "tool": "tool.bijon-anahtari",
+        "requiresGesture": true
+      },
+      "camera": "tekerlek",
+      "hint": "Sıkma yönü saat yönü.",
+      "commonMistake": {
+        "if": "ters-yon",
+        "feedback": "Ters çeviriyorsun. Bijon somunları saat yönünde sıkılır — sol taraf tekerleklerinde de aynıdır; ters dişli bijon çok eski araçlarda kalmıştır."
+      },
+      "teachingNote": "Ön sıkma tam tork değildir: amacı jantı göbeğe paralel oturtmaktır. Tam tork araç yere indikten sonra, yine yıldız sırasıyla uygulanır."
+    },
+    {
+      "id": 3,
+      "instruction": "Yanındaki usta somunları havalı tabancayla sıkıyor ve \"tabanca zaten ayarlı\" diyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.bijon-anahtari",
+        "question": "Bu doğru mu?",
+        "options": [
+          { "label": "Hayır: tabanca sökme ve ön sıkma aletidir, uyguladığı tork hava basıncına ve darbe sayısına göre değişir", "verdict": "tabanca-degil", "correct": true, "explain": "Havalı tabanca torku ölçmez, darbe üretir. Uyguladığı gerçek değer hattaki hava basıncına, hortum uzunluğuna, aletin yağlanmasına, tetiği ne kadar basılı tuttuğuna ve dişin durumuna göre değişir; aynı tabanca aynı araçta beş somuna beş farklı tork uygulayabilir. Bu, iki yönde de tehlikelidir. Az sıkılan somun yolda gevşer ve gevşeyen tek somun kalanların yükünü artırıp zincirleme kopmaya götürür. Fazla sıkılan somun ise saplamayı esneme sınırının ötesine geçirir; saplama kalıcı olarak uzar, bir dahaki sökmede kopar ya da diş sıyırır. Fazla sıkma ayrıca fren diskini gererek eğer ve frende titreşim üretir. Tabancanın yeri vardır — sökme ve somunu hızlıca yerine getirme — ama son sıkma her zaman tork anahtarıyla yapılır." },
+          { "label": "Doğru, tabancalar fabrikada ayarlanır", "verdict": "fabrika-ayari", "explain": "Tabancanın çıkışı hava basıncı ve darbe sayısıyla değişir; sabit bir değeri yoktur." },
+          { "label": "Doğru, tork anahtarı yalnız motor işlerinde kullanılır", "verdict": "yalniz-motor", "explain": "Tekerleği araca bağlayan bağlantı en kritik bağlantılardan biridir." },
+          { "label": "Yanlış ama önemsiz; somun zaten kendini oturtur", "verdict": "kendini-oturtur", "explain": "Somun kendini oturtmaz; germe kuvveti uygulanan torka bağlıdır." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bir alete güvenip güvenmemenin ölçüsü şudur: uyguladığı büyüklüğü ölçüyor mu, yoksa yalnız üretiyor mu?"
+    },
+    {
+      "id": 4,
+      "instruction": "İddiayı ölçtün. Aynı araçta tork anahtarıyla sıkılmış somun 112 Nm'de gevşedi; hemen yanındaki, havalı tabancayla sıkılmış somun 197 Nm'de gevşedi. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.bijon.2",
+        "unit": "Nm",
+        "acceptRange": [84, 86]
+      },
+      "camera": "tekerlek",
+      "hint": "197 eksi 112.",
+      "teachingNote": "Bu 85 Nm'lik fark tek bir tekerlekte, iki komşu somun arasında çıktı. Hiçbiri doğru değerin ne olduğunu söylemiyor — o değer araca özgüdür ve servis kitabından okunur. Söylediği şey başka: tabanca tutarlı değil. Tutarsız bir alet, doğru değeri bilsen bile onu tutturamaz."
+    },
+    {
+      "id": 5,
+      "instruction": "Somunlardan biri paslı. Yanındaki çırak dişe gres sürmeyi öneriyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.bijon.3",
+        "question": "Dişe yağ ya da gres sürülür mü?",
+        "options": [
+          { "label": "Hayır — üretici açıkça belirtmedikçe diş kuru sıkılır; yağlı dişte aynı tork çok daha fazla germe üretir", "verdict": "kuru-sik", "correct": true, "explain": "Tork, uygulanan döndürme momentidir; asıl istenen ise saplamanın gerilmesi, yani germe kuvvetidir. İkisi arasındaki bağı sürtünme kurar: uygulanan momentin büyük kısmı dişteki ve somun oturma yüzeyindeki sürtünmeyi yenmek için harcanır, geri kalanı saplamayı gerer. Dişe yağ sürüldüğünde sürtünme düşer ve aynı tork değerinde saplamaya çok daha fazla germe geçer — anahtar doğru değerde kliklese bile saplama aşırı gerilmiş olur, esneme sınırını aşar ve ya hemen ya da ilk sökmede kopar. Bu yüzden kural nettir: üretici yağlı sıkma öngörmedikçe diş kuru olur. Kirli ya da hafif paslı diş yağlanarak değil, tel fırçayla temizlenerek düzeltilir; diş ezilmişse ya da pas derinse somun ve gerekiyorsa saplama değiştirilir. Jantın göbeğe oturduğu yüzeyin temizliği ayrı bir konudur ve orası da kuru temizlenir." },
+          { "label": "Evet, sürülür — sıkması kolaylaşır ve pas yapmaz", "verdict": "gres-sur", "explain": "Kolaylaşması sorunun kendisidir: sürtünme düşünce aynı tork saplamayı aşırı gerer." },
+          { "label": "Yalnız somunun oturma yüzeyine sürülür", "verdict": "yuzeye-sur", "explain": "Oturma yüzeyi de sürtünmenin bir parçasıdır; yağlanırsa aynı sonuç çıkar." },
+          { "label": "Pas sökücü sıkılıp bırakılır, sonra sıkılır", "verdict": "pas-sokucu", "explain": "Pas sökücü sökmede kullanılır; sıkmadan önce diş kuru ve temiz olmalıdır." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Tork değeri her zaman belirli bir sürtünme durumu için yayınlanır. O durumu değiştiren her şey — yağ, gres, kaplama, pas — değeri geçersiz kılar."
+    },
+    {
+      "id": 6,
+      "instruction": "Araç yere indirildi. Tork anahtarını aracın servis kitabındaki değere ayarla ve yıldız sırasıyla son sıkmayı yap.",
+      "interaction": {
+        "type": "rotate",
+        "target": "part.bijon.1",
+        "direction": "cw",
+        "turns": 2,
+        "tool": "tool.tork-anahtari",
+        "requiresGesture": true
+      },
+      "camera": "tekerlek",
+      "commonMistake": {
+        "if": "ters-yon",
+        "feedback": "Tork anahtarı sıkma yönünde kullanılır. Sökmede kullanmak ayar mekanizmasını bozar."
+      },
+      "teachingNote": "Anahtar klikledikten sonra durulur; \"bir tık daha\" diye zorlamak değeri aşar. Klik sesi bir tavsiye değil, bir sınırdır. Doğru tork değeri araca özgüdür ve bu derste bilinçle verilmemiştir: servis kitabından ya da araç etiketinden okunur. Aynı jant başka bir araca takıldığında değer de değişir."
+    },
+    {
+      "id": 7,
+      "instruction": "Tekerlek takıldı, tork uygulandı. Müşteriye teslim ediyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.jant",
+        "question": "Müşteriye ne söylenir?",
+        "options": [
+          { "label": "Kısa bir yol sonrasında somunların tekrar kontrol edilmesi gerektiği — oturma sırasında germe bir miktar düşer", "verdict": "tekrar-kontrol", "correct": true, "explain": "Yeni takılan bir tekerlekte jant ile göbek arasındaki yüzeyler ilk kilometrelerde tam olarak oturur; yüzeydeki mikroskobik pürüzler ezilir, boya ve pas kalıntıları sıkışır. Bu oturma, saplamadaki germeyi bir miktar düşürür — somun gevşemiş gibi görünmez ama gerçek germe azalmıştır. Bu yüzden yeni takılan tekerleğin somunları kısa bir yol sonrasında tork anahtarıyla tekrar kontrol edilir. Bu kontrol bir kusurun kabulü değil, işin normal parçasıdır ve müşteriye böyle anlatılır. Aynı sebeple jantın göbeğe oturduğu yüzey takmadan önce temizlenir: yüzeyde kalan pas ve kir ne kadar azsa oturma kaybı da o kadar az olur." },
+          { "label": "Bir şey söylemeye gerek yok, tork uygulandı", "verdict": "gerek-yok", "explain": "Tork doğru uygulansa da ilk kilometrelerdeki oturma germeyi düşürür." },
+          { "label": "Somunları kendisi ara ara elle kontrol etsin", "verdict": "elle-kontrol", "explain": "Elle kontrol germeyi ölçmez; kontrol tork anahtarıyla yapılır." },
+          { "label": "Bir hafta sonra tabancayla sıkılsın", "verdict": "tabancayla", "explain": "Tabanca son sıkma aleti değildir; kontrol de tork anahtarıyla yapılır." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bu ders bir sayı öğretmiyor, bir zincir öğretiyor: temiz yüzey → elle oturtma → yıldız sırası → yerde son tork → kısa yol sonrası kontrol. Zincirin bir halkası atlanınca diğerlerinin hepsi doğru yapılsa da tekerlek gevşeyebilir."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Somunlar neden yıldız sırasıyla sıkılır?",
+        "a": "paralel-otursun",
+        "options": [
+          { "verdict": "paralel-otursun", "label": "Jant göbeğe paralel insin diye; sırayla sıkılırsa bir taraftan çekilir ve eğik oturur", "explain": "İlk sıkılan somun jantı kendi tarafından çeker. Sırayla devam edilirse bu eğiklik düzelmez, üzerine kilitlenir ve tekerlek dönerken yalpalar — direksiyonda titreşim, zamanla da gevşeyen somun olarak ortaya çıkar. Yıldız sırasında her somundan sonra karşı tarafa geçilir, jant iki karşıt noktadan eşit çekilir ve paralel iner." },
+          { "verdict": "hizli", "label": "Daha hızlı olduğu için", "explain": "Hızla ilgisi yok; jantın nasıl oturduğuyla ilgili." },
+          { "verdict": "esit-tork", "label": "Yalnız somunlar eşit torka gelsin diye", "explain": "Son tork sırayla sıkmada da eşit olabilir; belirleyici olan jantın hangi konumda kilitlendiği." },
+          { "verdict": "alet", "label": "Anahtarın hareket alanı için", "explain": "Erişim değil, jantın paralel oturması sebep." }
+        ]
+      },
+      {
+        "q": "Bijon dişine gres sürmek neden yanlıştır?",
+        "a": "surtunme-duser",
+        "options": [
+          { "verdict": "surtunme-duser", "label": "Sürtünme düşer ve aynı tork değerinde saplamaya çok daha fazla germe geçer; saplama aşırı gerilir", "explain": "Uygulanan torkun büyük kısmı sürtünmeyi yenmek için harcanır, kalanı saplamayı gerer. Yağlanan dişte sürtünme düştüğü için aynı tork değerinde germe belirgin biçimde artar — anahtar doğru değerde kliklese bile saplama esneme sınırını aşabilir ve ilk sökmede kopar. Üretici yağlı sıkma öngörmedikçe diş kuru sıkılır; kirli diş yağlanarak değil temizlenerek düzeltilir." },
+          { "verdict": "kir-toplar", "label": "Gres kir toplar", "explain": "Doğru ama asıl sebep değil; asıl sebep germe kuvvetinin değişmesi." },
+          { "verdict": "gevser", "label": "Yağlı somun kendiliğinden gevşer", "explain": "Asıl risk gevşemesi değil, aynı torkta aşırı gerilmesi." },
+          { "verdict": "yanlis-degil", "label": "Yanlış değil, yaygın bir uygulamadır", "explain": "Yaygın olması doğru olduğunu göstermez; tork değeri kuru diş için yayınlanır." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 4'teki 112 Nm ve 197 Nm SENARYO okumalarıdır ve hiçbiri doğru sıkma torku DEĞİLDİR. Öğrenciden istenen FARKTIR (85 Nm); dersin gösterdiği şey tabancanın tutarsızlığıdır, bir hedef değer değil.",
+    "sourceRequired": "Bijon sıkma torku araca özgüdür ve bu derste bilinçle VERİLMEDİ. Adım 6 'servis kitabındaki değere ayarla' diyor; sabit bir sayı öğretilseydi öğrenci onu her araca uygulardı ve bu tehlikeli olurdu. Bu yüzden adım rotate-to-torque değil rotate ile yazıldı: hedef değer olmadığı için tolerans da tanımlanamaz.",
+    "kapsam": "Saplama değişimi, kırık saplama çıkarma ve diş tamiri bu derste yok — ayrı işlerdir. Bijon somunu tipleri (konik, küresel, düz pullu) jant dersinde ele alınır.",
+    "reviewedByMechanic": false
+  }
+}

@@ -1,0 +1,177 @@
+{
+  "id": "kaporta.gocuk-analizi",
+  "area": "kaporta",
+  "stage": 3,
+  "title": "Göçüğün Merkezi ve Kilitlenmesi: Nereden Başlanır",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 40,
+  "prerequisites": ["kaporta.sokme-takma"],
+  "learningGoals": [
+    "Göçüğü tutan şeyin merkez değil çevresindeki kilitlenme olduğunu görmek",
+    "Onarımın darbenin geliş sırasının tersine ilerlediğini bilmek",
+    "Yüzeyi ışıkla ve elle okumayı, gözle değil"
+  ],
+
+  "safety": [
+    { "rule": "Göçük taşıyıcı bir parçadaysa düzeltmeye başlanmaz", "why": "Direk, eşik ve taşıyıcı ayak üzerindeki deformasyon kılavuz olmadan düzeltilmez; çelik sınıfı ve ısı yasağı araca özgüdür", "blocksStart": true },
+    { "rule": "Keskin katlanma ve çatlak bulunan bölge düzeltme değil değerlendirme konusudur", "why": "Katlanmış metal şekil değiştirme kapasitesini büyük ölçüde tüketmiştir; zorlanması çatlakla biter", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.cizgi-lambasi", "label": "Çizgi lambası", "required": true },
+    { "id": "tool.olcum-mastari", "label": "Ölçüm mastarı", "required": true },
+    { "id": "tool.isaret-kalemi", "label": "İşaret kalemi", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Çamurlukta yayvan bir göçük var. Çizgi lambasını yüzeye eğik tutuyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.gocuk-bolgesi",
+        "question": "Işık göçüğü okumaya nasıl yardım eder?",
+        "options": [
+          { "label": "Yüzeye eğik gelen düz çizgiler, sacın her bozukluğunda kırılır: çizginin nerede büküldüğü göçüğün gerçek sınırını, nerede sıkıştığı ise kilitlenmiş bölgeyi gösterir", "verdict": "cizgi-isigi", "correct": true, "explain": "Göçüğü doğrudan bakarak değerlendirmek bu alanda en yaygın yanılgıdır, çünkü göz mutlak yüksekliği ölçmez; yalnız yansımaları yorumlar. Düz bir yüzeye eğik açıyla düşen paralel çizgiler bu yansımaları okunur hâle getirir: yüzey düzse çizgiler düz ve eşit aralıklı kalır, çukurlaşma varsa çizgiler o bölgede içe doğru bükülür, kabarma varsa dışa taşar, keskin bir kırılma varsa çizgi orada kopar gibi görünür. Bunun onarımdaki değeri şudur: göçüğün gözle görünen sınırı gerçek sınırı değildir. Gözle avuç içi kadar bir çukur görürken, çizgi lambası altında bozulmanın çok daha geniş bir alana yayıldığını fark edersin — çünkü metal çökerken çevresini de kendine doğru çeker. Onarıma o dar alandan başlamak, geniş bölgeyi olduğu gibi bırakmak demektir. İkinci fayda, ilerlemeyi kontrol etmektir: her hamleden sonra aynı ışıkla bakılır ve çizgilerin düzelmesi izlenir; 'bitti' kararı bu şekilde verilir, gözle değil. Üçüncü fayda, ışığın açısını değiştirmenin farklı kusurları görünür kılmasıdır — bu yüzden yüzeye tek açıdan bakılmaz. Işıkla birlikte el de kullanılır: avuç içi ince bir bez üzerinden yüzeyde gezdirilir ve gözün göremediği dalga elde hissedilir. Işık nerede olduğunu, el ne kadar olduğunu söyler." },
+          { "label": "Işık yalnız aydınlatmak içindir", "verdict": "aydinlat", "explain": "Çizgi lambası aydınlatmaz, yüzey bozukluğunu ölçülebilir hâle getirir." },
+          { "label": "Göçük en iyi doğrudan bakarak değerlendirilir", "verdict": "dogrudan", "explain": "Göz yalnız yansımayı yorumlar; sınırı yanlış okur." },
+          { "label": "Işık yalnız boyadan sonra kullanılır", "verdict": "boyadan-sonra", "explain": "Asıl faydası onarım sırasında ilerlemeyi görmektir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Işık nerede olduğunu, el ne kadar olduğunu söyler. İkisi olmadan 'bitti' kararı verilmez."
+    },
+    {
+      "id": 2,
+      "instruction": "Çizgi lambası altında ölçtün: gözle görünen çukurun çapı 120 mm, bozulmanın gerçek dış sınırı 180 mm. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.olcum-mastari",
+        "unit": "mm",
+        "acceptRange": [55, 65]
+      },
+      "camera": "kaporta",
+      "hint": "180 eksi 120.",
+      "teachingNote": "60 milimetre — yani göçüğün etrafında, gözle hiç fark edilmeyen 3 santimlik bir kuşak daha var. Bu kuşak bu dersin ana konusu: metal çökerken kendini çeker ve çevresinde gerilmiş, sıkışmış bir halka bırakır. Usta diline 'kilitlenme' diye geçer ve göçüğü yerinde tutan asıl şey odur. Çukurun ortasına vurup merkezi kaldırmaya çalışmak, bu halkayı olduğu gibi bırakmak demektir; merkez bir türlü tam gelmez, her denemede metal biraz daha sertleşir ve sonunda ya çatlak ya kalın macun çıkar. Doğru sıra tersidir: önce kilitlenmiş kuşak çözülür, merkez büyük ölçüde kendiliğinden yükselir, geri kalan ince fark en sonda alınır. Ölçümün ikinci faydası kapsam belirlemektir: onarım, boya ve rötuş alanı 120 milimetrelik çukura göre değil 180 milimetrelik gerçek sınıra göre planlanır. Dar alan üzerinden verilen bir fiyat, işin ortasında büyür. Üçüncü faydası kayıttır — hasar okuma dersindeki ilke burada da geçerli: ölçülen ve yazılan bir sınır, sonradan 'bu çizik de sizde mi oldu' tartışmasını bitirir. Bu iki sayı senaryo okumasıdır; ders hiçbir araç için göçük boyutu ya da kabul sınırı iddia etmiyor."
+    },
+    {
+      "id": 3,
+      "instruction": "Kilitlenmiş kuşağı işaretledin. Şimdi nereden başlayacağına karar vereceksin.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-camurluk",
+        "question": "Onarım hangi sırayla ilerler?",
+        "options": [
+          { "label": "Darbenin geliş sırasının tersine: en son deforme olan yer ilk düzeltilir, yani dıştaki kilitlenmiş kuşaktan başlanıp merkeze doğru gidilir", "verdict": "ters-sira", "correct": true, "explain": "Bir göçük tek anda değil, bir sıra hâlinde oluşur. Darbe önce yüzeye değer, metal o noktada içeri gider, sonra çevresi bu hareketi izleyerek gerilir ve en son dış kuşak sıkışıp kilitlenir. Onarım bu sıranın tam tersini izler: en son oluşan deformasyon ilk çözülür. Sebebi mekaniktir — dıştaki kilitlenmiş kuşak, içerideki metalin geri dönmesi için gereken hareket alanını tutmaktadır; o çözülmeden merkez zorlanırsa metal gidecek yer bulamaz ve gerilir. Kuşak çözüldüğünde ise sac büyük ölçüde kendi hafızasıyla geri gelir, çünkü metal çoğu zaman ilk hâline dönmek ister. Bu ilkenin pratik karşılığı şudur: iş, çukurun ortasından değil kenarından başlar ve daireler hâlinde içe doğru ilerler. Her turda küçük hamleler yapılır, ara ara ışıkla ve elle kontrol edilir. Aceleci usta ortadan başlar ve iki şey görür: merkez inatla geri gelmez ve çevrede yeni dalgalar oluşur. Bir de sınır bilgisi vardır: bazı göçükler bu sırayla bile tam düzelmez. Keskin bir kenarla katlanmış, kıvrım hattını ezmiş ya da metalin şekil değiştirme kapasitesini tüketmiş hasarlarda doğru cevap ısrar değil, yöntem değiştirmek ya da parça değişimini konuşmaktır." },
+          { "label": "En derin noktadan başlanır", "verdict": "merkez", "explain": "Kilitlenme çözülmeden merkez zorlanırsa metal gerilir." },
+          { "label": "Rastgele, farkı yok", "verdict": "rastgele", "explain": "Sıra deformasyonun oluşum sırasıyla belirlenir." },
+          { "label": "Boyası bozuk yerden başlanır", "verdict": "boya", "explain": "Boya durumu ayrı bir konu; sıra deformasyona göre." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Onarım darbenin tersine ilerler: en son deforme olan yer ilk düzeltilir. Kenardan içe, daireler hâlinde."
+    },
+    {
+      "id": 4,
+      "instruction": "Göçüğün bir kenarı, panelin karakter çizgisinin — keskin kıvrım hattının — üzerinden geçiyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.arka-kapi-paneli",
+        "question": "Kıvrım hattındaki hasar neden ayrı bir zorluk?",
+        "options": [
+          { "label": "Kıvrım hattı panelin en sert yeridir: metal orada bükülerek sertleştirilmiştir, ezildiğinde kendi hafızasını kaybeder ve düz bir yüzey gibi geri gelmez — hattın düzgünlüğü ayrıca gözle hemen fark edilir", "verdict": "karakter-cizgisi", "correct": true, "explain": "Panellerin üzerinden geçen keskin kıvrımlara karakter çizgisi denir ve iki işi birden yaparlar: panele görsel bir kimlik verirler ve onu sertleştirirler. Düz bir sac kolay esner; aynı sacı bir hat boyunca bükersen o hat boyunca çok daha sert olur — bu yüzden geniş paneller karakter çizgileriyle desteklenir. Onarım açısından bu iki sonuç doğurur. Birincisi, kıvrım hattındaki metal zaten bir kez kalıcı olarak şekillendirilmiştir; şekil değiştirme kapasitesinin bir kısmını fabrikada harcamıştır. Üzerine gelen bir ezilme, kalan kapasiteyi de tüketir ve o bölge düz bir yüzey gibi 'geri gelmez'; zorlandığında çatlamaya en yakın yer burasıdır. İkincisi, sonuç acımasızca görünürdür. İnsan gözü düz yüzeydeki hafif bir dalgayı bağışlar ama kesintisiz bir çizginin en küçük sapmasını hemen yakalar — çünkü çizgi boyunca ışık keskin bir yansıma üretir ve o yansıma bozuk yerde kırılır. Bu yüzden kıvrım hattı geçen göçükler daha uzun sürer, daha az hamle affeder ve çoğu zaman parça değişimi ile onarım arasındaki kararın belirleyicisi olur. Uygulamada hat, kendi doğrultusunda ve iki ucundaki sağlam bölümlere bakılarak çalışılır; hattın hizası ışıkla sürekli kontrol edilir. Hangi hasarın onarılıp hangisinin değişeceği araca ve panele özgüdür; bu ders bir sınır vermiyor." },
+          { "label": "Fark etmez, düz yüzey gibi çalışılır", "verdict": "duz-gibi", "explain": "Kıvrım hattı daha serttir ve hafızasını kaybeder." },
+          { "label": "Daha kolaydır, sert olduğu için tutar", "verdict": "kolay", "explain": "Sertlik burada avantaj değil; kapasite tükenmiştir." },
+          { "label": "Macunla düzeltilir", "verdict": "macun", "explain": "Hat boyunca macun ışıkta hemen belli olur." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Göz düz yüzeydeki dalgayı bağışlar, kesintisiz bir çizginin en küçük sapmasını bağışlamaz."
+    },
+    {
+      "id": 5,
+      "instruction": "Göçüğün ortasında keskin, katlanmış bir kırık var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.zimpara-bolgesi",
+        "question": "Katlanmış metal ne anlama gelir?",
+        "options": [
+          { "label": "O bölge şekil değiştirme kapasitesini büyük ölçüde tüketmiştir: açılsa bile ilk sertliğinde ve düzlüğünde olmaz, zorlanırsa çatlar — burada karar onarım ile değişim arasındadır", "verdict": "katlanma", "correct": true, "explain": "Yayvan bir çökme ile keskin bir katlanma aynı şey değildir ve ikisini ayırmak bu dersin en pratik çıktısıdır. Yayvan çökmede metal geniş bir alanda azar azar esnemiştir; kapasitesinin küçük bir kısmını harcamıştır ve doğru yöntemle büyük ölçüde geri gelir. Katlanmada ise deformasyon dar bir hat üzerinde toplanmıştır: o hat boyunca metal neredeyse kapasitesinin tamamını kullanmış, sertleşmiş ve incelmiştir. Açmaya çalıştığında üç şeyden biri olur — ya açılmaz, ya açılır ama o hat kalıcı bir iz olarak kalır, ya da çatlar. Bu yüzden katlanma gördüğün anda soru değişir: 'nasıl düzeltirim' değil, 'bu düzeltilmeli mi'. Karar üç girdiye bakar. Malzeme: yüksek mukavemetli çelikte ve alüminyumda katlanma neredeyse her zaman değişim demektir. Konum: katlanma taşıyıcı bir parçadaysa karar zaten senin değil kılavuzundur. Ekonomi: uzun bir uğraşın sonunda ancak orta kalitede çıkacak bir onarım, çoğu zaman parça değişiminden pahalıya gelir ve müşteri farkı yıllar boyunca görür. Bir de dürüstlük tarafı vardır: katlanmayı kalın macunla düzleştirip boyamak teslim anında kusursuz görünür — ve tam da bu yüzden en çok yapılan hatadır. O macun zamanla çatlar, nem alır ve altında korozyon başlar." },
+          { "label": "Sorun değil, açılır", "verdict": "acilir", "explain": "Açılsa bile ilk sertliğinde olmaz; çatlama riski yüksektir." },
+          { "label": "Isıtılarak yumuşatılır", "verdict": "isit", "explain": "Malzeme sınıfı bilinmeden ısı uygulanmaz." },
+          { "label": "Macunla düzleştirilir", "verdict": "macun", "explain": "Kalın macun çatlar, nem alır ve korozyon başlatır." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Katlanma görünce soru değişir: 'nasıl düzeltirim' değil, 'bu düzeltilmeli mi'."
+    },
+    {
+      "id": 6,
+      "instruction": "Onarım ilerledi. Yüzey gözle düzgün görünüyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kaput-kaporta",
+        "question": "'Bitti' kararı nasıl verilir?",
+        "options": [
+          { "label": "Üç kontrol birlikte: çizgi lambasıyla farklı açılardan bakmak, elle ince bez üzerinden gezmek ve derinliği ölçmek — biri tek başına yeterli değildir", "verdict": "uc-kontrol", "correct": true, "explain": "Bu alanda 'bitti' demek bir kanaat değil, bir kontrol listesidir; çünkü üç yöntemin her biri diğerinin göremediğini görür. Çizgi lambası yüzeyin genel geometrisini verir ve özellikle uzun dalgaları yakalar — ama tek açıdan bakmak yanıltır, çünkü bazı bozukluklar ancak belirli bir açıda yansımayı kırar; bu yüzden lamba ve baş açısı değiştirilerek en az iki farklı yönden bakılır. El, gözün ayırt edemediği küçük ve yerel farkları bulur: avuç içi ince bir bez üzerinden yüzeyde gezdirildiğinde birkaç yüz mikronluk bir tümsek bile hissedilir; bez, parmak uçlarının sürtünmeyle takılmasını engelleyip hassasiyeti artırır. Ölçüm ise sayı verir ve tartışmayı bitirir: kalan derinlik ne kadar, dolgu ile kapatılacak fark ne. Bu üçlünün pratikteki karşılığı şudur — yüzeyi 'iyi görünüyor' diye bırakan usta, kusuru astar ve boya aşamasında bulur. Ve bu en pahalı bulma zamanıdır, çünkü o noktada geri dönmek demek kat kat sökmek, yeniden zımparalamak ve yeniden boyamak demektir. Boya kusurları dersinde göreceğin gibi, boyanın altındaki her dalga boyadan sonra daha da belirgin çıkar: parlak yüzey kusuru gizlemez, büyütür. Kabul edilebilir kalan sapma ve dolgu kalınlığı iş tanımına ve ürüne bağlıdır; bu ders bir sınır vermiyor." },
+          { "label": "Gözle düzgün görünüyorsa bitmiştir", "verdict": "goz", "explain": "Parlak boya kusuru gizlemez, büyütür." },
+          { "label": "Elle kontrol tek başına yeter", "verdict": "el", "explain": "El yerel farkı bulur, uzun dalgayı ışık gösterir." },
+          { "label": "Macun aşamasında zaten düzelir", "verdict": "macun", "explain": "Macun kalınlaştıkça yeni kusurlar üretir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Yüzeyi 'iyi görünüyor' diye bırakan usta kusuru astar aşamasında bulur — en pahalı bulma zamanı."
+    },
+    {
+      "id": 7,
+      "instruction": "Göçük okumayı öğrendin.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.tavan-paneli",
+        "question": "Göçük analizi işin hangi kararını belirler?",
+        "options": [
+          { "label": "Onarılıp onarılmayacağını: hasarın türü, konumu ve malzemesi birlikte okunduğunda cevap ya düzeltme, ya parça değişimi, ya da yönlendirme olur — analiz bu üç yoldan birini seçmek içindir", "verdict": "yol-secimi", "correct": true, "explain": "Bu aşamanın amacı çekiç kullanmayı öğretmek değil, çekice davranmadan önce doğru soruyu sormayı öğretmektir. Analiz dört girdi toplar. Birincisi hasarın türü: yayvan çökme mi, keskin katlanma mı, kıvrım hattı geçiyor mu, çatlak var mı. İkincisi konumu: dış panel mi, taşıyıcı yapı mı, arkasına ulaşılabiliyor mu. Üçüncüsü malzemesi: yumuşak çelik mi, yüksek mukavemetli çelik mi, alüminyum mu, plastik mi. Dördüncüsü geçmişi: bu panel daha önce onarılmış mı — boya kalınlığı ölçümü bunu söyler ve daha önce kalın macun görmüş bir panel, ikinci onarımda bambaşka davranır. Bu dördü birleştiğinde ortaya üç yoldan biri çıkar. Düzeltme: hasar yayvan, panel dış panel, malzeme tolerans veriyor. Parça değişimi: katlanma var, kıvrım hattı ezilmiş, malzeme az affediyor ya da onarım süresi değişimden pahalı. Yönlendirme: hasar taşıyıcı yapıya ulaşmış, gövde ölçüm sistemi ya da kılavuz gerekiyor. Üç yolun da meşru olması bu dersin asıl mesajıdır — 'her göçüğü düzelten usta' iyi usta değil, sınır tanımayan ustadır. Ve karar müşteriye anlatılırken üç yol da masaya konur: ne yapılacağı, ne kadar süreceği ve sonucun neye benzeyeceği. 'Yepyeni gibi olur' cümlesi burada da kurulmaz." },
+          { "label": "Yalnız hangi çekicin kullanılacağını", "verdict": "cekic", "explain": "Alet bir ayrıntı; analiz yol seçimini belirler." },
+          { "label": "Yalnız süreyi", "verdict": "sure", "explain": "Süre bir sonuç." },
+          { "label": "Hiçbirini, deneyerek anlaşılır", "verdict": "deneyerek", "explain": "Deneme, malzemenin sınırlı kapasitesini harcar." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Her göçüğü düzelten usta iyi usta değil, sınır tanımayan ustadır. Sırada boyasız göçük düzeltme."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Göçüğün ortasına vurmak neden sonuç vermez?",
+        "a": "ters-sira",
+        "options": [
+          { "verdict": "ters-sira", "label": "Göçüğü tutan şey merkez değil çevresindeki kilitlenmiş kuşaktır: o çözülmeden merkez zorlanırsa metal gidecek yer bulamaz ve gerilir", "explain": "Onarım darbenin geliş sırasının tersine ilerler — en son deforme olan dış kuşak ilk çözülür, sonra daireler hâlinde merkeze gidilir. Kuşak çözüldüğünde sac büyük ölçüde kendi hafızasıyla geri gelir." },
+          { "verdict": "merkez", "label": "En derin noktadan başlanmalıdır", "explain": "Kilitlenme çözülmeden merkez gelmez." },
+          { "verdict": "rastgele", "label": "Sıranın önemi yoktur", "explain": "Sıra deformasyonun oluşum sırasıyla belirlenir." },
+          { "verdict": "boya", "label": "Boyası bozuk yerden başlanır", "explain": "Boya durumu ayrı bir konudur." }
+        ]
+      },
+      {
+        "q": "Göçükte keskin, katlanmış bir kırık var. Ne yapılır?",
+        "a": "katlanma",
+        "options": [
+          { "verdict": "katlanma", "label": "Soru değişir: o bölge şekil değiştirme kapasitesini tüketmiştir — açılsa bile ilk sertliğinde olmaz, zorlanırsa çatlar; karar onarım ile değişim arasındadır", "explain": "Malzeme (yüksek mukavemetli çelik ve alüminyumda genelde değişim), konum (taşıyıcıysa karar kılavuzun) ve ekonomi birlikte bakılır. Katlanmayı kalın macunla düzleştirip boyamak teslimde kusursuz görünür; o macun zamanla çatlar ve altında korozyon başlar." },
+          { "verdict": "acilir", "label": "Sorun değil, açılır", "explain": "Çatlama riski yüksektir." },
+          { "verdict": "isit", "label": "Isıtılarak yumuşatılır", "explain": "Malzeme sınıfı bilinmeden ısı uygulanmaz." },
+          { "verdict": "macun", "label": "Macunla düzleştirilir", "explain": "Macun çatlar ve nem alır." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2'deki 120 mm ve 180 mm SENARYO okumalarıdır; istenen FARKTIR (60 mm). Ders hiçbir araç için göçük boyutu, kabul sınırı ya da onarım/değişim eşiği iddia etmiyor.",
+    "sourceRequired": "Hangi hasarın onarılıp hangisinin değişeceği, kabul edilebilir kalan sapma, azami dolgu kalınlığı, kıvrım hattı hasarında onarım kriterleri ve malzemeye göre izin verilen hamle sınırları bilinçle VERİLMEDİ; araca, panele ve malzemeye özgüdür ve üreticinin onarım kılavuzundan okunur.",
+    "kapsam": "Taşıyıcı yapıda deformasyon düzeltme, şasi çekme ve gövde ölçüm sistemiyle doğrulama KAPSAM DIŞIDIR — ders hasarın okunmasını ve yol seçimini öğretiyor.",
+    "kaynak": "Bu alan kullanıcının açık talebiyle eklendi (talep birebir: 'birde alanlara kaportayı ekleyelim'); konu başlıkları MEB Otomotiv Gövde ve Boya dalının çerçevesini takip ediyor, kazanım numarası iddiası yok.",
+    "reviewedByMechanic": false
+  }
+}

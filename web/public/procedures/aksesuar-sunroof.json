@@ -1,0 +1,173 @@
+{
+  "id": "aksesuar.sunroof",
+  "area": "aksesuar-ses",
+  "stage": 4,
+  "title": "Sunroof Mekanizması ve Su Tahliyesi",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 35,
+  "prerequisites": ["aksesuar.elektrikli-koltuk"],
+  "learningGoals": [
+    "Sunroof'un sızdırmaz değil, tahliyeli bir sistem olduğunu anlamak",
+    "Kabine su girmesinin sebebinin conta değil tıkalı tahliye olduğunu görmek",
+    "Mekanizmanın senkron çalışmasını ve öğrenme gereğini bilmek"
+  ],
+
+  "safety": [
+    { "rule": "Tavan kaplaması indirilmeden önce enerji kesilir, süre beklenir ve doğrulanır", "why": "Tavan kaplamasının içinde ve direklerde perde tipi hava yastığı bulunabilir; sarı konektör ve sarı bantlı demet bu sistemin işaretidir", "blocksStart": true },
+    { "rule": "Mekanizma hareket ederken açıklığa el ya da baş sokulmaz", "why": "Panel mekanizması yüksek kuvvet üretir ve sıkışma koruması her araçta ve her kademede aynı davranmaz", "blocksStart": true },
+    { "rule": "Cam panel sökülürken iki kişi çalışır ve panel bir yüzeye yatırılarak taşınır", "why": "Panel ağır ve kırılgandır; tek elle taşınan panel hem düşer hem kabini çizer", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.plastik-sokme-spatulasi", "label": "Plastik söküm spatulası", "required": true },
+    { "id": "tool.tornavida-seti", "label": "Tornavida seti", "required": true },
+    { "id": "tool.pens-ampermetre", "label": "Pens ampermetre", "required": false },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Müşteri 'yağmurda tavandan su damlıyor' diyor. Panelin contasına bakıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sunroof-paneli",
+        "question": "Sunroof su geçirmemesi gereken bir sistem midir?",
+        "options": [
+          { "label": "Hayır: sunroof sızdırmaz değildir, TAHLİYELİDİR — panelin kenarından giren su bilinçli olarak bir kanala alınır ve dört köşedeki hortumlarla aracın altına atılır", "verdict": "tahliyeli", "correct": true, "explain": "Bu ders bu tek cümlenin üstüne kuruludur ve bilinmediğinde yanlış parça değiştirilir. Sunroof panelinin contası bir sızdırmazlık contası değil, bir yönlendirmedir; su akıntısının büyük kısmını keser ama bir miktar suyun panelin kenarından içeri girmesi TASARIM GEREĞİDİR. Panelin çevresinde bir tepsi ya da kanal vardır; giren su bu kanalda toplanır ve dört köşesinden çıkan hortumlarla — genellikle ön direklerden ve arka direklerden aşağı inerek — aracın altına atılır. Sistem böyle çalıştığı için 'su damlıyor' şikâyetinin cevabı neredeyse hiçbir zaman conta değildir; cevap tıkalı ya da çıkmış tahliye hortumudur. Tahliye tıkandığında kanal dolar, su kenarından taşar ve tavan kaplamasından ya da direklerden kabine iner. Müşteri suyu tavanda gördüğü için sorunun tavanda olduğunu sanır; oysa sorun yer çekiminin suyu bırakmak zorunda kaldığı ilk delikte, yani tıkalı hortumun yukarısındadır. İkinci bir sonuç daha vardır: bu su kabine indiğinde çoğu zaman halının altına birikir ve orada duran soketleri, modülleri ve şase noktalarını oksitler — yani sunroof tahliyesi tıkalı bir aracın elektrik arızaları da olabilir ve bunlar ilk bakışta ilgisiz görünür." },
+          { "label": "Evet, conta tamamen sızdırmaz olmalıdır", "verdict": "sizdirmaz", "explain": "Conta yönlendirir; bir miktar su girmesi tasarımın parçasıdır." },
+          { "label": "Evet, su girerse panel değişmelidir", "verdict": "panel-degistir", "explain": "Su girmesi normaldir; anormal olan suyun tahliye edilmemesidir." },
+          { "label": "Su yalnız panel açıkken girer", "verdict": "acikken", "explain": "Kapalıyken de kenarından bir miktar su girer ve tahliye edilir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Sunroof sızdırmaz değil, tahliyelidir. Bu cümle bu dersin ve bu şikâyetin tamamının cevabı."
+    },
+    {
+      "id": 2,
+      "instruction": "Tahliye kanalının köşesindeki hortum ağzını buldun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sunroof-tahliye-hortumu",
+        "question": "Tahliye nasıl kontrol edilir?",
+        "options": [
+          { "label": "Kanalın köşesine az miktarda su dökülür ve suyun aracın altından çıkıp çıkmadığı, hangi köşeden çıktığı izlenir; her köşe ayrı ayrı denenir", "verdict": "su-dok-izle", "correct": true, "explain": "Kontrol basittir ve doğru yapıldığında hangi hortumun tıkalı olduğunu tek seferde söyler. Panel açılır, tahliye kanalının bir köşesine bir şişeden yavaşça az miktarda su dökülür ve aracın altına bakılır: su dışarı çıkıyorsa o hortum açıktır, çıkmıyorsa ya tıkalıdır ya çıkmıştır ya da kopmuştur. Dört köşe de ayrı ayrı denenir çünkü genellikle yalnız biri ya da ikisi tıkanır ve hangisinin tıkalı olduğunu bilmek işin nerede yapılacağını belirler. Üç uyarı vardır. Birincisi su miktarı azdır: hortum tıkalıysa dökülen bütün su kabine gider ve döşemeyi ıslatır. İkincisi hortumun içine basınçlı hava ya da sert tel sokulmaz — ince ve esnek bir hortumdur, basınç onu soketinden çıkarabilir ya da yırtabilir ve o zaman su artık doğrudan direğin içine akar; sert tel de aynı biçimde deler. Doğru yöntem, ürünün izin verdiği ölçüde yumuşak ve esnek bir tel ya da düşük basınçlı hava, hortumun kendi çapına uygun biçimde ve dikkatle kullanmaktır. Üçüncüsü tıkanmanın sebebidir: tıkayan şey genellikle yaprak, çam iğnesi, toz ve bunların oluşturduğu çamurdur; ağaç altına park eden araçlarda bu tıkanma her yıl tekrarlar ve müşteriye periyodik kontrol önerilir." },
+          { "label": "Hortuma basınçlı hava verilir", "verdict": "basincli-hava", "explain": "Basınç hortumu soketinden çıkarabilir ya da yırtabilir; su o zaman doğrudan direğe akar." },
+          { "label": "Panel contası değiştirilir", "verdict": "conta", "explain": "Sorun sızdırmazlıkta değil, tahliyededir." },
+          { "label": "Tavan kaplaması indirilerek bakılır", "verdict": "kaplama", "explain": "Basit su testi sökmeden sonuç verir; söküm son çaredir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Bir şişe su ve altına bakmak: bu teşhisi bir sökümden önce bitiren en ucuz test."
+    },
+    {
+      "id": 3,
+      "instruction": "Panel açılıp kapanırken zorlanıyor. Motorun akımını ölçtün: bu araçta 11,7 A, sağlam bir araçta 4,9 A. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.pens-ampermetre",
+        "unit": "A",
+        "acceptRange": [6.6, 7.0]
+      },
+      "camera": "aksesuar",
+      "hint": "11,7 eksi 4,9.",
+      "teachingNote": "6,8 amperlik bu fark mekanizmanın zorlandığını gösteriyor ve sunroof'ta sebep neredeyse her zaman bakımsızlıktır. Panel iki yanda kızak üzerinde yürür ve kızakların içindeki gres zamanla kurur, üstüne toz ve kum biner; kuruyan gres yapışkan bir macuna dönüşür ve sürtünmeyi büyütür. Doğru işlem eski gresin tamamen temizlenip uygun yeni gresle yağlanmasıdır — yanlış ürün kullanmak lastik ve plastik parçaları şişirebileceği için ürün araca uygun olmalıdır. İkinci sebep kızağa düşmüş bir cisim ya da donmuş sudur; kışın tahliyesi tıkalı bir sunroof'ta biriken su donar ve mekanizmayı kilitler — bu durumda zorlamak mekanizmayı kırar, önce buz çözülür. Üçüncü sebep senkron kaybıdır: iki yandaki taşıyıcılar aynı hizada gitmiyorsa panel eğik hareket eder ve sıkışır; bu mekanik bir bozukluktur ve bir sonraki adımın konusudur. Kabul edilebilir akım araca özgüdür ve bu ders bir sınır vermiyor; karşılaştırma sağlam bir araçla yapılıyor."
+    },
+    {
+      "id": 4,
+      "instruction": "Panel kapanırken bir tarafı öne, diğeri arkaya kaçıyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sunroof-motoru",
+        "question": "Bu neyi anlatır?",
+        "options": [
+          { "label": "İki yandaki taşıyıcılar senkronunu kaybetmiştir: panel tek motorla ama iki ayrı kızak üzerinden sürülür ve bu iki taraf birbirine göre kaymışsa panel eğik gider", "verdict": "senkron-kaybi", "correct": true, "explain": "Sunroof paneli tek motorla sürülür ama hareket, motorun iki yana gönderdiği iki ayrı kablo ya da dişli çubuk üzerinden iletilir. Bu iki taraf her zaman aynı hizada olmak zorundadır; aksi hâlde panel bir köşesinden önde, diğerinden geride kalır — belirti panelin eğik kapanması, bir köşesinin conta üzerine binmemesi ya da hareketin bir noktada takılmasıdır. Senkron kaybının üç sebebi olur. Birincisi mekanizmanın zorlanmasıdır: donmuş ya da sıkışmış bir panel elle ya da motorla zorlandığında bir taraf kayar. İkincisi taşıyıcı ya da kayar parçadaki kırıktır — bu parçalar plastiktir ve yaşlandıkça kırılganlaşır; kırıldığında o taraf serbest kalır. Üçüncüsü motor değişimi ya da sökümün ardından parçaların yanlış konumda birleştirilmesidir. Onarım her zaman aynı ilkeyle başlar: iki taraf üreticinin belirlediği referans konuma getirilir, ancak ondan sonra motor takılır. Bu, koltuk dersindeki referans mantığının aynısıdır. Ardından sistemin öğrenme işlemi yapılır. Zorlayarak düzeltmeye çalışmak en pahalı hatadır: plastik taşıyıcılar kırılır ve tek parça onarım, komple mekanizma değişimine döner." },
+          { "label": "Motor bozulmuştur", "verdict": "motor", "explain": "Motor tek ve ortaktır; iki tarafın farklı davranması mekanik senkron sorunudur." },
+          { "label": "Cam panel eğrilmiştir", "verdict": "cam-egri", "explain": "Panel değil, onu taşıyan iki taraf hizasını kaybetmiştir." },
+          { "label": "Conta şişmiştir", "verdict": "conta", "explain": "Conta panelin eğik hareket etmesine yol açmaz." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Zorlayarak düzeltmek plastik taşıyıcıları kırar ve tek parçalık iş komple mekanizmaya döner."
+    },
+    {
+      "id": 5,
+      "instruction": "Akü söküldükten sonra sunroof yalnız tuş basılı tutulunca çalışıyor, otomatik kapanmıyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sunroof-motoru",
+        "question": "Bu tanıdık bir durum mu?",
+        "options": [
+          { "label": "Evet — camdaki durumun aynısı: sistem uç konumları ve normal direnci unutmuştur, öğrenme yapılana kadar otomatik işlev ve sıkışma koruması devre dışıdır", "verdict": "ogrenme", "correct": true, "explain": "Sunroof da tıpkı cam gibi sıkışma koruması taşır ve koruma aynı mantıkla çalışır: sistem panelin normal hareket direncini bilir, beklenenden fazla zorlanma görürse durur ve geri açar. Bu bilgi besleme kesildiğinde ya da motor, mekanizma veya modül değiştiğinde kaybolur. Modül bilgisiz kaldığında sorumlu davranır — otomatik çalışmayı devre dışı bırakır ve yalnız tuş basılı tutulduğunda hareket verir, çünkü o durumda sorumluluk sürücüdedir. Öğrenme işlemi paneli uç konumlara götürerek referansı yeniden kurar; adımlar araçtan araca değişir ve bu ders bir yöntem vermiyor. Sıra yine aynıdır ve bu uygulamanın değişmez kuralıdır: önce mekanik, sonra elektronik. Kızaklar kirliyken yapılan bir öğrenme, yüksek sürtünmeyi 'normal' diye kaydeder; sonra bakım yapılınca sistem bu kez fazla hassas davranır ya da tersine, gerçek bir sıkışmayı geç fark eder. Sunroof'ta bu daha da önemlidir çünkü panelin kapanma kuvveti yüksektir ve koruma bir güvenlik işlevidir — özellikle çocuklar için. Bu yüzden koruma da cam dersindeki gibi iptal edilmez." },
+          { "label": "Hayır, bu yalnız camlarda olur", "verdict": "yalniz-cam", "explain": "Sunroof da aynı koruma ve öğrenme mantığını kullanır." },
+          { "label": "Motor bozulmuştur", "verdict": "motor", "explain": "Tuşla çalışıyor; motor sağlamdır." },
+          { "label": "Sigorta atmıştır", "verdict": "sigorta", "explain": "Tuşla çalışıyorsa besleme vardır." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Aynı desen üçüncü kez: cam, koltuk, sunroof. Öğrenme bir onarım değil, sistemin referansını geri vermek."
+    },
+    {
+      "id": 6,
+      "instruction": "Tavan kaplamasını indirmen gerekiyor.",
+      "interaction": {
+        "type": "pull",
+        "target": "part.kapi-ic-dosemesi",
+        "requiresGesture": true
+      },
+      "camera": "aksesuar",
+      "hint": "Kaplamayı kenarlarından kurtarıp iki elle destekleyerek indir.",
+      "teachingNote": "Tavan kaplaması bu alandaki en kırılgan ve en pahalı iç parçalardan biridir: tek parçadır, esnemez ve bir kez kırıldığında ya da katlandığında düzelmez. Üç kural vardır. Birincisi güvenliktir — kaplamanın içinde ve direklerde perde tipi hava yastığı bulunabilir; sarı konektör ve sarı bantlı demet görüldüğünde durulur, enerji kesilmiş ve süre beklenmiş olsa bile bu birimlere dokunulmaz. İkincisi sıradır: önce tutamaklar, güneşlikler, tavan lambası ve direk kaplamaları, sonra fitiller, en son kaplamanın kendisi; sıra bozulduğunda kaplama bir yerinden zorlanır ve kırılır. Üçüncüsü taşımadır: kaplama iki kişiyle, iki elle ve yatay tutularak indirilir; koltuklar yatırılıp arka camdan çıkarılması gereken araçlar vardır ve zorlayarak kapıdan çıkarmaya çalışmak kaplamayı katlar. İnen kaplama temiz ve düz bir yüzeye konur, üstüne bir şey konmaz."
+    },
+    {
+      "id": 7,
+      "instruction": "İş bitti, panel takıldı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sunroof-paneli",
+        "question": "Teslim öncesi doğrulama nedir?",
+        "options": [
+          { "label": "Panel bütün konumlarda (havalandırma, kayar, tam açık, tam kapalı) denenir, hizası ve conta teması gözle kontrol edilir, dört tahliye su dökülerek doğrulanır ve otomatik işlev ile koruma denenir", "verdict": "tam-kontrol", "correct": true, "explain": "Sunroof işinde doğrulama beş başlıktır ve tahliye testi asla atlanmaz — çünkü bu işin en sık geri dönme sebebi su şikâyetidir. Birincisi hareket: panel havalandırma konumu (arkadan kalkma), kayar konum, tam açık ve tam kapalı olarak denenir; her geçişte takılma ya da ses olmamalıdır. İkincisi hiza: panel kapalıyken tavan sacıyla aynı düzlemde olmalı, bir köşesi yüksek ya da alçak kalmamalıdır — çoğu araçta panelin yükseklik ayarı vardır ve yanlış hiza hem rüzgâr sesi hem su sorunu üretir. Üçüncüsü conta temasıdır: panel kapalıyken conta çevresinde eşit basmalı, bir kâğıt şeridi çevrede benzer dirençle çekilmelidir. Dördüncüsü ve en kritiği tahliye testidir: dört köşeye ayrı ayrı az miktarda su dökülür ve dördünün de aracın altından çıktığı görülür; bu test yapılmadan araç teslim edilmez. Beşincisi otomatik işlev ve sıkışma korumasıdır — koruma uygun bir cisimle denenir, parmakla değil. Son olarak müşteriye bakım bilgisi verilir: ağaç altına park ediliyorsa tahliyeler yılda en az bir kez kontrol edilmeli ve kızaklar periyodik olarak temizlenip greslenmelidir. Bu bilgi verilmezse aynı araç bir yıl sonra aynı şikâyetle döner." },
+          { "label": "Panel açılıp kapanıyorsa iş tamamdır", "verdict": "hareket", "explain": "Tahliye testi ve hiza kontrolü ayrıca yapılmalıdır." },
+          { "label": "Tahliye testi yalnız şikâyet varsa yapılır", "verdict": "sikayet-varsa", "explain": "Bu işin en sık geri dönme sebebi su; test her zaman yapılır." },
+          { "label": "Koruma parmakla denenir", "verdict": "parmak", "explain": "Koruma çalışmıyorsa yaralanma olur; uygun bir cisimle denenir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Aşama 4 bitti. Aşama 5 dışarı çıkıyor: aydınlatma ve dış aksesuar montajı."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Sunroof'lu bir araçta tavandan su damlıyor. İlk şüphe nedir?",
+        "a": "tahliyeli",
+        "options": [
+          { "verdict": "tahliyeli", "label": "Tıkalı ya da çıkmış tahliye hortumu — sunroof sızdırmaz değil, tahliyeli bir sistemdir", "explain": "Panelin kenarından bir miktar su girmesi tasarım gereğidir; giren su çevredeki kanalda toplanır ve dört köşeden çıkan hortumlarla aracın altına atılır. Tahliye tıkanırsa kanal dolar, su taşar ve kabine iner. Bu su çoğu zaman halının altına birikip soketleri ve şase noktalarını oksitler; yani tıkalı tahliye ilk bakışta ilgisiz görünen elektrik arızaları da üretebilir." },
+          { "verdict": "sizdirmaz", "label": "Conta sızdırmaz olmalıdır", "explain": "Conta yönlendirir, sızdırmazlık sağlamaz." },
+          { "verdict": "panel-degistir", "label": "Panel değiştirilir", "explain": "Su girmesi normaldir." },
+          { "verdict": "acikken", "label": "Su yalnız panel açıkken girer", "explain": "Kapalıyken de girer ve tahliye edilir." }
+        ]
+      },
+      {
+        "q": "Tahliye hortumu nasıl kontrol edilir ve nasıl açılmaz?",
+        "a": "su-dok-izle",
+        "options": [
+          { "verdict": "su-dok-izle", "label": "Her köşeye ayrı ayrı az miktarda su dökülüp aracın altından çıkıp çıkmadığı izlenir; basınçlı hava ve sert tel kullanılmaz", "explain": "Az su kullanılır çünkü hortum tıkalıysa dökülen su kabine gider. Basınç hortumu soketinden çıkarabilir ya da yırtabilir; o zaman su doğrudan direğin içine akar ve şikâyet büyür. Tıkayan şey genellikle yaprak, çam iğnesi ve çamurdur; ağaç altına park eden araçlarda her yıl tekrarlar." },
+          { "verdict": "basincli-hava", "label": "Basınçlı hava verilir", "explain": "Hortumu çıkarabilir ya da yırtabilir." },
+          { "verdict": "conta", "label": "Conta değiştirilir", "explain": "Sorun tahliyededir." },
+          { "verdict": "kaplama", "label": "Tavan kaplaması indirilir", "explain": "Su testi sökmeden sonuç verir." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 11,7 A ve 4,9 A SENARYO okumalarıdır; istenen FARKTIR (6,8 A) ve ders bir azami akım sınırı vermiyor — karşılaştırma sağlam bir araçla yapılıyor.",
+    "sourceRequired": "Sunroof motoru azami akımı, panel yükseklik ayarı ölçüsü, gres tipi, öğrenme işleminin adımları ve tahliye hortumu çapı bilinçle VERİLMEDİ; hepsi araca ve ürüne özgüdür.",
+    "kapsam": "Perde tipi hava yastığı ve direk içi güvenlik bileşenlerine müdahale KAPSAM DIŞIDIR; ders yalnız sınırı ve güvenli durum ilkesini öğretiyor, sahnede bu bileşenler modellenmedi. Panelin cam olarak değişimi ve tavan sacı onarımı bu projede yok. Teşhis cihazı gerektiren öğrenme işlemleri kapsam dışı.",
+    "reviewedByMechanic": false
+  }
+}

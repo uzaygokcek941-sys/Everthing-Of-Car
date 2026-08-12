@@ -1,0 +1,159 @@
+{
+  "id": "motor.yag-basinci",
+  "area": "motor-mekanik",
+  "stage": 5,
+  "title": "Yağ Basıncı Ölçümü ve Düşük Basınç Teşhisi",
+  "vehicleClass": "binek-arac",
+  "estimatedMinutes": 20,
+  "prerequisites": ["motor.yag-ve-filtre"],
+  "learningGoals": [
+    "Yağ basınç lambasını doğru okumak ve doğru tepki vermek",
+    "Sensöre güvenmek yerine mekanik manometre ile ölçmek",
+    "Düşük basıncın nedenlerini ucuzdan pahalıya doğru elemek"
+  ],
+
+  "safety": [
+    { "rule": "Yağ basınç lambası yanan motor derhal durdurulur", "why": "Lamba yağın azaldığını değil, yatağa yağ GİTMEDİĞİNİ söyler. Yağ filmi kesildikten sonra krank yatakları saniyeler içinde sarar; birkaç saniye fazla çalıştırmak motoru komple değiştirmek demektir", "blocksStart": true },
+    { "rule": "Sıcak motorda basınç sensörü sökülmez", "why": "Sensörün yeri basınçlı yağ galerisidir. Sıcak motorda sökülen sensörden 100 °C'nin üzerinde yağ fışkırır", "blocksStart": true },
+    { "rule": "Ölçüm sırasında motor çalışırken kayış ve fan bölgesinden uzak durulur", "why": "Manometre hortumu çalışan motorun üzerinden geçirilir; hortumun kayışa kapılması hem hattı koparır hem eli çeker", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.manometre", "label": "Mekanik yağ basınç manometresi ve adaptör seti", "required": true },
+    { "id": "tool.anahtar-24", "label": "24 mm anahtar (sensör yuvası)", "required": true },
+    { "id": "tool.termometre", "label": "Temassız termometre", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Araç çalışırken gösterge panelinde yağ basınç lambası yandı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.yag-basinc-lambasi",
+        "question": "İlk ne yaparsın?",
+        "options": [
+          { "label": "Motoru hemen durdururum, sonra teşhise başlarım", "verdict": "hemen-durdur", "correct": true, "explain": "Bu lamba bir uyarı değil, bir dur emridir. Yağ basıncı yoksa krank ve biyel yatakları metal metale sürtüyor demektir; o temas başladıktan sonra hasar dakikayla değil saniyeyle ölçülür. Motoru durdurmak arızayı çözmez ama çözülebilir bir arıza olarak kalmasını sağlar." },
+          { "label": "Yağ çubuğuna bakarım, seviye normalse yoluma devam ederim", "verdict": "seviye-bak-devam", "explain": "Seviyeye bakmak doğru bir adımdır ama motoru çalıştırarak yapılmaz ve tek başına yeterli değildir. Seviye tam olsa da pompa, emiş süzgeci ya da yatak boşluğu yüzünden basınç olmayabilir." },
+          { "label": "Genelde sensör arızasıdır, yola devam ederim", "verdict": "sensor-arizasi", "explain": "Sensör gerçekten bozulabilir. Ama bunu ölçmeden varsaymanın bedeli motorun kendisidir; ihtimal düşük değil, sonuç ağırdır. Böyle durumlarda ucuz ihtimale değil, pahalı sonuca göre karar verilir." },
+          { "label": "Devri yükseltirim, basınç artar ve lamba söner", "verdict": "devir-yukselt", "explain": "Devir yükseltmek basıncı gerçekten artırır ve lamba sönebilir. Bu, yangın alarmını kapatıp yangını görmezden gelmektir; üstelik yüksek devirde yağsız çalışan yatak daha hızlı sarar." }
+        ]
+      },
+      "camera": "kabin",
+      "teachingNote": "Yağ lambası ile yağ seviyesi göstergesi farklı şeylerdir. Lamba basıncı ölçer: yağın deposunda olduğunu değil, ihtiyaç duyulan yere gittiğini gösterir. Bu ayrımı bilmeyen sürücü lambayı 'yağ ekleyince geçer' sanır."
+    },
+    {
+      "id": 2,
+      "instruction": "Motor durdu, yağ seviyesi ve viskozitesi doğru. Sıradaki adım?",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.yag-basinc-manometresi",
+        "question": "Basıncın gerçekten düşük olduğunu nasıl kanıtlarsın?",
+        "options": [
+          { "label": "Sensörü söküp yerine mekanik manometre takar, gerçek basıncı ölçerim", "verdict": "manometre-tak", "correct": true, "explain": "Panel lambası ve gösterge, sensörün söylediğini gösterir; sensör de bir parçadır ve yalan söyleyebilir. Mekanik manometre yağ galerisine doğrudan bağlanır ve elektronikten bağımsız ölçer. Bu tek adım, 'sensör mü gerçek arıza mı' sorusunu kesin olarak kapatır." },
+          { "label": "Sensörü yenisiyle değiştiririm, geçerse sorun oydu demektir", "verdict": "sensor-degistir", "explain": "Parça değiştirerek teşhis en pahalı yöntemdir ve burada tehlikelidir: yeni sensör de aynı düşük basıncı okuyacaksa hiçbir şey öğrenmiş olmazsın, geçerse de gerçek basıncı hâlâ bilmiyorsun." },
+          { "label": "Motoru çalıştırıp sesini dinlerim", "verdict": "ses-dinle", "explain": "Ses ileri seviyede bilgi verir ama basıncı sayı olarak vermez; ayrıca dinlemek için motoru çalıştırmak, basınç yoksa hasarı büyütür." },
+          { "label": "Yağı boşaltıp yenisini koyarım, önce onu deneriz", "verdict": "yag-degistir", "explain": "Yanlış viskozite ya da sulanmış yağ gerçekten sebep olabilir ama bu bir ölçüm değil, bir denemedir. Önce ölçülür, sonra müdahale edilir." }
+        ]
+      },
+      "camera": "motor-on",
+      "teachingNote": "Bu adım aslında aşama 9'un tek cümlesi: parçayı değiştirmeden önce ölç. Ölçmeden değiştiren usta, müşterinin parasıyla tahmin yürütüyor demektir."
+    },
+    {
+      "id": 3,
+      "instruction": "Manometre inç-kare başına pound (psi) ölçüyor, kılavuz ise bar istiyor. Gösterge 29 psi okuyor. Bar karşılığını gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.yag-basinc-manometresi",
+        "unit": "bar",
+        "acceptRange": [1.95, 2.05]
+      },
+      "camera": "motor-on",
+      "hint": "1 bar yaklaşık 14,5 psi'dir. Okunan değeri 14,5'e böl.",
+      "teachingNote": "29 / 14,5 = 2,0 bar. Atölyede aletler tek birimde konuşmaz: manometreler çoğu zaman psi, kılavuzlar bar ya da kPa yazar. Birim çevirmeyi bilmemek, doğru ölçülmüş bir değeri yanlış yorumlatır — ölçüm hatası değil, okuma hatasıdır ve daha sinsidir."
+    },
+    {
+      "id": 4,
+      "instruction": "Ölçümü ne zaman yaparsın?",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.yag-basinc-manometresi",
+        "question": "Yağ basıncı hangi koşulda ölçülür?",
+        "options": [
+          { "label": "Motor çalışma sıcaklığındayken ve kılavuzun belirttiği devirde", "verdict": "sicak-ve-devirde", "correct": true, "explain": "Yağ ısındıkça incelir ve basınç düşer; soğuk motorda ölçülen değer her zaman iyi çıkar ve arızayı gizler. Kılavuz da değerlerini belli bir sıcaklık ve belli bir devir için verir. Farklı koşulda okunan sayı, kılavuzdaki sayı ile karşılaştırılamaz — iki farklı şeyi kıyaslamış olursun." },
+          { "label": "Motor soğukken, çünkü en yüksek değer orada okunur", "verdict": "soguk", "explain": "En yüksek değer aranan şey değildir. Soğuk ölçüm, aşınmış bir motoru bile sağlıklı gösterir." },
+          { "label": "Rölantide ölçmek yeterlidir, devir fark etmez", "verdict": "sadece-rolanti", "explain": "Rölanti değeri önemlidir ama tek başına yetmez: bazı arızalar yalnız yüksek devirde ya da yalnız rölantide görünür. Kılavuz genelde iki ayrı değer verir." },
+          { "label": "Motor durduktan hemen sonra, kalan basınçtan anlaşılır", "verdict": "durduktan-sonra", "explain": "Motor durunca pompa da durur ve basınç sıfıra iner. Ölçülecek bir şey kalmaz." }
+        ]
+      },
+      "camera": "motor-on",
+      "teachingNote": "Bir ölçüm koşulu söylenmeden verilen sayı, sayı değildir. 'Basınç 2 bar' cümlesi eksiktir; 'çalışma sıcaklığında, rölantide 2 bar' cümlesi bilgidir."
+    },
+    {
+      "id": 5,
+      "instruction": "Basınç gerçekten kılavuz değerinin altında çıktı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.yag-filtresi",
+        "question": "Nedeni hangi sırayla ararsın?",
+        "options": [
+          { "label": "Önce yağın tipi ve seviyesi, sonra filtre ve emiş süzgeci, sonra pompa, en son yatak boşlukları", "verdict": "ucuzdan-pahaliya", "correct": true, "explain": "Eleme sırası hem olasılığa hem maliyete göre kurulur: yanlış viskozite ya da yakıtla sulanmış yağ en sık ve en ucuz nedendir. Tıkalı emiş süzgeci pompayı aç bırakır ve dışarıdan hiç görünmez. Pompa aşınması daha az görülür. Yatak boşluğunun büyümesi en pahalı ihtimaldir ve en sona bırakılır — çünkü diğerleri elenmeden ona karar vermek, motoru gereksiz yere açmaktır." },
+          { "label": "Daha koyu yağ koyup basıncı yükseltirim", "verdict": "koyu-yag", "explain": "Basınç yükselir ama akış azalır. Yatağa giden yağ MİKTARI düşer ve yağ hem yağlama hem soğutma yapamaz. Gösterge düzelirken motor daha hızlı ölür. Bu, arızayı çözmek değil göstergeyi susturmaktır." },
+          { "label": "Doğrudan yatakları söker bakarım", "verdict": "yataklari-sok", "explain": "En pahalı ihtimalden başlamak hem zaman hem para kaybıdır. Ucuz nedenler elenmeden motor açılmaz." },
+          { "label": "Basınç sensörünü değiştiririm", "verdict": "sensor", "explain": "Sensör bu aşamada zaten elendi: mekanik manometre gerçek basıncın düşük olduğunu gösterdi." }
+        ]
+      },
+      "camera": "motor-alt",
+      "teachingNote": "Emiş süzgeci bu listenin en çok atlanan maddesidir. Karterin dibinde durur, görülmez ve zamanla yağ çamuruyla kaplanır; pompa sağlamdır ama emecek yağ bulamaz. Sık ve zamanında yağ değişiminin asıl sebeplerinden biri budur."
+    },
+    {
+      "id": 6,
+      "instruction": "Basınç soğukken normal, motor ısındıkça düşüyor. Ayrıca rölantide derin ve boğuk bir vuruntu duyuluyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.yag-basinc-manometresi",
+        "question": "Bu iki bulgu birlikte neyi gösterir?",
+        "options": [
+          { "label": "Yatak boşlukları büyümüş", "verdict": "yatak-bosluklari", "correct": true, "explain": "Yağ ısınınca incelir; boşluğu büyümüş yataktan incelmiş yağ daha kolay kaçar ve galeride basınç tutulamaz. Bu yüzden tablo sıcaklığa bağlıdır: soğukta koyu yağ boşluğu doldurur ve basınç normal görünür. Derin ve boğuk vuruntu ise yatağın boşlukta çarpma sesidir; ince ve tiz tıkırtı olsaydı supap tarafını düşünürdük. İki bulgu aynı yere işaret ediyor." },
+          { "label": "Sensör ısınınca bozuluyor", "verdict": "sensor-isi", "explain": "Sensör zaten devre dışı; ölçüm mekanik manometreyle yapılıyor. Ayrıca sensör vuruntu sesini açıklamaz." },
+          { "label": "Yağ filtresi tıkalı", "verdict": "filtre-tikali", "explain": "Tıkalı filtrede by-pass valfi açılır ve basınç genelde korunur — kirli yağ dolaşır ama basınç bu tabloyu vermez. Ayrıca filtre vuruntu yapmaz." },
+          { "label": "Pompa kayışı gevşemiş", "verdict": "kayis", "explain": "Yağ pompası çoğu motorda doğrudan krank ya da zincirle tahrik edilir; ayrı bir kayışı yoktur. Olsa bile sıcaklığa bağlı bu davranışı açıklamaz." }
+        ]
+      },
+      "camera": "motor-on",
+      "teachingNote": "Aşama 8'in kapısı burada açılıyor: yatak teşhisi. Şimdilik bilmen gereken şu — sıcaklığa bağlı basınç düşüşü rastgele değildir, mekanik bir boşluğun imzasıdır."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Yağ seviyesi tam olduğu hâlde yağ basınç lambası neden yanabilir?",
+        "a": "yag-var-ama-gitmiyor",
+        "options": [
+          { "verdict": "yag-var-ama-gitmiyor", "label": "Yağ vardır ama basınçlı olarak yatağa ulaşmıyordur", "explain": "Lamba bir seviye göstergesi değil, basınç anahtarıdır. Yağ karterde durabilir ama emiş süzgeci tıkalıysa, pompa aşınmışsa ya da yatak boşlukları büyümüşse galeride basınç oluşmaz. Depoda yakıt olması ile motora yakıt gitmesi nasıl iki ayrı şeyse, bu da öyledir." },
+          { "verdict": "sadece-sensor", "label": "Sadece sensör arızasıdır", "explain": "Olabilir ama varsayılamaz; bu varsayımın bedeli motorun kendisidir." },
+          { "verdict": "yanmaz", "label": "Seviye tamsa yanmaz", "explain": "Bu yaygın yanlış, tam olarak bu dersin düzelttiği şeydir." },
+          { "verdict": "soguk-havada", "label": "Sadece soğuk havada olur", "explain": "Soğukta yağ koyulaşır ve basınç genelde yükselir; bu tablo tersini anlatır." }
+        ]
+      },
+      {
+        "q": "Düşük basınca çözüm olarak daha koyu yağ koymak neden yanlıştır?",
+        "a": "basinc-artar-akis-azalir",
+        "options": [
+          { "verdict": "basinc-artar-akis-azalir", "label": "Basınç artar ama akış azalır; yatağa daha az yağ gider", "explain": "Basınç ile debi aynı şey değildir. Koyu yağ akmakta zorlandığı için galeride basınç yükselir, ama birim zamanda yatağa ulaşan yağ miktarı düşer. Yağın ikinci görevi olan ısıyı taşımak da o miktara bağlıdır. Sonuç: gösterge iyileşir, motor kötüleşir. Üstelik soğuk çalıştırmada yağın yatağa ulaşması gecikir ve en çok aşınma tam o anlarda olur." },
+          { "verdict": "pahali", "label": "Sadece daha pahalı olduğu için", "explain": "Maliyet değil, mekanizma sorunu." },
+          { "verdict": "conta-yer", "label": "Contalara zarar verir", "explain": "Asıl sorun contalarda değil, yağlama debisindedir." },
+          { "verdict": "dogru-cozum", "label": "Yanlış değil, sahada işe yarayan bir çözümdür", "explain": "Belirtiyi geçici olarak gizler, arızayı ilerletir. Sahada yapılıyor olması doğru olduğunu göstermez." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "sourceRequired": "29 psi bir birim çevirme egzersizidir, belirli bir aracın değeri değildir. Rölanti ve yüksek devir için kabul edilebilir yağ basıncı, ölçüm sıcaklığı ve yağ viskozitesi araca özgüdür; üretici kılavuzundan okunur ve kaynaksız yayınlanmaz.",
+    "kapsam": "Bu ders read-gauge etkileşimi için işaretlenmişti. Ekranda kadranlı bir manometre çizilmeden read-gauge, measure ile aynı davranışı gösterirdi (aynı sayısal girdi, aynı aralık denetimi); bu yüzden yazılmadı. Öğretilen asıl beceri olan 'hangi koşulda okunur ve ne anlama gelir' inspect-and-choose ile veriliyor. Kadran modeli geldiğinde read-gauge yeniden değerlendirilir.",
+    "reviewedByMechanic": false
+  }
+}

@@ -1,0 +1,178 @@
+{
+  "id": "lastik.titresim-teshisi",
+  "area": "lastik-tekerlek",
+  "stage": 9,
+  "title": "Hıza Bağlı Titreşim: Balans mı, Salgı mı, Ön Düzen mi",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 35,
+  "prerequisites": ["lastik.balans-ayari", "lastik.jant-hasari", "lastik.on-duzen-ayari"],
+  "learningGoals": [
+    "Şikâyetin koşullarından kaynağı daraltmak",
+    "Tekerlekleri yer değiştirerek kaynağın araçta mı tekerlekte mi olduğunu ayırmak",
+    "Elenen her adayı ölçümle kapatmak"
+  ],
+
+  "safety": [
+    { "rule": "Yol testi trafiğe uygun ve güvenli bir yolda yapılır", "why": "Titreşimin ortaya çıktığı hız aralığında dikkat yola verilmelidir; ölçüm ve not alma sürücünün işi değildir", "blocksStart": true },
+    { "rule": "Titreşim şikâyetinde tekerlek bağlantıları ilk olarak kontrol edilir", "why": "Gevşek somun da titreşim yapar ve bu, giderilmezse tekerleğin ayrılmasına kadar gider", "blocksStart": true },
+    { "rule": "Frende ortaya çıkan titreşim fren sistemine yönlendirilir", "why": "Bu belirti lastik ve tekerlek alanının dışındadır; burada aranırsa zaman kaybedilir ve gerçek sebep gecikir", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.balans-makinesi", "label": "Balans makinesi", "required": true },
+    { "id": "tool.komparator", "label": "Salgı komparatörü", "required": true },
+    { "id": "tool.tork-anahtari", "label": "Tork anahtarı", "required": true },
+    { "id": "tool.manometre", "label": "Basınç manometresi", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Müşteri: \"Araç titriyor.\" Başka bir şey söylemiyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.jant",
+        "question": "İlk iş ne?",
+        "options": [
+          { "label": "Şikâyetin koşullarını sormak: hangi hızda, nerede hissediliyor, frende mi, her zaman mı", "verdict": "kosullar", "correct": true, "explain": "Titreşim tek bir arıza değil, birçok arızanın ortak belirtisidir; bu yüzden teşhis, belirtiyi daraltan sorularla başlar ve bu sorular hiçbir alet gerektirmez. Hangi hızda: belirli bir aralıkta başlayıp sonra azalıyorsa dengesizlik, hızla sürekli artıyorsa salgı ya da kuvvet değişimi akla gelir. Nerede hissediliyor: direksiyonda hissedilen titreşim çoğunlukla ön tekerlekleri, koltukta ve gövdede hissedilen arka tekerlekleri işaret eder. Frende mi: yalnız frenlemede ortaya çıkan titreşim fren sisteminin konusudur ve bu alanın dışındadır — bu tek soru koca bir dalı eler. Her zaman mı: yalnız soğukken oluyorsa jant içinde kar ve buz, yalnız yüklüyken oluyorsa süspansiyon akla gelir. Bu dört soru, araç kaldırılmadan önce adayların yarısını eler. Müşteri kendiliğinden bunları söylemez; sorulması gerekir ve cevaplar iş emrine yazılır." },
+          { "label": "Doğrudan balans yapmak", "verdict": "balans", "explain": "Balans adaylardan yalnız biri; koşullar sorulmadan yapılan işlem tahmindir." },
+          { "label": "Dört lastiği birden değiştirmek", "verdict": "lastik-degistir", "explain": "Sebep bulunmadan yapılan değişim pahalı bir tahmindir." },
+          { "label": "Ön düzen ayarına göndermek", "verdict": "on-duzen", "explain": "Ön düzen titreşimden çok aşınma ve çekme üretir; sıra burada değil." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bu alandaki en ucuz teşhis aracı sorudur. Dört soru, henüz hiçbir alet kullanılmadan adayların yarısını eler."
+    },
+    {
+      "id": 2,
+      "instruction": "Cevaplar geldi: titreşim belirli bir hız aralığında başlıyor, direksiyonda hissediliyor, frenlemeyle ilgisi yok.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.balans-makinesi",
+        "question": "Bu cevaplar neyi eler, neyi bırakır?",
+        "options": [
+          { "label": "Fren kaynaklı titreşimi eler ve aramayı ön tekerleklere daraltır; geriye dengesizlik, salgı, bağlantı ve ön takım kalır", "verdict": "daraltma", "correct": true, "explain": "Üç cevabın her biri bir iş yaptı. Frenlemeyle ilgisi olmaması, fren diski ve kaliperinden gelen titreşimi eler — bu, ayrı bir sistemdir ve burada aranmaz. Direksiyonda hissedilmesi aramayı ön aksa daraltır; arka tekerlek kaynaklı titreşim genellikle koltuk ve gövde üzerinden hissedilir, bu yüzden ön aks önceliklidir ama arka tamamen dışlanmaz. Belirli bir hız aralığında başlayıp sonra azalması ise dengesizliğin bir doğal titreşim frekansıyla çakıştığını düşündürür — dengesizlik hâlâ en güçlü adaydır. Geriye kalan adaylar sırasıyla şunlardır: tekerlek dengesizliği, tekerlek ya da lastiğin salgısı, gevşek veya yanlış sıkılmış bağlantı, ön takım boşluğu ve lastiğin kendi iç kusuru. Bu liste artık yönetilebilir ve her maddesinin kendi ölçümü var. Teşhisin gücü listeyi kısaltmaktan gelir, doğru tahmin etmekten değil." },
+          { "label": "Hiçbir şeyi elemez", "verdict": "elemez", "explain": "Fren dalı elendi ve arama ön aksa daraldı; bu büyük bir kazanç." },
+          { "label": "Kesin olarak balans bozukluğunu gösterir", "verdict": "kesin-balans", "explain": "En güçlü aday ama kesin değil; salgı ve bağlantı da aynı belirtiyi verir." },
+          { "label": "Lastiklerin bittiğini gösterir", "verdict": "lastik-bitti", "explain": "Aşınma ayrı bir konu; titreşim aşınmadan bağımsız olabilir." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "İyi bir teşhis adımı, olasılıkları ikiye bölen adımdır. Bu, elektrik alanında öğrenilen eleme yönteminin aynısı."
+    },
+    {
+      "id": 3,
+      "instruction": "Somunlar torkla kontrol edildi, basınçlar eşitlendi, balans doğrulandı. Şimdi salgı ölçüyorsun: sol ön 0,3 mm, sağ ön 1,4 mm. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.komparator",
+        "unit": "mm",
+        "acceptRange": [1.05, 1.15]
+      },
+      "camera": "tekerlek",
+      "hint": "1,4 eksi 0,3.",
+      "teachingNote": "1,1 mm'lik bu fark, balans temiz çıktıktan SONRA anlam kazanıyor. Sıra önemli: balans doğrulanmamış olsaydı salgı ölçümü de tek başına karar verdirmezdi. Şimdi elimizde iki simetrik köşeden birinin belirgin biçimde salgılı olduğu var — sol taraf o araç için referans. Sıradaki soru, salgının jantta mı yoksa lastiğin oturmasında mı olduğudur; bu, jant dersinde öğrenilen ayrımla, lastik sökülüp jant tek başına ölçülerek yapılır."
+    },
+    {
+      "id": 4,
+      "instruction": "Sağ ön tekerlekte salgı bulundu ama kaynağı henüz belli değil.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik",
+        "question": "Kaynağı ayırmak için ne yapılır?",
+        "options": [
+          { "label": "Lastik janttan sökülür, jant tek başına ölçülür: değer düşüyorsa sorun lastiğin oturmasında, sürüyorsa jant eğridir", "verdict": "ayir", "correct": true, "explain": "Salgı, iki farklı şeyden gelebilir ve ikisinin çözümü tamamen farklıdır. Jantın kendisi eğriyse jant düzeltilir ya da değiştirilir — pahalı bir karardır. Lastik jant üzerine merkezsiz oturmuşsa çözüm ücretsizdir: lastik sökülür, topuk yüzeyi temizlenir, kayganlaştırıcı yenilenir ve yeniden oturtulur. Bu iki adayı ayırmanın tek yolu ölçümü ikiye bölmektir: lastikli tekerlek ölçülür, sonra lastik sökülüp jant tek başına ölçülür. İki değer birbirine yakınsa suç jantındır; jantın değeri belirgin biçimde düşükse fark montajdan geliyordur. Ayrım yapılmadan verilen karar ya gereksiz bir jant değişimi ya da düzelmeyen bir titreşim üretir. Aynı mantık üçüncü bir adayı da açar: lastiğin kendi imalat kusuru — jant düzgün, oturma düzgün ama lastik çevre boyunca eşit değilse kütle ölçen bir makine bunu göremez ve tekerlek yine titrer." },
+          { "label": "Doğrudan jant değiştirilir", "verdict": "jant-degistir", "explain": "Kaynak ayrılmadan verilen karar gereksiz masraf olabilir." },
+          { "label": "Daha fazla balans ağırlığı takılır", "verdict": "agirlik", "explain": "Salgı geometrik kusurdur; kütleyle düzeltilmez." },
+          { "label": "Lastik değiştirilir", "verdict": "lastik-degistir", "explain": "Önce kaynak ayrılır; sorun oturmadaysa lastik sağlamdır." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bir ölçümü ikiye bölerek iki adayı ayırmak, bu alanın en güçlü hareketi. Aynı hareket jant dersinde de kullanıldı."
+    },
+    {
+      "id": 5,
+      "instruction": "Bütün tekerlek ölçümleri temiz çıktı ama titreşim sürüyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.jant",
+        "question": "Sıradaki test ne?",
+        "options": [
+          { "label": "Ön ve arka tekerlekleri yer değiştirip yol testi tekrarlanır: titreşim yer değiştiriyorsa kaynak tekerlekte, aynı yerde kalıyorsa araçtadır", "verdict": "yer-degistir", "correct": true, "explain": "Bu test, teşhisin en güçlü ayrımlarından birini hiçbir cihaz kullanmadan yapar. Ön tekerlekler arkaya, arkakiler öne alınır ve aynı yolda aynı hız aralığında test tekrarlanır. Titreşim öne değil arkaya taşındıysa kaynak tekerleğin kendisidir — dengesizlik, salgı ya da ölçülemeyen bir lastik kusuru; ölçümler temiz çıksa bile suç tekerlektedir ve o tekerlek üzerinde çalışılır. Titreşim yer değiştirmeden aynı yerde kaldıysa kaynak araçtadır: ön takım boşluğu, aks, göbek ya da süspansiyon. Bu ikinci sonuç, tekerlek üzerinde daha fazla zaman harcamayı anlamsız kılar ve aramayı doğrudan aracın altına taşır. Testin geçerli olması için tekerlekler doğru torkla takılmalı ve basınçlar aksa göre yeniden ayarlanmalıdır; yönlü lastiklerde taraf korunarak yalnız ön–arka değişimi yapılır. Bu, rotasyon dersinde öğrenilen kuralın teşhis amaçlı kullanımıdır." },
+          { "label": "Dört lastik birden değiştirilir", "verdict": "hepsini-degistir", "explain": "Kaynak araçta olabilir; yeni lastikler de titrer." },
+          { "label": "Balans tekrar yapılır", "verdict": "balans-tekrar", "explain": "Doğrulanmış balans tekrar edildiğinde aynı çıkar." },
+          { "label": "Müşteriye alışması söylenir", "verdict": "alis", "explain": "Şikâyetin bir sebebi vardır ve bulunabilir." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Parçaları yer değiştirip belirtinin onlarla birlikte taşınıp taşınmadığına bakmak, her alanda geçerli bir teşhis yöntemi."
+    },
+    {
+      "id": 6,
+      "instruction": "Titreşim tekerleklerle birlikte arkaya taşındı. O tekerleğin bütün ölçümleri temiz.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik",
+        "question": "Geriye ne kalıyor?",
+        "options": [
+          { "label": "Lastiğin kendi iç kusuru: kütlesi dengeli ve geometrisi düzgün olsa da çevre boyunca eşit sertlikte olmayabilir; bu, kütle ölçen bir makinede görünmez", "verdict": "ic-kusur", "correct": true, "explain": "Bir lastik iki bakımdan kusursuz olabilir ama yine de titretebilir. Balans makinesi kütlenin dağılımını ölçer; komparatör tekerleğin biçimini ölçer. Ancak lastik dönerken yola bir de kuvvet uygular ve bu kuvvet, lastiğin çevre boyunca ne kadar eşit sertlikte olduğuna bağlıdır. İç yapısında bir bölgede daha sert ya da daha yumuşak kalan bir lastik, her turda değişen bir kuvvet üretir — sürücü bunu titreşim olarak hisseder, oysa hem kütle hem geometri ölçümü temizdir. Bu kusuru gören özel makineler vardır ve tekerleği yola bastırarak ölçüm yapar; her atölyede bulunmaz. Bulunmadığı durumda karar, elemenin sonucuna dayanır: bağlantılar torklu, basınçlar doğru, balans doğrulanmış, salgı ölçülmüş ve titreşim tekerlekle birlikte taşınıyorsa geriye bu ihtimal kalır. Böyle bir lastik garanti kapsamında değerlendirilebilir; müşteriye söylenmesi gereken şey bulgunun nasıl elde edildiğidir — tahmin değil, eleme." },
+          { "label": "Hiçbir şey; sebep bulunamaz", "verdict": "bulunamaz", "explain": "Eleme bir dal daha bırakıyor: lastiğin kendi iç kusuru." },
+          { "label": "Kesinlikle jant kusurludur", "verdict": "jant", "explain": "Jant ölçüldü ve temiz çıktı." },
+          { "label": "Ön düzen bozuktur", "verdict": "on-duzen", "explain": "Titreşim tekerlekle taşındı; sebep tekerlekte." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Her ölçüm aleti bir şeyi ölçer ve ölçmediği şeyler vardır. İki alet de temiz çıktığında geriye ikisinin de göremediği bir kusur kalabilir."
+    },
+    {
+      "id": 7,
+      "instruction": "Teşhis tamamlandı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.balans-agirligi",
+        "question": "Kayda ne geçer?",
+        "options": [
+          { "label": "Şikâyetin koşulları, yapılan ölçümler ve sonuçları, elenen adaylar ve hangi ölçümle elendikleri, kalan sonuç ve gerekçesi", "verdict": "eleme-kaydi", "correct": true, "explain": "Titreşim şikâyetlerinde kayıt, bulunan sebepten çok elemenin kendisini anlatmalıdır. Sebebi şu üç sebeple: birincisi, arıza geri gelirse bir sonraki kişi elenmiş dalları tekrar elemek zorunda kalmaz — doğrudan kalan yere bakar ve bu, saatlerce zaman kazandırır. İkincisi, müşteriye yapılan işin gerekçesini gösterir; titreşim işlerinde en sık duyulan cümle 'parça değiştirdiler ama geçmedi' cümlesidir ve bunun sebebi çoğu zaman elemenin hiç yapılmamış olmasıdır. Üçüncüsü, bir sonraki bakımda karşılaştırma zemini kurar. Kayıtta bulunması gerekenler bellidir: müşterinin tarif ettiği koşullar, tork ve basınç kontrolü, balans değerleri (öncesi ve doğrulama turu), salgı ölçümleri (lastikli ve jant tek başına), tekerlek yer değiştirme testinin sonucu ve varılan karar. Bu liste bir formalite değil, teşhisin kendisinin yazılı hâlidir." },
+          { "label": "Yalnız değiştirilen parça", "verdict": "parca", "explain": "Elemenin kendisi asıl bilgi; parça listesi onu göstermez." },
+          { "label": "\"Titreşim giderildi\" cümlesi", "verdict": "cumle", "explain": "Hangi adayın hangi ölçümle elendiğini söylemeyen kayıt iş görmez." },
+          { "label": "Yalnız müşterinin şikâyeti", "verdict": "sikayet", "explain": "Kaydın başlangıcı ama sonucu ve ölçümleri içermez." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bu alanın son üç dersi aynı iskeleti kullanıyor: koşulları sor, adayları say, ikiye bölen ölçümü yap, elenen dalı bir daha açma, kalan dalı da ölç."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Bütün tekerlek ölçümleri temizken titreşim sürüyorsa hangi test yapılır?",
+        "a": "yer-degistirme",
+        "options": [
+          { "verdict": "yer-degistirme", "label": "Ön ve arka tekerlekler yer değiştirilip yol testi tekrarlanır: titreşim taşınıyorsa kaynak tekerlekte, kalıyorsa araçtadır", "explain": "Bu test hiçbir cihaz kullanmadan en güçlü ayrımı yapar. Titreşim tekerleklerle birlikte taşındıysa suç tekerlektedir — ölçümler temiz çıksa bile lastiğin iç kusuru kalır. Yer değiştirmediyse kaynak araçtadır: ön takım boşluğu, aks, göbek ya da süspansiyon; bu sonuç tekerlek üzerinde daha fazla zaman harcamayı anlamsız kılar. Testin geçerli olması için tekerlekler torkla takılır, basınçlar aksa göre ayarlanır ve yönlü lastiklerde taraf korunur." },
+          { "verdict": "balans-tekrar", "label": "Balans tekrarlanır", "explain": "Doğrulanmış balans tekrar edildiğinde aynı çıkar." },
+          { "verdict": "lastik-degistir", "label": "Lastikler değiştirilir", "explain": "Kaynak araçta olabilir; yeni lastikler de titrer." },
+          { "verdict": "on-duzen", "label": "Ön düzen ayarı yapılır", "explain": "Ön düzen daha çok aşınma ve çekme üretir." }
+        ]
+      },
+      {
+        "q": "Yalnız frenlemede ortaya çıkan titreşimde ne yapılır?",
+        "a": "fren-sistemi",
+        "options": [
+          { "verdict": "fren-sistemi", "label": "Fren sistemine yönlendirilir: bu belirti lastik ve tekerlek alanının dışındadır", "explain": "Frenleme sırasında ortaya çıkan titreşim genellikle fren diski ve kaliperi ile ilgilidir; lastik ve tekerlek tarafında aranırsa zaman kaybedilir ve gerçek sebep gecikir. Bu tek soru koca bir dalı eler — teşhisin ilk adımında sorulmasının sebebi budur." },
+          { "verdict": "balans", "label": "Balans yapılır", "explain": "Balans kaynaklı titreşim frenlemeden bağımsızdır." },
+          { "verdict": "salgi", "label": "Salgı ölçülür", "explain": "Salgı da frenlemeye bağlı değildir." },
+          { "verdict": "basinc", "label": "Basınç artırılır", "explain": "Basıncın frenlemeye bağlı titreşimle ilgisi yok." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 0,3 mm ve 1,4 mm SENARYO okumalarıdır; kabul edilebilir salgı SINIRI değildir. İstenen sol–sağ FARKIDIR (1,1 mm) ve dersin gösterdiği şey ölçümün ancak balans doğrulandıktan SONRA anlam kazandığıdır.",
+    "sourceRequired": "Kabul edilebilir salgı, dengesizlik ve boşluk sınırları bilinçle VERİLMEDİ: araca ve makineye özgüdür. Titreşimin ortaya çıktığı hız aralıkları da verilmedi; ders sayıyı değil eleme sırasını öğretiyor.",
+    "kapsam": "Kuvvet değişimi ölçen özel makineler metinde anılıyor ama sahnede yok. Fren kaynaklı titreşim bilinçle KAPSAM DIŞI bırakıldı ve derste bu açıkça söyleniyor — fren ayrı bir MEB öğrenme birimidir.",
+    "reviewedByMechanic": false
+  }
+}

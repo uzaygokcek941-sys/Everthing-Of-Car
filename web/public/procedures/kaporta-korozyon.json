@@ -1,0 +1,177 @@
+{
+  "id": "kaporta.korozyon",
+  "area": "kaporta",
+  "stage": 1,
+  "title": "Pas Nasıl Başlar, Fabrika Koruması Nasıl Çalışır",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 35,
+  "prerequisites": ["kaporta.birlestirme"],
+  "learningGoals": [
+    "Korozyonun üç şartını ve hangisini kesebileceğini bilmek",
+    "Fabrikanın kat kat kurduğu koruma sistemini tanımak ve onarımda geri kurmak",
+    "Çıplak metalin neden bekletilmediğini ve pasın neden üstünün kapatılmadığını anlamak"
+  ],
+
+  "safety": [
+    { "rule": "Kaynak ve zımpara sonrası çıplak kalan metal korumasız bırakılmaz", "why": "Korumasız metal nemle temas ettiği andan itibaren korozyona başlar; boyanın altında ilerler ve aylar sonra kabarma olarak ortaya çıkar", "blocksStart": false },
+    { "rule": "Kapalı kesitlere ısı ya da kaynak uygulanmadan önce içindeki koruyucu balmumu ve yalıtım kontrol edilir", "why": "Kapalı kesitteki koruyucu malzemeler yanıcıdır ve görünmediği için için yanma riski yaratır", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.kalinlik-olcer", "label": "Kalınlık ölçer", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true },
+    { "id": "tool.ayna", "label": "Muayene aynası", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Eşik sacının alt kıvrımında kabarmış bir boya bölgesi görüyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.esik-saci",
+        "question": "Korozyonun oluşması için neye ihtiyaç var?",
+        "options": [
+          { "label": "Üç şeye birden: metal, su ve oksijen — üçü bir aradayken korozyon başlar, biri kesildiğinde durur ve bütün koruma sistemleri bu üçünden birini kesmeye çalışır", "verdict": "uc-sart", "correct": true, "explain": "Korozyon bir kaza değil, kimyanın olağan işleyişidir: demir doğada zaten oksitli hâlde bulunur ve saf demire dönüştürülmüş bir sac, ilk fırsatta o hâline geri dönmeye çalışır. Bunun için üç şey gerekir — metalin kendisi, su ve oksijen. Üçü bir aradayken tepkime başlar ve başladıktan sonra kendi kendini besler: oluşan pas gözenekli ve hacimlidir, altındaki sağlam metale nemi taşır ve boyayı yukarı iterek çatlatır; çatlaktan giren yeni nem tepkimeyi hızlandırır. Bu yüzden pas 'bir noktada durup bekleyen' bir kusur değil, ilerleyen bir süreçtir. Koruma mantığı da buradan çıkar: metali ortadan kaldıramazsın, oksijeni yok edemezsin — geriye kesilebilecek tek halka olarak suyun metale ulaşması kalır. Fabrikanın yaptığı budur: metalin üzerine kat kat bariyer koyar. Ama bir ayrıntı daha var ve pratikte belirleyicidir: tepkimeyi hızlandıran şeyler. Tuz bunların başında gelir — kışın yola dökülen tuz, aracın altında kalan ıslak toprakla birlikte korozyonu kat kat hızlandırır. Nemin durduğu ve kurumadığı yerler de öyle: tıkalı bir tahliye deliği, içinde çamur biriken bir kapalı kesit, sürekli ıslak kalan bir bindirme aralığı. Bu yüzden pas rastgele yerlerde çıkmaz; hep suyun kaldığı yerde çıkar." },
+          { "label": "Yalnız suya", "verdict": "su", "explain": "Su tek başına yetmez; oksijen de gerekir." },
+          { "label": "Yalnız kötü boyaya", "verdict": "boya", "explain": "Boya bir bariyer; asıl mesele suyun metale ulaşması." },
+          { "label": "Aracın yaşına", "verdict": "yas", "explain": "Yaş bir olasılık artırıcı; şart değil — yeni araçta da hasarlı bölgede başlar." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Pas rastgele yerde çıkmaz; hep suyun kaldığı yerde çıkar. Tıkalı bir tahliye deliği pastan önce gelen sebeptir."
+    },
+    {
+      "id": 2,
+      "instruction": "Kabarmış bölgeyi açtın ve iki noktada sac kalınlığı ölçtün: sağlam bölgede 0,68 mm, paslı bölgede 0,31 mm. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.kalinlik-olcer",
+        "unit": "mm",
+        "acceptRange": [0.33, 0.41]
+      },
+      "camera": "kaporta",
+      "hint": "0,68 eksi 0,31.",
+      "teachingNote": "0,37 milimetre kaybolmuş — yani sacın yarısından fazlası. Bu ölçüm bu dersin en önemli mesajını taşıyor: pas yüzeyde görünen bir leke değil, malzeme kaybıdır. Dışarıdan bakınca avuç içi kadar bir kabarma görürsün; altını açtığında etkilenen alan çoğu zaman çok daha geniştir, çünkü korozyon boyanın altında yanlara doğru ilerler. Kalınlık kaybının pratik sonucu şu: kalan sac, o bölgenin taşıması gereken yükü artık taşımıyor olabilir. Dış panelde bu bir görünüm ve dayanıklılık sorunudur; taşıyıcı bir parçada ise doğrudan güvenlik sorunudur ve orada karar senin değil kılavuzundur. Bu yüzden paslı bölgede iki soru sorulur. Birincisi: pas yüzeysel mi, yoksa malzeme kaybı var mı? Yüzeysel pas temizlenip korunabilir; malzeme kaybı olan bölge onarılmaz, kesilip yenilenir ya da parça değişir. İkincisi: bu parça taşıyıcı mı? Evetse iş kılavuza ve çoğu zaman başka bir atölyeye gider. Kabul edilebilir kalınlık kaybı sınırı araca ve parçaya özgüdür; bu ders hiçbir araç için sınır vermiyor — buradaki iki sayı senaryo okumasıdır."
+    },
+    {
+      "id": 3,
+      "instruction": "Fabrika çıkışlı bir panelin kesitine bakıyorsun: metalin üzerinde birden fazla katman var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.arka-kapi-paneli",
+        "question": "Fabrika koruması neden tek katman değil?",
+        "options": [
+          { "label": "Her katman ayrı bir iş yapar: metalin kendi kaplaması, yapışmayı ve elektrokimyasal korumayı sağlayan ön işlem ve daldırma astar, üstüne dolgu astarı, renk ve vernik — biri delinse diğeri devam eder", "verdict": "kat-kat", "correct": true, "explain": "Fabrikada bir gövde boyanmadan önce uzun bir hazırlık zincirinden geçer ve her adımın ayrı bir görevi vardır. Sac çoğu zaman zaten çinko içeren bir kaplamayla gelir; bu kaplama bir bariyer olmanın ötesinde bir şey yapar: metal yüzeyde bir çizik olsa bile çinko kendini feda ederek altındaki çeliği korur, yani koruma çiziğin kenarında da devam eder. Sonra gövde yıkanır, yağı alınır ve kimyasal bir ön işlemden geçer; bu işlem yüzeyde astarın tutunacağı mikroskobik bir zemin oluşturur — yapışmanın asıl sırrı boyada değil buradadır. Ardından gövde bir daldırma astar banyosuna sokulur ve elektrik yardımıyla astar, gövdenin ulaşılması zor iç boşluklarına kadar her yerine eşit biçimde çeker. Üstüne dolgu astarı, renk katı ve vernik gelir. Bunlara ek olarak bindirme yerlerine sızdırmazlık macunu çekilir, alt takım bölgelerine taş darbelerine dayanıklı koruyucu uygulanır ve kapalı kesitlerin içine koruyucu balmumu püskürtülür. Onarım açısından çıkan sonuç nettir ve bu alanın en çok atlanan noktasıdır: bir bölgeyi zımparalayıp boyadığında fabrikanın kurduğu bu sistemin birkaç katmanını birden kaldırmış olursun. Aynı sırayla geri kurmazsan görüntü aynı olur ama koruma aynı olmaz — ve fark, işi teslim ettikten aylar ya da yıllar sonra ortaya çıkar. Bu ders hiçbir ürün için katman kalınlığı, kürlenme sıcaklığı ya da süresi vermiyor; onlar ürünün teknik belgesinde yazar." },
+          { "label": "Görünüm kalitesi için", "verdict": "gorunum", "explain": "Görünüm son katmanın işi; alttakilerin görevi koruma ve yapışma." },
+          { "label": "Kalınlık kazandırmak için", "verdict": "kalinlik", "explain": "Amaç kalınlık değil, her katmanın ayrı bir işi olması." },
+          { "label": "Maliyet düşürmek için", "verdict": "maliyet", "explain": "Aksine masraflı bir zincirdir; sebebi ömürdür." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Zımparaladığın yerde fabrikanın birkaç katmanını birden kaldırdın. Aynı sırayla kurulmazsa görüntü aynı olur, koruma olmaz."
+    },
+    {
+      "id": 4,
+      "instruction": "Kapı panelinin alt kenarında küçük delikler var; biri çamurla tıkanmış.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-kapi-paneli",
+        "question": "Bu delikler ne işe yarar ve tıkanması ne yapar?",
+        "options": [
+          { "label": "Tahliye delikleridir: kapının içine giren su oradan akar; tıkandığında su içeride birikir ve kapı alt kenarını içeriden dışarıya doğru çürütür", "verdict": "tahliye", "correct": true, "explain": "Kapının içine su girmesi bir arıza değildir; tasarımın kabul ettiği bir durumdur. Cam ile fitil arasından, yağmurda ve yıkamada mutlaka bir miktar su sızar. Üretici bunu bildiği için kapının alt kenarına tahliye delikleri koyar ve suyun girip çıkmasını planlar. Sorun su girmesi değil, suyun çıkamamasıdır. Delikler çamur, yaprak, boya ya da yanlış uygulanmış bir sızdırmazlık macunuyla tıkandığında su içeride birikir ve orada kalır. Kapının içi ise dışından daha savunmasızdır: fabrika koruması vardır ama iç yüzey dış yüzey kadar kalın kat almaz. Sonuç, kapı alt kenarının içeriden dışarıya doğru çürümesidir — ve bu, bu alanda en sık görülen korozyon deseninin ta kendisidir. Belirtisi de tanıdıktır: kapının alt kenarında boya kabarır; usta dışarıdan zımparalayıp boyar, birkaç ay sonra aynı yerden yeniden çıkar. Çünkü sorun dışarıda değil, içerideydi. Bu yüzden kapı, bagaj kapağı, eşik ve tavan kanallarında tahliye yolları her işte kontrol edilir ve açık bırakılır. Aynı ilke aksesuar montajlarında da geçerlidir: bir kapıya hoparlör ya da kamera kablosu çeken biri, tahliye yolunu kapatan bir bant ya da macun bırakırsa aylar sonra çürüyen kapının sebebi olur. Bu, alanların birbirine değdiği yerlerden biridir." },
+          { "label": "Üretim hatasıdır", "verdict": "hata", "explain": "Bilinçli olarak açılmış tahliye delikleridir." },
+          { "label": "Havalandırma içindir, önemsizdir", "verdict": "havalandirma", "explain": "Asıl işlevi suyun çıkması; tıkanması çürüme üretir." },
+          { "label": "Kapatılması gerekir", "verdict": "kapat", "explain": "Kapatılması suyu içeride hapseder." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Kapı alt kenarı içeriden dışarıya çürür. Dışarıdan boyayan usta, birkaç ay sonra aynı yeri tekrar görür."
+    },
+    {
+      "id": 5,
+      "instruction": "Zımparaladığın bölgede çıplak metal ortaya çıktı. Gün sonu yaklaşıyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.zimpara-bolgesi",
+        "question": "Çıplak metal ertesi güne bırakılabilir mi?",
+        "options": [
+          { "label": "Bırakılmaz: korumasız metal havadaki nemle temas ettiği andan itibaren yüzeyde ince bir oksit tabakası kurar, bu tabaka gözle görülmese bile astarın yapışmasını bozar ve altta korozyonu başlatır", "verdict": "beklemez", "correct": true, "explain": "Bu, atölyede en çok görülen ve en kolay kaçınılan hatalardan biridir. Zımparalanmış bir metal yüzey kimyasal olarak son derece isteklidir: temizlenmiş, aktif ve korumasızdır. Havadaki nem, elin teri, atölyenin havasındaki yağ buharı — hepsi o yüzeyle hemen tepkimeye girer. Görünen bir pas oluşması saatler ya da günler alabilir ama görünmeyen ilk katman çok daha erken kurulur. Sonuç iki yönlüdür. Birincisi yapışma: astarın tutunması gereken zemin artık temiz metal değil, gevşek bir ara tabakadır; astar bu tabakaya yapışır ve tabaka bir gün metalden ayrıldığında boya sistemi bütün olarak kalkar. İkincisi korozyon: o ara tabaka nemi tutar ve boyanın altında ilerlemeye başlar. İkisi de teslimden aylar sonra ortaya çıkar ve müşteriye 'boya kötüymüş' gibi görünür; oysa sebep boya değil, bekletilen çıplak metaldir. Doğru uygulama basit ve ucuzdur: zımparadan sonra yüzey uygun bir temizleyiciyle yağdan arındırılır ve aynı gün, mümkünse hemen astarlanır. Kaynak yapılan bölgeler için de aynı kural geçerlidir; kaynağın hem üstü hem — ulaşılabiliyorsa — arkası korunur ve kapalı kesitler için koruyucu balmumu uygulanır. Hangi temizleyicinin ve hangi astarın kullanılacağı, ne kadar süre içinde uygulanması gerektiği ürünün teknik belgesinde yazar; bu ders bir ürün ya da süre vermiyor." },
+          { "label": "Bırakılabilir, kapalı atölyede pas olmaz", "verdict": "kapali", "explain": "Kapalı ortamda da nem vardır; ilk oksit tabakası hızla kurulur." },
+          { "label": "Üstüne yağ sürülür", "verdict": "yag", "explain": "Yağ astarın yapışmasını bozar; doğru yol astarlamak." },
+          { "label": "Ertesi gün tekrar zımparalanır, sorun kalmaz", "verdict": "tekrar", "explain": "Her zımpara sacı biraz daha inceltir; doğru yol aynı gün korumak." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Müşteriye 'boya kötüymüş' gibi görünen kusurun sebebi çoğu zaman bekletilmiş çıplak metaldir."
+    },
+    {
+      "id": 6,
+      "instruction": "Bir aracın çamurluğunda pas var. Müşteri 'üstünü kapat, görünmesin yeter' diyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.gocuk-bolgesi",
+        "question": "Ne yapılır?",
+        "options": [
+          { "label": "Pas temizlenmeden üstü kapatılmaz: macun ve boya nemi durdurmaz, korozyon altta ilerler ve birkaç ay sonra daha geniş bir alan olarak geri gelir — müşteriye bu anlatılır ve karar birlikte verilir", "verdict": "kapatilmaz", "correct": true, "explain": "Bu isteğin arkasında genelde bütçe vardır ve anlaşılırdır; ama teknik cevabı değiştirmez. Pasın üstünü kapatmak onu durdurmaz: macun ve boya su geçirmez bir zırh değildir, nem zamanla altına ulaşır ve zaten paslı bölgede tepkime kendi kendini besleyecek malzemeyi bulmuştur. Birkaç ay içinde aynı yerden, üstelik daha geniş bir alanda geri gelir; üstelik bu sefer üzerinde macun ve boya katmanı olduğu için onarım da daha pahalıdır. Yani müşterinin tasarruf sandığı şey, gelecekteki masrafı büyütür. Doğru yaklaşım üç adımdır. Önce gerçeği anlat: bu bir görünüm sorunu değil, malzeme kaybı ve ilerleyen bir süreç. Sonra seçenekleri somut koy: pas tamamen temizlenip bölge yeniden korunacak ve boyanacak — kayıp ilerlemişse sac yenilenecek ya da parça değişecek. Son olarak, müşteri yine de yalnız kozmetik bir çözüm istiyorsa, bunu ne olduğunu açıkça yazarak yap: 'geçici kozmetik uygulama, korozyon devam edecektir' diye kayda geç ve garanti kapsamı dışında olduğunu belirt. Yazmadığın her açıklama, üç ay sonra 'bana böyle demedin' tartışmasına dönüşür. Bu alanda kayıt tutmak teknik bir adım değil ama en çok para kurtaran adımdır — hasar okuma dersinde de aynı şeyi söylemiştik. Bir sınır daha var: paslı bölge taşıyıcı bir parçadaysa kozmetik çözüm hiç önerilmez; orada karar kılavuzdan verilir ve gerekiyorsa iş reddedilir." },
+          { "label": "Üstü macunlanıp boyanır, müşteri istedi", "verdict": "macunla", "explain": "Pas altta ilerler ve daha geniş alanla geri gelir." },
+          { "label": "Pas dönüştürücü sürülüp boyanır, yeterlidir", "verdict": "donusturucu", "explain": "Bu ürünler yüzeysel pasta yardımcı olabilir ama malzeme kaybını geri getirmez ve kullanımı ürünün kendi şartlarına bağlıdır." },
+          { "label": "Hiçbir şey yapılmaz, iş reddedilir", "verdict": "reddet", "explain": "Reddetmek bazı durumlarda doğru ama önce gerçeği anlatıp seçenek sunmak gerekir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Müşterinin tasarruf sandığı şey gelecekteki masrafı büyütür. Kozmetik çözüm yapılacaksa ne olduğu yazılır."
+    },
+    {
+      "id": 7,
+      "instruction": "Korozyon zincirini kurdun: nerede başlar, ne hızlandırır, nasıl durur.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.tavan-paneli",
+        "question": "Onarımdan sonra korozyon korumasını geri kurmak neden bu alanın dürüstlük sınavı?",
+        "options": [
+          { "label": "Çünkü yapıldığı da yapılmadığı da teslim anında hiç görünmez: fark aylar ya da yıllar sonra ortaya çıkar ve o zaman kimse sebebini bilemez — bu yüzden bu adım kimse için değil, işin kendisi için yapılır", "verdict": "gorunmez-is", "correct": true, "explain": "Bu alanın bütün işleri arasında en kolay atlanabilen adım budur. Kapalı kesitin içine koruyucu balmumu püskürtmek, kaynak bölgesinin arkasını korumak, bindirme yerine yeniden sızdırmazlık macunu çekmek, tahliye deliklerini açık bırakmak — hiçbiri teslim anında görünmez. Araç yıkanmış, parlatılmış ve kusursuz görünüyorken bu adımların yapılıp yapılmadığını müşteri anlayamaz, çoğu zaman başka bir usta da anlayamaz. Fark, üç yıl sonra o kapının alt kenarında beliren kabarmayla ortaya çıkar ve o gün kimse geriye dönüp o onarımı hatırlamaz. İşte bu yüzden korozyon koruması bu alanın dürüstlük sınavıdır: yapan da yapmayan da aynı görünen faturayı keser. Uzun vadede fark eden tek şey ustanın adıdır — çünkü bir atölyenin işi üç yıl sonra hâlâ duruyorsa, o müşteri geri döner ve komşusunu getirir; kabarıyorsa ikisi de gitmiştir ve sebebini söylemezler. Pratik özet olarak korozyon dersinin üç kuralı şudur: çıplak metal bekletilmez ve aynı gün korunur; pasın üstü kapatılmaz, temizlenir ya da malzeme yenilenir; suyun çıkış yolları — tahliye delikleri, kanallar, kapalı kesitler — her işte kontrol edilir ve açık bırakılır. Bu üçü bir arada, bir onarımın kaç yıl dayanacağını belirler." },
+          { "label": "Çünkü zaman alır", "verdict": "zaman", "explain": "Zaman alır ama mesele görünmezliği." },
+          { "label": "Çünkü pahalıdır", "verdict": "pahali", "explain": "Maliyeti sınırlıdır; mesele denetlenememesi." },
+          { "label": "Çünkü müşteri talep eder", "verdict": "talep", "explain": "Müşteri çoğu zaman varlığından haberdar değildir; tam da bu yüzden." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Yapan da yapmayan da aynı faturayı keser. Üç yıl sonra fark eden tek şey ustanın adı. Sırada alet ve ölçüm."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Kapının alt kenarında boya kabardı. Dışarıdan zımparalayıp boyamak neden çözmez?",
+        "a": "tahliye",
+        "options": [
+          { "verdict": "tahliye", "label": "Çünkü çürüme içeriden dışarıya ilerliyor: tıkalı tahliye delikleri suyu kapının içinde hapsediyor ve kapının içi dış yüzeyden daha az korumalı", "explain": "Kapıya su girmesi tasarımın kabul ettiği bir durumdur; sorun suyun çıkamamasıdır. Tahliye yolları her işte kontrol edilir ve açık bırakılır — bir kapıya kablo çekerken tahliyeyi kapatan bant ya da macun bırakmak da aynı sonucu üretir." },
+          { "verdict": "hata", "label": "Delikler üretim hatasıdır", "explain": "Bilinçli açılmış tahliye delikleridir." },
+          { "verdict": "havalandirma", "label": "Delikler havalandırma içindir, önemsiz", "explain": "Asıl işlevi suyun çıkması." },
+          { "verdict": "kapat", "label": "Delikler kapatılmalıdır", "explain": "Kapatmak suyu içeride hapseder." }
+        ]
+      },
+      {
+        "q": "Zımparadan sonra çıplak kalan metal ertesi güne bırakılabilir mi?",
+        "a": "beklemez",
+        "options": [
+          { "verdict": "beklemez", "label": "Hayır: yüzeyde görünmeyen bir oksit tabakası kurulur, astarın yapışmasını bozar ve altta korozyonu başlatır — aynı gün yağdan arındırılıp astarlanır", "explain": "Sonuç aylar sonra boya kalkması ya da kabarma olarak çıkar ve müşteriye 'boya kötüymüş' gibi görünür. Kaynak bölgelerinin arkası da korunur, kapalı kesitlere koruyucu balmumu uygulanır. Ürün ve süre ürünün teknik belgesinde yazar." },
+          { "verdict": "kapali", "label": "Kapalı atölyede sorun olmaz", "explain": "Kapalı ortamda da nem vardır." },
+          { "verdict": "yag", "label": "Üstüne yağ sürülür", "explain": "Yağ yapışmayı bozar." },
+          { "verdict": "tekrar", "label": "Ertesi gün tekrar zımparalanır", "explain": "Her zımpara sacı biraz daha inceltir." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2'deki 0,68 mm ve 0,31 mm SENARYO okumalarıdır; istenen FARKTIR (0,37 mm). Ders hiçbir araç için fabrika sac kalınlığı ya da kabul edilebilir kalınlık kaybı sınırı iddia etmiyor.",
+    "sourceRequired": "Kabul edilebilir kalınlık kaybı sınırları, fabrika kaplama ve katman kalınlıkları, kürlenme sıcaklık ve süreleri, hangi temizleyici ve astarın kullanılacağı, çıplak metalin azami bekleme süresi, pas dönüştürücü ürünlerin uygunluk şartları ve kapalı kesit koruyucu ürün bilgileri bilinçle VERİLMEDİ; hepsi araca ve ürüne özgüdür, üreticinin onarım kılavuzundan ve ürünün teknik belgesinden okunur.",
+    "kapsam": "Taşıyıcı parçada korozyon onarımı, sac yenileme ve kesip ekleme KAPSAM DIŞIDIR — ders korozyonun mekanizmasını, korumanın mantığını ve kararın sınırını öğretiyor.",
+    "kaynak": "Bu alan kullanıcının açık talebiyle eklendi (talep birebir: 'birde alanlara kaportayı ekleyelim'); konu başlıkları MEB Otomotiv Gövde ve Boya dalının çerçevesini takip ediyor, kazanım numarası iddiası yok.",
+    "reviewedByMechanic": false
+  }
+}

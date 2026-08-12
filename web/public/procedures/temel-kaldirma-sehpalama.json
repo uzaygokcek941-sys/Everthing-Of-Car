@@ -1,0 +1,147 @@
+{
+  "id": "temel.kaldirma-sehpalama",
+  "area": "motor-mekanik",
+  "stage": 0,
+  "title": "Aracı Kaldırma ve Sehpaya Alma",
+  "vehicleClass": "binek-arac",
+  "estimatedMinutes": 15,
+  "prerequisites": ["temel.kkd-ve-atolye"],
+  "learningGoals": [
+    "Üreticinin kaldırma noktasını araca bakarak bulmak",
+    "Krikoyu kaldırma aleti, sehpayı taşıma aleti olarak ayırmak",
+    "Altına girmeden önce yükü sehpaya bindirip sağlamlığını denemek"
+  ],
+
+  "safety": [
+    { "rule": "Krikonun üstündeki aracın altına asla girilmez", "why": "Kriko hidroliktir; contası boşalırsa uyarı vermeden iner. Sehpa mekaniktir, boşalacak bir şeyi yoktur. Atölyede ölümlü kazaların çoğu bu tek maddeden çıkar", "blocksStart": true },
+    { "rule": "Zemin düz, sert ve kuru olmalı", "why": "Eğimli ya da yumuşak zeminde sehpa yana kayar; toprakta ve ıslak şapta ayak gömülür", "blocksStart": true },
+    { "rule": "Kaldırılmayan tekerleklere takoz konur", "why": "Araç kaldırılırken tekerlek üzerinde yuvarlanabilir; el freni tek başına yeterli değildir", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.kriko", "label": "Hidrolik kriko", "required": true },
+    { "id": "tool.sehpa", "label": "Sehpa (çifti)", "required": true },
+    { "id": "tool.takoz", "label": "Tekerlek takozu", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Krikoyu aracın altında nereye dayarsın?",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kaldirma-noktasi",
+        "question": "Doğru kaldırma noktası hangisi?",
+        "options": [
+          { "label": "Eşik altındaki takviyeli kaldırma noktası", "verdict": "kaldirma-noktasi", "correct": true, "explain": "Üretici bu noktayı aracın ağırlığını taşısın diye güçlendirmiştir ve genelde bir çentik ya da kabartma ile işaretlemiştir. Kaldırma noktası araca bakılarak bulunur, tahmin edilmez." },
+          { "label": "Yağ karteri", "verdict": "karter", "explain": "Karter ince sacdan ya da alüminyumdandır ve motorun yağını tutar. Üstüne kriko dayarsan ezilir, çatlar; motor yağsız kalır. Bu, tamir edilebilir bir hata değildir." },
+          { "label": "Eşik sacının herhangi bir yeri", "verdict": "esik-sac", "explain": "Takviyesiz eşik sacı krikonun altında katlanır. Araç düşmese bile gövdede kalıcı ezik bırakırsın." },
+          { "label": "Süspansiyon salıncağı", "verdict": "salincak", "explain": "Salıncak hareketli bir parçadır; kaldırırken açı değişir ve kriko kayabilir. Bazı işlerde bilinçli kullanılır ama varsayılan kaldırma noktası değildir." }
+        ]
+      },
+      "camera": "arac-alt",
+      "teachingNote": "Kaldırma noktasını bulmak ustalık işaretidir: usta araca bakar, çırak kılavuza bakar, acemi tahmin eder."
+    },
+    {
+      "id": 2,
+      "instruction": "Krikonun kolunu çevirerek aracı tekerlek yerden kesilene kadar kaldır.",
+      "interaction": {
+        "type": "rotate",
+        "target": "part.kriko",
+        "direction": "cw",
+        "turns": 6,
+        "tool": "tool.kriko",
+        "requiresGesture": true
+      },
+      "camera": "arac-alt",
+      "commonMistake": {
+        "if": "ters-yon",
+        "feedback": "Ters yöne çeviriyorsun. Bu yön krikoyu indirir; araç yükseldiği sırada indirmek krikonun kaymasına yol açar."
+      },
+      "hint": "Yavaş kaldır ve krikonun tabanına bak. Taban zeminden kalkmaya başladıysa kriko açı almış demektir, indirip yeniden yerleştir.",
+      "teachingNote": "Kaldırma yüksekliği sehpanın rahat girmesine yetecek kadar olmalı; gereğinden fazla yükseklik devrilme riskini artırır."
+    },
+    {
+      "id": 3,
+      "instruction": "Araç havada. Şimdi ne yaparsın?",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sehpa",
+        "question": "Kriko aracı kaldırdı. Sıradaki adım?",
+        "options": [
+          { "label": "Sehpayı kaldırma noktasına sürüp yüksekliğini ayarlarım", "verdict": "sehpa", "correct": true, "explain": "Kriko kaldırma aletidir, taşıma aleti değildir. Yükü mekanik olarak kilitlenen sehpaya devretmeden hiçbir iş başlamaz." },
+          { "label": "Kriko sağlam duruyor, işe başlarım", "verdict": "krikoda-birak", "explain": "Hidrolik kriko sızdırdığında sesli uyarı vermez, yavaşça iner. Altındayken fark edersen geç kalmışsındır." },
+          { "label": "Altına yedek lastik koyarım", "verdict": "yedek-lastik", "explain": "Lastik ezilir ve kayar, yükseklik tutmaz. Sehpa yokken hiç yoktan iyidir diye alışkanlık yapan çok kişi var; doğrusu sehpadır." },
+          { "label": "Tuğla ya da takoz yığarım", "verdict": "tugla", "explain": "Tuğla basınç altında ani ve haber vermeden kırılır; sehpa gibi kademeli bükülmez. Altına giremeyeceğin tek destek türü budur." }
+        ]
+      },
+      "camera": "arac-alt"
+    },
+    {
+      "id": 4,
+      "instruction": "Krikoyu ters yöne çevirerek aracın yükünü yavaşça sehpaya bindir.",
+      "interaction": {
+        "type": "rotate",
+        "target": "part.kriko",
+        "direction": "ccw",
+        "turns": 2,
+        "tool": "tool.kriko",
+        "requiresGesture": true
+      },
+      "camera": "arac-alt",
+      "commonMistake": {
+        "if": "ters-yon",
+        "feedback": "Bu yön kaldırır. Yükü sehpaya bindirmek için krikoyu yavaşça indirmen gerekiyor."
+      },
+      "hint": "Aniden bırakma. Yük sehpaya çarparak değil, oturarak geçmeli.",
+      "teachingNote": "Kriko tamamen boşaltılmaz, hafif temasta bırakılır: sehpa devrilirse ikinci bir engel olur."
+    },
+    {
+      "id": 5,
+      "instruction": "Altına girmeden önce son kontrol.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sehpa",
+        "question": "Aracın altına girmeden önce hangisi yapılır?",
+        "options": [
+          { "label": "Aracı elle iterek sallarım, oynamıyorsa girerim", "verdict": "sars-dene", "correct": true, "explain": "Sallama testi sehpanın tam oturup oturmadığını ve zeminin kayıp kaymadığını söyler. Yük altında yapılan tek ücretsiz sağlamlık testidir." },
+          { "label": "Gözle bakarım, düz duruyorsa yeter", "verdict": "gozle", "explain": "Yarım oturmuş bir sehpa gözle düz görünür. Fark ettiren şey harekettir, görüntü değil." },
+          { "label": "Hemen girerim, sehpa zaten güvenli", "verdict": "hemen-gir", "explain": "Sehpa güvenlidir, yanlış yerleştirilmiş sehpa değildir. Test edilen sehpa değil, yerleşimdir." },
+          { "label": "Motoru çalıştırıp titreşimde durup durmadığına bakarım", "verdict": "motor-calistir", "explain": "Kaldırılmış araçta motor çalıştırmak titreşimle sehpayı yürütür. Yapılabilecek en kötü testtir." }
+        ]
+      },
+      "camera": "arac-alt"
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Neden krikonun üstündeki aracın altına girilmez?",
+        "a": "hidrolik-uyarisiz-iner",
+        "options": [
+          { "verdict": "hidrolik-uyarisiz-iner", "label": "Hidrolik sızdırırsa uyarı vermeden iner", "explain": "Krikoda yükü tutan şey basınçlı sıvıdır; conta boşalınca basınç da gider. Sehpada yükü tutan şey çeliğin kendisidir." },
+          { "verdict": "yer-dar", "label": "Altında çalışmak için yer dar olduğundan", "explain": "Yer sorunu değil, güvenlik sorunu. Yüksek kriko da aynı ölçüde tehlikelidir." },
+          { "verdict": "kriko-zarar-gorur", "label": "Krikoya zarar verdiği için", "explain": "Zarar gören alet değil, altındaki kişidir." },
+          { "verdict": "girilir", "label": "Kısa işlerde girilebilir", "explain": "Süre riski azaltmaz. Conta ne zaman boşalacağını haber vermez." }
+        ]
+      },
+      {
+        "q": "Araç sehpadayken elektrik sistemine dokunacaksan işe nasıl başlarsın?",
+        "a": "eksi-kutup-sokulur",
+        "options": [
+          { "verdict": "eksi-kutup-sokulur", "label": "Akünün eksi kutup başı sökülür", "explain": "Eksi kutup şaseye bağlıdır. Önce onu sökersen, anahtar kazara gövdeye değdiğinde devre kapanmaz. Takarken sıra tersidir: önce artı, en son eksi." },
+          { "verdict": "arti-kutup-sokulur", "label": "Artı kutup başı sökülür", "explain": "Artıyı sökerken anahtar şaseye değerse kısa devre olur. Bu yüzden sökmede sıra eksiden başlar." },
+          { "verdict": "kontak-kapali-yeter", "label": "Kontağı kapatmak yeterlidir", "explain": "Kontak kapalıyken de akü birçok devreyi beslemeye devam eder." },
+          { "verdict": "gerek-yok", "label": "12 volt tehlikeli değil, gerek yok", "explain": "Tehlike çarpılma değil, akünün verebildiği yüksek akımdır. Kısa devre eden bir anahtar saniyeler içinde kızarır ve yangın çıkarır." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "sourceRequired": "Bu derste araca özgü sayısal değer yoktur. Gerçek kaldırma noktası araçtan araca değişir ve kullanım kılavuzunda gösterilir; model bazlı gösterim eklenene kadar genel kural öğretilir.",
+    "reviewedByMechanic": false
+  }
+}

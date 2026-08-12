@@ -1,0 +1,176 @@
+{
+  "id": "lastik.dot-ve-yas",
+  "area": "lastik-tekerlek",
+  "stage": 1,
+  "title": "DOT Tarihi: Dişi Var Ama Yaşlı",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 25,
+  "prerequisites": ["lastik.yanak-okuma"],
+  "learningGoals": [
+    "DOT kodunun son dört hanesinden üretim haftasını ve yılını okumak",
+    "Lastiğin kullanılmadan da yaşlandığını ve bunun nerede görüldüğünü bilmek",
+    "Yaş kararını kimin verdiğini ve ustanın işinin ne olduğunu ayırt etmek"
+  ],
+
+  "safety": [
+    { "rule": "Yanağında ya da diş dibinde çatlak bulunan lastik, dişi ne kadar olursa olsun yola çıkarılmaz", "why": "Çatlak, kauçuğun kord katmanlarını taşıma yeteneğini kaybettiğini gösterir; bu lastik ısındığında ayrılır", "blocksStart": true },
+    { "rule": "Yedek lastiğin de tarihi ve basıncı kontrol edilir", "why": "Hiç kullanılmamış yedek de yaşlanır; en çok ihtiyaç duyulduğu anda güvenilmez olur", "blocksStart": false },
+    { "rule": "Yaş kararı gözle görülen belirtiyle birlikte verilir", "why": "Tek başına tarih bir kusur değildir; karar tarih ile fiziksel durumun birlikte değerlendirilmesiyle verilir", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true },
+    { "id": "tool.dis-mastari", "label": "Diş derinliği mastarı", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Yanakta, oval bir çerçevenin içinde DOT ile başlayan bir kod var. Sonu 3621.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik-yanagi",
+        "question": "3621 neyi söyler?",
+        "options": [
+          { "label": "Üretim tarihini: 2021 yılının 36. haftası — ilk iki hane hafta, son iki hane yıl", "verdict": "hafta-yil", "correct": true, "explain": "DOT kodunun sonundaki dört hane üretim tarihidir ve okunuşu sabittir: ilk iki hane haftayı, son iki hane yılı verir. 3621, 2021 yılının 36. haftasında üretildiği anlamına gelir. Tarih haftaya kadar verilir çünkü lastik seri üretim bir üründür ve bir sorun çıktığında geri çağırma o hafta üretilen partiyi kapsar. Kodun yeri de bilinmelidir: bütün DOT kodu çoğu lastikte yalnız bir yanakta tam olarak basılıdır, karşı yanakta kısaltılmış hâli bulunur. Tekerlek araçtayken görünen yüzde tam kod yoksa tarihi bulmak için ya araç kaldırılıp iç yanağa bakılır ya da tekerlek sökülür. Tarihi okumadan 'yeni lastik' demek mümkün değildir — depoda yıllarca bekleyip yeni gibi satılan lastik yaygındır." },
+          { "label": "36. gün, 2021 yılı", "verdict": "gun", "explain": "İlk iki hane gün değil haftadır; yılda 52 hafta üzerinden okunur." },
+          { "label": "Üretim bandı numarası", "verdict": "bant", "explain": "Bant ve fabrika bilgisi kodun önceki hanelerinde yer alır; son dört hane tarihtir." },
+          { "label": "Azami kullanım süresini", "verdict": "sure", "explain": "Kod bir süre değil, bir başlangıç tarihi verir. Süreyi üretici ve mevzuat belirler." }
+        ]
+      },
+      "camera": "yanak",
+      "teachingNote": "Bu kod satın alma anında da işe yarar: raftaki lastiğin tarihine bakmadan alınan 'sıfır' lastik, üç yıl önce üretilmiş olabilir ve ömrünün bir kısmını depoda geçirmiştir."
+    },
+    {
+      "id": 2,
+      "instruction": "Aracın iki lastiği farklı. Birinin kodu 3621, diğerininki 1119. Aralarındaki farkı HAFTA olarak gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.lastik-yanagi",
+        "unit": "hafta",
+        "acceptRange": [128, 130]
+      },
+      "camera": "yanak",
+      "hint": "2019'un 11. haftasından 2021'in 11. haftasına 104 hafta; üstüne kalan haftaları ekle.",
+      "teachingNote": "1119 = 2019'un 11. haftası, 3621 = 2021'in 36. haftası. İki yıl 104 hafta eder, 11'den 36'ya 25 hafta daha; toplam 129 hafta, yani iki buçuk yıla yakın. Bu hesabın asıl işi şudur: aynı araçtaki lastiklerin yaşı birbirinden çok farklıysa o araç lastiklerini teker teker, muhtemelen patladıkça değiştirmiştir. Bu tek başına bir arıza değil ama araç hakkında gerçek bir ipucudur ve aşınma desenlerini yorumlarken işe yarar."
+    },
+    {
+      "id": 3,
+      "instruction": "Müşteri diyor ki: bu yedek lastik hiç kullanılmadı, bagajda duruyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik",
+        "question": "Yaşlanma açısından bu ne anlama gelir?",
+        "options": [
+          { "label": "Hiçbir şey değiştirmez: kauçuk kullanılmasa da zamanla sertleşir ve çatlar", "verdict": "yaslanir", "correct": true, "explain": "Lastiğin yaşlanması bir aşınma olayı değil, bir malzeme olayıdır. Kauçuğa esnekliğini veren katkılar zamanla oksijen, ısı ve ozonun etkisiyle yapılarını kaybeder; kauçuk sertleşir, elastikliği azalır ve içindeki gerilimleri taşıyamaz hâle gelir. Bu süreç lastik dönmese de işler. Yedek lastik ayrıca çoğu zaman en kötü şartlarda saklanır: bagaj altında, sıcakta, çoğu kez basıncı düşmüş hâlde. Sonuç şudur — dişi tertemiz duran bir yedek, gerçekten ihtiyaç duyulduğu anda, yani yol kenarında, güvenilmez olabilir. Bu yüzden periyodik bakımda yedeğin hem basıncı hem tarihi hem de yanak durumu kontrol edilir. Aynı mantık uzun süre park hâlinde bekleyen araçların lastikleri için de geçerlidir." },
+          { "label": "Kullanılmadığı için yaşlanmaz, sıfır sayılır", "verdict": "sifir", "explain": "Yaşlanma dönmeye bağlı değil; kauçuğun kimyasal değişimine bağlı." },
+          { "label": "Sadece dişi ölçülür, tarihe bakılmaz", "verdict": "sadece-dis", "explain": "Diş derinliği yaşlanmayı göstermez; yaşlı bir lastiğin dişi tam olabilir." },
+          { "label": "Bagajda karanlıkta durduğu için hiç etkilenmez", "verdict": "karanlik", "explain": "Güneş ışığı etkenlerden yalnız biri; ısı ve oksijen karanlıkta da iş görür." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bu dersin ana ayrımı burada: aşınma kullanımla, yaşlanma zamanla ilerler. İkisi bağımsızdır ve lastik hangisi önce sınıra gelirse orada biter."
+    },
+    {
+      "id": 4,
+      "instruction": "Yaşlanma belirtisi arıyorsun. Elinde fener var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik-yanagi",
+        "question": "Nereye bakılır?",
+        "options": [
+          { "label": "Yanağa ve diş diplerine: en çok esneyen ve en ince yerlerde ince çatlaklar ilk orada çıkar", "verdict": "yanak-ve-dis-dibi", "correct": true, "explain": "Yaşlanan kauçuk önce en çok çalışan yerde teslim olur. Yanak, tekerleğin her turunda bükülüp açılan bölgedir ve lastiğin en ince kesitidir; sertleşen kauçuk bu bükülmeyi taşıyamaz ve yüzeyde ince, ağ gibi çatlaklar belirir. İkinci yer diş dipleridir: sırt blokları yola bastıkça diplerinden esner ve aynı çatlaklar orada da başlar. Bu yüzden inceleme fenerle ve yakından yapılır; lastik elle bükülerek yanak açılır, çatlak varsa genişleyerek görünür hâle gelir. Çatlaklar derinleştiğinde kordlara ulaşır ve o noktadan sonra lastik ısındığında ayrılmaya başlar. Aynı incelemede kabarma da aranır: yanaktaki bir şişkinlik iç yapıdaki kordun koptuğu anlamına gelir ve o lastik hiç beklemeden değiştirilir." },
+          { "label": "Yalnız sırtın ortasına", "verdict": "sirt-ortasi", "explain": "Sırt ortası aşınmayı gösterir; yaşlanma çatlakları önce yanakta ve diş diplerinde çıkar." },
+          { "label": "Jantın oturduğu topuk bölgesine", "verdict": "topuk", "explain": "Topuk önemli ama takılı lastikte görünmez; yaşlanma incelemesi yanaktan yapılır." },
+          { "label": "Sadece DOT kodu yeterlidir, bakmaya gerek yok", "verdict": "kod-yeter", "explain": "Tarih bir gösterge, çatlak bir kanıttır. Karar ikisi birlikte verilir." }
+        ]
+      },
+      "camera": "yanak",
+      "teachingNote": "Yaşlanma incelemesi ölçü aleti istemez, ışık ve dikkat ister. Bakım sırasında en çok atlanan kontrol budur, çünkü hiçbir şey bozuk görünmüyordur."
+    },
+    {
+      "id": 5,
+      "instruction": "Lastikte hafif yanak çatlakları var, dişi ise hâlâ iyi durumda.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik",
+        "question": "Değişim yaşına kim karar verir?",
+        "options": [
+          { "label": "Araç ve lastik üreticisinin verdiği süre ile yürürlükteki mevzuat; ustanın işi durumu tespit edip belgelemek", "verdict": "uretici-ve-mevzuat", "correct": true, "explain": "Yaş sınırı bir usta görüşü değildir. Lastiğin ne kadar süre sonra değiştirilmesi gerektiğini lastik üreticisi ve aracın üreticisi kendi belgelerinde yazar; ayrıca bazı ülkelerde mevzuat, özellikle yolcu taşıyan araçlar için ayrı bir sınır koyar. Bu süreler üreticiden üreticiye ve kullanım tipine göre değişir, tek bir evrensel sayı yoktur — bu yüzden bu ders bilinçle bir yıl sayısı vermiyor. Ustanın işi üç adımdır: tarihi okumak, fiziksel durumu incelemek ve ikisini müşteriye anlaşılır biçimde aktarmak. Karar müşterinindir ama bilgiye dayanarak verilir. Çatlak ilerlemişse ya da kabarma varsa bu artık yaş meselesi değil doğrudan güvenlik meselesidir ve orada tavsiye nettir." },
+          { "label": "Usta kendi tecrübesine göre bir yıl sınırı koyar", "verdict": "usta-karari", "explain": "Tecrübe incelemede işe yarar; sınırı üretici ve mevzuat belirler." },
+          { "label": "Dişi varsa yaşın önemi yoktur", "verdict": "dis-varsa", "explain": "Yaşlanma ile aşınma bağımsızdır; yaşlı lastiğin dişi tam olabilir." },
+          { "label": "Müşteri kendi bilir, söylemeye gerek yok", "verdict": "musteri-bilir", "explain": "Müşteri karar verir ama tespiti bilerek verir; bildirmemek ustanın eksiğidir." }
+        ]
+      },
+      "camera": "yanak",
+      "teachingNote": "Bir sayıyı ezberlemek yerine kaynağı bilmek bu mesleğin ayırt edici alışkanlığıdır. Sayılar araca göre değişir, kaynak değişmez."
+    },
+    {
+      "id": 6,
+      "instruction": "Müşteri dört lastiğini de değiştirdi, çıkanları depoda saklamak istiyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik",
+        "question": "Nasıl saklanır?",
+        "options": [
+          { "label": "Serin, kuru, güneş görmeyen bir yerde; elektrik motoru, kaynak makinesi ve akaryakıttan uzak", "verdict": "serin-kuru-uzak", "correct": true, "explain": "Depolama yaşlanmayı durdurmaz ama hızını belirgin biçimde değiştirir. Isı ve doğrudan güneş ışığı kauçuktaki değişimi hızlandırır, bu yüzden depo serin ve karanlık olmalıdır. İkinci ve daha az bilinen etken ozondur: elektrik motorları, jeneratörler ve kaynak makineleri çalışırken ozon üretir ve ozon kauçuğu doğrudan çatlatır — lastikler bu cihazların yanında saklanmaz. Akaryakıt, yağ ve çözücüler de kauçuğu bozar, temas etmemelidir. Konum da önemlidir: janta takılı ve şişirilmiş tekerlekler yatay istiflenebilir ya da asılabilir, janttan sökülmüş lastikler ise dik durur ve ara sıra çevrilir; yanlış konumda uzun süre beklemek kalıcı şekil bozukluğu bırakır. Saklamadan önce lastikler yıkanıp kurutulur ve üzerlerine hangi tekerlekten çıktıkları yazılır — bu not bir sonraki sezonda rotasyon için gerekir." },
+          { "label": "Bahçede, üst üste, üzeri açık", "verdict": "bahce", "explain": "Güneş ve ısı yaşlanmayı hızlandırır; açıkta saklanan lastik bir sezonda belirgin biçimde bozulur." },
+          { "label": "Jeneratörün yanındaki depoda, yeter ki kapalı olsun", "verdict": "jenerator", "explain": "Elektrikli makineler ozon üretir; ozon kauçuğu doğrudan çatlatır." },
+          { "label": "Fark etmez, nasılsa bir sonraki sezon takılacak", "verdict": "farketmez", "explain": "Tek sezonluk kötü depolama bile yanakta görünür çatlak bırakabilir." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Ozon kuralı sahada en az bilinen kuraldır. Lastiği kaynak makinesinin yanında saklayan bir atölye, müşterinin lastiğini ücretsiz eskitiyordur."
+    },
+    {
+      "id": 7,
+      "instruction": "Müşteriye durumu anlatacaksın: tarih eski, çatlak var, diş iyi.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik-yanagi",
+        "question": "Nasıl anlatılır?",
+        "options": [
+          { "label": "Tarih, görülen çatlağın yeri ve üreticinin süre önerisi birlikte söylenir; karar müşteriye bırakılır ama tespit yazılı kalır", "verdict": "tespit-ve-kayit", "correct": true, "explain": "Bu konuşmanın zor tarafı şudur: müşteri lastiğin dişini görür, yaşını görmez. Dişi iyi olan bir lastiğe 'değiştir' demek, gerekçesi anlatılmazsa satış gibi görünür. Bu yüzden üç şey birlikte söylenir — yanaktaki tarih (istenirse gösterilir), fenerle görülen çatlakların yeri, ve üreticinin bu konuda bir süre önerisi bulunduğu. Sonra karar müşteriye bırakılır. Ama tespit iş emrine yazılır: hangi tarihli lastikte hangi belirtinin görüldüğü ve müşteriye bildirildiği kayda geçer. Bu kayıt iki tarafı da korur — müşteri kendisine söylenmediğini düşünmez, usta da bildirdiğini gösterebilir. Bildirmemek bu meslekte en pahalıya mal olan eksikliktir, çünkü yaşlanmış lastik genelde park hâlinde değil yolda ve hızlıyken teslim olur." },
+          { "label": "Bu lastikler çok eski, hemen değiştirmen lazım denir", "verdict": "kestirme", "explain": "Gerekçesiz bir cümle satış gibi duyulur; tarih ve çatlak gösterilerek anlatılır." },
+          { "label": "Dişi iyi olduğu için hiçbir şey söylenmez", "verdict": "sessiz", "explain": "Müşteri yaşı göremez; bildirmemek doğrudan bir eksikliktir." },
+          { "label": "Sadece sözlü söylenir, kayda geçmeye gerek yok", "verdict": "sozlu", "explain": "Kayıt hem müşteriyi hem ustayı korur ve bir sonraki bakımda hatırlatır." }
+        ]
+      },
+      "camera": "yanak",
+      "teachingNote": "Bu alanın çoğu dersi bir ölçüyle biter; bu ders bir cümleyle biter. Doğru tespit, anlatılmazsa yapılmamış sayılır."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "DOT kodunun son dört hanesi neyi verir?",
+        "a": "hafta-yil",
+        "options": [
+          { "verdict": "hafta-yil", "label": "Üretim haftasını ve yılını: ilk iki hane hafta, son iki hane yıl", "explain": "3621 kodu 2021 yılının 36. haftasını gösterir. Tarih haftaya kadar verilir çünkü lastik seri üretim bir üründür ve geri çağırmalar parti bazlıdır. Tam kod çoğu lastikte yalnız bir yanakta basılıdır; görünen yüzde yoksa iç yanağa bakılır." },
+          { "verdict": "seri", "label": "Seri numarasını", "explain": "Seri ve fabrika bilgisi önceki hanelerdedir." },
+          { "verdict": "olcu", "label": "Ölçüyü", "explain": "Ölçü ayrı bir koddur: 205/55 R16 gibi." },
+          { "verdict": "omur", "label": "Kalan ömrünü", "explain": "Kod bir süre değil bir başlangıç tarihi verir." }
+        ]
+      },
+      {
+        "q": "Hiç kullanılmamış bir yedek lastik neden yaşlanır?",
+        "a": "malzeme",
+        "options": [
+          { "verdict": "malzeme", "label": "Yaşlanma aşınma değil malzeme olayıdır: kauçuk ısı, oksijen ve ozonla sertleşir, dönmese de ilerler", "explain": "Kauçuğa esnekliğini veren katkılar zamanla yapılarını kaybeder; kauçuk sertleşir ve gerilimleri taşıyamaz. Bu süreç lastik dönmeden de işler. Yedek ayrıca çoğu kez sıcakta ve basıncı düşmüş hâlde saklandığı için, tam ihtiyaç duyulduğu anda güvenilmez olabilir." },
+          { "verdict": "basinc", "label": "Yalnız basıncı düştüğü için", "explain": "Basınç ayrı bir konu; kauçuğun kendisi de değişiyor." },
+          { "verdict": "yaslanmaz", "label": "Yaşlanmaz, kullanılmadığı için sıfır sayılır", "explain": "Diş tam olsa da malzeme yaşlanmıştır." },
+          { "verdict": "jant", "label": "Jantı paslandığı için", "explain": "Pas ayrı bir sorun; yaşlanma kauçuğun kendi değişimi." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2 bir ölçüm değil HESAPTIR: 1119 ile 3621 arasındaki fark 104 + 25 = 129 hafta. Yıl 52 hafta kabul edilerek hesaplanır; kodun tanımından çıktığı için künye gerekmez.",
+    "sourceRequired": "Lastiğin azami kullanım yaşı bilinçle VERİLMEDİ. Bu süre lastik üreticisine, araç üreticisine ve ülkedeki mevzuata göre değişir; künyesiz bir yıl sayısı yazmak uydurma değer olurdu. Ders sayıyı değil kaynağı ve tespit yöntemini öğretiyor.",
+    "kapsam": "Geri çağırma sorgusu, DOT kodunun fabrika ve ebat haneleri ve kaplama lastik işaretleri kapsam dışı. Mevsim işaretleri ayrı derste.",
+    "reviewedByMechanic": false
+  }
+}

@@ -1,0 +1,175 @@
+{
+  "id": "elektrik.multimetre-direnc",
+  "area": "arac-elektrik",
+  "stage": 1,
+  "title": "Direnç ve Süreklilik: Enerjisiz Devrede Ölçmek",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 25,
+  "prerequisites": ["elektrik.multimetre-gerilim"],
+  "learningGoals": [
+    "Direnç ölçümünün neden yalnız enerjisiz ve devreden ayrılmış parçada yapıldığını bilmek",
+    "Prob direncini ölçümden düşerek küçük dirençleri doğru okumak",
+    "Süreklilik sesinin ne söylediğini ve ne söylemediğini ayırmak"
+  ],
+
+  "safety": [
+    { "rule": "Direnç ölçümünden önce devrenin enerjisi kesilir", "why": "Ohmmetre ölçüm yapmak için devreye kendi küçük gerilimini verir. Canlı bir devrede bu ölçüm hem yanlış okur hem de aletin giriş katını bozabilir; yüksek gerilimli devrelerde alet tamamen gider", "blocksStart": true },
+    { "rule": "Hava yastığı ve ateşleme devrelerinde ohmmetre kullanılmaz", "why": "Aletin ölçüm için verdiği akım, hava yastığı fitilini tetiklemeye yetebilir. Bu devreler üretici yöntemi ve özel cihazla kontrol edilir; genel kural, bilinmeyen bir devreye ohmmetre bağlamamaktır", "blocksStart": true },
+    { "rule": "Ölçülecek parça devreden ayrılır", "why": "Devrede kalan parçanın üzerinde ona paralel başka yollar bulunur. Alet o yolların toplamını okur ve sağlam parçayı arızalı, arızalıyı sağlam gösterebilir", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.multimetre", "label": "Dijital multimetre", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Far yanmıyor. Ampulü çıkardın, elinde. Direncini ölçeceksin.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.far-ampulu",
+        "question": "Ölçümden önce hangi iki koşul sağlanmalı?",
+        "options": [
+          { "label": "Devrenin enerjisi kesik olmalı ve parça devreden ayrılmış olmalı", "verdict": "enerjisiz-ve-ayri", "correct": true, "explain": "İki koşul iki ayrı sebepten gelir. Birincisi: ohmmetre ölçüm yaparken devreye kendi küçük gerilimini verir ve okuduğu şey o gerilime karşılık akan akımdır. Devrede başka bir gerilim varsa bu hesap bozulur, sayı anlamsız çıkar ve alet zarar görebilir. İkincisi: devrede duran bir parçanın üzerinde ona paralel başka yollar bulunur ve akım en kolay yoldan gider. Alet o paralel yolların toplamını okur; sağlam bir parça arızalı, arızalı bir parça sağlam görünebilir. Bu yüzden direnç ölçümü enerjisiz ve tercihen parça sökülmüş hâlde yapılır. Gerilim ölçümü tam tersiydi: orada devre canlı olmak zorundaydı." },
+          { "label": "Devre canlı olmalı ki gerçek koşulda ölçülsün", "verdict": "canli", "explain": "Canlı koşul gerilim ölçümünün alanıdır. Ohmmetre canlı devrede yanlış okur ve bozulabilir." },
+          { "label": "Yalnız aletin pili dolu olmalı", "verdict": "pil", "explain": "Pil gereklidir ama koşul o değildir; enerji ve paralel yol sorunları ölçümü belirler." },
+          { "label": "Hiçbir koşul gerekmez, ohmmetre her yerde ölçer", "verdict": "kosulsuz", "explain": "Ohmmetrenin çalışma koşulu dardır: enerjisiz devre ve ayrılmış parça." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Gerilim canlı devrede, direnç ölü devrede ölçülür. Bu iki cümleyi karıştıran usta ya yanlış sayı okur ya aletini yakar."
+    },
+    {
+      "id": 2,
+      "instruction": "Seçici düğmeyi direnç kademesine çevir.",
+      "interaction": {
+        "type": "rotate",
+        "target": "part.multimetre-secici",
+        "direction": "cw",
+        "turns": 0.25,
+        "requiresGesture": true
+      },
+      "camera": "tezgah",
+      "hint": "Süreklilik ve direnç genelde aynı bölgededir; sayı istiyorsan direnç kademesi.",
+      "teachingNote": "Süreklilik kademesi sana bir ses verir, direnç kademesi bir sayı. Ses hızlıdır ama kabadır; sayı yavaştır ama karşılaştırılabilir. Hangi bilgiye ihtiyacın olduğuna önce karar ver."
+    },
+    {
+      "id": 3,
+      "instruction": "Ölçüme başlamadan önce iki probu birbirine değdirdin. Ekran 0,30 Ω gösteriyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.prob-siyah",
+        "question": "Sıfır olması gerekirken 0,30 okuması ne anlama gelir?",
+        "options": [
+          { "label": "Bu, probların ve kablolarının kendi direncidir; küçük dirençleri ölçerken sonuçtan düşülür", "verdict": "prob-direnci", "correct": true, "explain": "Prob kabloları da birer iletkendir ve küçük de olsa bir dirençleri vardır. Yüz ohmluk bir parça ölçerken bu değer önemsizdir; ama bir kabloyu, bir şase bağlantısını ya da bir ampulü ölçerken aradığın büyüklük zaten ohmun onda birleri mertebesindedir ve prob direnci sonucu ciddi biçimde şişirir. Doğru yöntem, ölçümden önce probları birbirine değdirip bu değeri görmek ve okuduğun sayıdan çıkarmaktır; bazı aletlerde bunu yapan bir sıfırlama tuşu vardır. Ayrıca içten kopmaya başlamış yıpranmış bir prob burada beklenmedik biçimde yüksek okur — bu kontrol aynı zamanda aletin kendi sağlamlık testidir." },
+          { "label": "Alet bozuktur, değiştirilmeli", "verdict": "alet-bozuk", "explain": "Bozuk değil; her prob çiftinde küçük bir direnç bulunur. Ancak beklenmedik biçimde yüksekse prob yıpranmış olabilir." },
+          { "label": "Önemsizdir, yuvarlanır", "verdict": "onemsiz", "explain": "Yüksek dirençlerde önemsizdir ama küçük direnç ölçümlerinde aradığın büyüklüğün kendisi kadardır." },
+          { "label": "Kalibrasyon gerektirir, atölyede yapılamaz", "verdict": "kalibrasyon", "explain": "Kalibrasyon ayrı bir iştir; burada yapılan şey basit bir çıkarma işlemidir." }
+        ]
+      },
+      "camera": "tezgah",
+      "hint": "Aletin sıfırlama tuşu varsa bu değeri kendisi düşer.",
+      "teachingNote": "Ölçü aleti kusursuz bir gözlemci değildir; ölçüme kendi payını katar. Kumpasın sıfır kontrolünü hatırla — aynı alışkanlığın elektrikteki karşılığı."
+    },
+    {
+      "id": 4,
+      "instruction": "Ampulü ölçtün, ekran 3,50 Ω gösteriyor. Probların kendi direnci 0,30 Ω idi. Ampulün gerçek direncini gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.far-ampulu",
+        "unit": "Ω",
+        "acceptRange": [3.15, 3.25]
+      },
+      "camera": "tezgah",
+      "hint": "3,50 eksi 0,30.",
+      "teachingNote": "Bu ampul sağlam: içinden bir yol geçiyor ve direnci ölçülebilir bir sayı. Kopuk bir ampul devreyi tamamlamaz; alet sonsuzu ya da açık devreyi gösterir. Aradaki fark keskindir, yorum gerektirmez. Asıl incelik şudur: bu ampulün kaç ohm olması gerektiğini bilmiyorsan aynı araçtaki ikinci farın ampulüyle karşılaştır. Aynı işi gören iki parça aynı üretilir; farkları sana kılavuzsuz bir referans verir."
+    },
+    {
+      "id": 5,
+      "instruction": "Ampul sağlam çıktı. Şimdi ampule giden kabloyu kontrol ediyorsun. Süreklilik kademesinde alet ötüyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kablo-demeti",
+        "question": "Süreklilik sesi ne söyler, ne söylemez?",
+        "options": [
+          { "label": "Düşük dirençli bir yol var der; o yolun yük altında akımı taşıyabileceğini söylemez", "verdict": "yol-var-yuk-belirsiz", "correct": true, "explain": "Süreklilik kademesi çok küçük bir akım gönderir ve karşısında düşük bir direnç görürse öter. Bu, iki nokta arasında bir yol bulunduğunu kanıtlar. Ama araç devrelerinde asıl arıza çoğu zaman 'yol yok' değil, 'yol var ama zayıf'tır: on iki telin onu kopmuş, kalan ikisi hâlâ bağlantıyı sürdürüyordur. Süreklilik testi ötecektir, çünkü küçük ölçüm akımı iki telden rahatça geçer. Farı yaktığında ise o iki tel gerekli akımı taşıyamaz, ısınır ve üzerinde gerilim kaybolur. Bu yüzden süreklilik testi bir başlangıçtır; kesin karar, devre çalışırken yapılan gerilim düşümü ölçümüyle verilir." },
+          { "label": "Kablo sapasağlamdır, başka kontrol gerekmez", "verdict": "saglam", "explain": "Ötmesi yalnız bir yol olduğunu gösterir; kesitin yeterli olduğunu göstermez." },
+          { "label": "Kablo koptuysa da öter, ses güvenilmezdir", "verdict": "guvenilmez", "explain": "Tam kopuk kabloda ötmez; ses güvenilirdir ama sınırlıdır." },
+          { "label": "Ses yalnız kısa devrede duyulur", "verdict": "kisa-devre", "explain": "Ses düşük dirençli her yolda duyulur; kısa devre bunun istenmeyen hâlidir." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Bu, elektrik alanının en pahalı yanılgısıdır: 'ölçtüm, geçiyor.' Küçük akımla geçen yol, büyük akımla geçmeyebilir. Aşama 9'daki gerilim düşümü testi tam olarak bu boşluğu kapatmak için vardır."
+    },
+    {
+      "id": 6,
+      "instruction": "Sigortayı da kontrol edeceksin.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sigorta.1",
+        "question": "Sigorta nasıl doğru kontrol edilir?",
+        "options": [
+          { "label": "Yerinden çıkarılıp iki ucundan ölçülür ya da devre canlıyken iki ucu arasındaki gerilim farkına bakılır", "verdict": "cikar-veya-gerilim", "correct": true, "explain": "İki yöntem de doğrudur ve ikisi de gözle bakmaktan güvenilirdir. Sigortayı çıkarıp süreklilik ölçmek kesin sonuç verir: sağlam sigorta öter, atmış sigorta ötmez. Devreyi bozmadan bakmak istiyorsan sigorta yerindeyken iki ucu arasındaki gerilime bakarsın; sağlam sigortanın iki ucu arasında kayda değer bir fark olmaz, atmış sigortanın bir ucunda gerilim vardır diğerinde yoktur. Gözle bakmak yanıltır: sigorta teli görünürde bütün dururken içten çatlamış olabilir, özellikle ısınıp soğuyarak yorulmuş sigortalarda bu sık görülür. Kural olarak sigorta gözle değil ölçümle karara bağlanır." },
+          { "label": "Işığa tutulup teline bakılır, kopuksa görünür", "verdict": "gozle", "explain": "Çoğu zaman görünür ama içten çatlamış sigorta bütün görünür. Gözle bakmak eleme yapar, karar vermez." },
+          { "label": "Yerine sağlam bir sigorta takılıp denenir", "verdict": "degistir-dene", "explain": "Yaygın bir yöntemdir ama atma sebebi duruyorsa yeni sigortayı da attırır. Önce ölçüm, sonra sebep." },
+          { "label": "Daha yüksek amperli sigorta takılıp bakılır", "verdict": "yuksek-amper", "explain": "Bu tehlikelidir: sigorta kabloyu korur. Yüksek amperli sigorta, kablonun yanmasına izin verir." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Sigortaya yüksek amperli takmak, elektrik arızasını yangına çeviren en bilinen hatadır. Sigortanın değeri kabloya göre seçilmiştir, tüketiciye göre değil."
+    },
+    {
+      "id": 7,
+      "instruction": "Ölçümler bitti, karar vereceksin.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.far-ampulu",
+        "question": "Bir direnç değerinin 'iyi' olduğunu neye göre söylersin?",
+        "options": [
+          { "label": "Aynı işi gören ikinci parçanın ölçümüne göre; kılavuz yoksa kardeş parça referans olur", "verdict": "kardes-parca", "correct": true, "explain": "Direnç değerleri parçadan parçaya çok değişir; bir sayı tek başına iyi ya da kötü değildir. En sağlam referans üreticinin verdiği aralıktır, ama elinde yoksa ikinci bir referansın vardır: aynı araçta aynı işi gören ikinci parça. İki far ampulü, iki enjektör, iki bobin aynı üretilir ve birbirine yakın okumalıdır. Biri diğerinden belirgin biçimde farklıysa fark arızayı gösterir. Bu yöntemi motor alanında kam mili loblarında ve krank muylularında zaten kullandın; elektrikte de aynı biçimde çalışır. Tek şart, karşılaştırılan iki parçanın gerçekten aynı görevi görmesidir." },
+          { "label": "Sıfıra ne kadar yakınsa o kadar iyidir", "verdict": "sifira-yakin", "explain": "Bir tüketicinin direnci sıfıra yaklaşırsa o kısa devredir; iyi değil, tehlikelidir." },
+          { "label": "İnternetteki ortalama değere göre", "verdict": "internet", "explain": "Başka aracın değeri bu parçanın ölçüsü değildir; elindeki kardeş parça daha doğru bir referanstır." },
+          { "label": "Alet ne gösterirse doğrudur, yorum gerekmez", "verdict": "alet-dogru", "explain": "Alet sayı verir; o sayının anlamı karşılaştırmayla doğar." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Bu müfredatın tekrar eden cümlesi: aynı üretilen iki parçanın farkı, kılavuzun yerini tutan bedava bir referanstır."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Direnç ölçümü neden enerjisiz devrede ve parça sökülü hâlde yapılır?",
+        "a": "iki-sebep",
+        "options": [
+          { "verdict": "iki-sebep", "label": "Ohmmetre devreye kendi gerilimini verir ve devrede kalan paralel yollar sonucu bozar", "explain": "İki ayrı sebep var. Birincisi: ohmmetre ölçüm yapmak için devreye küçük bir gerilim uygular ve karşılığında akan akımı ölçer; devrede başka bir gerilim varsa hesap bozulur, sayı anlamsız çıkar, alet zarar görebilir. İkincisi: devrede duran parçanın üzerinde ona paralel başka yollar bulunur ve alet hepsinin toplamını okur; bu, sağlam parçayı arızalı veya arızalıyı sağlam gösterebilir. Gerilim ölçümü bunun tam tersiydi: orada devrenin canlı olması şarttı." },
+          { "verdict": "guvenlik", "label": "Yalnız kullanıcının çarpılmaması için", "explain": "Düşük gerilimli araç devrelerinde çarpılma riski asıl gerekçe değildir; ölçümün doğruluğu ve aletin korunmasıdır." },
+          { "verdict": "pil", "label": "Aletin pili çabuk bitmesin diye", "explain": "Pil tüketimi bu kuralın sebebi değildir." },
+          { "verdict": "gerekmez", "label": "Gerekmez, canlı devrede de ölçülebilir", "explain": "Ölçülemez: sonuç yanlış çıkar ve alet zarar görebilir." }
+        ]
+      },
+      {
+        "q": "Süreklilik testi öten bir kablo neden yine de arızalı olabilir?",
+        "a": "kucuk-akim",
+        "options": [
+          { "verdict": "kucuk-akim", "label": "Test çok küçük bir akımla yapılır; yolun yük altında akımı taşıyabildiğini göstermez", "explain": "Süreklilik kademesi küçük bir akım gönderir ve düşük direnç görürse öter. Ama araç devrelerinde arıza çoğu zaman 'yol yok' değil, 'yol var ama zayıf'tır: telin çoğu kopmuş, kalan birkaç tel bağlantıyı sürdürüyordur. Küçük ölçüm akımı o birkaç telden rahatça geçer ve alet öter; tüketici çalıştığında ise o kesit gerekli akımı taşıyamaz, ısınır ve üzerinde gerilim kaybolur. Kesin karar, devre çalışırken yapılan gerilim düşümü ölçümüyle verilir." },
+          { "verdict": "ses-yanlis", "label": "Aletin sesi güvenilmezdir", "explain": "Ses güvenilirdir ama söylediği şey sınırlıdır." },
+          { "verdict": "olamaz", "label": "Öten kablo sağlamdır, arızalı olamaz", "explain": "Olabilir; zayıf kesit bu testte görünmez." },
+          { "verdict": "pil-zayif", "label": "Aletin pili zayıftır", "explain": "Zayıf pil ayrı bir sorundur; buradaki sınırlama testin doğasındadır." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 4'teki 3,50 Ω ve 0,30 Ω SENARYO okumalarıdır. Öğrenciden istenen bir üretici sınırı değil, ölçümden prob direncinin ÇIKARILMASIDIR (3,20 Ω). sourceRequired bu yüzden gerekmedi.",
+    "sourceRequired": "Far ampulünün, kablonun ya da başka bir parçanın kabul edilebilir direnç aralığı bu derste VERİLMEDİ; bunlar parçaya özgüdür. Ders, kardeş parça karşılaştırması üzerine kuruldu.",
+    "kapsam": "Prob uçlarının temas animasyonu ve sigorta çekme hareketi sahnede yok; bu adımlar seçim olarak öğretiliyor. Ohmmetrenin ekran değeri sayısal giriş ile veriliyor.",
+    "guvenlik": "Hava yastığı devrelerinde ohmmetre yasağı, sayı iddiası içermeyen niteliksel bir kuraldır ve derste bu şekilde verildi.",
+    "reviewedByMechanic": false
+  }
+}

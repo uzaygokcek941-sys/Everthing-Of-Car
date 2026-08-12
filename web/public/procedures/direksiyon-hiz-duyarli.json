@@ -1,0 +1,174 @@
+{
+  "id": "direksiyon.hiz-duyarli",
+  "area": "direksiyon",
+  "stage": 5,
+  "title": "Hıza Duyarlı Destek ve Değişken Oran",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 30,
+  "prerequisites": ["direksiyon.aci-sensoru"],
+  "learningGoals": [
+    "Desteğin neden hıza göre değiştiğini bilmek",
+    "Değişken destek ile değişken oranı birbirinden ayırmak",
+    "Hız bilgisi kaybolduğunda sistemin nasıl davrandığını öngörmek"
+  ],
+
+  "safety": [
+    { "rule": "Hıza duyarlı davranış yol testinde değerlendirilecekse trafiğe uygun, boş ve düz bir yol seçilir", "why": "Sürücünün dikkati direksiyon hissine yönelir", "blocksStart": true },
+    { "rule": "Destek davranışı beklenmedik biçimde değişen araç, durum sürücüye anlatılmadan teslim edilmez", "why": "Sürücü alıştığı ağırlığı bekler; ani değişim manevrada şaşırtır", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.teshis-cihazi", "label": "Teşhis cihazı", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Aynı araçta park hâlinde direksiyon çok hafif, otoyolda belirgin ağır.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.eps-kontrol-unitesi",
+        "question": "Bu neden böyle tasarlanmış?",
+        "options": [
+          { "label": "Düşük hızda manevra kolaylığı, yüksek hızda yön kararlılığı gerekir; iki ihtiyaç zıt olduğu için destek hıza göre değiştirilir", "verdict": "iki-ihtiyac", "correct": true, "explain": "Direksiyon tasarımı iki zıt ihtiyacı aynı anda karşılamak zorundadır. Park hâlinde ve düşük hızda tekerlekler yerinde dönmek zorundadır ve lastik ile zemin arasındaki sürtünme çok yüksektir; bu yüzden bol destek gerekir, yoksa manevra yorucu hâle gelir. Yüksek hızda ise durum tersine döner: tekerlekler zaten yuvarlanmaktadır ve dönmeleri çok az kuvvet ister, üstelik küçük bir direksiyon hareketi büyük bir yön değişikliği üretir. Burada bol destek tehlikelidir — direksiyon aşırı hafif olur, sürücü yolu hissedemez ve istemeden yaptığı küçük hareketler aracı savurabilir. Bu yüzden hız arttıkça destek kısılır ve direksiyon ağırlaşır; sürücü bunu 'yolda oturmuş' diye tarif eder. Hidrolik sistemlerde bu ancak ek düzeneklerle ve sınırlı biçimde yapılabilirdi; elektrik yardımlı sistemlerde ise destek zaten yazılımla hesaplandığı için hıza göre değiştirmek doğal bir sonuçtur. Teşhis açısından önemli olan şudur: bu bir arıza değil tasarımdır ve sürücü şikâyeti dinlenirken 'normal olan ne' sorusu önce yanıtlanmalıdır." },
+          { "label": "Yakıt tasarrufu için", "verdict": "yakit", "explain": "Enerji kazancı ayrı bir konu; sebep manevra ve kararlılık dengesi." },
+          { "label": "Motoru korumak için", "verdict": "motor", "explain": "Sebep sürüş ihtiyaçları." },
+          { "label": "Arızadır, düzeltilmelidir", "verdict": "ariza", "explain": "Bu bir tasarım davranışı." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Şikâyet dinlerken önce 'normal olan ne' sorusu yanıtlanır. Bu davranış arıza değil tasarım."
+    },
+    {
+      "id": 2,
+      "instruction": "Bazı araçlarda ayrıca 'değişken oran' deniyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kremayer-pinyonu",
+        "question": "Değişken oran, değişken destekten nasıl ayrılır?",
+        "options": [
+          { "label": "Destek kuvveti değiştirir, oran ise aynı simit hareketine karşılık tekerleğin ne kadar döndüğünü değiştirir; oran mekanik ya da elektronik olabilir", "verdict": "kuvvet-ve-oran", "correct": true, "explain": "Bu iki kavram sık karıştırılır ama farklı büyüklükleri değiştirirler. Değişken DESTEK, sürücünün ne kadar kuvvet uygulaması gerektiğini belirler; direksiyon hafifler ya da ağırlaşır ama aynı simit hareketi hep aynı tekerlek açısını üretir. Değişken ORAN ise geometriyi değiştirir: aynı simit hareketi, direksiyonun ortasındayken az, uçlara doğru daha çok tekerlek dönüşü üretir. Bunun mekanik yolu kremayer dişlerinin adımını çubuk boyunca değiştirmektir — orta bölgede sık, uçlara doğru seyrek dişler. Sonuç şudur: düz giderken direksiyon sakin ve hassastır, küçük hareketler aracı zıplatmaz; park manevrasında ise uçlara gidildiğinde tekerlekler daha çabuk döner ve daha az tur çevirmek gerekir. Elektronik yolu ise ek bir düzenekle simit ile pinyon arasındaki oranı hıza göre değiştirmektir ve bu, ayrı bir aktüatör ve kendi kontrol ünitesiyle çalışır. Teşhiste ayrım şöyle yapılır: şikâyet 'ağırlık/hafiflik' ise destek tarafına, 'aynı direksiyonla araç fazla ya da az dönüyor' ise oran tarafına bakılır." },
+          { "label": "İkisi aynı şeydir", "verdict": "ayni", "explain": "Biri kuvveti, diğeri hareket oranını değiştirir." },
+          { "label": "Oran yalnız yazılımla değişir", "verdict": "sadece-yazilim", "explain": "Mekanik yolu da var: diş adımının çubuk boyunca değişmesi." },
+          { "label": "Oran lastik ölçüsüyle belirlenir", "verdict": "lastik", "explain": "Lastik hissi etkiler ama oran dişli geometrisiyle belirlenir." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Şikâyet 'ağır/hafif' ise destek tarafı, 'fazla/az dönüyor' ise oran tarafı. Ayrım burada başlıyor."
+    },
+    {
+      "id": 3,
+      "instruction": "Canlı veriden destek akımını iki koşulda okudun: park manevrasında 38 A, otoyol hızında 12 A. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.eps-motoru",
+        "unit": "A",
+        "acceptRange": [25.5, 26.5]
+      },
+      "camera": "direksiyon",
+      "hint": "38 eksi 12.",
+      "teachingNote": "26 A'lik bu fark, desteğin hıza göre gerçekten değiştiğinin ölçülmüş kanıtı ve teşhiste doğrudan kullanılır: sürücü 'destek yok' diyorsa ama akım hıza göre değişiyorsa sistem çalışıyordur ve şikâyet başka bir şeyi tarif ediyordur. Tersi de bilgi verir — akım her koşulda aynı kalıyorsa hız bilgisi modüle ulaşmıyor olabilir. Ayrıca akımın büyüklüğü besleme dersini hatırlatıyor: park manevrasında çekilen bu akım, besleme yolundaki küçük bir direncin neden tam o anda kendini gösterdiğini açıklıyor. Akım değerleri araca özgüdür ve bu ders bir sınır vermiyor; ölçülen şey davranışın kendisi."
+    },
+    {
+      "id": 4,
+      "instruction": "Bir araçta destek her hızda aynı; otoyolda direksiyon fazla hafif.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.eps-kontrol-unitesi",
+        "question": "İlk şüphe ne?",
+        "options": [
+          { "label": "Modüle hız bilgisi ulaşmıyordur; sistem güvenli bir sabit desteğe geçmiş olabilir. Kaynak tekerlek hız sensörü, fren modülü ya da haberleşme hattı olabilir", "verdict": "hiz-bilgisi-yok", "correct": true, "explain": "Hıza duyarlı destek, adı üstünde, hız bilgisine bağlıdır ve o bilgi EPS'in kendi sensöründen gelmez; başka bir modülden, genellikle fren/ABS tarafından haberleşme hattı üzerinden alınır. Bilgi kesildiğinde modül desteği kapatmaz — çünkü desteksiz bir direksiyon daha kötü olurdu — bunun yerine güvenli kabul edilen sabit bir değere geçer. Sürücünün tarifi tam olarak budur: 'her hızda aynı, otoyolda çok hafif'. Bu, EPS arızası gibi görünen ama kaynağı başka sistemde olan arızaların en tipik örneğidir ve aşama 4'te kurulan kuralı doğrular. Aranacak yerler sırayla şunlardır: tekerlek hız sensörleri ve kabloları, fren/ABS modülünün kendi kodları, haberleşme hattındaki kopukluk ya da direnç sorunu, ve son olarak EPS modülünün bu veriyi alıp almadığı. Canlı veri burada belirleyicidir — EPS'in gördüğü araç hızı okunur ve gerçek hızla karşılaştırılır; sıfır ya da sabit kalıyorsa yol bulunmuştur. Bu tabloda EPS modülünü değiştirmek en pahalı ve en sonuçsuz karardır." },
+          { "label": "EPS motoru bozulmuştur", "verdict": "motor", "explain": "Motor destek veriyor; sorun desteğin hesaplanmasında." },
+          { "label": "Tork sensörü arızalıdır", "verdict": "tork", "explain": "Tork sensörü arızasında destek genellikle tamamen kesilir." },
+          { "label": "Normaldir, bazı araçlarda destek sabittir", "verdict": "normal", "explain": "Hıza duyarlı bir sistemde sabit destek bir bulgudur." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "EPS'in gördüğü araç hızını canlı veriden oku ve gerçek hızla karşılaştır. Sabit kalıyorsa yol bulunmuştur."
+    },
+    {
+      "id": 5,
+      "instruction": "Sürücü 'yeni araba aldım, direksiyon eskisi gibi değil' diyor. Ölçümler normal.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.direksiyon-simidi",
+        "question": "Ne yapılır?",
+        "options": [
+          { "label": "Şikâyet kayda alınır ve sistem davranışı anlatılır; ölçümler normalse arıza aranmaz ama şikâyet reddedilmez, gerekirse ayarlanabilir bir mod olup olmadığına bakılır", "verdict": "anlat-ve-kaydet", "correct": true, "explain": "Direksiyon hissi kişiseldir ve araçtan araca gerçekten belirgin biçimde değişir: destek eğrisi, direksiyon oranı, lastik ölçüsü, süspansiyon ayarı ve hatta koltuk konumu hissi etkiler. Bir sürücü daha ağır bir araçtan geliyorsa yeni aracını 'boş' bulur; tersi durumda 'sert' bulur. Bu yüzden ölçümler normal çıktığında yapılacak şey iki yanlıştan da kaçınmaktır. Birinci yanlış şikâyeti reddetmektir — 'ölçüm normal, sorun yok' demek sürücüyü haksız çıkarmaz, yalnız güveni kırar ve o kişi başka bir yere gider. İkinci yanlış, olmayan bir arızayı aramak için parça değiştirmeye başlamaktır. Doğru yol arada durmaktır: sistemin nasıl çalıştığı sade bir dille anlatılır, hıza göre değişen desteğin normal olduğu söylenir, şikâyet kayda geçirilir ve varsa aracın sunduğu sürüş modu seçenekleri gösterilir — bazı araçlarda direksiyon ağırlığı sürücü tarafından seçilebilir. Ayrıca hissi etkileyen basit şeyler kontrol edilir: lastik basınçları, lastik tipi ve ön düzen. Bunlar normalse durum açıklanır ve zorlanmaz." },
+          { "label": "Ölçüm normalse şikâyet reddedilir", "verdict": "reddet", "explain": "Güveni kırar; şikâyet kayda alınıp açıklanır." },
+          { "label": "Parça değiştirilerek denenir", "verdict": "parca", "explain": "Olmayan arıza için parça değiştirilmez." },
+          { "label": "Yazılım rastgele değiştirilir", "verdict": "yazilim", "explain": "Üretici dışı müdahale hem riskli hem sorumluluk doğurur." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "İki yanlıştan da kaçın: şikâyeti reddetmek ve olmayan arıza için parça değiştirmek."
+    },
+    {
+      "id": 6,
+      "instruction": "Hidrolik sistemli eski bir araçta da destek hıza göre değişiyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.hidrolik-pompa",
+        "question": "Bu nasıl yapılmış olabilir?",
+        "options": [
+          { "label": "Devreye eklenen bir kontrol valfi ya da akış düzenleyici, hıza göre kutuya giden akışı veya basıncı sınırlar", "verdict": "valf-ile", "correct": true, "explain": "Hıza duyarlı destek elektrik yardımlı sistemlere özgü değildir; hidrolik sistemlerde de yapılmıştır, yalnız yolu farklıdır. Elektronik olarak kumanda edilen bir valf ya da akış düzenleyici, araç hızı yükseldikçe kutuya giden akışı veya basıncı kısar; sonuç, yüksek hızda daha az destek ve daha ağır bir direksiyondur. Bazı tasarımlarda bu valf doğrudan pompanın üzerindedir, bazılarında hat üzerinde ayrı bir birimdir ve kendi elektrik bağlantısıyla çalışır. Teşhis açısından bunun iki sonucu vardır. Birincisi, hidrolik bir araçta 'destek her hızda aynı' ya da 'yüksek hızda çok hafif' şikâyeti duyulduğunda bu valf ve onun elektrik beslemesi şüpheliler arasına girer — mekanik hidrolik arıza aramaya başlamadan önce bakılır. İkincisi, bu valf devre dışı kaldığında sistem genellikle tam destek verir yani direksiyon her hızda hafif kalır; bu, sürücü için tehlikeli olabilir ve giderilmesi gerekir. Bu ders, elektronik ile hidroliğin kesin çizgilerle ayrılmadığını da gösteriyor: iki aile aynı ihtiyacı farklı yollarla çözüyor." },
+          { "label": "Hidrolikte bu mümkün değildir", "verdict": "mumkun-degil", "explain": "Kontrol valfi ya da akış düzenleyiciyle yapılabilir." },
+          { "label": "Pompa hızı sürücü tarafından ayarlanır", "verdict": "pompa-hizi", "explain": "Pompayı motor döndürür; ayar valfle yapılır." },
+          { "label": "Kayış gerginliğiyle ayarlanır", "verdict": "kayis", "explain": "Kayış gerginliği bir ayar parametresi değil." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Elektronik ve hidrolik kesin çizgilerle ayrılmıyor. Aynı ihtiyaç, iki farklı yolla çözülmüş."
+    },
+    {
+      "id": 7,
+      "instruction": "Şikâyet değerlendirmesi bitiyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.eps-kontrol-unitesi",
+        "question": "Destek davranışı şikâyetlerinde doğru sıra ne?",
+        "options": [
+          { "label": "Önce normalin ne olduğu belirlenir, sonra canlı veriden desteğin hıza göre değişip değişmediği ölçülür, sonra hız bilgisinin ulaşıp ulaşmadığına bakılır ve en son mekanik direnç kaynakları elenir", "verdict": "normal-olcum-veri-mekanik", "correct": true, "explain": "Bu sıra, alanın genel yönteminin bu konuya uyarlanmış hâlidir. Birinci adım normalin belirlenmesidir: aracın hıza duyarlı bir sistemi var mı, sürücünün tarif ettiği davranış tasarımın kendisi mi? Bu adım atlandığında sağlam araçlarda arıza aranır. İkinci adım ölçümdür — canlı veriden destek akımı ya da ilgili değer iki farklı koşulda okunur ve gerçekten değişip değişmediği görülür; bu, hissi bir tartışmayı sayısal bir bulguya çevirir. Üçüncü adım girdiyi kontrol etmektir: EPS'in gördüğü araç hızı gerçek hızla uyuşuyor mu? Uyuşmuyorsa arıza EPS'te değil, hız bilgisinin geldiği yerdedir. Dördüncü adım mekanik taraftır — düşük lastik basıncı, sıkı ayarlanmış bir kutu, sıkışmış bir mafsal ya da ön takım direnci, sistemin ne kadar destek verdiğinden bağımsız olarak direksiyonu ağırlaştırır ve bu, elektronikte hiçbir iz bırakmaz. Sıra bu şekilde işlediğinde en pahalı parça olan modül, ancak diğerlerinin hepsi elendikten sonra gündeme gelir." },
+          { "label": "Doğrudan modül değiştirilir", "verdict": "modul", "explain": "En pahalı parça, diğerleri elendikten sonra gündeme gelir." },
+          { "label": "Yalnız sürücünün tarifi esas alınır", "verdict": "tarif", "explain": "Tarif başlangıç; ölçümle doğrulanır." },
+          { "label": "Mekanik taraf hiç bakılmaz", "verdict": "mekanik-yok", "explain": "Mekanik direnç elektronikte iz bırakmadan direksiyonu ağırlaştırır." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Mekanik direnç elektronikte iz bırakmaz. Bu yüzden kod temizken bile lastik ve ön takım kontrol edilir."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Değişken destek ile değişken oran arasındaki fark nedir?",
+        "a": "kuvvet-ve-oran",
+        "options": [
+          { "verdict": "kuvvet-ve-oran", "label": "Destek uygulanması gereken kuvveti, oran ise aynı simit hareketine karşılık tekerleğin ne kadar döndüğünü değiştirir", "explain": "Değişken destekte direksiyon hafifler ya da ağırlaşır ama aynı simit hareketi hep aynı tekerlek açısını üretir. Değişken oranda geometri değişir: mekanik yolu kremayer diş adımının çubuk boyunca değişmesidir — ortada sık, uçlarda seyrek. Teşhiste ayrım: şikâyet 'ağır/hafif' ise destek tarafı, 'fazla/az dönüyor' ise oran tarafı." },
+          { "verdict": "ayni", "label": "İkisi aynı şeydir", "explain": "Farklı büyüklükleri değiştirirler." },
+          { "verdict": "sadece-yazilim", "label": "Oran yalnız yazılımla değişir", "explain": "Mekanik yolu da var." },
+          { "verdict": "lastik", "label": "Oran lastik ölçüsüyle belirlenir", "explain": "Oran dişli geometrisiyle belirlenir." }
+        ]
+      },
+      {
+        "q": "Destek her hızda aynı ve otoyolda çok hafif. İlk şüphe?",
+        "a": "hiz-bilgisi-yok",
+        "options": [
+          { "verdict": "hiz-bilgisi-yok", "label": "Modüle hız bilgisi ulaşmıyordur; sistem güvenli bir sabit desteğe geçmiştir", "explain": "Hız bilgisi EPS'in kendi sensöründen değil, genellikle fren/ABS tarafından haberleşme hattı üzerinden gelir. Kesildiğinde modül desteği kapatmaz, sabit bir değere geçer. Aranacak yerler: tekerlek hız sensörleri, fren modülü kodları, haberleşme hattı. Canlı veriden EPS'in gördüğü hız okunup gerçek hızla karşılaştırılır; sabit kalıyorsa yol bulunmuştur. Bu tabloda modül değiştirmek en pahalı ve en sonuçsuz karardır." },
+          { "verdict": "motor", "label": "EPS motoru bozulmuştur", "explain": "Motor destek veriyor." },
+          { "verdict": "tork", "label": "Tork sensörü arızalıdır", "explain": "O arızada destek genellikle tamamen kesilir." },
+          { "verdict": "normal", "label": "Normaldir", "explain": "Hıza duyarlı sistemde sabit destek bir bulgudur." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 38 A ve 12 A SENARYO okumalarıdır; istenen FARKTIR (26 A) ve gösterilen şey desteğin hıza göre gerçekten değiştiğinin ölçülebilirliğidir. Akım değerleri araca özgüdür ve sınır verilmiyor.",
+    "sourceRequired": "Destek eğrileri, akım değerleri, hız eşikleri ve değişken oran geometrisi bilinçle VERİLMEDİ; araca ve üreticiye özgüdür. Yazılım müdahalesi önerilmiyor ve dersin içinde açıkça riskli sayılıyor.",
+    "kapsam": "Sürüş modu seçenekleri anıldı ama araç arayüzü kapsam dışı. Değişken oranın elektronik uygulaması (ayrı aktüatörlü sistemler) tanıtıldı, onarımı kapsam dışı. Fren/ABS tarafının kendi teşhisi bu alanın konusu değil.",
+    "reviewedByMechanic": false
+  }
+}

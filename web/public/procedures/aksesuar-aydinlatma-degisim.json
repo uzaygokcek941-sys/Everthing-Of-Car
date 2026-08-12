@@ -1,0 +1,173 @@
+{
+  "id": "aksesuar.aydinlatma-degisim",
+  "area": "aksesuar-ses",
+  "stage": 5,
+  "title": "Far, Stop ve Sinyal: Değişim ve Ayar",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 35,
+  "prerequisites": ["aksesuar.sunroof"],
+  "learningGoals": [
+    "Ampul tiplerini ve her birinin kendi kurallarını tanımak",
+    "Far ayarının bir konfor değil güvenlik ve yasal zorunluluk olduğunu bilmek",
+    "Sonradan takılan aydınlatmanın sistemde neden sorun çıkardığını görmek"
+  ],
+
+  "safety": [
+    { "rule": "Xenon (HID) sistemlerinde ateşleyici ve balast ünitesine, sistem kapalı olduğu doğrulanmadan dokunulmaz", "why": "Bu sistemler ateşleme anında çok yüksek gerilim üretir; canlı bir ateşleyiciye temas ciddi elektrik çarpmasıdır", "blocksStart": true },
+    { "rule": "Halojen ampulün camına çıplak elle dokunulmaz", "why": "Cilt yağı camda sıcak nokta oluşturur ve ampul kısa sürede patlar; temiz bez ya da eldivenle tutulur", "blocksStart": true },
+    { "rule": "Far grubu söküldükten sonra hiçbir aydınlatma ayarsız teslim edilmez", "why": "Yanlış ayarlı far karşıdan gelen sürücüyü kör eder; bu bir konfor sorunu değil, kaza sebebi ve muayene kusurudur", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.multimetre", "label": "Multimetre", "required": true },
+    { "id": "tool.pens-ampermetre", "label": "Pens ampermetre", "required": false },
+    { "id": "tool.tornavida-seti", "label": "Tornavida seti", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Far grubunun arka kapağını açtın. İçinde ne olduğunu belirlemen gerekiyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.far-grubu",
+        "question": "Ampul tipini bilmek neden ilk adımdır?",
+        "options": [
+          { "label": "Her tipin kendi kuralı ve kendi tehlikesi vardır: halojen cama dokunulmaz, xenon yüksek gerilim üretir, LED çoğu zaman ayrı sökülemez ve grup olarak değişir", "verdict": "tip-belirle", "correct": true, "explain": "Aydınlatma işine ampul sökerek değil, ne olduğunu belirleyerek başlanır; çünkü üç ana tip üç ayrı iş demektir. Halojen en yaygın ve en basit olanıdır: içinde bir filaman vardır ve akım geçince ısınıp ışık verir. Tek kritik kuralı camına dokunulmamasıdır — parmaktaki yağ camda yerel bir sıcak nokta yapar ve ampul erken patlar. Xenon (HID) ampulde filaman yoktur; iki elektrot arasında bir gaz içinde ark oluşur ve bu arkı başlatmak için çok yüksek bir gerilim gerekir. Bu gerilimi üreten ateşleyici ve balast ünitesi far grubunun yanındadır ve bu uygulamanın bir sınırıdır: sistem kapalı olduğu doğrulanmadan bu birimlere dokunulmaz. LED ise bir yarı iletkendir; ısınmasını bir soğutucu ve çoğu zaman bir sürücü devre yönetir. LED'in en önemli özelliği ayrı bir ampul olarak değil, çoğu araçta grubun içine gömülü olarak gelmesidir — yani tek bir LED bozulduğunda değişen şey ampul değil, far ya da stop grubunun tamamıdır. Bunu müşteriye önden söylemek maliyet açısından belirleyicidir. Dördüncü bir tip daha vardır ve karıştırılır: park ve plaka aydınlatmasında kullanılan küçük ampuller; bunlar basittir ama yanlış güçte takıldığında yuvayı eritirler." },
+          { "label": "Hepsi aynıdır, ampul ampuldür", "verdict": "hepsi-ayni", "explain": "Üç tipin kuralları ve tehlikeleri farklıdır." },
+          { "label": "Yalnız duy tipi önemlidir", "verdict": "duy", "explain": "Duy uyumu gereklidir ama tip, işin nasıl yapılacağını belirler." },
+          { "label": "Tip yalnız fiyatı etkiler", "verdict": "fiyat", "explain": "Tip aynı zamanda güvenlik ve söküm yöntemini belirler." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "LED gruplarda değişen şey ampul değil, grubun tamamı olabilir. Bunu önden söylemek müşteriyi sürprizden kurtarır."
+    },
+    {
+      "id": 2,
+      "instruction": "Halojen ampulü değiştiriyorsun.",
+      "interaction": {
+        "type": "press-and-pull",
+        "target": "part.far-grubu",
+        "requiresGesture": true
+      },
+      "camera": "aksesuar",
+      "hint": "Tırnağı bastırıp ampulü yuvasından kurtar.",
+      "teachingNote": "Halojen değişiminin dört kuralı vardır. Birincisi cama dokunmamaktır; ampul kutusundan çıkarılırken tabanından tutulur, dokunulduysa temiz bir bezle ve uygun bir temizleyiciyle silinir. İkincisi konumdur: ampulün duydaki oturma yönü tektir ve tırnakları ancak doğru konumda kilitlenir — zorlanarak takılan bir ampul odak noktasına oturmaz ve far ne kadar ayarlanırsa ayarlansın düzgün ışık dağılımı vermez. Üçüncüsü çift değişimdir: bir taraf bittiğinde diğer taraf da benzer yaşta demektir ve tek taraf değiştirildiğinde iki farın rengi ve parlaklığı farklı olur; ikisini birden değiştirmek hem görüşü hem görünüşü düzeltir. Dördüncüsü arka kapağın sızdırmazlığıdır: kapak ve contası tam oturtulmazsa far grubu nem alır ve içeriden buğulanır. Ampulün gücü ve tipi araca özgüdür; farklı güçte bir ampul takmak yuvayı ve reflektörü ısıyla bozar, bu ders bir değer vermiyor — araç belgesindeki tip kullanılır."
+    },
+    {
+      "id": 3,
+      "instruction": "Müşteri 'daha çok görmek istiyorum, LED taktıralım' diyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.far-grubu",
+        "question": "Halojen far grubuna LED ampul takmak ne yapar?",
+        "options": [
+          { "label": "Işığın miktarını artırabilir ama DAĞILIMINI bozar: reflektör ve mercek o ampulün ışık kaynağı geometrisine göre tasarlanmıştır, farklı geometri kaçak ışık ve karşıdakini kör etme üretir", "verdict": "dagilim-bozulur", "correct": true, "explain": "Bu, sahada en çok istenen ve en çok yanlış anlaşılan işlerden biridir. Bir far grubu yalnız bir ampul yuvası değildir; reflektörün eğrileri ve varsa merceğin optiği, belirli bir ampulün ışığının belirli bir noktadan çıkacağı varsayımıyla hesaplanmıştır. Halojen ampulde ışık, ince bir filamandan belirli bir konumda çıkar. LED'de ise ışık, düz yüzeyler üzerine dizilmiş yongalardan çıkar ve geometri tamamen farklıdır. Sonuç: toplam ışık artsa bile dağılım bozulur. Işığın bir kısmı yolun aydınlatılması gereken yerine gitmez, bir kısmı ise kesme çizgisinin üstüne kaçar ve karşıdan gelen sürücünün gözüne girer. Bu 'daha çok görmek' değil, 'başkasını kör etmek'tir ve gece kazalarının bilinen sebeplerinden biridir. İkinci sorun elektrikseldir: LED çok az akım çeker ve birçok araç ampul kontrolünü akım üzerinden yapar — sistem ampulü 'yanmış' sanar, panelde uyarı verir ya da sinyallerde hızlı yanıp sönme oluşur. Üçüncü sorun yasaldır: aracın aydınlatması tip onayına tabidir ve uygun olmayan dönüşüm muayenede kusur yazılır. Doğru cevap müşteriyi geri çevirmek değil, gerçeği söylemek ve alternatif sunmaktır: doğru tipte kaliteli bir halojen, temizlenmiş ve doğru ayarlanmış bir far, ya da o araç için tip onaylı bir LED far grubu." },
+          { "label": "Her zaman daha iyi görüş sağlar", "verdict": "her-zaman-iyi", "explain": "Optik geometri uyuşmadığı için dağılım bozulur." },
+          { "label": "Hiçbir etkisi olmaz", "verdict": "etkisiz", "explain": "Hem optik hem elektriksel etkileri vardır." },
+          { "label": "Yalnız renk değişir", "verdict": "renk", "explain": "Asıl değişen ışığın dağılımıdır." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "'Daha çok görmek' ile 'başkasını kör etmek' arasındaki fark optik geometridir. Müşteriye gerçeği söylemek işin parçası."
+    },
+    {
+      "id": 4,
+      "instruction": "Sinyal ampulünü LED ile değiştirdin. Sinyal artık çok hızlı yanıp sönüyor. Akımı ölçtün: halojen 1,9 A, LED 0,2 A. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.pens-ampermetre",
+        "unit": "A",
+        "acceptRange": [1.6, 1.8]
+      },
+      "camera": "aksesuar",
+      "hint": "1,9 eksi 0,2.",
+      "teachingNote": "1,7 amperlik bu düşüş hızlı yanıp sönmenin doğrudan sebebidir. Sinyal devresi, bir ampul yandığında sürücünün bunu fark etmesi için tasarlanmıştır: sistem devreden geçen akımı izler, akım beklenenin altına düşerse 'bir ampul yanmış' diye yorumlar ve yanıp sönme hızını artırarak sürücüyü uyarır. LED çok az akım çektiği için sistem sağlam ampulü yanmış sanar. Çözüm üç türlüdür ve üçü de bilinerek seçilir. Birincisi doğru yol: o araç için tip onaylı LED sinyal ünitesi ve gerekiyorsa üreticinin öngördüğü uyarlama. İkincisi yaygın ama kusurlu yol: devreye direnç eklemek — direnç eksik akımı yakarak tamamlar, sistem susar ama enerji ısıya dönüşür, direnç çok ısınır ve yanlış yere sabitlenirse plastiği eritir ya da yangın riski üretir. Üçüncüsü hiç yapılmaması gereken yol: uyarı işlevini tamamen devre dışı bırakmak; bu, gerçekten bir ampul yandığında sürücünün haberi olmaması demektir. Buradaki asıl ders şudur — sistem yanılmıyor, ölçtüğü şey gerçekten değişmiş. Uyarıyı susturmak arızayı değil, uyarıyı çözer."
+    },
+    {
+      "id": 5,
+      "instruction": "Far grubunu söküp taktın. Araç teslime hazır görünüyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.far-grubu",
+        "question": "Eksik olan nedir?",
+        "options": [
+          { "label": "Far ayarı: grup söküldüyse ya da ampul değiştiyse ışığın kesme çizgisi düz bir duvara karşı, aracın yükü ve lastik basıncı normalken kontrol edilip ayarlanır", "verdict": "far-ayari", "correct": true, "explain": "Far ayarı bu işin en çok atlanan ve en çok sonuç doğuran adımıdır. Farın ışığı gelişigüzel dağılmaz: üstte keskin bir kesme çizgisi vardır ve bu çizginin altı yolu aydınlatır, üstü karanlık kalır — böylece karşıdan gelen sürücünün gözü korunur. Grup söküldüğünde, ampul değiştiğinde ya da tampon işi yapıldığında bu çizginin yüksekliği kayar. Ayar yöntemi atölyede iki türlüdür: özel far ayar cihazıyla ya da düz bir duvar karşısında. Duvar yöntemi şu koşullarda yapılır — araç düz zeminde, lastik basınçları normal, depoda normal yakıt, araçta olağandışı yük yok ve varsa far seviye ayarı sıfır konumunda. Farlar yakılır, kesme çizgisinin duvardaki yüksekliği iki taraf için karşılaştırılır ve gruptaki ayar vidalarıyla düşey ve yatay konum düzeltilir. Doğru yükseklik ve mesafe değerleri araca özgüdür ve bu ders bir ölçü vermiyor; araç belgesindeki değer kullanılır. Üç not: iki farın çizgisi aynı yükseklikte olmalıdır, ayar vidaları plastik olduğu için zorlanmaz, ve seviye ayarı olan araçlarda ayar sıfır konumunda yapılır yoksa yol koşullarında hep yanlış kalır. Yanlış ayarlı far muayenede kusurdur ve gece trafiğinde doğrudan bir tehlikedir." },
+          { "label": "Bir şey eksik değil, lambalar yanıyor", "verdict": "eksik-yok", "explain": "Yanmak yetmez; kesme çizgisinin yeri güvenliği belirler." },
+          { "label": "Yalnız temizlik gerekir", "verdict": "temizlik", "explain": "Temizlik faydalıdır ama ayarın yerini tutmaz." },
+          { "label": "Ayar yalnız yeni araçta gerekir", "verdict": "yeni-arac", "explain": "Grup söküldüğü ya da ampul değiştiği her seferde kontrol edilir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Kesme çizgisi bu işin görünmeyen ürünü. Lambanın yanması işin bittiğini göstermiyor."
+    },
+    {
+      "id": 6,
+      "instruction": "Başka bir araçta stop lambası yanmıyor ama sigorta sağlam.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.stop-lambasi",
+        "question": "Aydınlatma arızalarında en sık atlanan halka hangisidir?",
+        "options": [
+          { "label": "Şase: lamba yuvasının gövdeye dönüşü paslanır ya da oksitlenir; ampul ve besleme sağlam olduğu hâlde devre kapanmaz ya da lamba zayıf yanar", "verdict": "sase", "correct": true, "explain": "Dış aydınlatma araçtaki en çok neme maruz kalan devrelerden biridir ve arızalarının büyük kısmı ampulde değil, dönüş yolundadır. Stop, sinyal ve park lambalarının şase bağlantısı çoğu zaman gövdeye vidalanmış bir uçtur ya da yuvanın kendi metal parçasıyla sağlanır; bu noktalar yağmur, yol tuzu ve nemle oksitlenir. Oksit iletken değildir; sonuç ya lambanın hiç yanmaması ya da zayıf, sararmış bir ışıkla yanmasıdır. Zayıf yanma çok karakteristik bir belirtidir ve neredeyse her zaman şaseyi işaret eder. İkinci sık belirti şudur: fren pedalına basıldığında park lambası sönüyor ya da sinyal verildiğinde stop lambası titriyor — bunlar iki devrenin ortak bir kötü şase üzerinden birbirine karışması demektir, çünkü akım kendine geri dönmek için başka bir yol arar. Ölçüm yöntemi gerilim düşümüdür: lamba yanarken bir prob yuvanın şase ucuna, diğeri akü eksi kutbuna değdirilir ve fark okunur; sağlam bir şasede fark küçüktür. Onarım basittir ve parça gerektirmez: bağlantı sökülür, yüzeyler pastan ve boyadan temizlenir, gerekirse yeni bir uç sıkılır ve bağlantı korunur. Üçüncü sık sebep yuvanın kendisidir: içindeki yaylar ve temas dilleri oksitlenir; temizlik çoğu zaman yeterlidir, dağılmışsa yuva değişir." },
+          { "label": "Ampul her zaman suçludur", "verdict": "ampul", "explain": "Ampul sağlamken şase yüzünden yanmayan lamba çok sık görülür." },
+          { "label": "Modül arızalıdır", "verdict": "modul", "explain": "En pahalı halkayla başlamak teşhis değildir." },
+          { "label": "Fren anahtarı bozulmuştur", "verdict": "fren-anahtari", "explain": "Olabilir ama o zaman iki stop lambası birden yanmazdı." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Zayıf ve sararmış yanan bir lamba neredeyse her zaman kötü şase demek. Onarımı parça değil, temizlik."
+    },
+    {
+      "id": 7,
+      "instruction": "İş bitti, teslim öncesi.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sigorta-kutusu-aksesuar",
+        "question": "Aydınlatma işinde son kontrol nedir?",
+        "options": [
+          { "label": "Bütün dış aydınlatma iki kişiyle tek tek denenir — kısa, uzun, park, sinyal, dörtlü, stop, geri, sis ve plaka — ayrıca panelde uyarı olup olmadığı ve far grubunun sızdırmazlığı kontrol edilir", "verdict": "tam-liste", "correct": true, "explain": "Aydınlatma kontrolü bir liste işidir çünkü tek başına yapıldığında arkadaki lambalar görülmez. Doğru yöntem iki kişidir: biri kabinde kumandaları sırayla verir, diğeri dışarıdan bakar. Liste şudur — kısa far, uzun far, park lambaları, sağ ve sol sinyal (ön, yan, arka), dörtlü flaşör, fren lambaları (üçüncü stop dâhil), geri vites lambası, varsa ön ve arka sis, plaka aydınlatması ve gündüz farları. Fren lambası için pedal basılı tutulur, geri vites için vites geri konumuna alınır ve araç emniyete alınmış olur. İkinci kontrol gösterge panelidir: birçok araç ampul durumunu izler, teslim öncesi panelde ampul ya da aydınlatma uyarısı kalmamalıdır — LED dönüşümü yapıldıysa bu uyarı çıkabilir ve müşteriye açıklanır. Üçüncüsü far grubunun kendisidir: arka kapak ve contası tam oturmuş mu, grup içinde nem ya da buğu var mı, havalandırma tapası açık mı. Buğulanan bir far grubunun sebebi çoğu zaman yarım kapatılmış bir kapaktır ve bu, iş bitiminde fark edilirse beş saniyede, sonra fark edilirse yeniden sökümle çözülür. Dördüncü ve son kontrol far ayarıdır — grup söküldüyse ayar yapılmadan araç teslim edilmez." },
+          { "label": "Kısa ve uzun far denenirse yeterlidir", "verdict": "sadece-far", "explain": "Sinyal, stop, geri ve plaka aydınlatması da denenmelidir." },
+          { "label": "Müşteri kendi kontrol eder", "verdict": "musteri", "explain": "Arkadaki lambaları sürücü tek başına göremez; kontrol atölyede yapılır." },
+          { "label": "Panel uyarısı yoksa her şey tamamdır", "verdict": "panel", "explain": "Her araç her lambayı izlemez; gözle kontrol şarttır." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Aşama 5 devam ediyor: sırada tampon, spoiler ve çıta montajı — aynı bölgede ama bu kez gövde işi."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Halojen far grubuna LED ampul takmak ne yapar?",
+        "a": "dagilim-bozulur",
+        "options": [
+          { "verdict": "dagilim-bozulur", "label": "Işığın dağılımını bozar: reflektör ve mercek halojen filamanın geometrisine göre tasarlanmıştır", "explain": "Halojen ışığı ince bir filamandan belirli bir konumda çıkar; LED'de ışık düz yüzeylere dizilmiş yongalardan çıkar. Toplam ışık artsa bile bir kısmı yolun aydınlatılması gereken yerine gitmez, bir kısmı kesme çizgisinin üstüne kaçıp karşıdakini kör eder. Ayrıca LED az akım çektiği için sistem ampulü yanmış sanabilir ve uygun olmayan dönüşüm muayenede kusurdur." },
+          { "verdict": "her-zaman-iyi", "label": "Her zaman daha iyi görüş sağlar", "explain": "Optik geometri uyuşmaz." },
+          { "verdict": "etkisiz", "label": "Etkisi olmaz", "explain": "Optik ve elektriksel etkileri vardır." },
+          { "verdict": "renk", "label": "Yalnız renk değişir", "explain": "Asıl değişen dağılımdır." }
+        ]
+      },
+      {
+        "q": "Stop lambası yanmıyor ya da zayıf yanıyor, ampul ve sigorta sağlam. En sık sebep nedir?",
+        "a": "sase",
+        "options": [
+          { "verdict": "sase", "label": "Şase: yuvanın gövdeye dönüşü paslanmış ya da oksitlenmiştir", "explain": "Dış aydınlatma en çok neme maruz kalan devrelerden biridir ve arızaların çoğu dönüş yolundadır. Zayıf ve sararmış yanma karakteristik olarak şaseyi işaret eder; iki devrenin birbirine karışması (fren basınca park sönmesi gibi) da ortak kötü şasenin belirtisidir. Ölçüm gerilim düşümüyle yapılır ve onarım parça değil temizliktir." },
+          { "verdict": "ampul", "label": "Ampul suçludur", "explain": "Ampul sağlamken şase yüzünden yanmama çok sıktır." },
+          { "verdict": "modul", "label": "Modül arızalıdır", "explain": "En pahalı halkayla başlanmaz." },
+          { "verdict": "fren-anahtari", "label": "Fren anahtarı bozuktur", "explain": "O zaman iki stop birden yanmazdı." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 4'teki 1,9 A ve 0,2 A SENARYO okumalarıdır; istenen FARKTIR (1,7 A) ve ders bir ampul akımı ya da sinyal eşiği vermiyor.",
+    "sourceRequired": "Ampul tipi ve gücü, far ayar yüksekliği ve mesafesi, sinyal ampul kontrol eşiği ve direnç değeri bilinçle VERİLMEDİ; hepsi araca ve üretici belgesine aittir. Xenon sistemlerin çalışma gerilimi de verilmedi.",
+    "kapsam": "Xenon ateşleyici ve balast ünitesine müdahale KAPSAM DIŞIDIR; ders yalnız sınırı ve güvenli durum ilkesini öğretiyor. Far grubu içi onarımı, mercek parlatma ve gövde onarımı bu projede yok. Tip onaylı LED dönüşümünün seçimi ve yasal uygunluk değerlendirmesi araca özgüdür; ders yalnız riski ve doğru soruyu öğretiyor, ürün önermiyor.",
+    "reviewedByMechanic": false
+  }
+}

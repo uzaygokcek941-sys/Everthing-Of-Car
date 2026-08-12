@@ -1,0 +1,30 @@
+# bagimliliklar
+node_modules/
+.pnp
+.pnp.*
+
+# next.js
+.next/
+out/
+build/
+.vercel
+
+# gizli anahtarlar - service_role asla repoya girmez
+.env
+.env.*
+!.env.example
+
+# uretilen videolar (JSON'dan yeniden uretilir: cd video && node render-all.mjs)
+video/out/
+web/public/videos/
+*.mp4
+
+# remotion gecici
+video/check/
+
+# isletim sistemi / editor
+.DS_Store
+Thumbs.db
+*.tsbuildinfo
+next-env.d.ts
+npm-debug.log*

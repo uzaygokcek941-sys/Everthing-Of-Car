@@ -1,0 +1,140 @@
+{
+  "id": "motor.hava-filtresi",
+  "area": "motor-mekanik",
+  "stage": 4,
+  "title": "Hava Filtresi Değişimi ve Kirlilik Okuma",
+  "vehicleClass": "binek-arac",
+  "estimatedMinutes": 12,
+  "prerequisites": ["temel.el-aletleri"],
+  "learningGoals": [
+    "Filtre kutusunu içeri kir kaçırmadan açmak",
+    "Kirli filtreyi temizlemekle değiştirmek arasında doğru kararı vermek",
+    "Filtre üzerindeki izlerden başka bir sistemin arızasını okumak"
+  ],
+
+  "safety": [
+    { "rule": "Motor çalışırken hava kutusu açılmaz", "why": "Açık emme ağzı elden bez, yaprak, cıvata ne varsa içeri çeker. İçeri giren küçük bir cisim doğrudan silindire gider", "blocksStart": true },
+    { "rule": "Basınçlı hava gözlüksüz kullanılmaz", "why": "Filtreden kalkan toz ve lif göze girer; bu toz mineraldir ve korneayı çizer", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.tornavida-duz", "label": "Düz tornavida (klips için)", "required": false },
+    { "id": "tool.firca", "label": "Fırça ve temiz bez", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Kutuyu açmadan önce ne yaparsın?",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.hava-filtre-kutusu",
+        "question": "Filtre kutusu açılmadan önce?",
+        "options": [
+          { "label": "Kutunun dış yüzeyini ve kapak kenarını temizlerim", "verdict": "disi-temizle", "correct": true, "explain": "Kapak kenarında biriken toz, kapak kalkarken doğrudan temiz tarafa dökülür. O toz artık filtrenin arkasındadır, yani filtrelenmemiş olarak motora gidecektir. Temizlik işi bitirmenin değil, başlamanın parçasıdır." },
+          { "label": "Hemen açarım, içi zaten kirli", "verdict": "hemen-ac", "explain": "İçinin kirli olması sorun değil — kirin kirli tarafta olması normaldir. Sorun, kapak açılırken kirin temiz tarafa geçmesi." },
+          { "label": "Kompresörle üstünü üflerim", "verdict": "ufle", "explain": "Üflemek tozu dağıtır ve kapak aralığından içeri sürer. Fırça ve bez toza yön verir, hava vermez." },
+          { "label": "Filtre kutusunu komple sökerim", "verdict": "kutuyu-sok", "explain": "Gereksiz iş. Kutu yerindeyken de açılır; sökmek emme hortumu bağlantılarını gereksiz yere yorar." }
+        ]
+      },
+      "camera": "motor-ust",
+      "teachingNote": "Hava filtresinin iki yüzü vardır: kirli taraf ve temiz taraf. Bu işin tamamı, kiri temiz tarafa geçirmemekle ilgilidir."
+    },
+    {
+      "id": 2,
+      "instruction": "Kapağı aç ve filtreyi yuvasından düz yukarı çıkar.",
+      "interaction": {
+        "type": "pull",
+        "target": "part.hava-filtresi",
+        "axis": "y",
+        "distance": 1
+      },
+      "camera": "motor-ust",
+      "hint": "Düz çek. Eğik çekersen filtrenin kirli yüzü kutunun temiz tarafına sürtünür.",
+      "teachingNote": "Çıkardığın filtreyi kirli yüzü yukarı bakacak şekilde koy. Yere ters koyulan filtre, teşhis için bakacağın yüzeyi kaybettirir."
+    },
+    {
+      "id": 3,
+      "instruction": "Filtre gözle görülür şekilde kirli. Ne yaparsın?",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.hava-filtresi",
+        "question": "Kirli kağıt hava filtresi ne yapılır?",
+        "options": [
+          { "label": "Değiştiririm", "verdict": "degistir", "correct": true, "explain": "Binek araçtaki kağıt filtre sarf malzemedir; temizlenmek için değil değiştirilmek için tasarlanmıştır. Kirlenme yalnız yüzeyde değil, kağıdın gözeneklerinin içindedir ve oradan çıkmaz." },
+          { "label": "Kompresörle içten dışa üfleyip takarım", "verdict": "ufleyip-tak", "explain": "Ağır iş makinelerinde düşük basınçla ve temiz taraftan üfleme kabul gören bir uygulamadır ama binek aracın ince kağıdında basınç gözenekleri yırtar. Yırtılan filtre görünürde temizdir ve artık hiçbir şey süzmez — en tehlikeli hali budur." },
+          { "label": "Silkeleyip takarım, gözle temiz görünüyor", "verdict": "silkele", "explain": "Silkeleme yüzeydeki iri parçayı alır, akışı kısıtlayan ince tozu almaz. Gözle temiz görünen filtre akış olarak hâlâ tıkalı olabilir." },
+          { "label": "Yıkayıp kurutur, takarım", "verdict": "yika", "explain": "Kağıt filtre suyla lif yapısını kaybeder ve kuruduğunda deforme olur; yuvaya tam oturmaz. Yıkanabilen filtreler ayrı bir üründür ve kendi yağı ile birlikte satılır." }
+        ]
+      },
+      "camera": "motor-ust",
+      "teachingNote": "Tıkalı filtre motoru boğar: hava azalır, karışım zenginleşir, yakıt artar ve güç düşer. Ucuz parçanın pahalı sonucu."
+    },
+    {
+      "id": 4,
+      "instruction": "Filtrenin temiz tarafında ve kutunun içinde yağlı bir film var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.hava-filtresi",
+        "question": "Hava filtresinin temiz tarafındaki yağ izi neyi gösterir?",
+        "options": [
+          { "label": "Karter havalandırması motorun yağ buharını emmeye taşıyor", "verdict": "karter-havalandirma", "correct": true, "explain": "Motorun karter gazları emme sistemine geri verilir; bu normaldir. Ama iz belirginse ya havalandırma valfi (PCV) tıkalıdır ya da segmanlar yorulmuştur ve kartere fazla gaz kaçmaktadır. Filtre burada bir arıza değil, başka bir sistemin göstergesidir. Filtreyi değiştirip geçmek, termometreyi kırıp ateşi düşürmeye benzer." },
+          { "label": "Filtre bozuk, kalitesizmiş", "verdict": "filtre-bozuk", "explain": "Filtre yağ üretmez. Yağ oraya emme yolundan gelmiştir; kaynak filtre değil motordur." },
+          { "label": "Normaldir, her araçta olur", "verdict": "normal", "explain": "Hafif bir iz normaldir. Belirgin yağ filmi normal değildir ve nedeni araştırılır. Farkı görmek ustalıktır." },
+          { "label": "Yağ değişiminde fazla yağ konmuştur", "verdict": "fazla-yag", "explain": "Fazla yağ ayrı bir sorundur ve karter basıncını gerçekten artırabilir ama ilk bakılacak yer havalandırma valfidir." }
+        ]
+      },
+      "camera": "motor-ust",
+      "teachingNote": "Aşama 9'a giden yol buradan geçiyor: usta parçayı değiştirmeden önce parçanın neden bozulduğunu sorar."
+    },
+    {
+      "id": 5,
+      "instruction": "Yeni filtreyi yerleştirdin, kapağı kapatıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.hava-filtre-kutusu",
+        "question": "Kapağı kapatırken en kritik nokta hangisi?",
+        "options": [
+          { "label": "Filtrenin lastik kenarı yuvaya tam otursun, klipslerin hepsi kapansın", "verdict": "tam-otursun", "correct": true, "explain": "Kutu bir sızdırmazlık kabıdır. Kapanmayan tek bir klips ya da yuvasından kaçmış lastik kenar, filtrelenmemiş havanın doğrudan içeri girmesine yol açar; filtre orada takılı durur ama işlevi kalmaz. Ayrıca kaçak hava, ölçülen hava miktarını bozup karışımı yanlışlar." },
+          { "label": "Kapağı sıkıca bastırırım, gerisi kendiliğinden oturur", "verdict": "bastir", "explain": "Bastırmak yanlış oturmuş bir kenarı düzeltmez, ezerek gizler. Kapak kolay kapanmıyorsa filtre yanlış oturmuştur." },
+          { "label": "Bir klips açık kalırsa sorun olmaz", "verdict": "bir-klips", "explain": "Bir açık klips kutuyu açık bırakır. O aralıktan giren toz, filtrenin tamamının süzdüğü havadan daha kirlidir." },
+          { "label": "Kapak kenarına silikon sürerim", "verdict": "silikon", "explain": "Kutu zaten kendi lastik kenarıyla sızdırmazlık yapar. Silikon bir sonraki değişimde kapağı açtırmaz ve parçalanıp emmeye kaçabilir." }
+        ]
+      },
+      "camera": "motor-ust",
+      "teachingNote": "Filtre takmak işin kolay yarısı. Kutunun sızdırmaz kapanması işin karşılığını alan yarısı."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Hava filtresi kutusunun bir klipsi kapanmamış olarak kalırsa ne olur?",
+        "a": "filtresiz-hava-girer",
+        "options": [
+          { "verdict": "filtresiz-hava-girer", "label": "Filtrelenmemiş hava doğrudan motora girer", "explain": "Hava en kolay yoldan gider ve filtre bir dirençtir; açık bir aralık varsa hava oradan akar. Motor toz yutar, üstelik hava miktarını ölçen sensörden geçmediği için karışım da yanlışlanır. Takılı ama baypas edilen filtre, hiç filtre olmamasından beterdir çünkü kimse arızayı orada aramaz." },
+          { "verdict": "ses-gelir", "label": "Sadece ses gelir", "explain": "Ses gelebilir ama asıl zarar sessizdir: silindire giren aşındırıcı toz." },
+          { "verdict": "sorun-yok", "label": "Hiçbir şey olmaz, hava zaten girmesi gereken şey", "explain": "Girmesi gereken şey temiz havadır. Toz, gömlek ve segmanı zımpara gibi aşındırır." },
+          { "verdict": "kapak-ucar", "label": "Sadece kapak uçar", "explain": "Kapak uçmasa bile zarar oluşur; sorun mekanik değil, süzme kaybıdır." }
+        ]
+      },
+      {
+        "q": "Hava filtresinin temiz tarafında belirgin yağ izi görürsen ilk nereye bakarsın?",
+        "a": "karter-havalandirma-valfi",
+        "options": [
+          { "verdict": "karter-havalandirma-valfi", "label": "Karter havalandırma valfi ve hortumuna", "explain": "Karter gazları emmeye bu yoldan döner. Valf tıkalıysa karter basıncı yükselir ve yağ buharı yoğunlaşarak filtreye ulaşır. Devamında segman ve gömlek durumu da sorgulanır ama ilk ve en ucuz bakılacak yer valftir." },
+          { "verdict": "yag-filtresi", "label": "Yağ filtresine", "explain": "Yağ filtresi yağ devresindedir, emme yoluyla bağlantısı yoktur." },
+          { "verdict": "buji", "label": "Bujilere", "explain": "Buji sonucu gösterebilir ama nedeni değil; yağ emmeye başka bir yoldan girmiştir." },
+          { "verdict": "radyator", "label": "Radyatöre", "explain": "Soğutma sisteminin emme yoluna yağ göndermesi beklenmez." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "sourceRequired": "Bu derste araca özgü sayısal değer yoktur. Değişim aralığı (km) üretici verisidir ve tozlu ortamda kısaltılır; kaynaksız rakam verilmedi.",
+    "kapsam": "Hava filtre kutusu modeli gerekiyor. Model gelene kadar adımlar metinle oynanır; kapak açma ve filtre çıkarma animasyonlu değildir.",
+    "reviewedByMechanic": false
+  }
+}

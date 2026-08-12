@@ -1,0 +1,163 @@
+{
+  "id": "motor.kam-mili",
+  "area": "motor-mekanik",
+  "stage": 7,
+  "title": "Kam Mili: Lob Aşınmasını Ölçmek ve Sebebini Bulmak",
+  "vehicleClass": "binek-arac",
+  "estimatedMinutes": 25,
+  "prerequisites": ["motor.supap-ayari", "temel.olcu-aletleri"],
+  "learningGoals": [
+    "Aynı görevi gören loblar arasındaki farkı aşınmanın kanıtı olarak kullanmak",
+    "Kam lobunu mikrometreyle doğru doğrultuda ölçmek",
+    "Aşınmış lobun sebebini yağlamada aramak ve eşleşen iticiyi de değiştirmek"
+  ],
+
+  "safety": [
+    { "rule": "Kam mili çıplak elle kavranmaz, temiz bezle tutulur", "why": "Lob ve muylu yüzeyleri aynalanmış hâldedir; terden gelen tuz ve nem bu yüzeylerde saatler içinde paslanma başlatır", "blocksStart": false },
+    { "rule": "Ölçüm öncesi yüzey temiz ve kuru olmalı", "why": "Lob üzerinde kalan yağ filmi mikrometrede yüzde birlik farklar yaratır ve aradığın fark da o büyüklüktedir", "blocksStart": false },
+    { "rule": "Kam mili tek noktadan asılı bırakılmaz", "why": "İnce ve uzun bir mildir; tek uçtan tutulup bırakıldığında kendi ağırlığıyla eğilebilir ve eğilen mil çöpe gider", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.mikrometre", "label": "Dış çap mikrometresi", "required": true },
+    { "id": "tool.temiz-bez", "label": "Tiftiksiz bez", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true },
+    { "id": "tool.kumpas", "label": "Kumpas", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Yüksek kilometreli araç: güç kaybı var, rölanti hafif düzensiz, üstten tıkırtı geliyor ve supap ayarı yapıldığı hâlde bir supapta boşluk sürekli fazla çıkıyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kam-mili",
+        "question": "Ayar yapıldığı hâlde tek supapta boşluğun tekrar tekrar fazla çıkması neyi düşündürür?",
+        "options": [
+          { "label": "O supabın kam lobu aşınmış; lob alçaldıkça ölçülen boşluk büyür", "verdict": "lob-asinmasi", "correct": true, "explain": "Supap boşluğu, kam lobunun taban dairesi ile itici arasındaki aralıktır. Lobun tepesi aşınıp alçaldığında supap daha az açılır; aşınma taban dairesi bölgesini de yiyerek aralığı büyütür. Ayar yapıp kısa sürede aynı yerde tekrar boşluk bulmak, sorunun ayarda değil parçanın geometrisinde olduğunu söyler. Ayrıca o silindir daha az hava alır ve güç kaybı bundan gelir." },
+          { "label": "Sentil yanlış okunmuş", "verdict": "olcum-hatasi", "explain": "Ölçüm hatası bir kez olur; aynı supapta tekrar tekrar aynı yönde çıkan sonuç, sistematik bir sebebi işaret eder." },
+          { "label": "Supap yayı zayıflamış", "verdict": "yay", "explain": "Zayıf yay yüksek devirde supabın kamı takip edememesine yol açar; soğukta ölçülen boşluğu büyütmez." },
+          { "label": "Silindir kapağı çarpılmış", "verdict": "kapak-carpik", "explain": "Çarpıklık conta kaçağı yapar; tek supabın boşluğunu düzenli biçimde büyütmez." }
+        ]
+      },
+      "camera": "motor-ust",
+      "teachingNote": "Aynı ayarı iki kez yapmak zorunda kalıyorsan, ayarladığın şey sorun değildir. Tekrar eden ayar her zaman altta bir aşınmayı gösterir."
+    },
+    {
+      "id": 2,
+      "instruction": "Kam mili söküldü ve tezgâhta. Ölçmeye hazırlanıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kam-mili",
+        "question": "Lob aşınması nasıl ölçülür?",
+        "options": [
+          { "label": "Mikrometreyle lob tepesinden taban dairesine, en yüksek doğrultuda ölçülür ve aynı görevi gören diğer loblarla karşılaştırılır", "verdict": "tepe-taban-karsilastir", "correct": true, "explain": "Lob yuvarlak değil, bir tarafı yükseltilmiş bir eğridir. Ölçüm en yüksek noktadan tam karşısındaki taban dairesine alınır; buna lob yüksekliği denir. Asıl güçlü yöntem ise karşılaştırmadır: aynı motordaki bütün emme lobları aynı ölçüde üretilir, bütün egzoz lobları da öyle. Dolayısıyla kılavuzun sınır değerini bilmesen bile, bir lobun kardeşlerinden ölçülebilir biçimde alçak olması tek başına aşınmanın kanıtıdır. Emme lobunu egzoz lobuyla karşılaştırma; ikisi zaten farklı tasarlanmıştır." },
+          { "label": "Kumpasla lob genişliği ölçülür", "verdict": "kumpas-genislik", "explain": "Aşınma yükseklikte olur, genişlikte değil. Ayrıca kumpasın çözünürlüğü bu fark için yetersizdir." },
+          { "label": "Gözle bakılır, parlak bölge varsa aşınmıştır", "verdict": "gozle", "explain": "Parlaklık ipucu verir ama miktarı söylemez. Aşınma kararı ölçümle verilir." },
+          { "label": "Muylu çapı ölçülür", "verdict": "muylu", "explain": "Muylu çapı yatak boşluğu için ölçülür; lob aşınmasını göstermez. İkisi ayrı kontrollerdir." }
+        ]
+      },
+      "camera": "tezgah",
+      "hint": "Mikrometreyi lobun tam tepesine dik getir; eğik ölçüm gerçek yükseklikten küçük okur.",
+      "teachingNote": "Karşılaştırmalı ölçüm bu mesleğin en güçlü aletlerinden biridir. Kılavuz elinde olmadığında bile, birbirinin aynısı olması gereken iki parçanın farkı sana gerçeği söyler."
+    },
+    {
+      "id": 3,
+      "instruction": "Üç emme lobunu ölçtün: üçü de 39,50 mm. Şikâyet edilen supabın lobu 39,10 mm. Aradaki farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.kam-mili",
+        "unit": "mm",
+        "acceptRange": [0.35, 0.45]
+      },
+      "camera": "tezgah",
+      "hint": "39,50 eksi 39,10.",
+      "teachingNote": "Bu sayı bir üretici sınırı değil, senin ürettiğin bir kanıttır. Aynı motorda aynı görevi gören dört lobun üçü aynı, biri farklıysa, farklı olan aşınmıştır — kılavuza bakmana bile gerek kalmadan. Kılavuzun sınırı işin ikinci yarısıdır ve değiştirme kararını netleştirir."
+    },
+    {
+      "id": 4,
+      "instruction": "Aşınma doğrulandı. Yeni kam mili sipariş etmeden önce durup düşünüyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kam-mili",
+        "question": "Tek bir lobun aşınmasının sebebi ne olabilir?",
+        "options": [
+          { "label": "O bölgede yağlama yetersiz kalmış: tıkalı yağ deliği, geciken yağ değişimleri, düşük yağ basıncı ya da uygunsuz yağ", "verdict": "yaglama-yetersiz", "correct": true, "explain": "Kam lobu ile itici arasındaki temas, motorun en yüksek yüzey basıncına maruz kalan yerlerinden biridir ve o teması ayakta tutan tek şey ince bir yağ filmidir. Film zayıfladığında metal metale sürtünür ve aşınma başlar. Tek lobda çıkması genellikle yerel bir sebebi gösterir: o bölgeyi besleyen yağ deliği tıkalıdır, ya da geciken yağ değişimleri yüzünden biriken çamur o kanalı kapatmıştır. Sebep bulunmadan takılan yeni kam mili aynı yerden yeniden aşınır. Bu yüzden yağ kanalları temizlenir, yağ basıncı ölçülür ve yağ tipi kontrol edilir." },
+          { "label": "Üretim hatası, sebep aramaya gerek yok", "verdict": "uretim-hatasi", "explain": "Üretim hatası binlerce kilometre sonra değil, çok daha erken ortaya çıkar. Geç ortaya çıkan aşınma yağlamayı işaret eder." },
+          { "label": "Sürüş tarzı yüzünden", "verdict": "surus", "explain": "Sürüş tarzı motorun genelini etkiler; tek lobu seçip aşındırmaz." },
+          { "label": "Yakıt kalitesi düşük", "verdict": "yakit", "explain": "Yakıt yanma tarafını etkiler; kam ile itici arasındaki yağ filmiyle ilgisi yoktur." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Aşınmış parçayı değiştirip sebebi bırakmak, bu meslekteki en pahalı alışkanlıktır. Aynı hikâye kapak contasında da, kam milinde de, yatakta da aynıdır."
+    },
+    {
+      "id": 5,
+      "instruction": "Yeni kam milini takacaksın. Eski itici hâlâ yerinde ve dışarıdan sağlam görünüyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kam-mili",
+        "question": "İtici ne olacak?",
+        "options": [
+          { "label": "Aşınmış lobun eşleştiği itici de değişir; iki yüzey birbirine aşınarak uyum kazanmıştır", "verdict": "itici-de-degis", "correct": true, "explain": "Kam lobu ile itici, çalışma boyunca birbirine göre aşınır ve zamanla eşleşmiş bir yüzey çifti hâline gelir. Bir lob aşındıysa, ona sürten iticinin yüzeyi de aşınmış ve çukurlaşmıştır. Yeni kam milini eski iticiyle çalıştırmak, yepyeni lobu bozuk bir yüzeye sürtmek demektir ve yeni mil hızla aşınır. Bu yüzden bu iki parça çift olarak değiştirilir. Aynı mantık dişli çiftlerinde, kavrama yüzeylerinde ve fren disk-balata takımında da geçerlidir." },
+          { "label": "Sağlam görünüyorsa kalır", "verdict": "kalsin", "explain": "Görünüm yeterli değildir; eşleşmiş yüzeyin çukurluğu gözle zor ayırt edilir ama yeni lobu bozar." },
+          { "label": "İtici zaten aşınmaz", "verdict": "asinmaz", "explain": "Aşınma her zaman iki yüzeyde birden olur; biri aşındıysa diğeri de aşınmıştır." },
+          { "label": "İticiyi çevirip başka yüzeyini kullanırım", "verdict": "cevir", "explain": "İticinin temas yüzeyi tektir; çevirmek yeni bir yüzey üretmez." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Birbirine sürterek uyum kazanan her parça çifti birlikte değişir. Bu kuralı bir kez öğrenirsen, hangi parçanın yanında hangisinin değişeceğini artık ezberlemene gerek kalmaz."
+    },
+    {
+      "id": 6,
+      "instruction": "Müşteri neden güç kaybettiğini soruyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.supap",
+        "question": "Alçalan bir lob motora ne yapar?",
+        "options": [
+          { "label": "O silindirin supabı daha az ve daha kısa açılır; o silindir daha az hava alır ve silindirler arası denge bozulur", "verdict": "az-hava-dengesizlik", "correct": true, "explain": "Lobun yüksekliği supabın ne kadar açılacağını, profili ise ne kadar süre açık kalacağını belirler. Lob alçaldığında supap hem daha az açılır hem de etkin açık kalma süresi kısalır; o silindire giren hava miktarı düşer. Motor artık dört eşit silindirden değil, üç normal ve bir zayıf silindirden oluşur. Sonuç güç kaybı, düzensiz rölanti ve o silindirde farklı yanma koşullarıdır. Bu dengesizlik silindir bazında yapılan karşılaştırmalı ölçümlerde açıkça görünür." },
+          { "label": "Yalnız ses yapar, performansa etkisi yok", "verdict": "sadece-ses", "explain": "Ses en görünen etkidir; asıl etki dolgunun düşmesidir." },
+          { "label": "Yakıt tüketimini düşürür", "verdict": "yakit-duser", "explain": "Zayıf silindir, aynı gücü almak için gazın daha çok açılmasına yol açar; tüketim düşmez, artar." },
+          { "label": "Motoru kaynatır", "verdict": "kaynatir", "explain": "Kaynama soğutma sisteminin sorunudur; lob aşınmasının doğrudan sonucu değildir." }
+        ]
+      },
+      "camera": "motor-ust",
+      "hint": "Müşteriye anlatırken sayıya değil sebebe dayan: bir silindir diğerlerinden az hava alıyor.",
+      "teachingNote": "Bir arızayı müşteriye anlatabilmek, onu teşhis edebilmenin bir parçasıdır. Anlatamadığın teşhis, çoğu zaman tam kurulmamış teşhistir."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Kılavuzun sınır değeri elinde olmadan bir lobun aşındığını nasıl söyleyebilirsin?",
+        "a": "kardes-loblar",
+        "options": [
+          { "verdict": "kardes-loblar", "label": "Aynı görevi gören diğer loblarla karşılaştırarak; hepsi aynı ölçüde üretilir", "explain": "Bir motordaki bütün emme lobları aynı ölçüde, bütün egzoz lobları da kendi aralarında aynı ölçüde üretilir. Bu, elinde bedava bir referans olduğu anlamına gelir: kardeş loblar. Üçü aynı, biri ölçülebilir biçimde alçaksa, alçak olan aşınmıştır ve bu sonuç için hiçbir kılavuza ihtiyacın yoktur. Kılavuzun sınırı işin ikinci yarısıdır ve değiştirme kararını netleştirir. Dikkat edilecek tek şey emme lobunu egzoz lobuyla karşılaştırmamaktır; ikisi zaten farklı tasarlanır." },
+          { "verdict": "renk", "label": "Lobun rengine bakarak", "explain": "Renk ve parlaklık ipucu verir ama miktar vermez." },
+          { "verdict": "ses", "label": "Motorun sesinden", "explain": "Ses arızayı işaret eder, ölçmez." },
+          { "verdict": "olcemezsin", "label": "Kılavuz olmadan söylenemez", "explain": "Söylenebilir; karşılaştırma kılavuzdan bağımsız bir kanıt üretir." }
+        ]
+      },
+      {
+        "q": "Yeni kam mili takılırken eşleşen itici neden birlikte değiştirilir?",
+        "a": "esleserek-asinir",
+        "options": [
+          { "verdict": "esleserek-asinir", "label": "İki yüzey birbirine sürterek uyum kazanır; eskisi yeni lobu hızla bozar", "explain": "Kam lobu ile itici, binlerce saatlik çalışma boyunca birbirine göre aşınır ve eşleşmiş bir yüzey çifti oluşturur. Lob aşındıysa ona sürten iticinin yüzeyi de çukurlaşmıştır. Yeni bir kam milini o eski yüzeye sürtmek, yeni parçayı ilk günden yıpratmaktır ve aşınma kısa sürede geri gelir. Bu yüzden ikisi çift olarak değiştirilir. Aynı ilke birbirine sürterek uyum kazanan bütün parça çiftleri için geçerlidir." },
+          { "verdict": "ucuz", "label": "İtici ucuz olduğu için, ihtiyatlı davranılır", "explain": "Fiyat gerekçe değildir; sebep yüzey eşleşmesidir." },
+          { "verdict": "garanti", "label": "Garanti şartı olduğu için", "explain": "Garanti şartı olabilir ama teknik sebep yüzey çiftidir." },
+          { "verdict": "gerekmez", "label": "Gerekmez, itici bağımsız çalışır", "explain": "Bağımsız değildir; doğrudan lobla temas eden yüzeydir." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 39,50 ve 39,10 mm senaryo okumalarıdır; öğrenciden istenen bir üretici sınırı değil, iki okuma arasındaki FARKTIR (0,40 mm). Bu yüzden sourceRequired gerekmedi: ortaya çıkan sayı bizim ürettiğimiz bir iddia değil, verilen iki okumanın çıkarmasıdır. Aynı yaklaşım motor.yag-basinci dersindeki psi-bar dönüşümünde de kullanıldı.",
+    "sourceRequired": "Kam lobu yükseklik sınırı, muylu çapı ve yatak boşluğu araca özgüdür ve bu derste verilmedi. Ders bilinçli olarak kılavuzdan bağımsız çalışan karşılaştırma yöntemi üzerine kuruldu.",
+    "kapsam": "Kam mili tek silindir gövdesi olarak modellendi; lob geometrisi yok. Ölçüm bu yüzden sahnede mikrometre animasyonuyla değil, sayısal giriş ile yapılıyor.",
+    "reviewedByMechanic": false
+  }
+}

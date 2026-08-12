@@ -1,0 +1,173 @@
+{
+  "id": "aksesuar.cam-krikosu",
+  "area": "aksesuar-ses",
+  "stage": 2,
+  "title": "Otomatik Cam Kumandası ve Kriko Mekanizması",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 35,
+  "prerequisites": ["aksesuar.kapi-kablo-gecisi"],
+  "learningGoals": [
+    "Cam sisteminin motor, kriko ve kılavuz olmak üzere üç ayrı parçadan oluştuğunu görmek",
+    "Elektriksel arıza ile mekanik arızayı sesle ve akımla ayırmak",
+    "Camı sökmeden önce güvenli konuma almayı öğrenmek"
+  ],
+
+  "safety": [
+    { "rule": "Kriko sökülmeden önce cam yukarı alınır ve bantla ya da takozla kapı sacına sabitlenir", "why": "Kriko serbest kaldığında cam kendi ağırlığıyla kapının içine düşer; düşen cam hem kırılır hem elleri keser", "blocksStart": true },
+    { "rule": "Kapı içinde el varken cam düğmesine kimse basmaz", "why": "Kriko makas ya da halat düzeneğidir; hareket ederken parmak sıkıştırma gücü yüksektir", "blocksStart": true },
+    { "rule": "Kırık cam parçaları toplanmadan kapı kapatılmaz", "why": "Kapının içine düşen cam kırıkları tahliye deliklerini tıkar ve her kapanışta ses yapar", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.multimetre", "label": "Multimetre", "required": true },
+    { "id": "tool.pens-ampermetre", "label": "Pens ampermetre", "required": true },
+    { "id": "tool.plastik-sokme-spatulasi", "label": "Plastik söküm spatulası", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Kapı döşemesi söküldü. Camı yukarı aşağı hareket ettiren düzeneğe bak.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.cam-krikosu",
+        "question": "Cam sistemi kaç ayrı parçadan oluşur?",
+        "options": [
+          { "label": "Üç ayrı parçadan: motor (kuvvet üretir), kriko (kuvveti düşey harekete çevirir) ve kılavuz kanallar (camı hizada tutar); arıza üçünden birinde olabilir ve belirtileri farklıdır", "verdict": "uc-parca", "correct": true, "explain": "Cam çalışmıyor denince akla motor gelir ama sistem üç parçadır ve bunları ayırmak teşhisin tamamıdır. Birincisi motordur: küçük bir elektrik motoru ve ona bağlı bir redüktör dişli takımı. Redüktör hem devri düşürüp kuvveti artırır hem de bir güvenlik işlevi görür — cam kendi ağırlığıyla aşağı kaçmaz, çünkü dişli düzeneği ters yönde kolay dönmez. İkincisi krikodur ve iki tipi vardır: makas tipi (çapraz kollar açılıp kapanır) ve halat tipi (bir makara sistemi üzerinde çelik halat camı çeker). Halat tipi hafif ve ucuzdur ama halat zamanla lifleri kopararak dağılır; makas tipi daha dayanıklıdır, aşınması dişli ve pimlerinde olur. Üçüncüsü kılavuz kanallardır: camın iki yanında, içi kadifemsi kaplı lastik kanallar camı hizada tutar ve aynı zamanda sızdırmazlık sağlar. Bu üçlü ayrım şu yüzden önemlidir — motor sağlam olup kriko kırılmış olabilir, kriko sağlam olup kanal sıkışmış olabilir. Belirtiler de farklıdır: motor arızasında ses yoktur, kriko kırılmasında motor döner ama cam hareket etmez ya da eğri iner, kanal sıkışmasında cam yavaşlar ve motor zorlanarak çalışır." },
+          { "label": "Tek parçadan: motorlu kriko bir bütündür", "verdict": "tek-parca", "explain": "Bazı araçlarda birlikte satılır ama arızaları ayrıdır ve ayrı teşhis edilir." },
+          { "label": "Motor ve düğmeden", "verdict": "motor-dugme", "explain": "Düğme istek kaynağıdır; hareketi üreten mekanizma ayrıdır." },
+          { "label": "Yalnız kriko vardır, motor kapıda değildir", "verdict": "kriko-only", "explain": "Motor kapının içindedir ve krikoya bağlıdır." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Motor / kriko / kanal — üç parça, üç ayrı belirti. Bu dersin bütün teşhisi bu ayrımın üstüne kuruluyor."
+    },
+    {
+      "id": 2,
+      "instruction": "Müşteri 'cam inmiyor' diyor. Kapıyı sökmeden önce düğmeye bas ve DİNLE.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.cam-motoru",
+        "question": "Ses ne söyler?",
+        "options": [
+          { "label": "Hiç ses yoksa arıza elektrikseldir; motor sesi var ama cam hareket etmiyorsa arıza mekaniktir — bu tek dinleme sistemi ikiye böler", "verdict": "ses-boler", "correct": true, "explain": "Kapı sökmeden yapılabilecek en değerli test budur ve hiçbir alet gerektirmez. Düğmeye basıldığında üç ihtimal duyulur. Birincisi tam sessizliktir: motora enerji ulaşmıyor demektir ve arıza düğme, modül çıkışı, körükteki kablo ya da beslemededir; yani elektrikseldir ve mekanizma büyük ihtimalle sağlamdır. İkincisi motorun döndüğü ama camın hareket etmediği durumdur — bu, elektriğin sorunsuz ulaştığının kanıtıdır ve arızayı doğrudan mekaniğe taşır: kriko halatı kopmuş, dişli sıyrılmış ya da camın bağlantı klipsi kırılmıştır. Üçüncüsü zorlanma sesidir: motor iniltili çalışır, cam yavaş hareket eder ya da bir yerde durur; bu kanal sıkışmasının, kirlenmenin ya da mekanizmanın yağsız kalmasının belirtisidir. Bir dördüncü ihtimal daha vardır ve atlanmamalıdır: 'tık' sesi duyulup hiçbir şey olmuyorsa devreye giren bir röle ya da modül çıkışı var ama motor yükü kaldıramıyordur — bu genelde çok sıkışmış bir mekanizmayı ya da bitmiş bir motoru işaret eder. Dinleme testinin sonucu yazılır, çünkü kapı söküldükten sonra bu bilgi bir daha aynı temizlikte elde edilemez." },
+          { "label": "Ses bir şey söylemez, ölçüm şarttır", "verdict": "ses-yok", "explain": "Ölçüm gerekli ama ses sistemi ikiye bölerek ölçümün nereye yapılacağını söyler." },
+          { "label": "Ses varsa motor bozuktur", "verdict": "ses-bozuk", "explain": "Dönen motor enerji aldığını kanıtlar; şüphe mekaniğe geçer." },
+          { "label": "Önce sigorta değiştirilir", "verdict": "sigorta", "explain": "Tek cam çalışmıyorsa sigorta ortak halkadır ve diğer camlar çalışıyordur." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Bedava, üç saniye süren ve sistemi ikiye bölen test. Kapı sökmeden önce mutlaka yapılır."
+    },
+    {
+      "id": 3,
+      "instruction": "Motor sesi var, cam kıpırdamıyor. Kapıyı söktün. Camı elle tutup hareket ettiriyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kapi-cami",
+        "question": "Cam elle serbestçe hareket ediyorsa ne anlaşılır?",
+        "options": [
+          { "label": "Cam ile kriko arasındaki bağ kopmuştur: halat kopmuş, klips kırılmış ya da cam tutucudan çıkmıştır — kanallar ve cam sağlamdır", "verdict": "bag-kopuk", "correct": true, "explain": "Bu tek deneme mekanik arızayı da kendi içinde ikiye böler. Cam elle serbest hareket ediyorsa kılavuz kanallar temizdir, cam eğrilmemiştir ve sürtünme normaldir — sorun camın taşıyıcıya bağlandığı yerdedir. Üç klasik biçimi vardır. Birincisi halat kopmasıdır: halat tipi krikolarda çelik halat lif lif dağılır ve bir gün kopar; koptuğunda motor boşa döner, halat makaraların içinde dolanır ve çoğu zaman krikonun tamamı değişir. İkincisi klips ya da taşıyıcı kırığıdır: cam, krikonun taşıyıcısına plastik ya da metal bir tutucuyla bağlanır; bu tutucu kırıldığında cam serbest kalır ve kapının içine iner. Üçüncüsü yapıştırma ayrılmasıdır — bazı araçlarda cam taşıyıcıya yapıştırılır ve sıcakla ayrılır. Cam elle zorlanarak hareket ediyorsa tablo tersine döner: bağ sağlam ama kanal sıkışmış ya da cam eğri oturmuştur; o zaman krikoya değil kanala bakılır. Bu ayrım parça siparişini belirler ve yanlış parça beklemek bu işte en çok zaman kaybettiren şeydir." },
+          { "label": "Motor bozuktur", "verdict": "motor", "explain": "Motorun döndüğü zaten duyuldu." },
+          { "label": "Kanal sıkışmıştır", "verdict": "kanal", "explain": "Kanal sıkışsa cam elle de zor hareket ederdi." },
+          { "label": "Cam kırılmak üzeredir", "verdict": "kirik", "explain": "Serbest hareket camın sağlam olduğunu gösterir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Elle deneme mekanik arızayı ikiye böler: bağ mı koptu, yol mu sıkıştı? İki farklı parça, iki farklı iş."
+    },
+    {
+      "id": 4,
+      "instruction": "Başka bir araçta cam çalışıyor ama çok yavaş. Motorun çektiği akımı ölçtün: bu kapıda 9,8 A, sorunsuz kapıda 4,2 A. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.pens-ampermetre",
+        "unit": "A",
+        "acceptRange": [5.4, 5.8]
+      },
+      "camera": "aksesuar",
+      "hint": "9,8 eksi 4,2.",
+      "teachingNote": "5,6 amperlik bu fark mekanik direncin elektriksel imzasıdır. Elektrik motoru zorlandıkça daha çok akım çeker; yani akım ölçümü, mekanik sürtünmeyi görmeden ölçmenin yoludur. Karşılaştırmanın aynı araçtaki sorunsuz bir kapıyla yapılması bu ölçümü güçlü kılar — üretici değerine ihtiyaç kalmaz, referans aracın kendisidir. Yüksek akımın üç sebebi olur: kılavuz kanalların kirlenmesi ya da kurumuş olması, camın kanala eğri oturması, ve mekanizmanın yağının kuruması. Üçünün de çözümü parça değil bakımdır: kanal temizlenir ve uygun kayganlaştırıcıyla bakımı yapılır, mekanizmanın hareketli noktaları yağlanır. Bu bakım yapılmazsa motor sürekli zorlanır ve birkaç yıl içinde gerçekten bozulur — yani 'yavaş çalışan cam' bir arıza değil, gelecekteki arızanın habercisidir. Kabul edilebilir azami akım araca ve motora özgüdür; bu ders bir sınır vermiyor, karşılaştırma aynı araçta yapılıyor."
+    },
+    {
+      "id": 5,
+      "instruction": "Krikoyu söküp değiştireceksin. Camı güvenli konuma alıyorsun.",
+      "interaction": {
+        "type": "pull",
+        "target": "part.kapi-cami",
+        "requiresGesture": true
+      },
+      "camera": "aksesuar",
+      "hint": "Camı yukarı kaldırıp sacın üstünden bantla sabitle.",
+      "teachingNote": "Bu adım atlandığında iş kazayla biter. Kriko cıvataları söküldüğü anda cam artık hiçbir şeye tutunmuyordur; kendi ağırlığıyla kapının içine düşer, alt kenarına çarpar ve çoğu zaman kırılır — üstelik düşerken elleri keser. Doğru yöntem: cam yukarı konuma alınır (motor hâlâ çalışıyorsa düğmeyle, çalışmıyorsa elle kaldırılarak) ve kapı sacının üst kenarından güçlü bir bantla ya da bir takozla sabitlenir. Sabitlemenin camı iki noktadan tutması gerekir, tek nokta camı döndürür. Bantın yapışkanı camda iz bırakmayacak cinsten olmalı ve iş bitince temizlenmelidir. İkinci güvenlik notu: cam kanaldan çıkarılacaksa kapının alt boşluğuna bir bez ya da köpük konur, böylece elden kayan cam sert sacla buluşmaz."
+    },
+    {
+      "id": 6,
+      "instruction": "Yeni kriko takıldı, cam yerine oturdu. Ama cam kapanırken bir tarafı daha erken değiyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kapi-cami",
+        "question": "Ne yapılır?",
+        "options": [
+          { "label": "Camın taşıyıcı üzerindeki konumu ayarlanır: cıvatalar gevşetilir, cam kanala tam oturacak şekilde hizalanır ve öyle sıkılır — eğri cam hem su alır hem mekanizmayı yorar", "verdict": "hizala", "correct": true, "explain": "Cam krikoya sabit değil, ayarlanabilir biçimde bağlanır ve bu bilinçli bir tasarımdır: kapılar ve camlar üretim toleransıyla gelir, cam mutlaka yerinde hizalanır. Ayar gevşetilmeden takılan bir cam neredeyse her zaman eğri oturur ve üç sonuç üretir. Birincisi su alır: cam üst fitile bir tarafından tam basmaz, oradan yağmur suyu ve yıkama suyu içeri girer, kabin nemlenir. İkincisi rüzgâr sesi yapar: yüksek hızda tam kapanmamış kenardan ıslık sesi gelir ve müşteri bunu hemen fark eder. Üçüncüsü mekanizmayı yorar: eğri cam kanalda sürtünür, motor fazla akım çeker ve yeni takılan kriko erken bozulur. Ayar yöntemi şudur: cıvatalar hafifçe gevşetilir, cam elle yukarı tam kapanacak konuma getirilir, kanala ve üst fitile her iki taraftan eşit bastığı görülerek cıvatalar sıkılır. Bazı araçlarda ileri-geri ve eğim için ayrı ayar noktaları vardır. Kontrol basittir: cam tam kapalıyken bir kâğıt şeridi fitille cam arasına sıkıştırıp çekmek — iki tarafta da benzer direnç hissedilmelidir. Sıkma torku araca özgüdür ve bu ders bir değer vermiyor." },
+          { "label": "Cam zorlanarak yerine oturtulur", "verdict": "zorla", "explain": "Zorlama camı ya kırar ya kanalı bozar; ayar noktası zaten vardır." },
+          { "label": "Fitil değiştirilir", "verdict": "fitil", "explain": "Fitil sağlamsa sorun hizadadır; fitil değiştirmek eğriliği gidermez." },
+          { "label": "Kapı hizası ayarlanır", "verdict": "kapi-hiza", "explain": "Kapı hizası ayrı bir konudur; cam tek yanından değiyorsa önce cam hizalanır." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Cam ayarlanabilir bağlanır çünkü ayarlanması gerekir. Kâğıt şeridi testi bu ayarın bedava kontrolü."
+    },
+    {
+      "id": 7,
+      "instruction": "İş bitti, döşemeyi takmadan önce.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kapi-modulu",
+        "question": "Cam işinde son doğrulama nedir?",
+        "options": [
+          { "label": "Cam sonuna kadar iki yönde birkaç kez çalıştırılır, sesi ve hızı dinlenir, otomatik iniş-kalkış işlevi denenir ve su bariyeri geri yapıştırılır", "verdict": "tam-deneme", "correct": true, "explain": "Cam işinde doğrulama beş başlıktır. Birincisi tam strok: cam sonuna kadar iner ve sonuna kadar kalkar; yarım denemede takılma noktası görülmez, çünkü sıkışma çoğu zaman stroğun bir ucunda olur. İkincisi ses ve hız: hareket boyunca düzgün ve sabit olmalı, bir noktada yavaşlama varsa orada direnç vardır. Üçüncüsü otomatik işlev: birçok araçta düğmeye tam basıldığında cam kendiliğinden sonuna kadar iner ya da kalkar; kriko ya da motor değiştikten sonra bu işlev çalışmayabilir ve öğrenme gerekir — o bir sonraki dersin konusudur. Dördüncüsü diğer kumandalar: sürücü kapısındaki merkezî düğmeden de aynı cam denenir, çünkü kapı düğmesi çalışıp merkezî düğme çalışmayabilir. Beşincisi ve en çok atlananı su bariyeridir: cam işinde bariyer mutlaka açılır ve geri yapıştırılmazsa kapı içine giren su döşemeye geçer. Son olarak kapının içine düşmüş cam kırıkları ve vidalar toplanır, tahliye deliklerinin açık olduğu kontrol edilir. Bu liste bittikten sonra panel takılır." },
+          { "label": "Bir kez indirip kaldırmak yeterlidir", "verdict": "bir-kez", "explain": "Takılma stroğun ucunda olur; tam strok denenmelidir." },
+          { "label": "Panel takılır, müşteri dener", "verdict": "musteri", "explain": "Bir eksik çıkarsa ikinci söküm gerekir." },
+          { "label": "Akım ölçümü yeterlidir", "verdict": "akim", "explain": "Akım iyi bir göstergedir ama otomatik işlev ve su bariyeri ayrıca kontrol edilir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Otomatik iniş-kalkış çalışmıyorsa bu bir arıza değil, öğrenme eksikliği olabilir — bir sonraki ders tam olarak bunu anlatıyor."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Cam düğmesine basıldığında motor sesi geliyor ama cam hareket etmiyor. Ne anlaşılır?",
+        "a": "ses-boler",
+        "options": [
+          { "verdict": "ses-boler", "label": "Elektrik motora ulaşıyor; arıza mekaniktir — kriko halatı, dişli ya da camın taşıyıcıya bağlantısı", "explain": "Dinleme testi sistemi ikiye böler: hiç ses yoksa arıza elektrikseldir (düğme, modül çıkışı, körükteki kablo, besleme), motor sesi varsa elektrik ulaşıyor demektir ve şüphe mekaniğe geçer. Zorlanma sesi ise kanal sıkışmasını ya da yağsızlığı işaret eder. Bu test kapı sökmeden, üç saniyede ve bedava yapılır." },
+          { "verdict": "ses-yok", "label": "Ses bir şey söylemez", "explain": "Ses ölçümün nereye yapılacağını söyler." },
+          { "verdict": "ses-bozuk", "label": "Motor bozuktur", "explain": "Dönen motor enerji aldığını kanıtlar." },
+          { "verdict": "sigorta", "label": "Sigorta değiştirilir", "explain": "Tek cam sorunuysa sigorta ortak halkadır." }
+        ]
+      },
+      {
+        "q": "Kriko sökülmeden önce hangi adım atlanamaz?",
+        "a": "cam-sabitle",
+        "options": [
+          { "verdict": "cam-sabitle", "label": "Cam yukarı alınır ve iki noktadan kapı sacına sabitlenir", "explain": "Kriko cıvataları söküldüğü anda cam hiçbir şeye tutunmuyordur; kendi ağırlığıyla kapının içine düşer, kırılır ve düşerken elleri keser. Sabitleme camı iki noktadan tutmalıdır, tek nokta camı döndürür. Ayrıca kapının alt boşluğuna bez ya da köpük konur." },
+          { "verdict": "akim-olc", "label": "Motor akımı ölçülür", "explain": "Faydalı ama güvenlik adımının yerini tutmaz." },
+          { "verdict": "aku-tak", "label": "Akü geri bağlanır", "explain": "Söküm sırasında enerji kesik kalır." },
+          { "verdict": "fitil-cikar", "label": "Cam fitili çıkarılır", "explain": "Gereksiz; asıl risk camın düşmesidir." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 4'teki 9,8 A ve 4,2 A SENARYO okumalarıdır; istenen FARKTIR (5,6 A) ve ders bir azami akım sınırı vermiyor — karşılaştırma aynı araçtaki sorunsuz kapıyla yapılıyor.",
+    "sourceRequired": "Cam motoru azami akımı, kriko cıvatası sıkma torku, kanal kayganlaştırıcı tipi ve otomatik işlev öğrenme adımları bilinçle VERİLMEDİ; hepsi araca ve üretici belgesine aittir.",
+    "kapsam": "Cam değişimi ve yapıştırma camlar (ön/arka) bu dersin dışındadır — onlar ayrı bir uzmanlıktır. Sıkışma koruması ve öğrenme işlemi bir sonraki dersin konusu. Kapı içi hava yastığı bulunan araçlarda güvenli durum ilkesi aşama 0'daki dersten geçerlidir.",
+    "reviewedByMechanic": false
+  }
+}

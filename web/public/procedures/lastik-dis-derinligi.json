@@ -1,0 +1,176 @@
+{
+  "id": "lastik.dis-derinligi",
+  "area": "lastik-tekerlek",
+  "stage": 3,
+  "title": "Diş Derinliği ve TWI Çubukları",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 25,
+  "prerequisites": ["lastik.basinc-etkileri"],
+  "learningGoals": [
+    "TWI çubuklarının ne olduğunu ve yanaktaki işaretle nasıl bulunduğunu bilmek",
+    "Ölçümün neden tek noktadan yapılamayacağını ve en düşük değerin geçerli olduğunu kavramak",
+    "Ölçüm sonucunu bir sayı olarak değil, bir teşhis girdisi olarak kullanmak"
+  ],
+
+  "safety": [
+    { "rule": "Yasal asgari derinliğin altındaki lastik yola çıkarılmaz", "why": "Derinlik azaldıkça suyun tahliye edilebileceği hacim küçülür; ıslak zeminde fren mesafesi uzar ve araç su üzerinde kayabilir", "blocksStart": true },
+    { "rule": "Sırtta kord teli görünüyorsa lastik hiç beklemeden değiştirilir", "why": "Koruyucu kauçuk bitmiştir; bu lastik her an patlayabilir", "blocksStart": true },
+    { "rule": "Ölçüm sırasında sırtın içine parmakla değil aletle bakılır", "why": "Sırta batmış cam ya da metal parçası eli keser", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.dis-mastari", "label": "Diş derinliği mastarı", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Sırttaki ana kanalların dibinde, kanalı enine kesen küçük kabartılar var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik",
+        "question": "Bunlar ne?",
+        "options": [
+          { "label": "TWI çubukları: sırt onlarla aynı seviyeye geldiğinde lastik yasal aşınma sınırına ulaşmış demektir", "verdict": "twi", "correct": true, "explain": "TWI, aşınma gösterge çubuğu demektir ve lastiğin içine üretimde yerleştirilmiş bir ölçü aletidir. Ana kanalların dibinde, kanalı enine kesen küçük köprüler hâlinde bulunurlar ve yükseklikleri yasal asgari derinliğe eşittir. Lastik aşındıkça sırt alçalır; sırt yüzeyi bu çubukların üstüyle aynı hizaya geldiğinde lastik sınıra gelmiştir ve değiştirilmesi gerekir. Çubukların yerini bulmak için lastiğin yanağına bakılır: küçük üçgenler, TWI harfleri ya da üretici işareti, o hizadaki kanalda çubuk bulunduğunu gösterir. Bu sistemin güzelliği aletsiz çalışmasıdır — yol kenarında bile gözle bakılabilir. Ancak bir sınırı vardır: çubuk yalnız 'sınıra geldi mi' sorusunu yanıtlar, 'ne kadar kaldı' sorusunu yanıtlamaz. O soru için mastarla ölçmek gerekir; ayrıca çubuklar sırtın belirli noktalarındadır, düzensiz aşınmış bir lastikte başka bir bölge çoktan sınırın altına inmiş olabilir." },
+          { "label": "Üretim kalıbından kalan çapak", "verdict": "capak", "explain": "Çapak değil; kasıtlı konmuş ve yüksekliği yasal sınıra eşit ayarlanmış göstergelerdir." },
+          { "label": "Su tahliyesini artıran kanal köprüleri", "verdict": "su", "explain": "Tersine, kanalı kısmen kapatırlar; işleri ölçü göstermek." },
+          { "label": "Yalnız kış lastiklerinde bulunur", "verdict": "kis", "explain": "Bütün binek lastiklerinde bulunur." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Lastik, ölçü aletini kendi içinde taşıyan ender parçalardan biri. Ama gösterge ile ölçüm farklı şeylerdir: biri sınırı, diğeri mesafeyi söyler."
+    },
+    {
+      "id": 2,
+      "instruction": "Mastarı eline aldın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.dis-mastari",
+        "question": "Nereden ve kaç noktadan ölçülür?",
+        "options": [
+          { "label": "Ana kanallardan, sırt genişliği boyunca iç–orta–dış olmak üzere ve çevre boyunca birkaç yerden; geçerli olan en düşük değerdir", "verdict": "cok-nokta-en-dusuk", "correct": true, "explain": "Tek noktadan alınan bir ölçüm lastiğin durumunu değil, yalnız o noktanın durumunu verir. Oysa bu alanın bütün teşhisi lastiğin farklı yerlerinin farklı aşınmasına dayanır: basınç yanlışsa orta ile omuzlar, ön düzen bozuksa iç ile dış kenar, süspansiyon zayıfsa çevre boyunca noktalar birbirinden ayrışır. Bu yüzden ölçüm en az üç şeritten — iç, orta, dış — ve tekerlek çevresi boyunca birkaç yerden alınır. Ölçüm ana kanallardan yapılır; lamel ve desen boşlukları ana kanal değildir ve oradan alınan değer yanıltır. Değerlendirmede geçerli olan ortalama değil, ölçülen en düşük değerdir: lastiğin en zayıf yeri, o lastiğin ıslak zemindeki davranışını belirler. Ayrıca bu değerler birbirinden çok farklıysa bu tek başına bir teşhis bilgisidir — lastik yalnız aşınmamış, düzensiz aşınmıştır ve sebebi araçtadır." },
+          { "label": "Tek bir noktadan, sırtın ortasından", "verdict": "tek-nokta", "explain": "Orta değer kenarlardaki aşınmayı gizler; teşhis de kaybolur." },
+          { "label": "Lamel içlerinden ölçülür", "verdict": "lamel", "explain": "Ölçüm ana kanaldan yapılır; lamel derinliği farklıdır." },
+          { "label": "Üç noktadan ölçülür ve ortalaması alınır", "verdict": "ortalama", "explain": "Ortalama en zayıf yeri gizler; geçerli olan en düşük değerdir." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Ölçüm noktası sayısı, teşhisin çözünürlüğüdür. Tek nokta bir sayı verir; dokuz nokta bir desen verir ve desen sebebi söyler."
+    },
+    {
+      "id": 3,
+      "instruction": "Sol ön lastiği ölçtün: dış omuz 6,8 mm, iç omuz 3,2 mm. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.dis-mastari",
+        "unit": "mm",
+        "acceptRange": [3.5, 3.7]
+      },
+      "camera": "tekerlek",
+      "hint": "6,8 eksi 3,2.",
+      "teachingNote": "3,6 mm'lik bu fark artık bir aşınma ölçüsü değil, bir teşhis. Aynı lastiğin iki kenarı bu kadar farklı aşındıysa lastik yolla paralel basmıyor demektir; sebep lastikte değil aracın altındadır. Dikkat edilecek nokta şudur: bu lastiğin dış omzuna bakan biri 'daha çok yolu var' der, oysa geçerli değer 3,2'dir ve iç taraf bitmek üzeredir. Aracın altındaki sebep bulunmazsa yeni lastik de aynı biçimde bitecektir."
+    },
+    {
+      "id": 4,
+      "instruction": "Sonucu değerlendiriyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik",
+        "question": "Bu fark ne anlama gelir?",
+        "options": [
+          { "label": "Lastik yola paralel basmıyor: sebep aracın altındaki bir ayar ya da aşınmış bir ön takım parçası", "verdict": "arac-altinda", "correct": true, "explain": "Bir lastiğin iç ve dış kenarı arasında büyük fark varsa o lastik yola eğik basıyordur. Bunun iki tipik sebebi vardır. Birincisi kamber açısıdır: tekerlek düşeyle açı yapıyorsa yükün büyük kısmını tek kenar taşır ve o kenar hızla aşınır. İkincisi ön takım boşluğudur: rotil ya da burç yorulmuşsa tekerlek sabit bir açıda durmaz, yükle birlikte kayar ve aynı sonucu üretir. İkisi de ayrı derslerde ölçülür, ama teşhisin başladığı yer bu ölçümdür. Buradaki asıl ders şudur: diş derinliği ölçümü 'lastikte ne kadar kaldı' sorusunun değil, 'bu araçta ne oluyor' sorusunun ilk verisidir. Yalnız lastiğe bakan usta yeni lastik satar; deseni okuyan usta arızayı bulur. İkincisinin taktığı lastik ömrünü tamamlar." },
+          { "label": "Lastik kalitesizmiş", "verdict": "kalite", "explain": "Kalitesiz lastik daha hızlı ama düzgün aşınır; tek kenardan aşınma araçla ilgilidir." },
+          { "label": "Basınç düşük çalışmış", "verdict": "basinc", "explain": "Düşük basınç İKİ omuzu birden aşındırır; burada tek kenar var." },
+          { "label": "Normaldir, sol lastikler hep böyle aşınır", "verdict": "normal", "explain": "Normal değil; iki kenar arasındaki bu fark bir sebep gösterir." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bu adım alanın tezini uyguluyor: ölçüm sayı vermek için değil, sebep bulmak için yapılır."
+    },
+    {
+      "id": 5,
+      "instruction": "Müşteri soruyor: kaç milimetrede değiştirmem gerekiyor?",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik",
+        "question": "Nasıl cevap verilir?",
+        "options": [
+          { "label": "Yasal asgari değeri yürürlükteki mevzuat belirler; ayrıca üretici ve mevsim şartları için önerilen değer bundan daha yüksek olabilir", "verdict": "mevzuat-ve-oneri", "correct": true, "explain": "İki ayrı eşik vardır ve karıştırılmamalıdır. Birincisi yasal asgari derinliktir: bu değeri ülkedeki mevzuat belirler, araç sınıfına göre değişebilir ve altına inen lastikle trafiğe çıkmak ihlaldir. TWI çubukları da tam bu değere göre üretilmiştir. İkincisi güvenli kullanım eşiğidir ve daha yüksektir: derinlik azaldıkça suyun tahliye edileceği hacim küçülür, bu yüzden ıslak zeminde performans yasal sınıra gelmeden çok önce düşmeye başlar. Kış lastiklerinde durum daha belirgindir, çünkü kar performansı doğrudan derinliğe bağlıdır ve derinliği azalmış bir kış lastiği yasal olarak geçerli olsa bile karda beklendiği gibi davranmaz. Bu yüzden doğru cevap tek bir sayı değildir: mevzuatın sınırı söylenir, üreticinin önerisi varsa aktarılır ve müşterinin nerede sürdüğü sorulur." },
+          { "label": "Bütün lastikler için tek bir evrensel sayı vardır", "verdict": "evrensel", "explain": "Yasal değer ülkeye ve araç sınıfına göre değişir; ayrıca güvenli kullanım eşiği ayrıdır." },
+          { "label": "Kord görünene kadar kullanılabilir", "verdict": "kord", "explain": "Kord görünmesi çok geç bir aşamadır ve doğrudan patlama riskidir." },
+          { "label": "TWI çubuğu göründüğü sürece sorun yoktur", "verdict": "twi-gorunur", "explain": "Çubuk zaten hep görünür; ölçü, sırtın çubukla aynı hizaya gelmesidir." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Yasal sınır bir alt sınırdır, hedef değil. Müşteriye 'yasaya uygun' demekle 'ıslakta güvenli' demek aynı şey değildir."
+    },
+    {
+      "id": 6,
+      "instruction": "Müşteri sık yağmur alan bir bölgede ve otoyolda çok kilometre yapıyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik",
+        "question": "Derinlik neden özellikle ıslak zeminde önemli?",
+        "options": [
+          { "label": "Kanallar, temas alanındaki suyu tahliye eden hacimdir; hacim küçülünce lastik su üzerinde kalmaya başlar", "verdict": "su-tahliyesi", "correct": true, "explain": "Islak yolda lastiğin yapması gereken ilk iş tutmak değil, suyu ortadan kaldırmaktır. Sırt yola bastığı anda önündeki su kütlesini yana ve arkaya atmak zorundadır; bunu yapan şey desen kanallarının hacmidir. Derinlik azaldıkça o hacim küçülür ve belirli bir hızın üzerinde su tahliye edilemez hâle gelir; lastik yolla değil su tabakasıyla temas eder. Bu durumda direksiyon hafifler, fren ve yön kontrolü fiilen kaybolur. Aşınmanın bu etkisi sabit değildir, hızla birlikte hızla büyür — yani yasal sınıra yakın bir lastik şehir içinde sorun çıkarmazken otoyolda yağmurda ciddi risk oluşturur. Bu yüzden derinlik değerlendirmesi müşterinin nerede ve nasıl sürdüğü bilinerek yapılır. Aynı sebeple yeni lastikler tercihen arka aksa takılır: arka lastiklerin suda kayması aracın savrulmasına yol açar ve düzeltmesi ön tekerleklerinkinden çok daha zordur." },
+          { "label": "Derin desen daha çok gürültü yapar, o kadar", "verdict": "gurultu", "explain": "Gürültü ayrı bir konu; asıl işi suyu tahliye etmek." },
+          { "label": "Islak zeminde derinliğin etkisi yoktur, önemli olan karışım", "verdict": "karisim", "explain": "Karışım da etkiler ama suyu tahliye eden şey kanal hacmidir." },
+          { "label": "Yalnız kar için önemlidir", "verdict": "kar", "explain": "Kar için de önemli ama ıslak asfaltta doğrudan belirleyici." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bu alanın en çok hayat kurtaran cümlesi: yeni lastikler arkaya. Sebebi konfor değil, arkanın kayması hâlinde aracın toparlanamaması."
+    },
+    {
+      "id": 7,
+      "instruction": "İş bitti, dört tekerleğin de ölçüsü elinde.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.dis-mastari",
+        "question": "Bu sayılarla ne yapılır?",
+        "options": [
+          { "label": "Dördü de kilometre bilgisiyle birlikte kayda geçer; bir sonraki bakımda aradaki fark aşınma hızını verir", "verdict": "kayit-ve-hiz", "correct": true, "explain": "Tek bir bakımda alınan derinlik değerleri yalnız o anın fotoğrafıdır. Aynı ölçümler kilometreyle birlikte kaydedilirse bir sonraki bakımda çok daha güçlü bir bilgi ortaya çıkar: aşınma hızı. İki bakım arasında kaç kilometrede kaç milimetre eksildiği bilinirse üç şey yapılabilir. Birincisi, lastiğin ne zaman biteceği tahmin edilir ve müşteri hazırlıksız yakalanmaz. İkincisi, bir tekerleğin diğerlerinden belirgin biçimde hızlı aşındığı görülür — bu, henüz şikâyete dönüşmemiş bir ön düzen ya da ön takım sorununun en erken işaretidir. Üçüncüsü, yapılan bir ayarın işe yarayıp yaramadığı ölçüyle doğrulanır: ayardan sonra aşınma dengelendiyse sebep gerçekten giderilmiştir. Bu yüzden dört değer ve kilometre iş emrine yazılır. Kaydedilmeyen ölçüm bir sonraki ustaya hiçbir şey bırakmaz." },
+          { "label": "En düşük değer söylenir, gerisi atılır", "verdict": "en-dusuk-soyle", "explain": "En düşük değer karar için gerekli ama dördünün kaydı aşınma hızını verir." },
+          { "label": "Yalnız değiştirilecek lastik not edilir", "verdict": "yalniz-degisen", "explain": "Diğerlerinin değerleri bir sonraki bakımın karşılaştırma verisidir." },
+          { "label": "Sözlü söylenir, yazmaya gerek yok", "verdict": "sozlu", "explain": "Yazılmayan ölçüm bir sonraki bakımda karşılaştırılamaz." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Aynı ölçümü iki kez almak, tek bir ölçümün veremediği bir bilgiyi verir: değişim hızı. Bu, bütün bakım işlerinin ortak fikridir."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Diş derinliği neden birden çok noktadan ölçülür?",
+        "a": "desen-teshis",
+        "options": [
+          { "verdict": "desen-teshis", "label": "Farklı noktalardaki farklar teşhis verir; ayrıca geçerli olan en düşük değerdir, ortalama değil", "explain": "Basınç yanlışsa orta ile omuzlar, ön düzen bozuksa iç ile dış kenar, süspansiyon zayıfsa çevre boyunca noktalar ayrışır. Tek nokta bu deseni göremez ve teşhis kaybolur. Karar verirken de ortalama değil en düşük değer geçerlidir, çünkü lastiğin en zayıf yeri ıslak zemindeki davranışını belirler." },
+          { "verdict": "hassasiyet", "label": "Mastarın hassasiyeti düşük olduğu için", "explain": "Alet hassas; mesele lastiğin farklı yerlerinin farklı aşınması." },
+          { "verdict": "hizli", "label": "Daha hızlı sonuç verdiği için", "explain": "Tersine daha uzun sürer; kazanç bilgide." },
+          { "verdict": "gereksiz", "label": "Gerekmez, tek nokta yeterlidir", "explain": "Tek nokta bir sayı verir, desen vermez." }
+        ]
+      },
+      {
+        "q": "Bir lastiğin dış omzu 6,8 mm, iç omzu 3,2 mm ise ne yapılır?",
+        "a": "sebep-ara",
+        "options": [
+          { "verdict": "sebep-ara", "label": "Geçerli değer 3,2'dir ve aracın altında bir sebep aranır: kamber ya da ön takım boşluğu", "explain": "İki kenar arasındaki bu fark lastiğin yola eğik bastığını gösterir. Tipik sebepler kamber açısı ve yorulmuş rotil ya da burçtur. Dış omza bakıp 'daha yolu var' demek hatadır; geçerli değer en düşük olandır. Sebep bulunmazsa yeni lastik de aynı biçimde bitecektir." },
+          { "verdict": "cevir", "label": "Lastik janttan sökülüp ters çevrilir", "explain": "Bu sebebi gidermez, yalnız aşınmayı diğer kenara taşır — üstelik yönlü ve asimetrik lastiklerde yapılamaz." },
+          { "verdict": "ortalama", "label": "Ortalaması alınır: 5,0 mm kabul edilir", "explain": "Geçerli olan en düşük değerdir." },
+          { "verdict": "basinc-artir", "label": "Basınç artırılır", "explain": "Tek kenar aşınması basınç değil ön düzen işaretidir." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 6,8 mm ve 3,2 mm SENARYO okumalarıdır; hiçbiri bir sınır değeri değildir. İstenen FARKTIR (3,6 mm) ve dersin gösterdiği şey tek taraflı aşınmanın teşhis değeri taşıdığıdır.",
+    "sourceRequired": "Yasal asgari diş derinliği bilinçle VERİLMEDİ. Bu değer ülkeye, araç sınıfına ve yürürlükteki mevzuata göre değişir; künyesiz yazılırsa uydurma değer olur. Ders sayıyı değil, TWI'nin ne olduğunu, ölçümün nasıl yapıldığını ve sınırın kaynağını öğretiyor. Kış lastikleri için önerilen daha yüksek eşik de aynı sebeple sayı olarak verilmedi.",
+    "kapsam": "Aşınma desenlerinin ayrıntılı okunması bir sonraki derste, rotasyon ondan sonra. Onarım sınırı 9. aşamada.",
+    "reviewedByMechanic": false
+  }
+}

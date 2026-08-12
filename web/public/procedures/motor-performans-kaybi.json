@@ -1,0 +1,181 @@
+{
+  "id": "motor.performans-kaybi",
+  "area": "motor-mekanik",
+  "stage": 9,
+  "title": "Güç Kaybı ve Sarsıntı: Belirtiyi Sebebe Bağlamak",
+  "vehicleClass": "binek-arac",
+  "estimatedMinutes": 30,
+  "prerequisites": ["motor.buji-degisimi", "motor.kompresyon-testi", "motor.hava-filtresi"],
+  "learningGoals": [
+    "Şikâyeti teşhise çevirmek için belirtiyi koşullarıyla birlikte tarif ettirmek",
+    "Tek silindir teklemesi ile bütün motoru kapsayan güç kaybını birbirinden ayırmak",
+    "Parça değiştirmeden önce yer değiştirme testiyle arızanın parçayla birlikte gidip gitmediğini görmek"
+  ],
+
+  "safety": [
+    { "rule": "Motor çalışırken ateşleme bobini ve kabloları çıplak elle çekilmez", "why": "Ateşleme devresinde on binlerce volt vardır ve çalışan motorda bu gerilim süreklidir. Çarpılma ani kas kasılmasına yol açar; el o anda kayış ya da fan bölgesindeyse yaralanma çarpmadan gelir", "blocksStart": true },
+    { "rule": "Egzoz sıcaklığı elle yoklanmaz", "why": "Yük altında egzoz manifoldu ve borusu yüzlerce dereceye çıkar. Sıcaklık farkı gözlenecekse temassız termometreyle bakılır", "blocksStart": true },
+    { "rule": "Kapalı alanda uzun süre motor çalıştırılmaz", "why": "Egzoz gazındaki karbonmonoksit renksiz ve kokusuzdur; belirti verdiğinde geç kalınmış olur. Kapı açılır ya da egzoz hortumla dışarı alınır", "blocksStart": true },
+    { "rule": "Bobin ve buji sökme işlemleri motor soğuduktan sonra yapılır", "why": "Sıcak alüminyum silindir kapağından buji sökmek diş sıyırma riskini artırır; ayrıca yüzeyler yakacak sıcaklıktadır", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.lokma-16", "label": "Buji lokması", "required": true },
+    { "id": "tool.kompresyon-test-cihazi", "label": "Kompresyon test cihazı", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": false },
+    { "id": "tool.temassiz-termometre", "label": "Temassız termometre", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Müşteri geldi: 'Araba çekmiyor.' Başka bir şey söylemiyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kaput",
+        "question": "Kaputu açmadan önce ne yapılır?",
+        "options": [
+          { "label": "Belirti koşullarıyla birlikte tarif ettirilir: ne zaman başladı, soğukta mı sıcakta mı, rölantide mi yükte mi, sürekli mi ara ara mı, sarsıntı var mı", "verdict": "belirti-tarifi", "correct": true, "explain": "Güç kaybı bir arıza değil, onlarca arızanın ortak belirtisidir. Onu teşhise çeviren şey koşullardır. Soğukta olup ısınınca geçen bir kayıp başka bir yeri, ancak yükte ortaya çıkan bir kayıp bambaşka bir yeri gösterir. Rölantide sarsıntı varsa sorun tek silindirdedir; sarsıntı yoksa ve kayıp bütün devirlerde varsa arıza motorun tamamını kapsayan bir yerdedir — hava girişi, egzoz çıkışı ya da yakıt basıncı. 'Ne zaman başladı' sorusu ayrıca son yapılan işi ortaya çıkarır ve çoğu arıza son dokunulan yerden çıkar. Bu üç dakikalık konuşma çoğu zaman bir saatlik ölçümden daha çok daraltır." },
+          { "label": "Hata kodu okunur, koda göre parça değiştirilir", "verdict": "koda-gore", "explain": "Kod hangi devrede sapma görüldüğünü söyler, hangi parçanın bozuk olduğunu değil. Koda göre parça değiştirmek teşhis değil, tahmin sırasıdır." },
+          { "label": "Bujiler sökülüp bakılır", "verdict": "buji-sok", "explain": "Buji iyi bir kanıttır ama sökmekle başlamak pahalıdır. Önce ücretsiz kanıtlar toplanır." },
+          { "label": "Test sürüşüne çıkılır, gerisi sonra", "verdict": "test-surus", "explain": "Test sürüşü şart ama neye bakacağını bilerek çıkılır. Tarif alınmadan yapılan sürüş çoğu zaman belirtiyi yakalayamaz." }
+        ]
+      },
+      "camera": "motor-ust",
+      "teachingNote": "Müşterinin cümlesi belirtidir, teşhis değildir. Senin işin o cümleyi koşullarına ayırmak; ayrılan her koşul ihtimallerin bir kısmını eler."
+    },
+    {
+      "id": 2,
+      "instruction": "Tarif netleşti: rölantide belirgin sarsıntı var, devir yükseldikçe azalıyor, motor sıcak soğuk fark etmiyor, iki hafta önce aniden başlamış.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.silindir-1",
+        "question": "Bu tarif neyi işaret eder?",
+        "options": [
+          { "label": "Tek silindir teklemesi: bir silindir katkı vermiyor, rölantide bu eksiklik oransal olarak en büyük", "verdict": "tek-silindir", "correct": true, "explain": "Rölantide motor az sayıda ateşleme ile kendini döndürür; dört silindirden biri katkı vermezse eksik olan pay dörtte birdir ve bu, sarsıntı olarak açıkça hissedilir. Devir yükseldikçe saniyedeki ateşleme sayısı artar, volanın ataleti boşlukları örter ve sarsıntı azalır — arıza düzelmez, yalnız görünmez olur. Aniden başlaması da aynı yönü gösterir: aşınma yavaş gelişir, ani başlangıç bir parçanın devre dışı kalmasıdır. Bu tarif teşhisi tek silindire indirir ve o silindirde üç ihtimal kalır: ateşleme yok, yakıt yok ya da kompresyon yok." },
+          { "label": "Hava filtresi tıkalı", "verdict": "filtre", "explain": "Tıkalı filtre bütün silindirleri birlikte kısıtlar; rölantide sarsıntı yapmaz, güç kaybı yükte ve yüksek devirde belirginleşir." },
+          { "label": "Yakıt kalitesi düşük", "verdict": "yakit", "explain": "Kötü yakıt bütün silindirleri etkiler ve genelde kademeli başlar; tek silindirlik ani bir sarsıntı üretmez." },
+          { "label": "Motor takozu bozuk", "verdict": "takoz", "explain": "Bozuk takoz motorun titreşimini kabine iletir ama motorun kendi çalışmasını bozmaz; güç kaybı yapmaz." }
+        ]
+      },
+      "camera": "motor-ust",
+      "hint": "Sarsıntının devirle azalması, sorunun ortadan kalktığı değil, örtüldüğü anlamına gelir.",
+      "teachingNote": "Belirtinin hangi koşulda büyüyüp hangi koşulda küçüldüğü, arızanın yerini belirtinin kendisinden daha iyi anlatır."
+    },
+    {
+      "id": 3,
+      "instruction": "Tekleyen silindir bulundu: dördüncü. Parça siparişi vermeden önce ücretsiz bir test yapacaksın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.bobin.1",
+        "question": "Hangi test yapılır?",
+        "options": [
+          { "label": "Yer değiştirme testi: dördüncü silindirin bobini birinci silindire takılır, teklemenin onunla birlikte birinci silindire geçip geçmediğine bakılır", "verdict": "yer-degistirme", "correct": true, "explain": "Bu, elindeki en güçlü ücretsiz testtir. Şüphelendiğin parçayı sağlam çalışan bir silindire takarsın. Tekleme parçayla birlikte yer değiştirdiyse arıza o parçadadır; tekleme dördüncü silindirde kaldıysa parça sağlamdır ve arıza o silindirin kendisindedir — enjektörü, kompresyonu ya da o silindire giden kablo. Testin değeri şudur: bir parçayı değiştirmeden onun suçlu olup olmadığını kanıtlar. Aynı mantık enjektörde, bujide, aynısından birden çok bulunan her parçada çalışır. Parça değiştirerek teşhis koymak müşterinin parasıyla tahmin yürütmektir; yer değiştirme testi ise kanıt üretir." },
+          { "label": "Bobin doğrudan değiştirilir, en olası sebep odur", "verdict": "degistir", "explain": "Olası olması kanıt değildir. Değiştirip düzelmezse hem para hem zaman gitmiş, hem de arıza hâlâ yerinde olur." },
+          { "label": "Bütün bujiler değiştirilir", "verdict": "tum-buji", "explain": "Bakım olarak makul olabilir ama teşhis değildir; tek silindirlik arızayı dört parça değiştirerek aramak kanıt üretmez." },
+          { "label": "Hata kodu silinip beklenir", "verdict": "kod-sil", "explain": "Kod silmek belirtiyi geçici olarak gizler. Arıza sürerse kod geri gelir, zaman kaybedilir." }
+        ]
+      },
+      "camera": "motor-ust",
+      "teachingNote": "Yer değiştirme testi bu meslekte en çok para kazandıran alışkanlıklardan biridir: hiçbir parça almadan suçluyu bulur."
+    },
+    {
+      "id": 4,
+      "instruction": "Yer değiştirme testinden önce mekanik tarafı elemek istiyorsun. Kompresyon ölçtün: birinci, ikinci ve üçüncü silindir 12,9 bar; dördüncü silindir 12,7 bar. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.silindir-1",
+        "unit": "bar",
+        "acceptRange": [0.15, 0.25]
+      },
+      "camera": "motor-ust",
+      "hint": "12,9 eksi 12,7.",
+      "teachingNote": "Bu fark çok küçük. Dört silindir birbirine bu kadar yakınsa mekanik taraf sağlamdır: segman, supap ve conta bu tabloyu üretmez. Böylece üç ihtimalden biri elenmiş olur, geriye yalnız ateşleme ile yakıt kalır. Ölçümün burada yaptığı iş bir suçlu bulmak değil, bir daldan kurtulmaktır — teşhisin yarısı budur."
+    },
+    {
+      "id": 5,
+      "instruction": "Bobinler yer değiştirildi. Tekleme birinci silindire geçti.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.bobin.1",
+        "question": "Sonuç nedir?",
+        "options": [
+          { "label": "Arıza bobindedir; parçayla birlikte yer değiştirdi", "verdict": "bobin-arizali", "correct": true, "explain": "Tekleme, taşınan parçayı takip ettiyse arıza o parçadadır. Bu artık bir tahmin değil, kontrollü bir deneydir: tek bir şeyi değiştirdin ve belirti onunla birlikte hareket etti. Silindirin kendisi de, kompresyonu da, yakıt tarafı da yerinde kaldı; değişen tek şey bobinin yeriydi. Bobin değiştirilir, sonra motor çalıştırılıp aynı koşullarda sarsıntının gittiği doğrulanır. Doğrulama yapılmadan iş teslim edilmez; parça değişimi teşhisin sonu değil, sınamasıdır." },
+          { "label": "Rastlantıdır, tekrar denenir", "verdict": "rastlanti", "explain": "Tekrar denemek zararsızdır ama belirtinin parçayı takip etmesi rastlantı değil, testin tam olarak beklediği sonuçtur." },
+          { "label": "Dördüncü silindirin enjektörü arızalıdır", "verdict": "enjektor", "explain": "Enjektör yerinde kaldı; tekleme yer değiştirdiğine göre suçlu taşınan parçadır." },
+          { "label": "Kompresyon düşüktür", "verdict": "kompresyon", "explain": "Kompresyon ölçüldü ve silindirler arası fark 0,2 bardı; ayrıca kompresyon bobinle birlikte silindir değiştirmez." }
+        ]
+      },
+      "camera": "motor-ust",
+      "teachingNote": "Bir teşhisi deneye çeviren şey, tek seferde tek değişkeni değiştirmektir. İki şeyi birden değiştirirsen sonuç sana hiçbir şey söylemez."
+    },
+    {
+      "id": 6,
+      "instruction": "İkinci araç: burada sarsıntı yok, motor düzgün çalışıyor ama yokuşta ve hızlanmada belirgin güç kaybı var. Kayıp devir yükseldikçe artıyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.egzoz-manifoldu",
+        "question": "Sarsıntısız, yükte ve yüksek devirde artan güç kaybı nereyi düşündürür?",
+        "options": [
+          { "label": "Motorun nefes yolunda kısıtlama: girişte tıkalı hava filtresi ya da çıkışta tıkanmış egzoz", "verdict": "nefes-kisitlamasi", "correct": true, "explain": "Sarsıntı yoksa bütün silindirler eşit çalışıyor demektir; arıza tek bir silindirde değil, hepsini birden etkileyen ortak bir yoldadır. Motor bir hava pompasıdır: içeri aldığı havayı sıkıştırır, yakar ve dışarı atar. Bu yolun girişi tıkalıysa yeterince hava alamaz, çıkışı tıkalıysa yanmış gazı atamaz ve yeni dolguya yer açamaz. İki durumda da kayıp düşük devirde küçük, yüksek devirde büyüktür — çünkü hava ihtiyacı devirle artar, kısıtlama sabittir. Ayırt etmesi kolaydır: hava filtresine bakılır, egzoz tarafında ise karşı basınç ölçülür ya da katalitik dönüştürücünün giriş ve çıkış sıcaklıkları karşılaştırılır. Bu ders, güç kaybının her zaman ateşlemede aranmaması gerektiğini öğretir." },
+          { "label": "Tek silindir tekliyor", "verdict": "tekleme", "explain": "Tekleme rölantide sarsıntı yapar; burada sarsıntı yok ve kayıp bütün silindirlere eşit dağılmış." },
+          { "label": "Motor yağı eski", "verdict": "yag", "explain": "Eski yağ sürtünmeyi ve aşınmayı etkiler ama devirle artan böyle bir güç kaybı üretmez." },
+          { "label": "Lastik basıncı düşük", "verdict": "lastik", "explain": "Yuvarlanma direncini artırır, sürüş hissini değiştirir ama motorun devirle artan nefes darlığını açıklamaz." }
+        ]
+      },
+      "camera": "motor-ust",
+      "hint": "Sarsıntı var mı sorusu, arızayı 'tek silindir' ile 'bütün motor' arasında böler.",
+      "teachingNote": "Motoru bir hava pompası olarak düşünmek, güç kaybı teşhislerinin yarısını kendiliğinden çözer: giriş, yanma, çıkış. Üçünden hangisinin kısıtlandığını sor."
+    },
+    {
+      "id": 7,
+      "instruction": "Her iki arızada da onarım yapıldı. İş teslim edilecek.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.hava-filtresi",
+        "question": "Teslimden önce ne yapılır?",
+        "options": [
+          { "label": "Belirtinin ortaya çıktığı koşullar tekrar üretilir ve arızanın gittiği o koşulda doğrulanır", "verdict": "kosulu-tekrarla", "correct": true, "explain": "Bir arıza yalnız belirli koşullarda görünüyorsa, onarımın doğrulaması da o koşulda yapılır. Rölantide sarsan araç rölantide dinlenir; yokuşta çeken araç yüklenerek denenir. Atölyede rölantide bırakılıp 'düzeldi' denen iş, müşteri ilk rampada aynı şikâyetle geri gelir. Doğrulama ayrıca ikinci bir iş yapar: onarım sırasında gözden kaçmış ikinci bir arıza varsa burada ortaya çıkar. Teşhis, belirtinin gittiği kanıtlanana kadar bitmiş sayılmaz — ve bu kanıt sözle değil, aynı koşulun tekrarıyla üretilir." },
+          { "label": "Motor rölantide birkaç dakika çalıştırılır, ses temizse tamamdır", "verdict": "rolanti", "explain": "Yükte ortaya çıkan bir arıza rölantide görünmez. Doğrulama, belirtinin koşuluyla eşleşmelidir." },
+          { "label": "Hata kodları silinir ve teslim edilir", "verdict": "kod-sil", "explain": "Kod silmek onarımın kanıtı değildir; yalnız kaydı temizler. Arıza sürüyorsa kod geri gelir." },
+          { "label": "Müşteriye birkaç gün deneyip haber vermesi söylenir", "verdict": "musteri-denesin", "explain": "Doğrulamayı müşteriye devretmek işi yarım bırakmaktır. Sınamayı yapan usta olur." }
+        ]
+      },
+      "camera": "motor-ust",
+      "teachingNote": "Dokuzuncu aşamanın kapanış cümlesi budur: bir işi bitiren şey parçanın değişmesi değil, belirtinin kendi koşulunda geri gelmediğinin görülmesidir."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Rölantide sarsan, devir yükseldikçe düzelen bir motor neyi gösterir?",
+        "a": "tek-silindir",
+        "options": [
+          { "verdict": "tek-silindir", "label": "Tek silindirin katkı vermediğini; devirle sarsıntının örtüldüğünü", "explain": "Rölantide saniyedeki ateşleme sayısı azdır; bir silindir katkı vermediğinde eksik pay dörtte birdir ve sarsıntı olarak hissedilir. Devir yükseldikçe ateşleme sıklığı artar, volanın ataleti eksik ateşlemeyi örter ve sarsıntı azalır. Arıza düzelmez, yalnız görünmez olur. Bu tarif teşhisi tek silindire indirir; o silindirde üç ihtimal kalır: ateşleme yok, yakıt yok, kompresyon yok. Sıradaki adım, üçünü birbirinden ayıracak en ucuz testi seçmektir." },
+          { "verdict": "hava-filtresi", "label": "Hava filtresinin tıkalı olduğunu", "explain": "Tıkalı filtre bütün silindirleri birlikte kısıtlar; belirtisi rölanti sarsıntısı değil, yükte ve yüksek devirde güç kaybıdır." },
+          { "verdict": "yag", "label": "Yağ seviyesinin düşük olduğunu", "explain": "Düşük yağ farklı ve daha ağır belirtiler verir; devirle azalan bir rölanti sarsıntısı üretmez." },
+          { "verdict": "normal", "label": "Normaldir, her motor rölantide sarsar", "explain": "Sağlıklı bir motor rölantide düzgün çalışır; belirgin sarsıntı normal değildir." }
+        ]
+      },
+      {
+        "q": "Şüphelenilen bobin neden doğrudan değiştirilmez de önce yeri değiştirilir?",
+        "a": "kanit-uretir",
+        "options": [
+          { "verdict": "kanit-uretir", "label": "Yer değiştirme testi, parçanın suçlu olup olmadığını hiçbir parça almadan kanıtlar", "explain": "Şüpheli parça sağlam çalışan bir silindire takılır. Tekleme parçayla birlikte oraya geçtiyse arıza o parçadadır; tekleme eski silindirde kaldıysa parça sağlamdır ve arıza o silindirin kendisindedir. Bu, tek değişkenli kontrollü bir deneydir ve sonucu kesindir. Parça değiştirerek teşhis koymak ise müşterinin parasıyla tahmin yürütmektir: düzelmezse ne parça geri gelir ne zaman. Aynı mantık enjektör, buji ve aynısından birden çok bulunan her parça için geçerlidir." },
+          { "verdict": "ucuz", "label": "Bobin pahalı olduğu için", "explain": "Fiyat ikincil bir gerekçe; asıl sebep testin kanıt üretmesidir. Ucuz olsaydı da yer değiştirme testi doğru sıra olurdu." },
+          { "verdict": "garanti", "label": "Garanti şartı olduğu için", "explain": "Garanti bir teşhis yöntemi değildir." },
+          { "verdict": "gerekmez", "label": "Gerekmez, en olası parça doğrudan değiştirilir", "explain": "Olasılık kanıt değildir; teşhis kanıtla kapanır." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 4'teki 12,9 ve 12,7 bar SENARYO okumalarıdır. Öğrenciden istenen bir üretici sınırı değil, verilen iki okuma arasındaki FARKTIR (0,2 bar). Buradaki öğretim noktası ters yönlüdür: küçük fark bir suçlu göstermez, bir dalı eler. sourceRequired bu yüzden gerekmedi.",
+    "sourceRequired": "Bu derste hiçbir üretici eşiği kullanılmadı: kabul edilebilir azami silindir farkı, egzoz karşı basıncı sınırı ve yakıt basıncı değerleri araca özgüdür ve bilinçli olarak verilmedi. Bu değerler kullanılacaksa aracın servis kılavuzundan alınmalıdır.",
+    "kapsam": "Enjektör, yakıt basıncı ve katalitik dönüştürücü modelde yok; adım 6 bu yüzden ölçüm değil seçim olarak öğretiliyor. Egzoz karşı basıncı ölçümü, Araç Elektrik ve Elektronik Sistemleri alanıyla ortak bir ileri ders olacak.",
+    "reviewedByMechanic": false
+  }
+}

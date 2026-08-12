@@ -1,0 +1,176 @@
+{
+  "id": "lastik.jant-olculeri",
+  "area": "lastik-tekerlek",
+  "stage": 7,
+  "title": "Jant Ölçüleri: Bijon Deseni, Göbek Çapı ve Ofset",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 30,
+  "prerequisites": ["lastik.tekerlek-degisimi"],
+  "learningGoals": [
+    "Jantın üzerindeki ölçü kodunu okumak",
+    "Birbirine çok yakın iki bijon deseninin neden uymadığını bilmek",
+    "Ofset değişiminin neyi etkilediğini açıklamak"
+  ],
+
+  "safety": [
+    { "rule": "Bijon deseni tam uymayan jant zorlanarak takılmaz", "why": "Somunlar deliklere merkezsiz oturur; sıkılmış görünürken bağlantı yoktur ve tekerlek yolda çıkar", "blocksStart": true },
+    { "rule": "Göbek deliği büyük olan jant, merkezleme halkası olmadan takılmaz", "why": "Jant göbeğe asılı kalır, merkezlenmez ve titreşim üretir", "blocksStart": true },
+    { "rule": "Ofset değişikliği rastgele yapılmaz", "why": "Ofset yalnız görünümü değil rulman yükünü, direksiyon davranışını ve parça temaslarını değiştirir", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.kumpas", "label": "Kumpas", "required": true },
+    { "id": "tool.cetvel", "label": "Cetvel", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Jantın iç yüzünde şu yazıyor: 7J x 16 ET45 5x112.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.jant",
+        "question": "Bu kod neyi söyler?",
+        "options": [
+          { "label": "7 genişlik (inç), J kenar profili, 16 çap (inç), ET45 ofset (mm), 5x112 bijon deseni", "verdict": "kod", "correct": true, "explain": "Jantın kodu beş ayrı ölçüyü tek satırda verir ve hepsi ayrı bir uyum şartıdır. Baştaki sayı jantın genişliğidir ve inç cinsindendir; lastiğin oturacağı yatağın enini belirler. Yanındaki harf jant kenarının profilidir — lastiğin topuğunun oturduğu kenarın biçimini tanımlar ve binek araçlarda çoğunlukla J'dir. Çarpı işaretinden sonraki sayı jant çapıdır, yine inçtir ve lastiğin ölçü kodundaki son sayıyla birebir aynı olmak zorundadır. ET ile başlayan değer ofsettir, milimetre cinsindendir ve jantın göbeğe oturduğu yüzeyin, jant genişliğinin ortasına göre ne kadar dışarıda olduğunu söyler. Son ikili ise bijon desenidir: kaç adet bijon ve delik merkezlerinin oluşturduğu dairenin çapı kaç milimetre. Bu beş değerden herhangi biri araca uymuyorsa jant o araca takılmaz — dördü uyup biri uymadığında da sonuç aynıdır." },
+          { "label": "7 çap, 16 genişlik", "verdict": "ters", "explain": "İlk sayı genişlik, çarpıdan sonraki sayı çaptır." },
+          { "label": "ET45 lastik ölçüsüdür", "verdict": "et-lastik", "explain": "ET ofsettir ve milimetredir; lastik ölçüsü lastiğin yanağında yazar." },
+          { "label": "5x112 jant ağırlığıdır", "verdict": "agirlik", "explain": "5 bijon sayısı, 112 delik dairesinin çapıdır." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Lastikte olduğu gibi jantta da tek bir kodda hem inç hem milimetre var. Hangi değerin hangi birimde olduğunu bilmek, kodu okumanın yarısı."
+    },
+    {
+      "id": 2,
+      "instruction": "Elde 5x114,3 desenli bir jant var, araç ise 5x112 istiyor. Somunlar deliklere giriyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.bijon.1",
+        "question": "Takılır mı?",
+        "options": [
+          { "label": "Takılmaz: delik dairesi çapları farklı olduğu için somunlar deliklere merkezsiz oturur, bağlantı görünürde vardır ama gerçekte yoktur", "verdict": "takilmaz", "correct": true, "explain": "İki desen arasında yalnız birkaç milimetre fark vardır ve bu, deliklerin somunları almasına yetecek kadar küçüktür — sahadaki tehlike tam olarak buradan gelir, çünkü jant takılabiliyor gibi görünür. Ama delik dairesinin çapı farklı olduğu için somunlar deliklerin ortasına değil kenarına yaslanır. Somunun konik yüzeyi delikle tam temas edemez, uygulanan tork gerçek germeye dönüşmez ve jant göbeğe eşit basmaz. Sonuç kademeli bir çöküştür: somunlar ilk kilometrelerde gevşemeye başlar, delikler ovalleşir, saplamalar yorulur ve tekerlek en sonunda araçtan ayrılır. Bu, bu alandaki en ölümcül montaj hatasıdır ve 'zorlayınca girdi' cümlesiyle başlar. Bijon deseni ölçülerek doğrulanır: beş delikli jantlarda karşılıklı delik olmadığı için ölçüm bir delikten karşı iki deliğin ortasına yapılır ya da desen mastarı kullanılır." },
+          { "label": "Takılır, fark çok küçük", "verdict": "kucuk-fark", "explain": "Fark küçük olduğu için tehlikeli: jant takılıyor görünür ama somunlar merkezsiz oturur." },
+          { "label": "Takılır, somunlar sıkılırsa merkezlenir", "verdict": "somun-merkezler", "explain": "Somun ancak deliğiyle tam eşleşirse merkezler; farklı çapta bunu yapamaz." },
+          { "label": "Takılır, tork biraz artırılır", "verdict": "tork-artir", "explain": "Tork artırmak merkezsiz oturmayı düzeltmez, saplamayı zorlar." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bu alandaki en tehlikeli uyumsuzluk, uymadığı hemen belli olmayan uyumsuzluktur. 112 ile 114,3 arasındaki fark tam da böyle."
+    },
+    {
+      "id": 3,
+      "instruction": "Araç ET45 istiyor, elde ET35 bir jant var. Ofset farkını milimetre olarak gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.jant",
+        "unit": "mm",
+        "acceptRange": [9.5, 10.5]
+      },
+      "camera": "tekerlek",
+      "hint": "45 eksi 35.",
+      "teachingNote": "10 mm'lik bu fark tekerleğin 10 mm daha dışarıda duracağı anlamına gelir. Küçük görünür ama etkisi mekaniktir: tekerlek göbekten uzaklaştıkça tekerlek rulmanına binen eğilme momenti artar, direksiyon geometrisi değişir ve tekerlek çamurluğa, süspansiyon parçalarına ya da fren kaliperine yaklaşır. Ofset küçüldükçe tekerlek dışa, büyüdükçe içe gider. Bu yüzden ofset bir görünüm tercihi değil, araç üreticisinin belirlediği bir ölçüdür."
+    },
+    {
+      "id": 4,
+      "instruction": "Müşteri ofseti değiştirmek istiyor: tekerlekler biraz dışarıda dursun diyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.gobek",
+        "question": "Ne anlatılır?",
+        "options": [
+          { "label": "Ofsetin rulman yükünü, direksiyon davranışını ve parça temaslarını değiştirdiği; üreticinin verdiği değerin dışına çıkılmaması gerektiği", "verdict": "etkileri", "correct": true, "explain": "Ofset, tekerleğin araca göre yerini belirler ve bu yer bir tasarım kararıdır. Ofset küçültülüp tekerlek dışa alındığında dört şey birden değişir. Birincisi rulman yüküdür: tekerleğin merkezi göbeğin taşıma noktasından uzaklaşır, aradaki kol uzar ve rulmana binen eğilme momenti artar; rulman tasarlandığından daha kısa sürede yorulur. İkincisi direksiyon davranışıdır — tekerleğin yol yüzeyine bastığı nokta ile direksiyon ekseninin yolu kestiği nokta arasındaki mesafe değişir, bu da fren sırasında ve tek taraflı çekişte direksiyonun elde nasıl davrandığını doğrudan etkiler. Üçüncüsü temaslardır: tekerlek dışa gidince çamurluğa ve iç davlumbaza, içe gidince süspansiyon koluna ve fren kaliperine yaklaşır; temas dolu araçta ya da direksiyon sonuna kadar çevrilince ortaya çıkar ve atölyede fark edilmez. Dördüncüsü ise mevzuattır: birçok yerde tekerleğin çamurluk dışına taşması denetimde sorun çıkarır. Doğru cevap ürünü kötülemek değil, üreticinin değerinin bir tasarım kararı olduğunu anlatmaktır." },
+          { "label": "Sorun yok, yalnız görünüm değişir", "verdict": "gorunum", "explain": "Rulman yükü, direksiyon davranışı ve parça temasları da değişir." },
+          { "label": "Ara pul takılarak istenen ofset elde edilir", "verdict": "ara-pul", "explain": "Jantla göbek arasına ara parça konması ayrı bir konudur ve aynı riskleri büyütür." },
+          { "label": "Yalnız lastik ölçüsü değişirse sorun olur", "verdict": "lastik-olcusu", "explain": "Ofset lastikten bağımsız olarak tekerleğin konumunu değiştirir." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Görünümle ilgili her isteğin bir mekanik karşılığı vardır. Ustanın işi isteği reddetmek değil, karşılığını görünür kılmak."
+    },
+    {
+      "id": 5,
+      "instruction": "Jantın göbek deliği aracın göbek çıkıntısından belirgin biçimde büyük.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.gobek",
+        "question": "Ne gerekir?",
+        "options": [
+          { "label": "Merkezleme halkası: jantı göbeğe ortalayan ve boşluğu dolduran parça olmadan jant merkezlenmez", "verdict": "halka", "correct": true, "explain": "Göbek merkezli araçlarda jantı ortalayan şey somunlar değil, göbeğin çıkıntısıdır. Sonradan alınan jantlar birçok araca uysun diye göbek deliği büyük üretilir; bu delik aracın çıkıntısından büyük olduğunda jant çıkıntıya oturmaz, somunlar sıkılana kadar boşlukta asılı kalır ve tam merkezlenmeden kilitlenir. Ortaya çıkan şey balansla geçmeyen bir titreşimdir — üstelik ölçüm makinede kusursuz çıkabilir, çünkü sorun tekerlekte değil araca oturma biçimindedir. Merkezleme halkası bu boşluğu dolduran, bir tarafı jantın deliğine bir tarafı göbeğin çıkıntısına uyan bir bileziktir ve montajın parçasıdır, aksesuar değil. Doğru ölçüde olması şarttır: iki ölçü de kumpasla alınır. Halka takıldıktan sonra jantın çıkıntıya tam oturduğu elle kontrol edilir; jant halkanın üstüne binip kalıyorsa ölçü yanlıştır." },
+          { "label": "Gerekmez, somunlar merkezler", "verdict": "somun", "explain": "Göbek merkezli araçta merkezleme göbekten yapılır; somunlar yalnız bastırır." },
+          { "label": "Jant deliği doldurulur", "verdict": "doldur", "explain": "Delik işlenerek ya da doldurularak değiştirilmez; halka bu iş içindir." },
+          { "label": "Daha yüksek torkla sıkılır", "verdict": "tork", "explain": "Tork merkezleme yapmaz; asılı kalan jant yine merkezsizdir." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Merkezleme halkası ucuz, küçük ve kolay unutulan bir parça. Yokluğu her zaman aynı şikâyeti üretir ve sebebi en son akla gelir."
+    },
+    {
+      "id": 6,
+      "instruction": "Jant 7J genişliğinde. Müşteri çok geniş bir lastik taktırmak istiyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik",
+        "question": "Sınırı ne belirler?",
+        "options": [
+          { "label": "Lastik üreticisinin o ölçü için verdiği uygun jant genişliği aralığı; her lastik her jant genişliğine takılmaz", "verdict": "uygun-aralik", "correct": true, "explain": "Bir lastiğin topukları, belirli bir genişlik aralığındaki jantlara oturacak biçimde tasarlanır ve üretici her ölçü için hem önerilen hem de kabul edilebilir jant genişliklerini yayınlar. Dar bir janta fazla geniş lastik takıldığında yanaklar içe doğru toplanır, sırt yola tam düz basmaz ve omuzlardan aşınma başlar; ayrıca yanak profili tasarlandığından farklı çalıştığı için viraj davranışı değişir. Geniş bir janta fazla dar lastik takıldığında ise yanaklar aşırı gerilir, topuk bölgesi zorlanır ve darbelerde jant kenarı korumasız kalır. İki uçta da lastiğin gerçek genişliği ve yüksekliği kataloğundakinden sapar — yani dönme çevresi de değişir. Bu yüzden karar tahminle verilmez: lastik üreticisinin o ölçü için verdiği aralığa bakılır ve jant o aralığın içindeyse takılır. Aynı kontrol jant değişikliğinde de yapılır; yeni jant genişliği mevcut lastiğe uygun olmayabilir." },
+          { "label": "Sınır yok, lastik jantı sarar", "verdict": "sinir-yok", "explain": "Topuklar belirli bir genişlik aralığı için tasarlanmıştır." },
+          { "label": "Yalnız çamurluğa değmemesi yeterli", "verdict": "camurluk", "explain": "Temas bir şart ama tek şart değil; jant genişliği uyumu ayrı." },
+          { "label": "Basınç artırılarak telafi edilir", "verdict": "basinc", "explain": "Basınç yanlış jant genişliğini düzeltmez, yeni sorun ekler." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Jant ve lastik ayrı ürünler ama tek bir parça gibi çalışırlar. Uyum listesi ikisinin de üreticisinde bulunur; birinden bakmak yetmez."
+    },
+    {
+      "id": 7,
+      "instruction": "Müşteri sonradan jant alacak ve senden liste istiyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.jant",
+        "question": "Kontrol listesinde ne var?",
+        "options": [
+          { "label": "Bijon deseni, göbek çapı, ofset, jant çapı ve genişliği, somun tipi, fren kaliperi boşluğu ve TPMS uyumu", "verdict": "liste", "correct": true, "explain": "Jant seçimi tek bir ölçüye değil, bir listeye bakarak yapılır ve listedeki her madde ayrı bir yerde sorun çıkarır. Bijon deseni birebir uymalıdır — yakın değerler uymaz. Göbek çapı ya birebir olmalı ya da doğru merkezleme halkası kullanılmalıdır. Ofset üreticinin verdiği değerde olmalıdır; sapma rulman yükünü ve direksiyon davranışını değiştirir. Jant çapı lastik ölçüsüyle, genişliği ise lastiğin uygun jant aralığıyla eşleşmelidir. Somun tipi jantın yuva biçimine uymalıdır — konik yuvaya küresel somun bağlantı kurmaz. Fren kaliperi için yeterli boşluk bulunmalıdır; özellikle büyük frenli araçlarda jantın iç profili kalipere değebilir ve bu ancak deneme montajıyla görülür. Son madde TPMS'tir: doğrudan sistemli bir araçta yeni jantlara sensör takılması ve tanıtılması gerekir. Bu liste yazılı verilir; müşteri satıcıya tek tek sorabilsin diye." },
+          { "label": "Yalnız jant çapı ve bijon deseni", "verdict": "iki-madde", "explain": "Ofset, göbek çapı, somun tipi ve kaliper boşluğu da uyum şartı." },
+          { "label": "Yalnız görünüm ve marka", "verdict": "gorunum", "explain": "Görünüm bir tercih; uyum ise ölçülerle belirlenir." },
+          { "label": "Satıcı zaten bilir", "verdict": "satici-bilir", "explain": "Sorumluluk montajı yapanda; ölçüler doğrulanmadan takılmaz." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bu liste bir satış aracı değil, bir güvenlik listesi. Yedi maddeden biri atlandığında sonuç titreşimden tekerleğin ayrılmasına kadar gidebilir."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "5x112 isteyen bir araca 5x114,3 jant neden takılmaz?",
+        "a": "merkezsiz-oturur",
+        "options": [
+          { "verdict": "merkezsiz-oturur", "label": "Delik dairesinin çapı farklı olduğu için somunlar deliklere merkezsiz oturur; bağlantı görünürde vardır ama gerçekte yoktur", "explain": "Fark birkaç milimetredir ve deliklerin somunları almasına yeter — tehlike tam da buradan gelir, jant takılıyor gibi görünür. Somunun konik yüzeyi delikle tam temas edemez, tork gerçek germeye dönüşmez, jant göbeğe eşit basmaz. Somunlar gevşer, delikler ovalleşir, saplamalar yorulur ve tekerlek en sonunda araçtan ayrılır." },
+          { "verdict": "gorunum", "label": "Görünümü bozuk olur", "explain": "Sorun görünüm değil, bağlantının kurulamaması." },
+          { "verdict": "agirlik", "label": "Jant daha ağırdır", "explain": "Ağırlıkla ilgisi yok; desen çapı farklı." },
+          { "verdict": "takilir", "label": "Takılır, somunlar sıkınca merkezlenir", "explain": "Somun ancak deliğiyle tam eşleşirse merkezler." }
+        ]
+      },
+      {
+        "q": "Ofsetin küçültülmesi (tekerleğin dışa alınması) neyi etkiler?",
+        "a": "rulman-ve-geometri",
+        "options": [
+          { "verdict": "rulman-ve-geometri", "label": "Rulmana binen eğilme momentini, direksiyon davranışını ve tekerleğin çamurluk ile süspansiyon parçalarına olan mesafesini", "explain": "Tekerleğin merkezi göbeğin taşıma noktasından uzaklaşır, kol uzar ve rulman tasarlandığından daha kısa sürede yorulur. Tekerleğin yola bastığı nokta ile direksiyon ekseninin yolu kestiği nokta arasındaki mesafe değiştiği için fren ve tek taraflı çekişte direksiyon farklı davranır. Ayrıca tekerlek çamurluğa yaklaşır; temas dolu araçta ya da direksiyon sonuna kadar çevrilince ortaya çıkar." },
+          { "verdict": "yalniz-gorunum", "label": "Yalnız görünümü", "explain": "Görünüm sonuçlardan yalnız biri." },
+          { "verdict": "basinc", "label": "Lastik basıncını", "explain": "Basınçla doğrudan ilgisi yok." },
+          { "verdict": "hicbir", "label": "Hiçbir şeyi", "explain": "Tekerleğin konumu bir tasarım kararıdır ve birçok şeyi etkiler." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki ET45 ve ET35 SENARYO değerleridir; belirli bir araca ait ofset önerisi DEĞİLDİR. İstenen FARKTIR (10 mm) ve dersin gösterdiği şey ofsetin tekerleğin konumunu belirlediğidir.",
+    "sourceRequired": "Hiçbir araca ait bijon deseni, göbek çapı ya da ofset değeri verilmedi; 7J x 16 ET45 5x112 kodu, kodun NASIL okunduğunu göstermek için kullanılan jenerik bir örnektir. Lastiklerin uygun jant genişliği aralıkları da bilinçle verilmedi — lastik üreticisinin kataloğundan okunur.",
+    "kapsam": "Ara pul kullanımı, jant adaptörleri ve çok parçalı jantlar kapsam dışı. Salgı ve hasar bir sonraki derste.",
+    "reviewedByMechanic": false
+  }
+}

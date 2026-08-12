@@ -1,0 +1,177 @@
+{
+  "id": "lastik.balans-ayari",
+  "area": "lastik-tekerlek",
+  "stage": 5,
+  "title": "Statik ve Dinamik Balans",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 30,
+  "prerequisites": ["lastik.balans-hazirlik"],
+  "learningGoals": [
+    "Statik ve dinamik dengesizliğin araçta farklı hissedildiğini bilmek",
+    "İki ağırlık düzleminin neden gerektiğini açıklamak",
+    "Ağırlık takıldıktan sonra doğrulama turunun zorunlu olduğunu kavramak"
+  ],
+
+  "safety": [
+    { "rule": "Ağırlıklar makine çalışırken takılmaz ve kapak açıkken ölçüm başlatılmaz", "why": "Dönen tekerleğe uzanan el ciddi biçimde yaralanır; kopan ağırlık mermi gibi fırlar", "blocksStart": true },
+    { "rule": "Klipsli ağırlık jant kenarına tam oturmadan bırakılmaz", "why": "Yarım oturan ağırlık yolda düşer ve tekerlek yeniden dengesiz kalır", "blocksStart": true },
+    { "rule": "Yapıştırma ağırlık soğuk, ıslak ya da kirli yüzeye uygulanmaz", "why": "Bant tutmaz; ağırlık ilk kilometrelerde düşer", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.balans-makinesi", "label": "Balans makinesi", "required": true },
+    { "id": "tool.agirlik-pensesi", "label": "Ağırlık pensesi", "required": true },
+    { "id": "tool.temizleyici", "label": "Yüzey temizleyici", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Müşteri diyor ki: belli bir hızın üstünde direksiyon elimde titriyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.jant",
+        "question": "Statik dengesizlik nedir?",
+        "options": [
+          { "label": "Kütlenin tekerleğin bir noktasında fazla olması; tekerlek dönerken yukarı–aşağı zıplar", "verdict": "statik", "correct": true, "explain": "Statik dengesizlik en basit hâlidir: tekerleğin çevresi boyunca bir noktada diğerlerinden fazla kütle vardır. Tekerlek serbestçe asılsa o ağır nokta her zaman aşağıya döner — adı buradan gelir, çünkü tekerlek dönmeden, durağan hâlde bile ortaya çıkar. Araç hareket ederken bu fazlalık her turda bir kez merkezkaç kuvveti üretir ve tekerleği yukarı aşağı zıplatır. Sürücü bunu belirli bir hızın üzerinde başlayan, hızla birlikte artan bir titreşim olarak hisseder; ön tekerleklerdeyse titreşim direksiyonda, arka tekerleklerdeyse koltukta ve gövdede duyulur. Düzeltmesi kavram olarak basittir: ağır noktanın tam karşısına, aynı çapta, eksik kütle kadar ağırlık takılır. Ancak tek başına statik denge yeterli değildir — çünkü tekerlek ince bir disk değil, genişliği olan bir cisimdir ve dengesizlik genişlik boyunca da dağılabilir. Bir sonraki adım bunu ele alıyor." },
+          { "label": "Tekerleğin eğri dönmesi", "verdict": "egri", "explain": "Eğri dönme salgıdır; geometri kusurudur, kütle dengesizliği değil." },
+          { "label": "Lastiğin basıncının düşük olması", "verdict": "basinc", "explain": "Basınç ayrı bir konu; dengesizlik kütle dağılımıyla ilgilidir." },
+          { "label": "Jantın merkezden kaçık olması", "verdict": "merkez", "explain": "Merkez kaçıklığı da salgıdır; ağırlıkla düzeltilmez." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Titreşimin nerede hissedildiği hangi aksta olduğunu söyler: direksiyonda hissedilen titreşim çoğunlukla ön, koltukta hissedilen arka tekerleklerden gelir."
+    },
+    {
+      "id": 2,
+      "instruction": "Makine iki ayrı düzlem için iki ayrı değer gösteriyor: iç düzlem ve dış düzlem.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.balans-agirligi",
+        "question": "Neden iki düzlem gerekiyor?",
+        "options": [
+          { "label": "Tekerleğin genişliği vardır; dengesizlik iç ve dış tarafta farklıysa tekerlek yalpalar — bu dinamik dengesizliktir ve tek düzlemle düzeltilemez", "verdict": "dinamik", "correct": true, "explain": "Tekerlek ince bir disk olsaydı tek bir ağırlık yeterdi. Ama genişliği vardır ve fazla kütle iç tarafta bir yerde, dış tarafta başka bir yerde olabilir. Bu durumda tekerlek yukarı aşağı zıplamak yerine dönme ekseni etrafında sağa sola yalpalar; buna dinamik dengesizlik denir ve sürücü bunu direksiyonun sağa sola oynaması olarak hisseder. Tek bir düzleme takılan ağırlık bu yalpalamayı gideremez, hatta bazen artırır: statik dengeyi düzeltirken dinamik dengeyi bozabilir. Bu yüzden makine iç ve dış olmak üzere iki düzlem için ayrı değer verir ve iki ağırlık takılır; ikisi birlikte hem zıplamayı hem yalpalamayı giderir. Bu ayrım eski tip statik balans tezgâhlarının neden yetersiz kaldığını da açıklar. Makinenin doğru hesap yapabilmesi için jant genişliği, çapı ve makineye mesafesi doğru girilmelidir — yanlış girilen bir ölçü, doğru ölçülmüş bir dengesizliğin yanlış yere takılmasına yol açar." },
+          { "label": "Biri yedek, aynı değeri gösterirler", "verdict": "yedek", "explain": "Farklı değerler gösterirler; ikisi farklı düzlemin dengesizliğidir." },
+          { "label": "Biri jant, diğeri lastik içindir", "verdict": "jant-lastik", "explain": "Makine ikisini ayıramaz; düzlemler tekerleğin iç ve dış tarafıdır." },
+          { "label": "İkisinden büyüğü seçilir, biri takılır", "verdict": "buyugu", "explain": "İkisi de takılır; biri eksik kalırsa yalpalama sürer." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Zıplama ve yalpalama farklı hissedilir ve farklı düzeltilir. Ölçüm iki düzlem veriyorsa, düzeltme de iki düzlemden yapılır."
+    },
+    {
+      "id": 3,
+      "instruction": "İlk ölçümde toplam 40 g dengesizlik çıktı. Ağırlıklar takıldı ve doğrulama turu yapıldı: 5 g kaldı. Giderilen miktarı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.balans-makinesi",
+        "unit": "g",
+        "acceptRange": [34, 36]
+      },
+      "camera": "tekerlek",
+      "hint": "40 eksi 5.",
+      "teachingNote": "35 g giderildi ve 5 g kaldı. Buradaki asıl ders sayı değil, doğrulama turunun kendisi: ağırlık takıldıktan sonra tekerlek yeniden ölçülmeden iş bitmiş sayılmaz. Doğrulama üç şeyi birden kontrol eder — ağırlık doğru yere mi takıldı, doğru miktarda mıydı ve yerinde duruyor mu. Kalan değerin ne kadarının kabul edilebilir olduğu makineye ve araca göre değişir; ama kalan değeri hiç ölçmemek, ağırlığın işe yarayıp yaramadığını bilmemek demektir."
+    },
+    {
+      "id": 4,
+      "instruction": "Ağırlıkları takacaksın. Bir tekerlek çelik jantlı, diğeri alüminyum.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.balans-agirligi",
+        "question": "Ağırlık tipi nasıl seçilir?",
+        "options": [
+          { "label": "Jantın kenar profiline uygun tip seçilir: klipsli ağırlığın tırnağı o jant kenarına oturmalı, yapıştırma ağırlık ise temiz ve kuru yüzeye uygulanır", "verdict": "profile-uygun", "correct": true, "explain": "Klipsli ağırlıklar jant kenarına tırnakla tutunur ve tırnak biçimi jant profiline göre farklıdır; çelik jant için üretilmiş bir ağırlık alüminyum jantın kenarına tam oturmaz, yarım tutar ve yolda düşer. Ayrıca yanlış tırnak alüminyum jantın kenarını çizer ve orada korozyon başlatır. Yapıştırma ağırlıklar ise jantın iç yüzeyine uygulanır ve tamamen yüzey hazırlığına bağlıdır: yüzey eski bant kalıntısından arındırılmış, yağdan temizlenmiş ve kuru olmalıdır. Soğukta bant tutmaz — kışın atölyeye yeni girmiş buz gibi bir tekerleğe yapıştırma ağırlık uygulamak, birkaç gün sonra geri gelen bir titreşim demektir. Ağırlığın konumu da rastgele değildir: makinenin hesabı belirli bir çapa göre yapılmıştır, ağırlık başka bir çapa yapıştırılırsa etkisi değişir. Bu yüzden makinenin gösterdiği düzlem ve açı korunur." },
+          { "label": "Hangisi elde varsa o kullanılır", "verdict": "eldeki", "explain": "Yanlış tırnak profili yarım tutar ve ağırlık yolda düşer." },
+          { "label": "Her zaman yapıştırma kullanılır, daha güvenli", "verdict": "hep-yapistirma", "explain": "Yapıştırma yüzey hazırlığına ve sıcaklığa bağlıdır; her durumda uygun değildir." },
+          { "label": "Ağırlık tipi ölçümü etkilemez, önemsizdir", "verdict": "onemsiz", "explain": "Ölçümü etkilemez ama tutup tutmadığı sonucu belirler." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Doğru hesaplanmış bir düzeltme, yerinde durmuyorsa yapılmamıştır. Ağırlığın tutması hesabın kendisi kadar önemli."
+    },
+    {
+      "id": 5,
+      "instruction": "Doğrulama turu yapılmadan tekerlek araca takılmak isteniyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.balans-makinesi",
+        "question": "Neden doğrulama turu şart?",
+        "options": [
+          { "label": "Ağırlığın doğru yere, doğru miktarda takıldığı ve yerinde durduğu ancak yeniden ölçülerek görülür", "verdict": "dogrulama", "correct": true, "explain": "Ağırlık takmak bir düzeltme denemesidir; düzeltmenin işe yarayıp yaramadığı ancak ölçülerek bilinir. Doğrulama turunda üç ayrı hata birden yakalanır. Birincisi konum hatasıdır: ağırlık makinenin gösterdiği açıdan kaydırılarak takılmışsa dengesizlik tam gitmez, hatta yer değiştirir. İkincisi miktar hatasıdır: yanlış gramajda bir ağırlık alınmış ya da iki ağırlığın düzlemleri karıştırılmış olabilir. Üçüncüsü tutma hatasıdır: klipsli ağırlık yarım oturmuşsa ya da yapıştırma tutmamışsa makine ilk turda bunu gösterir — yolda düşmesini beklemek gerekmez. Doğrulama turu birkaç saniye sürer ve bu üç hatayı da atölyede yakalar; yapılmazsa hatalar müşteride ortaya çıkar. Bu, bu alandaki genel kuralın bir örneği daha: yapılan işin sonucu, yapıldığı yerde ölçülür." },
+          { "label": "Gerekmez, makine hesabı doğrudur", "verdict": "hesap-dogru", "explain": "Hesap doğru olsa da uygulamanın doğruluğu ayrı bir sorudur." },
+          { "label": "Yalnız yeni lastiklerde gerekir", "verdict": "yeni-lastik", "explain": "Her balansta gerekir; hata kaynakları lastiğin yaşından bağımsız." },
+          { "label": "Müşteri isterse yapılır", "verdict": "musteri-isterse", "explain": "İşin parçasıdır; müşterinin bilmesi gereken bir seçenek değildir." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bu, projenin bütün alanlarında tekrar eden ilke: bir işi yaptığını söylemek için, yaptıktan sonra ölçmüş olman gerekir."
+    },
+    {
+      "id": 6,
+      "instruction": "Dört tekerlek de balans edildi ama müşteri iki gün sonra dönüyor: titreşim devam ediyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.komparator",
+        "question": "Nereye bakılır?",
+        "options": [
+          { "label": "Balans dışındaki sebeplere: salgı, kirli göbek yüzeyi, gevşek somun, ön takım boşluğu, aks eğriliği ya da lastiğin iç yapısındaki kusur", "verdict": "balans-disi", "correct": true, "explain": "Balans yalnız kütle dağılımını düzeltir; titreşim üretebilecek tek şey o değildir. Doğrulanmış bir balanstan sonra titreşim sürüyorsa liste şudur. Salgı: jant eğri ya da lastik jant üzerine merkezsiz oturmuş olabilir, komparatörle ölçülür. Kirli göbek yüzeyi: tekerlek araca eğik oturuyorsa balans makinesindeki denge araçta geçersizdir. Gevşek ya da yanlış sıkılmış somunlar: bağlantı tam değilse tekerlek her devirde hafifçe oynar. Ön takım boşluğu: rotil ya da burç yorulmuşsa tekerlek yolda sabit durmaz. Aks ya da göbek eğriliği: çarpma sonrası oluşur ve balansla ilgisi yoktur. Son olarak lastiğin kendi iç yapısındaki kusur: kütlesi dengeli olduğu hâlde lastik çevre boyunca eşit sertlikte olmayabilir ve her turda değişen bir kuvvet üretir; bu, kütle ölçen bir makinede görünmez. Bu yüzden 'balans yaptım geçmedi' bir çıkmaz değil, listenin ikinci maddesine geçme işaretidir." },
+          { "label": "Balans tekrarlanır, muhtemelen ölçüm yanlıştı", "verdict": "tekrarla", "explain": "Doğrulama turu yapıldıysa ölçüm zaten teyitlidir; sebep başka yerde." },
+          { "label": "Daha fazla ağırlık takılır", "verdict": "fazla-agirlik", "explain": "Dengeli bir tekerleğe ağırlık eklemek yeni dengesizlik üretir." },
+          { "label": "Lastikler değiştirilir", "verdict": "degistir", "explain": "Sebep bulunmadan değişen lastik aynı titreşimi verebilir." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "İyi bir usta 'balans yaptım' demez, 'balansı doğruladım, titreşim sürüyorsa sebep şu listede' der. Bu liste teşhis dersinin de iskeletidir."
+    },
+    {
+      "id": 7,
+      "instruction": "Titreşim yalnız belirli bir hız aralığında ortaya çıkıyor, daha yüksek hızda azalıyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik",
+        "question": "Bu bilgi ne işe yarar?",
+        "options": [
+          { "label": "Belirli bir hızda belirginleşip sonra azalan titreşim, dengesizliğin bir doğal titreşim frekansıyla çakıştığını gösterir; teşhis için hız aralığı kaydedilir", "verdict": "hiz-araligi", "correct": true, "explain": "Dengesizliğin ürettiği kuvvet hızla birlikte sürekli artar, ama sürücünün hissettiği titreşim her zaman böyle davranmaz: aracın süspansiyonu ve direksiyon sistemi belirli frekanslarda daha çok tepki verir. Dengesizliğin dönme frekansı bu aralığa girdiğinde titreşim belirginleşir, aralığın dışına çıkıldığında azalır. Bu yüzden müşterinin 'şu hız civarında oluyor, sonra geçiyor' cümlesi bir çelişki değil, kullanılabilir bir veridir ve iş emrine yazılır. Aynı bilgi ayrım için de kullanılır: dengesizlik kaynaklı titreşim tekerleğin dönme hızına bağlıdır, motor kaynaklı titreşim ise devre bağlıdır — araç aynı hızda vitesten çıkarılıp serbest bırakıldığında titreşim sürüyorsa kaynak tekerlektir, kesiliyorsa motordur. Fren sırasında ortaya çıkan titreşim ise ayrı bir konudur ve fren sisteminde aranır. Bu üçlü ayrım teşhisi daha yola çıkmadan daraltır." },
+          { "label": "Hiçbir şeye; titreşim titreşimdir", "verdict": "onemsiz", "explain": "Hangi hızda ve hangi koşulda olduğu kaynağı daraltan asıl veridir." },
+          { "label": "Lastiğin bozuk olduğunu kesin olarak gösterir", "verdict": "lastik-bozuk", "explain": "Kesin bir sonuç değil; kaynak süspansiyon, jant ya da bağlantı da olabilir." },
+          { "label": "Yalnız yüksek hızda test edilmesi gerektiğini", "verdict": "yuksek-hiz", "explain": "Aksine, titreşimin ortaya çıktığı aralık kaydedilir ve orada test edilir." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Şikâyetin koşulu şikâyetin kendisi kadar bilgi taşır: hangi hızda, frende mi, viteste mi, yüklü mü. Teşhis dersleri 9. aşamada bunun üzerine kurulu."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Neden iki ağırlık düzlemi kullanılır?",
+        "a": "dinamik",
+        "options": [
+          { "verdict": "dinamik", "label": "Tekerleğin genişliği vardır; iç ve dış taraftaki dengesizlik farklıysa tekerlek yalpalar ve bu tek düzlemle düzeltilemez", "explain": "Tekerlek ince bir disk olsaydı tek ağırlık yeterdi. Fazla kütle iç tarafta bir yerde, dış tarafta başka bir yerdeyse tekerlek zıplamak yerine dönme ekseni etrafında yalpalar — dinamik dengesizlik budur ve direksiyonun sağa sola oynaması olarak hissedilir. Tek düzleme takılan ağırlık bunu gidermez, bazen artırır. Makinenin doğru hesap yapması için jant genişliği, çapı ve mesafesi doğru girilmelidir." },
+          { "verdict": "yedek", "label": "Biri yedektir", "explain": "İkisi farklı düzlemin dengesizliğidir, ikisi de takılır." },
+          { "verdict": "jant-lastik", "label": "Biri jant biri lastik içindir", "explain": "Makine ikisini ayıramaz." },
+          { "verdict": "guzellik", "label": "Ağırlık görünmesin diye", "explain": "Görünürlük ayrı bir tercih; iki düzlem teknik gerekliliktir." }
+        ]
+      },
+      {
+        "q": "Balans doğrulandığı hâlde titreşim sürüyorsa ne yapılır?",
+        "a": "liste",
+        "options": [
+          { "verdict": "liste", "label": "Balans dışı sebepler aranır: salgı, kirli göbek yüzeyi, gevşek somun, ön takım boşluğu, aks eğriliği, lastiğin iç yapı kusuru", "explain": "Balans yalnız kütle dağılımını düzeltir. Doğrulanmış bir balanstan sonra süren titreşim, sebebin başka yerde olduğunu söyler. Salgı geometrik bir kusurdur ve komparatörle ölçülür; kirli göbek yüzeyi tekerleği araca eğik oturtur; gevşek somun her devirde oynama üretir; ön takım boşluğu tekerleği yolda sabit tutmaz; lastiğin çevre boyunca eşit olmayan sertliği ise kütle ölçen bir makinede hiç görünmez." },
+          { "verdict": "fazla-agirlik", "label": "Daha fazla ağırlık takılır", "explain": "Dengeli tekerleğe ağırlık eklemek yeni dengesizlik üretir." },
+          { "verdict": "tekrar", "label": "Balans birkaç kez tekrarlanır", "explain": "Doğrulanmış ölçüm tekrar edildiğinde aynı çıkar; sebep başka yerde." },
+          { "verdict": "normal", "label": "Bir miktar titreşim normaldir", "explain": "Şikâyet üreten titreşimin bir sebebi vardır ve bulunabilir." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 40 g ve 5 g SENARYO okumalarıdır. İstenen giderilen FARKTIR (35 g); kalan 5 g bir kabul sınırı olarak öğretilmiyor — dersin gösterdiği şey doğrulama turunun zorunluluğudur.",
+    "sourceRequired": "Kabul edilebilir kalan dengesizlik, ağırlık gramajı basamakları ve makinenin devir sayısı bilinçle VERİLMEDİ: makineye, jant ölçüsüne ve araca göre değişir.",
+    "kapsam": "Yol balansı, kuvvet değişimi ölçümü ve lastik–jant eşleştirme kapsam dışı; ders klasik iki düzlemli balansı öğretiyor. Titreşim teşhisinin tamamı 9. aşamada.",
+    "reviewedByMechanic": false
+  }
+}

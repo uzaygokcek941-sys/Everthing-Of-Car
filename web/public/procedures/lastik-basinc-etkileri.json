@@ -1,0 +1,177 @@
+{
+  "id": "lastik.basinc-etkileri",
+  "area": "lastik-tekerlek",
+  "stage": 2,
+  "title": "Düşük ve Yüksek Basıncın Bıraktığı İzler",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 30,
+  "prerequisites": ["lastik.basinc-olcme"],
+  "learningGoals": [
+    "Düşük ve yüksek basıncın sırtta bıraktığı iki farklı aşınma desenini ayırt etmek",
+    "Düşük basıncın asıl tehlikesinin aşınma değil ısı olduğunu açıklamak",
+    "Sürekli inen bir lastikte sızıntının hangi sırayla arandığını bilmek"
+  ],
+
+  "safety": [
+    { "rule": "Basıncı ileri derecede düşmüş bir lastikle yola devam edilmez", "why": "Yanak kendi üzerine katlanarak ısınır ve iç yapı çok kısa sürede ayrılır; bu hasar hava basıldıktan sonra da geri gelmez", "blocksStart": true },
+    { "rule": "Basınçsız gidilmiş bir lastik, hava basılıp gönderilmeden önce iç ve dış yüzeyinden incelenir", "why": "İç yüzeydeki ezilme ve kararma iç yapının ayrıldığını gösterir; bu lastik onarılmaz", "blocksStart": true },
+    { "rule": "Sızıntı arama işlemi güvenli basınçta yapılır", "why": "Sızıntı ararken basıncı yükseltmek, hasarlı bir lastikte patlamaya yol açabilir", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.manometre", "label": "Basınç manometresi", "required": true },
+    { "id": "tool.dis-mastari", "label": "Diş derinliği mastarı", "required": true },
+    { "id": "tool.sabunlu-su", "label": "Sabunlu su", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Bir lastik geldi: iki omuz belirgin biçimde aşınmış, ortası ise hâlâ iyi durumda.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik",
+        "question": "Bu desen neyi söyler?",
+        "options": [
+          { "label": "Basınç düşük çalışmış: yanak çöktüğü için yük iki omuza kaymış, orta bölge yeterince basmamış", "verdict": "dusuk-basinc", "correct": true, "explain": "Lastiğin sırtı doğru basınçta yola düz bir yüzey olarak basar ve yük bütün genişliğe eşit dağılır. Basınç düştüğünde içerideki hava sırtı destekleyemez; yanaklar çöker, sırtın ortası hafifçe yukarı kalkar ve yükün büyük kısmını iki omuz taşır. Aylarca böyle çalışan bir lastikte omuzlar ortadan belirgin biçimde daha çok aşınır ve desen okunabilir hâle gelir. Bu, bu alanın temel fikrinin ilk örneğidir: aşınmış lastik bir rapordur. Deseni okuyup 'basınç düşüktü' demek sebebi bulmanın yarısıdır. Diğer yarısı şu sorudur: basınç neden düşüktü? Cevap ihmal olabilir, ama valf kaçağı, topuk sızıntısı ya da jantta çatlak da olabilir. Sebep bulunmadan yeni lastik takılırsa aynı desen yeni lastikte de oluşur — müşteri bu kez ustayı suçlar." },
+          { "label": "Basınç yüksek çalışmış", "verdict": "yuksek-basinc", "explain": "Yüksek basınç tersini yapar: orta bölge aşınır, omuzlar korunur." },
+          { "label": "Kamber ayarı bozuk", "verdict": "kamber", "explain": "Kamber TEK bir kenardan aşındırır; iki omzun birden aşınması basınç işaretidir." },
+          { "label": "Lastik yaşlı", "verdict": "yasli", "explain": "Yaşlanma çatlak bırakır, belirli bir aşınma deseni üretmez." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "İki kenar mı, tek kenar mı — bu ayrım bu alanın en çok iş gören ayrımıdır. İkisi basınç, teki ön düzen demektir."
+    },
+    {
+      "id": 2,
+      "instruction": "Başka bir lastikte tam tersi var: orta bölge aşınmış, iki omuz iyi durumda.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik",
+        "question": "Sebep ne?",
+        "options": [
+          { "label": "Basınç yüksek çalışmış: sırt kubbeleşip yolla yalnız ortadan temas etmiş", "verdict": "yuksek-basinc", "correct": true, "explain": "Fazla basınç sırtı içeriden dışarı doğru şişirir ve düz olması gereken yüzey hafifçe kubbeleşir. Böyle bir lastik yola bütün genişliğiyle değil, ağırlıklı olarak ortasından basar; yük dar bir şeride yüklenir ve orta bölge omuzlardan hızlı aşınır. Yan etkileri de vardır: temas alanı küçüldüğü için özellikle ıslak zeminde tutuş düşer, lastik yoldaki düzensizlikleri emmek yerine iletir ve sürüş sertleşir; darbeler doğrudan janta ve süspansiyona gider. Bu desenin en sık sebebi, lastiğin yanağındaki azami değeri hedef sanmak ya da 'yakıt tasarrufu için biraz fazla bassın' düşüncesidir. İkisinin de sonucu aynıdır: lastik erken biter ve araç daha az tutar. Doğru basınç bir tercih değil, aracın etiketinde yazan bir değerdir." },
+          { "label": "Basınç düşük çalışmış", "verdict": "dusuk", "explain": "Düşük basınç iki omuzu aşındırır, ortayı korur." },
+          { "label": "Balans bozuk", "verdict": "balans", "explain": "Balans bozukluğu düzensiz noktasal aşınma ve titreşim yapar, düzgün orta aşınması değil." },
+          { "label": "Toe ayarı bozuk", "verdict": "toe", "explain": "Toe testere dişi görünümü verir; bu desen basınç işaretidir." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "İki desen birbirinin aynası: düşük basınç kenarları, yüksek basınç ortayı yer. Bu simetri sayesinde ikisi karıştırılmaz."
+    },
+    {
+      "id": 3,
+      "instruction": "Müşteri diyor ki: biraz inik gidiyordum, nasılsa aşınma meselesi.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik-yanagi",
+        "question": "Düşük basıncın asıl tehlikesi ne?",
+        "options": [
+          { "label": "Isı: yanak her turda fazla bükülür, ürettiği ısı iç yapıyı ayrıştırır ve lastik yolda dağılabilir", "verdict": "isi", "correct": true, "explain": "Aşınma yavaş ve görünür bir zarardır; asıl tehlike ise hızlı ve görünmezdir. Basıncı düşük bir lastikte yanak her tekerlek turunda olması gerekenden çok daha fazla bükülüp açılır. Kauçuk bükülürken enerji harcar ve bu enerjinin bir kısmı ısıya döner. Isı arttıkça kauçuğun çelik kordlara tutunması zayıflar; katmanlar arasında ayrışma başlar ve bu ayrışma bir yerden sonra kendi kendini hızlandırır. Sonuç çoğu zaman yavaş bir sönme değil, yüksek hızda ani bir dağılmadır. Bu yüzden ileri derecede inik bir lastikle 'yakındaki sanayiye kadar' gitmek doğru değildir: o birkaç kilometre lastiği hava basıldıktan sonra bile güvenilmez hâle getirebilir. Basınçsız gidilmiş lastik janttan sökülüp iç yüzeyinden incelenir; iç yüzeyde ezilme ya da kararma varsa lastik onarılmaz, değiştirilir. Aşınma ve yakıt tüketimi bunun yanında ikincil sonuçlardır." },
+          { "label": "Yalnız yakıt tüketiminin artması", "verdict": "yakit", "explain": "Yakıt artar ama asıl risk ısının iç yapıyı ayrıştırması." },
+          { "label": "Yalnız jantın zarar görmesi", "verdict": "jant", "explain": "Jant da zarar görebilir; asıl mesele lastiğin iç yapısı." },
+          { "label": "Sadece daha hızlı aşınması", "verdict": "asinma", "explain": "Aşınma görünür ve yavaş bir zarardır; ısı hasarı görünmez ve ani sonuç verir." }
+        ]
+      },
+      "camera": "yanak",
+      "teachingNote": "Müşteriye anlatırken kullanılacak cümle şudur: inik lastik yalnız çabuk bitmez, yolda dağılabilir. Aşınmadan bahsetmek yeterli bir uyarı değildir."
+    },
+    {
+      "id": 4,
+      "instruction": "Araç hafifçe sağa çekiyor. Ön lastikleri ölçtün: sol ön 2,4 bar, sağ ön 1,9 bar. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.manometre",
+        "unit": "bar",
+        "acceptRange": [0.48, 0.52]
+      },
+      "camera": "tekerlek",
+      "hint": "2,4 eksi 1,9.",
+      "teachingNote": "0,5 barlık bu fark aracı düşük basınçlı tarafa doğru çeker: o taraftaki lastik daha çok ezildiği için yuvarlanma direnci artar ve araç o yöne döner. Bu, çekme şikâyetinde ilk bakılacak yerdir ve en ucuz olanıdır. Ön düzen ayarına gitmeden önce dört basınç ölçülür — çünkü basınç farkını düzeltmeden yapılan ayar, basınç eşitlendiğinde geçersiz hâle gelir."
+    },
+    {
+      "id": 5,
+      "instruction": "Bir lastik sürekli iniyor. Müşteri iki kez hava bastırmış.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.valf",
+        "question": "Sızıntı hangi sırayla aranır?",
+        "options": [
+          { "label": "Önce valf, sonra jant ile lastiğin oturduğu topuk çevresi, sonra sırt yüzeyi, en son jantın kendisi", "verdict": "valf-topuk-sirt-jant", "correct": true, "explain": "Arama en olası ve en kolay bakılandan başlar. Birincisi valftir: iğnesi kirlenip tam kapanmayabilir, gövdesi yaşlanıp çatlayabilir, kapağı eksikse ikinci bariyer de yoktur — valf üzerine sabunlu su damlatılıp kabarcık aranır. İkincisi topuk çevresidir: jantın kenarındaki korozyon ya da kir, lastiğin oturduğu yüzeyi bozar ve hava oradan yavaşça kaçar; bu özellikle alüminyum jantlarda çok yaygındır ve çözümü yüzeyin temizlenmesidir. Üçüncüsü sırt yüzeyidir: çivi ya da vida çoğu zaman gözle görülmez, sabunlu su gezdirilerek ya da tekerlek su dolu bir tekneye batırılarak bulunur. Dördüncüsü jantın kendisidir: çatlak ya da eğrilik havayı kaçırır ve bunu görmek için lastiğin sökülmesi gerekebilir. Bu sıra hem zamandan kazandırır hem de en sık karşılaşılan iki sebebi — valf ve topuk — hemen eler." },
+          { "label": "Doğrudan lastik sökülür ve iç yüzeye bakılır", "verdict": "hemen-sok", "explain": "Sökmeden önce valf ve topuk kontrol edilir; sebep çoğu zaman oradadır." },
+          { "label": "Yeni lastik önerilir", "verdict": "yeni-lastik", "explain": "Sebep bulunmadan değişen lastik aynı sorunu yaşar; sızıntı jantta ya da valfte olabilir." },
+          { "label": "Tekrar hava basılıp gönderilir", "verdict": "hava-bas", "explain": "Sızıntı sürerse araç yine düşük basınçla dolaşır; sebep bulunmalıdır." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Teşhis sırası her alanda aynı ilkeye dayanır: en olası, en ucuz ve en hızlı bakılan önce. Bu sıra bilinmiyorsa iş sökmeyle başlar ve zaman kaybedilir."
+    },
+    {
+      "id": 6,
+      "instruction": "Müşteri azot dolumu yaptırmak istiyor: böylece basınç hiç inmez, değil mi diye soruyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.valf",
+        "question": "Ne söylenir?",
+        "options": [
+          { "label": "Azot da zamanla kaçar ve düzenli kontrolün yerini tutmaz; ayrıca sızıntı varsa hiçbir gaz onu kapatmaz", "verdict": "kontrolun-yerini-tutmaz", "correct": true, "explain": "Azot doldurmanın gerekçesi, azot moleküllerinin lastik gövdesinden havanın diğer bileşenlerine göre daha yavaş geçtiği ve içeride nem bulunmadığı için basıncın sıcaklıkla daha az oynadığı iddiasıdır. Ancak bunların hiçbiri kontrolü gereksiz kılmaz: azot da zamanla kaçar, valf hâlâ kaçırabilir, topuk hâlâ sızdırabilir, çivi hâlâ batabilir. Yani azot bir bakım işini ortadan kaldırmaz, olsa olsa hızını biraz değiştirir. Müşteriye söylenecek doğru cümle şudur: basıncın düzenli olarak kontrol edilmesi gerekir, azot bunu değiştirmez. Sık karşılaşılan bir yanlış anlaşılma daha vardır: azotla dolu bir lastiğe yolda hava basmak zarar vermez, yalnız karışımdaki azot oranını düşürür. Asıl mesele hangi gazın içeride olduğu değil, basıncın doğru olup olmadığıdır." },
+          { "label": "Doğru, azot dolumundan sonra kontrole gerek kalmaz", "verdict": "kontrol-gereksiz", "explain": "Azot da kaçar ve sızıntıları kapatmaz; kontrol yine gerekir." },
+          { "label": "Azotlu lastiğe asla hava basılmaz", "verdict": "hava-basilmaz", "explain": "Hava basmak zarar vermez; yalnız azot oranı düşer." },
+          { "label": "Azot lastiği delinmeye karşı korur", "verdict": "delinme", "explain": "Delinmeyle ilgisi yok; o mekanik bir hasar." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bir ürünün faydasını abartmamak da mesleğin parçası. Doğru cümle ürünü kötülemez ama beklentiyi gerçeğe oturtur."
+    },
+    {
+      "id": 7,
+      "instruction": "Müşteri: panelde lastik lambası yanmıyor, demek ki basınçlar doğru diyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.tpms-sensoru",
+        "question": "Bu çıkarım doğru mu?",
+        "options": [
+          { "label": "Hayır: uyarı sistemi belirli bir alt sınırda devreye girer; lamba yanmadan çok önce basınç etiket değerinin altına inmiş olabilir", "verdict": "sinir-alti", "correct": true, "explain": "Lastik basınç uyarı sistemi bir ayar aracı değil, bir güvenlik uyarısıdır. Görevi doğru basıncı korumak değil, tehlikeli sayılabilecek bir düşüşü sürücüye haber vermektir; bu yüzden uyarı eşiği etiket değerinin belirgin biçimde altındadır. Yani lamba yanmıyorken de lastik etiket değerinin altında olabilir ve o araç aylarca düşük basınçla dolaşıp omuzlarından aşınabilir. İkinci nokta, dolaylı sistemlerin tekerlek dönme hızlarını karşılaştırarak çalışmasıdır: dört lastik birlikte ve yavaşça indiğinde aralarında fark oluşmaz ve sistem hiçbir şey fark etmez. Üçüncü nokta, sistemin kendisinin arızalanabilmesidir — sensör pili biter, sensör kırılır, lastik değişiminde tanıtım yapılmamıştır. Bu üç sebeple sonuç aynıdır: lambanın yanmaması bir ölçüm değildir. Basınç yine de manometre ile ölçülür." },
+          { "label": "Doğru, sistem her sapmayı gösterir", "verdict": "her-sapma", "explain": "Sistem alt sınırda uyarır; küçük ama önemli düşüşleri göstermez." },
+          { "label": "Doğru, çünkü sensörler sürekli ölçer", "verdict": "surekli-olcer", "explain": "Sürekli ölçmesi, her sapmada uyarması anlamına gelmez." },
+          { "label": "Yanlış, çünkü bu sistemler zaten çalışmaz", "verdict": "calismaz", "explain": "Sistemler çalışır; mesele uyarı eşiğinin nerede olduğu." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bir uyarı sisteminin ne zaman uyardığını bilmek, uyarmadığı aralığı da bilmek demektir. TPMS'in kendisi 6. aşamada ayrıntısıyla işleniyor."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "İki omuzdan aşınmış, ortası iyi bir lastik neyi gösterir?",
+        "a": "dusuk-basinc",
+        "options": [
+          { "verdict": "dusuk-basinc", "label": "Basıncın düşük çalıştığını: yanak çöktüğü için yük iki omuza kaymıştır", "explain": "Doğru basınçta sırt yola düz basar ve yük bütün genişliğe dağılır. Basınç düşünce hava sırtı destekleyemez, yanaklar çöker, orta bölge hafifçe yukarı kalkar ve yükü omuzlar taşır. İki kenarın birden aşınması basınç işaretidir; TEK kenarın aşınması ise kamber işaretidir. Desen okunduktan sonra ikinci soru sorulur: basınç neden düşüktü — ihmal mi, valf mi, topuk mu, jant çatlağı mı?" },
+          { "verdict": "yuksek-basinc", "label": "Basıncın yüksek olduğunu", "explain": "Yüksek basınç ortayı aşındırır, omuzları korur." },
+          { "verdict": "toe", "label": "Toe ayarının bozuk olduğunu", "explain": "Toe testere dişi görünümü bırakır." },
+          { "verdict": "balans", "label": "Balansın bozuk olduğunu", "explain": "Balans düzensiz noktasal aşınma ve titreşim yapar." }
+        ]
+      },
+      {
+        "q": "Düşük basınçla gitmenin asıl tehlikesi nedir?",
+        "a": "isi-ayrisma",
+        "options": [
+          { "verdict": "isi-ayrisma", "label": "Yanağın fazla bükülmesinden doğan ısı iç yapıyı ayrıştırır; lastik yüksek hızda ani olarak dağılabilir", "explain": "Kauçuk her bükülmede enerji harcar ve bunun bir kısmı ısıya döner. Isı arttıkça kauçuğun çelik kordlara tutunması zayıflar, katmanlar ayrışır ve süreç kendi kendini hızlandırır. Bu yüzden ileri derecede inik bir lastikle kısa bir mesafe gitmek bile lastiği hava basıldıktan sonra da güvenilmez hâle getirebilir; basınçsız gidilmiş lastiğin iç yüzeyi incelenir. Aşınma ve yakıt tüketimi bunun yanında ikincil sonuçlardır." },
+          { "verdict": "yakit", "label": "Yakıt tüketiminin artması", "explain": "Artar, ama asıl risk ısı hasarı." },
+          { "verdict": "gurultu", "label": "Gürültünün artması", "explain": "Gürültü bir belirti, tehlike değil." },
+          { "verdict": "asinma", "label": "Yalnız daha hızlı aşınması", "explain": "Aşınma görünür ve yavaş; ısı hasarı görünmez ve ani." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 4'teki 2,4 bar ve 1,9 bar SENARYO okumalarıdır; hiçbiri üretici değeri değildir. İstenen FARKTIR (0,5 bar) ve dersin gösterdiği şey, çekme şikâyetinde ilk bakılacak yerin basınç farkı olduğudur.",
+    "sourceRequired": "Künye gerektiren hiçbir değer kullanılmadı. TPMS uyarı eşiğinin etiket değerinin ne kadar altında olduğu bilinçle VERİLMEDİ: araca ve mevzuata göre değişir, künyesiz bir yüzde uydurma değer olur.",
+    "kapsam": "Ön düzen kaynaklı aşınma desenleri (kamber, kaster, toe) 3. aşamada ayrıntısıyla işleniyor; bu ders yalnız basınç kaynaklı iki deseni öğretiyor. Onarım sınırı 9. aşamada.",
+    "reviewedByMechanic": false
+  }
+}

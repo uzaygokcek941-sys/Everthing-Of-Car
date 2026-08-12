@@ -1,0 +1,178 @@
+{
+  "id": "lastik.rotasyon",
+  "area": "lastik-tekerlek",
+  "stage": 3,
+  "title": "Rotasyon: Neden, Ne Zaman, Hangi Desen",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 25,
+  "prerequisites": ["lastik.asinma-deseni"],
+  "learningGoals": [
+    "Ön ve arka lastiklerin neden farklı hızda aşındığını açıklamak",
+    "Rotasyon desenini lastiğin tipine göre seçmek",
+    "Rotasyondan önce aşınma deseninin neden kaydedilmesi gerektiğini bilmek"
+  ],
+
+  "safety": [
+    { "rule": "Rotasyon sonrası bütün somunlar tork anahtarıyla ve yıldız sırasıyla sıkılır", "why": "Dört tekerlek birden sökülüp takıldığı için hata yapma ihtimali dört katına çıkar", "blocksStart": true },
+    { "rule": "Ön ve arkada farklı ölçü kullanan araçlarda ön–arka rotasyon yapılmaz", "why": "Farklı ölçüdeki lastiğin başka aksa takılması dönme çevresini ve yol tutuşunu bozar", "blocksStart": true },
+    { "rule": "Rotasyondan sonra basınçlar aksa göre yeniden ayarlanır", "why": "Ön ve arka aks için önerilen basınçlar farklı olabilir; lastik yer değiştirdiğinde basıncı da değişmelidir", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.bijon-anahtari", "label": "Bijon anahtarı", "required": true },
+    { "id": "tool.tork-anahtari", "label": "Tork anahtarı", "required": true },
+    { "id": "tool.dis-mastari", "label": "Diş derinliği mastarı", "required": true },
+    { "id": "tool.manometre", "label": "Basınç manometresi", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Önden çekişli bir araçta ön lastikler arkadakilerden belirgin biçimde daha çok aşınmış.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik",
+        "question": "Bu normal mi?",
+        "options": [
+          { "label": "Normal: ön lastikler hem çekiyor, hem yönlendiriyor, hem frenlemenin büyük kısmını yapıyor", "verdict": "on-daha-cok-is", "correct": true, "explain": "Bir aracın dört lastiği aynı işi yapmaz. Önden çekişli bir araçta ön lastikler motorun gücünü yola aktarır, direksiyonla sürekli açı değiştirir ve frenlemede ağırlık öne bindiği için fren kuvvetinin büyük kısmını taşır. Arka lastikler ise esas olarak yalnız yuvarlanır. Bu yüzden ön lastikler arkadakilerden çok daha hızlı aşınır ve aradaki fark zamanla büyür. Arkadan itişli araçlarda iş dağılımı değişir — çekiş arkada, yönlendirme öndedir — ama sonuç yine dengesizdir. Rotasyonun bütün mantığı buradan doğar: lastikler belirli aralıklarla yer değiştirirse aşınma dörde yayılır ve takım birlikte biter. Birlikte biten bir takım, dört lastiğin aynı anda değişmesi demektir; bu hem aracın dengesi hem de yeni lastiğin nereye takılacağı sorusunun ortadan kalkması anlamına gelir. Rotasyon yapılmayan araçta ön ikili çok daha erken biter ve araç sürekli iki eski iki yeni lastikle dolaşır." },
+          { "label": "Anormal, ön düzen bozuktur", "verdict": "on-duzen", "explain": "Ön düzen tek kenar ya da testere dişi bırakır; buradaki fark aşınma HIZI farkı." },
+          { "label": "Anormal, basınç yanlıştır", "verdict": "basinc", "explain": "Basınç belirli bir desen bırakır; ön–arka hız farkı iş dağılımından gelir." },
+          { "label": "Anormal, lastikler farklı markadır", "verdict": "marka", "explain": "Marka farkı da etkileyebilir ama ön–arka farkının asıl sebebi iş dağılımı." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bir belirtinin normal olup olmadığına karar vermek teşhisin yarısıdır. Beklenen bir farkı arıza sanmak, gerçek arızayı aramaktan alıkoyar."
+    },
+    {
+      "id": 2,
+      "instruction": "Lastikler yönlü desenli: yanaklarında dönme yönünü gösteren ok var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik-yanagi",
+        "question": "Rotasyon nasıl yapılır?",
+        "options": [
+          { "label": "Aynı taraf korunarak yalnız ön–arka yer değiştirilir; sağdaki sağda, soldaki solda kalır", "verdict": "ayni-taraf", "correct": true, "explain": "Yönlü desende su kanalları, lastik tek bir yönde dönerken suyu sırtın ortasından dışarı atacak biçimde tasarlanmıştır. Lastik karşı tarafa alınırsa aynı jantta ters yönde dönmeye başlar ve desen suyu içeri toplar; ıslak zeminde tutuş belirgin biçimde düşer. Bu yüzden yönlü lastiklerde rotasyon yalnız aynı taraf içinde, ön ile arka arasında yapılır. Asimetrik desende ise kural farklıdır: orada dönme yönü değil hangi yüzün dışa geleceği önemlidir, bu yüzden lastik karşı tarafa alınabilir ama jant üzerindeki konumu korunmak zorundadır. Hem yönlü hem asimetrik olan lastiklerde iki kural birden geçerlidir ve yine yalnız aynı taraf içinde yer değiştirilir. Tarafı değiştirmek gerekiyorsa tek yol lastiğin janttan sökülüp ters takılmasıdır, ki bu ayrı bir iştir. Bu yüzden rotasyon deseni tahminle değil, lastiğin yanağı okunarak seçilir." },
+          { "label": "Çapraz olarak: sağ ön sol arkaya", "verdict": "capraz", "explain": "Çapraz geçiş yönlü lastiği ters çevirir; desen suyu içeri toplar." },
+          { "label": "Yalnız sağ–sol yer değiştirilir", "verdict": "sag-sol", "explain": "Bu da yönü tersine çevirir ve zaten aşınma farkı ön–arka arasındadır." },
+          { "label": "Yönlü lastiklerde rotasyon yapılmaz", "verdict": "yapilmaz", "explain": "Yapılır; yalnız aynı taraf içinde ön–arka olarak." }
+        ]
+      },
+      "camera": "yanak",
+      "teachingNote": "Rotasyon deseni lastiğin kendisinden okunur. Yanaktaki ok ve OUTSIDE yazısı, hangi hareketin serbest hangisinin yasak olduğunu söyler."
+    },
+    {
+      "id": 3,
+      "instruction": "Ölçtün: ön lastikler 4,1 mm, arka lastikler 6,9 mm. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.dis-mastari",
+        "unit": "mm",
+        "acceptRange": [2.7, 2.9]
+      },
+      "camera": "tekerlek",
+      "hint": "6,9 eksi 4,1.",
+      "teachingNote": "2,8 mm'lik bu fark, rotasyon yapılmadığının en açık kanıtı. Şu sonuç çıkar: ön ikili yakında bitecek, arka ikili yarı yolunda olacak ve araç iki yeni iki eski lastikle dolaşacak. Rotasyon zamanında yapılsaydı dört lastik de bugün yaklaşık aynı değerde olurdu ve takım birlikte değişecekti. Fark bu kadar açıldıktan sonra rotasyon eski faydayı tam veremez; yine de yapılır, çünkü kalan ömrü dengelemek hâlâ mümkündür."
+    },
+    {
+      "id": 4,
+      "instruction": "Rotasyona başlamadan önce bir işin daha var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.dis-mastari",
+        "question": "Ne yapılır?",
+        "options": [
+          { "label": "Her tekerleğin bulunduğu konum, ölçüm değerleri ve aşınma deseni kaydedilir — rotasyon bu bilgiyi yok eder", "verdict": "once-kaydet", "correct": true, "explain": "Aşınma deseninin teşhis değeri, desenin hangi köşede oluştuğunu bilmekten gelir: sol ön lastiğin iç kenarındaki aşınma, sol ön köşede bir sorun olduğunu söyler. Lastikler yer değiştirdikten sonra bu bağ kopar; desen hâlâ lastiğin üstündedir ama artık hangi köşenin ürettiği bilinmez. Üstelik rotasyon sonrası lastik yeni konumunda farklı biçimde aşınmaya başlar ve iki desen üst üste binerek okunamaz hâle gelir. Bu yüzden rotasyon her zaman ölçüm ve incelemeden SONRA yapılır: dört tekerleğin değerleri, desenleri ve konumları yazılır, ardından lastikler döndürülür ve yeni konumlar da kaydedilir. Bu kayıt bir sonraki bakımda iki soruyu birden yanıtlar — aşınma dengelendi mi ve daha önce tespit edilen sebep giderildi mi. Kayıt tutulmazsa rotasyon, bir bakım işi olmaktan çıkıp teşhis kanıtını silen bir işleme dönüşür." },
+          { "label": "Doğrudan sökülür, ölçüm sonra da yapılabilir", "verdict": "sonra-olc", "explain": "Sonra ölçülen değerin hangi köşeye ait olduğu bilinmez; teşhis kaybolur." },
+          { "label": "Yalnız en aşınmış lastik not edilir", "verdict": "en-asinmis", "explain": "Desenin hangi köşede oluştuğu bilgisi dört tekerlek için de gerekir." },
+          { "label": "Kayıt gerekmez, rotasyon rutin bir iştir", "verdict": "rutin", "explain": "Rutin olması kanıt sildiği gerçeğini değiştirmez." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bazı işler geri döndürülemez biçimde bilgi yok eder. Böyle işlerden önce ölçüp yazmak, sonradan telafi edilemeyecek tek adımdır."
+    },
+    {
+      "id": 5,
+      "instruction": "Lastikler yerlerini değiştirdi, somunlar torkla sıkıldı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.manometre",
+        "question": "Sıradaki iş ne?",
+        "options": [
+          { "label": "Basınçlar aracın etiketine göre yeniden ayarlanır: ön ve arka aks için önerilen değerler farklı olabilir", "verdict": "basinc-yeniden", "correct": true, "explain": "Basınç lastiğin değil, lastiğin bulunduğu aksın özelliğidir; çünkü belirleyen şey o aksın taşıdığı yüktür. Araç etiketinde ön ve arka için farklı değerler yazıyorsa, arkadan öne alınan bir lastik artık farklı bir basınçta çalışmalıdır. Rotasyondan sonra basınçların kontrol edilmemesi, dört lastiğin de yanlış basınçla dolaşması anlamına gelir ve bu, rotasyonun sağladığı bütün faydayı fazlasıyla götürür: yanlış basınç yeni konumlarda hemen kendi aşınma desenini üretmeye başlar. Ayrıca bu, işi tamamlayan bir kontrol fırsatıdır — lastikler zaten sökülmüşken valf kapakları, valf durumu ve jant iç yüzeyi de görülmüş olur. Kural basittir: tekerlek yer değiştirdiyse basınç yeniden ayarlanır." },
+          { "label": "Basınçlar aynı kalır, lastikler aynı lastikler", "verdict": "ayni-kalir", "explain": "Basınç lastiğe değil aksa aittir; aks değişince değer de değişebilir." },
+          { "label": "Dört lastik de aynı değere getirilir", "verdict": "esitle", "explain": "Etikette ön ve arka farklıysa eşitlemek yanlış olur." },
+          { "label": "Basınç bir sonraki bakımda kontrol edilir", "verdict": "sonraki-bakim", "explain": "O zamana kadar araç yanlış basınçla dolaşır." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Rotasyonun en sık atlanan adımı budur. Tekerlekler doğru yere gitmiş ama basınçları yanlış kalmışsa iş yarım yapılmıştır."
+    },
+    {
+      "id": 6,
+      "instruction": "Araçta doğrudan ölçen TPMS var: her tekerleğin içinde bir sensör bulunuyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.tpms-sensoru",
+        "question": "Rotasyondan sonra ne gerekebilir?",
+        "options": [
+          { "label": "Sensör konumlarının araca yeniden tanıtılması: sistem hangi sensörün hangi köşede olduğunu bilmelidir", "verdict": "konum-tanitma", "correct": true, "explain": "Doğrudan ölçen sistemlerde her tekerleğin içindeki sensörün kendine ait bir kimliği vardır ve araç bu kimlikleri konumlarla eşleştirerek tutar. Rotasyondan sonra sensörler yer değiştirmiştir; sistem yeniden tanıtılmazsa basınçları doğru ölçmeye devam eder ama yanlış köşeye yazar. Sonuç kafa karıştırıcıdır: sol ön düşükken panelde sağ arka gösterilir ve usta olmayan yerde sızıntı arar. Bazı araçlar konumu kendi kendine, belirli bir süre sürüldükten sonra öğrenir; bazıları teşhis cihazı ya da menüden yapılan bir işlem ister. Hangisinin geçerli olduğu araca bağlıdır ve tahmin edilmez. Bu yüzden TPMS'li araçlarda rotasyon, tekerlekleri döndürmekle bitmez; işin son adımı sistemin doğru konumları bilmesini sağlamak ve panelde uyarı kalmadığını görmektir." },
+          { "label": "Hiçbir şey; sensörler yerlerini kendileri bilir", "verdict": "kendi-bilir", "explain": "Sensör basıncı ölçer, konumunu bilmez; eşleştirmeyi araç tutar." },
+          { "label": "Sensörlerin pilleri değiştirilir", "verdict": "pil", "explain": "Piller sensörün içinde sabittir; ömrü dolduğunda sensör komple değişir." },
+          { "label": "Sistem kapatılır", "verdict": "kapat", "explain": "Uyarı sistemini kapatmak çözüm değil, güvenlik özelliğini devre dışı bırakmaktır." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Elektronik sistemi olan her mekanik işte bir adım daha vardır: sistemin yapılan değişikliği bilmesi. TPMS'in ayrıntısı 6. aşamada."
+    },
+    {
+      "id": 7,
+      "instruction": "Müşteri soruyor: bunu kaç kilometrede bir yaptırayım?",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik",
+        "question": "Nasıl cevap verilir?",
+        "options": [
+          { "label": "Aralığı araç üreticisi belirler; ayrıca sezon değişimi doğal bir fırsattır ve ölçüm farkı büyümeden yapılmalıdır", "verdict": "uretici-ve-firsat", "correct": true, "explain": "Rotasyon aralığı araca, çekiş tipine ve kullanım biçimine göre değişir; bu yüzden değeri aracın kendi bakım programı verir ve tek bir evrensel kilometre yoktur. Ancak pratikte iki kullanışlı ölçüt vardır. Birincisi takvim değil ölçümdür: ön ile arka arasındaki diş derinliği farkı büyümeye başladıysa zaman gelmiştir; fark çok açıldıktan sonra yapılan rotasyon eski faydayı vermez. İkincisi fırsattır: kış–yaz lastik değişimi zaten dört tekerleğin söküldüğü bir iştir ve rotasyon o sırada ek maliyet olmadan yapılabilir. Bir uyarı da gerekir — rotasyon 'yeni lastikler arkaya' kuralını iptal etmez. Diş derinliği belirgin biçimde farklı iki takım varsa, derin olanların arkada olması yol güvenliği açısından önceliklidir; rotasyon bu kuralı bozacaksa yapılmaz. Aynı şekilde ön ve arkada farklı ölçü kullanan araçlarda ön–arka rotasyon zaten mümkün değildir." },
+          { "label": "Her araçta geçerli sabit bir kilometre vardır", "verdict": "sabit-km", "explain": "Araca ve kullanıma göre değişir; kaynak aracın bakım programıdır." },
+          { "label": "Lastikler bitmeden hemen önce yapılır", "verdict": "bitmeden-once", "explain": "O noktada aşınma zaten dengesizleşmiştir; rotasyon faydasını erken verir." },
+          { "label": "Gerek yoktur, lastikler nasılsa değişecek", "verdict": "gereksiz", "explain": "Rotasyon takımın birlikte bitmesini sağlar; yapılmazsa iki lastik erken biter." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "İyi bir bakım tavsiyesi takvimden değil ölçümden çıkar. Ölçüm zaten elindeyken 'bakalım' demek gerekmez."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Yönlü desenli lastiklerde rotasyon nasıl yapılır?",
+        "a": "ayni-taraf",
+        "options": [
+          { "verdict": "ayni-taraf", "label": "Aynı taraf korunarak yalnız ön–arka yer değiştirilir; taraf değişirse lastik ters yönde döner", "explain": "Yönlü desende su kanalları tek bir dönme yönü için tasarlanmıştır; karşı tarafa alınan lastik ters döner ve desen suyu dışarı atmak yerine içeri toplar, ıslak tutuş düşer. Asimetrik desende kural farklıdır: taraf değişebilir ama jant üzerindeki iç–dış konumu korunmalıdır. Rotasyon deseni tahminle değil, yanaktaki işaret okunarak seçilir." },
+          { "verdict": "capraz", "label": "Her zaman çapraz olarak", "explain": "Çapraz geçiş yönlü lastiği ters çevirir." },
+          { "verdict": "yapilmaz", "label": "Yönlü lastiklerde rotasyon yapılmaz", "explain": "Yapılır, yalnız aynı taraf içinde." },
+          { "verdict": "farketmez", "label": "Desenin bir önemi yoktur", "explain": "Desen tam olarak hangi hareketin yasak olduğunu belirler." }
+        ]
+      },
+      {
+        "q": "Rotasyondan önce neden ölçüm ve desen kaydı yapılır?",
+        "a": "kanit-silinir",
+        "options": [
+          { "verdict": "kanit-silinir", "label": "Rotasyon, desenin hangi köşede oluştuğu bilgisini yok eder; teşhis kanıtı kaydedilmezse kaybolur", "explain": "Aşınma deseninin teşhis değeri hangi köşede oluştuğunu bilmekten gelir. Lastikler yer değiştirince bu bağ kopar ve lastik yeni konumunda farklı aşınmaya başlayınca iki desen üst üste binerek okunamaz hâle gelir. Bu yüzden dört tekerleğin değerleri, desenleri ve konumları önce yazılır, sonra döndürülür ve yeni konumlar da kaydedilir." },
+          { "verdict": "musteri", "label": "Yalnız müşteriye fatura göstermek için", "explain": "Kaydın işi teşhisi korumak; belge ikincil." },
+          { "verdict": "sure", "label": "İşin ne kadar sürdüğünü ölçmek için", "explain": "Kayıt aşınma verisi için tutulur." },
+          { "verdict": "gereksiz", "label": "Gerekmez", "explain": "Kaydedilmeyen desen rotasyondan sonra geri getirilemez." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 4,1 mm ve 6,9 mm SENARYO okumalarıdır. İstenen FARKTIR (2,8 mm); dersin gösterdiği şey rotasyon yapılmadığında ön–arka aşınmanın nasıl ayrıştığıdır, bir sınır değeri değil.",
+    "sourceRequired": "Rotasyon aralığı (kilometre) bilinçle VERİLMEDİ: araca, çekiş tipine ve kullanıma göre değişir, kaynağı aracın bakım programıdır. Künyesiz bir kilometre yazmak uydurma değer olurdu.",
+    "kapsam": "Rotasyon desenlerinin çizimli şeması sahnede yok; ders kuralı metinden öğretiyor. Tam boy yedeği rotasyona dahil eden düzenler kapsam dışı. TPMS tanıtımı 6. aşamada ayrıntılı.",
+    "reviewedByMechanic": false
+  }
+}

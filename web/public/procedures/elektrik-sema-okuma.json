@@ -1,0 +1,176 @@
+{
+  "id": "elektrik.sema-okuma",
+  "area": "arac-elektrik",
+  "stage": 2,
+  "title": "Devre Şeması Okuma: Kağıttaki Yolu Araçta Bulmak",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 25,
+  "prerequisites": ["elektrik.devre-elemanlari", "elektrik.seri-paralel"],
+  "learningGoals": [
+    "Şemanın parçaların yerini değil, aralarındaki bağlantıyı gösterdiğini bilmek",
+    "Kablo kodu, konektör ve pin numarası üzerinden şemadaki noktayı araçta bulmak",
+    "Ölçüm noktasını şemaya bakarak seçmek: nerede ne okunması gerektiğini önceden söylemek"
+  ],
+
+  "safety": [
+    { "rule": "Soket ayrılırken tırnağına basılır, kablodan çekilmez", "why": "Kablodan çekilen soketin pinleri gövdesinden sıyrılır ya da tel uçtan kopar. Ortaya çıkan arıza, aramaya geldiğin arızadan daha zor bulunur çünkü hasar yalıtımın içinde kalır", "blocksStart": false },
+    { "rule": "Soket ayırmadan önce o devrenin canlı olup olmadığı şemadan kontrol edilir", "why": "Bazı devreler canlıyken soket ayrılırsa kontrol ünitesi hata kaydeder ya da zarar görür. Şema hangi devrenin ne zaman beslendiğini söyler", "blocksStart": true },
+    { "rule": "Prob pin yuvasına zorla sokulmaz", "why": "Genişletilen bir pin yuvası bir daha sıkı temas vermez; gevşek temas, sonradan ortaya çıkan aralıklı arızanın kaynağı olur. Ölçüm arka taraftan ya da uygun prob ucuyla yapılır", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.multimetre", "label": "Dijital multimetre", "required": true },
+    { "id": "tool.sema", "label": "Araç devre şeması", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Elinde far devresinin şeması var. Kağıtta akü, sigorta, anahtar, ampul ve şase alt alta çizilmiş.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kablo-demeti",
+        "question": "Şema neyi gösterir?",
+        "options": [
+          { "label": "Parçaların birbirine nasıl bağlandığını; araçtaki fiziksel yerlerini ve kablonun izlediği yolu göstermez", "verdict": "baglanti-haritasi", "correct": true, "explain": "Devre şeması bir yerleşim planı değil, bir bağlantı haritasıdır. Kağıtta yan yana çizilen iki parça araçta iki metre arayla durabilir; kağıtta düz bir çizgi olan kablo araçta motor bölmesini dolaşıp kabine girebilir. Şemanın söylediği tek şey şudur: hangi uç hangi uca bağlı, arada hangi koruma ve kumanda var. Bu yeterlidir, çünkü elektriksel davranışı belirleyen şey bağlantı sırasıdır, mesafe değil. Parçanın nerede durduğunu bulmak için ayrı bir belge kullanılır: yerleşim çizimi ya da soket konum tablosu. İkisini karıştırmak, şemada bir dakikada çözülecek işi araçta saatlerce kablo takip ederek aramaya çevirir." },
+          { "label": "Parçaların araçtaki gerçek yerlerini", "verdict": "yerlesim", "explain": "Yeri gösteren belge ayrıdır; şema bağlantıyı gösterir." },
+          { "label": "Kablonun araçta izlediği yolu birebir", "verdict": "kablo-yolu", "explain": "Şemadaki çizgi kablonun güzergâhı değil, bağlantının kendisidir." },
+          { "label": "Yalnız parçaların listesini", "verdict": "liste", "explain": "Liste ayrı bir belgedir; şema aralarındaki ilişkiyi gösterir." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Şema soruyu 'bu kablo nereye gidiyor' olmaktan çıkarıp 'bu uç neye bağlı' hâline getirir. Aradaki fark, saatlerce kablo takip etmekle beş dakikada ölçüm noktası seçmek arasındaki farktır."
+    },
+    {
+      "id": 2,
+      "instruction": "Şemada far soketine giden kablonun yanında bir kod, bir kesit değeri ve bir renk kısaltması yazıyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kablo-demeti",
+        "question": "Bu bilgiler ne işe yarar?",
+        "options": [
+          { "label": "Demetin içinde doğru kabloyu bulmayı ve onarımda doğru kesitte kablo kullanmayı sağlar", "verdict": "kablo-kimligi", "correct": true, "explain": "Bir kablo demetinin içinde onlarca tel yan yana durur ve hepsi dışarıdan birbirine benzer. Şemadaki kod, renk ve kesit bilgisi o telin kimliğidir: hangi renk, ne kalınlıkta, hangi devreye ait. Kesit özellikle önemlidir çünkü onarımda kullanılacak kablonun kalınlığını belirler — daha ince bir kabloyla yapılan ek, devreye gizli bir direnç ekler ve yük altında ısınır. Renk kodları üreticiden üreticiye değişir ve şemanın kendi açıklama sayfasından okunur, ezberlenmez. Sahada bir uyarı da geçerlidir: daha önce onarım görmüş bir araçta renk artık güvenilir olmayabilir. Kesin kimlik, ölçümle doğrulanan bağlantıdır." },
+          { "label": "Yalnız görsel düzen içindir", "verdict": "susleme", "explain": "Bu bilgiler onarımın kendisinde kullanılır; süsleme değildir." },
+          { "label": "Kablonun uzunluğunu verir", "verdict": "uzunluk", "explain": "Uzunluk şemada verilmez; verilen kimlik ve kesittir." },
+          { "label": "Sigorta değerini belirler", "verdict": "sigorta-degeri", "explain": "Sigorta değeri ayrıca yazılır; kesit ise korunacak kablonun kalınlığıdır. İkisi ilişkilidir ama aynı şey değildir." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Sigorta kabloyu korur demiştik. Şemadaki kesit bilgisi o cümlenin sayısal karşılığıdır: koruma, koruduğu kabloya göre seçilmiştir."
+    },
+    {
+      "id": 3,
+      "instruction": "Şemada far soketi bir dikdörtgenle gösterilmiş ve uçlarında numaralar var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.far-soketi",
+        "question": "Pin numaraları neden önemlidir?",
+        "options": [
+          { "label": "Ölçümün hangi uçtan alınacağını tek anlamlı biçimde söyler; besleme, şase ve kumanda uçları karışmaz", "verdict": "pin-numarasi", "correct": true, "explain": "Bir sokette üç uç varsa hangisinin besleme, hangisinin şase, hangisinin kumanda olduğunu ancak numara söyler. Şema 'bir numaralı uçta besleme beklenir' der; sen de probu oraya koyar ve beklediğini okuyup okumadığına bakarsın. Numara olmadan ölçüm bir tahmin sırasına dönüşür ve yanlış uca verilen besleme bazı devrelerde parçayı bozar. İkinci incelik: soketin numaralandırması genellikle gövdesine küçük rakamlarla basılmıştır ve şemadaki görünüm çoğu zaman soketin belirli bir tarafından bakışa göre çizilir. Karşıdan bakınca sıra ters görünebilir; bu yüzden şemanın bakış yönü notu okunur. Yanlış taraftan sayılan pinler, sahadaki en sinsi hatalardan biridir." },
+          { "label": "Yalnız üretim sırasında kullanılır", "verdict": "uretim", "explain": "Sahada ölçüm noktası seçmek için doğrudan kullanılır." },
+          { "label": "Renk yerine geçer, ikisinden biri yeter", "verdict": "renk-yerine", "explain": "Renk demet içinde yol gösterir, numara sokette uç belirler; ikisi farklı işlerdir." },
+          { "label": "Numaralar rastgeledir", "verdict": "rastgele", "explain": "Numaralandırma tanımlıdır ve şemayla araç arasındaki ortak dildir." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Şema ile araç arasındaki köprü üç şeydir: kablo kodu, konektör kimliği ve pin numarası. Bu üçü olmadan şema yalnız bir resimdir."
+    },
+    {
+      "id": 4,
+      "instruction": "Ölçüm için far soketini ayıracaksın. Tırnağa bas ve soketi yukarı çek.",
+      "interaction": {
+        "type": "press-and-pull",
+        "target": "part.far-soketi"
+      },
+      "camera": "tezgah",
+      "hint": "Önce tırnak, sonra çekme. Kablodan çekme.",
+      "teachingNote": "Soketi kablodan çekmek, aramaya geldiğin arızadan daha kötü bir arıza üretir: pin gövdesinden sıyrılır, tel yalıtımın içinde kopar ve dışarıdan hiçbir şey görünmez. Tırnak önce, gövdeden sonra."
+    },
+    {
+      "id": 5,
+      "instruction": "Soket ayrıldı. Şemaya bakıyorsun: bir numaralı uçta besleme, iki numaralı uçta şase görünüyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.far-soketi",
+        "question": "Şimdi hangi ölçümler yapılır ve ne beklenir?",
+        "options": [
+          { "label": "Besleme ucu ile gövde arasında tam gerilim, şase ucu ile gövde arasında ise sıfıra yakın bir değer beklenir", "verdict": "iki-olcum", "correct": true, "explain": "Şemanın en büyük faydası budur: ölçmeden önce ne okuman gerektiğini söyler. Anahtar açıkken besleme ucu ile sağlam bir gövde noktası arasında kaynağın tam gerilimini beklersin; okunmuyorsa arıza yukarıda, besleme tarafındadır — sigorta, anahtar ya da o kablo. Şase ucu ile gövde arasında ise neredeyse sıfır beklersin, çünkü orası dönüş yoludur ve iki nokta elektriksel olarak aynı olmalıdır; kayda değer bir değer okursan dönüş tarafında direnç var demektir. İki kısa ölçümle arızayı besleme tarafı ile dönüş tarafı arasında ikiye bölmüş olursun. Beklentisiz yapılan ölçüm ise yalnız bir sayı üretir; onu yorumlayacak referansın olmaz." },
+          { "label": "Yalnız ampulün direncine bakılır", "verdict": "ampul-direnci", "explain": "Ampul ayrıca ölçülebilir; buradaki soru devrenin sokete kadar sağlam gelip gelmediğidir." },
+          { "label": "İki uç arasındaki direnç ölçülür", "verdict": "iki-uc-direnc", "explain": "Devre canlıyken ohmmetre kullanılmaz. Burada gerilim ölçülür." },
+          { "label": "Ölçüme gerek yok, soket temizse devre sağlamdır", "verdict": "gorunum", "explain": "Görünüm karar vermez; temiz görünen bir soket gevşek temas veriyor olabilir." }
+        ]
+      },
+      "camera": "tezgah",
+      "hint": "Ölçmeden önce beklentini söyle: burada kaç volt olmalı ve neden?",
+      "teachingNote": "Şema, ölçümü tahminden çıkarıp sınamaya çevirir. Beklentin varsa okuduğun sayı ya beklentiyi doğrular ya da sana yeni bir soru verir; ikisi de ilerlemedir."
+    },
+    {
+      "id": 6,
+      "instruction": "Şemada şase ucunun bir numarayla işaretlendiğini ve aynı numaranın başka devrelerde de geçtiğini fark ettin.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sase-noktasi",
+        "question": "Ortak şase numarası ne anlama gelir?",
+        "options": [
+          { "label": "Birden çok devrenin aynı fiziksel noktadan gövdeye bağlandığını; oradaki bir arıza hepsini birden etkiler", "verdict": "ortak-sase", "correct": true, "explain": "Araçta her tüketiciye ayrı bir şase kablosu çekilmez; birden çok devre gövdenin aynı noktasında toplanır ve şemada bu nokta bir kodla gösterilir. Bunu okuyabilmek teşhiste büyük bir kısayol verir: birbiriyle alakasız görünen arızalar aynı anda ortaya çıkıyorsa, şemadan ortak şase noktalarını bulur ve doğrudan oraya gidersin. Tersi de doğrudur — tek bir devre arızalıysa ve aynı şaseyi paylaşan diğerleri sorunsuz çalışıyorsa, o şase noktası büyük olasılıkla sağlamdır ve aramayı o kolun kendisine daraltırsın. Şema burada yalnız bağlantıyı değil, arızanın kapsamını da okumanı sağlar." },
+          { "label": "Yalnız çizim kolaylığı içindir", "verdict": "cizim-kolayligi", "explain": "Gerçek bir fiziksel noktayı temsil eder ve teşhiste doğrudan kullanılır." },
+          { "label": "O devrelerin seri bağlı olduğunu", "verdict": "seri", "explain": "Ortak şase, paralel kolların ortak dönüş noktasıdır; seri bağlantı değildir." },
+          { "label": "Numaranın pratikte karşılığı yoktur", "verdict": "karsiligi-yok", "explain": "Araçta o numaraya karşılık gelen fiziksel bir bağlantı noktası bulunur ve genelde yeri de belgelenir." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Bir önceki derste 'arızanın kapsamı yerini söyler' demiştik. Şema o kapsamı kâğıt üzerinde önceden görmeni sağlar."
+    },
+    {
+      "id": 7,
+      "instruction": "Arıza bulundu ve giderildi. Şemayı kapatmadan önce bir şey daha yapıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sigorta-kutusu",
+        "question": "Şemayla çalışırken hangi alışkanlık işi hızlandırır?",
+        "options": [
+          { "label": "Devreyi kaynaktan tüketiciye ve şaseye kadar bir kez baştan okumak, ölçüm noktalarını önceden işaretlemek", "verdict": "bastan-oku", "correct": true, "explain": "Şemayı arıza anında rastgele taramak yerine devreyi bir kez baştan sona okumak birkaç dakika alır ve o dakikaları fazlasıyla geri verir. Kaynaktan başlarsın, korumadan geçersin, kumandayı bulursun, tüketiciye ulaşırsın, dönüşü şaseye kadar izlersin. Bu okuma sırasında iki üç ölçüm noktası kendiliğinden belirginleşir: devreyi ikiye bölen noktalar. Sonra araçta o noktalara gider ve her ölçümde arama alanını yarıya indirirsin. Bu yöntem kabloları uçtan uca takip etmekten hem daha hızlı hem daha az hasar vericidir. Ayrıca onarımı bitirdiğinde ne yaptığını şema üzerinden anlatabilirsin; bu hem müşteriye hem seni takip edecek ustaya bırakılmış bir kayıttır." },
+          { "label": "Şemaya bakmadan başlamak, tecrübe daha hızlıdır", "verdict": "semasiz", "explain": "Tecrübe şemayı hızlı okumayı sağlar, gereksiz kılmaz. Bilinmeyen bir araçta şemasız arama en yavaş yoldur." },
+          { "label": "Bütün kabloları uçtan uca takip etmek", "verdict": "kablo-takip", "explain": "En yavaş ve demete en çok zarar veren yöntemdir; şema tam da bunu gereksiz kılmak için vardır." },
+          { "label": "Yalnız hata kodunun gösterdiği parçaya bakmak", "verdict": "koda-bak", "explain": "Kod bir başlangıçtır; devrenin tamamını görmeden verilen karar çoğu zaman yanlış parçayı suçlar." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Şema okumak bir hız becerisidir ve pratikle gelir. Her arızada devreyi baştan bir kez okuma alışkanlığı, birkaç ay içinde seni kablo takip eden ustadan ölçüm noktası seçen ustaya çevirir."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Devre şeması neyi gösterir, neyi göstermez?",
+        "a": "baglanti-evet-yer-hayir",
+        "options": [
+          { "verdict": "baglanti-evet-yer-hayir", "label": "Parçaların birbirine nasıl bağlandığını gösterir; araçtaki fiziksel yerlerini ve kablonun güzergâhını göstermez", "explain": "Şema bir bağlantı haritasıdır. Kağıtta yan yana duran iki parça araçta metrelerce uzakta olabilir, düz çizilen bir kablo bambaşka bir yol izleyebilir. Elektriksel davranışı belirleyen şey bağlantı sırasıdır — hangi uç neye bağlı, arada hangi koruma ve kumanda var — ve şema tam olarak bunu verir. Parçanın nerede durduğunu bulmak için yerleşim çizimi ya da soket konum tablosu kullanılır. İkisini karıştırmak, beş dakikalık işi saatlerce kablo takibine çevirir." },
+          { "verdict": "yer-gosterir", "label": "Parçaların araçtaki yerini birebir gösterir", "explain": "Yeri gösteren belge ayrıdır." },
+          { "verdict": "guzergah", "label": "Kablonun izlediği güzergâhı gösterir", "explain": "Çizgi güzergâh değil, bağlantıdır." },
+          { "verdict": "ikisi-de", "label": "Hem bağlantıyı hem yerleşimi birebir gösterir", "explain": "Tek bir belgede ikisi birden verilmez; yerleşim ayrı çizimdedir." }
+        ]
+      },
+      {
+        "q": "Şema ölçüme nasıl katkı sağlar?",
+        "a": "beklenti-uretir",
+        "options": [
+          { "verdict": "beklenti-uretir", "label": "Ölçmeden önce hangi noktada ne okunması gerektiğini söyler; ölçüm böylece tahmin değil sınama olur", "explain": "Şema, devrenin hangi ucunda besleme, hangisinde şase, hangisinde kumanda olduğunu söyler. Böylece probu koymadan önce beklentini kurarsın: burada tam gerilim olmalı, burada sıfıra yakın olmalı. Okuduğun sayı beklentiyi doğrularsa o bölüm elenir, doğrulamazsa arıza oradadır. Beklentisiz ölçüm yalnız bir sayı üretir ve yorumlayacak referansın olmaz. Ayrıca şema devreyi ikiye bölen ölçüm noktalarını gösterir; her ölçüm arama alanını yarıya indirir." },
+          { "verdict": "gerek-yok", "label": "Katkısı yoktur, ölçüm zaten sayıyı verir", "explain": "Sayının anlamı beklentiden doğar; beklentiyi şema kurar." },
+          { "verdict": "parca-listesi", "label": "Yalnız parça listesi verir", "explain": "Şemanın işi bağlantıyı ve ölçüm noktalarını göstermektir." },
+          { "verdict": "yer-bulur", "label": "Yalnız parçanın yerini bulmaya yarar", "explain": "Yer için ayrı belge kullanılır; şema bağlantı ve beklenti üretir." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "sourceRequired": "Bu derste hiçbir sayısal değer kullanılmadı: gerilim, kesit, sigorta amperi ve pin numarası örnekleri sayı olarak VERİLMEDİ. Renk kodları ve pin numaralandırma yönü üreticiye özgüdür; ders bunları kaynağı şemanın kendisi olacak biçimde anlatıyor.",
+    "kapsam": "Şema sahnede gösterilmiyor; ders şema okumayı metin ve seçimle öğretiyor. Şemanın ekranda çizim olarak verilmesi ayrı bir bileşen işidir ve mevcut etkileşim dilbilgisinde karşılığı yok — eklenirse yeni bir tip gerekebilir, bu yüzden bilinçli olarak ertelendi.",
+    "etkilesim": "press-and-pull tipi burada soket ayırmak için kullanıldı; motor alanındaki bobin soketiyle aynı jest.",
+    "reviewedByMechanic": false
+  }
+}

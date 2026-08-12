@@ -1,0 +1,344 @@
+{
+  "area": "lastik-tekerlek",
+  "title": "Lastik ve Tekerlek",
+  "goal": "Lastik değiştiren çıraktan, lastiğin aşınmasına bakıp aracın nesinin bozuk olduğunu söyleyen ustaya.",
+  "framework": {
+    "meb": "Motorlu Araçlar Teknolojisi — Hareket Kontrol Sistemleri Atölyesi Dersi (11. sınıf, haftada 10 saat), öğrenme birimi \"Ön Düzen ve Tekerlekler\": (1) tekerleklerin değişimi, (2) lastik basınç kontrol sistemi değişimi, (3) tekerlek balans ayarı, (4) ön takım parçalarının kontrolü ve değişimi, (5) ön düzen ayarları · Otomotiv Test Teknikleri Dersi: yanal kayma testi, süspansiyon testi, ön düzen ayarı, balans ayarı · Otomotiv Periyodik Bakım Dersi: \"Fren Sisteminin ve Lastiklerin Periyodik Bakımı — araç lastiklerinin periyodik kontrolü ve değişimi\"",
+    "myk": "11UY0021-4/B1 — araç üzerinde periyodik bakım, arıza tespit ve onarım işlemleri",
+    "note": "Bu alanın çerçevesi 2026-08-11 tarihinde MEB çerçeve programının PDF metninden DOĞRUDAN okundu (motorluarac_12.pdf, s. 42 ve 57); daha önce yalnız ders adından tahmin ediliyordu. Aşama sırası MEB kazanım sırasını izler: önce tekerleği sök-tak, sonra basınç sistemi, sonra balans, en son ön düzen. Bkz. docs/MUFREDAT.md"
+  },
+  "ustalikTanimi": [
+    "Lastik değiştirmek çıraklıktır: dört somunu sök, yenisini tak, herkes öğrenir.",
+    "Ustalık lastiği OKUMAKTIR. Aşınmış bir lastik, aracın altında neyin bozuk olduğunu yazan bir rapordur: ortadan aşınmışsa basınç fazladır, iki kenardan aşınmışsa azdır, tek yanaktan aşınmışsa kamber kaçmıştır, testere dişi olmuşsa toe bozuktur.",
+    "Bu yüzden bu alanda hiçbir ders \"şu parçayı değiştir\" diye bitmez; her ders \"bu aşınmayı ne yaptı ve o giderilmezse yeni lastik de aynı hâle gelir\" diye biter.",
+    "Ölçmenin karşılığı burada da nettir: diş derinliği, basınç, balans ağırlığı, salgı ve ön düzen açıları. Beşi de sayıdır; hiçbiri göz kararı değildir."
+  ],
+  "stages": [
+    {
+      "no": 0,
+      "title": "Güvenlik ve tekerleğin sökülmesi",
+      "why": "Tekerlek işi aracın altına girmek demektir; kaldırma hatası burada öldürür.",
+      "gate": "Araç sehpaya alınmadan altına girilmez; somun torku el hissiyle verilmez.",
+      "mebUnit": "Ön Düzen ve Tekerlekler — kazanım 1",
+      "ustalikIsareti": "Aracı doğru noktadan kaldırır, tekerleği sırasıyla söker, torku aletle verir.",
+      "procedures": [
+        {
+          "id": "lastik.guvenlik-kaldirma",
+          "title": "Aracı kaldırma, sehpa ve tekerlek çıkarma güvenliği",
+          "status": "yazildi",
+          "teaches": [
+            "kaldirma-noktasi",
+            "sehpa-sarti"
+          ]
+        },
+        {
+          "id": "lastik.somun-torku",
+          "title": "Bijon somunu: yıldız sırası ve tork",
+          "status": "yazildi",
+          "teaches": [
+            "yildiz-sirasi",
+            "tork-sarti"
+          ]
+        }
+      ]
+    },
+    {
+      "no": 1,
+      "title": "Lastiğin dili — yanak yazıları",
+      "why": "Yanaktaki yazı lastiğin kimliğidir; okumayan yanlış lastik takar.",
+      "gate": "Ölçü, yük ve hız endeksi okunmadan lastik seçilmez.",
+      "mebUnit": "Ön Düzen ve Tekerlekler — kazanım 1",
+      "ustalikIsareti": "Yanağa bakıp lastiğin ölçüsünü, yaşını ve sınırlarını söyler.",
+      "procedures": [
+        {
+          "id": "lastik.yanak-okuma",
+          "title": "Yanak yazısını okumak: ölçü, yük ve hız endeksi",
+          "status": "yazildi",
+          "teaches": [
+            "olcu-kodu",
+            "yuk-hiz-endeksi"
+          ]
+        },
+        {
+          "id": "lastik.dot-ve-yas",
+          "title": "DOT tarihi ve lastiğin yaşlanması",
+          "status": "yazildi",
+          "teaches": [
+            "dot-okuma",
+            "yaslanma"
+          ]
+        },
+        {
+          "id": "lastik.tip-ve-mevsim",
+          "title": "Lastik tipleri: yaz, kış, dört mevsim, run-flat",
+          "status": "yazildi",
+          "teaches": [
+            "tip-secimi",
+            "karisim-yasagi"
+          ]
+        }
+      ]
+    },
+    {
+      "no": 2,
+      "title": "Basınç",
+      "why": "Basınç lastiğin tek ayar noktasıdır ve her şeyi etkiler: aşınma, tutuş, yakıt, fren mesafesi.",
+      "gate": "Basınç soğukken ve üreticinin etiketine göre ölçülür; lastiğin yanağındaki sayıya göre değil.",
+      "mebUnit": "Ön Düzen ve Tekerlekler — kazanım 2",
+      "ustalikIsareti": "Doğru referansı bulur, soğukken ölçer, sapmayı sayıyla söyler.",
+      "procedures": [
+        {
+          "id": "lastik.basinc-olcme",
+          "title": "Basıncı doğru ölçmek: soğuk lastik ve doğru referans",
+          "status": "yazildi",
+          "teaches": [
+            "soguk-olcum",
+            "etiket-referansi"
+          ]
+        },
+        {
+          "id": "lastik.basinc-etkileri",
+          "title": "Düşük ve yüksek basıncın bıraktığı izler",
+          "status": "yazildi",
+          "teaches": [
+            "basinc-asinma-iliskisi"
+          ]
+        }
+      ]
+    },
+    {
+      "no": 3,
+      "title": "Aşınmayı okumak = teşhis",
+      "why": "Aşınma deseni aracın altındaki arızanın yazılı hâlidir.",
+      "gate": "Aşınmış lastik sebebi bulunmadan değiştirilmez; yenisi aynı hâle gelir.",
+      "mebUnit": "Fren Sisteminin ve Lastiklerin Periyodik Bakımı — kazanım 2",
+      "ustalikIsareti": "Desene bakıp sebebi söyler ve sebebi giderilmeden lastik satmaz.",
+      "procedures": [
+        {
+          "id": "lastik.dis-derinligi",
+          "title": "Diş derinliği ölçümü ve TWI çubukları",
+          "status": "yazildi",
+          "teaches": [
+            "derinlik-olcumu",
+            "twi"
+          ]
+        },
+        {
+          "id": "lastik.asinma-deseni",
+          "title": "Aşınma deseninden sebebe: basınç, kamber, toe, süspansiyon",
+          "status": "yazildi",
+          "teaches": [
+            "desen-sebep-eslesmesi"
+          ]
+        },
+        {
+          "id": "lastik.rotasyon",
+          "title": "Lastik rotasyonu: neden, ne zaman, hangi desen",
+          "status": "yazildi",
+          "teaches": [
+            "rotasyon-deseni"
+          ]
+        }
+      ]
+    },
+    {
+      "no": 4,
+      "title": "Tekerlek ve lastik sökme-takma",
+      "why": "Jant ile lastik ayrı iki parçadır; ayırma işlemi hem lastiği hem jantı bozabilir.",
+      "gate": "Lastik janttan sökülürken topuk ve jant kenarı zarar görmez.",
+      "mebUnit": "Ön Düzen ve Tekerlekler — kazanım 1",
+      "ustalikIsareti": "Lastiği janttan sökerken jantı çizmez, topuğu ezmez, valfi yeniler.",
+      "procedures": [
+        {
+          "id": "lastik.tekerlek-degisimi",
+          "title": "Tekerleğin araçtan sökülüp takılması",
+          "status": "yazildi",
+          "teaches": [
+            "sokme-sirasi",
+            "merkezleme"
+          ]
+        },
+        {
+          "id": "lastik.janttan-sokme",
+          "title": "Lastiği janttan sökmek ve takmak",
+          "status": "yazildi",
+          "teaches": [
+            "topuk-ayirma",
+            "valf-degisimi"
+          ]
+        }
+      ]
+    },
+    {
+      "no": 5,
+      "title": "Balans",
+      "why": "Dönen bir kütlenin ağırlık dağılımı eşit değilse hız arttıkça titreşim büyür.",
+      "gate": "Balans, ağırlık rastgele yapıştırılarak değil ölçülerek yapılır.",
+      "mebUnit": "Ön Düzen ve Tekerlekler — kazanım 3 · Otomotiv Test Teknikleri — Balans Ayarı",
+      "ustalikIsareti": "Statik ve dinamik dengesizliği ayırır, ağırlığı makinenin gösterdiği yere ve tipe göre koyar.",
+      "procedures": [
+        {
+          "id": "lastik.balans-hazirlik",
+          "title": "Balansa hazırlık: temizlik, eski ağırlıklar, doğru merkezleme",
+          "status": "yazildi",
+          "teaches": [
+            "hazirlik-sarti"
+          ]
+        },
+        {
+          "id": "lastik.balans-ayari",
+          "title": "Statik ve dinamik balans",
+          "status": "yazildi",
+          "teaches": [
+            "statik-dinamik-ayrimi",
+            "agirlik-yerlesimi"
+          ]
+        }
+      ]
+    },
+    {
+      "no": 6,
+      "title": "Lastik basınç kontrol sistemi (TPMS)",
+      "why": "Basınç artık sensörle izleniyor; sistemi tanımayan usta lambayı söndüremez.",
+      "gate": "TPMS lambası sıfırlanarak değil, sebebi bulunarak söndürülür.",
+      "mebUnit": "Ön Düzen ve Tekerlekler — kazanım 2",
+      "ustalikIsareti": "Doğrudan ve dolaylı sistemi ayırır, sensörü değiştirip araca tanıtır.",
+      "procedures": [
+        {
+          "id": "lastik.tpms-turleri",
+          "title": "Doğrudan ve dolaylı sistem: ikisi neyi ölçer",
+          "status": "yazildi",
+          "teaches": [
+            "dogrudan-dolayli"
+          ]
+        },
+        {
+          "id": "lastik.tpms-degisim",
+          "title": "Sensör değişimi ve araca tanıtma",
+          "status": "yazildi",
+          "teaches": [
+            "sensor-degisimi",
+            "tanitma"
+          ]
+        }
+      ]
+    },
+    {
+      "no": 7,
+      "title": "Jant",
+      "why": "Jant lastiği taşır ama aynı zamanda göbeğe oturur; yanlış jant tekerleği merkezden kaçırır.",
+      "gate": "Jant seçiminde bijon deseni, göbek çapı ve ofset birlikte tutmalıdır.",
+      "mebUnit": "Ön Düzen ve Tekerlekler — kazanım 1",
+      "ustalikIsareti": "Bir jantın araca uyup uymadığını üç ölçüyle söyler; hasarlı jantı salgı ölçerek ayırır.",
+      "procedures": [
+        {
+          "id": "lastik.jant-olculeri",
+          "title": "Bijon deseni, göbek çapı ve ofset",
+          "status": "yazildi",
+          "teaches": [
+            "pcd",
+            "gobek-capi",
+            "ofset"
+          ]
+        },
+        {
+          "id": "lastik.jant-hasari",
+          "title": "Eğrilik, çatlak ve salgı ölçümü",
+          "status": "yazildi",
+          "teaches": [
+            "runout-olcumu",
+            "hasar-siniri"
+          ]
+        }
+      ]
+    },
+    {
+      "no": 8,
+      "title": "Ön düzen ve ön takım",
+      "why": "Tekerleğin yere hangi açıyla bastığı, lastiğin ömrünü ve aracın yolda durmasını belirler.",
+      "gate": "Ön düzen ayarına, ön takımda boşluk varken başlanmaz.",
+      "mebUnit": "Ön Düzen ve Tekerlekler — kazanım 4 ve 5 · Otomotiv Test Teknikleri — Ön Düzen Ayarı",
+      "ustalikIsareti": "Boşluğu ayarla kapatmaya çalışmaz; önce parçayı, sonra açıyı düzeltir.",
+      "procedures": [
+        {
+          "id": "lastik.on-duzen-terimleri",
+          "title": "Kamber, kaster ve toe: her biri neyi yapar",
+          "status": "yazildi",
+          "teaches": [
+            "kamber",
+            "kaster",
+            "toe"
+          ]
+        },
+        {
+          "id": "lastik.on-takim-kontrol",
+          "title": "Rotil, rot başı ve burç boşluğunun kontrolü",
+          "status": "yazildi",
+          "teaches": [
+            "bosluk-kontrolu",
+            "sira-kurali"
+          ]
+        },
+        {
+          "id": "lastik.on-duzen-ayari",
+          "title": "Ön düzen ayarı ve sonuç raporunun okunması",
+          "status": "yazildi",
+          "teaches": [
+            "ayar-sirasi",
+            "rapor-okuma"
+          ]
+        }
+      ]
+    },
+    {
+      "no": 9,
+      "title": "Arıza teşhis — ustalık sınavı",
+      "why": "Titreşim, çekme ve uğultu üç ayrı arızadır; üçü de tekerlek bölgesinden gelir.",
+      "gate": "Teşhis, arıza kendi koşulunda tekrarlanıp kaybolduğu görülmeden kapanmaz.",
+      "mebUnit": "Otomotiv Test Teknikleri — yanal kayma ve süspansiyon testi",
+      "ustalikIsareti": "Belirtiyi hıza, yöne ve koşula bağlayarak dört adaydan birine indirir.",
+      "procedures": [
+        {
+          "id": "lastik.titresim-teshisi",
+          "title": "Hıza bağlı titreşim: balans mı, salgı mı, ön düzen mi",
+          "status": "yazildi",
+          "teaches": [
+            "hiz-belirti-iliskisi"
+          ]
+        },
+        {
+          "id": "lastik.cekme-teshisi",
+          "title": "Araç bir tarafa çekiyor",
+          "status": "yazildi",
+          "teaches": [
+            "cekme-elemesi"
+          ]
+        },
+        {
+          "id": "lastik.ugultu-teshisi",
+          "title": "Uğultu: tekerlek rulmanı mı, lastik mi",
+          "status": "yazildi",
+          "teaches": [
+            "ses-ayrimi"
+          ]
+        },
+        {
+          "id": "lastik.onarim-siniri",
+          "title": "Delik onarımı: nerede onarılır, nerede onarılmaz",
+          "status": "yazildi",
+          "teaches": [
+            "onarim-bolgesi",
+            "yanak-yasagi"
+          ]
+        }
+      ]
+    }
+  ],
+  "_notes": {
+    "status": "TAMAMLANDI. 25/25 prosedür yazıldı, 10 aşamanın tamamı.",
+    "kapsam": "25 prosedür, 10 aşama. Fren sistemi bu alana DAHİL DEĞİL: MEB programında ayrı bir öğrenme birimi, ayrı alan olarak ele alınmalı. Süspansiyon yalnız aşınmaya sebep olduğu ölçüde geçiyor.",
+    "olcumDegerleri": "Bu alan sayı yoğun: diş derinliği sınırı, basınç değerleri, bijon torku, azami salgı ve ön düzen açıları araca ve mevzuata özgüdür. Diğer alanlarda olduğu gibi FARK DESENİ kullanılacak: öğrenciden üretici sınırı değil, ölçülen iki değer arasındaki fark istenecek. Yasal asgari diş derinliği gibi mevzuat değerleri kullanılacaksa sourceRequired ile künyelenir.",
+    "sira": "MEB kazanım sırası korundu: tekerlek değişimi, basınç sistemi, balans, ön takım, ön düzen. Yanak okuma ve aşınma teşhisi MEB listesinde ayrı kazanım değil ama periyodik bakım birimindeki lastiklerin periyodik kontrolü kazanımının içeriğidir ve bu alanın ustalık tezini taşıdığı için öne alındı.",
+    "model": "Sahne henüz yok. Gerekecek parçalar: jant, lastik (yanak yazısı okunabilir), bijon somunları, göbek, valf, TPMS sensörü, balans makinesi, diş derinliği mastarı, basınç manometresi, rot başı ve rotil."
+  }
+}

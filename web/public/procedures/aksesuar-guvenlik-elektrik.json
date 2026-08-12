@@ -1,0 +1,172 @@
+{
+  "id": "aksesuar.guvenlik-elektrik",
+  "area": "aksesuar-ses",
+  "stage": 0,
+  "title": "Aksesuar İşinin Elektrik Güvenliği ve Kırmızı Çizgileri",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 30,
+  "prerequisites": [],
+  "learningGoals": [
+    "Araca sonradan eklenen her şeyin mevcut elektrik sisteminin bir parçası hâline geldiğini görmek",
+    "Enerji kesme, bekleme ve doğrulama sırasını uygulamak",
+    "Airbag ve haberleşme ağı olmak üzere iki kırmızı çizgiyi tanımak"
+  ],
+
+  "safety": [
+    { "rule": "Herhangi bir döşeme ya da panel sökülmeden önce akü eksi ucu ayrılır", "why": "Aksesuar bölgelerindeki kablo demetleri sürekli beslemeli hatlar taşır; kontak kapalıyken bile canlıdırlar ve metal bir alet kısa devre yaptığında yangına kadar gidebilir", "blocksStart": true },
+    { "rule": "Airbag ve gergili kemer bileşeni bulunan bölgelerde enerji kesildikten sonra üretici belgesindeki bekleme süresi beklenir ve süre dolmadan hiçbir bağlantı ayrılmaz", "why": "Sistemde enerji kesildikten sonra da bir süre boşalmayan depolanmış enerji bulunur; erken müdahale patlatabilir. Bekleme süresi araca özgüdür ve bu ders bir süre vermiyor", "blocksStart": true },
+    { "rule": "Sökülen bir aksesuar kablosunun ucu açıkta bırakılmaz, izole edilir", "why": "Açıkta kalan besleme ucu titreşimle gövdeye değerse kısa devre yapar; bu kısa devre çoğu zaman iş bittikten günler sonra ortaya çıkar", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.multimetre", "label": "Multimetre", "required": true },
+    { "id": "tool.izole-anahtar", "label": "İzoleli anahtar takımı", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Müşteri araca bir ses sistemi taktırmak istiyor. Sen daha hiçbir şeye dokunmadan işin niteliği belli.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.ana-kablo-demeti",
+        "question": "Araca sonradan bir aksesuar takmak ne demektir?",
+        "options": [
+          { "label": "Var olan bir elektrik sistemine yeni bir tüketici eklemektir; o andan sonra aksesuar aracın elektriğinin bir parçasıdır", "verdict": "sisteme-ekleme", "correct": true, "explain": "Bu alanın tek cümlelik özeti budur. Bir aksesuar takıldığı anda bağımsız bir cihaz olmaktan çıkar ve aracın elektrik sisteminin bir parçası olur. Bu şu demektir: çektiği akım aracın sigortasından, kablosundan ve şasesinden geçer; ürettiği gürültü aracın diğer devrelerine karışır; araç uykudayken bile bir şey çekiyorsa aküyü o boşaltır. Bu yüzden aksesuar işinde asıl soru 'çalışıyor mu' değildir — çalışmasını sağlamak kolaydır. Asıl sorular şunlardır: nereden besleniyor, hangi sigortadan geçiyor, hangi şaseyi kullanıyor, kontak kapalıyken ne kadar çekiyor ve bu araç iki hafta beklerse ne olur? Bir aksesuarın kötü bağlandığı, takıldığı gün değil, aracın havaalanı otoparkında on gün beklediği zaman anlaşılır. Usta ile 'çalıştırdım' diyen arasındaki fark tam olarak bu sorulardır." },
+          { "label": "Bağımsız bir cihazı araca yerleştirmektir", "verdict": "bagimsiz", "explain": "Kendi aküsü ve şasesi olmadığı sürece bağımsız değildir; aracın kaynağını paylaşır." },
+          { "label": "Yalnız montaj ve kaplama işidir", "verdict": "montaj", "explain": "İşçiliğin yarısı montajdır ama elektrik tarafı işin sonucunu belirler." },
+          { "label": "Fabrikanın bıraktığı boş yeri doldurmaktır", "verdict": "bos-yer", "explain": "Boş yer olması o noktanın beslenmeye hazır olduğu anlamına gelmez." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Bu alandaki bütün derslerin arka planı bu cümle: eklenen şey artık sistemin parçası. Sonraki dersler bu cümlenin sonuçlarını tek tek açıyor."
+    },
+    {
+      "id": 2,
+      "instruction": "İşe başlamadan önce enerjiyi kes. Sigorta kutusunun kapağını çıkar ve akü eksi ucuna gitmeden önce buraya bak.",
+      "interaction": {
+        "type": "pull",
+        "target": "part.sigorta-kutusu-aksesuar",
+        "requiresGesture": true
+      },
+      "camera": "aksesuar",
+      "hint": "Kapağı düz çek; klipsler kenarda.",
+      "teachingNote": "Sigorta kutusunun kapağının içi çoğu araçta bir haritadır: hangi sigortanın hangi devreye ait olduğu ve amperi orada yazar. Aksesuar işine başlamadan önce bu haritaya bakmak iki şey kazandırır — hangi devrelerin sürekli beslemeli olduğunu görürsün ve boş yuva varsa hangi devreye ait olduğunu öğrenirsin. Boş bir yuvanın 'serbest' olduğunu varsaymak yaygın bir hatadır; o yuva o araçta olmayan bir donanıma ait olabilir ve arkasındaki kablo hiçbir yere gitmiyor olabilir."
+    },
+    {
+      "id": 3,
+      "instruction": "Akü eksi ucunu ayırdın. Ama enerjinin gerçekten kesildiğini varsaymıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sase-noktasi-aksesuar",
+        "question": "Enerji kesme işlemi kaç adımdır?",
+        "options": [
+          { "label": "Üç adımdır: kes, bekle, doğrula — üçü de yapılmadan işlem tamamlanmış sayılmaz", "verdict": "kes-bekle-dogrula", "correct": true, "explain": "Kesmek tek başına yeterli değildir, çünkü kesmek bir niyettir; doğrulamak bir ölçümdür. Birinci adım kesmedir: akünün eksi ucu ayrılır ve ayrılan kablo ucu kutba geri temas edemeyecek şekilde bağlanır — sadece kutbun yanına bırakmak yeterli değildir, titreşim onu geri değdirir. İkinci adım beklemedir: sistemde kondansatörlerde ve modüllerde depolanmış enerji vardır; özellikle airbag bulunan bölgelerde bu bekleme bir nezaket değil bir zorunluluktur ve süresi araca özgü olduğu için bu ders bir sayı vermiyor, üretici belgesine bakılır. Üçüncü adım doğrulamadır: multimetre ile çalışılacak noktada gerilim olmadığı ölçülür. Doğrulama neden şart? Çünkü birçok araçta ikinci bir besleme kaynağı vardır — ayrı bir akü, bir yedek modül beslemesi ya da servis anahtarıyla kapatılmamış bir devre. 'Aküyü çıkardım' cümlesi bir ölçüm değildir." },
+          { "label": "Tek adımdır: akü eksi ucunu ayırmak", "verdict": "tek-adim", "explain": "Ayırmak niyettir; sistemde depolanmış enerji ve ikinci kaynak olabilir." },
+          { "label": "İki adımdır: kesmek ve beklemek", "verdict": "iki-adim", "explain": "Beklemeden sonra da ölçülmeden emin olunmaz." },
+          { "label": "Kontağı kapatmak yeterlidir", "verdict": "kontak", "explain": "Sürekli beslemeli hatlar kontak kapalıyken de canlıdır." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Kes–bekle–doğrula sırası bu alanın ve Direksiyon alanının ortak kuralı. Doğrulama adımı atlanan adımdır ve tam olarak o yüzden yazılı."
+    },
+    {
+      "id": 4,
+      "instruction": "İki araçta uykudaki akım çekişini ölçtün. Birinde 0,062 A, diğerinde 0,027 A okudun. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.pens-ampermetre",
+        "unit": "A",
+        "acceptRange": [0.033, 0.037]
+      },
+      "camera": "aksesuar",
+      "hint": "0,062 eksi 0,027.",
+      "teachingNote": "0,035 amperlik bu fark küçük görünüyor ama anlamı büyük: aynı marka iki araçtan biri diğerinden fazla çekiyor ve fazlalık aksesuar eklendikten sonra oluşmuş. Uykudaki akım (parazit akım) araç tamamen uyuduktan sonra ölçülür — modüller uykuya geçene kadar geçmesi gereken bir süre vardır ve o süre dolmadan yapılan ölçüm her araçta yüksek çıkar. Burada öğrenilen şey bir sınır değil bir alışkanlıktır: aksesuar takmadan ÖNCE ölç, taktıktan SONRA tekrar ölç, farkı bil. Kabul edilebilir azami parazit akım araca özgüdür ve bu ders bir sınır vermiyor; ama kendi eklediğin şeyin ne kadar eklediğini bilmemek için hiçbir mazeret yok."
+    },
+    {
+      "id": 5,
+      "instruction": "Kapı iç döşemesini sökmen gerekiyor. Ama bu araçta kapı içinde yan hava yastığı olabilir.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kapi-ic-dosemesi",
+        "question": "Airbag bulunan bir bölgede çalışırken sınır nerede?",
+        "options": [
+          { "label": "Sınır nettir: enerji kesilir, süre beklenir, doğrulanır ve airbag modülünün kendisine, kablosuna ya da bağlantısına müdahale edilmez", "verdict": "sinir-net", "correct": true, "explain": "Bu uygulamanın kırmızı çizgilerinden biridir ve Direksiyon alanında öğrenilen kuralın aynısıdır. Airbag ve gergili emniyet kemeri bileşenleri koltukta, tavanda, direklerde ve bazı araçlarda kapı döşemesinin içinde bulunur; yani aksesuar işi yapılan bölgelerle doğrudan çakışır. Bu bölgede çalışmak yasak değildir — enerji kesilir, üretici belgesindeki süre beklenir, doğrulanır ve döşeme sökülür. Yasak olan şey modülün kendisidir: airbag ünitesi sökülmez, taşınmaz, saklanmaz, onarılmaz, imha edilmez ve bağlantısı ayrılıp yerine bir şey takılmaz. Sarı renkli konektörler ve sarı bantlı kablo demetleri bu sistemin işaretidir; sarı gördüğün yerde durursun. İkinci kural: bir aksesuar kablosu bu bölgeden geçirilecekse airbag kablo demetiyle aynı güzergâh kullanılmaz, açılma yoluna hiçbir şey yerleştirilmez. Uygulama bu sınırı öğretiyor, sınırın ötesini öğretmiyor; oradan sonrası yetkili servisin ve belgeli teknisyenin işidir." },
+          { "label": "Enerji kesildikten sonra her şeye müdahale edilebilir", "verdict": "her-sey", "explain": "Enerji kesmek söküm iznidir, modüle müdahale izni değildir." },
+          { "label": "Airbag olan araçta hiçbir aksesuar işi yapılamaz", "verdict": "hicbir-sey", "explain": "Yapılabilir; kural doğru sıra ve modüle dokunmamaktır." },
+          { "label": "Sarı konektörler yalnız renk kodudur, önemi yoktur", "verdict": "renk-kodu", "explain": "Sarı bu sistemin uluslararası işaretidir ve durma işaretidir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "İki kırmızı çizginin birincisi. İkincisi bir sonraki adımda ve o daha az bilinen ama daha sık ihlal edilen çizgi."
+    },
+    {
+      "id": 6,
+      "instruction": "Aksesuarı beslemek için en yakın kalın kabloyu buldun. İçinde ince, burulmuş bir çift tel var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.haberlesme-hatti",
+        "question": "Bu burulmuş çift tele ne yapılır?",
+        "options": [
+          { "label": "Hiçbir şey — bu bir haberleşme hattıdır, güç alınmaz, delinmez, kesilmez", "verdict": "dokunma", "correct": true, "explain": "İkinci kırmızı çizgi budur. Modern araçlarda modüller birbiriyle ince, birbirine burulmuş bir tel çifti üzerinden konuşur. Bu çift üzerinde güç değil veri taşınır ve verinin doğru okunabilmesi hattın elektriksel dengesine bağlıdır; burulmuş olmasının sebebi de budur. Bu hatta yapılan üç şey aracı bozar. Birincisi delerek bağlantı almak: hattın yalıtımını delen bir kontak hem dengeyi bozar hem de o noktadan giren nem zamanla iletkeni yer. İkincisi güç almaya çalışmak: bu hat zaten güç taşımaz, alınacak bir şey yoktur ama denemek hattı kısa devre yapar. Üçüncüsü hatalı bir adaptör takmak: doğru olmayan bir arayüz hattı sürekli meşgul eder ve o hat üzerindeki bütün modüller birbirini duymaz olur. Sonuç tek bir aksesuarın arızası değildir — panelde birden çok uyarı yanar, camlar çalışmaz, gösterge yanlış okur. Aksesuar bağlantısı için doğru yol ya üretici arayüzünü kullanmak ya da o araca uygun, denenmiş bir adaptör takmaktır. Kablo delen aparat bu alanda usta işi değildir." },
+          { "label": "Güç almak için uygun bir noktadır", "verdict": "guc-al", "explain": "Bu hat güç taşımaz; denemek hattı bozar." },
+          { "label": "Delerek bağlantı alınabilir, yaygın yöntemdir", "verdict": "del", "explain": "Yaygın olması doğru olduğunu göstermez; delme hem dengeyi hem yalıtımı bozar." },
+          { "label": "Kesilip uzatılabilir", "verdict": "kes-uzat", "explain": "Uzunluk ve burulma bu hattın çalışma koşuludur." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Sarı renkli bu hat sahnede bilerek ayrı bir parça olarak duruyor: bu alanda 'nereden besleniyor' sorusunun yanıtı asla burası değil."
+    },
+    {
+      "id": 7,
+      "instruction": "İş bitti, aksesuar çalışıyor, aküyü geri bağladın. Müşteriye anahtarı vermeden önce.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.multimetre-aksesuar",
+        "question": "Son kontrol nedir?",
+        "options": [
+          { "label": "Aracın DİĞER bütün sistemleri tek tek denenir ve uykudaki akım tekrar ölçülür", "verdict": "diger-sistemler", "correct": true, "explain": "Aksesuar işinin en sık atlanan adımı budur ve şikâyetlerin çoğu buradan doğar. Sen bir şey eklerken aynı sigortayı, aynı şaseyi, aynı kablo kanalını ve aynı paneli paylaştın; dokunmadığını sandığın bir şeyi kolayca ayırmış olabilirsin. Bu yüzden teslimden önce şu tek tek denenir: camlar, aynalar, merkezî kilit, silecekler, korna, bütün dış aydınlatma, iç aydınlatma, gösterge paneli uyarı lambaları ve varsa sunroof. Ardından uykudaki akım işten önce ölçülen değerle karşılaştırılır — fark yalnız eklenen cihazın beklenen tüketimi kadar olmalıdır, daha fazlaysa bir yerde bir şey uyanık kalıyordur. Üçüncü kontrol fizikseldir: sökülen bütün klipsler yerine oturdu mu, hiçbir kablo hareketli parçanın yoluna girmiyor mu, körük ve fitil geri takıldı mı. Bir aksesuar işi, eklenen şey çalıştığında değil, eklenmeyen hiçbir şey bozulmadığı doğrulandığında biter." },
+          { "label": "Yalnız takılan aksesuarın çalıştığı kontrol edilir", "verdict": "yalniz-aksesuar", "explain": "Eksik olan tam da bu; şikâyet genelde dokunulmadığı sanılan yerden gelir." },
+          { "label": "Görsel kontrol yeterlidir", "verdict": "gorsel", "explain": "Akım ve işlev kontrolü göze görünmez." },
+          { "label": "Müşteri şikâyet ederse bakılır", "verdict": "sikayet", "explain": "Teslimden sonra bulunan hata, teslimden önce bulunmuş hatanın on katı iştir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Bu adım aynı zamanda aşama 9'daki ustalık sınavının konusu: montajdan sonra çıkan üç şikâyetin sebebini bulmak."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Enerji kesme işlemi kaç adımdır ve neden?",
+        "a": "kes-bekle-dogrula",
+        "options": [
+          { "verdict": "kes-bekle-dogrula", "label": "Üç adım: kes, bekle, doğrula", "explain": "Kesmek bir niyettir, doğrulamak bir ölçümdür. Akü eksi ucu ayrılır ve geri temas edemeyecek şekilde bağlanır; sistemde depolanmış enerji için üretici belgesindeki süre beklenir; çalışılacak noktada gerilim olmadığı multimetre ile ölçülür. Doğrulama şart çünkü ikinci bir besleme kaynağı ya da kapatılmamış bir devre olabilir." },
+          { "verdict": "tek-adim", "label": "Tek adım: aküyü ayırmak", "explain": "Depolanmış enerji ve ikinci kaynak ihtimali kalır." },
+          { "verdict": "iki-adim", "label": "İki adım: kes ve bekle", "explain": "Ölçmeden emin olunmaz." },
+          { "verdict": "kontak", "label": "Kontağı kapatmak yeterli", "explain": "Sürekli beslemeli hatlar canlı kalır." }
+        ]
+      },
+      {
+        "q": "Kablo demetinin içindeki ince, birbirine burulmuş tel çiftine ne yapılır?",
+        "a": "dokunma",
+        "options": [
+          { "verdict": "dokunma", "label": "Hiçbir şey — haberleşme hattıdır; güç alınmaz, delinmez, kesilmez", "explain": "Bu çift üzerinde veri taşınır ve doğru okunması hattın elektriksel dengesine bağlıdır; burulma bunun içindir. Delmek dengeyi ve yalıtımı bozar, güç almaya çalışmak kısa devre yapar, hatalı adaptör hattı meşgul edip o hattaki bütün modülleri birbirine sağır bırakır. Doğru yol üretici arayüzü ya da o araca uygun, denenmiş bir adaptördür." },
+          { "verdict": "guc-al", "label": "Güç alınabilecek uygun bir noktadır", "explain": "Güç taşımaz." },
+          { "verdict": "del", "label": "Delerek bağlantı alınır", "explain": "Yaygın olması doğru yapmaz." },
+          { "verdict": "kes-uzat", "label": "Kesilip uzatılabilir", "explain": "Uzunluk ve burulma çalışma koşuludur." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 4'teki 0,062 A ve 0,027 A SENARYO okumalarıdır; istenen FARKTIR (0,035 A) ve ders kabul edilebilir azami parazit akım sınırı vermiyor. Modüllerin uykuya geçme süresi de araca özgüdür ve bir sayı verilmedi.",
+    "sourceRequired": "Airbag enerji kesme sonrası bekleme süresi, azami parazit akım sınırı, sigorta amperleri ve kablo kesitleri bilinçle VERİLMEDİ; hepsi araç ve üretici belgesine aittir. Bu ders sırayı, sınırı ve alışkanlığı öğretiyor, değeri değil.",
+    "kapsam": "Airbag/SRS bileşenlerine müdahale KAPSAM DIŞIDIR ve öyle kalacaktır; ders yalnız sınırı ve güvenli durum ilkesini öğretiyor. Haberleşme ağı protokollerinin çözümlenmesi, teşhis cihazıyla veri okuma ve modül kodlama bu alanın kapsamında değil. Sahnede airbag bileşeni modellenmedi.",
+    "reviewedByMechanic": false
+  }
+}

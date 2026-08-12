@@ -1,0 +1,177 @@
+{
+  "id": "direksiyon.kutu-yapisi",
+  "area": "direksiyon",
+  "stage": 2,
+  "title": "Kremayerin İçinde Ne Var, Nasıl Çalışır",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 35,
+  "prerequisites": ["direksiyon.simit-merkezi"],
+  "learningGoals": [
+    "Kremayer kutusunun içindeki parçaları ve her birinin görevini bilmek",
+    "Baskı pabucunun neden var olduğunu ve boşlukla ilişkisini kavramak",
+    "Hidrolik ve elektrik yardımın kutuya nasıl eklendiğini görmek"
+  ],
+
+  "safety": [
+    { "rule": "Kutu sökülecekse araç sehpaya alınır ve direksiyon dönmeyecek biçimde sabitlenir", "why": "Kutu bağlantısı ayrıldığında kolon serbest kalır; çevrilirse spiral kablo kopar", "blocksStart": true },
+    { "rule": "Hidrolik hatlar ayrılmadan önce basıncın boşaldığından emin olunur", "why": "Basınç altındaki sıvı bağlantı açılırken fışkırır ve göze kaçabilir", "blocksStart": true },
+    { "rule": "Sökülen hatların ve kutu ağızlarının açık ucu kapatılır", "why": "Hidrolik devreye giren toz, pompayı ve valfi kısa sürede bitirir", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.anahtar-takimi", "label": "Anahtar takımı", "required": true },
+    { "id": "tool.tork-anahtari", "label": "Tork anahtarı", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Kutunun içini tanı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kremayer-kutusu",
+        "question": "Bir kremayer kutusunun içinde en az hangi parçalar bulunur?",
+        "options": [
+          { "label": "Pinyon dişlisi ve yatakları, dişli kremayer çubuğu, çubuğu pinyona bastıran baskı pabucu ile yayı, çubuk yatakları ve keçeler", "verdict": "pinyon-kremayer-pabuc", "correct": true, "explain": "Kremayer kutusu dışarıdan basit bir boru gibi görünse de içinde birbirine bağlı birkaç görev vardır. Pinyon, direksiyon milinden gelen dönmeyi alan küçük dişlidir ve kendi yatakları üzerinde döner; bu yataklar pinyonun yalnız dönmesine izin verir, yana kaçmasına izin vermez. Dişli kremayer çubuğu kutunun içinde araç enine uzanır ve yalnız ileri geri kayabilir. İkisinin dişleri sürekli kavrama hâlindedir. Üçüncü parça ilk bakışta göze çarpmaz ama sistemin kalbidir: baskı pabucu. Kremayer çubuğunun pinyonun karşı tarafında duran, bir yay tarafından çubuğa bastırılan parçadır ve çubuğu sürekli pinyona doğru iter. Bunun yanında çubuğun iki ucunu taşıyan yataklar ve kutunun içindeki yağı tutup dışarıdaki kiri almayan keçeler vardır. Bu parçaların hepsi tek bir amaca hizmet eder: hareketi kayıpsız aktarmak ve bunu yaparken ne sıkışmak ne de boşluk vermek. Aradaki denge çok dardır ve bu dersin geri kalanı o dengeyi anlatıyor." },
+          { "label": "Yalnız bir zincir ve iki dişli", "verdict": "zincir", "explain": "Kutuda zincir yoktur; pinyon doğrudan kremayer dişlerine geçer." },
+          { "label": "Bir elektrik motoru ve dişli kutusu", "verdict": "motor", "explain": "Motor yalnız EPS'te ve ek olarak vardır; temel yapı mekaniktir." },
+          { "label": "Sadece hidrolik piston", "verdict": "piston", "explain": "Piston yalnız hidrolik yardımlı kutularda ek olarak bulunur." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Kutunun bütün mühendisliği tek bir dengede toplanıyor: ne sıkışacak, ne boşluk verecek."
+    },
+    {
+      "id": 2,
+      "instruction": "Pinyonun dişlerine yakından bak; düz değil, eğik kesilmişler.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kremayer-pinyonu",
+        "question": "Dişler neden eğik?",
+        "options": [
+          { "label": "Eğik diş, temasın kademeli başlamasını sağlar; aynı anda daha çok diş kavradığı için hareket daha sessiz ve daha düzgün aktarılır", "verdict": "kademeli-temas", "correct": true, "explain": "Düz kesilmiş dişlerde her diş temasa bir anda girer ve bir anda çıkar; bu, her diş geçişinde küçük bir darbe ve ses üretir, üstelik yükü tek bir diş taşır. Eğik (helis) kesilmiş dişlerde ise temas dişin bir ucundan başlar ve diğer ucuna doğru ilerler. Sonuçları üç tanedir. Birincisi sessizliktir: darbe yerine kademeli bir yüklenme olur. İkincisi düzgünlüktür — sürücü direksiyonda dişleri hissetmez, hareket akıcı gelir. Üçüncüsü dayanıklılıktır: her an birden çok diş kavrama hâlinde olduğu için yük paylaşılır ve diş dibindeki gerilme düşer. Bunun bir bedeli vardır: eğik diş, dönme kuvvetinin bir kısmını mil ekseni boyunca iten bir kuvvete çevirir, yani pinyonu yana doğru zorlar. Bu yüzden pinyon yataklarının bu ekseni de tutması gerekir ve yatakların aşınması doğrudan boşluk olarak hissedilir. Ayrıca birçok kutuda kremayer dişlerinin adımı ve formu çubuk boyunca değişkendir; bu, direksiyonun ortada daha az, uçlarda daha çok çevik olmasını sağlayan tasarımsal bir seçimdir." },
+          { "label": "Üretim kolaylığı için", "verdict": "uretim", "explain": "Tersine, eğik diş işlemesi daha zordur; sebep sessizlik ve yük paylaşımı." },
+          { "label": "Yağın daha iyi dağılması için", "verdict": "yag", "explain": "Yan etkisi olabilir ama amaç kademeli temas." },
+          { "label": "Süs amaçlı", "verdict": "sus", "explain": "Diş formu tamamen işlevseldir." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Eğik diş sessizlik kazandırır ama pinyona eksenel bir kuvvet bindirir; yataklar bu yüzden önemli."
+    },
+    {
+      "id": 3,
+      "instruction": "Kutunun altında ya da arkasında bir kapak ve ayar cıvatası var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kremayer-baski-civatasi",
+        "question": "Baskı pabucu ve bu ayar ne işe yarar?",
+        "options": [
+          { "label": "Pabuç, kremayer çubuğunu bir yay aracılığıyla pinyona bastırır; böylece dişler arasında boşluk kalmaz ve aşınma bir miktar telafi edilir", "verdict": "pabuc-bastirir", "correct": true, "explain": "İki dişli birbirine geçtiğinde aralarında mutlaka küçük bir boşluk bulunur; bu boşluk üretimde bilinçle bırakılır, çünkü sıfır boşluk sıkışma ve ısınma demektir. Ama bu boşluk sürücüye ölü bölge olarak yansır. Baskı pabucu bu çelişkiyi çözer: kremayer çubuğunun pinyonun karşı tarafında durur ve bir yay tarafından sürekli çubuğa bastırılır. Böylece çubuk pinyona doğru itilir, dişler her zaman temas hâlinde kalır ve boşluk kapanır. Yayla çalışması kritiktir — sert bir dayama olsaydı ısıl genleşme ve toz sıkışmaya yol açardı; yay ise değişen koşullara uyar ve zamanla oluşan aşınmayı bir ölçüde telafi eder. Ayar cıvatası bu yayın ön yükünü belirler. Buradaki denge çok hassastır ve iki yönde de tehlikelidir: gevşek bırakılırsa dişler ayrılır, boşluk ve tıkırtı başlar; fazla sıkılırsa direksiyon ağırlaşır, merkeze dönmez ve pabuç ile dişler hızla aşınır. Bu yüzden ayar 'boşluk bitene kadar sık' mantığıyla yapılmaz; kendi prosedürü ve sınırı vardır ve bir sonraki derste ayrıca işlenir." },
+          { "label": "Kutunun yağını tutar", "verdict": "yag-tutar", "explain": "Yağı keçeler tutar; pabuç dişleri temasta tutar." },
+          { "label": "Kremayerin dönmesini sağlar", "verdict": "dondurur", "explain": "Kremayer dönmez, kayar; pabuç onu pinyona bastırır." },
+          { "label": "Hidrolik basıncı üretir", "verdict": "basinc", "explain": "Basıncı pompa üretir; pabuç mekanik bir parçadır." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Baskı pabucu, 'boşluk olmasın ama sıkışmasın' probleminin çözümü. Bir yay olması tesadüf değil."
+    },
+    {
+      "id": 4,
+      "instruction": "Diş boşluğunu iki konumda ölçtün: kremayer ortadayken 0,08 mm, uca yakınken 0,15 mm. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.kremayer-kutusu",
+        "unit": "mm",
+        "acceptRange": [0.065, 0.075]
+      },
+      "camera": "direksiyon",
+      "hint": "0,15 eksi 0,08.",
+      "teachingNote": "0,07 mm'lik bu fark bir arıza değil, çoğu kutuda tasarımın kendisidir: diş formu çubuk boyunca değişir ve boşluk orta konumda en az olacak biçimde ayarlanır. Sebebi açıktır — araç zamanının büyük bölümünü direksiyon ortadayken geçirir, aşınma da en çok orada olur ve sürücünün hassasiyeti en çok orada gerekir. Bunun teşhisteki karşılığı kritiktir: ayar ve boşluk ölçümü DAİMA orta konumda yapılır. Uçta ölçülen daha büyük boşluğa bakıp kutuyu suçlamak ya da orayı sıfırlamaya çalışmak, ortayı sıkıştırır ve direksiyonu bağlar. Kabul edilebilir boşluk değerleri araca ve kutuya özgüdür; bu ders bir sınır vermiyor."
+    },
+    {
+      "id": 5,
+      "instruction": "Hidrolik yardımlı bir kutuya bak: aynı gövdenin üstünde iki hortum bağlantısı var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.basinc-hortumu",
+        "question": "Hidrolik yardım kutuya ne ekler?",
+        "options": [
+          { "label": "Sürücünün hareketini algılayan bir kumanda valfi ile kremayer çubuğu üzerinde çalışan bir piston ve onun iki tarafındaki basınç odaları", "verdict": "valf-ve-piston", "correct": true, "explain": "Hidrolik yardımlı kutu, mekanik kutunun üzerine iki parça ekler. Birincisi kumanda valfidir ve pinyon bölgesinde bulunur: sürücü direksiyonu çevirdiğinde mil ile pinyon arasındaki çok küçük bir burulma valfi kaydırır ve basıncı hangi tarafa göndereceğine karar verir. Bu, sistemin 'sürücü ne istiyor' sorusunu okuma biçimidir ve burulma miktarı ne kadar büyükse, yani sürücü ne kadar zorluyorsa, o kadar çok basınç yönlendirilir. İkincisi kremayer çubuğu üzerindeki pistondur: çubuk bir bölgede genişler ve kutunun içindeki silindiri iki odaya böler. Basınç bir odaya girdiğinde piston o yöne itilir ve sürücünün kuvvetine eklenir; diğer odadaki sıvı dönüş hattından depoya gider. İki hortumun sebebi budur — biri basınç, biri dönüş. Bu yapının teşhisteki sonucu şudur: kutu artık hem mekanik hem hidrolik bir parçadır. Aynı gövdede boşluk arızası da olur, sızıntı arızası da, valf arızası da; ve valf arızası kendini boşluk gibi değil, 'yardım tek yöne geliyor' ya da 'direksiyon kendi kendine çekiyor' gibi gösterir." },
+          { "label": "Yalnız bir yağ deposu", "verdict": "depo", "explain": "Depo ayrıdır; kutuya valf ve piston eklenir." },
+          { "label": "İkinci bir pinyon", "verdict": "ikinci-pinyon", "explain": "İkinci pinyon bazı EPS tasarımlarında olur, hidrolikte değil." },
+          { "label": "Elektrik motoru", "verdict": "motor", "explain": "Motor elektrik yardımlı sistemin parçası." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Valf arızası boşluk gibi değil, 'yardım tek yöne geliyor' gibi görünür. Belirtiyi tanımak parçayı tanımaktan geçiyor."
+    },
+    {
+      "id": 6,
+      "instruction": "Elektrik yardımlı bir kutuya bak.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.eps-motoru",
+        "question": "EPS kutuya nasıl bağlanır?",
+        "options": [
+          { "label": "Motor ya kolona, ya pinyona, ya da doğrudan kremayere bağlanır; kremayere bağlı tasarımlarda genellikle ikinci bir pinyon ya da bilyeli vida düzeneği kullanılır", "verdict": "uc-nokta", "correct": true, "explain": "EPS'in nereye bağlandığı, kutunun onarılabilirliğini ve arıza belirtilerini doğrudan belirler. Üç yaygın yer vardır. Kolona bağlı tasarımda motor kabinin içindedir; en ucuz çözümdür, kutu tamamen mekanik kalır ve motor arızası kutuyu ilgilendirmez, ama destek zincirin başından verildiği için mafsal ve mil de yardım kuvvetini taşır. Pinyona bağlı tasarımda motor doğrudan pinyonu döndürür; destek dişliye daha yakın verilir. Kremayere bağlı tasarımda motor kremayer çubuğuna etki eder ve bunu ya ikinci bir pinyonla ya da çubuğun üzerindeki bilyeli vida düzeneğiyle yapar; en güçlü ve en sessiz çözümdür, büyük araçlarda tercih edilir, ama motor ile kutu tek bir birim hâline gelir. Bu son durumun pratik sonucu önemlidir: kutu ile motor birlikte fiyatlanır, çoğu zaman ayrı satılmaz ve bir arızada değişecek parça çok daha pahalı olur. Ayrıca bu tasarımlarda kutu değiştiğinde ya da sökülüp takıldığında sistemin konum ve tork öğrenmesi gerekir; bu, aşama 4'te ayrı bir ders olarak işleniyor." },
+          { "label": "Motor doğrudan tekerleğe bağlanır", "verdict": "tekerlege", "explain": "Motor zincire kuvvet ekler; tekerleği doğrudan çevirmez." },
+          { "label": "Motor yalnız simide bağlanabilir", "verdict": "sadece-simit", "explain": "Kolon, pinyon ve kremayer olmak üzere üç yaygın nokta var." },
+          { "label": "EPS'te kutu bulunmaz", "verdict": "kutusuz", "explain": "Kutu vardır; EPS ona kuvvet ekler." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Motorun nereye bağlandığı, arızada değişecek parçanın fiyatını belirliyor. Teşhiste bu bilgi maliyet demek."
+    },
+    {
+      "id": 7,
+      "instruction": "Kutuda arıza tespit edildi. Onarım mı, değişim mi?",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kremayer-kutusu",
+        "question": "Kararı ne belirler?",
+        "options": [
+          { "label": "Arızanın hangi parçada olduğu, o parçanın ayrı temin edilebilirliği, kutunun sökülüp toplanmasının gerektirdiği koşullar ve toplam maliyet ile garanti", "verdict": "parca-kosul-maliyet", "correct": true, "explain": "Bu karar duygusal değil, dört soruyla verilir. Birincisi: arıza hangi parçada? Körük, bağlantı ya da baskı ayarı gibi dıştan erişilebilen sorunlar çoğu zaman yerinde çözülür; iç yataklar, keçeler, valf ya da çubuk yüzeyi söz konusuysa iş büyür. İkincisi: o parça ayrı bulunabiliyor mu? Birçok modern kutu, tamir takımı satılmayacak biçimde tasarlanmıştır ve üretici yalnız komple kutu ya da yenilenmiş kutu sunar. Üçüncüsü: koşullar uygun mu? Kutu içi işler temizlik ister — hidrolik bir kutunun içine giren toz, kısa sürede valfi ve pompayı bitirir; ayrıca sıkma torkları, ön yük ayarları ve özel aletler gerekir. Dördüncüsü: toplam maliyet ve garanti. İşçilik yüksekse ve sonuç garanti edilemiyorsa, yenilenmiş bir kutu çoğu zaman hem daha ucuz hem daha güvenilirdir. Buradaki dürüstlük ölçütü şudur: müşteriye 'onarırım' demeden önce onarımın sonuca ulaşacağından emin olmak gerekir. Ayrıca kutu her söküldüğünde ön düzen ayarı gerekir ve elektrikli sistemlerde öğrenme işlemi yapılır; bunlar işin parçasıdır, sonradan çıkarılan ek kalem değil." },
+          { "label": "Her zaman onarılır, değişim gereksizdir", "verdict": "hep-onar", "explain": "Birçok kutuda iç parça ayrı satılmaz; onarım her zaman mümkün değil." },
+          { "label": "Her zaman değiştirilir, onarım denenmez", "verdict": "hep-degistir", "explain": "Körük ve ayar gibi sorunlar yerinde çözülür; komple değişim gereksiz maliyet olur." },
+          { "label": "En ucuz seçenek ne ise o yapılır", "verdict": "en-ucuz", "explain": "Maliyet dört ölçütten yalnız biri; sonuç ve garanti de sayılır." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Kutu her söküldüğünde ön düzen ayarı ve elektrikli sistemlerde öğrenme gerekir. Teklif verilirken bunlar da yazılır."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Baskı pabucu ne işe yarar?",
+        "a": "pabuc-bastirir",
+        "options": [
+          { "verdict": "pabuc-bastirir", "label": "Kremayer çubuğunu bir yay aracılığıyla pinyona bastırır; dişler arasında boşluk kalmaz ve aşınma bir miktar telafi edilir", "explain": "İki dişli arasında üretimde bilinçle boşluk bırakılır çünkü sıfır boşluk sıkışma ve ısınma demektir; ama bu boşluk sürücüye ölü bölge olarak yansır. Pabuç çubuğu pinyona doğru iterek dişleri sürekli temasta tutar. Yayla çalışması ısıl genleşmeye ve aşınmaya uyum sağlar. Ayar iki yönde de tehlikelidir: gevşekse boşluk ve tıkırtı, sıkıysa ağırlık, merkeze dönmeme ve hızlı aşınma." },
+          { "verdict": "yag-tutar", "label": "Kutunun yağını tutar", "explain": "Yağı keçeler tutar." },
+          { "verdict": "dondurur", "label": "Kremayerin dönmesini sağlar", "explain": "Kremayer dönmez, kayar." },
+          { "verdict": "basinc", "label": "Hidrolik basıncı üretir", "explain": "Basıncı pompa üretir." }
+        ]
+      },
+      {
+        "q": "Diş boşluğu neden kremayerin ortasında en az olacak biçimde ayarlanır?",
+        "a": "orta-kullanim",
+        "options": [
+          { "verdict": "orta-kullanim", "label": "Araç zamanının çoğunu direksiyon ortadayken geçirir; aşınma ve hassasiyet ihtiyacı en çok oradadır", "explain": "Çoğu kutuda diş formu çubuk boyunca değişir ve boşluk orta konumda en az olacak biçimde tasarlanır. Bunun teşhisteki karşılığı şudur: ayar ve boşluk ölçümü daima orta konumda yapılır. Uçta ölçülen daha büyük boşluğa bakıp kutuyu suçlamak ya da orayı sıfırlamaya çalışmak ortayı sıkıştırır ve direksiyonu bağlar." },
+          { "verdict": "uretim-hatasi", "label": "Üretim hatasıdır", "explain": "Tasarımın kendisidir, hata değil." },
+          { "verdict": "yag", "label": "Yağ orada birikir", "explain": "Sebep kullanım ve aşınma dağılımı." },
+          { "verdict": "farketmez", "label": "Fark etmez, her yerde eşittir", "explain": "Çoğu kutuda boşluk konuma göre değişir." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 4'teki 0,08 mm ve 0,15 mm SENARYO okumalarıdır; istenen FARKTIR (0,07 mm) ve gösterilen şey boşluğun kremayer boyunca tasarım gereği değiştiğidir. Kabul edilebilir diş boşluğu verilmiyor.",
+    "sourceRequired": "Diş boşluğu sınırları, baskı pabucu ön yük torku ve kutu bağlantı torkları bilinçle VERİLMEDİ; araca ve kutuya özgüdür ve künyesiz yazılmaz.",
+    "kapsam": "Baskı ayarının nasıl yapılacağı bu ders değil, aşama 2'nin üçüncü dersi (direksiyon.kutu-bosluk-ayari). Sızıntı ve körük kontrolü ayrı ders. EPS öğrenme işlemi aşama 4'te. Sonsuz dişli tipi kutular kapsam dışı.",
+    "reviewedByMechanic": false
+  }
+}

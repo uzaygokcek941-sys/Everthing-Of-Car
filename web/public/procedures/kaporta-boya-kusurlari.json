@@ -1,0 +1,177 @@
+{
+  "id": "kaporta.boya-kusurlari",
+  "area": "kaporta",
+  "stage": 7,
+  "title": "Boya Kusurları: Krater, Sarkma, Toz ve Portakal Kabuğu",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 40,
+  "prerequisites": ["kaporta.cila"],
+  "learningGoals": [
+    "Her kusurun hangi adımın imzası olduğunu geriye doğru okumak",
+    "Kusuru üç sınıfa ayırmak: yüzeyde olan, katmanın içinde olan ve alt katmandan gelen",
+    "Hangi kusurun cilayla, hangisinin yeniden boyayla, hangisinin hazırlığa dönerek çözüldüğünü bilmek"
+  ],
+
+  "safety": [
+    { "rule": "Kusur düzeltmek için yapılan her zımpara ve polisaj işleminde uygun toz maskesi ve göz koruması kullanılır", "why": "Kürlenmiş boya tozu solunduğunda zararlıdır ve gözde tahriş yapar", "blocksStart": false },
+    { "rule": "Kusurun sebebi bulunmadan yeniden boya yapılmaz", "why": "Sebep yerinde duruyorsa aynı kusur ikinci katmanda da çıkar ve iki kat malzeme ve emek harcanmış olur", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.kalinlik-olcer", "label": "Kalınlık ölçer", "required": true },
+    { "id": "tool.aydinlatma", "label": "Kontrol lambası", "required": true },
+    { "id": "tool.polisaj-makinesi", "label": "Polisaj makinesi", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Boyalı yüzeyde yer yer küçük, yuvarlak çukurlar var; her birinin ortasında boya çekilmiş gibi duruyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-kapi-paneli",
+        "question": "Bu kusur ne anlatıyor?",
+        "options": [
+          { "label": "Yüzeyde boyanın tutunamadığı bir madde kalmış: yağ, silikon ya da benzeri bir kalıntı boyayı kendinden iterek çukur açıyor — kaynağı yalnız yüzey değil, hava hattından gelen yağ ve su da olabilir", "verdict": "krater", "correct": true, "explain": "Bu kusura atölyede krater ya da balık gözü denir ve mekanizması basittir: yüzeyde çok küçük bir noktada boyanın ıslatamadığı bir madde vardır; boya oraya geldiğinde tutunmak yerine çevreye kaçar ve ortada bir çukur bırakır. Sorumlu madde neredeyse her zaman aynı ailedendir — yağ, gres, silikon içeren parlatıcı ve bakım ürünleri, hatta ele sürülen bazı kremler. Kaynağı bulmak, kusuru düzeltmekten daha önemlidir, çünkü sebep yerinde kaldığı sürece ikinci kat da aynı sonucu verir. Üç yere bakılır. Birincisi yüzeyin kendisidir: hazırlık dersinde geçtiği gibi temizlik iki aşamalıdır ve zımparadan sonra tekrarlanır; bir kez silinmiş yüzey temiz sayılmaz. İkincisi ve en çok atlanan kaynak hava hattıdır — kompresör, hem yoğuşan suyu hem kendi yağını hatta gönderebilir ve bu, tabancadan doğrudan yüzeye püskürür; bu yüzden hava hattında su ve yağ ayırıcı bulunur, düzenli boşaltılır ve hortumların temizliği kontrol edilir. Üçüncüsü ortamdır: yakınlarda silikon içeren bir ürün kullanılıyorsa havada asılı zerreler yaş yüzeye iner. Düzeltme, o bölgenin kürlenmesini bekleyip temizlenmesi, zımparalanması ve yeniden yapılmasıdır; kalıntı alınmadan üstüne kat atmak kusuru büyütür. Temizleyici ürün adları ve hava hattı ekipmanı bu derste verilmiyor." },
+          { "label": "Boya az atılmış, kalın kat çözer", "verdict": "az-boya", "explain": "Kalın kat kraterin üstünü kapatmaz; çukur büyür." },
+          { "label": "Vernik hatasıdır", "verdict": "vernik", "explain": "Kusur alttaki yüzeyde kalan kalıntıdan gelir." },
+          { "label": "Cilayla alınır", "verdict": "cila", "explain": "Çukur katmanın içindedir; cila yüzeyi ona kadar indirmek zorunda kalır." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Krater bir temizlik imzası. En çok atlanan kaynak hava hattı: kompresörün yağı ve suyu doğrudan tabancadan gelir."
+    },
+    {
+      "id": 2,
+      "instruction": "Sarkmanın olduğu yerde kalınlık 212 mikron, hemen yanında 154 mikron. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.kalinlik-olcer",
+        "unit": "mikron",
+        "acceptRange": [56, 60]
+      },
+      "camera": "kaporta",
+      "hint": "212 eksi 154.",
+      "teachingNote": "58 mikronluk bir yığılma — ve bu sayı, sarkmanın neden bir 'görüntü kusuru' değil bir malzeme dağılımı sorunu olduğunu gösterir. Sarkan bölgede malzeme çevresinden belirgin biçimde fazladır ve bu fark üç ayrı sorun üretir. Birincisi görünüştür: yüzeyde bir kabartı ya da damla vardır ve ışıkta hemen belli olur. İkincisi kürlenmedir — kalın bölgenin dışı hızla sertleşirken içeride çözücü kalır; o bölge çevresinden farklı bir hızla kürlenir ve haftalar sonra matlık, büzülme ya da küçük kabarcık olarak kendini gösterebilir. Üçüncüsü düzeltmenin kendisidir: kabartıyı almak, çevredeki sağlam katmanı da bir miktar aşındırmak demektir; yani düzeltme kalınlık payından yer ve bu pay ölçülmeden harcanamaz. Ölçümün ikinci işlevi teşhistir — yığılmanın miktarı, sebebin şiddetini söyler. Küçük bir fark tek bir geçişin fazla yavaş yapıldığına işaret ederken, büyük bir fark genellikle katın tümüyle fazla kalın atıldığını ya da ortamın çok soğuk olduğunu gösterir. Üçüncü işlevi ise sınırdır: yığılma çok büyükse o bölgeyi düzeltmeye çalışmak yerine katmanı geri alıp yeniden yapmak daha az emek ister. Kabul edilebilir kalınlık farkı, düzeltme yöntemleri ve aşındırma kademeleri sisteme özgüdür; buradaki iki sayı senaryo okumasıdır."
+    },
+    {
+      "id": 3,
+      "instruction": "Yüzey parlak ama dokusu düzgün değil; ışıkta bakınca portakal kabuğuna benzeyen bir desen var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.tavan-paneli",
+        "question": "Bu desenin sebebi nedir?",
+        "options": [
+          { "label": "Boya yüzeye vardıktan sonra yayılıp düzleşecek zamanı bulamamış: tabanca fazla uzak, hava fazla, ürün fazla koyu ya da ortam çok sıcak — zerreler birleşmiş ama tepe ve çukurları kalmış", "verdict": "portakal-kabugu", "correct": true, "explain": "Portakal kabuğu, kuru inmenin bir sonraki komşusudur ve aradaki fark derecedir. Püskürtülen boya yüzeye ayrı ayrı zerreler hâlinde varır; iyi bir sonuçta bu zerreler yüzeyde bir süre akışkan kalır, birbirine karışır ve tek düz bir film oluşturur. Bu akışkan kalma süresi kısalırsa zerreler birleşir ama düzleşemez — her birinin tepesi ve arasındaki çukur yerinde kalır ve ortaya o tanıdık desen çıkar. Süreyi kısaltan her şey aynı kusuru üretir: tabancanın fazla uzak olması (zerre yolda çözücüsünü kaybeder), hava miktarının fazlalığı (zerre çok küçülür ve hızlı kurur), ürünün olması gerekenden koyu karıştırılması (akışkanlık yetersizdir), ortam sıcaklığının yüksekliği ve güçlü hava akımı. Bir de ters yönden gelen bir sebep vardır: çok kalın atılan kat, yüzeyde kendi ağırlığıyla dalga yapabilir ve bu da benzer bir dokuya yol açar. Teşhis için desenin ölçeğine bakılır — çok ince ve yaygın bir doku genellikle kuruma hızıyla, iri ve düzensiz bir doku ise uygulama düzeniyle ilgilidir. Düzeltme tarafı önemlidir: hafif portakal kabuğu, yeterli vernik kalınlığı varsa polisajla düzeltilebilir, çünkü kusur verniğin içinde ve yüzeye yakındır. Ama derinse ya da renk katındaysa cila yetmez; katman geri alınır. Uygun akışkanlık, mesafe ve sıcaklık aralıkları ürüne ve tabancaya özgüdür." },
+          { "label": "Vernik az atılmış", "verdict": "az-vernik", "explain": "Miktar değil, yüzeyde yayılma süresi belirleyici." },
+          { "label": "Renk yanlış karışmış", "verdict": "renk", "explain": "Doku sorunu; renkten bağımsızdır." },
+          { "label": "Yüzey iyi zımparalanmamış", "verdict": "zimpara", "explain": "Zımpara izi başka bir desen verir; bu kuruma hızıyla ilgili." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Portakal kabuğu kuru inmenin hafif hâli. Zerreler birleşmiş ama düzleşecek zamanı bulamamış."
+    },
+    {
+      "id": 4,
+      "instruction": "Yüzeyde birkaç toz zerresi var. Bazıları elle hissediliyor, bazıları verniğin içinde duruyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.bagaj-kapagi",
+        "question": "Hangisi cilayla alınır?",
+        "options": [
+          { "label": "Verniğin en üstünde kalan, yüzeyden yukarı çıkan zerreler kontrollü biçimde alınabilir; katmanın derinine gömülmüş olanlar alınamaz — çünkü onlara ulaşmak verniğin tamamını harcamak demektir", "verdict": "yuzeydeki-alinir", "correct": true, "explain": "Toz kusurlarında karar tek bir soruya bağlıdır: zerre katmanın neresinde? Vernik püskürtülürken yüzeye inen bir toz, o anda katmanın hangi derinliğine denk geldiyse orada kalır. Son katın üstüne inmiş bir zerre yüzeyden yukarı çıkar; onu almak için yalnız çok ince bir tabaka aşındırmak yeterlidir ve bu, yeterli kalınlık varsa yapılabilir. Ama ilk katlardan birinin üstüne inmiş ve üstüne birkaç kat gelmiş bir zerre, verniğin derinliğindedir; ona ulaşmak için üstündeki bütün sağlam katmanı almak gerekir ve geriye koruma kalmaz. Bu yüzden karar ölçümle verilir: alınacak derinlik, kalan pay içinde mi? Değilse o zerre yerinde bırakılır ya da bölge yeniden yapılır. İkinci bir ayrım daha vardır — zerrenin ne olduğu. Toz ve tüy görece yumuşaktır; kum ya da metal parçacığı sert olabilir ve aşındırma sırasında yerinden çıkıp yüzeyde uzun bir çizik açar, yani düzeltme yeni bir kusur üretir. Üçüncüsü sayıdır: tek tük zerre için nokta düzeltmesi mantıklıdır, ama yüzey geneline yayılmış toz için tek tek uğraşmak hem kalınlığı hem zamanı tüketir; o durumda katmanı geri alıp temiz bir ortamda yeniden yapmak daha az emek ister. Ve asıl mesele hep aynıdır: tozun kaynağı bulunmazsa ikinci deneme de aynı sonucu verir." },
+          { "label": "Hepsi alınır, cila güçlü bir işlemdir", "verdict": "hepsi", "explain": "Derindeki zerreye ulaşmak verniğin tamamını harcar." },
+          { "label": "Hiçbiri alınmaz, panel yeniden boyanır", "verdict": "hicbiri", "explain": "Yüzeye yakın zerreler kontrollü biçimde alınabilir." },
+          { "label": "Elle hissedilenler zaten kendiliğinden düşer", "verdict": "duser", "explain": "Zerre katmanın içinde sabitlenmiştir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Karar tek soruya bağlı: zerre katmanın neresinde? Alınacak derinlik kalan payın içinde değilse yerinde bırakılır."
+    },
+    {
+      "id": 5,
+      "instruction": "Boyalı yüzeyde ince, birbirine paralel çizgiler belirdi. Cila ile geçtin, çıkmadı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.zimpara-bolgesi",
+        "question": "Bu izler nereden geliyor?",
+        "options": [
+          { "label": "Alt katmandan: hazırlık aşamasında atlanan bir zımpara kademesinin bıraktığı derin çizikler, boya ve vernik altında büyütülerek yüzeye çıkmış — cila yüzeyi düzeltir ama alttaki izi almaz", "verdict": "alt-katman", "correct": true, "explain": "Bu, kusur teşhisinin en öğretici örneğidir çünkü sorun görüldüğü yerde değildir. Yüzey hazırlığı dersinde geçen kural burada geri döner: zımpara kademeleri atlanırsa kaba kademenin bıraktığı derin çizikler ince kademe tarafından silinmez, yalnız üstü örtülür. Astar bir süre onları gizler; boya ve vernik ise tam tersini yapar — parlak ve şeffaf bir katman, altındaki her düzensizliği büyüterek gösterir. Bu yüzden 'boyadan sonra çizgiler çıktı' aslında 'hazırlıkta kademe atlandı' demektir. Cila neden çözmez? Çünkü cila verniğin üstünden malzeme alır; çizik ise verniğin altında, renk katının da altındadır. Yüzeyi ne kadar düzlersen düzle, alttaki iz olduğu yerde durur ve şeffaf katman onu göstermeye devam eder. Tek çözüm geri dönmektir: katmanlar o bölgede alınır, yüzey doğru kademe sırasıyla yeniden zımparalanır ve sistem baştan kurulur. Bu ders bu alanın merkezi ilkesini bir kez daha doğrular — görünen katman değil, altındaki hazırlık belirler. Aynı mantıkla okunacak akraba kusurlar da vardır: onarım bölgesinde belirli bir açıdan görünen halka, geçişin dar açılmasıdır; birkaç ay sonra beliren çukur, macunun kalın atılması ya da erken zımparalanmasıdır. Üçü de boyadan önceki adımlara aittir. Zımpara kademeleri ve geçiş genişlikleri ürüne özgüdür ve teknik belgeden okunur." },
+          { "label": "Cila kademesi yetersiz kalmış", "verdict": "cila-kademe", "explain": "Çizik verniğin altında; cila kademesi ona ulaşmaz." },
+          { "label": "Vernik ürün kusuru", "verdict": "urun", "explain": "İz hazırlık aşamasından geliyor." },
+          { "label": "Tabanca ayarı bozuk", "verdict": "tabanca", "explain": "Tabanca kusuru düzenli paralel çizgiler bırakmaz." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Sorun görüldüğü yerde değil. Parlak katman alttaki her düzensizliği büyüterek gösterir — cila onu almaz."
+    },
+    {
+      "id": 6,
+      "instruction": "Elinde beş farklı kusur var ve hangisine nasıl yaklaşacağına karar vereceksin.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-camurluk",
+        "question": "Kusurlar nasıl sınıflandırılır?",
+        "options": [
+          { "label": "Üç sınıfa: yüzeyin en üstünde olanlar (cila), katmanın içinde olanlar (o bölge yeniden boyanır), alt katmandan gelenler (hazırlığa geri dönülür) — ve sınıfı belirleyen şey derinliktir, kusurun adı değil", "verdict": "uc-sinif", "correct": true, "explain": "Boya kusurlarında en çok zaman kaybettiren şey, kusuru adına göre ele almaktır: 'portakal kabuğu çıktı, cilalayalım' ya da 'toz var, cilalayalım'. Oysa aynı ada sahip iki kusur farklı derinlikte olabilir ve çözümleri tamamen ayrılır. Bu yüzden sınıflandırma derinliğe göre yapılır. Birinci sınıf, verniğin en üst tabakasında kalanlardır: hafif portakal kabuğu, yüzeye yakın toz zerresi, ince cila izleri ve tırnağın takılmadığı çizikler. Bunlar kalan kalınlık izin veriyorsa polisajla çözülür. İkinci sınıf, katmanın içinde olanlardır: krater, sarkma, derine gömülmüş zerreler ve verniği aşan çizikler. Bunlar için yüzeyi kusurun dibine indirmek gerekir ve bu, katmanı harcamak demektir; doğru yol o bölgeyi geri alıp yeniden yapmaktır. Üçüncü sınıf, alt katmandan gelenlerdir: zımpara izi, macun çukuru, geçiş halkası, astar delinmesi ve yapışma kaynaklı sorunlar. Bunlarda boya masum bir tanıktır; iş hazırlık aşamasına döner. Karar için üç araç kullanılır — yönlü ışıkta bakmak, tırnak testi ve kalınlık ölçümü. Üçü birlikte 'bu kusur nerede?' sorusunu cevaplar ve cevabı bilmeden başlanan her düzeltme, elde kalan payı tahmine dayanarak harcar. Kabul edilebilir kalan kalınlık ve düzeltme kademeleri sisteme özgüdür." },
+          { "label": "Kusurun adına göre: her kusurun bilinen bir çözümü vardır", "verdict": "ada-gore", "explain": "Aynı adlı kusur farklı derinlikte olabilir; çözüm değişir." },
+          { "label": "Büyüklüğüne göre: küçükler cila, büyükler boya", "verdict": "buyukluge-gore", "explain": "Küçük ama derin bir kusur cilayla alınmaz." },
+          { "label": "Görünürlüğüne göre: görünmeyene dokunulmaz", "verdict": "gorunurluge-gore", "explain": "Bugün görünmeyen bir kusur kürlenme ilerledikçe çıkabilir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Sınıfı derinlik belirler, kusurun adı değil. Üç araç: yönlü ışık, tırnak testi, kalınlık ölçümü."
+    },
+    {
+      "id": 7,
+      "instruction": "Kusurlar sınıflandırıldı, düzeltme planı çıktı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kaput-kaporta",
+        "question": "Bu dersin asıl becerisi nedir?",
+        "options": [
+          { "label": "Kusuru düzeltmek değil, hangi adımda üretildiğini bulmak: her kusur bir parametrenin imzasıdır ve sebebi yerinde bırakılırsa ikinci deneme de aynı sonucu verir", "verdict": "sebebi-bul", "correct": true, "explain": "Bu dersin bütün örnekleri geriye doğru okunuyor. Krater temizliği ya da hava hattını, portakal kabuğu mesafeyi ve kuruma hızını, sarkma kat kalınlığını ve sıcaklığı, toz ortamı ve kıyafeti, paralel çizgiler zımpara kademesini işaret ediyor. Yani yüzeydeki her kusur, daha önce alınmış bir kararın imzası. Bunu görmeyen usta, kusuru düzeltir ve aynı kusurla ikinci kez karşılaşır — üstelik ikinci seferde elinde daha az kalınlık payı vardır. Buradan üç davranış çıkıyor. Birincisi, düzeltmeye başlamadan önce sebebi yazmak: hava hattı boşaltıldı mı, ortam sıcaklığı neydi, kaç kat atıldı, zımpara kademeleri tam mıydı. İkincisi, düzeltmenin kendi maliyetini hesaba katmak: her polisaj ve her zımpara kalınlıktan yer, yani düzeltme de tükettiği için sınırsız değildir. Üçüncüsü ve en zoru, bazı işlerde 'bu düzelmez, geri dönmek gerekiyor' diyebilmek. Bu alanın tekrar eden cümlesi burada da geçerli: reddedilen iş, kötü yapılan işten ucuzdur. Ve bu aşamanın kendi cümlesi şu — kusur bir suçlama değil, bir kayıttır; doğru okunduğunda bir sonraki işi düzeltir. Sırada cam, conta ve su var: yapıştırma camın bekleme süresi neden bir güvenlik konusudur ve su nereden girer." },
+          { "label": "Her kusuru cilayla alabilmek", "verdict": "cila", "explain": "Cila yalnız yüzeye yakın kusurları alır ve kalınlık tüketir." },
+          { "label": "Kusuru müşteriye fark ettirmemek", "verdict": "gizle", "explain": "Gizlenen kusur kürlenme ilerledikçe kendini gösterir." },
+          { "label": "Daha kaliteli ürün kullanmak", "verdict": "urun", "explain": "Kusurların çoğu parametre ve hazırlık kaynaklı." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Kusur bir suçlama değil bir kayıt. Sebebi yerinde bırakılırsa ikinci deneme aynı sonucu verir — üstelik daha az payla."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Yüzeyde ortası çekilmiş küçük yuvarlak çukurlar var. İlk bakılacak yer neresi?",
+        "a": "krater",
+        "options": [
+          { "verdict": "krater", "label": "Yüzeydeki yağ ya da silikon kalıntısı ve hava hattı: kompresörden gelen su ve yağ doğrudan tabancadan püskürebilir", "explain": "Boya, ıslatamadığı noktadan kaçarak çukur bırakır. Yüzey temizliği zımparadan sonra tekrarlanır, hava hattında su ve yağ ayırıcı bulunur ve düzenli boşaltılır. Kalıntı alınmadan üstüne kat atmak kusuru büyütür." },
+          { "verdict": "az-boya", "label": "Boya az atılmış", "explain": "Kalın kat çukuru kapatmaz." },
+          { "verdict": "vernik", "label": "Vernik hatası", "explain": "Kaynak alttaki yüzey kalıntısı." },
+          { "verdict": "cila", "label": "Cilayla alınır", "explain": "Çukur katmanın içindedir." }
+        ]
+      },
+      {
+        "q": "Boyadan sonra ince paralel çizgiler çıktı, cila almadı. Ne yapılır?",
+        "a": "alt-katman",
+        "options": [
+          { "verdict": "alt-katman", "label": "Hazırlığa geri dönülür: izler atlanan bir zımpara kademesinden geliyor ve parlak katman onları büyüterek gösteriyor", "explain": "Cila verniğin üstünden alır; çizik ise renk katının da altındadır. Katmanlar o bölgede alınır, yüzey doğru kademe sırasıyla yeniden zımparalanır. Aynı mantıkla halka dar geçişi, sonradan beliren çukur kalın ya da erken zımparalanmış macunu gösterir." },
+          { "verdict": "cila-kademe", "label": "Daha ince cila kademesi denenir", "explain": "Kademe alttaki ize ulaşmaz." },
+          { "verdict": "urun", "label": "Vernik ürün kusuru", "explain": "İz hazırlıktan geliyor." },
+          { "verdict": "tabanca", "label": "Tabanca ayarı düzeltilir", "explain": "Tabanca düzenli paralel çizgi bırakmaz." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2'deki 212 mikron ve 154 mikron SENARYO okumalarıdır; istenen FARKTIR (58 mikron). Ders hiçbir sistem için kabul edilebilir kalınlık farkı iddia etmiyor.",
+    "sourceRequired": "Kabul edilebilir kalan vernik kalınlığı, düzeltme ve aşındırma kademeleri, temizleyici ürün adları, hava hattı ekipman gereklilikleri, uygun akışkanlık ile mesafe ve sıcaklık aralıkları bilinçle VERİLMEDİ; hepsi ürüne ve sisteme özgüdür ve teknik belgeden okunur.",
+    "kapsam": "Boya kabini kurulumu, havalandırma ve filtre gereklilikleri ile atık mevzuatı KAPSAM DIŞIDIR; ders kusur teşhisini ve derinliğe göre sınıflandırmayı öğretiyor.",
+    "kaynak": "Bu alan kullanıcının açık talebiyle eklendi (talep birebir: 'birde alanlara kaportayı ekleyelim'); konu başlıkları MEB Otomotiv Gövde ve Boya dalının çerçevesini takip ediyor, kazanım numarası iddiası yok.",
+    "reviewedByMechanic": false
+  }
+}

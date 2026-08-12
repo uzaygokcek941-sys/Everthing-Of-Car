@@ -1,0 +1,177 @@
+{
+  "id": "elektrik.aku-degisim-sarj",
+  "area": "arac-elektrik",
+  "stage": 0,
+  "title": "Akü Değişimi, Şarj ve Takviye: Sırayı Bozmadan",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 25,
+  "prerequisites": ["elektrik.aku-guvenlik", "elektrik.multimetre-gerilim"],
+  "learningGoals": [
+    "Aküyü değiştirmeden önce şarj edilip edilemeyeceğine ölçümle karar vermek",
+    "Şarj ve takviyede son bağlantının neden aküye değil şaseye yapıldığını bilmek",
+    "Akü değişiminin arızayı değil belirtiyi çözebileceğini görmek: sebep şarj tarafında olabilir"
+  ],
+
+  "safety": [
+    { "rule": "Şarj cihazı, kabloları aküye bağlandıktan sonra prize takılır; şarj bitince önce prizden çekilir", "why": "Cihaz enerjiliyken kelepçeyi kutba değdirmek kıvılcım üretir. Şarj hâlindeki akünün üstünde hidrojen birikmiştir ve o kıvılcım gazı tutuşturabilir. Sıra, kıvılcımın akünün üzerinde çıkmasını engellemek içindir", "blocksStart": true },
+    { "rule": "Takviyede son kelepçe, boş akünün eksi kutbuna değil aracın şasesine bağlanır", "why": "Son bağlantı kıvılcım çıkarır. Bu kıvılcımın akünün gaz çıkaran kapağından uzakta, gövdenin metal bir noktasında olması istenir. Aynı sebeple ilk sökülen kablo da şasedeki kelepçedir", "blocksStart": true },
+    { "rule": "Donmuş ya da gövdesi şişmiş akü şarj edilmez, takviye verilmez", "why": "Donmuş elektrolit ve şişmiş gövde iç yapının bozulduğunu gösterir. Bu akü şarj sırasında patlayabilir; ısıtılmaz, doğrudan toplama noktasına verilir", "blocksStart": true },
+    { "rule": "Akü iki elle, gövdesinden ve dik tutularak taşınır", "why": "Kutuplardan kaldırılan akünün kurşun kutbu içeride gevşer ve akü kullanılmaz hâle gelir. Yatırılan akünün kapağından elektrolit sızar", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.multimetre", "label": "Dijital multimetre", "required": true },
+    { "id": "tool.anahtar-10", "label": "10 mm anahtar", "required": true },
+    { "id": "tool.sarj-cihazi", "label": "Akü şarj cihazı", "required": true },
+    { "id": "tool.takviye-kablosu", "label": "Takviye kablosu", "required": false },
+    { "id": "tool.gozluk", "label": "Koruyucu gözlük", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Araç çalışmıyor, akü zayıf. Müşteri 'yeni akü tak' diyor. Ölçtün: dinlenmiş gerilim düşük ama gövde sağlam, kutuplar temiz.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.aku",
+        "question": "İlk karar ne olmalı?",
+        "options": [
+          { "label": "Önce şarj edilip yeniden ölçülür; boşalmış akü ile ömrünü tamamlamış akü aynı şey değildir", "verdict": "once-sarj", "correct": true, "explain": "Zayıf okuyan bir akünün iki farklı sebebi olabilir: ya uzun süre kullanılmadığı, farı açık kaldığı ya da şarj sistemi beslemediği için boşalmıştır, ya da içindeki plakalar ömrünü tamamlamıştır. Bu ikisi ölçümle ayrılır ve ayırmanın yolu şarj etmektir: tam şarjdan sonra dinlendirilip ölçülen akü hâlâ düşükse ya da yük altında çöküyorsa karar nettir. Şarj edip sonucu görmek birkaç saat alır ama müşteriye gereksiz bir akü satmayı önler. Ayrıca bu adım atlanırsa asıl arıza — şarj etmeyen bir alternatör ya da kaçak akım — gizli kalır ve yeni akü de birkaç hafta içinde aynı duruma düşer." },
+          { "label": "Doğrudan yeni akü takılır, müşteri de onu istiyor", "verdict": "yeni-tak", "explain": "Müşterinin istediği çalışan bir araçtır. Sebep şarj tarafındaysa yeni akü de aynı yoldan boşalır ve ikinci kez gelir." },
+          { "label": "Takviye verilip gönderilir", "verdict": "takviye", "explain": "Takviye aracı hareket ettirir, arızayı çözmez. Boşalma sebebini bulmadan yapılan takviye yalnız zaman kazandırır." },
+          { "label": "Kutuplar temizlenip bırakılır", "verdict": "temizle", "explain": "Kutup temizliği her zaman yapılır ama ölçüm kutupların zaten temiz olduğunu söylüyor; sorun başka yerde." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Parça satmak kolaydır, teşhis koymak zordur. Aradaki fark, müşterinin ikinci kez sana gelip gelmemesidir."
+    },
+    {
+      "id": 2,
+      "instruction": "Aküyü şarj için tezgâha alacaksın. Kutuplar sökülü. Aküyü yerinden yukarı çek.",
+      "interaction": {
+        "type": "pull",
+        "target": "part.aku",
+        "axis": "y",
+        "distance": 0.5
+      },
+      "camera": "tezgah",
+      "hint": "İki elle, gövdesinden ve dik tut.",
+      "teachingNote": "Akü göründüğünden ağırdır ve ağırlığı içinde eşit dağılmamıştır. Kutuplardan kaldırmak kurşun kutbu içeride gevşetir; o akü sağlam olsa bile artık düzgün temas veremez. Taşıma kolu varsa kullanılır, yoksa iki elle gövdeden kavranır."
+    },
+    {
+      "id": 3,
+      "instruction": "Şarj cihazını bağlayacaksın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.aku-arti-kutup",
+        "question": "Doğru sıra hangisi?",
+        "options": [
+          { "label": "Cihaz fişi prizde değilken kelepçeler bağlanır — önce artı, sonra eksi — ve en son cihaz prize takılır", "verdict": "kablo-once-fis-sonra", "correct": true, "explain": "Bütün mesele kıvılcımın nerede çıktığıdır. Enerjili bir cihazın kelepçesini kutba değdirmek küçük bir kıvılcım üretir ve şarj olan akünün üzerinde her zaman bir miktar hidrojen bulunur. Bu yüzden bağlantılar cihaz enerjisizken yapılır, cihaz en son çalıştırılır. Bitişte sıra terse döner: önce cihaz kapatılır ve fişi çekilir, sonra kelepçeler alınır. Ayrıca akü havalandırılmış bir yerde şarj edilir. Şarj biter bitmez ölçülen gerilim yüzey şarjı yüzünden yüksek çıkar; karar için akü bir süre dinlendirilir." },
+          { "label": "Cihaz çalışırken kelepçeler kutuplara takılır, böylece bağlantı test edilmiş olur", "verdict": "cihaz-calisirken", "explain": "Bağlantı zaten cihaz çalışınca test olur. Enerjiliyken takmak kıvılcımı tam da gazın olduğu yere getirir." },
+          { "label": "Sıra önemli değil, cihaz kendini korur", "verdict": "onemsiz", "explain": "Modern cihazların koruması vardır ama kıvılcım fiziksel bir olaydır; sıra yine de uygulanır." },
+          { "label": "Yalnız artı kelepçe bağlanır, eksi gerekmez", "verdict": "tek-kelepce", "explain": "Devre tamamlanmadan akım akmaz; iki kelepçe de bağlanır." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Elektrikte güvenlik kurallarının çoğu tek bir soruya indirgenir: kıvılcım nerede çıkacak? Sırayı o soru belirler."
+    },
+    {
+      "id": 4,
+      "instruction": "Şarj öncesi dinlenmiş gerilim 12,10 V idi. Şarjdan sonra bir saat dinlendirdin, şimdi 12,65 V okuyor. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.multimetre-ekran",
+        "unit": "V",
+        "acceptRange": [0.5, 0.6]
+      },
+      "camera": "tezgah",
+      "hint": "12,65 eksi 12,10.",
+      "teachingNote": "Bu fark akünün şarjı kabul ettiğini söyler: plakalar hâlâ iş görüyor. Şarja rağmen gerilim kayda değer biçimde yükselmiyorsa akü şarjı tutmuyordur ve karar değişir. Burada da bir üretici sınırı kullanmadın; aynı akünün iki andaki hâlini karşılaştırdın. Bir soru hâlâ açık: bu akü yük altında ne yapıyor? Onu bir önceki derste öğrendiğin marş anı ölçümü söyler."
+    },
+    {
+      "id": 5,
+      "instruction": "Yolda kalan başka bir araca takviye vereceksin. Üç kelepçe bağlandı, sıra sonuncusunda.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.aku-eksi-kutup",
+        "question": "Son kelepçe nereye bağlanır?",
+        "options": [
+          { "label": "Boş akünün eksi kutbuna değil, o aracın şasesinde boyasız bir metal noktaya", "verdict": "saseye", "correct": true, "explain": "Son bağlantı devreyi tamamladığı için kıvılcım çıkarır. Boş akü, hele derin boşalmışsa, kapağından hidrojen salıyor olabilir; kıvılcımı oraya getirmek akünün patlamasına yol açabilir. Şaseye bağlamak devreyi elektriksel olarak aynı biçimde tamamlar — gövde zaten eksi uçtur — ama kıvılcımı gazdan uzağa taşır. Sökme sırası bunun tersidir: ilk çıkarılan kelepçe şasedeki olur. Ayrıca motorlar çalışırken kelepçeler oynatılmaz ve kelepçelerin uçları birbirine değdirilmez." },
+          { "label": "Boş akünün eksi kutbuna, en doğrudan yol odur", "verdict": "eksi-kutba", "explain": "Elektriksel olarak çalışır ama kıvılcımı akünün gaz çıkardığı noktaya getirir. Kaçınılan tam olarak budur." },
+          { "label": "İki aracın gövdelerini birbirine değdirmek yeterlidir", "verdict": "govde-govdeye", "explain": "Lastikler üzerindeki iki araç arasında güvenilir bir gövde teması yoktur; bağlantı kelepçeyle yapılır." },
+          { "label": "Sıra fark etmez, kablolar zaten yalıtımlı", "verdict": "fark-etmez", "explain": "Yalıtım kabloyu korur, kıvılcımı engellemez. Kıvılcım kelepçenin ucunda çıkar." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Takviyede de şarjda da aynı ilke: son bağlantı, gazdan en uzak noktada yapılır."
+    },
+    {
+      "id": 6,
+      "instruction": "Ömrünü tamamlamış akü tezgâhta duruyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.aku",
+        "question": "Eski akü ne yapılır?",
+        "options": [
+          { "label": "Dik konumda, kutupları yalıtılmış hâlde toplama noktasına verilir; içeriği hem tehlikeli hem geri kazanılabilirdir", "verdict": "geri-donusum", "correct": true, "explain": "Bir akünün içinde kurşun ve sülfürik asit vardır. Toprağa ya da çöpe giden akü hem zehirli bir atıktır hem de neredeyse tamamen geri kazanılabilecek bir malzemeyi yok eder; bu yüzden atık akülerin toplanması yasal bir yükümlülüktür ve satıcılar eskisini teslim almakla yükümlüdür. Atölye tarafında kural basittir: akü dik durur, kutupları kısa devre yapmayacak biçimde yalıtılır, sızıntıya karşı ayrı bir yerde bekletilir. Yere dökülen elektrolit su ile seyreltilip nötrleştirilir, kuru süpürülmez." },
+          { "label": "Çöpe atılır, içi zaten boşalmıştır", "verdict": "cope", "explain": "Boşalmış akünün içinde de kurşun ve asit vardır; çöpe atmak hem zararlı hem yasaklıdır." },
+          { "label": "İçindeki asit dökülüp gövdesi hurdaya verilir", "verdict": "asidi-dok", "explain": "Asit dökülmez; akü içeriğiyle birlikte toplama noktasına gider." },
+          { "label": "Yatık olarak istiflenir, yer kazanılır", "verdict": "yatik", "explain": "Yatık akünün kapağından elektrolit sızar; dik istiflenir." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Atık yönetimi bu mesleğin görünmeyen yarısıdır. MEB programının ilk öğrenme birimi de güvenlik ve çevredir; sebebi budur."
+    },
+    {
+      "id": 7,
+      "instruction": "Yeni akü takıldı, araç çalışıyor. Müşteri gitmeye hazırlanıyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.aku-arti-kutup",
+        "question": "Aracı teslim etmeden önce ne yapılır?",
+        "options": [
+          { "label": "Aküyü boşaltan sebep aranır: şarj sistemi ölçülür ve kaçak akım kontrol edilir", "verdict": "sebep-ara", "correct": true, "explain": "Akü kendi kendine boşalmaz. Ya şarj sistemi yeterince beslememiştir, ya kontak kapalıyken bir devre akım çekmeye devam etmiştir, ya da akü ömrünü tamamlamıştır. Üçüncüsü doğrulanmadan ilk ikisi elenmezse yeni akü de birkaç hafta içinde aynı yerden boşalır ve müşteri haklı olarak takılan parçayı suçlar. Motor çalışırken alternatör çıkışını ölçmek dakikalar sürer; kaçak akım ölçümü ileride ayrı bir derste işlenir. Bu iki kontrol, akü değişimini bir parça satışından bir onarıma dönüştüren şeydir." },
+          { "label": "Gerek yok, yeni akü sorunu çözer", "verdict": "gerek-yok", "explain": "Akü belirtidir; sebep şarj ya da tüketim tarafında olabilir. Sebep bulunmadan iş kapanmaz." },
+          { "label": "Yalnız kelepçe sıkılığı kontrol edilir", "verdict": "kelepce", "explain": "Doğru ve gerekli bir kontrol ama tek başına yetmez." },
+          { "label": "Müşteriye birkaç gün gözlemlemesi söylenir", "verdict": "gozlemlesin", "explain": "Doğrulamayı müşteriye devretmek işi yarım bırakmaktır; ölçüm birkaç dakikadır." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Motor alanında öğrendiğin cümle burada da geçerli: parçayı değiştirip sebebi bırakan usta, aynı arızayı ikinci kez ücretsiz onarır."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Takviyede son kelepçe neden boş akünün eksi kutbuna bağlanmaz?",
+        "a": "kivilcim-gazdan-uzak",
+        "options": [
+          { "verdict": "kivilcim-gazdan-uzak", "label": "Son bağlantı kıvılcım çıkarır; kıvılcım akünün gaz çıkardığı noktadan uzakta olsun diye şaseye bağlanır", "explain": "Devreyi tamamlayan son bağlantı küçük bir kıvılcım üretir. Boşalmış akü kapağından hidrojen salıyor olabilir ve hidrojen kolay tutuşur; kıvılcımı oraya getirmek akünün patlamasına yol açabilir. Gövde zaten akünün eksi ucuna bağlı olduğu için şaseye bağlamak devreyi aynı biçimde tamamlar, ama kıvılcımı gazdan uzağa taşır. Sökerken de ilk çıkarılan kelepçe şasedeki olur." },
+          { "verdict": "direnc", "label": "Şase daha az direnç gösterdiği için", "explain": "Direnç farkı sebep değildir; sebep kıvılcımın yerini seçmektir." },
+          { "verdict": "kolaylik", "label": "Kelepçe şaseye daha kolay tutunduğu için", "explain": "Kolaylık değil güvenlik gerekçesidir." },
+          { "verdict": "gerekmez", "label": "Aslında eksi kutba bağlanır", "explain": "Bağlanabilir ama güvenli yöntem şasedir; kural bunun için vardır." }
+        ]
+      },
+      {
+        "q": "Zayıf okuyan bir akü neden hemen değiştirilmez?",
+        "a": "bosalmis-mi-bitmis-mi",
+        "options": [
+          { "verdict": "bosalmis-mi-bitmis-mi", "label": "Boşalmış akü ile ömrünü tamamlamış akü aynı şey değildir; ayrımı şarj edip yeniden ölçmek yapar", "explain": "Akü ya dışarıdan bir sebeple boşalmıştır — far açık kalmış, araç uzun süre durmuş, şarj sistemi beslememiş, bir devre kaçak akım çekmiş — ya da plakaları ömrünü tamamlamıştır. Şarj edip dinlendirdikten sonra alınan ölçüm bu ikisini ayırır: gerilim toparlanıyor ve yük altında dayanıyorsa akü sağlamdır, sorun başka yerdedir. Bu adım atlanırsa hem gereksiz parça satılır hem de asıl arıza gizli kalır; yeni akü de aynı yoldan boşalır." },
+          { "verdict": "fiyat", "label": "Akü pahalı olduğu için", "explain": "Fiyat ikincil gerekçedir; asıl sebep teşhisin tamamlanmamış olmasıdır." },
+          { "verdict": "garanti", "label": "Garanti şartı olduğu için", "explain": "Garanti bir teşhis yöntemi değildir." },
+          { "verdict": "degistirilir", "label": "Değiştirilir, ölçüm zaten düşük çıkmıştır", "explain": "Düşük gerilim sebebi söylemez; boşalmayla ömrün bitmesi aynı sayıyı verebilir." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 4'teki 12,10 V ve 12,65 V SENARYO okumalarıdır. Öğrenciden istenen bir üretici sınırı değil, aynı akünün iki andaki okumasının FARKIDIR (0,55 V). sourceRequired bu yüzden gerekmedi.",
+    "sourceRequired": "Şarj akımı, şarj süresi, sağlıklı dinlenmiş gerilim aralığı ve akü kapasitesi seçimi bu derste bilinçli olarak VERİLMEDİ; bunlar akü tipine ve üreticiye bağlıdır. Şarj cihazı kullanımı cihazın kendi kılavuzuna göre yapılır.",
+    "kapsam": "Şarj cihazı, takviye kablosu ve akü bağlantı braketi modelde yok; bu adımlar seçim olarak öğretiliyor. Akünün yerinden çıkarılması pull hareketiyle veriliyor.",
+    "mevzuat": "Atık akü toplama yükümlülüğünün varlığı anlatıldı; yönetmelik adı ve madde numarası iddia EDİLMEDİ. Mevzuat atfı eklenecekse kaynakla birlikte eklenir.",
+    "reviewedByMechanic": false
+  }
+}

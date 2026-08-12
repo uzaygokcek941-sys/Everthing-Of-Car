@@ -1,0 +1,177 @@
+{
+  "id": "lastik.on-duzen-ayari",
+  "area": "lastik-tekerlek",
+  "stage": 8,
+  "title": "Ön Düzen Ayarı ve Raporun Okunması",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 35,
+  "prerequisites": ["lastik.on-takim-kontrol"],
+  "learningGoals": [
+    "Salgı telafisinin neden ölçümün ilk adımı olduğunu bilmek",
+    "Toplam toe doğruyken direksiyonun neden eğri kalabileceğini açıklamak",
+    "Aralığa girmeyen bir açının ayar sorunu değil parça sorunu olduğunu kavramak"
+  ],
+
+  "safety": [
+    { "rule": "Ayar öncesi hazırlık adımları atlanmaz", "why": "Basınç, boşluk, salgı ve yük durumu ölçülen açıyı değiştirir; hazırlık yapılmadan alınan sonuç doğru cihazdan gelse bile yanlıştır", "blocksStart": true },
+    { "rule": "Rot kolu ayarlanırken kilit somunu gevşetilir, kol zorlanmaz", "why": "Kilit somunu gevşetilmeden çevrilen kol körüğü burar ve rot başını hasarlandırır", "blocksStart": true },
+    { "rule": "Ayar bitince kilit somunları belirtilen torkla sıkılır ve körüklerin burulmadığı kontrol edilir", "why": "Gevşek kilit somunu ayarın yolda kaymasına, burulmuş körük ise kısa sürede yırtılmasına yol açar", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.on-duzen-cihazi", "label": "Ön düzen cihazı", "required": true },
+    { "id": "tool.rot-anahtari", "label": "Rot ayar anahtarı", "required": true },
+    { "id": "tool.tork-anahtari", "label": "Tork anahtarı", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Cihazın sensörleri dört jantın kenarına bağlandı. Cihaz tekerleklerin döndürülmesini istiyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.jant",
+        "question": "Bu adım ne işe yarar?",
+        "options": [
+          { "label": "Salgı telafisi: jantın kendi eğriliği ölçüme sahte bir açı ekler, cihaz tekerleği döndürerek bu sapmayı öğrenir ve hesaptan çıkarır", "verdict": "salgi-telafisi", "correct": true, "explain": "Cihazın sensörleri aracın açılarını doğrudan değil, jantın kenarına bağlandıkları için jantın düzlemi üzerinden okur. Jant kusursuz düz değilse — ki hiçbiri tam değildir, üstelik çukur görmüş bir jant belirgin biçimde eğridir — sensör, aracın gerçek açısına jantın eğriliğini de ekleyerek okur. Bu sahte katkı ölçümün tamamını kaydırır ve doğru cihazla yanlış sonuç alınmasına yol açar. Salgı telafisi bu katkıyı ayıklar: tekerlek belirli bir miktar döndürülür, sensör aynı noktanın farklı konumlardaki okumasını karşılaştırır ve jantın kendi sapmasını hesaplayıp ölçümden çıkarır. Bu yüzden adım atlanmaz; atlandığında rapordaki sayılar aracı değil, aracı artı jantı anlatır. Aynı sebeple sensörler temiz bir jant kenarına, sıkıca ve doğru yönde bağlanır: gevşek bağlanan bir sensör kendi başına sapma üretir." },
+          { "label": "Cihazın ısınması için", "verdict": "isinma", "explain": "Isınma değil; jantın kendi eğriliğinin ölçümden çıkarılması." },
+          { "label": "Lastiğin oturması için", "verdict": "oturma", "explain": "Lastiğin oturması ayrı bir konu; bu adım jant salgısını telafi eder." },
+          { "label": "Gerekmez, atlanabilir", "verdict": "atlanabilir", "explain": "Atlanırsa jantın eğriliği açı gibi ölçülür ve rapor yanıltır." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Ölçüm aletinin bağlandığı yüzeyin kusuru, ölçümün kusuru olur. Salgı telafisi tam olarak bu sorunu çözen adım."
+    },
+    {
+      "id": 2,
+      "instruction": "Rapor ekrana geldi. Bazı değerler yeşil, bazıları kırmızı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.rot-kolu",
+        "question": "Rapor nasıl okunur?",
+        "options": [
+          { "label": "Her değer hem kendi hedef aralığıyla hem de karşı tarafla karşılaştırılır; renkler yalnız aralığı gösterir, sol–sağ dengesini göstermez", "verdict": "aralik-ve-denge", "correct": true, "explain": "Cihazın renklendirmesi tek bir soruyu yanıtlar: bu değer üreticinin verdiği aralığın içinde mi? Bu önemli ama yetersiz bir sorudur, çünkü sürüş davranışını belirleyen şey çoğu zaman mutlak değer değil sol ile sağ arasındaki farktır. İki taraf da aralığın içinde olabilir ama biri aralığın alt ucunda diğeri üst ucunda duruyorsa aralarında gerçek bir fark vardır ve araç o tarafa çeker — rapor yemyeşil görünürken müşteri şikâyetle döner. Bu yüzden rapor okunurken iki geçiş yapılır: önce her değer kendi aralığına bakılır, sonra sol ve sağ yan yana konur. Aynı mantık ön ve arka aks arasındaki ilişkiler için de geçerlidir. Bir de rapor öncesi ve sonrası ayrımı vardır: cihaz ölçümü kaydeder, ayardan sonra ikinci ölçüm alınır ve ikisi birlikte saklanır. Bu ikili kayıt hem yapılan işin kanıtıdır hem de bir sonraki bakımda karşılaştırma zemini." },
+          { "label": "Yalnız renklere bakılır: yeşilse sorun yok", "verdict": "renk", "explain": "Renk yalnız aralığı gösterir; iki taraf aralık içindeyken de aralarında fark olabilir." },
+          { "label": "Yalnız toplam toe değerine bakılır", "verdict": "toplam", "explain": "Toplam doğruyken dağılım bozuk olabilir; direksiyon eğri kalır." },
+          { "label": "Rapor müşteriye verilir, yorum gerekmez", "verdict": "yorumsuz", "explain": "Raporun yorumu ustanın işidir; sayılar tek başına karar vermez." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Cihaz ölçer, usta yorumlar. Renkli bir ekran teşhisin yerine geçmez — özellikle sol–sağ dengesinde."
+    },
+    {
+      "id": 3,
+      "instruction": "Raporda ölçülen toplam toe 0,45°, aracın hedef değeri 0,10°. Sapmayı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.rot-kolu",
+        "unit": "derece",
+        "acceptRange": [0.34, 0.36]
+      },
+      "camera": "tekerlek",
+      "hint": "0,45 eksi 0,10.",
+      "teachingNote": "0,35°'lik bu sapma küçük bir sayı gibi görünüyor ama toe her metrede çalışan bir hatadır: tekerlek ileri giderken sürekli yana sürüklenir ve sırtı tıraşlar. Bu yüzden ön düzen ayarında derecenin ondalıkları önemlidir ve ayar gözle değil cihazla yapılır. Hedef değerin kendisi araca özgüdür ve cihazın araç veritabanından gelir — bu ders bir hedef değer öğretmiyor, sapmanın nasıl okunacağını öğretiyor."
+    },
+    {
+      "id": 4,
+      "instruction": "Toe ayarını yapacaksın. Rot kollarının boyu değiştirilerek ayarlanıyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.rot-basi",
+        "question": "Ayar nasıl dağıtılır?",
+        "options": [
+          { "label": "İki rot kolundan dengeli biçimde: toplam toe tutturulurken direksiyonun da merkezde kalması gerekir", "verdict": "iki-taraftan", "correct": true, "explain": "Toplam toe, iki ön tekerleğin toe değerlerinin toplamıdır ve ayar bu toplamı hedefe getirmeyi amaçlar. Ama aynı toplam sonsuz farklı dağılımla elde edilebilir: bütün düzeltmeyi tek bir koldan yapmak da toplamı tutturur. Sorun şudur — tek taraftan yapılan ayar, aracın düz gitme yönü ile direksiyon simidinin konumunu birbirinden ayırır. Araç düz gider ama direksiyon eğri durur; müşteri bunu hemen fark eder ve haklı olarak şikâyet eder. Doğru yöntem direksiyonu ölçüm sırasında merkezde sabitlemek ve düzeltmeyi iki koldan dengeli dağıtmaktır; böylece hem toplam toe hem de direksiyonun merkezi doğru olur. Cihazların çoğu bu iş için tekerlek başına ayrı toe değeri gösterir. Direksiyon zaten eğri gelmişse önce sebep aranır — bazen sorun ayar değil, önceki bir onarımda yanlış takılmış direksiyon simidi ya da arka aksın itiş açısıdır." },
+          { "label": "Tek koldan: toplam tutarsa yeter", "verdict": "tek-kol", "explain": "Toplam tutar ama direksiyon eğri kalır; müşteri hemen fark eder." },
+          { "label": "Direksiyon eğri kalırsa simit sökülüp düz takılır", "verdict": "simit", "explain": "Bu, sorunu gizler; ayrıca dönüş açısı sensörleri ve sürüş yardımları etkilenir." },
+          { "label": "Yalnız çeken taraftan ayarlanır", "verdict": "ceken-taraf", "explain": "Çekme ayrı bir konu; toe dağılımı direksiyon merkezini belirler." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Aynı sonucu veren iki yol her zaman eşdeğer değildir. Toplam toe doğru olsa da yanlış dağıtılmışsa iş yarım yapılmıştır."
+    },
+    {
+      "id": 5,
+      "instruction": "Ayar sırasında bir açı, kol sonuna kadar çevrildiği hâlde hedef aralığa girmiyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.rotil",
+        "question": "Ne yapılır?",
+        "options": [
+          { "label": "Zorlanmaz: ayar aralığının yetmemesi geometride bir sapma olduğunu gösterir; parçalar ve gövde kontrol edilir", "verdict": "geometri-sapmasi", "correct": true, "explain": "Fabrika, ayar aralığını üretim toleranslarını karşılayacak kadar geniş bırakır — normal bir araçta o aralık fazlasıyla yeterlidir. Kol sonuna kadar çevrildiği hâlde hedefe ulaşılamıyorsa, aracın geometrisi artık fabrikadaki geometri değildir. Sebepler bellidir: çukur ya da kaldırım darbesiyle eğilmiş bir salıncak veya rot çubuğu, yorulup açılmış burçlar, hasarlı bir amortisör gövdesi, ya da onarılmış bir kazanın ardından tam düzeltilmemiş bir gövde. Bu durumda yapılacak şey açıyı zorlamak değil, sebebi aramaktır: ön takım parçaları tek tek kontrol edilir, gerekirse gövde ölçümü yapılır ve bulunan parça değiştirilir. Sonradan takılan ayar parçalarıyla açıyı çekmek bazı araçlarda mümkündür ve meşrudur, ama bu ancak geometrinin sağlam olduğu doğrulandıktan sonra düşünülür — aksi hâlde hasar gizlenmiş olur. Müşteriye söylenecek cümle nettir: ayar yapılamıyor, çünkü ayarlanacak şey ayarın dışına çıkmış." },
+          { "label": "Kol daha fazla zorlanır", "verdict": "zorla", "explain": "Zorlamak dişleri ve körüğü bozar, sebebi gidermez." },
+          { "label": "Diğer tekerlekten telafi edilir", "verdict": "telafi", "explain": "Telafi toplamı tutturur ama sapmayı ve direksiyon merkezini bozar." },
+          { "label": "Aralık dışı bırakılıp teslim edilir", "verdict": "birak", "explain": "Bırakılabilir ama sebebi bulunup yazılmadan değil; lastikler aşınmaya devam eder." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Ayar aralığının bitmesi bir sınır değil, bir bulgudur: sistem artık tasarlandığı yerde değil."
+    },
+    {
+      "id": 6,
+      "instruction": "Ayar tamamlandı, ikinci ölçüm alındı ve değerler hedefte.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik",
+        "question": "İş bitti mi?",
+        "options": [
+          { "label": "Bitmedi: kilit somunları torklanır, körüklerin burulmadığı kontrol edilir ve yol testi yapılır", "verdict": "yol-testi", "correct": true, "explain": "Cihazın ekranındaki değerler işin doğru yapıldığını gösterir ama tamamlandığını göstermez. Üç adım daha vardır. Birincisi kilit somunlarıdır: rot kolları ayarlandıktan sonra kilit somunları belirtilen torkla sıkılır, gevşek kalan bir somun ayarın yolda yavaşça kaymasına yol açar ve araç birkaç hafta içinde eski hâline döner. İkincisi körüklerdir: kol çevrilirken körük burulmuş olabilir, burulmuş körük kısa sürede yırtılır ve rot başının ömrünü bitirir — bu yüzden ayar bitince körüklerin serbest ve düz durduğu gözle kontrol edilir. Üçüncüsü yol testidir: araç düz bir yolda sürülür, direksiyonun merkezde durduğu ve aracın çekmediği fiilen görülür. Yol testi cihazın göremediği şeyleri gösterir — fren sıkışması, lastik kaynaklı çekme ya da yol eğiminin etkisi. Ölçüm öncesi ve sonrası rapor birlikte müşteriye verilir; bu, yapılan işin hem kanıtı hem de bir sonraki bakımın karşılaştırma zeminidir." },
+          { "label": "Bitti; ekranda değerler hedefte", "verdict": "bitti", "explain": "Kilit somunu, körük ve yol testi kalıyor." },
+          { "label": "Yalnız yol testi yeterli", "verdict": "yalniz-yol", "explain": "Kilit somunu ve körük kontrolü atlanamaz." },
+          { "label": "Yalnız rapor çıktısı verilir", "verdict": "rapor", "explain": "Rapor işin kaydı; fiziksel kontroller ayrı." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Ayarın kendisi birkaç dakika, ayarı kalıcı kılan adımlar birkaç dakika daha. İkincisi atlanınca birincisi de boşa gider."
+    },
+    {
+      "id": 7,
+      "instruction": "Müşteriye teslim ediyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.manometre",
+        "question": "Ne anlatılır ve ne kayda geçer?",
+        "options": [
+          { "label": "Ayar öncesi ve sonrası değerler, değiştirilen parçalar, ayarlanamayan bir açı varsa gerekçesi ve lastiklerdeki mevcut aşınma deseni", "verdict": "onceki-sonraki", "correct": true, "explain": "Ön düzen işi, sonucu gözle görülmeyen ender işlerden biridir: müşteri ne yapıldığını göremez, yalnız aracın nasıl gittiğini hisseder. Bu yüzden kayıt ve anlatım işin parçasıdır. Öncesi ve sonrası değerler birlikte verilir — hangi açının ne kadar saptığı ve nereye getirildiği görünür olur; bu, gereksiz iş yazılmadığının da kanıtıdır. Değiştirilen parçalar ve gerekçeleri yazılır. Ayarlanamayan bir açı kaldıysa sebebi açıkça belirtilir, çünkü o açı ileride yeniden şikâyet üretecektir. Son olarak lastiklerin mevcut aşınma deseni kaydedilir: ayar bugün düzeltildi ama lastikte önceki sapmanın izi duruyor ve o iz bir süre daha ses ve titreşim üretebilir — müşteriye bunu önceden söylemek, iki hafta sonra gelecek bir şikâyeti baştan karşılar. Bu kayıt, bir sonraki bakımda aşınmanın gerçekten dengelendiğini görmenin de tek yoludur." },
+          { "label": "Yalnız ayar yapıldığı söylenir", "verdict": "yapildi", "explain": "Sonucu görünmeyen bir işte sayısal kayıt tek kanıttır." },
+          { "label": "Yalnız sonraki değerler verilir", "verdict": "sonraki", "explain": "Öncesi olmadan ne kadar düzeltildiği görünmez." },
+          { "label": "Rapor dosyada kalır, müşteriye gerekmez", "verdict": "dosyada", "explain": "Müşteri neyin neden yapıldığını bilerek karar verir." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Sonucu görünmeyen işlerde kayıt, işin kendisi kadar önemlidir. Öncesi–sonrası raporu bu alandaki en güçlü güven aracı."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Toplam toe hedefe getirildiği hâlde direksiyon neden eğri kalabilir?",
+        "a": "dagilim",
+        "options": [
+          { "verdict": "dagilim", "label": "Düzeltme iki rot koluna dengeli dağıtılmadığı için: aynı toplam farklı dağılımlarla elde edilebilir ama direksiyonun merkezi dağılıma bağlıdır", "explain": "Toplam toe iki tekerleğin değerlerinin toplamıdır ve bütün düzeltmeyi tek koldan yapmak da toplamı tutturur. Ancak bu, aracın düz gitme yönü ile direksiyon simidinin konumunu birbirinden ayırır: araç düz gider, direksiyon eğri durur. Doğru yöntem direksiyonu merkezde sabitleyip düzeltmeyi iki koldan dengeli dağıtmaktır. Direksiyon zaten eğri geldiyse önce sebep aranır — yanlış takılmış simit ya da arka aksın itiş açısı olabilir." },
+          { "verdict": "kamber", "label": "Kamber ayarsız olduğu için", "explain": "Direksiyon merkezi toe dağılımıyla belirlenir." },
+          { "verdict": "basinc", "label": "Basınçlar farklı olduğu için", "explain": "Basınç çekme yapabilir ama merkez konumu dağılımdan gelir." },
+          { "verdict": "normal", "label": "Normaldir, düzeltilemez", "explain": "Düzeltilebilir; ayar iki koldan dengeli dağıtılır." }
+        ]
+      },
+      {
+        "q": "Rot kolu sonuna kadar çevrildiği hâlde açı hedefe girmiyorsa ne düşünülür?",
+        "a": "geometri",
+        "options": [
+          { "verdict": "geometri", "label": "Aracın geometrisi fabrikadaki geometri değildir: eğilmiş parça, yorulmuş burç ya da düzeltilmemiş kaza hasarı", "explain": "Fabrika ayar aralığını üretim toleranslarını karşılayacak kadar geniş bırakır; normal bir araçta fazlasıyla yeterlidir. Aralığın yetmemesi bir sınır değil bulgudur. Parçalar tek tek kontrol edilir, gerekirse gövde ölçümü yapılır. Sonradan takılan ayar parçalarıyla açıyı çekmek ancak geometrinin sağlam olduğu doğrulandıktan sonra düşünülür — aksi hâlde hasar gizlenir." },
+          { "verdict": "zorla", "label": "Kol biraz daha zorlanır", "explain": "Zorlamak dişleri ve körüğü bozar, sebebi gidermez." },
+          { "verdict": "telafi", "label": "Diğer tekerlekten telafi edilir", "explain": "Toplamı tutturur ama sapmayı ve direksiyon merkezini bozar." },
+          { "verdict": "cihaz", "label": "Cihaz yanlış ölçmüştür", "explain": "Cihaz doğrulanır ama ilk açıklama geometrinin değişmiş olmasıdır." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 0,45° ve 0,10° SENARYO değerleridir; belirli bir araca ait hedef toe DEĞİLDİR. İstenen SAPMADIR (0,35°) ve dersin gösterdiği şey ondalıkların bu işte önemli olduğudur.",
+    "sourceRequired": "Hedef açı değerleri, kabul aralıkları ve rot kilit somunu torku bilinçle VERİLMEDİ: araca özgüdür; açılar cihazın araç veritabanından, tork üreticinin belgesinden okunur.",
+    "kapsam": "Arka aks ayarı, itiş açısı ve dört tekerlek ayarının ayrıntıları kapsam dışı; ders ön aks toe ayarı üzerine kurulu. Sahnede ön düzen cihazı MODELLENMEDİ; adım hedefleri mevcut parçalara bağlandı ve cihaz metinde anlatıldı.",
+    "reviewedByMechanic": false
+  }
+}

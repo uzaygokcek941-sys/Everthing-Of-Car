@@ -1,0 +1,173 @@
+{
+  "id": "elektrik.multimetre-akim",
+  "area": "arac-elektrik",
+  "stage": 1,
+  "title": "Akım Ölçme: Devreye Seri Girmek",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 25,
+  "prerequisites": ["elektrik.multimetre-gerilim", "elektrik.multimetre-direnc"],
+  "learningGoals": [
+    "Ampermetreyi devreye seri bağlamak ve neden paralel bağlanamayacağını bilmek",
+    "Akım yuvasının ve aletin kendi sigortasının ne işe yaradığını anlamak",
+    "Paralel çalışan tüketicilerin akımlarının toplandığını ölçümle görmek"
+  ],
+
+  "safety": [
+    { "rule": "Ampermetre asla bir tüketicinin üzerine paralel bağlanmaz", "why": "Ampermetrenin iç direnci neredeyse sıfırdır. Kaynağın iki ucuna ya da bir tüketicinin üzerine paralel bağlanırsa akım tüketici yerine aletin içinden akar; bu doğrudan kısa devredir. En iyi ihtimalle aletin sigortası atar, sigortasız alette kablo ve alet yanar", "blocksStart": true },
+    { "rule": "Ölçülecek akım aletin kademe sınırının altında olmalı", "why": "Yüksek akım yuvası bile sınırlıdır ve çoğu alette süreli kullanıma göre tasarlanmıştır. Marş devresi gibi yüzlerce amper akan yerlerde multimetre kullanılmaz, pens ampermetre kullanılır", "blocksStart": true },
+    { "rule": "Bağlantı yapılırken devre enerjisiz olur, ölçüm sonrası prob eski yuvasına döner", "why": "Canlı devrede araya girerken çıkan kıvılcım hem tehlikelidir hem soket pinlerini yakar. Akım yuvasında unutulan prob ise bir sonraki gerilim ölçümünde kısa devre demektir", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.multimetre", "label": "Dijital multimetre", "required": true },
+    { "id": "tool.sigorta-adaptoru", "label": "Sigorta yuvası ölçüm adaptörü", "required": false },
+    { "id": "tool.pens-ampermetre", "label": "Pens ampermetre", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Far devresinin ne kadar akım çektiğini ölçeceksin.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.multimetre",
+        "question": "Ampermetre devreye nasıl bağlanır?",
+        "options": [
+          { "label": "Seri: devre bir noktadan açılır ve alet o açıklığın arasına girer, akım aletin içinden geçer", "verdict": "seri", "correct": true, "explain": "Akım bir yolu izler ve o yolun her noktasından aynı miktarda geçer. Akımı ölçmek için aletin o yolun üstünde olması, akımın kendi içinden geçmesi gerekir. Bu yüzden devre bir noktadan açılır ve alet araya girer. Aletin iç direnci bilerek neredeyse sıfır yapılmıştır ki ölçtüğü devreyi yavaşlatmasın. Voltmetre tam tersiydi: iç direnci çok yüksekti ve devreye paralel bağlanıyordu, çünkü ölçtüğü şey iki nokta arasındaki farktı. İki alet aynı kutunun içindedir ama bağlanma biçimleri birbirinin zıddıdır; bu zıtlık, yanlış yuvada unutulan probun neden kısa devre yaptığını da açıklar." },
+          { "label": "Paralel: tüketicinin iki ucuna bağlanır", "verdict": "paralel", "explain": "Bu voltmetrenin bağlanma biçimidir. Ampermetreyi paralel bağlamak, iç direnci sıfıra yakın olduğu için doğrudan kısa devredir." },
+          { "label": "Tek uç devreye değdirilir, diğeri şaseye", "verdict": "tek-uc-sase", "explain": "Bu da bir paralel bağlantıdır ve aynı kısa devre riskini taşır." },
+          { "label": "Bağlamaya gerek yok, alet yakınından okur", "verdict": "temassiz", "explain": "Temassız ölçüm pens ampermetrenin işidir; o da kabloyu çenesinin içine alır. Multimetre devreye girer." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Voltmetre paralel, ampermetre seri. Bir önceki derste öğrendiğin cümlenin ikinci yarısı bu dersin tamamıdır."
+    },
+    {
+      "id": 2,
+      "instruction": "Probları yuvalarına takacaksın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.multimetre",
+        "question": "Akım ölçümünde hangi yuva kullanılır ve neden aletin orada bir sigortası vardır?",
+        "options": [
+          { "label": "Kırmızı prob akım yuvasına alınır; o yuvadan aletin içine dirençsiz bir yol geçtiği için yanlış bağlantıda devreyi ve aleti sigorta korur", "verdict": "akim-yuvasi-ve-sigorta", "correct": true, "explain": "Akım ölçebilmek için aletin içinden neredeyse dirençsiz bir yol geçmesi gerekir; akımın aleti fark etmeden geçmesi istenir. Bu aynı zamanda aletin en savunmasız hâlidir: prob akım yuvasındayken yanlışlıkla iki kutba dokunulursa kaynak, aletin içinden kısa devre olur. Üretici bu yüzden akım yolunun üstüne bir sigorta koyar; yanlış bağlantıda önce o sigorta atar ve alet kurtulur. Ucuz aletlerde bu sigorta bulunmaz ya da yetersizdir; kazanın sonucu yanan bir alet ve eriyen bir prob olur. İşin alışkanlık tarafı basittir: ölçüm biter bitmez prob gerilim yuvasına geri alınır." },
+          { "label": "Gerilim yuvası kullanılır, akım da oradan okunur", "verdict": "gerilim-yuvasi", "explain": "Gerilim yuvasının önünde yüksek bir direnç vardır; oradan akım ölçülemez." },
+          { "label": "Yuva fark etmez, kademe seçimi yeterlidir", "verdict": "yuva-farketmez", "explain": "Kademe ile yuva birlikte çalışır; yuva yanlışsa kademe doğru olsa da ölçüm olmaz." },
+          { "label": "Aletteki sigorta yalnız süslemedir", "verdict": "sigorta-gereksiz", "explain": "O sigorta, yanlış bağlantıda aleti ve devreyi kurtaran tek şeydir." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Aletin içindeki sigorta, senin hatanı bekleyen bir sigortadır. Attığında aleti değil kendini feda etmiştir; yenisi aynı değerde takılır."
+    },
+    {
+      "id": 3,
+      "instruction": "Devreyi açman gerekiyor. En kolay açma noktası sigorta yuvasıdır. Far sigortasını yuvasından yukarı çek.",
+      "interaction": {
+        "type": "pull",
+        "target": "part.sigorta.1",
+        "axis": "y",
+        "distance": 0.2
+      },
+      "camera": "tezgah",
+      "hint": "Sigortayı çekmek devreyi kablo kesmeden açar.",
+      "teachingNote": "Devreyi açmak için kablo kesilmez. Sigorta yuvası zaten devrenin ayrılabilir bir noktasıdır ve tam da bu iş için elverişlidir. Bu yuvaya oturan ölçüm adaptörleri vardır; aleti seri sokmanın en temiz yolu odur."
+    },
+    {
+      "id": 4,
+      "instruction": "Alet sigorta yuvasına seri girdi. Bir far yanınca ekran 4,60 A gösterdi. İkinci farı da yakınca 9,15 A oldu. İkinci farın kattığı akımı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.far-ampulu",
+        "unit": "A",
+        "acceptRange": [4.5, 4.6]
+      },
+      "camera": "tezgah",
+      "hint": "9,15 eksi 4,60.",
+      "teachingNote": "İkinci far, birincisinin akımını bölüşmedi; kendi akımını ekledi. Paralel bağlı tüketicilerin her biri kaynaktan kendi payını çeker ve kaynağın verdiği toplam akım bunların toplamıdır. Araçtaki tüketicilerin neredeyse tamamı böyle bağlıdır — bu yüzden bir lamba yandığında diğerleri sönmez. Aynı sebep, sigorta değerinin neden devrenin toplamına göre seçildiğini de açıklar."
+    },
+    {
+      "id": 5,
+      "instruction": "Ölçüm sürüyor, bir de marş akımını görmek istiyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.multimetre",
+        "question": "Marş devresinin akımı bu aletle ölçülür mü?",
+        "options": [
+          { "label": "Ölçülmez; marş yüzlerce amper çeker, bu iş için pens ampermetre kullanılır", "verdict": "pens-ampermetre", "correct": true, "explain": "Multimetrenin akım yuvası küçük akımlar içindir ve çoğu alette o yuva bile kısa süreli kullanıma göre tasarlanmıştır. Marş devresi yüzlerce amper çeker; bu akımı aletin içinden geçirmeye kalkmak aleti anında yok eder ve tehlike yaratır. Bu ölçüm pens ampermetre ile yapılır: alet kabloyu çenesinin arasına alır, devreye hiç girmez ve akımın kablonun çevresinde oluşturduğu manyetik alandan okuma yapar. Devreyi açmadığı için hızlıdır ve yüksek akımda güvenlidir. Kural olarak, ölçeceğin akım aletin sınırının üstündeyse alet değiştirilir, sınır zorlanmaz." },
+          { "label": "Ölçülür, kısa süre bağlı tutulursa sorun olmaz", "verdict": "kisa-sure", "explain": "Kısa süre bile yetmez; akım aletin sınırının kat kat üstündedir." },
+          { "label": "Ölçülür ama önce aletin sigortası çıkarılır", "verdict": "sigortasiz", "explain": "Sigortayı çıkarmak aleti korumasız bırakmaktır; sorunu büyütür." },
+          { "label": "Marş devresinde akım ölçülmez, gerilim yeterlidir", "verdict": "sadece-gerilim", "explain": "Gerilim düşümü ölçümü çok işe yarar ama akım da ölçülebilir; doğru aletle." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Aletin sınırını bilmek, aleti kullanmayı bilmenin yarısıdır. Sınırı aşan ölçüm yalnız yanlış sonuç vermez, aleti bitirir."
+    },
+    {
+      "id": 6,
+      "instruction": "Ölçüm bitti, sigorta yerine takıldı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sigorta-kutusu",
+        "question": "Ölçtüğün akım, sigortanın değeriyle nasıl ilişkilidir?",
+        "options": [
+          { "label": "Sigorta, devrenin normal akımının üstünde ama kablonun taşıyabileceğinin altında seçilir; koruduğu şey tüketici değil kablodur", "verdict": "kabloyu-korur", "correct": true, "explain": "Sigortanın işi, devrede bir sorun çıktığında akımı kablo ısınmadan kesmektir. Bu yüzden değeri iki sınır arasına yerleşir: devrenin normal çalışma akımının biraz üstünde olmalı ki her açılışta atmasın, kablonun güvenle taşıyabileceğinin altında olmalı ki kablo yanmadan devreye girsin. Sık atan bir sigortaya daha yüksek amperli takmak bu ikinci sınırı çiğner: sigorta artık atmaz, onun yerine kablo ısınır ve yalıtımı erir. Doğru davranış sigortanın neden attığını bulmaktır — kısa devre, sıkışmış bir tüketici ya da ezilmiş bir kablo." },
+          { "label": "Sigorta tüketiciyi korur; tüketici bozulursa atar", "verdict": "tuketiciyi-korur", "explain": "Yan etkisi olabilir ama asıl görevi kabloyu korumaktır; değeri de kabloya göre seçilir." },
+          { "label": "Sigorta değeri rastgele seçilir, önemli olan atmamasıdır", "verdict": "rastgele", "explain": "Atmaması hedef değildir; gerektiğinde atması hedeftir." },
+          { "label": "Sigorta devrenin akımını sınırlar", "verdict": "akimi-sinirlar", "explain": "Sigorta akımı sınırlamaz, aşıldığında devreyi tamamen keser. İkisi farklı işlerdir." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Sigorta kabloyu korur. Bu tek cümle, atölyedeki en tehlikeli alışkanlığın — yüksek amperli sigorta takmanın — neden yangınla bittiğini açıklar."
+    },
+    {
+      "id": 7,
+      "instruction": "Aleti bırakacaksın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.multimetre",
+        "question": "Akım ölçümünden sonraki ilk iş nedir?",
+        "options": [
+          { "label": "Kırmızı probu akım yuvasından alıp gerilim yuvasına geri takmak", "verdict": "probu-geri-al", "correct": true, "explain": "Multimetre kazalarının çoğu, bir önceki ölçümden kalan bağlantıyla başlar. Akım yuvasında unutulan kırmızı prob, sonraki gerilim ölçümünde iki kutba dokunulduğu anda kaynağı aletin içinden kısa devre yapar; en iyi ihtimalle aletin sigortası atar. Bu yüzden akım ölçümü biter bitmez prob gerilim yuvasına geri alınır ve seçici gerilim kademesine getirilir. Bu, tork anahtarını en düşük kademede bırakma alışkanlığının elektrikteki karşılığıdır: alet, bir sonraki kullanan için en zararsız durumda bırakılır." },
+          { "label": "Aleti kapatmak yeterli", "verdict": "kapat", "explain": "Kapalı alet açıldığında son ayarıyla açılır; prob hâlâ akım yuvasındadır." },
+          { "label": "Probları çıkarıp çantaya atmak", "verdict": "cantaya-at", "explain": "İyidir ama yeterli değil; asıl mesele bir dahaki sefere hangi yuvada bulacağındır." },
+          { "label": "Fark etmez, bir sonraki ölçümde nasılsa bakılır", "verdict": "farketmez", "explain": "Bakmayı unutmak tam da kazanın olduğu andır; alışkanlık ölçümün sonuna konur." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Bu dersin sonu bir öncekiyle aynı cümleye bağlanıyor: aleti bir sonraki kullanan için güvenli bırak. Aynı kuralı üçüncü kez görmen tesadüf değil."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Ampermetre neden devreye seri bağlanır?",
+        "a": "akim-icinden-gecsin",
+        "options": [
+          { "verdict": "akim-icinden-gecsin", "label": "Akımı ölçmek için akımın aletin içinden geçmesi gerekir; bu yüzden devre açılır ve alet araya girer", "explain": "Akım bir yol boyunca akar ve o yolun her noktasından aynı miktarda geçer. Ölçmek için aletin bu yolun üstünde olması gerekir, bu yüzden devre bir noktadan açılır ve alet aradaki boşluğa girer. Aletin iç direnci bilerek neredeyse sıfır yapılmıştır ki ölçtüğü devreyi değiştirmesin. Aynı sebeple bu alet asla paralel bağlanmaz: paralel bağlanan bir ampermetre, dirençsiz yoluyla doğrudan kısa devre olur." },
+          { "verdict": "guvenlik", "label": "Yalnız güvenlik gereği", "explain": "Güvenlik sonuçtur; sebep ölçülen büyüklüğün doğasıdır." },
+          { "verdict": "kolaylik", "label": "Kolay olduğu için", "explain": "Seri bağlamak kolay değil, zahmetlidir; yine de zorunludur." },
+          { "verdict": "paralel", "label": "Aslında paralel bağlanır", "explain": "Paralel bağlanan ampermetre kısa devre yapar; paralel bağlanan alet voltmetredir." }
+        ]
+      },
+      {
+        "q": "İki far birlikte yandığında toplam akımın artması neyi gösterir?",
+        "a": "paralel-toplanir",
+        "options": [
+          { "verdict": "paralel-toplanir", "label": "Tüketiciler paralel bağlıdır; her biri kaynaktan kendi akımını çeker ve akımlar toplanır", "explain": "Paralel bağlı tüketicilerin her biri kaynağa kendi yolundan bağlıdır ve kendi akımını çeker; kaynağın verdiği toplam akım bunların toplamıdır. Bu yüzden ikinci far yanınca akım bölüşülmedi, arttı. Araçtaki tüketicilerin neredeyse tamamı böyle bağlıdır — bir lamba yandığında diğerleri sönmez, çünkü her birinin kendi yolu vardır. Aynı sebeple sigorta değeri, o devrede aynı anda çalışabilecek tüketicilerin toplamına göre seçilir." },
+          { "verdict": "seri", "label": "Tüketiciler seri bağlıdır", "explain": "Seri bağlı olsalardı akım artmaz, gerilim bölünürdü ve biri yanınca devre tamamen kesilirdi." },
+          { "verdict": "ariza", "label": "Devrede arıza vardır", "explain": "Arıza değil, paralel devrenin normal davranışıdır." },
+          { "verdict": "olcum-hatasi", "label": "Ölçüm hatasıdır", "explain": "Hata değil; beklenen ve açıklanabilir bir sonuçtur." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 4'teki 4,60 A ve 9,15 A SENARYO okumalarıdır. Öğrenciden istenen bir üretici değeri değil, iki okumanın FARKIDIR (4,55 A). Farkın öğrettiği şey paralel devrede akımların toplandığıdır. sourceRequired bu yüzden gerekmedi.",
+    "sourceRequired": "Far ampulünün çektiği akım, sigorta değerleri ve aletin akım kademesi sınırları bu derste sayı olarak VERİLMEDİ; bunlar araca ve alete özgüdür. Aletin sınırı kendi kılavuzundan okunur.",
+    "kapsam": "Ölçüm adaptörü ve pens ampermetre modelde yok; bu adımlar seçim olarak öğretiliyor. Sigortanın yuvadan çıkarılması pull hareketiyle veriliyor.",
+    "reviewedByMechanic": false
+  }
+}

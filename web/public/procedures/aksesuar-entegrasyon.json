@@ -1,0 +1,181 @@
+{
+  "id": "aksesuar.entegrasyon",
+  "area": "aksesuar-ses",
+  "stage": 10,
+  "title": "Ustalık Sınavı: Dört Şikâyetli Araç",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 50,
+  "prerequisites": ["aksesuar.aku-bosaliyor"],
+  "learningGoals": [
+    "Birden çok şikâyeti tek bir ortak sebebe bağlayabilmek",
+    "İşi güvenlik, sınır ve maliyet sırasına göre planlamak",
+    "Kırmızı çizgiye gelindiğinde durup doğru yönlendirmeyi yapmak"
+  ],
+
+  "safety": [
+    { "rule": "Sarı konektörlü hiçbir birime dokunulmaz; hava yastığı bileşenleri sökülmez, ölçülmez, taşınmaz", "why": "Bu alanın ilk dersinden beri değişmeyen sınır; ölçüm akımı bile tetikleme eşiğine yaklaşabilir", "blocksStart": true },
+    { "rule": "Araç haberleşme hattına müdahale edilmez", "why": "Yanlış müdahale tek bir cihazı değil ağa bağlı bütün birimleri etkiler ve ortaya çıkan arıza alakasız görünür", "blocksStart": true },
+    { "rule": "Anahtar tanıtma, çip kopyalama ve immobilizer iptali yapılmaz", "why": "Bu alanın kırmızı çizgisi; birçok araçta işlem mevcut anahtarların hepsini siler ve araç sahipliğinin doğrulanması gerekir", "blocksStart": true },
+    { "rule": "Hiçbir koruma iptal edilerek belirti susturulmaz", "why": "Sıkışma koruması, park modu akü koruması ve sigortalar birer güvenlik cihazıdır; belirtiyi susturan çözüm arızayı büyütür", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.multimetre", "label": "Multimetre", "required": true },
+    { "id": "tool.pens-ampermetre", "label": "Pens ampermetre", "required": true },
+    { "id": "tool.plastik-sokme-spatulasi", "label": "Plastik söküm spatulası", "required": true },
+    { "id": "tool.tornavida-seti", "label": "Tornavida seti", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Araç geldi. Müşteri dört şikâyet sayıyor: sol arka cam çalışmıyor, sol ön hoparlörden ses gelmiyor, araç bekledikçe akü boşalıyor ve kamera kaydı bazen olmuyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kapi-ic-dosemesi",
+        "question": "Nereden başlanır?",
+        "options": [
+          { "label": "Şikâyetler tek tek doğrulanır ve aralarında ortak bir sebep olup olmadığı aranır; dört ayrı iş gibi başlamadan önce tek bir sebebin dördünü birden açıklayıp açıklamadığına bakılır", "verdict": "ortak-sebep-ara", "correct": true, "explain": "Birden çok şikâyeti olan bir araçta acemi usta dört ayrı iş görür ve dört ayrı fiyat verir; usta olan önce bir soru sorar: bunların ortak bir sebebi olabilir mi? Bu soru bu alanın merkez kuralının genişletilmiş hâlidir — hepsini etkileyen arıza ortak halkadadır. Burada iki şikâyet aynı bölgeye işaret ediyor: cam ve hoparlör devrelerinin ikisi de kapı içinden geçiyor, ikisinin de kablosu körükten çıkıyor ve ikisi de kapı içindeki neme açık. Üçüncü şikâyet, akünün boşalması, bir modülün uyanık kalmasıyla açıklanabilir ve kapı modüllerini uyanık tutan en yaygın sebep suyla bozulmuş bir kapı düğmesidir. Dördüncüsü, kameranın bazen kaydetmemesi, park modu ya da besleme sorununa işaret eder ve o da aynı akü tablosuyla ilişkilidir. Yani dört şikâyetin en az üçü tek bir zincire — kapı içine giren su ve zayıflayan bağlantılar — bağlanabilir. Bu bir tahmindir ve doğrulanması gerekir; ama doğru soru sorulduğu için arama dört ayrı yöne değil tek bir yöne odaklanır. Doğrulama sırası şudur: her şikâyet önce kendi tablosuyla teyit edilir — cam için hangi cam hangi düğme, ses için hangi hoparlör, akü için uykudaki akım — sonra ortak nokta aranır." },
+          { "label": "Dört ayrı iş olarak fiyat verilir", "verdict": "dort-is", "explain": "Ortak sebep varsa müşteri gereksiz para öder, sen gereksiz emek harcarsın." },
+          { "label": "En pahalı parçadan başlanır", "verdict": "pahali", "explain": "Sebep bulunmadan parça değiştirilmez." },
+          { "label": "Müşterinin en çok yakındığı şikâyet çözülür", "verdict": "en-cok", "explain": "Öncelik önemli ama ortak sebep aranmadan başlanmaz." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Acemi dört iş görür, usta bir soru sorar: bunların ortak sebebi olabilir mi?"
+    },
+    {
+      "id": 2,
+      "instruction": "Şikâyetleri tek tek doğruladın. Sol arka kapı döşemesini açtığında halının kenarı nemli, kapı içinde su izi var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kapi-modulu",
+        "question": "Bu bulgu neyi açıklıyor?",
+        "options": [
+          { "label": "Muhtemelen üçünü birden: biriken su soketleri ve düğmeleri oksitliyor, bu hem cam devresini hem hoparlör hattını bozuyor hem de modülü uyanık tutup aküyü boşaltıyor", "verdict": "su-zinciri", "correct": true, "explain": "Kapı içine giren su, bu alanın en çok tekrarlanan zinciridir ve burada üç şikâyeti birden açıklıyor. Zincir şöyle işler: su kapıya normalde de girer — bu bir arıza değildir, camın kenarından sızan su kapı içine iner ve alttaki tahliye deliklerinden dışarı çıkar. Sistemi bozan şey suyun girmesi değil, ÇIKAMAMASIDIR. Tahliye delikleri tıkandığında ya da su bariyeri eksik veya yırtık olduğunda su kapı içinde birikir ve kabine doğru yol bulur. Biriken su üç ayrı hasar üretir. Birincisi soketlerdir: nemli ortamda temas noktaları oksitlenir, direnç artar ve devre ya kesilir ya kararsız çalışır — cam ve hoparlör şikâyetlerinin ikisi de bununla açıklanır. İkincisi düğmelerdir: kapının açık olduğunu bildiren küçük anahtar oksitlendiğinde sistem kapıyı sürekli açık sanar, modül uyumaz ve akü boşalır. Üçüncüsü mekanizmadır: nem ve kir kanalları ve krikoyu ağırlaştırır, cam yavaşlar. Yani doğru onarım oksitlenmiş soketi temizlemek DEĞİLDİR — o belirtiyi giderir, sebebi bırakır ve altı ay sonra araç geri gelir. Doğru onarım su yolunu düzeltmektir: tahliye delikleri açılır, su bariyeri eksiksiz yerine oturtulur, körük tam takılır ve ancak ondan sonra oksitlenmiş bağlantılar temizlenip gerekirse yenilenir." },
+          { "label": "Yalnız cam arızasını açıklar", "verdict": "yalniz-cam", "explain": "Aynı su hoparlör hattını ve kapı düğmesini de bozar." },
+          { "label": "Su normaldir, ilgisizdir", "verdict": "normal", "explain": "Su girmesi normaldir; birikmesi değil." },
+          { "label": "Halı kurutulup geçilir", "verdict": "kurut", "explain": "Sebep duruyor; su yeniden birikir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Sistemi bozan şey suyun girmesi değil, çıkamaması. Tahliye açılmadan yapılan her onarım geçici."
+    },
+    {
+      "id": 3,
+      "instruction": "Kapı içindeki şase noktasını temizlemeden önce 0,62 ohm, temizledikten sonra 0,03 ohm okudun. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.multimetre-aksesuar",
+        "unit": "ohm",
+        "acceptRange": [0.57, 0.61]
+      },
+      "camera": "aksesuar",
+      "hint": "0,62 eksi 0,03.",
+      "teachingNote": "0,59 ohmluk bu fark küçük bir sayı gibi duruyor ama bu alanın bütün derslerinde karşına çıkan sorunun ta kendisi. Şase akımın dönüş yoludur ve dönüş yolundaki her direnç iki şey yapar: devreye ulaşan gerilimi düşürür ve gürültü üretir. Küçük akım çeken bir devrede bu direnç fark edilmez; ama cam motoru gibi yüksek akım çeken bir yükte aynı direnç ciddi bir gerilim kaybına dönüşür — çünkü kayıp akımla birlikte büyür. İşte bu yüzden aynı kötü şase bir devrede hiç belirti vermezken diğerinde arıza gibi görünür ve usta 'bir şey çalışıyor, öbürü çalışmıyor' tablosuyla karşılaşır. Ses tarafında ise aynı direnç gürültü üretir; parazit dersinde ölçtüğün şase farkının kaynağı budur. Temizliğin nasıl yapıldığı da önemlidir: cıvata sökülür, temas yüzeyi metale kadar açılır, pabuç ve cıvata temizlenir, sıkılır ve yüzey sonradan paslanmayacak biçimde korunur. Bir de not: bu ölçüm onarımın kanıtıdır. Önce ve sonra iki sayı, müşteriye gösterilebilecek somut bir şeydir ve 'temizledim' demekten çok daha fazlasını anlatır. Kabul edilebilir şase direnci sınırı devreye ve araca özgüdür; bu ders bir sınır vermiyor, önemli olan farkın kendisidir."
+    },
+    {
+      "id": 4,
+      "instruction": "Müşteri ayrıca 'ikinci anahtarı kaybettim, yenisini kopyala' ve 'kameranın kablosunu şu direğin içinden geçir' diyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.haberlesme-hatti",
+        "question": "Ne cevap verilir?",
+        "options": [
+          { "label": "İkisi de yapılmaz ve sebebi açıklanır: anahtar tanıtma bu atölyenin işi değildir ve yetkili yere yönlendirilir; kablo hava yastığının şişme yolundan geçirilemez, güvenli bir güzergâh gösterilir", "verdict": "ikisi-de-sinir", "correct": true, "explain": "Bu adım sınavın asıl sorusudur: usta olmak yalnız yapabildiğini bilmek değil, yapmayacağını bilmektir. İki istek de bu alanın kırmızı çizgilerine denk geliyor ve ikisinin de reddedilme biçimi önemlidir — 'yapamam' değil, 'neden yapılmaz ve bunun yerine ne yapılır' diye anlatılır. Anahtar tarafında gerekçe üçlüdür: birçok araçta yeni anahtar tanıtma işlemi mevcut bütün anahtarları siler ve yanlış yapılan bir işlem aracı hiç çalışmaz hâle getirebilir; işlem aracın güvenlik sisteminin bir parçasıdır ve aracın gerçekten o kişiye ait olduğunun doğrulanması gerekir; ayrıca bu ayrı bir uzmanlık ve ayrı bir donanım işidir. Doğru cevap müşteriyi yetkili bir yere yönlendirmek ve neden orada yapılması gerektiğini anlatmaktır. Kablo tarafında gerekçe daha da nettir: direk kaplamasının altında perde tipi hava yastığı bulunabilir ve oraya sıkıştırılan bir kablo, yastık şiştiğinde kabin içine savrulur — bu bir konfor tercihi değil doğrudan can güvenliğidir. Ama burada iş reddedilmez, güzergâh değiştirilir: kablo aracın kendi demetinin gittiği yoldan, yastığın olmadığı taraftan indirilir. Müşteriye söylenecek cümle şudur: bu kabloyu oradan geçirirsem bir kazada sana zarar verir, şuradan geçirirsem hem görünmez hem güvenli olur. Sınırı anlatan usta güven kaybetmez, kazanır." },
+          { "label": "İkisi de yapılır, müşteri istiyor", "verdict": "yap", "explain": "İkisi de bu alanın kırmızı çizgisi." },
+          { "label": "Anahtar yapılır, kablo reddedilir", "verdict": "yarim", "explain": "Anahtar tanıtma ayrı bir uzmanlık ve sahiplik doğrulaması gerektirir." },
+          { "label": "Sessizce başka türlü yapılır", "verdict": "sessiz", "explain": "Müşteriye söylenmeyen değişiklik güven kaybettirir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Usta olmak yapabildiğini bilmek değil, yapmayacağını bilmek. Ve sebebini anlatabilmek."
+    },
+    {
+      "id": 5,
+      "instruction": "Kamera kaydının bazen olmaması şikâyetine bakıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-kamera",
+        "question": "Bu şikâyet diğerleriyle nasıl ilişkili?",
+        "options": [
+          { "label": "Aynı akü tablosunun parçası olabilir: akü zayıfladıkça park modu koruması erken kesiyor ya da besleme kararsız kalıyordur — önce su yolu, şase ve tüketim düzeltilir, kamera en son değerlendirilir", "verdict": "ayni-tablo", "correct": true, "explain": "Bu, sınavın en öğretici bağlantısıdır: kameranın bazen kaydetmemesi bağımsız bir arıza gibi görünür ama aynı zincire bağlıdır. İki yol vardır. Birincisi park modu korumasıdır: koruma, akü belli bir seviyeye indiğinde cihazın beslemesini keser — akü zaten bir kapı modülü tarafından boşaltılıyorsa koruma her gece erken devreye girer ve müşteri 'bazen kaydetmiyor' der. Burada kamera kusursuz çalışıyordur; kusur aküyü boşaltan modüldedir. İkincisi besleme kalitesidir: aynı su ve oksitlenme zinciri kameranın besleme ya da şase bağlantısını da etkiliyorsa cihaz kararsız çalışır ve dosyaları yarım kapatır. Bu yüzden onarım sırası bellidir ve tek yönlüdür: önce su yolu ve şase, sonra modülü uyanık tutan giriş, sonra uykudaki akımın yeniden ölçümü, en son kamera davranışının değerlendirilmesi. Tersten gidilirse — yani önce kamera ayarlarıyla oynanırsa — belirti bir süre kaybolur, akü hâlâ boşalır ve şikâyet geri gelir. Bir de ihtimal listesinden çıkarılmaması gereken bir madde var: kartın yorulmuş olması. Kamera dersinde anlatıldığı gibi kart sessizce bozulur ve 'bazen kaydetmiyor' bunun da klasik belirtisidir; bu yüzden kart kontrol edilir ve gerekirse cihazın kendi menüsünden biçimlendirilir." },
+          { "label": "Bağımsız bir arızadır, kamera değişir", "verdict": "bagimsiz", "explain": "Aynı akü ve besleme zincirine bağlı olabilir." },
+          { "label": "Park modu iptal edilir", "verdict": "iptal", "explain": "Müşterinin istediği işlevi kaldırmak çözüm değil." },
+          { "label": "Önce kamera ayarları değiştirilir", "verdict": "ayar", "explain": "Sıra tersten gidilirse belirti gizlenir, sebep kalır." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Kamera kusursuz olabilir; kusur aküyü boşaltan modülde. Sıra tek yönlü: su, şase, giriş, ölçüm, en son kamera."
+    },
+    {
+      "id": 6,
+      "instruction": "İş planını çıkarıp müşteriye anlatacaksın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sase-noktasi-aksesuar",
+        "question": "Plan nasıl sunulur?",
+        "options": [
+          { "label": "Ortak sebep önce çözülür ve bunun büyük olasılıkla üç şikâyeti birden gidereceği söylenir; kalanlar ondan sonra değerlendirilir ve onay alınmadan ek iş yapılmaz", "verdict": "once-ortak", "correct": true, "explain": "İş planının sırası hem teknik hem ticari bir karardır ve ikisi burada aynı yöne bakıyor. Teknik sıra: önce su yolu düzeltilir — tahliye delikleri açılır, su bariyeri ve körük eksiksiz yerine oturtulur; sonra oksitlenmiş şase ve soketler temizlenip gerekirse yenilenir; sonra modülü uyanık tutan giriş bulunup düzeltilir; sonra uykudaki akım yeniden ölçülür; sonra cam ve hoparlör tek tek doğrulanır; en son kamera değerlendirilir. Bu sıra tesadüf değil: her adım bir sonrakinin sonucunu değiştirebilir, tersten gidilirse aynı iş iki kere yapılır. Ticari sıra da aynıdır ve müşteriye şöyle anlatılır: bu dört şikâyetin muhtemelen ortak bir sebebi var, önce onu çözelim, üçü birden düzelebilir; düzelmeyen kalırsa ayrıca bakarız ve o zaman haber veririm. Bu cümle üç şey yapar — müşteriyi gereksiz masraftan korur, işin sonunda çıkacak sürprizi baştan alır ve senin onay almadan iş büyütmeyeceğini söyler. Onay konusu nettir: teşhis sırasında kapsam genişlerse iş durdurulur ve müşteriye danışılır; haber vermeden büyüyen fatura, iyi yapılmış bir işi bile kötü bir deneyime çevirir. Son olarak dürüst bir belirsizlik payı da söylenir: su hasarı yıllara yayılmışsa bazı parçalar temizlikle kurtulmayabilir ve değişebilir." },
+          { "label": "Dört iş de aynı anda başlatılır", "verdict": "hepsi", "explain": "Her adım bir sonrakinin sonucunu değiştirebilir." },
+          { "label": "En pahalı iş önce yapılır", "verdict": "pahali", "explain": "Ortak sebep çözülünce pahalı iş gerekmeyebilir." },
+          { "label": "Kapsam büyürse haber verilmez", "verdict": "haber-verme", "explain": "Onaysız büyüyen fatura iyi işi bile kötü deneyime çevirir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Önce ortak sebep. Kapsam genişlerse dur ve sor — haber vermeden büyüyen fatura işi bitirir."
+    },
+    {
+      "id": 7,
+      "instruction": "İşler bitti. Aracı teslim ediyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.hoparlor-kapi",
+        "question": "Bu alan sana ne öğretti?",
+        "options": [
+          { "label": "Aksesuar işi parça takma işi değil: aracın kendi sistemine bir şey eklemek ve o sistemi bozmadan yapmak — besleme, şase, kablo güzergâhı, su yolu ve sınır bilgisi işin tamamı", "verdict": "sistem-bilgisi", "correct": true, "explain": "Bu alan boyunca öğrenilen şey bir liste değil bir yaklaşımdı ve altı cümlede toplanır. Birincisi: eklediğin şey artık sistemin parçasıdır — kamera, hoparlör ya da bir lamba, taktığın andan itibaren aracın elektriğinin, suyunun ve titreşiminin içinde yaşar. İkincisi: hepsi mi biri mi — arızanın kapsamı, sebebin nerede olduğunu neredeyse tek başına söyler. Üçüncüsü: önce mekanik, sonra elektronik — kirli bir mekanizmada yapılan öğrenme işlemi arızayı normal olarak kaydeder ve korumayı köreltir. Dördüncüsü: belirtiyi susturan çözüm arızayı büyütür — sıkışma koruması, akü koruması ve sigortalar birer güvenlik cihazıdır, iptal edilmez. Beşincisi: şikâyet bir montajdan sonra başlıyorsa şüphe önce o montajdadır. Altıncısı ve en önemlisi: bu işin kalitesi görünmeyen yerdedir — kablo nereden geçti, besleme nereden alındı, şase nasıl bağlandı, su nereye gidiyor. Müşteri bunların hiçbirini ilk gün göremez; bir olay yaşandığında ya da bir yıl sonra görür. Ve o gün, ödediği paranın karşılığında ya bir usta bulmuş olur ya da bir kablo. Bir de sınır bilgisi var ve onu ayrı saymak gerekir: hava yastığı, araç ağı ve anahtar sistemleri. Bunları bilmek işi küçültmez — hangi işi alıp hangisini doğru yere yönlendireceğini bilen usta, her işi kabul edenden daha çok kazanır ve daha uzun çalışır." },
+          { "label": "Parça takmayı", "verdict": "parca", "explain": "Parça takmak işin en kolay ve en kısa kısmı." },
+          { "label": "Kablo çekmeyi", "verdict": "kablo", "explain": "Kablo güzergâhı işin bir parçası, tamamı değil." },
+          { "label": "Hızlı çalışmayı", "verdict": "hiz", "explain": "Hız, doğru sırayla çalışmanın sonucudur; hedefi değil." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Aksesuar ve Ses Sistemleri alanı bitti: 31 ders, 11 aşama."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Dört şikâyeti olan bir araçta işe nasıl başlanır?",
+        "a": "ortak-sebep-ara",
+        "options": [
+          { "verdict": "ortak-sebep-ara", "label": "Şikâyetler tek tek doğrulanır ve dördünü birden açıklayabilecek ortak bir sebep aranır", "explain": "Acemi dört ayrı iş görür, usta bir soru sorar. Kapı içinde biriken su tek başına üç şikâyeti açıklayabilir: oksitlenen soketler cam ve hoparlör devresini bozar, oksitlenen kapı düğmesi modülü uyanık tutup aküyü boşaltır. Ortak sebep önce çözülür; kalan şikâyetler ondan sonra değerlendirilir." },
+          { "verdict": "dort-is", "label": "Dört ayrı iş olarak fiyat verilir", "explain": "Müşteri gereksiz para öder, sen gereksiz emek harcarsın." },
+          { "verdict": "pahali", "label": "En pahalı parçadan başlanır", "explain": "Sebep bulunmadan parça değiştirilmez." },
+          { "verdict": "en-cok", "label": "En çok yakınılan şikâyet çözülür", "explain": "Ortak sebep aranmadan başlanmaz." }
+        ]
+      },
+      {
+        "q": "Müşteri anahtar kopyalama ve hava yastığı direğinden kablo geçirme istiyor. Ne yapılır?",
+        "a": "ikisi-de-sinir",
+        "options": [
+          { "verdict": "ikisi-de-sinir", "label": "İkisi de yapılmaz ve sebebi anlatılır; anahtar için yetkili yere yönlendirilir, kablo için güvenli güzergâh gösterilir", "explain": "Anahtar tanıtma birçok araçta mevcut anahtarların hepsini siler, ayrı donanım ister ve araç sahipliğinin doğrulanmasını gerektirir. Direk kaplaması altındaki perde hava yastığı şiştiğinde oraya sıkıştırılan kablo kabine savrulur — bu can güvenliğidir. Kablo işi reddedilmez, güzergâh değiştirilir. Sınırı anlatan usta güven kaybetmez, kazanır." },
+          { "verdict": "yap", "label": "İkisi de yapılır", "explain": "İkisi de kırmızı çizgi." },
+          { "verdict": "yarim", "label": "Anahtar yapılır, kablo reddedilir", "explain": "Anahtar tanıtma ayrı uzmanlık ve sahiplik doğrulaması ister." },
+          { "verdict": "sessiz", "label": "Sessizce başka türlü yapılır", "explain": "Söylenmeyen değişiklik güven kaybettirir." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 0,62 ohm ve 0,03 ohm SENARYO okumalarıdır; istenen FARKTIR (0,59 ohm) ve ders kabul edilebilir bir şase direnci sınırı vermiyor.",
+    "sourceRequired": "Kabul edilebilir şase direnci ve gerilim düşümü, uykudaki akım sınırı, park modu kesme değerleri, tahliye deliği konumları ve anahtar tanıtma prosedürü bilinçle VERİLMEDİ; hepsi araca özgüdür.",
+    "kapsam": "Hava yastığı bileşenlerine müdahale, araç haberleşme ağına bağlantı, anahtar tanıtma ve immobilizer işlemleri KAPSAM DIŞIDIR — bu alanın kırmızı çizgileri. Akü yük testi ve şarj sistemi teşhisi elektrik alanının konusu; gövde onarımı ve boya ayrı uzmanlıklar.",
+    "kaynak": "Bu ders alanın bütün aşamalarının sentezidir; yeni bilgi getirmiyor, öğrenilenleri tek bir araçta sınıyor. Kamera aşaması kullanıcının açık talebiyle eklendi ve bu sınavın parçasıdır.",
+    "reviewedByMechanic": false
+  }
+}

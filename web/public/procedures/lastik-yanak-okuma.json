@@ -1,0 +1,176 @@
+{
+  "id": "lastik.yanak-okuma",
+  "area": "lastik-tekerlek",
+  "stage": 1,
+  "title": "Yanak Yazısını Okumak: 205/55 R16 91V",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 30,
+  "prerequisites": ["lastik.guvenlik-kaldirma"],
+  "learningGoals": [
+    "Ölçü kodunun her parçasının hangi büyüklüğü verdiğini bilmek",
+    "Yanak yüksekliğinin bir oran olduğunu, sabit bir ölçü olmadığını hesapla görmek",
+    "Yük ve hız endeksinin neden düşürülemeyeceğini açıklamak"
+  ],
+
+  "safety": [
+    { "rule": "Ölçü, yük endeksi ya da hız endeksi araç etiketinin altına düşürülmez", "why": "Bu değerler aracın ağırlığına ve azami hızına göre belirlenir; düşürülen lastik yol şartlarında dayanmaz", "blocksStart": true },
+    { "rule": "Aynı aksa farklı ölçü, farklı desen ya da farklı mevsim lastiği takılmaz", "why": "İki tekerleğin yol tutuşu ve dönme çevresi farklı olursa araç frende ve virajda dengesiz davranır", "blocksStart": true },
+    { "rule": "Yanağı kesilmiş, kabarmış ya da kordu görünen lastik takılmaz", "why": "Yanak lastiğin en ince ve en çok esneyen yeridir; hasarlı yanak onarılmaz, patlar", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true },
+    { "id": "tool.dis-mastari", "label": "Diş derinliği mastarı", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Yanakta şunu okuyorsun: 205/55 R16 91V. İlk sayıdan başla.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik-yanagi",
+        "question": "205 neyi söyler?",
+        "options": [
+          { "label": "Lastiğin kesit genişliğini, milimetre cinsinden — yanaktan yanağa ölçülen genişlik", "verdict": "kesit-genisligi", "correct": true, "explain": "205, lastiğin en geniş yerindeki kesit genişliğidir ve milimetre cinsindendir. Bu ölçü sırt genişliği değildir: sırt, yani yolla temas eden bölge her zaman bundan biraz dardır. Genişlik iki şeyi birden belirler. Birincisi temas alanıdır — geniş lastik kuru zeminde daha çok tutar, ama aynı genişlik ıslakta suyu tahliye etmesi gereken alanı da büyütür ve su kanallarının yükünü artırır. İkincisi araca sığmasıdır: fazla geniş lastik çamurlukla, süspansiyon parçalarıyla ya da direksiyon sonuna kadar çevrildiğinde iç davlumbazla temas eder. Bu yüzden genişlik keyfî büyütülmez; aracın kendi etiketindeki ölçüye uyulur. Genişlik değişince ayrıca dönme çevresi de değişir ve bu, hız göstergesinden ABS'ye kadar birçok sistemi etkiler." },
+          { "label": "Lastiğin yüksekliğini milimetre cinsinden", "verdict": "yukseklik", "explain": "Yükseklik ikinci sayıdan hesaplanır ve doğrudan yazmaz; 205 genişliktir." },
+          { "label": "Jant çapını", "verdict": "jant-capi", "explain": "Jant çapı R'den sonraki sayıdır ve inç cinsindendir." },
+          { "label": "Taşıyabileceği ağırlığı", "verdict": "agirlik", "explain": "Ağırlık yük endeksiyle, yani 91 ile verilir." }
+        ]
+      },
+      "camera": "yanak",
+      "teachingNote": "Kodun ilk sayısı tek metrik ölçüdür ve milimetredir. Sonraki iki değer bir oran ve bir inç ölçüsüdür — aynı kodda üç farklı birim vardır, karışması bundandır."
+    },
+    {
+      "id": 2,
+      "instruction": "İkinci sayı bir yüzdedir: yanak yüksekliği, kesit genişliğinin yüzde kaçı. Hesapla: 205/55 lastiğin yanak yüksekliği ile 205/45 lastiğin yanak yüksekliği arasındaki farkı milimetre olarak gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.lastik-yanagi",
+        "unit": "mm",
+        "acceptRange": [20.4, 20.6]
+      },
+      "camera": "yanak",
+      "hint": "205'in %55'i ile %45'i arasındaki fark.",
+      "teachingNote": "205 x 0,55 = 112,75 mm; 205 x 0,45 = 92,25 mm; fark 20,5 mm. Buradan iki sonuç çıkar. Birincisi: aynı ilk sayıya sahip iki lastiğin yanak yüksekliği farklı olabilir, çünkü ikinci sayı bir oran. İkincisi: genişlik değişince aynı orandaki yanak yüksekliği de değişir — 225/55 lastiğin yanağı 205/55'ten yüksektir, oysa oran aynıdır. Alçak yanak daha az esner, direksiyon tepkisi keskinleşir ama çukur darbesi doğrudan janta gider; yüksek yanak konfor verir, viraj altında daha çok bükülür."
+    },
+    {
+      "id": 3,
+      "instruction": "Sayıların arasındaki harf: R.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik-yanagi",
+        "question": "R ne demek?",
+        "options": [
+          { "label": "Radyal yapı: kordlar sırta dik uzanır", "verdict": "radyal", "correct": true, "explain": "R, lastiğin iç yapısını söyler. Radyal lastikte gövde kordları merkezden dışa doğru, sırta dik olarak uzanır ve sırtın altında ayrıca çelik kuşaklar bulunur. Bu ayrım işi ikiye böler: yanak esnemesini kordlar, sırt sertliğini kuşaklar taşır. Sonuç, yol tutuşu daha iyi, ısınması daha az ve ömrü daha uzun bir lastiktir. Radyal olmayan yapıda (çapraz katlı) kordlar açılı serilir; yanak ve sırt aynı yapıya bağlı olduğu için biri sertleşmeden diğeri yumuşayamaz. Binek araçlarda bugün fiilen bütün lastikler radyaldir; harfi okumanın asıl işi, radyal olmayan bir lastiği aynı araca karıştırmamaktır. Aynı akstaki iki lastiğin yapısı da aynı olmak zorundadır." },
+          { "label": "Yeniden üretilmiş (kaplama) lastik", "verdict": "retread", "explain": "Kaplama lastik yanakta ayrıca belirtilir; R yapı harfidir." },
+          { "label": "Sağ tekerlek için üretildiğini", "verdict": "sag", "explain": "Yön ve taraf ayrı işaretlerle belirtilir; R yapıyı söyler." },
+          { "label": "Run-flat olduğunu", "verdict": "runflat", "explain": "Run-flat ayrı bir işaretle yazılır ve üreticiye göre değişir." }
+        ]
+      },
+      "camera": "yanak",
+      "teachingNote": "Harf kolayca atlanır çünkü hep aynıdır. Ama kodun yapı bilgisi orada durur ve ticari araç ya da eski araç lastiklerinde farklı olabilir."
+    },
+    {
+      "id": 4,
+      "instruction": "R'den sonraki sayı: 16.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.jant",
+        "question": "16 neyi verir?",
+        "options": [
+          { "label": "Jant çapını inç cinsinden — lastik yalnız bu çaptaki janta takılır", "verdict": "jant-inc", "correct": true, "explain": "16, lastiğin oturacağı jantın çapıdır ve inç cinsindendir; milimetre değildir. Bu ölçü diğerlerinden farklı olarak esnek değildir: 16 inçlik bir lastik 17 inçlik janta hiçbir şekilde takılamaz, zorlanırsa topuk teli kopar ve lastik makinede ya da şişirilirken patlar. Kod içinde metrik ve inç ölçünün yan yana durması tarihsel bir mirastır ve karışıklığın kaynağıdır: 205 milimetre, 16 inçtir. Jant çapı değiştirilecekse yanak oranı da buna göre değiştirilir ki tekerleğin toplam çapı, yani dönme çevresi korunsun. Dönme çevresi değişirse hız göstergesi ve kilometre sayacı yanlış okur, ABS ve çekiş kontrolü tekerlek hızlarını yanlış karşılaştırır." },
+          { "label": "Jant çapını santimetre cinsinden", "verdict": "cm", "explain": "İnç cinsindendir; 16 inç yaklaşık 40,6 cm eder." },
+          { "label": "Lastiğin toplam çapını", "verdict": "toplam-cap", "explain": "Toplam çap jant çapı artı iki yanak yüksekliğidir; kodda doğrudan yazmaz." },
+          { "label": "Bijon sayısını", "verdict": "bijon", "explain": "Bijon deseni jantın kendi ölçüsüdür ve lastik kodunda yer almaz." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Ölçü değiştirilecekse kural şudur: jant çapı büyürken yanak oranı küçülür. Amaç toplam çapı korumaktır; korunmazsa hız göstergesinden ABS'ye kadar her şey yanlış veriyle çalışır."
+    },
+    {
+      "id": 5,
+      "instruction": "Son iki karakter: 91V.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik-yanagi",
+        "question": "91 ve V neyi söyler?",
+        "options": [
+          { "label": "91 yük endeksi, V hız endeksi; ikisi de tablodan okunan kodlardır ve araç etiketinin altına düşürülmez", "verdict": "yuk-hiz", "correct": true, "explain": "91 bir ağırlık değil, bir koddur: karşılığı yük endeksi tablosunda kilogram olarak yazar ve tek bir lastiğin taşıyabileceği azami yükü verir. V de bir hız değil koddur; hız endeksi tablosunda karşılık gelen azami hızı gösterir. İkisi de aracın kendi etiketindeki değerin altına düşürülemez. Yük endeksi düşük lastik, aracın ağırlığı ve yüküyle zorlandığında ısınır; ısınan lastikte kordlar zayıflar ve ayrılma başlar. Hız endeksi düşük lastik ise yüksek hızda oluşan dalgalanmayı sönümleyemez ve dağılır. Bu iki değer yükseltilebilir ama düşürülemez — yükseltmek genelde sertlik ve yakıt tüketimi olarak geri döner. Kış lastiğinde hız endeksinin bir kademe düşürülmesine bazı ülkelerde izin verilir; bu izin mevzuata bağlıdır ve varsayılan kabul edilmez." },
+          { "label": "91 lastiğin ağırlığı, V üretim yeri", "verdict": "agirlik-yer", "explain": "91 lastiğin kendi ağırlığı değil, taşıyabileceği yükün kodudur." },
+          { "label": "91 üretim yılı, V mevsim", "verdict": "yil-mevsim", "explain": "Üretim tarihi DOT kodunda yazar; mevsim ayrı işaretlerle belirtilir." },
+          { "label": "İkisi de tavsiye niteliğindedir", "verdict": "tavsiye", "explain": "Tavsiye değil sınırdır; araç etiketinin altına düşürülmesi güvenlik sorunudur." }
+        ]
+      },
+      "camera": "yanak",
+      "teachingNote": "Bu iki kodun karşılığı bu derste bilinçle verilmedi: tablodan okunur, ezberlenmez. Ustanın işi sayıyı ezberlemek değil, hangi tabloya bakılacağını ve neyin altına inilemeyeceğini bilmektir."
+    },
+    {
+      "id": 6,
+      "instruction": "Müşteri arka iki lastiği değiştiriyor. Elde 205/55 R16 yerine 205/60 R16 var, fiyatı da uygun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik",
+        "question": "Takılır mı?",
+        "options": [
+          { "label": "Takılmaz: yanak oranı farklı olduğu için dönme çevresi de farklı olur; aynı aksta iki farklı çevre araç elektroniğini ve dengeyi bozar", "verdict": "takilmaz", "correct": true, "explain": "205/60 lastiğin yanağı 205/55'ten yüksektir, dolayısıyla toplam çapı ve dönme çevresi büyüktür. Aynı akstaki iki tekerlek farklı çevreye sahipse aynı yolda farklı sayıda dönerler. Bunun üç sonucu vardır. Birincisi, ABS ve çekiş kontrolü kararlarını tekerlek hızlarını karşılaştırarak verir; sürekli farklı okuyan iki tekerlek bu sistemleri yanıltır. İkincisi, dört çeker ya da kendinden kilitli diferansiyelli araçlarda aktarma organları sürekli bir hız farkını telafi etmeye çalışır ve ısınıp aşınır. Üçüncüsü, iki lastiğin yanak yüksekliği farklı olduğu için viraj ve fren altında farklı bükülürler; araç dengesiz davranır. Kural nettir: aynı aksta ölçü, yapı, desen ve mevsim aynı olur. Fiyat farkı bu kuralı esnetmez." },
+          { "label": "Takılır, arka aks olduğu için önemli değil", "verdict": "arka-onemsiz", "explain": "Arka aksın tekerlek hızları da ABS ve çekiş kontrolü tarafından okunur." },
+          { "label": "Takılır, oran farkı küçük", "verdict": "kucuk-fark", "explain": "205 üzerinden %5 oran farkı yanak yüksekliğinde 10,25 mm, çapta iki katı eder." },
+          { "label": "İkisi de arkaya takılırsa sorun olmaz", "verdict": "ikisi-arkaya", "explain": "Ön-arka çap farkı da dört çeker ve elektronik sistemler için sorundur; araç etiketine uyulur." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bu sorunun cevabı fiyatla değil, aracın nasıl karar verdiğiyle ilgili. Modern araç neredeyse bütün güvenlik kararlarını dört tekerleğin hızını karşılaştırarak veriyor."
+    },
+    {
+      "id": 7,
+      "instruction": "Lastiğin yanağında ayrıca bir ok ve OUTSIDE yazısı var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik-yanagi",
+        "question": "Bu işaretler ne yapar?",
+        "options": [
+          { "label": "Lastiğin janta hangi yönde ve hangi yüzü dışa gelecek şekilde takılacağını söyler; ters takılan lastik tasarlandığı gibi çalışmaz", "verdict": "yon-ve-yuz", "correct": true, "explain": "İki ayrı işaret vardır ve ikisi farklı şeyi söyler. Ok, yönlü desenli lastiklerde dönme yönünü gösterir: desenin su kanalları suyu sırtın ortasından dışarı atacak biçimde tasarlanmıştır ve ters takıldığında aynı kanallar suyu içeri toplar, ıslak zeminde tutuş belirgin biçimde düşer. OUTSIDE yazısı (bazı lastiklerde INSIDE ile birlikte) ise asimetrik desenli lastiklerde hangi yüzün dışa geleceğini söyler: dış omuz virajda daha çok yüklenir ve o taraf daha sert bloklarla üretilir. Ters takılan asimetrik lastik virajda yumuşak tarafını yükler; hem tutmaz hem çabuk aşınır. Bu işaretler takma sırasında kontrol edilir; iş bittikten sonra fark edilirse lastik janttan sökülüp çevrilmek zorundadır — tekerleği karşı tarafa almak çözmez, çünkü ters durum aynen devam eder." },
+          { "label": "Yalnız üretici logosunun hangi tarafta duracağını", "verdict": "logo", "explain": "Görünüm değil, desen tasarımı belirleyici." },
+          { "label": "Balans ağırlığının takılacağı yeri", "verdict": "balans", "explain": "Balans noktası ölçümle bulunur; bu işaretlerle ilgisi yok." },
+          { "label": "Yalnız yarış lastiklerinde bulunur", "verdict": "yaris", "explain": "Yaygın binek lastiklerinin çoğunda yönlü ya da asimetrik desen vardır." }
+        ]
+      },
+      "camera": "yanak",
+      "teachingNote": "Yanak yalnız bir ölçü etiketi değil, üreticinin lastiğin nasıl kullanılacağını yazdığı yüzeydir. Bu alanın ustalığı buradan başlar: okumayı bilen, sökmeden önce bilir."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "205/55 R16 kodunda 55 neyi verir?",
+        "a": "oran",
+        "options": [
+          { "verdict": "oran", "label": "Yanak yüksekliğinin kesit genişliğine oranını yüzde olarak; milimetre değil", "explain": "Yanak yüksekliği doğrudan yazmaz, hesaplanır: 205 x 0,55 = 112,75 mm. Oran olduğu için aynı 55 değeri farklı genişliklerde farklı yükseklik verir — 225/55 lastiğin yanağı 205/55'ten yüksektir. Alçak oran daha az esner ve direksiyon tepkisini keskinleştirir, ama darbeyi janta iletir." },
+          { "verdict": "mm", "label": "Yanak yüksekliğini milimetre olarak", "explain": "Milimetre olsaydı 55 mm çok alçak bir yanak olurdu; bu bir yüzdedir." },
+          { "verdict": "genislik", "label": "Sırt genişliğini", "explain": "Genişlik ilk sayıdır ve milimetredir." },
+          { "verdict": "hiz", "label": "Azami hızı", "explain": "Hız, harf kodudur — bu örnekte V." }
+        ]
+      },
+      {
+        "q": "Aynı aksa neden farklı ölçüde lastik takılmaz?",
+        "a": "cevre-farki",
+        "options": [
+          { "verdict": "cevre-farki", "label": "Dönme çevreleri farklı olur; ABS ve çekiş kontrolü tekerlek hızlarını karşılaştırarak karar verdiği için yanlış veriyle çalışır", "explain": "Farklı çevredeki iki tekerlek aynı yolda farklı sayıda döner. Modern araç neredeyse bütün güvenlik kararlarını bu hızları karşılaştırarak verir; sürekli farklı okuyan iki tekerlek ABS'yi ve çekiş kontrolünü yanıltır. Dört çeker ve kilitli diferansiyelli araçlarda ayrıca aktarma organları bu farkı telafi etmeye çalışıp ısınır. Üstüne, farklı yanak yükseklikleri viraj ve fren altında farklı büküldüğü için araç dengesiz davranır." },
+          { "verdict": "gorunum", "label": "Görünüm bozulduğu için", "explain": "Görünüm değil, aracın kararlarını verdiği veri bozuluyor." },
+          { "verdict": "asinma", "label": "Yalnız daha çabuk aşındığı için", "explain": "Aşınma sonuçlardan biri; asıl sorun güvenlik sistemlerinin yanlış veriyle çalışması." },
+          { "verdict": "mevzuat", "label": "Yalnız mevzuat yasakladığı için", "explain": "Mevzuat da yasaklar ama sebebi teknik." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2 bir ÖLÇÜM değil, kodun kendisinden yapılan bir HESAPTIR: 205 x 0,55 = 112,75 mm, 205 x 0,45 = 92,25 mm, fark 20,5 mm. Üretici değeri değil oranın tanımı olduğu için künye gerekmez.",
+    "sourceRequired": "Yük endeksi ve hız endeksi tablolarının karşılıkları (91 kaç kg, V kaç km/s) bilinçle VERİLMEDİ. Bunlar tablo değerleridir ve künyesiz yazılmaları uydurma değer riski taşır; ders sayıyı değil, tabloya bakma ve etiketin altına inmeme kuralını öğretiyor.",
+    "kapsam": "DOT tarihi, mevsim işaretleri ve run-flat işareti bu derste yok — kendi derslerinde işleniyor. Ticari araç ve çift lastik kodları kapsam dışı.",
+    "reviewedByMechanic": false
+  }
+}

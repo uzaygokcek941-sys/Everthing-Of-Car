@@ -1,0 +1,177 @@
+{
+  "id": "direksiyon.hidrolik-sivi",
+  "area": "direksiyon",
+  "stage": 3,
+  "title": "Sıvı Seviyesi, Tipi ve Durumu",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 30,
+  "prerequisites": ["direksiyon.hidrolik-devre"],
+  "learningGoals": [
+    "Seviyeyi doğru koşulda okumak ve okumayı koşulla birlikte kaydetmek",
+    "Sıvının rengi, kokusu ve köpüğünden sistemin durumunu okumak",
+    "Yanlış sıvının neden geri dönüşü zor bir hata olduğunu bilmek"
+  ],
+
+  "safety": [
+    { "rule": "Sıcak sistemde depo kapağı dikkatle açılır", "why": "Isınmış sıvı genleşmiştir ve kapak açılırken taşabilir; sıcak sıvı yanık yapar", "blocksStart": true },
+    { "rule": "Motor çalışırken seviye kontrolü yapılacaksa kayış bölgesinden uzak durulur", "why": "Depo çoğu zaman kayış ve kasnakların yakınındadır", "blocksStart": true },
+    { "rule": "Kullanılmış hidrolik sıvı yere ve kanalizasyona dökülmez, atık olarak toplanır", "why": "Çevreye zararlıdır ve mevzuata göre atık yönetimi gerekir", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true },
+    { "id": "tool.temizlik-bezi", "label": "Temizlik bezi", "required": true },
+    { "id": "tool.huni", "label": "Temiz huni", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Depo kapağını açtın; üzerinde iki ayrı işaret var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.hidrolik-deposu",
+        "question": "Neden iki işaret var ve hangisine bakılır?",
+        "options": [
+          { "label": "Biri soğuk biri sıcak sistem içindir; sıvı ısınınca genleştiği için hangi koşulda okunduğuna göre doğru işaret seçilir", "verdict": "soguk-sicak", "correct": true, "explain": "Hidrolik sıvı da her sıvı gibi ısındıkça genleşir ve devrede dolaşırken belirgin biçimde ısınır. Bu yüzden aynı miktar sıvı, soğuk sistemde daha alçak, sıcak sistemde daha yüksek bir seviye gösterir. Depoların çoğunda bu yüzden iki işaret ya da iki aralık bulunur ve okuma, sistemin o anki hâline uyan işarete göre yapılır. Yanlış işarete bakmanın iki sonucu vardır ve ikisi de zararlıdır. Soğuk sistemde sıcak işaretine bakılırsa seviye eksik görünür ve sıvı eklenir; sistem ısındığında fazla sıvı genleşir, depodan taşar ve hem kirlilik hem de yanlış bir 'sızıntı' şikâyeti üretir. Sıcak sistemde soğuk işaretine bakılırsa seviye fazla görünür ve gerçek bir eksiklik gözden kaçar. Bu yüzden ölçüm alışkanlığı şudur: önce sistemin hangi hâlde olduğuna karar ver, sonra doğru işarete bak, sonra okumayı KOŞULLA BİRLİKTE kaydet. Bu projede aynı ilke motor yağında ve lastik basıncında da geçmişti; koşulsuz bir okuma karşılaştırılamaz." },
+          { "label": "Biri yaz biri kış içindir", "verdict": "yaz-kis", "explain": "Ayrım mevsim değil, sistemin o anki sıcaklığı." },
+          { "label": "Biri asgari biri azami tüketim", "verdict": "tuketim", "explain": "Kapalı devre sıvı tüketmez; işaretler sıcaklık koşulunu gösterir." },
+          { "label": "Fark etmez, ortalaması alınır", "verdict": "ortalama", "explain": "Koşula uyan işaret seçilir; ortalama almak ölçümü anlamsız kılar." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Koşulsuz okuma karşılaştırılamaz. Bu kural bu projede dördüncü kez karşına çıkıyor."
+    },
+    {
+      "id": 2,
+      "instruction": "Sıvıyı beyaz bir beze damlatıp inceledin.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.donus-hortumu",
+        "question": "Renk ve koku neyi anlatır?",
+        "options": [
+          { "label": "Koyulaşmış ve yanık kokan sıvı aşırı ısınmayı, gri-süt görünümü havayı, siyah zerrecikler ise iç aşınmayı işaret eder", "verdict": "renk-koku-parcacik", "correct": true, "explain": "Sıvı, sistemin içini görmenin en ucuz yoludur. Üç bulgu ayrı ayrı okunur. Birincisi renk ve kokudur: yeni sıvı berrak ve tipik rengindedir; koyulaşmış, esmerleşmiş ve yanık kokan bir sıvı aşırı ısınmış demektir. Bunun sebebi aranmalıdır — sürekli uç konumda tutulan direksiyon, tıkanmış bir dönüş hattı ya da yıpranmış bir pompa. Sıvıyı değiştirip sebebi bırakmak, birkaç ay sonra aynı manzarayı üretir. İkincisi görünümdür: gri, sütlü ya da köpüklü bir sıvı içinde hava olduğunu söyler ve bu doğrudan bir teşhistir — emişten hava geliyor ya da sistemin havası alınmamış. Havalı sıvı sıkışabilir hâle gelir, destek düzensizleşir ve pompa ses yapar. Üçüncüsü parçacıklardır: beze damlatılan sıvıda görülen siyah metalik zerrecikler devrede aşınma olduğunu gösterir; bu, pompanın ya da kutunun içinden gelir ve yalnız sıvı değiştirerek çözülmez, çünkü aşınan parça yerinde durmaktadır. Üç bulgunun ortak dersi şudur: sıvı bir belirtidir, arızanın kendisi değil." },
+          { "label": "Renk önemsizdir, yalnız seviye sayılır", "verdict": "renk-onemsiz", "explain": "Renk, koku ve parçacıklar sistemin iç durumunu anlatır." },
+          { "label": "Koyu renk normaldir, hep öyle olur", "verdict": "koyu-normal", "explain": "Koyulaşma ve yanık koku aşırı ısınmayı gösterir." },
+          { "label": "Köpük iyi bir işarettir", "verdict": "kopuk-iyi", "explain": "Köpük sistemde hava olduğunu gösterir." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Sıvı bir belirtidir, arızanın kendisi değil. Değiştirip sebebi bırakmak aynı manzarayı geri getirir."
+    },
+    {
+      "id": 3,
+      "instruction": "Seviyeyi motor çalışmadan önce 44 mm, direksiyon birkaç kez uçtan uca çevrildikten sonra 40 mm okudun. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.hidrolik-deposu",
+        "unit": "mm",
+        "acceptRange": [3.8, 4.2]
+      },
+      "camera": "direksiyon",
+      "hint": "44 eksi 40.",
+      "teachingNote": "4 mm'lik bu düşüş bir kayıp değil, sıvının yerleşmesidir: sistem çalışırken sıvının bir kısmı hatlara ve kutuya dağılır, ayrıca varsa hava kabarcıkları yerini sıvıya bırakır. Bu yüzden dolum sonrası seviye HEP yeniden kontrol edilir ve asıl geçerli okuma, sistem çalıştırılıp direksiyon uçtan uca birkaç kez çevrildikten sonra alınandır. Sık yapılan hata, durgun sistemde seviyeyi işarete tam getirip kapağı kapatmaktır; sistem çalışınca seviye düşer, usta 'demek ki sızdırıyor' diye yanlış bir teşhise gider ya da tersine, ısındığında taşacak kadar fazla doldurmuş olur. Doğru seviye aralığı araca özgüdür ve bu ders bir değer vermiyor."
+    },
+    {
+      "id": 4,
+      "instruction": "Sıvı eklenecek. Elde birkaç farklı şişe var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kremayer-kutusu",
+        "question": "Hangisi konur?",
+        "options": [
+          { "label": "Yalnız üreticinin o araç için belirttiği sıvı; belge yoksa iş yapılmaz, sıvı tahminle seçilmez", "verdict": "ureticinin-sivisi", "correct": true, "explain": "Hidrolik direksiyon devresinde kullanılan sıvılar dışarıdan bakınca birbirine benzer ama kimyaları farklıdır ve sistemin keçeleriyle uyumlu olacak biçimde seçilmiştir. Bazı araçlar özel bir direksiyon sıvısı, bazıları belirli bir otomatik şanzıman sıvısı, bazıları ise mineral esaslı bir sıvı ister; hangisinin gerektiği yalnız üreticinin belgesinden ya da deponun üzerindeki uyarıdan okunur. Yanlış sıvının zararı hemen görünmez, birkaç hafta ya da ay içinde ortaya çıkar: keçeler ya şişer ve sistemi sıkıştırır — direksiyon ağırlaşır, merkeze dönmez — ya da sertleşip büzülür ve sızdırmaya başlar. İkisi de geri dönüşü zor bir hatadır çünkü zararı bir kez oluştuktan sonra doğru sıvıyı koymak keçeleri eski hâline getirmez; devrenin yıkanması ve keçelerin yenilenmesi gerekir. Farklı sıvıları karıştırmak da aynı sonucu doğurur. Bu yüzden kural sadedir: emin değilsen koyma. Bu, bu alandaki 'yapmamayı bilmek de bir beceridir' ilkesinin bir başka uygulaması ve airbag dersindeki sınırla aynı mantığı taşıyor." },
+          { "label": "Benzer görünen herhangi bir hidrolik sıvı", "verdict": "benzer", "explain": "Kimyaları farklıdır; yanlış sıvı keçeleri bozar." },
+          { "label": "Motor yağı", "verdict": "motor-yagi", "explain": "Bu devre için tasarlanmamıştır; keçeleri ve akışkanlığı uymaz." },
+          { "label": "Elde ne varsa, sonra değiştirilir", "verdict": "sonra-degistir", "explain": "Zarar oluştuktan sonra doğru sıvı keçeleri eski hâline getirmez." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Yanlış sıvının zararı hemen değil, aylar içinde görünür ve geri alınamaz. Emin değilsen koyma."
+    },
+    {
+      "id": 5,
+      "instruction": "Sıvı değişimi yapılacak.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.hidrolik-pompa",
+        "question": "Devredeki eski sıvı nasıl boşaltılır?",
+        "options": [
+          { "label": "Depo boşaltılıp yenisiyle doldurulur, motor kısa süre çalıştırılıp direksiyon çevrilerek eski sıvı dönüş hattından alınır ve bu işlem sıvı temiz gelene kadar tekrarlanır; sistem hiçbir anda kuru çalıştırılmaz", "verdict": "kademeli-degisim", "correct": true, "explain": "Sıvının yalnız depodaki kısmını değiştirmek işin küçük bir bölümünü yapar, çünkü sıvının büyük kısmı hatlarda, pompada ve kutunun içindedir. Yaygın ve güvenli yöntem kademeli değişimdir: depo boşaltılır, temiz sıvıyla doldurulur, dönüş hattı depoya değil bir kaba yönlendirilir ve motor KISA süre çalıştırılırken direksiyon yavaşça çevrilir; eski sıvı dönüşten çıkarken depo sürekli beslenir. Buradaki tek kritik nokta şudur: depo hiçbir anda boşalmamalıdır. Pompa sıvısız çalıştığı anda hem yağlaması hem soğuması kesilir ve saniyeler içinde zarar görür. Bu yüzden işlem tek başına yapılmaz — biri depoyu besler, diğeri motoru ve direksiyonu kontrol eder — ve motor uzun süre çalıştırılmaz, kısa aralıklarla ilerlenir. Çıkan sıvı temiz görünene kadar tekrarlanır. İşlem bitince sistem doldurulur, havası alınır ve seviye ısındıktan sonra doğrulanır. Eski sıvı atık olarak toplanır. Sıvı değişimi bir arızayı gidermez; ısınma ya da aşınma varsa sebebi ayrıca aranır." },
+          { "label": "Yalnız depodaki sıvı çekilir, gerisi kalır", "verdict": "sadece-depo", "explain": "Sıvının çoğu hatlarda ve kutudadır; işin küçük bir kısmı yapılmış olur." },
+          { "label": "Motor uzun süre kuru çalıştırılır", "verdict": "kuru", "explain": "Pompa sıvısız çalışırsa saniyeler içinde zarar görür." },
+          { "label": "Devreye su basılıp yıkanır", "verdict": "su", "explain": "Su korozyon ve keçe hasarı üretir; devreye yalnız uygun sıvı girer." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Depo hiçbir anda boşalmamalı. Bu işlem tek kişiyle yapılmaz."
+    },
+    {
+      "id": 6,
+      "instruction": "Sıvı yeni değiştirildi ama iki hafta sonra yine koyulaşmış.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.hidrolik-pompa",
+        "question": "Ne düşünürsün?",
+        "options": [
+          { "label": "Sıvıyı bozan sebep hâlâ duruyor; aşırı ısınmanın kaynağı aranır — dönüşte kısıtlama, yıpranmış pompa, sürekli uç konumda tutma ya da devredeki aşınma", "verdict": "sebep-duruyor", "correct": true, "explain": "İki haftada koyulaşan bir sıvı, sıvının kendisiyle ilgili değildir; sistemde sıvıyı hızla bozan bir koşul vardır. Adaylar sırayla değerlendirilir. Birincisi dönüş tarafındaki kısıtlamadır: ezilmiş bir hortum, tıkanmış bir süzgeç ya da içten çökmüş bir dönüş hattı sıvının rahat dönmesini engeller, basınç ve ısı yükselir. İkincisi pompadır: iç aşınma arttıkça pompanın verimi düşer ve harcadığı enerjinin daha büyük kısmı ısıya döner. Üçüncüsü kullanım biçimidir — direksiyonu uç konumda tutma alışkanlığı sistemi sürekli sınırlayıcı valf üzerinde çalıştırır ve bu doğrudan ısı üretir; sürücüyle konuşmak burada teşhisin parçasıdır. Dördüncüsü devredeki aşınmadır: sıvıda metalik parçacık varsa aşınan parça sıvıyı hem kirletir hem de sürtünmeyi artırarak ısıtır. Bazı araçlarda ayrıca bir sıvı soğutucusu bulunur; tıkanmış ya da hasar görmüş bir soğutucu da aynı tabloyu üretir. Sıvıyı tekrar değiştirip sebebi bırakmak, aynı sonucun tekrarını satın almaktır." },
+          { "label": "Yeni sıvı kalitesizdir, marka değiştirilir", "verdict": "marka", "explain": "Doğru sıvı kullanıldıysa asıl mesele onu bozan koşul." },
+          { "label": "Normaldir, sıvı hızlı koyulaşır", "verdict": "normal", "explain": "İki haftada koyulaşma normal değildir." },
+          { "label": "Sıvı hiç değiştirilmemeli", "verdict": "degistirme", "explain": "Değişim yerinde; eksik olan sebebin bulunması." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Sürücüyle konuşmak teşhisin parçası: uç konumda tutma alışkanlığı sıvıyı gerçekten yakar."
+    },
+    {
+      "id": 7,
+      "instruction": "İş kapanıyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.hidrolik-deposu",
+        "question": "Son kontroller neler?",
+        "options": [
+          { "label": "Sistem ısıtılıp seviye doğru işarete göre yeniden okunur, depoda köpük olmadığı görülür, kapak sıkıca kapatılır ve bölge temizlenip sızıntı olmadığı doğrulanır", "verdict": "isit-oku-kopuk-temizlik", "correct": true, "explain": "Kapanışın dört kontrolü birbirini tamamlar. Birincisi ısıtılmış sistemde okumadır: soğukken doğru görünen seviye ısındığında değişir ve asıl geçerli okuma çalışma sıcaklığındakidir; ayrıca bu sırada varsa kalan hava da çıkmış olur. İkincisi köpük kontrolüdür — depoda köpük varsa sistemde hava kalmış demektir ve bu, hava alma işleminin tamamlanmadığını ya da emişten hava geldiğini gösterir; köpüklü bir sistemle araç teslim edilmez çünkü destek düzensiz olur ve pompa zarar görür. Üçüncüsü kapaktır: gevşek kalan ya da contası bozuk bir kapak hem sızıntı hem de kirlenme yolu açar; ayrıca havalandırma deliği tıkalıysa temizlenir. Dördüncüsü temizlik ve görsel doğrulamadır — dolum sırasında dökülen sıvı silinir, bölge kurulanır ve araç kısa bir sürüşten sonra tekrar bakılır. Bu son bakış, hem yeni bir sızıntının hem de gözden kaçmış bir gevşekliğin yakalandığı yerdir. Eski sıvı atık olarak toplanır; yere ya da kanalizasyona dökülmez." },
+          { "label": "Soğuk okuma yeterlidir", "verdict": "soguk-yeter", "explain": "Geçerli okuma çalışma sıcaklığındakidir." },
+          { "label": "Köpük varsa zamanla geçer, beklenir", "verdict": "kopuk-gecer", "explain": "Köpük hava demektir; sebebi giderilmeden teslim edilmez." },
+          { "label": "Eski sıvı yere dökülebilir", "verdict": "yere-dok", "explain": "Çevreye zararlıdır ve atık olarak toplanması gerekir." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Köpüklü sistemle araç teslim edilmez. Köpük, işin bitmediğinin görünür kanıtı."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Hidrolik sıvı eklenecek. Hangisi konur?",
+        "a": "ureticinin-sivisi",
+        "options": [
+          { "verdict": "ureticinin-sivisi", "label": "Yalnız üreticinin o araç için belirttiği sıvı; belge yoksa iş yapılmaz", "explain": "Sıvılar dışarıdan benzer görünür ama kimyaları farklıdır ve keçelerle uyumlu seçilmiştir. Yanlış sıvı keçeleri ya şişirip sistemi sıkıştırır ya da sertleştirip sızdırır; zarar haftalar veya aylar sonra görünür ve doğru sıvıyı sonradan koymak keçeleri eski hâline getirmez — devrenin yıkanması ve keçelerin yenilenmesi gerekir. Emin değilsen koyma." },
+          { "verdict": "benzer", "label": "Benzer görünen herhangi bir sıvı", "explain": "Kimyaları farklıdır." },
+          { "verdict": "motor-yagi", "label": "Motor yağı", "explain": "Bu devre için tasarlanmamıştır." },
+          { "verdict": "sonra-degistir", "label": "Şimdi herhangi biri, sonra değiştirilir", "explain": "Zarar geri alınamaz." }
+        ]
+      },
+      {
+        "q": "Yeni değiştirilen sıvı iki hafta sonra koyulaşmışsa ne düşünülür?",
+        "a": "sebep-duruyor",
+        "options": [
+          { "verdict": "sebep-duruyor", "label": "Sıvıyı bozan sebep hâlâ duruyor; aşırı ısınmanın kaynağı aranır", "explain": "Adaylar: dönüş tarafında kısıtlama (ezik hortum, tıkalı süzgeç), verimi düşmüş pompa, direksiyonu uç konumda tutma alışkanlığı — bu doğrudan sınırlayıcı valf üzerinde çalışmak ve ısı demektir — devredeki aşınma ve varsa tıkalı sıvı soğutucusu. Sıvıyı tekrar değiştirip sebebi bırakmak aynı sonucun tekrarını satın almaktır." },
+          { "verdict": "marka", "label": "Sıvı kalitesizdir, marka değiştirilir", "explain": "Doğru sıvı kullanıldıysa mesele onu bozan koşul." },
+          { "verdict": "normal", "label": "Normaldir", "explain": "İki haftada koyulaşma normal değil." },
+          { "verdict": "degistirme", "label": "Sıvı hiç değiştirilmemeli", "explain": "Değişim yerinde; eksik olan sebep tespiti." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 44 mm ve 40 mm SENARYO okumalarıdır; istenen FARKTIR (4 mm) ve gösterilen şey sıvının çalışmayla hatlara dağılıp seviyenin düşmesidir. Doğru seviye aralığı verilmiyor.",
+    "sourceRequired": "Sıvı tipi, doğru seviye aralığı, değişim aralığı ve çalışma sıcaklığı bilinçle VERİLMEDİ; araca ve üreticiye özgüdür. Sıvı tipi bu dersin en kritik değeri olduğu için özellikle künyesiz verilmedi ve ders 'belgeden oku, emin değilsen koyma' diyor.",
+    "kapsam": "Havanın alınması ayrı ders (direksiyon.hidrolik-hava). Basınç testi ayrı ders. Sızıntı arama kutu-kacak dersinde işlendi. Sıvı soğutucusu anıldı ama ayrı ders konusu değil.",
+    "reviewedByMechanic": false
+  }
+}

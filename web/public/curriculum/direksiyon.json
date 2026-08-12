@@ -1,0 +1,202 @@
+{
+  "area": "direksiyon",
+  "title": "Direksiyon",
+  "goal": "Direksiyon sistemini simitten tekerleğe uzanan bir zincir olarak görmek; her şikâyeti zincirin hangi halkasında olduğunu ölçerek bulmak ve mekanik, hidrolik ve elektrik yardımlı sistemlerin farklarını bilmek.",
+  "framework": "MEB Motorlu Araçlar Teknolojisi Çerçeve Öğretim Programı — Hareket Kontrol Sistemleri Atölyesi Dersi, öğrenme birimi 'Direksiyon Sistemleri' (5 kazanım, s. 42). Otomotiv Periyodik Bakım Dersi'nde ayrı bir 'Direksiyon Sisteminin Periyodik Bakımı' birimi (mekanik ve hidrolik, 2 kazanım). Otomotiv Test Teknikleri Dersi'nde 'Direksiyon sistemlerinin testlerini yapar' kazanımı. Elektrikli Araçlar dalında aynı birim 'Elektrikli Direksiyon Sistemleri' adıyla ve 3 kazanımla geçiyor.",
+  "ustalikTanimi": "Direksiyon bir kumanda değil, bir ZİNCİRDİR: simit, mil, kutu, rot çubuğu, rot başı, tekerlek. Sürücünün bütün şikâyetleri (boşluk, ağırlık, ses, merkeze dönmeme, tek yöne zorluk) bu zincirin belirli bir halkasında oluşur. Ustalık, şikâyeti dinleyip parça değiştirmek değil, zinciri bölerek boşluğun ya da direncin hangi halkadan geldiğini ölçmektir. İkinci ustalık, aynı belirtinin üç farklı sistemde farklı sebeplere işaret ettiğini bilmektir — hidrolikte sıvı ve pompa, elektrikte sensör ve modül, mekanikte boşluk ve aşınma.",
+  "stages": [
+    {
+      "title": "Güvenlik ve sistemin haritası",
+      "procedures": [
+        {
+          "id": "direksiyon.guvenlik-airbag",
+          "title": "Airbag ve spiral kablo: bu alanın kırmızı çizgisi",
+          "status": "yazildi"
+        },
+        {
+          "id": "direksiyon.sistem-haritasi",
+          "title": "Simitten tekerleğe: zincirin halkaları",
+          "status": "yazildi"
+        },
+        {
+          "id": "direksiyon.tipleri",
+          "title": "Mekanik, hidrolik ve elektrik yardımlı sistemler",
+          "status": "yazildi"
+        }
+      ]
+    },
+    {
+      "title": "Kontrol ve ayar",
+      "procedures": [
+        {
+          "id": "direksiyon.bosluk-olcumu",
+          "title": "Direksiyon boşluğunun ölçülmesi",
+          "status": "yazildi"
+        },
+        {
+          "id": "direksiyon.bosluk-yeri",
+          "title": "Boşluk zincirin neresinde: ayırma yöntemi",
+          "status": "yazildi"
+        },
+        {
+          "id": "direksiyon.simit-merkezi",
+          "title": "Direksiyon merkezi ve düz gitme",
+          "status": "yazildi"
+        }
+      ]
+    },
+    {
+      "title": "Dişli kutusu (kremayer)",
+      "procedures": [
+        {
+          "id": "direksiyon.kutu-yapisi",
+          "title": "Kremayerin içinde ne var, nasıl çalışır",
+          "status": "yazildi"
+        },
+        {
+          "id": "direksiyon.kutu-kacak",
+          "title": "Kutu sızıntısı ve körük kontrolü",
+          "status": "yazildi"
+        },
+        {
+          "id": "direksiyon.kutu-bosluk-ayari",
+          "title": "Kremayer baskı ayarı ve sınırları",
+          "status": "yazildi"
+        }
+      ]
+    },
+    {
+      "title": "Hidrolik yardımlı sistem",
+      "procedures": [
+        {
+          "id": "direksiyon.hidrolik-devre",
+          "title": "Pompa, hortum, depo: devrenin okunması",
+          "status": "yazildi"
+        },
+        {
+          "id": "direksiyon.hidrolik-sivi",
+          "title": "Sıvı seviyesi, tipi ve durumu",
+          "status": "yazildi"
+        },
+        {
+          "id": "direksiyon.hidrolik-basinc",
+          "title": "Basınç testi ve pompanın değerlendirilmesi",
+          "status": "yazildi"
+        },
+        {
+          "id": "direksiyon.hidrolik-hava",
+          "title": "Sistemde hava: belirtisi ve alınması",
+          "status": "yazildi"
+        }
+      ]
+    },
+    {
+      "title": "Elektrik yardımlı sistem (EPS)",
+      "procedures": [
+        {
+          "id": "direksiyon.eps-yapisi",
+          "title": "Motor, tork sensörü ve kontrol ünitesi",
+          "status": "yazildi"
+        },
+        {
+          "id": "direksiyon.eps-ariza",
+          "title": "EPS uyarı lambası ve destek kaybı",
+          "status": "yazildi"
+        },
+        {
+          "id": "direksiyon.eps-ogrenme",
+          "title": "Onarım sonrası konum ve tork öğrenme",
+          "status": "yazildi"
+        }
+      ]
+    },
+    {
+      "title": "Yardımcı sistemler",
+      "procedures": [
+        {
+          "id": "direksiyon.aci-sensoru",
+          "title": "Direksiyon açı sensörü ve ESP ile ilişkisi",
+          "status": "yazildi"
+        },
+        {
+          "id": "direksiyon.hiz-duyarli",
+          "title": "Hıza duyarlı destek ve değişken oran",
+          "status": "yazildi"
+        },
+        {
+          "id": "direksiyon.kilit-ve-kontak",
+          "title": "Direksiyon kilidi ve elektronik kilit",
+          "status": "yazildi"
+        }
+      ]
+    },
+    {
+      "title": "Periyodik bakım",
+      "procedures": [
+        {
+          "id": "direksiyon.bakim-mekanik",
+          "title": "Mekanik sistemin periyodik bakımı",
+          "status": "yazildi"
+        },
+        {
+          "id": "direksiyon.bakim-hidrolik",
+          "title": "Hidrolik sistemin periyodik bakımı",
+          "status": "yazildi"
+        }
+      ]
+    },
+    {
+      "title": "Testler",
+      "procedures": [
+        {
+          "id": "direksiyon.yol-testi",
+          "title": "Yol testi: neye bakılır, ne kaydedilir",
+          "status": "yazildi"
+        },
+        {
+          "id": "direksiyon.yanal-kayma",
+          "title": "Yanal kayma testi ve yorumlanması",
+          "status": "yazildi"
+        }
+      ]
+    },
+    {
+      "title": "Arıza teşhis",
+      "procedures": [
+        {
+          "id": "direksiyon.agirlik-teshisi",
+          "title": "Direksiyon ağırlaştı",
+          "status": "yazildi"
+        },
+        {
+          "id": "direksiyon.ses-teshisi",
+          "title": "Direksiyon çevrilirken ses geliyor",
+          "status": "yazildi"
+        },
+        {
+          "id": "direksiyon.merkeze-donmeme",
+          "title": "Direksiyon merkeze dönmüyor",
+          "status": "yazildi"
+        }
+      ]
+    },
+    {
+      "title": "Ustalık sınavı",
+      "procedures": [
+        {
+          "id": "direksiyon.entegrasyon",
+          "title": "Aynı şikâyet, üç farklı alan: direksiyon mu, lastik mi, fren mi",
+          "status": "yazildi"
+        }
+      ]
+    }
+  ],
+  "_notes": {
+    "status": "TAMAMLANDI. 27/27 prosedür yazıldı, 10 aşamanın tamamı.",
+    "kapsam": "27 prosedür, 10 aşama. Süspansiyon bu alana DAHİL DEĞİL: MEB'de ayrı bir öğrenme birimidir. Ön düzen de ayrı birimdir ve Lastik ve Tekerlek alanında işlendi; burada yalnız direksiyon merkezi ve düz gitme bağlamında geçiyor. İş makinelerine özgü orbitrollü sistemler kapsam dışı (MEB'de ayrı dal).",
+    "kirmizi-cizgi": "AIRBAG. Direksiyon simidinin sökülmesini gerektiren her işlem airbag ve spiral kablo işlemidir; yanlış yapıldığında patlayabilir ya da sistemi kalıcı devre dışı bırakabilir. Bu alan airbag SÖKME öğretmez — ilk ders bunun neden ayrı yetki ve prosedür gerektirdiğini, sistemin nasıl güvenli hâle getirildiğini ve hangi işlerin bu sınırın ötesinde olduğunu öğretir.",
+    "olcumDegerleri": "Bu alan da sayı yoğun: direksiyon boşluğu sınırı, hidrolik basınç değerleri, sıvı tipi ve EPS tork sensörü değerleri araca özgüdür. Diğer alanlarda olduğu gibi FARK DESENİ kullanılacak — öğrenciden üretici sınırı değil, ölçülen iki değer arasındaki fark istenecek. Mevzuat değeri kullanılacaksa sourceRequired ile künyelenir.",
+    "sira": "MEB kazanım sırası korundu: kontrol ve ayar (1), dişli kutusu (2), hidrolik (3), elektrik yardımlı (4), yardımcı sistemler (5). Periyodik bakım ve testler MEB'de ayrı derslerdir ve o sırayla eklendi. Güvenlik/harita aşaması ile teşhis aşamaları, diğer alanlarda olduğu gibi öne ve sona konuldu.",
+    "model": "Sahne henüz yok. Gerekecek parçalar: direksiyon simidi, direksiyon mili ve mafsalı, kremayer kutusu, rot çubuğu, rot başı, körük, hidrolik pompa ve kasnağı, hidrolik depo, basınç ve dönüş hortumu, EPS motoru, tork sensörü, açı sensörü, basınç ölçme cihazı. Rot başı ve rot kolu lastik sahnesinde zaten modellendi."
+  }
+}

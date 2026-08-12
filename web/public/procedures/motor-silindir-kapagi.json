@@ -1,0 +1,192 @@
+{
+  "id": "motor.silindir-kapagi",
+  "area": "motor-mekanik",
+  "stage": 6,
+  "title": "Silindir Kapağı: Sökme Sırası, Gönye Kontrolü ve Açı Torku",
+  "vehicleClass": "binek-arac",
+  "estimatedMinutes": 35,
+  "prerequisites": ["motor.manifolt", "motor.sogutma-bakim"],
+  "learningGoals": [
+    "Kapak cıvatalarını gevşetme ve sıkma sıralarının neden ters olduğunu bilmek",
+    "Kapak yüzeyinin düzlüğünü gönye ve sentille ölçmek",
+    "Tork kademesinden sonra açı ile sıkmayı uygulamak ve fazla açının ne yaptığını bilmek"
+  ],
+
+  "safety": [
+    { "rule": "Motor tamamen soğukken sökülür", "why": "Alüminyum kapak, döküm bloktan çok daha fazla genleşir. Sıcakken cıvataları gevşetmek kapağı gerilim altında serbest bırakır ve kapak kalıcı olarak çarpılır. Bu hata sökme anında görünmez, montajdan sonra kaçak olarak ortaya çıkar", "blocksStart": true },
+    { "rule": "Soğutma sistemi boşaltılmadan kapak sökülmez", "why": "Kapak kalkarken soğutma kanallarındaki sıvı silindirlerin içine ve kartere iner. Yağa karışan soğutucu yatakları kısa sürede bozar", "blocksStart": true },
+    { "rule": "Kapak kalkarken silindir ağızları örtülür", "why": "Açık silindire düşen tek bir cıvata ya da conta parçası, motor döndüğünde piston tepesi ile kapak arasında sıkışır ve onarımı katbekat büyütür", "blocksStart": false },
+    { "rule": "Sökülen cıvatalar numaralanır", "why": "Kapak cıvataları çoğu motorda farklı boydadır ve bazıları tekrar kullanılamaz. Sırasını kaybetmek montajı tahmine çevirir", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.torx-e14", "label": "E14 çok köşe / torx lokma", "required": true },
+    { "id": "tool.uzatma", "label": "Uzun kollu kırıcı kol", "required": true },
+    { "id": "tool.tork-anahtari", "label": "Tork anahtarı", "required": true },
+    { "id": "tool.aci-olcer", "label": "Açı ölçer (açısal sıkma aparatı)", "required": true },
+    { "id": "tool.cetvel", "label": "Gönye / çelik cetvel", "required": true },
+    { "id": "tool.sentil", "label": "Sentil takımı", "required": true },
+    { "id": "tool.kumpas", "label": "Kumpas", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Araç atölyeye yeni girdi, motor sıcak. Kapağı sökeceksin.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.silindir-kapagi",
+        "question": "Ne yaparsın?",
+        "options": [
+          { "label": "Motorun tamamen soğumasını beklerim", "verdict": "bekle", "correct": true, "explain": "Alüminyum kapak ile döküm blok aynı sıcaklıkta farklı oranda genleşir. Motor sıcakken kapak, cıvataların tuttuğu bir gerilim durumundadır. O gerilim altındayken cıvataları gevşetmek, kapağın serbest kalıp kendi genleşmesine göre şekil almasına ve soğurken o şekilde kalmasına yol açar. Ortaya çıkan çarpıklık gözle görülmez ama gönyede görünür ve conta bir daha tutmaz. Beklemek zaman kaybı değil, işi bir kez yapmanın bedelidir." },
+          { "label": "Fanla soğutup yarım saatte sökerim", "verdict": "fan", "explain": "Zorlamalı soğutma yüzeyi soğutur, kapağın içini değil. Dıştan soğuk içten sıcak bir kapak en riskli durumdur: sıcaklık farkı gerilimi artırır." },
+          { "label": "Sıcakken sökmek daha kolay, cıvatalar rahat çıkar", "verdict": "sicakken-kolay", "explain": "Doğru, sıcakken daha kolay çıkar. Ama kolaylık burada kapağın çarpılmasıyla ödenir. Kolay olan ile doğru olan bu işte aynı değildir." },
+          { "label": "Soğutucuyu boşaltıp hemen başlarım, sıcaklık conta ile ilgili değil", "verdict": "sogutucu-yeter", "explain": "Sorun soğutucu değil, metalin sıcaklığıdır. Sistem boşalsa da kapak hâlâ sıcak ve gerilim altındadır." }
+        ]
+      },
+      "camera": "motor-ust",
+      "teachingNote": "Bu adımda öğrenilen şey sabırdır ve bu işin en pahalı dersidir: kapak çarpılırsa masaya iş yeniden gelir, üstelik ikinci kez müşterinin parasıyla değil senin cebinden."
+    },
+    {
+      "id": 2,
+      "instruction": "Motor soğudu, sistem boşaltıldı. Kapak cıvatalarını gevşetmeye başlıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kapak-civatasi",
+        "question": "Gevşetme hangi sırayla yapılır?",
+        "options": [
+          { "label": "Dıştan içe doğru, birkaç kademede ve her turda hepsini biraz gevşeterek", "verdict": "distan-ice", "correct": true, "explain": "Sıkarken merkezden dışa gidilir; gevşetirken tam tersi yapılır. Sebep aynı: kapağın üzerindeki yük tek noktada toplanmasın. Ortadaki cıvatayı önce tamamen gevşetirsen, kapağın ortası serbest kalırken kenarlar hâlâ tam yükte olur ve kapak ortadan yukarı doğru esner. Dıştan içe ve kademeli gevşetmek yükü kademe kademe düşürür, kapak hiçbir anda dengesiz yüklenmez." },
+          { "label": "Sıkma sırasıyla aynı, merkezden dışa", "verdict": "merkezden-disa", "explain": "En sık yapılan hatadır çünkü mantıklı görünür. Sıkma ve gevşetme sıraları birbirinin tersidir; ikisi de kapağın yük altında dengeli kalmasını hedefler ama yükün yönü terstir." },
+          { "label": "Sıra önemli değil, hepsi nasılsa çıkacak", "verdict": "sira-onemsiz", "explain": "Cıvatalar çıkar ama kapak sağlam çıkmaz. Sırasız gevşetme, çarpılmanın en sessiz sebebidir." },
+          { "label": "Önce köşeleri tamamen çıkarır, sonra ortadakileri sökerim", "verdict": "koseler-once", "explain": "Kademeli olmayan her yöntem aynı sonucu verir: kalan cıvatalar bütün yükü taşır ve kapak o noktalardan zorlanır." }
+        ]
+      },
+      "camera": "motor-ust",
+      "hint": "Cıvata numaralarını bir kâğıda kapak şeması çizip üzerine işaretle; söküm sırası montajda işine yarayacak.",
+      "teachingNote": "Sıkma sırası kılavuzda vardır; gevşetme sırası çoğu zaman yazılmaz çünkü sıkmanın tersi olduğu varsayılır. Bu varsayımı bilmeyen usta, kapağı daha sökerken bozar."
+    },
+    {
+      "id": 3,
+      "instruction": "Cıvataları sırayla ve kademeli olarak sök.",
+      "interaction": {
+        "type": "unscrew",
+        "target": "part.kapak-civatasi",
+        "count": 10,
+        "turns": 8,
+        "tool": "tool.torx-e14"
+      },
+      "camera": "motor-ust",
+      "commonMistake": {
+        "if": "yanlis-alet",
+        "feedback": "Kapak cıvataları çok köşe ya da torx başlıdır. Altı köşe lokma zorlarsa yuvayı yuvarlar ve cıvata sökülemez hâle gelir."
+      },
+      "hint": "Kırıcı kolu cıvataya dik tut; açılı çekmek yuvayı yorar.",
+      "teachingNote": "Kapak yerinden kalkmıyorsa kaldıraçla zorlama. Conta yüzeyine giren tek bir tornavida ucu, o kapağı bir daha sızdırmaz hâle getirir. Krank milini bir tık çevirmek genelde kapağı kendiliğinden ayırır."
+    },
+    {
+      "id": 4,
+      "instruction": "Kapak masada. Tekrar kullanılıp kullanılamayacağına karar vereceksin.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.silindir-kapagi",
+        "question": "Düzlük kontrolü nasıl yapılır?",
+        "options": [
+          { "label": "Gönyeyi yüzeye dayar, altından sentil geçirmeyi denerim; boydan boya, enine ve iki çapraz doğrultuda ölçerim", "verdict": "gonye-sentil-cok-yon", "correct": true, "explain": "Gönye yüzeye konur ve gönye ile yüzey arasından sentil yaprağı geçirilmeye çalışılır. Geçen en kalın yaprak, o doğrultudaki eğriliği verir. Tek doğrultuda ölçmek yeterli değildir: kapak boyuna düz görünüp çapraz doğrultuda burkulmuş olabilir. Bu yüzden boyuna, enine ve iki çapraza bakılır. Ölçülen değerin kabul sınırı araca özgüdür ve kılavuzdan okunur; sınırı aşan kapak yüzey taşlamasına gider, taşlama payı da sınırlıdır." },
+          { "label": "Gözle bakarım, belirgin eğrilik yoksa düzdür", "verdict": "gozle", "explain": "Conta kaçağı yapan eğrilik, gözün ayırt edebileceğinden çok daha küçüktür. Bu kontrol tanım gereği aletle yapılır." },
+          { "label": "Cam üzerine koyup sallanıyor mu bakarım", "verdict": "cam", "explain": "Kapak kendi ağırlığıyla oturur ve küçük eğrilikte sallanmaz. Yöntem kaba bir fikir verir, ölçüm değildir." },
+          { "label": "Yeni conta kalın olduğu için eğrilik önemli değildir", "verdict": "conta-kalin", "explain": "Conta belli bir sıkışma payı için tasarlanır; eğriliği telafi etmek için değil. Sınırın üstünde eğrilikte conta bir süre tutar, sonra aynı noktadan patlar." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Bu kontrol iki dakikadır ve bütün işin kaderini belirler. Atlanırsa yeni conta, yeni cıvata ve bir günlük emek, ilk ısınmada boşa gider."
+    },
+    {
+      "id": 5,
+      "instruction": "Montaja hazırlanıyorsun. Sökülen kapak cıvataları elinde.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kapak-civatasi",
+        "question": "Bu cıvatalar tekrar kullanılır mı?",
+        "options": [
+          { "label": "Kılavuz açı ile sıkma istiyorsa cıvatalar akma sınırına kadar uzatılmıştır; yenisiyle değiştiririm", "verdict": "yenile", "correct": true, "explain": "Açı ile sıkılan kapak cıvataları bilinçli olarak akma sınırına kadar gerdirilir. Bu, cıvatanın esnek bir yay gibi değil, kalıcı olarak uzamış bir çubuk gibi davranması demektir ve tam olarak istenen budur, çünkü akma bölgesinde cıvatanın gerginliği sıcaklık ve titreşimle çok az değişir. Bedeli ise cıvatanın tek kullanımlık olmasıdır: bir kez uzamış cıvata ikinci kez aynı gerginliği veremez, üstelik ikinci uzamada kopmaya çok daha yakındır. Boyları kumpasla ölçüp uzayanı ayıklamak da yaygındır ama kılavuz değiştir diyorsa ölçüm tartışmayı bitirmez." },
+          { "label": "Gözle sağlam görünüyorsa kullanılır", "verdict": "gozle-saglam", "explain": "Akma sınırına gerilmiş bir cıvatada hasar gözle görülmez. Uzama tüm gövdeye yayılır ve boyu çok az artar." },
+          { "label": "Yağlayıp kullanırım, sorun çıkmaz", "verdict": "yagla", "explain": "Yağlama sürtünmeyi değiştirir ve aynı torkta farklı gerginlik oluşturur; sorunu çözmez, ölçümü de bozar. Ayrıca kılavuz yağlama istemiyorsa dişe yağ konmaz." },
+          { "label": "Yarısını yenilerim, diğerleri idare eder", "verdict": "yarisini", "explain": "Kapağın yükü bütün cıvatalar arasında paylaşılır. Farklı davranan iki grup cıvata, yükü eşitsiz taşır ve conta baskısı bölgesel olarak bozulur." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Açı ile sıkma, cıvatayı bilerek kalıcı biçimde uzatan bir yöntemdir. Bunu bilen usta cıvataya para harcamayı israf saymaz; bilmeyen usta daha yeni değiştirdim, neden kaçırıyor der."
+    },
+    {
+      "id": 6,
+      "instruction": "Yeni conta ve yeni cıvatalar takıldı. Kılavuzun tork kademeleri uygulandı; sıra son kademede: bu senaryoda kılavuz 90 derece açı istiyor. Açı ölçeri tak ve tam 90 derece çevir.",
+      "interaction": {
+        "type": "rotate-to-angle",
+        "target": "part.kapak-civatasi",
+        "direction": "cw",
+        "degrees": 90,
+        "toleranceDeg": 8,
+        "tool": "tool.aci-olcer",
+        "requiresGesture": true
+      },
+      "camera": "motor-ust",
+      "commonMistake": {
+        "if": "asiri-aci",
+        "feedback": "Fazla çevirdin. Açı kademesinde cıvata zaten akma bölgesindedir; fazladan her derece onu kopma sınırına yaklaştırır. Kopan kapak cıvatasının gövdesi blokta kalır ve iş bambaşka bir onarıma döner."
+      },
+      "hint": "Açıyı gözle kestirmeye çalışma. Aparatı takıp sayıyı oku; 90 derece küçük bir hareket gibi görünür ama cıvatada büyük bir uzamaya karşılık gelir.",
+      "teachingNote": "Neden tork değil de açı? Çünkü akma bölgesinde tork ile gerginlik arasındaki bağ zayıflar: sürtünme biraz değişse tork aynı kalırken gerginlik çok farklı çıkar. Açı ise doğrudan dönmeyi, yani diş hatvesi üzerinden uzamayı ölçer ve sürtünmeden etkilenmez. Bu yüzden modern motorlarda kapak cıvatası önce torkla oturtulur, sonra açıyla gerdirilir."
+    },
+    {
+      "id": 7,
+      "instruction": "Kapak sıkıldı, motor toplandı ve çalıştı. Bir hafta sonra müşteri cıvataları bir daha sıktırayım mı diye soruyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kapak-civatasi",
+        "question": "Ne cevap verirsin?",
+        "options": [
+          { "label": "Kılavuz sonradan sıkma öngörmüyorsa dokunulmaz", "verdict": "dokunma", "correct": true, "explain": "Açı ile sıkılan cıvatalar zaten akma sınırındadır; üzerine bir tur daha sıkmak onları kopma bölgesine taşır. Eski nesil, tekrar sıkma öngören motorlarda kılavuz bunu açıkça yazar ve nasıl yapılacağını da tarif eder. Kılavuz yazmıyorsa sonradan sıkma bir bakım değil, hasardır. Bunun yerine yapılacak şey kontroldür: soğutucu seviyesi, yağda su izi, egzozdan beyaz duman, genleşme deposunda kabarcık." },
+          { "label": "Emniyet için hepsini çeyrek tur daha sıkarım", "verdict": "ceyrek-tur", "explain": "Emniyet duygusu veren ama tam tersini yapan bir alışkanlıktır. Akma bölgesindeki cıvatada çeyrek tur, kopmaya giden yolun büyük bölümüdür." },
+          { "label": "Tork anahtarıyla kontrol ederim, düşen varsa tamamlarım", "verdict": "tork-kontrol", "explain": "Açı ile sıkılmış cıvatada tork okuması anlamlı değildir; ölçtüğün şey gerginlik değil, o anki sürtünmedir. Düşük çıkması gevşediği anlamına gelmez." },
+          { "label": "Motoru ısıtıp sıcakken sıkarım, daha iyi oturur", "verdict": "sicakken-sik", "explain": "Sıcakken sıkmak kapağı gerilim altında değiştirir ve soğuyunca yük dağılımı bozulur. Kapak işlemleri soğukta yapılır." }
+        ]
+      },
+      "camera": "motor-ust",
+      "hint": "Sorunun altında yatan gerçek endişeyi de cevapla: müşteri kaçak olmasından korkuyor, ona neyi izleyeceğini söyle.",
+      "teachingNote": "İyi usta hayır demez, hayır çünkü der ve yerine ne yapılacağını söyler. Müşteriye izlenecek dört belirtiyi saymak, gereksiz bir müdahaleyi engellemenin en kolay yoludur."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru", "aciToleransIcinde"],
+    "questions": [
+      {
+        "q": "Kapak cıvatalarında neden torktan sonra açı ile sıkma kademesi vardır?",
+        "a": "surtunmeden-bagimsiz",
+        "options": [
+          { "verdict": "surtunmeden-bagimsiz", "label": "Akma bölgesinde tork gerginliği güvenilir biçimde göstermez; açı doğrudan uzamayı verir", "explain": "Tork anahtarının ölçtüğü şey, cıvatayı çevirmek için gereken kuvvettir ve bunun büyük bölümü diş ile kafa altındaki sürtünmeye harcanır. Sürtünme yağa, pasa, yüzey durumuna göre değişir; aynı tork farklı gerginlikler üretebilir. Açı ise cıvatanın kaç derece döndüğünü, yani diş hatvesi üzerinden ne kadar uzadığını ölçer ve sürtünmeden etkilenmez. Bu yüzden hassas gerginlik istenen yerde önce tork ile oturtulur, sonra açı ile gerdirilir." },
+          { "verdict": "daha-hizli", "label": "Daha hızlı olduğu için", "explain": "Açı kademesi hız kazandırmaz; ek aparat ve dikkat ister." },
+          { "verdict": "tork-anahtari-pahali", "label": "Tork anahtarı pahalı olduğu için", "explain": "Açı kademesinde tork anahtarı zaten kullanılır; biri diğerinin yerine geçmez." },
+          { "verdict": "gelenek", "label": "Üreticilerin alışkanlığı, teknik gerekçesi yok", "explain": "Gerekçesi ölçülebilir: aynı torkta gerginlik saçılımı yüksektir, açı ile sıkmada belirgin biçimde düşer." }
+        ]
+      },
+      {
+        "q": "Kapak cıvatalarını gevşetme sırası neden sıkma sırasının tersidir?",
+        "a": "yuk-kademeli-dussun",
+        "options": [
+          { "verdict": "yuk-kademeli-dussun", "label": "Kapak üzerindeki yük tek noktada toplanmadan kademeli düşsün diye", "explain": "Sıkarken yük merkezden dışa doğru kurulur; sökerken aynı yükün dıştan içe doğru sökülmesi gerekir. Ortadaki cıvata önce tamamen gevşetilirse kapağın ortası serbest kalır, kenarlar hâlâ tam yüktedir ve kapak ortadan yukarı esner. Kademeli ve dıştan içe gevşetmede hiçbir anda dengesiz bir yük dağılımı oluşmaz. Çarpılma, çoğu zaman montajda değil sökümde başlar." },
+          { "verdict": "civata-kurtarma", "label": "Cıvatalar kırılmasın diye", "explain": "Kırılma riski pas ve ısı ile ilgilidir; sıra kapağın şekliyle ilgilidir." },
+          { "verdict": "conta-kurtarma", "label": "Conta tekrar kullanılabilsin diye", "explain": "Kapak contası tek kullanımlıktır; kurtarma amacı yoktur." },
+          { "verdict": "kolaylik", "label": "Dıştaki cıvatalara ulaşmak kolay olduğu için", "explain": "Erişim değil, yük dağılımı belirler." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "aciDegeri": "Adım 6'daki 90 derece SENARYO verisidir; belirli bir araca ait bir iddia değildir ve öyle kullanılamaz. Gerçek motorlarda kademe sayısı ve açılar değişir (60, 90, 90+90, 180 gibi) ve yalnız üretici kılavuzundan okunur. Bu yüzden sourceRequired ile işaretlenmedi: kaynaklandırılacak bir gerçek iddia değil, öğretilen becerinin uygulandığı bir örnektir. Öğretilen beceri açıyı tam tutturmak ve fazla çevirmemektir; sayı motora göre değişir.",
+    "sourceRequired": "Kapak cıvatası tork kademeleri, kapak düzlük sınırı ve taşlama payı araca özgüdür ve bu derste bilerek sayı verilmedi.",
+    "kapsam": "Kapak cıvatası tek mesh ile temsil edilir; gerçekte sayısı ve deseni motora göre değişir. Sıkma ve gevşetme sırası bu yüzden animasyonla değil teşhis adımıyla öğretiliyor.",
+    "reviewedByMechanic": false
+  }
+}

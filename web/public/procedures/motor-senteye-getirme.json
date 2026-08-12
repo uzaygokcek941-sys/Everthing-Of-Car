@@ -1,0 +1,150 @@
+{
+  "id": "motor.senteye-getirme",
+  "area": "motor-mekanik",
+  "stage": 3,
+  "title": "Motoru Senteye Getirme",
+  "vehicleClass": "motor",
+  "estimatedMinutes": 15,
+  "prerequisites": ["motor.terimler-ve-cevrim"],
+  "learningGoals": [
+    "1. silindirin sıkıştırma sonunda olduğunu kanıtla doğrulamak",
+    "Krank ve kam işaretlerini birlikte okumak",
+    "İşaret kaçırıldığında geri değil ileri dönmek"
+  ],
+
+  "safety": [
+    { "rule": "Kontak kapalı, akünün eksi kutbu sökülü", "why": "Sente ararken marş dönerse el kayışın içinde kalır. Bu iş elle ve motor ölüyken yapılır", "blocksStart": true },
+    { "rule": "Krank asla geri çevrilmez", "why": "Ters yön triger gergisini boşaltır ve dişli boşluğunu ters yöne alır; işaretler hizalı görünse bile kayış gerçekte kaymış olabilir", "blocksStart": true },
+    { "rule": "Buji deliğine parmak sokulurken tırnak ve yüzük olmamalı", "why": "Kompresyon parmağı iterken tırnak deliğin kenarına takılır", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.lokma-19", "label": "19 mm lokma (krank kasnak somunu)", "required": true },
+    { "id": "tool.circir", "label": "1/2\" cırcır kolu", "required": true },
+    { "id": "tool.buji-lokmasi", "label": "Buji lokması", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "1. silindirin sıkıştırma zamanında olduğunu nasıl kanıtlarsın?",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.silindir-1",
+        "question": "1. silindirin sıkıştırmada olduğunu ne gösterir?",
+        "options": [
+          { "label": "Bujiyi sökerim, deliği parmağımla kapatırım; krank dönerken basınç parmağımı iterse sıkıştırmadadır", "verdict": "basinc-testi", "correct": true, "explain": "Sıkıştırmada iki supap da kapalıdır, o yüzden silindir kapalı bir hacimdir ve piston çıkarken içerideki hava dışarı basar. Egzoz zamanında ise egzoz supabı açıktır, basınç manifolttan kaçar ve parmağın itilmez. Aleti olmayan ustanın en güvenilir testi budur." },
+          { "label": "Krank işareti sıfırdaysa yeterlidir", "verdict": "krank-yeter", "explain": "Yetmez. Krank iki turda bir aynı yere gelir; işaret sıfırdayken silindir ya sıkıştırma sonundadır ya egzoz sonunda. İkisi arasında karar veren şey krank değildir." },
+          { "label": "Bujiye bakarım, kuruysa sıkıştırmadadır", "verdict": "buji-kuru", "explain": "Bujinin kuru ya da ıslak olması karışım ve ateşleme hakkında bilgi verir, o anki zaman hakkında değil." },
+          { "label": "Motoru çalıştırıp dinlerim", "verdict": "calistir", "explain": "Sente sökülecek ya da ayar yapılacak motorda aranır; zaten çalışmayan ya da parçası sökülmüş motorda bu seçenek yoktur. Ayrıca çalışan motorda krank istediğin yerde duramaz." }
+        ]
+      },
+      "camera": "motor-ust",
+      "teachingNote": "Sente aramanın ilk adımı krank işaretine bakmak değildir. Önce hangi silindirin hangi zamanda olduğu kanıtlanır, sonra işarete gidilir."
+    },
+    {
+      "id": 2,
+      "instruction": "Krankı yavaşça çevirerek kasnaktaki işareti blok üzerindeki sıfır çizgisine getir.",
+      "interaction": {
+        "type": "rotate",
+        "target": "part.krank-kasnagi",
+        "direction": "cw",
+        "turns": 1,
+        "tool": "tool.lokma-19",
+        "requiresGesture": true
+      },
+      "camera": "motor-on",
+      "commonMistake": {
+        "if": "ters-yon",
+        "feedback": "Ters çeviriyorsun. Bu yön gergiyi boşaltır ve işaret hizalı görünse bile kayış kaymış olabilir."
+      },
+      "hint": "Son birkaç dereceyi çok yavaş al. İşareti hızlı geçmek, dönüp bir tur daha atmak demektir.",
+      "teachingNote": "İşaret kasnağın üstünde küçüktür ve yağ, kir ya da eski boya altında kaybolur. Çevirmeden önce kasnağı temizlemek bu işin yarısıdır."
+    },
+    {
+      "id": 3,
+      "instruction": "Krank işareti tam sıfırda. Ama kam mili kasnağının işareti kapak çizgisinin tam karşısında — 180° ters duruyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kam-kasnagi",
+        "question": "Krank işareti tuttu, kam işareti ters. Ne yaparsın?",
+        "options": [
+          { "label": "Krankı bir tam tur daha çeviririm", "verdict": "bir-tur-daha", "correct": true, "explain": "Kam mili krankın yarı hızında döner. Krank bir tur atarken kam yarım tur atar; yani kam işareti tam ters duruyorsa doğru noktaya gelmesi için krankın bir tur daha dönmesi gerekir. Motor şu anda ölü noktada ama 1. silindirin sıkıştırma sonunda değil, egzoz sonunda." },
+          { "label": "Kam kasnağını gevşetip işareti elle çeviririm", "verdict": "kam-cevir", "explain": "Kam kasnağını krankla ilişkisini bozacak şekilde çevirmek zamanlamayı topluca kaydırır. Supap piston tepesine vurabilir; bu hata motorun içini dağıtır." },
+          { "label": "İşaretler yaklaşık tutuyor, devam ederim", "verdict": "yaklasik", "explain": "180° 'yaklaşık' değildir; tam ters çevrimdir. Bu haldeyken yapılan supap ayarı ya da ateşleme ayarı baştan yanlıştır." },
+          { "label": "Krankı yarım tur geri alırım", "verdict": "yarim-tur-geri", "explain": "Yarım tur geri kamı da yanlış yöne çeker ve gergi boşalır. Ayrıca gidilecek yol bir tam turdur, yarım tur değil." }
+        ]
+      },
+      "camera": "motor-ust",
+      "teachingNote": "Bu durum hata değil, çevrimin doğal yarısıdır. 2:1 oranını bilen çırak burada paniklemez, bir tur daha atar."
+    },
+    {
+      "id": 4,
+      "instruction": "Krankı bir tam tur daha çevir; iki işaret de yerine gelsin.",
+      "interaction": {
+        "type": "rotate",
+        "target": "part.krank-kasnagi",
+        "direction": "cw",
+        "turns": 1,
+        "tool": "tool.lokma-19",
+        "requiresGesture": true
+      },
+      "camera": "motor-on",
+      "commonMistake": {
+        "if": "ters-yon",
+        "feedback": "Yine ters yön. Sente ararken tek yön vardır: motorun kendi dönüş yönü."
+      },
+      "hint": "Şimdi hem krank hem kam işareti aynı anda yerinde olmalı. İkisi birden tutmuyorsa sente tutmamıştır.",
+      "teachingNote": "Sente tek işaretle doğrulanmaz. Krank çevrimin neresinde olduğunu söylemez, kam söyler; ikisi birlikte okunur."
+    },
+    {
+      "id": 5,
+      "instruction": "Elin ağır geldi, işareti birkaç derece geçtin.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.krank-kasnagi",
+        "question": "İşareti geçtin. Nasıl düzeltirsin?",
+        "options": [
+          { "label": "Geri almam; aynı yönde bir tam tur daha atıp yeniden yaklaşırım", "verdict": "bir-tur-daha", "correct": true, "explain": "Birkaç derece için bir tam tur atmak zaman kaybı gibi görünür ama tek doğru yol budur. Geri çevirmek zincir ya da kayış gergisini gevşek tarafa alır ve dişli boşluğu işareti yalancı olarak hizalar: gözünle doğru görürsün, motor yanlış durur." },
+          { "label": "Birkaç derece geri alırım, o kadarcık şey", "verdict": "geri-al", "explain": "Boşluğun kendisi de birkaç derecedir; tam olarak bu ölçekte yanıltır. 'O kadarcık' hatanın küçüklüğü değil, hatanın tam olarak yaşandığı aralıktır." },
+          { "label": "Geçtiğim kadarını gözle telafi ederim, ayarı ona göre yaparım", "verdict": "gozle-telafi", "explain": "Sente bir referans noktasıdır; kaydırılmış referansla yapılan her ölçü aynı miktarda kayar. Referans göz kararıyla düzeltilmez." },
+          { "label": "Kam kasnağını azıcık çevirip denkleştiririm", "verdict": "kam-denklestir", "explain": "Bu, hatayı krank tarafından kam tarafına taşımaktır. Sonuç: supap zamanlaması kalıcı olarak bozuk bir motor." }
+        ]
+      },
+      "camera": "motor-on",
+      "teachingNote": "Tek yönde dönme kuralı sente, triger ve supap ayarının üçünde de aynıdır. Bir kez öğrenilir, ömür boyu kullanılır."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Motoru senteye getirmek hangi işlerin ön koşuludur?",
+        "a": "supap-triger-atesleme",
+        "options": [
+          { "verdict": "supap-triger-atesleme", "label": "Supap boşluğu ayarı, triger takma ve ateşleme ayarı", "explain": "Üçü de motorun çevrimin tam olarak neresinde olduğunu bilmeyi gerektirir. Sente bu üç işin ortak başlangıç noktasıdır; sentesiz yapılan ayar, doğru aletle yapılmış yanlış iştir." },
+          { "verdict": "yag-degisimi", "label": "Yağ ve filtre değişimi", "explain": "Yağ değişimi krank konumundan bağımsızdır." },
+          { "verdict": "aku-degisimi", "label": "Akü değişimi", "explain": "Elektrik işinin krank konumuyla ilgisi yok." },
+          { "verdict": "lastik", "label": "Lastik ve fren işleri", "explain": "Motorun dışındaki işler senteye ihtiyaç duymaz." }
+        ]
+      },
+      {
+        "q": "İşareti kaçırınca krankı geri çevirmek neden yanlıştır?",
+        "a": "gergi-ve-bosluk",
+        "options": [
+          { "verdict": "gergi-ve-bosluk", "label": "Gergi boşalır ve dişli boşluğu işareti yalancı hizalar", "explain": "İleri dönerken kayışın çekilen tarafı gergindir ve boşluk o tarafta kapalıdır. Geri dönünce boşluk yer değiştirir; işaretler gözle hizalı görünürken kam mili gerçekte birkaç derece geride kalır. Ölçemediğin bir hatayı içeri almış olursun." },
+          { "verdict": "yag-basinci", "label": "Yağ basıncı düşer", "explain": "Motor ölüyken zaten yağ basıncı yoktur; sorun bu değil." },
+          { "verdict": "krank-zarar", "label": "Krank mili zarar görür", "explain": "Krank elle ters çevrilmekten zarar görmez. Zarar gören şey zamanlamanın doğruluğudur." },
+          { "verdict": "yanlis-degil", "label": "Yanlış değil, geri çevrilebilir", "explain": "Çevrilebilir ama sonuç güvenilmez olur. Bu yüzden atölye kuralı istisnasızdır: tek yön." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "sourceRequired": "Bu derste araca özgü sayısal değer yoktur; işaret yerleri motordan motora değişir ve gerçek işte üretici kılavuzundan bakılır.",
+    "kapsam": "Krank ve kam kasnağı işaretleri model gerektiriyor. Model gelene kadar adımlar metinle oynanır; kasnak dönüşü animasyonlu değildir.",
+    "reviewedByMechanic": false
+  }
+}

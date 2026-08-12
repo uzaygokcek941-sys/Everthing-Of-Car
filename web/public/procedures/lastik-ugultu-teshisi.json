@@ -1,0 +1,177 @@
+{
+  "id": "lastik.ugultu-teshisi",
+  "area": "lastik-tekerlek",
+  "stage": 9,
+  "title": "Uğultu: Tekerlek Rulmanı mı, Lastik mi",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 30,
+  "prerequisites": ["lastik.asinma-deseni", "lastik.on-takim-kontrol"],
+  "learningGoals": [
+    "Sesin hıza mı devre mi bağlı olduğunu ayırmak",
+    "Viraj testiyle rulman ile lastiği birbirinden ayırmak",
+    "Lastik kaynaklı uğultuda asıl sebebin lastikte olmadığını görmek"
+  ],
+
+  "safety": [
+    { "rule": "Viraj testi güvenli hızda ve boş bir yolda yapılır", "why": "Test sırasında dikkat sese verilir; bu, trafikte yapılacak bir iş değildir", "blocksStart": true },
+    { "rule": "İleri derecede gürültü yapan bir rulmanla yola devam edilmez", "why": "Dağılan bir tekerlek rulmanı tekerleğin kilitlenmesine ya da aşırı oynamasına yol açabilir", "blocksStart": true },
+    { "rule": "Tekerlek elle döndürülerek dinlenirken araç sehpada ve vitesi boşta olur", "why": "Sehpaya alınmamış araçta ya da viteste dönen tekerlek ciddi yaralanma üretir", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.dis-mastari", "label": "Diş derinliği mastarı", "required": true },
+    { "id": "tool.sehpa", "label": "Sehpa (mapa)", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Müşteri: belli bir hızdan sonra uğultu başlıyor, hızlandıkça artıyor diyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.gobek",
+        "question": "İlk ayrım ne?",
+        "options": [
+          { "label": "Ses hıza mı yoksa motor devrine mi bağlı: vitesten çıkarılıp serbest bırakıldığında ses sürüyorsa kaynak dönen tekerlek grubudur", "verdict": "hiz-mi-devir-mi", "correct": true, "explain": "Araçta uğultu üretebilecek iki bağımsız kaynak vardır: dönme hızıyla değişenler (tekerlek, rulman, lastik, aktarma organları) ve motor devriyle değişenler (motor, egzoz, yardımcı kayış, turbo). Bu ikisini ayırmak için tek bir test yeter: araç uğultunun duyulduğu hıza çıkarılır, sonra vitesten çıkarılıp motor devri düşürülerek serbest bırakılır. Araç aynı hızda giderken ses aynen sürüyorsa kaynak tekerlek grubudur, çünkü motor devri değişti ama ses değişmedi. Ses kesildiyse ya da belirgin biçimde değiştiyse kaynak motor tarafındadır ve bu alanın dışına çıkar. Bu ayrım yapılmadan lastik ve rulman aranırsa saatler boşa gider. İkinci bir gözlem daha alınır: ses hızla birlikte sürekli mi artıyor, yoksa belirli bir aralıkta belirginleşip sonra azalıyor mu? Sürekli artan uğultu rulman ve lastik için tipiktir; belirli aralıkta belirginleşen ses daha çok titreşim kaynaklıdır ve o ayrı bir derstir." },
+          { "label": "Doğrudan rulman değiştirilir", "verdict": "rulman-degistir", "explain": "Uğultu lastikten de gelebilir; ayrım yapılmadan parça değişmez." },
+          { "label": "Lastikler değiştirilir", "verdict": "lastik-degistir", "explain": "Aynı sebeple: kaynak henüz belli değil." },
+          { "label": "Ses seviyesi ölçülür", "verdict": "ses-olc", "explain": "Seviye değil, sesin neye bağlı değiştiği bilgi verir." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bir sesin kaynağını bulmanın ilk adımı, onu neyin değiştirdiğini bulmaktır: hız mı, devir mi, yük mü, yön mü?"
+    },
+    {
+      "id": 2,
+      "instruction": "Ses hıza bağlı, motor devrinden bağımsız. Şimdi hafif virajlar alıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.gobek",
+        "question": "Viraj testi ne söyler?",
+        "options": [
+          { "label": "Yön değiştikçe belirgin biçimde değişen ses rulmanı işaret eder: virajda yük dış tekerleklere kayar ve yorulmuş rulman yük altında daha çok ses verir", "verdict": "viraj", "correct": true, "explain": "Viraj alırken aracın ağırlığı dış tekerleklere kayar. Bu, tekerlek rulmanları için bir yük testidir: yorulmuş bir rulman yük altında belirgin biçimde daha çok ses çıkarır, yükü kalktığında ise sesi azalır ya da tamamen kesilir. Bu yüzden ses hafif bir sağa dönüşte artıp sola dönüşte azalıyorsa, sağa dönüşte yüklenen taraf — yani sol tekerlek — şüphelidir. Tersi de aynı mantıkla okunur. Lastik kaynaklı uğultu ise yön değişiminden bu kadar keskin biçimde etkilenmez; düz yolda ve virajda benzer biçimde sürer, çünkü sesi üreten şey yükün nereye bindiği değil, sırt deseninin yolla teması ve o desenin düzensizliğidir. Bu test kesin bir kanıt değil, güçlü bir işarettir ve tek başına parça değiştirmek için yeterli sayılmaz; ardından tekerlek sehpaya alınıp elle döndürülerek dinlenir ve boşluk testi yapılır. Ama teşhisi ikiye bölmesi bakımından çok değerlidir, üstelik hiçbir alet gerektirmez." },
+          { "label": "Hiçbir şey; viraj sesi etkilemez", "verdict": "etkilemez", "explain": "Viraj yükü kaydırır ve rulman sesi yüke duyarlıdır." },
+          { "label": "Kesin olarak lastiği gösterir", "verdict": "lastik", "explain": "Yön değişimine duyarlı ses daha çok rulmanı işaret eder." },
+          { "label": "Yalnız aktarma organlarını gösterir", "verdict": "aktarma", "explain": "Aktarma sesleri genellikle çekiş ve yavaşlamayla değişir, yönle değil." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Yük yönünü değiştirerek bir parçayı sınamak, ücretsiz ve güçlü bir teşhis. Fren pedalı testiyle aynı fikir: koşulu değiştir, tepkiyi izle."
+    },
+    {
+      "id": 3,
+      "instruction": "Viraj testi belirsiz kaldı. Lastikleri inceliyorsun: sol arka lastikte çevre boyunca ölçtüğün en yüksek değer 5,5 mm, en düşük 4,1 mm. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.dis-mastari",
+        "unit": "mm",
+        "acceptRange": [1.35, 1.45]
+      },
+      "camera": "tekerlek",
+      "hint": "5,5 eksi 4,1.",
+      "teachingNote": "1,4 mm'lik bu çevresel fark, lastiğin boyuna düzensiz aşındığını gösteriyor — aşınma dersinde öğrenilen kepçe deseni. Böyle bir sırt her turda yola farklı yükseklikte basar ve düzenli bir uğultu üretir; ses hıza bağlıdır çünkü tekerleğin dönme hızıyla doğrudan ilişkilidir. Bu bulgu uğultunun kaynağını lastiğe bağlar. Ama teşhis burada bitmez: kepçe aşınmanın kendisi bir sonuçtur, sebebi süspansiyonda, balansta ya da rulmandadır."
+    },
+    {
+      "id": 4,
+      "instruction": "Uğultunun kaynağı lastik olarak bulundu.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik",
+        "question": "İş bitti mi?",
+        "options": [
+          { "label": "Bitmedi: düzensiz aşınma bir sonuçtur; sebebi bulunmazsa yeni lastik de aynı deseni ve aynı sesi üretir", "verdict": "sebep-ara", "correct": true, "explain": "Lastiğin uğultu yapması, sırtının düzensiz aşınmasından gelir; ama sırt kendi kendine düzensiz aşınmaz. Arkasında her zaman bir sebep vardır ve bu sebep giderilmezse yeni lastik birkaç bin kilometrede aynı deseni yeniden üretir — müşteri o zaman haklı olarak 'yeni lastik taktım yine uğulduyor' der. Aranacak sebepler bellidir ve aşınma dersinde öğrenilmişti: yorulmuş amortisör tekerleği yola bastıramaz ve tekerlek zıplar, ağır bir balans hatası aynı deseni üretir, tekerlek rulmanındaki boşluk sırtın eşit basmasını engeller, ön düzen sapması ise sürüklenme ekler. Bu yüzden lastik kaynaklı uğultuda yapılacak iş çift yönlüdür: lastik değişir ya da rotasyonla konumu değiştirilir, ve aynı anda süspansiyon, balans, rulman ve ön düzen kontrol edilir. Müşteriye anlatılacak cümle de budur — ses lastikten geliyor, ama lastiği bu hâle getiren şey lastik değil." },
+          { "label": "Bitti, lastik değiştirilir", "verdict": "degistir", "explain": "Sebep giderilmezse yeni lastik aynı deseni üretir." },
+          { "label": "Bitti, rotasyon yeterli", "verdict": "rotasyon", "explain": "Rotasyon sesi bir süre azaltabilir ama sebebi gidermez." },
+          { "label": "Bitti, basınç ayarlanır", "verdict": "basinc", "explain": "Basınç bir sebep olabilir ama tek başına varsayılamaz; kontrol listesi işletilir." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bu alanın tezinin son hâli: lastik bir belirti değil, bir rapor. Uğultu bile aracın altındaki bir şeyi anlatıyor."
+    },
+    {
+      "id": 5,
+      "instruction": "Başka bir araçta lastikler düzgün, ses hıza bağlı ve virajda belirgin biçimde değişiyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.gobek",
+        "question": "Rulman şüphesi nasıl doğrulanır?",
+        "options": [
+          { "label": "Araç sehpaya alınır, tekerlek elle döndürülerek dinlenir ve sallama testiyle boşluk aranır", "verdict": "sehpada-dinle", "correct": true, "explain": "Yol testi kaynağı daraltır, doğrulama sehpada yapılır. Araç sehpaya alınır, vites boşa alınır ve tekerlek elle hızlıca döndürülür; yorulmuş bir rulman pürüzlü, taneli bir ses ya da düzensiz bir sürtünme hissi verir — sağlam bir rulman sessiz ve düzgün döner. Ses zayıfsa göbeğe temas eden bir dinleme çubuğu ya da elin göbek üzerine konması titreşimi doğrudan hissettirir. İkinci kontrol boşluktur: tekerlek 12–6 yönünde sallanır ve boşluk varsa fren pedalı yöntemiyle rulman mı rotil mi olduğu ayrılır. Üçüncü bir ipucu daha vardır: ileri derecede yorulmuş bir rulman ısınır, sürüş sonrası göbek bölgesi diğerlerinden belirgin biçimde sıcak olabilir. Bu üç bulgudan en az ikisi aynı yönü gösteriyorsa karar verilebilir. Tek bir ipucuyla — özellikle yalnız yol testiyle — rulman değiştirmek, sık yapılan ve sık yanılan bir karardır." },
+          { "label": "Doğrudan değiştirilir", "verdict": "degistir", "explain": "Yol testi işaret verir, doğrulama sehpada yapılır." },
+          { "label": "Balans yapılır", "verdict": "balans", "explain": "Balans titreşim içindir; uğultuyu açıklamaz." },
+          { "label": "Ön düzen ölçülür", "verdict": "on-duzen", "explain": "Ön düzen aşınma ve çekme üretir; rulman sesini açıklamaz." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bir şüpheyi doğrulamak için en az iki bağımsız bulgu aranır. Tek ipucuyla parça değiştirmek teşhis değil, tahmindir."
+    },
+    {
+      "id": 6,
+      "instruction": "Hem rulmanda hafif boşluk hem lastikte düzensiz aşınma var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.rotil",
+        "question": "Bu mümkün mü?",
+        "options": [
+          { "label": "Mümkün ve sık: rulman boşluğu tekerleğin eşit basmasını engelleyerek lastiği düzensiz aşındırmış olabilir; ikisi bağlantılıdır", "verdict": "zincir", "correct": true, "explain": "Aynı araçta iki bulgu birden çıktığında ilk düşünülmesi gereken, ikisinin bağımsız değil bağlantılı olduğudur. Rulmandaki boşluk tekerleğin yola sabit ve eşit basmasını engeller; tekerlek her turda hafifçe oynar ve sırt belirli bölgelerinden fazladan sürtünür — sonuç, ölçtüğün düzensiz aşınmadır. Yani zincirin başı rulman, sonucu lastiktir. Bu durumda yalnız lastiği değiştirmek sesi bir süre azaltır ama birkaç bin kilometre sonra aynı desen geri gelir; yalnız rulmanı değiştirmek ise boşluğu giderir ama zaten bozulmuş sırt uğultu yapmaya devam eder. Doğru iş ikisini birden ele almaktır: rulman değiştirilir, lastiğin durumu değerlendirilir ve gerekiyorsa değişir ya da arka aksa alınır, sonra balans yapılır. Müşteriye de zincir olarak anlatılır — hangi parça sebep, hangisi sonuç. Bu ayrım, iki ayrı fatura kalemini gerekçeli hâle getirir." },
+          { "label": "Mümkün değil, biri yanlış ölçülmüştür", "verdict": "yanlis-olcum", "explain": "İkisi birlikte sık görülür ve genellikle biri diğerinin sebebidir." },
+          { "label": "Mümkün ama ilgisizdirler", "verdict": "ilgisiz", "explain": "Rulman boşluğu doğrudan düzensiz aşınma üretir; ilgisiz sayılmaz." },
+          { "label": "Yalnız lastik değiştirilir", "verdict": "yalniz-lastik", "explain": "Sebep dururken sonuç düzeltilmiş olur; desen geri gelir." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "İki bulgu bir arada çıktığında önce aralarındaki bağ aranır. Sebep–sonuç zinciri kurulduğunda iki iş de gerekçelenmiş olur."
+    },
+    {
+      "id": 7,
+      "instruction": "Teşhis tamamlandı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.jant",
+        "question": "Uğultu teşhisinin sırası neydi?",
+        "options": [
+          { "label": "Ses neye bağlı (hız/devir), viraj testi, lastik deseni ve ölçümü, sehpada dinleme ve boşluk, sebep–sonuç zincirinin kurulması", "verdict": "sira", "correct": true, "explain": "Bu sıra da diğer teşhis dersleriyle aynı iki ölçütten çıkar: önce olasılıkları en çok bölen ve en ucuz olan test. Sesin neye bağlı olduğunu bulmak motor tarafını tek hamlede eler ve hiçbir maliyeti yoktur. Viraj testi kalan adayları rulman ile lastik arasında böler, yine bedavadır. Lastik deseni ve diş ölçümü gözle ve mastarla yapılır; kepçe ya da testere dişi görülüyorsa kaynak büyük ölçüde bellidir. Sehpada dinleme ve boşluk testi rulmanı doğrular ve bu, parça değiştirmeden önceki son adımdır. En sonda ise bu alanın kendine özgü sorusu gelir: bulunan kusur sebep mi sonuç mu? Lastik düzensiz aşındıysa bunu yapan bir şey vardır ve o bulunmadan iş bitmez. Kayıtta bu beş adımın her biri ve sonucu yazılır; ses şikâyetleri en çok geri gelen işlerdendir ve elenmiş dalların kaydı bir sonraki kişiye saatler kazandırır." },
+          { "label": "Doğrudan rulman değişimiyle başlanır", "verdict": "rulman-once", "explain": "En pahalı adımla başlamak elemenin tersidir." },
+          { "label": "Yalnız yol testi yeterlidir", "verdict": "yol-yeter", "explain": "Yol testi daraltır; doğrulama sehpada yapılır." },
+          { "label": "Sıra önemli değildir", "verdict": "sirasiz", "explain": "Yanlış sırayla yapılan doğru testler zaman kaybettirir." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Üç teşhis dersi de aynı iskelet: koşulu sor, adayları say, ikiye bölen testi yap, elenen dalı kapat, kalan dalı doğrula, sebep–sonuç zincirini kur."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Uğultunun kaynağını daraltan ilk test nedir?",
+        "a": "hiz-devir",
+        "options": [
+          { "verdict": "hiz-devir", "label": "Sesin hıza mı motor devrine mi bağlı olduğu: vitesten çıkarılıp serbest bırakıldığında ses sürüyorsa kaynak dönen tekerlek grubudur", "explain": "Araçta uğultu üretebilecek iki bağımsız kaynak vardır: dönme hızıyla değişenler (tekerlek, rulman, lastik, aktarma) ve motor devriyle değişenler (motor, egzoz, kayış). Araç aynı hızda giderken vitesten çıkarıldığında ses aynen sürüyorsa motor tarafı elenmiştir. Bu ayrım yapılmadan lastik ve rulman aranırsa saatler boşa gider." },
+          { "verdict": "balans", "label": "Balans ölçümü", "explain": "Balans titreşim içindir; uğultuyu açıklamaz." },
+          { "verdict": "basinc", "label": "Basınç ölçümü", "explain": "Basınç önemli ama sesin kaynağını ikiye bölmez." },
+          { "verdict": "sokme", "label": "Tekerleklerin sökülmesi", "explain": "Sökmeden önce ücretsiz testlerle daraltılır." }
+        ]
+      },
+      {
+        "q": "Uğultunun kaynağı lastiğin düzensiz aşınması çıktı. İş bitti mi?",
+        "a": "sebep-ara",
+        "options": [
+          { "verdict": "sebep-ara", "label": "Bitmedi: düzensiz aşınma bir sonuçtur, sebebi süspansiyonda, balansta, rulmanda ya da ön düzendedir", "explain": "Sırt kendi kendine düzensiz aşınmaz. Sebep giderilmezse yeni lastik birkaç bin kilometrede aynı deseni ve aynı sesi üretir. Bu yüzden lastik değişirken ya da rotasyonla konumu değişirken aynı anda amortisör, balans, rulman ve ön düzen kontrol edilir. Müşteriye söylenecek cümle: ses lastikten geliyor ama lastiği bu hâle getiren şey lastik değil." },
+          { "verdict": "degistir", "label": "Bitti, lastik değiştirilir", "explain": "Sebep dururken yeni lastik aynı hâle gelir." },
+          { "verdict": "rotasyon", "label": "Bitti, rotasyon yeterli", "explain": "Rotasyon sesi bir süre azaltır, sebebi gidermez." },
+          { "verdict": "normal", "label": "Bitti, bir miktar uğultu normaldir", "explain": "Şikâyet üreten sesin bir sebebi vardır ve ölçülebilir." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 5,5 mm ve 4,1 mm SENARYO okumalarıdır. İstenen çevresel FARKTIR (1,4 mm) ve dersin gösterdiği şey boyuna düzensiz aşınmanın uğultu ürettiğidir; kabul edilebilir bir düzensizlik sınırı öğretilmiyor.",
+    "sourceRequired": "Kabul edilebilir rulman boşluğu ve aşınma düzensizliği sınırları bilinçle VERİLMEDİ: araca özgüdür ve üreticinin belgesinden okunur.",
+    "kapsam": "Aktarma organları ve motor kaynaklı sesler bu derste yalnız ELENİR, aranmaz — ayrı alanların konusu. Rulman değişiminin kendisi de kapsam dışı; ders teşhisi öğretiyor.",
+    "reviewedByMechanic": false
+  }
+}

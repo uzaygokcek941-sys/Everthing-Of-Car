@@ -1,0 +1,178 @@
+{
+  "id": "kaporta.birlestirme",
+  "area": "kaporta",
+  "stage": 1,
+  "title": "Punta, Gazaltı Kaynağı, Yapıştırma ve Perçin: Hangisi Nerede",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 40,
+  "prerequisites": ["kaporta.sac-turleri"],
+  "learningGoals": [
+    "Fabrikanın hangi birleştirme yöntemini neden seçtiğini okumak",
+    "Bir birleşimin yerine aynı türden birleşim kurulması gerektiğini bilmek",
+    "Kaynak öncesi enerji kesme ve dönüş kablosu kuralını içselleştirmek"
+  ],
+
+  "safety": [
+    { "rule": "Kaynak öncesi enerji kesilir ve kesildiği doğrulanır", "why": "Kaynak akımı araç üzerinde beklenmedik yollar bulur; kesilmemiş bir devrede kumanda modülleri, hava yastığı ve gergi birimleri zarar görebilir ya da tetiklenebilir", "blocksStart": true },
+    { "rule": "Kaynak dönüş kablosu iş noktasına en yakın yerden bağlanır", "why": "Uzaktan bağlanan dönüş kablosu akımı gövdenin içinden dolaştırır; akım yolu üzerindeki rulman, soket ve elektronik birim zarar görür", "blocksStart": true },
+    { "rule": "Yakıt hattı ve deposu, hava yastığı ve gergi birimleri güvenceye alınmadan kaynak yapılmaz", "why": "Kıvılcım ve ısı yakıt buharını tutuşturabilir; hava yastığı ve gergi birimleri ısı ve akımla tetiklenebilir", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.kaynak-makinesi", "label": "Kaynak makinesi", "required": true },
+    { "id": "tool.cetvel", "label": "Cetvel", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Kaynak yapmadan önce aracın enerjisini kestin. Kaynak makinesinin dönüş kablosunu bağlayacaksın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kaynak-makinesi",
+        "question": "Dönüş kablosu nereye bağlanır?",
+        "options": [
+          { "label": "İş noktasına en yakın temiz metale: akım gidiş ve dönüşünü kısa tutar, gövdenin içinden dolaşmasını ve yol üzerindeki parçalara zarar vermesini engeller", "verdict": "yakin-donus", "correct": true, "explain": "Kaynak akımı, kaynak noktasından çıkıp dönüş kablosuna ulaşana kadar bir yol izler ve o yolu sen belirlemezsen kendisi seçer — hep en az dirençli olanı. Dönüş kablosu aracın öbür ucuna bağlanmışsa akım gövdenin içinden, birleşim noktalarından, bazen rulmanların ve elektronik birimlerin üzerinden dolaşarak gider. Bunun üç zararı vardır. Birincisi, yüksek akımın geçtiği rulmanda mikro çukurlar oluşur ve rulman bir süre sonra ses yapmaya başlar; bu ses kaynağın yapıldığı günden aylar sonra ortaya çıkar ve kimse ilişkilendirmez. İkincisi, akım yolu üzerindeki soketler ve kumanda modülleri zarar görebilir; ortaya çıkan arıza kaynağın yapıldığı yerle hiç ilgisi olmayan bir sistemde belirir. Üçüncüsü, direncin yüksek olduğu bir ara noktada ısınma olur ve orada istenmeyen bir ergime izi kalır. Doğru uygulama basittir: dönüş kablosu iş noktasına en yakın, boyası ve pası temizlenmiş metale sıkıca bağlanır. Temas yüzeyinin temiz olması ayrıca kaynağın kendisinin kalitesini de belirler; boyanın üzerine tutturulmuş bir kelepçe hem kötü kaynak hem sıcak temas üretir. Bu ders hangi araçta hangi bağlantı noktasının önerildiğini vermiyor; bazı üreticiler belirli bölgelerde kaynak yasağı ve özel bağlantı noktaları tanımlar ve bu kılavuzda yazar." },
+          { "label": "Aküye bağlanır", "verdict": "aku", "explain": "Akü kaynak devresinin parçası değildir; enerji zaten kesilmiştir." },
+          { "label": "Aracın herhangi bir yerine", "verdict": "herhangi", "explain": "Akım o zaman gövdenin içinden dolaşır ve yol üzerindekilere zarar verir." },
+          { "label": "Boyalı yüzeye bağlanabilir", "verdict": "boyali", "explain": "Boya yalıtkandır; kötü temas hem kötü kaynak hem ısınma üretir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Akım yolunu sen seçmezsen kendisi seçer. Aylar sonra ses yapan rulmanın sebebi o gün bağlanan uzak dönüş kablosudur."
+    },
+    {
+      "id": 2,
+      "instruction": "İki sacın bindirme genişliğini ölçtün: fabrika birleşiminde 25 mm, senin hazırladığın hatta 18 mm. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.olcum-mastari",
+        "unit": "mm",
+        "acceptRange": [6.5, 7.5]
+      },
+      "camera": "kaporta",
+      "hint": "25 eksi 18.",
+      "teachingNote": "7 milimetrelik bu eksiklik küçük görünür ama birleşimin karakterini değiştirir. Bindirme genişliği üç şeyi belirler. Birincisi, kaynak noktalarının kenara olan mesafesi: nokta kenara fazla yakın düşerse sac kenarı erir, çapak yapar ve birleşim beklenen kuvveti taşımaz. İkincisi, iki sac arasındaki temas alanı: yükün bir sactan diğerine aktarıldığı yüzey burasıdır ve daralması, aynı yükün daha küçük bir alandan geçmesi demektir. Üçüncüsü, yapıştırıcı kullanılan birleşimlerde yapıştırıcının tutunacağı alan doğrudan bu genişliktir; dar bir bindirme yapıştırıcının işini yapamamasına yol açar. Pratikte bunun anlamı şudur: kesim hattı keyfî seçilmez. 'Buradan kesersem kolay olur' diye alınan bir karar, birleşimin genişliğini değiştirir ve sonuçları görünmez. Kesim hattı, bindirme genişliği, nokta sayısı ve nokta aralığı birbirine bağlı bir bütündür ve bu bütün üreticinin onarım kılavuzunda tanımlanır. Bu ders hiçbir araç için bindirme genişliği, kenar mesafesi ya da nokta aralığı değeri iddia etmiyor; buradaki iki sayı senaryo okumasıdır ve amaç farkın ne anlama geldiğini görmektir."
+    },
+    {
+      "id": 3,
+      "instruction": "Fabrika birleşiminde sıra sıra nokta izleri var; senin elinde ise gazaltı kaynak makinesi.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.punta-noktasi",
+        "question": "Punta yerine düz gazaltı dikişi çekmek uygun mudur?",
+        "options": [
+          { "label": "Hayır: birleşimin türü değişir — punta noktasal ve sınırlı ısı verirken sürekli dikiş geniş bir bölgeyi ısıtır ve o bölgede malzeme özellikleri, gerilme dağılımı ve deformasyon davranışı değişir", "verdict": "ayni-tur", "correct": true, "explain": "Bir birleşim yalnız 'iki sacı tutmak' değildir; nasıl tuttuğu da tasarımın parçasıdır. Punta kaynağı noktasaldır: ısı küçük bir alanda kalır, sac genelinde çarpılma az olur ve birleşim belirli noktalarda yük aktarır. Sürekli bir dikiş ise uzun bir hat boyunca ısı verir. Bunun üç sonucu vardır. Birincisi, ısıdan etkilenen bölge genişler — yüksek mukavemetli çelikte bu, mukavemetin geniş bir şeritte düşmesi demektir. İkincisi, sac çarpılır: uzun bir dikiş boyunca ısınıp soğuyan metal büzülür ve panel dalgalanır; bu dalgalanma sonradan macunla kapatılır ve o macun kalınlığı boya kusuru olarak geri döner. Üçüncüsü, birleşimin kaza davranışı değişir: sürekli dikişle birleştirilmiş bir bölge, punta ile birleştirilmiş bir bölgeden farklı biçimde deforme olur ve bu, ezilme sırasının hesaplandığı bir yapıda istenmeyen bir değişikliktir. Kural sadedir: fabrikanın kurduğu birleşim türü, aynı türle yeniden kurulur. Punta yerine punta, yapıştırma varsa yapıştırma, perçin varsa perçin. Üretici bazı bölgelerde punta yerine belirli bir dikiş biçimine açıkça izin verir ya da onu şart koşar — bu da kılavuzda yazar. Yani cevap 'asla dikiş çekilmez' değil, 'kılavuz ne diyorsa o yapılır'dır; kendi kolayına göre yöntem değiştirmek yasaktır." },
+          { "label": "Evet, daha sağlam olur", "verdict": "saglam", "explain": "Daha çok kaynak daha sağlam demek değildir; ısı geniş bir bölgede zarar verir." },
+          { "label": "Fark etmez, ikisi de kaynaktır", "verdict": "fark-etmez", "explain": "Isı dağılımı, çarpılma ve kaza davranışı farklıdır." },
+          { "label": "Daha hızlı olduğu için tercih edilir", "verdict": "hiz", "explain": "Hız bir ölçüt değil; yöntem kılavuzla belirlenir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Kural sade: fabrikanın kurduğu birleşim türü aynı türle yeniden kurulur. Kolayına göre yöntem değiştirmek yasak."
+    },
+    {
+      "id": 4,
+      "instruction": "Bir panelin kenarında kaynak izi değil, sıvanmış gri bir şerit ve düzenli perçin başları görüyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kaput-kaporta",
+        "question": "Yapıştırma ve perçin birleşimi neden kullanılır?",
+        "options": [
+          { "label": "Isı vermeden birleştirir: ısıtılamayan malzemelerde ve yüksek mukavemetli bölgelerde tek uygun yöntem olabilir, ayrıca yükü noktasal değil yüzeye yayarak dağıtır", "verdict": "yapistirma-percin", "correct": true, "explain": "Yapıştırıcı ve perçin, modern gövdelerde bir kolaylık değil bir zorunluluk olarak yer alır. Sebebi malzemedir: ultra yüksek mukavemetli çelik ve alüminyum, geleneksel punta kaynağıyla her yerde birleştirilemez; ısı bu malzemelerde ya mukavemeti düşürür ya birleşimi kırılgan yapar. Yapıştırıcı ise hiç ısı vermeden birleştirir ve bir avantajı daha vardır: yükü tek tek noktalar yerine bütün bindirme yüzeyine yayar; bu, hem birleşimi sertleştirir hem yorulma dayanımını artırır. Perçin bu birleşimin mekanik tarafıdır: yapıştırıcı sertleşene kadar parçaları bir arada tutar ve sertleştikten sonra da darbe anında yapıştırıcıya destek olur. İkisi çoğu zaman birlikte kullanılır ve buna karma birleşim denir. Onarımdaki sonucu şudur: fabrikada yapıştırılmış bir birleşim, kaynakla geri kurulmaz. Kaynak orada hem yapıştırıcı kalıntısını yakar hem malzemeye ısı verir. Doğru yol, kılavuzun tanımladığı yapıştırıcıyı ve tanımladığı perçin tipini kullanmaktır. Yapıştırıcı işinde üç ayrıntı belirleyicidir ve üçü de ürünün kendi teknik belgesinde yazar: yüzey hazırlığı, karışım ve uygulama sıcaklığı, ve tam mukavemete ulaşma süresi. Bu son madde en çok atlanandır — birleşim tam mukavemetine ulaşmadan araç yola çıkarsa birleşim tasarlandığı gibi davranmaz. Bu ders hiçbir ürün için süre ya da sıcaklık değeri vermiyor." },
+          { "label": "Kaynaktan ucuz olduğu için", "verdict": "ucuz", "explain": "Maliyet değil, malzemenin ısıya dayanmaması belirleyici." },
+          { "label": "Geçici bir birleştirmedir", "verdict": "gecici", "explain": "Kalıcı ve yapısal bir birleşimdir." },
+          { "label": "Yalnız süs panellerinde kullanılır", "verdict": "sus", "explain": "Taşıyıcı bölgelerde de kullanılır." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Yapıştırma yükü noktalara değil yüzeye yayar. Tam mukavemete ulaşma süresi beklenmezse birleşim tasarlandığı gibi davranmaz."
+    },
+    {
+      "id": 5,
+      "instruction": "Sökülen bir parçayı geri takıyorsun. Fabrikada 14 punta noktası vardı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.esik-saci",
+        "question": "Kaç nokta atılır ve nereye?",
+        "options": [
+          { "label": "Kılavuzun belirttiği sayıda ve aralıkta — noktalar eskilerin tam üzerine değil aralarına kaydırılarak; sayı azaltılmaz, aralık keyfî büyütülmez", "verdict": "kilavuz-sayisi", "correct": true, "explain": "Bu üç kuralın her biri ayrı bir hatayı önler. Birincisi sayı: nokta sayısı birleşimin taşıyacağı yükü belirler ve üretici bunu hesaplayarak koyar; 'birkaç nokta atsam tutar' demek, yapının bir kazadaki davranışını değiştirmektir. Bazı kılavuzlar onarımda fabrikadan farklı bir sayı ister — genelde daha fazla, çünkü onarım kaynağı fabrika kaynağıyla birebir aynı koşullarda yapılmaz; bu yüzden 'fabrikada kaç varsa o kadar' bile bir varsayımdır, doğrusu kılavuza bakmaktır. İkincisi yer: yeni noktalar eski noktaların tam üzerine atılmaz. Eski nokta zaten bir kez ısınmış, iç yapısı değişmiş bir bölgedir; üstüne atılan yeni nokta orada zayıf ve güvenilmez bir birleşim üretir. Noktalar eskilerin arasına kaydırılır. Üçüncüsü aralık: aralığın büyütülmesi, aynı hattı daha az noktayla tutmak demektir ve yük dağılımını bozar; sıkıştırılması da iyi değildir, çünkü çok yakın iki nokta arasında akım bir öncekinin üzerinden kaçar ve ikinci nokta zayıf çıkar. Bir de görünmeyen bir şart var: kaynaktan önce yüzeydeki boya, astar ve pas temizlenir, kaynaktan sonra o bölge yeniden korunur — çıplak metal bırakılan bir birleşim, korozyonun başlayacağı ilk yerdir. Bunu bir sonraki derste ayrıntısıyla göreceksin. Bu ders hiçbir araç için nokta sayısı, aralık ya da kenar mesafesi vermiyor." },
+          { "label": "Tutması için yeterli sayıda", "verdict": "yeterli", "explain": "'Yeterli' bir ölçüt değil; sayı hesaplanmıştır." },
+          { "label": "Eski noktaların tam üzerine 14 nokta", "verdict": "uzerine", "explain": "Eski nokta ısı görmüştür; üzerine atılan nokta zayıf birleşim yapar." },
+          { "label": "Daha fazla nokta atmak her zaman iyidir", "verdict": "fazla", "explain": "Fazla ısı ve çarpılma üretir; sayı kılavuzla belirlenir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Üç kural: sayı kılavuzdan, yer eskinin arasına, aralık ne daraltılır ne genişletilir."
+    },
+    {
+      "id": 6,
+      "instruction": "Kaynak yapılacak bölgenin arkasında bir kablo demeti ve bir yalıtım keçesi var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.direk-b",
+        "question": "Kaynağa başlamadan önce ne yapılır?",
+        "options": [
+          { "label": "Arka taraf açılıp kontrol edilir; yanabilecek her şey uzaklaştırılır ya da korunur ve yangın söndürücü elde bulundurulur — kaynak yalnız baktığın yüzü değil arkasını da ısıtır", "verdict": "arka-kontrol", "correct": true, "explain": "Kaynağın en sık unutulan tarafı, ısının sacın öbür yüzüne geçmesidir. Baktığın yüzde küçük bir nokta görürsün; arkada ise o noktanın karşısı yeterince ısınmıştır. Orada bir kablo demeti, bir yalıtım keçesi, bir döşeme parçası ya da yakıt hattı varsa sonuç ya erimiş bir yalıtım ya yavaş yavaş için için yanan bir keçedir. En tehlikeli hâli budur: alevle değil, saatler sonra fark edilen bir yanmayla başlar. Bu yüzden sıra şudur. Önce enerji kesilir ve doğrulanır. Sonra kaynak bölgesinin arkası fiilen açılıp bakılır — tahmin edilmez. Yanabilecek malzemeler sökülür, sökülemiyorsa uygun bir ısı bariyeriyle korunur. Yakıt hattı, yakıt deposu, hava yastığı ve gergi birimleri ile elektrikli araçlarda yüksek gerilim bileşenleri güvenceye alınır; bunlar bu alanın kırmızı çizgisidir ve şüphe varsa işe başlanmaz. Yangın söndürücü elde bulundurulur ve iş bittikten sonra bölge bir süre gözlenir — atölyeler bu yüzden kaynak işinden hemen sonra aracı kapatıp gitmez. Son olarak, işin bittiği yerde çıplak kalan metal korunur; hem korozyon hem sonraki katmanların tutunması için." },
+          { "label": "Doğrudan kaynağa başlanır, ısı arkaya geçmez", "verdict": "gecmez", "explain": "Isı sacın öbür yüzüne geçer; en tehlikeli yangınlar böyle başlar." },
+          { "label": "Arkaya su dökülür", "verdict": "su", "explain": "Su kaynağı ve çevresini bozar; doğru yol yanabilecekleri uzaklaştırmak." },
+          { "label": "Hızlı çalışılırsa sorun olmaz", "verdict": "hizli", "explain": "Hız bir koruma yöntemi değildir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "En tehlikeli yangın alevle değil, saatler sonra fark edilen için için yanmayla başlar. Arkaya bak, tahmin etme."
+    },
+    {
+      "id": 7,
+      "instruction": "Birleştirme yöntemlerini ayırt ediyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.tasiyici-ayak",
+        "question": "Bir parçanın nasıl birleştirildiğini bilmek işin neresini belirler?",
+        "options": [
+          { "label": "İşin sınırını: cıvatalıysa senin işin, kaynaklıysa kılavuza tabi, taşıyıcı ve karma birleşimliyse çoğu zaman kapasitenin ötesi — bu ayrım fiyattan önce gelir", "verdict": "isin-siniri", "correct": true, "explain": "Bu alanda bir işin kabul edilip edilmeyeceği, çoğu zaman bu tek soruyla belirlenir. Cıvatalı bir dış panel işi nettir: sök, düzelt ya da değiştir, boya, tak. Kaynaklı bir dış panel işi kılavuza tabidir ama yapılabilir: kesim hattı, nokta sayısı ve koruma kılavuzdan okunur. Taşıyıcı bir parçanın kaynaklı değişimi ise bambaşka bir kategoridir — çelik sınıfı, ısı yasağı, ölçüm doğrulaması ve çoğu zaman özel ekipman gerektirir; kılavuzsuz yapılan böyle bir iş, aracı bir kazada tasarlandığı gibi davranmayan bir araca çevirir ve bu, dışarıdan asla görünmez. Karma birleşimli parçalar da aynı kategoridedir: yapıştırıcı ve perçin sistemi, ürün ve uygulama şartlarıyla birlikte gelir. Bu yüzden sıra hep aynıdır ve fiyat en sona kalır: önce parça nedir ve nasıl bağlanmıştır, sonra taşıyıcı mı, sonra hasar nereye gitmiş, sonra bu iş bu atölyede yapılabilir mi, en sonda kapsam ve fiyat. Bu sıra bozulduğunda ortaya çıkan iki tipik sonuç var — ya fiyat verilip sonra iş büyür ve usta zarar eder, ya da yapılamayacak bir iş yapılmış gibi teslim edilir. İkincisi bu alanda dürüstlüğün sınavıdır, çünkü kimse fark etmez." },
+          { "label": "Yalnız hangi aletin kullanılacağını", "verdict": "alet", "explain": "Aleti de belirler ama asıl olan işin sınırı." },
+          { "label": "Yalnız süreyi", "verdict": "sure", "explain": "Süre bir sonuç; önce yöntem ve sınır." },
+          { "label": "Hiçbir şeyi, hepsi sonunda kaynaktır", "verdict": "hepsi-kaynak", "explain": "Yapıştırma ve perçin ısı vermeden birleştirir; yöntem birbirinin yerine geçmez." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Sıra: parça ne, nasıl bağlı, taşıyıcı mı, hasar nereye gitti, bu atölyede yapılır mı — fiyat en sonda. Sırada korozyon."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Kaynak dönüş kablosu aracın öbür ucuna bağlanırsa ne olur?",
+        "a": "yakin-donus",
+        "options": [
+          { "verdict": "yakin-donus", "label": "Akım gövdenin içinden dolaşır; yol üzerindeki rulman, soket ve kumanda birimleri zarar görür — kablo iş noktasına en yakın temiz metale bağlanır", "explain": "Rulmanda oluşan mikro çukurlar aylar sonra ses olarak ortaya çıkar ve kimse kaynakla ilişkilendirmez. Bağlantı yüzeyinin boyası ve pası temizlenir; boyaya tutturulmuş kelepçe hem kötü kaynak hem sıcak temas üretir." },
+          { "verdict": "aku", "label": "Aküye bağlanmalıdır", "explain": "Akü kaynak devresinin parçası değildir." },
+          { "verdict": "herhangi", "label": "Fark etmez", "explain": "Akım yolu belirlenmezse kendi yolunu seçer." },
+          { "verdict": "boyali", "label": "Boyalı yüzey de olur", "explain": "Boya yalıtkandır." }
+        ]
+      },
+      {
+        "q": "Fabrikada yapıştırıcı ve perçinle birleştirilmiş bir parça, kaynakla geri kurulabilir mi?",
+        "a": "yapistirma-percin",
+        "options": [
+          { "verdict": "yapistirma-percin", "label": "Hayır: o birleşim ısı vermeden yapılmıştır çünkü malzeme ısıya dayanmaz; kaynak hem yapıştırıcıyı yakar hem malzemeye ısı verir", "explain": "Yapıştırma yükü noktalara değil bütün bindirme yüzeyine yayar; perçin sertleşene kadar tutar ve sonra desteğe devam eder. Yüzey hazırlığı, karışım ve tam mukavemete ulaşma süresi ürünün kendi teknik belgesinde yazar ve süre beklenmeden araç yola çıkarsa birleşim tasarlandığı gibi davranmaz." },
+          { "verdict": "ucuz", "label": "Yapıştırma ucuz olduğu için seçilmiştir", "explain": "Maliyet değil, malzemenin ısıya dayanmaması belirleyici." },
+          { "verdict": "gecici", "label": "Geçici birleşimdir, kaynakla kalıcı yapılır", "explain": "Kalıcı ve yapısal bir birleşimdir." },
+          { "verdict": "sus", "label": "Yalnız süs panellerindedir", "explain": "Taşıyıcı bölgelerde de kullanılır." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2'deki 25 mm ve 18 mm SENARYO okumalarıdır; istenen FARKTIR (7 mm). Ders hiçbir araç için bindirme genişliği ya da kenar mesafesi iddia etmiyor.",
+    "sourceRequired": "Punta sayısı ve aralığı, kenar mesafesi, bindirme genişliği, kesim hatları, izin verilen kaynak yöntemleri ve yasak bölgeler, yapıştırıcı ürün adı, karışım oranı, uygulama sıcaklığı ve tam mukavemete ulaşma süresi, perçin tipi ve çapı bilinçle VERİLMEDİ; hepsi araca ve ürüne özgüdür, üreticinin onarım kılavuzundan ve ürünün teknik belgesinden okunur.",
+    "kapsam": "Taşıyıcı parça kaynaklı değişimi, şasi çekme ve gövde ölçüm sistemiyle yapısal doğrulama KAPSAM DIŞIDIR — ders yöntem ayrımını ve sınırını öğretiyor, taşıyıcı onarımın uygulanışını değil.",
+    "kaynak": "Bu alan kullanıcının açık talebiyle eklendi (talep birebir: 'birde alanlara kaportayı ekleyelim'); konu başlıkları MEB Otomotiv Gövde ve Boya dalının çerçevesini takip ediyor, kazanım numarası iddiası yok.",
+    "reviewedByMechanic": false
+  }
+}

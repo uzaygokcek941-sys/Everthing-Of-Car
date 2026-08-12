@@ -1,0 +1,176 @@
+{
+  "id": "lastik.tpms-turleri",
+  "area": "lastik-tekerlek",
+  "stage": 6,
+  "title": "Doğrudan ve Dolaylı TPMS: İkisi Neyi Ölçer",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 25,
+  "prerequisites": ["lastik.basinc-etkileri"],
+  "learningGoals": [
+    "Doğrudan sistemin basıncı ölçtüğünü, dolaylı sistemin ölçmediğini bilmek",
+    "Dolaylı sistemin kör noktasını ve neden sıfırlama istediğini açıklamak",
+    "Uyarı lambasının iki farklı davranışını ayırt etmek"
+  ],
+
+  "safety": [
+    { "rule": "Uyarı lambası yanan araç, basınçlar ölçülmeden yola çıkarılmaz", "why": "Uyarı gerçek bir basınç kaybını gösteriyor olabilir; düşük basınçla sürmek lastiği ısıtıp iç yapısını ayrıştırır", "blocksStart": true },
+    { "rule": "Uyarı sistemi müşteri isteğiyle devre dışı bırakılmaz", "why": "Sistem bir güvenlik donanımıdır; kapatmak arızayı gidermez, yalnız görünmez kılar", "blocksStart": true },
+    { "rule": "Lamba söndü diye basınç doğru kabul edilmez", "why": "Uyarı eşiği etiket değerinin belirgin altındadır; lamba yanmadan önce lastik uzun süre düşük çalışabilir", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.manometre", "label": "Basınç manometresi", "required": true },
+    { "id": "tool.tpms-cihazi", "label": "TPMS teşhis cihazı", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Aracın gösterge panelinde her tekerleğin basıncı ayrı ayrı yazıyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.tpms-sensoru",
+        "question": "Bu hangi sistem ve nasıl çalışır?",
+        "options": [
+          { "label": "Doğrudan sistem: her tekerleğin içinde basıncı ölçüp radyo sinyaliyle araca gönderen bir sensör var", "verdict": "dogrudan", "correct": true, "explain": "Doğrudan sistemde her tekerleğin içine, çoğu zaman valfin gövdesine bağlı olarak bir sensör yerleştirilmiştir. Bu sensör lastiğin içindeki basıncı gerçekten ölçer, birçok modelde sıcaklığı da okur ve değerleri kendi kimliğiyle birlikte radyo sinyali olarak araca gönderir. Araç, hangi kimliğin hangi köşede olduğunu bildiği için basıncı tekerlek tekerlek gösterebilir — panelde ayrı değerler görünmesinin sebebi budur. Sistemin gücü buradadır: gerçek bir ölçüm yapar, tek bir lastiğin düşüşünü yakalar ve dördü birlikte inse bile fark eder. Zayıf tarafları ise fiziksel olmasından gelir: sensörün pili sınırlı ömürlüdür ve bittiğinde sensör komple değişir, lastik montajında kırılabilir, alüminyum jantla temasında korozyon oluşabilir ve kış takımı için ikinci bir sensör seti gerekir. Ayrıca tekerlekler yer değiştirdiğinde araca hangi sensörün nereye gittiği tanıtılmalıdır." },
+          { "label": "Dolaylı sistem: ABS tekerlek hızlarını karşılaştırıyor", "verdict": "dolayli", "explain": "Dolaylı sistem tek tek basınç DEĞERİ gösteremez; yalnız uyarı verir." },
+          { "label": "Basınç motor kontrol ünitesinden hesaplanıyor", "verdict": "ecu", "explain": "Motor kontrol ünitesinin lastik basıncıyla ilgisi yok." },
+          { "label": "Sürücünün girdiği değerler gösteriliyor", "verdict": "manuel", "explain": "Değerler ölçülür; sürücü girmez." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Panelde tekerlek tekerlek basınç değeri görünüyorsa sistem doğrudandır. Yalnız bir uyarı lambası varsa hangi tip olduğu başka yollarla anlaşılır."
+    },
+    {
+      "id": 2,
+      "instruction": "Başka bir araçta yalnız bir uyarı lambası var, basınç değeri gösterilmiyor. Tekerleklerin içinde sensör de yok.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.jant",
+        "question": "Bu sistem basıncı nasıl anlıyor?",
+        "options": [
+          { "label": "Anlamıyor: ABS sensörlerinden gelen tekerlek hızlarını karşılaştırıyor. Basıncı düşen lastiğin çapı küçüldüğü için o tekerlek daha hızlı döner", "verdict": "hiz-karsilastirma", "correct": true, "explain": "Dolaylı sistem basınç ölçmez ve tekerleğin içinde hiçbir parçası yoktur; aracın zaten sahip olduğu ABS tekerlek hız sensörlerini kullanır. Mantığı şudur: basıncı düşen bir lastik hafifçe ezilir, yuvarlanma çapı küçülür ve aynı yolu almak için diğerlerinden biraz daha fazla dönmesi gerekir. Sistem dört tekerleğin dönme hızlarını sürekli karşılaştırır ve biri diğerlerinden belirgin biçimde ayrışırsa uyarı verir. Bazı gelişmiş sürümler ayrıca tekerleğin titreşim özelliklerindeki değişimi de değerlendirir. Bu yaklaşımın avantajları maliyet ve dayanıklılıktır: takılacak ek bir parça, bitecek bir pil, kırılacak bir sensör yoktur ve kış takımı için ikinci set gerekmez. Ama bedeli açıktır — sistem hiçbir zaman gerçek bir basınç değeri veremez, yalnız 'bir tekerlek diğerlerinden farklı' diyebilir. Karşılaştırmaya dayandığı için de bir kör noktası vardır." },
+          { "label": "Lastiğin sesinden anlıyor", "verdict": "ses", "explain": "Ses ölçen bir sistem değil; ABS hız sensörleri kullanılıyor." },
+          { "label": "Valfin içindeki mekanik anahtardan", "verdict": "valf-anahtar", "explain": "Valfte böyle bir anahtar yok; ölçüm ABS üzerinden dolaylı yapılıyor." },
+          { "label": "Süspansiyon yüksekliğinden", "verdict": "suspansiyon", "explain": "Yükseklik sensörü ayrı bir sistemdir ve basınç uyarısı vermez." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Adı 'basınç kontrol sistemi' olsa da dolaylı sistem basınç ölçmez. Bir sistemin neyi ölçtüğünü bilmek, neyi kaçıracağını da söyler."
+    },
+    {
+      "id": 3,
+      "instruction": "Doğrudan sistemli bir araçta panel sol ön 2,05 bar, sağ ön 2,45 bar gösteriyor. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.tpms-sensoru",
+        "unit": "bar",
+        "acceptRange": [0.38, 0.42]
+      },
+      "camera": "tekerlek",
+      "hint": "2,45 eksi 2,05.",
+      "teachingNote": "0,40 barlık bu fark aynı akstaki iki lastik arasında ve aracı düşük basınçlı tarafa çeker. Doğrudan sistem bunu değer olarak gösterdiği için usta hangi tekerleğin düştüğünü daha araca bakmadan bilir. Dolaylı bir sistem aynı durumda yalnız bir lamba yakardı ve hangi tekerlek olduğunu söylemezdi. Yine de her iki durumda da basınç manometreyle doğrulanır: sensör de bir ölçü aletidir ve sapabilir."
+    },
+    {
+      "id": 4,
+      "instruction": "Dolaylı sistemli araçta dört lastik de kış boyunca yavaşça inmiş, hepsi eşit derecede düşük. Lamba yanmamış.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.tpms-sensoru",
+        "question": "Neden uyarmadı?",
+        "options": [
+          { "label": "Karşılaştırmaya dayandığı için: dördü birlikte inince aralarında fark oluşmaz ve sistem sapma göremez", "verdict": "kor-nokta", "correct": true, "explain": "Dolaylı sistemin çalışma ilkesi tekerlekleri birbiriyle karşılaştırmaktır; ölçtüğü şey mutlak basınç değil, tekerlekler arasındaki farktır. Dört lastik birlikte ve yaklaşık aynı miktarda indiğinde aralarındaki oran değişmez, sistem hiçbir sapma görmez ve uyarı vermez. Oysa araç dört düşük lastikle dolaşıyordur: omuzlardan aşınma başlar, yakıt tüketimi artar ve yanaklar fazladan ısınır. Bu, özellikle sıcaklığın düştüğü mevsim geçişlerinde yaygındır, çünkü soğuk hava bütün lastiklerin basıncını birlikte düşürür. İkinci bir kör nokta daha vardır: sistem 'şu an doğru' kabul ettiği duruma göre çalışır, yani basınçlar ayarlandıktan sonra sıfırlanması gerekir. Sıfırlama yapılmazsa düşük basınçlı hâli normal kabul eder. Bu iki sebeple dolaylı sistemli araçlarda elle basınç kontrolü, doğrudan sistemli araçlardakinden daha da önemlidir." },
+          { "label": "Sistem arızalıdır", "verdict": "ariza", "explain": "Arıza değil; sistemin çalışma ilkesinin doğal sınırı." },
+          { "label": "Basınç yeterince düşmemiştir", "verdict": "yeterince-dusmemis", "explain": "Düşmüş olabilir; sistem mutlak değeri değil farkı görüyor." },
+          { "label": "Lamba yalnız ani kayıpta yanar", "verdict": "ani-kayip", "explain": "Yavaş kayıpta da yanabilir — ama tek tekerlekte; dördü birlikte inince göremez." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Her ölçüm yönteminin bir kör noktası vardır ve o kör nokta yöntemin kendisinden çıkar. Karşılaştıran bir sistem, birlikte değişen şeyleri göremez."
+    },
+    {
+      "id": 5,
+      "instruction": "Dolaylı sistemli araçta basınçlar ayarlandı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.tpms-sensoru",
+        "question": "Sonrasında ne yapılır?",
+        "options": [
+          { "label": "Sistem sıfırlanır: araç, güncel doğru basınçtaki hâli referans olarak öğrenmelidir", "verdict": "sifirla", "correct": true, "explain": "Dolaylı sistem, tekerleklerin doğru basınçtayken nasıl döndüğünü referans olarak kaydeder ve sonraki karşılaştırmaları o referansa göre yapar. Basınçlar değiştirildikten sonra sıfırlama yapılmazsa sistem eski referansı kullanmaya devam eder; yeni ve doğru durumu sapma sanıp gereksiz uyarı verebilir ya da tam tersine, düşük olan eski hâli normal kabul edip gerçek bir kaybı geç fark eder. Sıfırlama aynı sebeple lastik değişiminden, rotasyondan ve mevsimlik takım değişiminden sonra da gerekir — tekerleklerin yerleri ve çapları değişmiştir. İşlem araca göre değişir: bazılarında gösterge panelinden bir menü, bazılarında torpido altında ya da konsolda bir düğme, bazılarında teşhis cihazı gerekir. Hangi yöntemin geçerli olduğu tahmin edilmez, aracın kılavuzundan bakılır. Sıfırlama yapılmadan teslim edilen araç, uyarı sistemi çalışıyor görünürken fiilen yanlış referansla çalışıyordur." },
+          { "label": "Hiçbir şey; sistem kendi anlar", "verdict": "kendi-anlar", "explain": "Referansı kendisi güncellemez; sıfırlama işlemi gerekir." },
+          { "label": "Akü kutbu sökülüp takılır", "verdict": "aku", "explain": "Bu yöntem başka arızalara yol açar ve sıfırlama yordamı değildir." },
+          { "label": "Yalnız lamba yanıyorsa sıfırlanır", "verdict": "lamba-yaniyorsa", "explain": "Basınç her değiştiğinde referans güncellenmelidir." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Referansa göre çalışan her sistemde referansın ne zaman güncelleneceği bilinmelidir. Bu, TPMS'te de aynı, ön düzen ayarında da aynı."
+    },
+    {
+      "id": 6,
+      "instruction": "Bir araç geldi, hangi sistem olduğunu bilmiyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.valf",
+        "question": "Nasıl anlaşılır?",
+        "options": [
+          { "label": "Panelde tekerlek başına değer gösteriliyor mu, valfler metal ve somunlu mu, araçta sıfırlama düğmesi ya da menüsü var mı — üçüne birden bakılır", "verdict": "uc-isaret", "correct": true, "explain": "Kesin ayrım araç belgesinden yapılır, ama atölyede üç işaret hızlı sonuç verir. Birincisi panel: tekerlek tekerlek basınç değeri gösteriliyorsa sistem doğrudandır, çünkü dolaylı sistemin böyle bir verisi yoktur. İkincisi valfler: doğrudan sistemlerde valf çoğu zaman metaldir, somunla jantın üzerine sabitlenmiştir ve gövdesi kauçuk valften belirgin biçimde farklıdır — ancak bu kesin bir kanıt değildir, çünkü doğrudan sistemli bazı araçlarda kauçuk gövdeli sensörler kullanılır. Üçüncüsü sıfırlama: araçta bir sıfırlama düğmesi ya da menüsü bulunması dolaylı sistemin güçlü işaretidir. En güvenilir yol TPMS teşhis cihazıyla tekerleğe okuma yapmaktır: sensör varsa cevap verir. Bu ayrım işin başında yapılır, çünkü sökme yöntemi, kullanılacak servis takımı ve iş sonundaki tanıtma adımı buna bağlıdır." },
+          { "label": "Yalnız valfin metal olmasına bakılır", "verdict": "metal-valf", "explain": "Güçlü bir işaret ama tek başına kesin değil; kauçuk gövdeli sensörler de var." },
+          { "label": "Lastik markasından anlaşılır", "verdict": "marka", "explain": "Sistem aracın donanımıdır, lastiğin değil." },
+          { "label": "Anlaşılmaz, denenerek bulunur", "verdict": "deneme", "explain": "Belge, panel, valf ve teşhis cihazı ile net biçimde anlaşılır." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Hangi sistemle karşı karşıya olduğunu bilmeden lastik sökmek, sensörü kırma riskiyle çalışmak demektir. Bu soru işin başında sorulur."
+    },
+    {
+      "id": 7,
+      "instruction": "Kontak açıldığında uyarı lambası bir süre yanıp söndü, sonra sabit yanmaya başladı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.tpms-sensoru",
+        "question": "Bu ne anlama gelir?",
+        "options": [
+          { "label": "Çoğu araçta bu davranış sistem arızasını gösterir: sistem bir sensörü göremiyor ya da kendini denetleyemiyor — basıncın düşük olması ayrı bir uyarıdır", "verdict": "sistem-arizasi", "correct": true, "explain": "Uyarı lambasının iki farklı işi vardır ve çoğu araçta ikisi farklı davranışla ayrılır. Doğrudan doğruya sabit yanan lamba genellikle bir basınç uyarısıdır: en az bir lastik sistemin eşiğinin altına inmiştir. Kontak açılışında bir süre yanıp sönüp ardından sabit kalan lamba ise sistemin kendi arızasını bildirir; sistem beklediği sensörlerden birini duyamıyor, bir sensörün pili bitmiş, sensör kırılmış ya da tanıtma yapılmamıştır. Bu ayrım işi doğru yere yönlendirir: birinci durumda basınçlar ölçülür, ikinci durumda sistem incelenir. Yine de davranışın araca göre değişebileceği unutulmaz; kesin anlamı aracın kendi kılavuzunda yazar. Her iki durumda da yapılmayacak tek şey bellidir: lambayı görmezden gelmek ya da söndürmek. Uyarı söndürüldüğünde arıza gitmez, yalnız görünmez olur ve sistem bir sonraki gerçek basınç kaybında sessiz kalır." },
+          { "label": "Normal açılış testidir, bir anlamı yok", "verdict": "acilis-testi", "explain": "Açılış testinde lamba kısa süre yanıp söner; sabit kalması normal değil." },
+          { "label": "Kesinlikle bir lastiğin patlamak üzere olduğunu", "verdict": "patlak", "explain": "Bu davranış çoğunlukla sistem arızasını gösterir; basınç ayrıca ölçülür." },
+          { "label": "Akünün zayıf olduğunu", "verdict": "aku", "explain": "Akü zayıflığı farklı belirtiler verir; bu uyarı TPMS'e aittir." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bir uyarı lambasının nasıl yandığı, ne söylediğini değiştirir. Sabit mi, yanıp sönüyor mu, ne zaman başlıyor — üçü birlikte okunur."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Dolaylı TPMS basıncı nasıl ölçer?",
+        "a": "olcmez",
+        "options": [
+          { "verdict": "olcmez", "label": "Ölçmez: ABS tekerlek hızlarını karşılaştırır; basıncı düşen lastiğin çapı küçüldüğü için o tekerlek daha hızlı döner", "explain": "Dolaylı sistemin tekerlek içinde hiçbir parçası yoktur; aracın zaten sahip olduğu ABS hız sensörlerini kullanır ve dört tekerleğin dönme hızlarını karşılaştırır. Avantajı maliyet ve dayanıklılıktır: bitecek pil, kırılacak sensör, kış takımı için ikinci set yoktur. Bedeli ise gerçek bir basınç değeri verememesi ve karşılaştırmaya dayandığı için kör noktası olmasıdır." },
+          { "verdict": "sensor", "label": "Tekerlek içindeki sensörle", "explain": "O doğrudan sistemdir." },
+          { "verdict": "valf", "label": "Valfteki mekanik anahtarla", "explain": "Böyle bir anahtar yok." },
+          { "verdict": "ses", "label": "Lastiğin sesinden", "explain": "Ses ölçen bir sistem değil." }
+        ]
+      },
+      {
+        "q": "Dolaylı sistem dört lastik birlikte indiğinde neden uyarmaz?",
+        "a": "fark-olusmaz",
+        "options": [
+          { "verdict": "fark-olusmaz", "label": "Tekerlekleri birbiriyle karşılaştırdığı için: hepsi birlikte inince aralarındaki oran değişmez ve sapma görünmez", "explain": "Sistem mutlak basıncı değil tekerlekler arasındaki farkı görür. Dördü birlikte indiğinde fark oluşmaz, uyarı gelmez ve araç dört düşük lastikle dolaşır — omuzlardan aşınma, artan tüketim ve ısınan yanaklar. Bu özellikle soğuk mevsim geçişlerinde yaygındır. İkinci kör nokta sıfırlamadır: sistem sıfırlanmazsa düşük hâli normal kabul eder." },
+          { "verdict": "ariza", "label": "Sistem arızalıdır", "explain": "Arıza değil, yöntemin doğal sınırı." },
+          { "verdict": "yavas", "label": "Kayıp yavaş olduğu için", "explain": "Hız değil, farkın oluşmaması belirleyici." },
+          { "verdict": "esik", "label": "Eşiğin altına inilmediği için", "explain": "İnse bile karşılaştırmada fark çıkmaz." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 2,05 bar ve 2,45 bar SENARYO okumalarıdır. İstenen FARKTIR (0,40 bar); dersin gösterdiği şey doğrudan sistemin hangi tekerleğin düştüğünü söyleyebilmesidir.",
+    "sourceRequired": "TPMS uyarı eşiği, sensör pil ömrü ve sistemin tepki süresi bilinçle VERİLMEDİ: araca, sisteme ve mevzuata göre değişir. Uyarı lambasının yanıp sönme davranışının anlamı da 'çoğu araçta' kaydıyla verildi; kesin anlamı aracın kılavuzuna bırakıldı.",
+    "kapsam": "Sensör değişimi ve tanıtma bir sonraki derste. Sahnede yalnız bir TPMS sensörü var; teşhis cihazı modellenmedi, metinde anlatılıyor.",
+    "reviewedByMechanic": false
+  }
+}

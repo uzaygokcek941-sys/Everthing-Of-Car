@@ -1,0 +1,176 @@
+{
+  "id": "direksiyon.eps-ogrenme",
+  "area": "direksiyon",
+  "stage": 4,
+  "title": "Onarım Sonrası Konum ve Tork Öğrenme",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 35,
+  "prerequisites": ["direksiyon.eps-ariza"],
+  "learningGoals": [
+    "Hangi işlemlerden sonra öğrenme gerektiğini bilmek",
+    "Öğrenmenin neden bir formalite değil güvenlik adımı olduğunu kavramak",
+    "Öğrenme yapılmadığında hangi sistemlerin yanlış çalışacağını görmek"
+  ],
+
+  "safety": [
+    { "rule": "Öğrenme işlemi sırasında araç üreticinin tarif ettiği koşullarda tutulur", "why": "Yanlış koşulda yapılan öğrenme, sisteme yanlış bir merkez ya da sıfır noktası kaydeder ve bu, doğrudan bir güvenlik sorunudur", "blocksStart": true },
+    { "rule": "Öğrenme tamamlanmadan araç teslim edilmez", "why": "Kararlılık kontrolü ve sürücü destek sistemleri yanlış açı bilgisiyle çalışır", "blocksStart": true },
+    { "rule": "Yol testi gerektiren öğrenmelerde boş, düz ve trafiğe uygun bir yol seçilir", "why": "İşlem sırasında sürücünün dikkati bölünür ve araç düz gitmek zorundadır", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.teshis-cihazi", "label": "Teşhis cihazı", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Bir işlem tamamlandı. Öğrenme gerekip gerekmediğine karar vereceksin.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.eps-kontrol-unitesi",
+        "question": "Hangi işlemlerden sonra öğrenme gerekir?",
+        "options": [
+          { "label": "Modül, sensör ya da kolon değişimi; kutu veya rot tarafında yapılan işler; ön düzen ayarı; akünün uzun süre ayrılması gibi sistemin referansını etkileyen her işlem", "verdict": "referansi-etkileyen", "correct": true, "explain": "Öğrenme, sistemin 'benim sıfır noktam nerede' sorusuna verdiği cevabın yenilenmesidir ve bu cevabı bozan her işlemden sonra gerekir. Liste tek tek ezberlenmez, mantığı anlaşılır: sistem düz gitmeyi ve nötr torku bir referansa göre bilir; o referansı değiştiren her şey öğrenmeyi gerektirir. Modül değişince yeni modülün hiçbir kaydı yoktur. Sensör ya da kolon değişince ölçümün sıfır noktası kayar. Kutu ya da rot çubuklarına dokunulunca tekerleklerin düz olduğu kremayer konumu değişir — yani mekanik referans oynar. Ön düzen ayarı doğrudan bu referansı hedefler ve bu yüzden birçok araçta ayar sonrası açı sensörü öğrenmesi zorunludur. Akünün uzun süre ayrılması bazı araçlarda öğrenilmiş değerleri siler. Kural olarak, üreticinin onarım belgesi hangi işlemden sonra hangi öğrenmenin gerektiğini söyler ve buna bakılır; tahmin edilmez. Öğrenmeyi atlamanın bedeli sinsidir: araç çalışır, direksiyon döner, hiçbir şey bozuk görünmez ama sistem yanlış bir referansla karar verir." },
+          { "label": "Yalnız modül değişiminde", "verdict": "sadece-modul", "explain": "Sensör, kolon, kutu, rot ve ön düzen işleri de referansı etkiler." },
+          { "label": "Hiçbir zaman gerekmez", "verdict": "gerekmez", "explain": "Referans değişince sistem yanlış kararlar verir." },
+          { "label": "Yalnız lastik değişiminde", "verdict": "lastik", "explain": "Lastik değişimi bu referansı doğrudan etkilemez." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Liste ezberlenmez, mantığı anlaşılır: sistemin referansını bozan her işlem öğrenme gerektirir."
+    },
+    {
+      "id": 2,
+      "instruction": "Açı sensörü öğrenmesi yapılacak.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.aci-sensoru",
+        "question": "Sistem ne öğreniyor?",
+        "options": [
+          { "label": "Tekerlekler gerçekten düzken direksiyon açısının kaç olduğunu, yani sıfır noktasını", "verdict": "sifir-noktasi", "correct": true, "explain": "Açı sensörü direksiyonun kaç derece döndüğünü ölçer ama bu ölçüm tek başına anlamsızdır; bir referans noktası gerekir. Sistemin bilmesi gereken şey şudur: hangi açı değeri 'araç düz gidiyor' demektir. İşte öğrenme bu eşleştirmeyi kurar — tekerlekler fiilen düz konumdayken sensörün okuduğu değer sıfır olarak kaydedilir. Bu yüzden öğrenme işleminin ön koşulu, tekerleklerin gerçekten düz olmasıdır; simidin düz görünmesi yetmez, çünkü simit yanlış takılmış ya da rot dağılımı bozuk olabilir. Bu noktada aşama 1'deki simit merkezi dersi doğrudan devreye giriyor: önce mekanik doğru yapılır, sonra elektronik onu öğrenir. Sıra ters çevrildiğinde sistem bir yanlışı 'doğru' diye kaydeder ve bundan sonra bütün kararlarını ona göre verir. Öğrenmenin nasıl yapılacağı araca göre değişir: bazılarında teşhis cihazından bir komut verilir, bazılarında direksiyon uçtan uca çevrilir, bazılarında belirli bir hızda kısa bir düz sürüş gerekir. Hangisi olduğu üreticinin belgesinden okunur." },
+          { "label": "Sürücünün sürüş alışkanlığını", "verdict": "aliskanlik", "explain": "Öğrenilen şey sürüş tarzı değil, sıfır referansı." },
+          { "label": "Lastik ölçüsünü", "verdict": "lastik", "explain": "Lastik ölçüsü ayrı bir konu." },
+          { "label": "Motor devrini", "verdict": "devir", "explain": "İlgisi yok." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Önce mekanik doğru yapılır, sonra elektronik onu öğrenir. Sıra tersine dönerse sistem yanlışı doğru sanır."
+    },
+    {
+      "id": 3,
+      "instruction": "Öğrenme öncesi açı sensörü tekerlekler düzken 3,7° gösteriyordu, öğrenme sonrası 0,2° gösteriyor. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.aci-sensoru",
+        "unit": "derece",
+        "acceptRange": [3.4, 3.6]
+      },
+      "camera": "direksiyon",
+      "hint": "3,7 eksi 0,2.",
+      "teachingNote": "3,5°'lik bu düzeltme, sistemin daha önce yanlış bir sıfır noktasıyla çalıştığını gösteriyor: tekerlekler düzken sensör 'sağa 3,7 derece dönük' diyordu. Bu, küçük görünen ama sonuçları büyük bir hatadır — kararlılık kontrolü savrulmayı, aracın gitmesi beklenen yön ile gerçekte gittiği yönü karşılaştırarak anlar ve beklenen yönü bu açıdan hesaplar. Yanlış sıfır, sistemin sürekli hafif bir dönüş olduğunu sanması demektir. Öğrenme sonrası değerin tam sıfır çıkması da beklenmez; küçük bir kalıntı normaldir. Kabul edilebilir kalıntı aralığı araca özgüdür ve bu ders bir sınır vermiyor; öğrettiği şey, öğrenmenin sonucunun ölçülerek doğrulanabileceği."
+    },
+    {
+      "id": 4,
+      "instruction": "Bazı araçlarda ayrıca tork sensörü öğrenmesi isteniyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.tork-sensoru",
+        "question": "Burada ne öğreniliyor ve koşulu ne?",
+        "options": [
+          { "label": "Sürücü hiçbir kuvvet uygulamıyorken sensörün ürettiği değer, yani nötr nokta; bu yüzden işlem sırasında simide dokunulmaz", "verdict": "notr-nokta", "correct": true, "explain": "Tork sensörü de bir referansa ihtiyaç duyar: hangi sinyal 'sürücü hiçbir kuvvet uygulamıyor' demektir. Bu nötr nokta üretim toleransları, montaj ve yaşlanma nedeniyle küçük farklar gösterir ve sistemin bunu bilmesi gerekir; bilmezse, sürücü simidi serbest bıraktığı hâlde küçük bir kuvvet uygulanıyor sanır ve kendiliğinden destek vermeye başlar. Sonuç tanıdıktır: direksiyon bir tarafa doğru hafifçe kayar ya da sürücü düz gitmek için sürekli karşı kuvvet uygulamak zorunda kalır. İşlemin koşulu bu yüzden çok nettir — öğrenme sırasında simide DOKUNULMAZ, araç hareketsizdir ve tekerlekler düz konumdadır. Kolundaki hafif bir yaslanma bile yanlış bir nötr noktanın kaydedilmesine yeter. Bazı araçlarda bu işlem açı öğrenmesiyle birleşiktir, bazılarında ayrıdır ve sırası bellidir. Sıra ve koşullar üreticinin belgesinden okunur; bu ders bir adım listesi vermiyor çünkü liste araca göre değişir ve yanlış sırayla yapılan öğrenme, hiç yapılmamış olmaktan daha kötüdür." },
+          { "label": "Sürücünün ortalama kuvvetini", "verdict": "ortalama", "explain": "Öğrenilen şey sıfır kuvvet referansı." },
+          { "label": "Azami destek miktarını", "verdict": "azami", "explain": "Destek eğrisi yazılımda tanımlı; öğrenilen şey nötr nokta." },
+          { "label": "Direksiyon çevrilirken öğrenilir", "verdict": "cevirerek", "explain": "Nötr nokta için simide hiç dokunulmaması gerekir." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Kolundaki hafif bir yaslanma bile yanlış nötr nokta kaydettirir. Öğrenme sırasında simide dokunulmaz."
+    },
+    {
+      "id": 5,
+      "instruction": "Ön düzen ayarı yapıldı ama öğrenme atlandı. Araç düz gidiyor ve simit düz duruyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.eps-kontrol-unitesi",
+        "question": "Sorun ne?",
+        "options": [
+          { "label": "Mekanik doğru ama sistemin kaydettiği sıfır eski hâline ait; kararlılık kontrolü ve sürücü destek sistemleri yanlış referansla karar verir", "verdict": "eski-referans", "correct": true, "explain": "Bu vaka öğrenmenin neden bir formalite olmadığını en iyi gösteren örnektir, çünkü hiçbir şey bozuk görünmez: araç düz gider, simit ortadadır, direksiyon normal çalışır ve müşteri memnun ayrılır. Ama sistemin belleğindeki sıfır noktası ayar öncesine aittir. Bunun sonuçları ancak sınır durumlarda ortaya çıkar ve tam da o anlarda önemlidir. Kararlılık kontrolü, aracın gitmesi beklenen yön ile gerçekte gittiği yönü karşılaştırarak savrulmayı anlar; beklenen yönü direksiyon açısından hesapladığı için yanlış sıfır, sistemin sürekli küçük bir hata görmesi demektir. Bu, müdahalenin geç ya da erken gelmesine yol açabilir. Şerit takip sistemi direksiyonun nerede olduğunu bilemez ve düzeltmeyi yanlış hesaplar. Park asistanı manevrayı kaydırır. Hıza duyarlı destek eğrisi kayar. Hiçbiri panelde lamba yakmayabilir çünkü sistem kendi verisinin yanlış olduğunu bilmez — kendi içinde tutarlıdır, yalnız gerçekle uyumsuzdur. Bu yüzden öğrenme, işin görünür sonucu olmasa bile yapılır ve yapıldığı kaydedilir." },
+          { "label": "Sorun yok, araç düz gidiyorsa her şey tamamdır", "verdict": "sorun-yok", "explain": "Mekanik doğru ama elektronik referans eski; sınır durumlarda ortaya çıkar." },
+          { "label": "Ayar yanlış yapılmıştır", "verdict": "ayar-yanlis", "explain": "Ayar doğru; eksik olan öğrenme." },
+          { "label": "Panelde lamba yanardı, yanmıyorsa sorun yoktur", "verdict": "lamba", "explain": "Sistem kendi verisinin yanlış olduğunu bilmez; lamba yanmayabilir." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Sistem kendi içinde tutarlı, yalnız gerçekle uyumsuz. Bu yüzden lamba yanmaz ve hata sessiz kalır."
+    },
+    {
+      "id": 6,
+      "instruction": "Öğrenme komutu verildi ama işlem tamamlanmadı, cihaz hata döndürdü.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kremayer-kutusu",
+        "question": "Ne kontrol edilir?",
+        "options": [
+          { "label": "Ön koşullar: aracın hareketsiz ve düz zeminde olması, tekerleklerin düz konumu, gerilim seviyesi, aktif kodların temizlenmiş olması ve simide dokunulmuyor olması", "verdict": "on-kosullar", "correct": true, "explain": "Öğrenme işlemleri ön koşullu çalışır; koşullardan biri sağlanmadığında modül işlemi bilinçle reddeder, çünkü yanlış koşulda kaydedilen bir referans hiç kaydedilmemiş olmaktan daha kötüdür. Reddedilme bu yüzden bir arıza değil, bir korumadır ve doğru tepki koşulları tek tek doğrulamaktır. Sırasıyla: araç hareketsiz ve düz zeminde mi; tekerlekler gerçekten düz mü — bunu simide bakarak değil, tekerleklere bakarak doğrula; sistem gerilimi yeterli mi, çünkü düşük gerilimde birçok modül öğrenmeyi reddeder; başka aktif kod var mı, çünkü sistem kendi içinde bir arıza varken referans kaydetmez; simide dokunan biri var mı; ve motorun çalışır ya da durmuş olması gerekiyor mu — bu araca göre değişir. Ayrıca bazı araçlarda öğrenme belirli bir sırayla yapılır: önce tork, sonra açı ya da tersi. Bütün bunlar üreticinin belgesinde yazılıdır. Koşullar sağlandığı hâlde işlem hâlâ reddediliyorsa, sistemde henüz giderilmemiş bir arıza olduğu düşünülür ve teşhise geri dönülür." },
+          { "label": "Cihaz bozuktur, başka cihaz denenir", "verdict": "cihaz", "explain": "Önce ön koşullar doğrulanır; ret genellikle bir korumadır." },
+          { "label": "İşlem birkaç kez tekrarlanır, sonunda tutar", "verdict": "tekrarla", "explain": "Koşul sağlanmadan tekrar aynı sonucu verir." },
+          { "label": "Modül değiştirilir", "verdict": "modul", "explain": "Ret bir arıza kanıtı değil; ön koşullar kontrol edilir." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Reddedilme bir arıza değil koruma. Yanlış koşulda kaydedilen referans, hiç kaydedilmemiş olmaktan kötüdür."
+    },
+    {
+      "id": 7,
+      "instruction": "Öğrenme tamamlandı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.direksiyon-simidi",
+        "question": "İş nasıl kapanır?",
+        "options": [
+          { "label": "Canlı veriden sıfır noktası doğrulanır, kodlar okunup yeni kayıt olmadığı görülür, yol testinde düz gitme ve merkeze dönme denenir ve yapılan öğrenme kayda geçilir", "verdict": "dogrula-test-kaydet", "correct": true, "explain": "Öğrenme, komut verildi diye tamamlanmış sayılmaz; sonucu görülmelidir. Birincisi canlı veri kontrolüdür: tekerlekler düzken açı değerinin sıfıra yakın olduğu ve tork sensörünün nötr değerinin beklenen aralıkta olduğu okunur. Bu, işlemin gerçekten kaydedildiğinin ölçülmüş kanıtıdır. İkincisi kod kontrolüdür — işlem sırasında yeni bir kayıt oluşmadığı doğrulanır; bazı sistemler öğrenme sırasında geçici kodlar üretir ve bunların temizlenmesi gerekir. Üçüncüsü yol testidir: araç düz bir yolda sürülür, direksiyonun ortada durduğu, aracın düz gittiği ve viraj çıkışında merkeze döndüğü görülür; varsa şerit takip ve benzeri sistemlerin normal çalıştığı kontrol edilir. Dördüncüsü kayıttır ve bu adım en çok atlanandır: hangi işlem yapıldı, hangi öğrenme çalıştırıldı, öncesi ve sonrası değerler ne oldu. Bu kayıt bir sonraki bakımda ya da bir şikâyet geri geldiğinde doğrudan yol gösterir. Araç, öğrenme tamamlanıp doğrulanmadan teslim edilmez." },
+          { "label": "Komut verildiyse iş bitmiştir", "verdict": "komut-yeter", "explain": "Sonucun canlı veriden ve yolda doğrulanması gerekir." },
+          { "label": "Yol testi gereksizdir", "verdict": "test-yok", "explain": "Düz gitme ve merkeze dönme yalnız yolda görülür." },
+          { "label": "Kayıt tutmaya gerek yok", "verdict": "kayit-yok", "explain": "Öncesi/sonrası değerler bir sonraki teşhiste yol gösterir." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Komut vermek öğrenmek değil. Sonuç canlı veriden okunur ve yolda doğrulanır."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Ön düzen ayarı yapılıp öğrenme atlandığında ne olur?",
+        "a": "eski-referans",
+        "options": [
+          { "verdict": "eski-referans", "label": "Mekanik doğru ama sistemin kaydettiği sıfır eski hâline aittir; kararlılık kontrolü ve destek sistemleri yanlış referansla karar verir", "explain": "Hiçbir şey bozuk görünmez: araç düz gider, simit ortadadır. Ama kararlılık kontrolü beklenen yönü direksiyon açısından hesapladığı için yanlış sıfır, sistemin sürekli küçük bir hata görmesi demektir ve müdahale geç ya da erken gelebilir. Şerit takip düzeltmeyi yanlış hesaplar, park asistanı manevrayı kaydırır. Panelde lamba yanmayabilir çünkü sistem kendi içinde tutarlıdır, yalnız gerçekle uyumsuzdur." },
+          { "verdict": "sorun-yok", "label": "Sorun yok", "explain": "Sınır durumlarda ortaya çıkar." },
+          { "verdict": "ayar-yanlis", "label": "Ayar yanlıştır", "explain": "Ayar doğru, eksik olan öğrenme." },
+          { "verdict": "lamba", "label": "Lamba yanmıyorsa sorun yoktur", "explain": "Sistem kendi verisinin yanlış olduğunu bilmez." }
+        ]
+      },
+      {
+        "q": "Öğrenme komutu reddedildi. Ne yapılır?",
+        "a": "on-kosullar",
+        "options": [
+          { "verdict": "on-kosullar", "label": "Ön koşullar doğrulanır: araç hareketsiz ve düz zeminde mi, tekerlekler düz mü, gerilim yeterli mi, aktif kod var mı, simide dokunan var mı", "explain": "Öğrenme ön koşullu çalışır ve koşul sağlanmadığında modül işlemi bilinçle reddeder; yanlış koşulda kaydedilen referans hiç kaydedilmemiş olmaktan kötüdür, yani ret bir korumadır. Tekerleklerin düzlüğü simide bakarak değil tekerleklere bakarak doğrulanır. Koşullar sağlandığı hâlde ret sürüyorsa giderilmemiş bir arıza vardır ve teşhise dönülür." },
+          { "verdict": "cihaz", "label": "Cihaz bozuktur", "explain": "Önce ön koşullar." },
+          { "verdict": "tekrarla", "label": "Birkaç kez tekrarlanır", "explain": "Koşul sağlanmadan aynı sonucu verir." },
+          { "verdict": "modul", "label": "Modül değiştirilir", "explain": "Ret arıza kanıtı değil." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 3,7° ve 0,2° SENARYO okumalarıdır; istenen FARKTIR (3,5°) ve gösterilen şey öğrenmenin sonucunun ölçülerek doğrulanabileceğidir. Kabul edilebilir kalıntı aralığı verilmiyor.",
+    "sourceRequired": "Öğrenme adımlarının sırası, ön koşullar, asgari gerilim, kabul edilebilir kalıntı açı ve tork nötr değerleri bilinçle VERİLMEDİ; araca ve üreticiye özgüdür. Ders bir adım listesi vermiyor çünkü yanlış sırayla yapılan öğrenme hiç yapılmamış olmaktan kötüdür.",
+    "kapsam": "Modül kodlama ve yazılım güncelleme kapsam dışı. Kararlılık kontrolü ve şerit takip sistemlerinin kendi kalibrasyonları ayrı konudur ve bu alanda işlenmiyor. Açı sensörünün ESP ile ilişkisi aşama 5'te ayrı ders.",
+    "reviewedByMechanic": false
+  }
+}

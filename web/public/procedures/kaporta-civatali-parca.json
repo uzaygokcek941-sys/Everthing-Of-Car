@@ -1,0 +1,177 @@
+{
+  "id": "kaporta.civatali-parca",
+  "area": "kaporta",
+  "stage": 4,
+  "title": "Cıvatalı Parça Değişimi ve Fuga Ayarı",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 40,
+  "prerequisites": ["kaporta.cekme-ve-isi"],
+  "learningGoals": [
+    "Fuganın iki eksende — aralık ve yüzey hizası — birlikte ayarlandığını görmek",
+    "Yeni parçanın takılmadan önce hazırlanması gerektiğini bilmek",
+    "Ayarın yapı bozukluğunu gizlemek için kullanılamayacağını içselleştirmek"
+  ],
+
+  "safety": [
+    { "rule": "Ağır paneller tek başına sökülüp takılmaz", "why": "Denge kaybında hem panel hem komşu paneller hasar görür; ayrıca sıkışma ve düşme riski vardır", "blocksStart": true },
+    { "rule": "Yeni parçanın çıplak kalan kenarları ve montaj yüzeyleri korumasız bırakılmaz", "why": "Korumasız metal ve kesilmiş kenarlar korozyonun ilk başladığı yerlerdir", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.tork-anahtari", "label": "Tork anahtarı", "required": true },
+    { "id": "tool.olcum-mastari", "label": "Ölçüm mastarı", "required": true },
+    { "id": "tool.cizgi-lambasi", "label": "Çizgi lambası", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Yeni çamurluk geldi, kutusundan çıkardın. Henüz takmadın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-camurluk",
+        "question": "Takmadan önce ne yapılır?",
+        "options": [
+          { "label": "Parça kontrol edilir ve hazırlanır: eskisiyle karşılaştırılır, hasarsız olduğu doğrulanır, koruyucu kaplaması ve iç yüzeyi işlenir — takıldıktan sonra ulaşılamayacak her yüzey önce halledilir", "verdict": "once-hazirla", "correct": true, "explain": "Yeni bir panel takılmaya hazır gelmez; hazırlanması gereken bir yarı mamuldür ve hazırlığın çoğu takıldıktan sonra imkânsız hâle gelir. Sıra şudur. Önce doğrulama: yeni parça eskisinin yanına konur ve delik yerleri, kıvrım hatları, kenar biçimleri karşılaştırılır — yanlış parça ya da farklı donanıma ait bir varyant, ancak araca tutulduğunda anlaşılır ve bunu montajın ortasında fark etmek yarım günü yakar. Nakliye sırasında ezilmiş bir kenar da bu aşamada görülür. Sonra iç yüzey: pek çok yeni panel yalnız ince bir koruyucu ya da fabrika astarıyla gelir ve iç tarafı, takıldıktan sonra bir daha asla ulaşamayacağın bir yerdir. Korozyon dersinin kuralı burada uygulanır — iç yüzey ve kenarlar uygun biçimde korunur, gerekiyorsa sızdırmazlık ve taş darbesi koruyucusu uygulanır. Sonra montaj yüzeyleri: parçanın gövdeye oturduğu yerler ile gövdenin karşılık yüzeyi temizlenir; eski contalar, ezik pullar ve kalıntılar alınır. En son bağlantı elemanları: hangi cıvatanın tek kullanımlık olduğu kontrol edilir ve gerekli olanlar yenilenir. Bir de boya sorusu var: parça takılmadan mı boyanacak, takıldıktan sonra mı — ikisinin de gerekçesi vardır ve karar renk uyumu ile erişim arasında verilir; bu, boya aşamasının konusudur." },
+          { "label": "Doğrudan takılır", "verdict": "dogrudan", "explain": "İç yüzey ve kenarlar takıldıktan sonra ulaşılamaz hâle gelir." },
+          { "label": "Yalnız boyası kontrol edilir", "verdict": "boya", "explain": "Delik yerleri, kıvrımlar ve iç koruma da kontrol edilir." },
+          { "label": "Montajda sorun çıkarsa müdahale edilir", "verdict": "sonra", "explain": "Montajın ortasında fark edilen yanlış parça yarım günü yakar." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Yeni panel hazır gelmez, hazırlanır. Takıldıktan sonra ulaşamayacağın her yüzey önce halledilir."
+    },
+    {
+      "id": 2,
+      "instruction": "Çamurluğu taktın. Kaputla arasındaki yüzey hizasını iki noktada ölçtün: ön uçta 1,2 mm, arka uçta 0,3 mm. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.olcum-mastari",
+        "unit": "mm",
+        "acceptRange": [0.85, 0.95]
+      },
+      "camera": "kaporta",
+      "hint": "1,2 eksi 0,3.",
+      "teachingNote": "0,9 milimetrelik bu fark, fugada gözden en çok kaçan eksenin ölçüsü: yüzey hizası. Fuga iki ayrı şeyi birden ifade eder — iki panel arasındaki aralık ve iki panelin yüzeylerinin aynı düzlemde olup olmadığı. Aralık eşit olsa bile bir panel diğerinden yüksek duruyorsa iş tamamlanmamıştır ve bu, ışıkta aralıktan daha çok göze batar; çünkü yüzey farkı yansımayı kırar ve araca yandan bakan herkes görür. Ayarın üç ekseni vardır ve üçü birlikte çalışılır: ileri-geri (aralık), yukarı-aşağı (hiza) ve içeri-dışarı (yüzey yüksekliği). Cıvatalar gevşekken parça bu üç yönde de az miktarda oynatılabilir; sıkıldıktan sonra oynatmaya çalışmak deliği ovalleştirir. Bu yüzden akış hep aynıdır: parça yerine alınır, cıvatalar elle takılır ama sıkılmaz, üç eksen birlikte ayarlanır, ölçülür ve ancak her şey oturunca uygun torkla sıkılır. Bir uyarı: yüzey hizası ölçülürken kaput ve kapı gibi hareketli parçalar birkaç kez açılıp kapatılır — kapalıyken doğru duran bir panel, kilit ve menteşe boşluğu yüzünden ikinci kapanışta kayabilir. Kabul edilebilir hiza ve aralık farkı araca özgüdür; buradaki iki sayı senaryo okumasıdır."
+    },
+    {
+      "id": 3,
+      "instruction": "Aralık iyi ama ayarı bir türlü oturtamıyorsun; bir uçta iyileşen fark diğer uçta bozuluyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.direk-a",
+        "question": "Bu ne anlama gelir?",
+        "options": [
+          { "label": "Parçanın oturduğu gövde geometrisi bozuk olabilir: ayarla düzelmeyen bir fuga, sorunun panelde değil yapıda olduğunu söyler — çapraz ölçüye dönülür", "verdict": "yapi-bozuk", "correct": true, "explain": "Cıvatalı bir parçanın ayar payı sınırlıdır ve o pay, üreticinin öngördüğü küçük üretim toleranslarını karşılamak içindir; bir gövde deformasyonunu telafi etmek için değil. Bu yüzden ayar sırasında ortaya çıkan belirli bir belirti çok anlamlıdır: bir uçtaki farkı düzeltirken diğer ucun bozulması. Bu, parçanın oturduğu yüzeyin artık düz ya da doğru konumda olmadığını gösterir — yani panel değil, panelin bağlandığı yapı sorunludur. Doğru davranış, ayarı zorlamayı bırakıp ölçme dersine dönmektir: kapı boşluğunun çapraz ölçüleri alınır, karşı taraf ile karşılaştırılır ve bağlantı noktalarının konumu kontrol edilir. Sonuç sapma gösteriyorsa iş artık cıvatalı panel işi değildir; taşıyıcı yapıda deformasyon vardır ve orada karar kılavuzun, doğrulama gövde ölçüm sistemininidir. Bu noktada en sık yapılan hata, farkı 'idare edecek' bir orta noktada bırakıp teslim etmektir. Böyle bir araçta fuga her iki uçta da hafif bozuk kalır, kapı ya da kaput tam oturmaz, zamanla su ve rüzgâr sesi çıkar ve müşteri geri gelir. İkinci hata, cıvatayı zorlayarak paneli yerine 'çekmeye' çalışmaktır: panel gerilir, montaj yüzeyinde boya zedelenir, delik ovalleşir ve gerilim zamanla bağlantıyı gevşetir." },
+          { "label": "Yeni parça kalitesizdir", "verdict": "parca", "explain": "Mümkün ama önce yapı kontrol edilir; belirti yapıyı işaret ediyor." },
+          { "label": "Daha sıkı sıkılırsa oturur", "verdict": "sik", "explain": "Zorlama paneli gerer ve deliği ovalleştirir." },
+          { "label": "Orta bir noktada bırakılır", "verdict": "orta", "explain": "İki uçta da bozuk kalır; şikâyet geri gelir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Ayar payı üretim toleransı içindir, gövde deformasyonu için değil. Ayarla düzelmeyen fuga yapıyı işaret eder."
+    },
+    {
+      "id": 4,
+      "instruction": "Kapı takılıyor. Menteşe cıvataları henüz gevşek.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-kapi-paneli",
+        "question": "Hareketli parçalarda ayar sırası nedir?",
+        "options": [
+          { "label": "Önce menteşeden konum ve fuga ayarlanır, sonra kilit karşılığı ayarlanır — kapının kapanma yüksekliği kilitle değil menteşeyle belirlenir; kilit yalnız kapalı konumu tutar", "verdict": "once-mentese", "correct": true, "explain": "Hareketli parçalarda iki ayrı ayar noktası vardır ve karıştırılmaları çok yaygın bir hatadır. Menteşe, parçanın uzaydaki konumunu belirler: yüksekliği, ileri-geri konumu ve yüzey hizası menteşeden ayarlanır. Kilit karşılığı ise yalnız kapalı konumda parçayı tutar ve fitili doğru bastırır. Sıra bu yüzden değişmez: önce menteşeden fuga ve hiza oturtulur, en son kilit karşılığı o konuma göre ayarlanır. Ters yapıldığında ortaya çok tanıdık bir arıza tablosu çıkar. Kapı yüksekliği kilit karşılığı kaydırılarak 'düzeltilirse' kapı kapanırken kilide doğru zorlanır; kapanış sert olur, kilit ve karşılığı hızla aşınır, kapı bir süre sonra tam kapanmamaya başlar. Bir de fitil vardır: kapı kapandığında fitil çevresi boyunca eşit basmalıdır — eşit basmayan fitil su ve rüzgâr sesi demektir. Fitilin eşit basıp basmadığı kilitle değil, kapının konumuyla belirlenir. Ayar sırasında iki pratik kural işe yarar: parça birkaç kez açılıp kapatılarak kontrol edilir, çünkü statikte doğru duran bir kapı hareket ederken sürtebilir; ve ayar bittiğinde cıvatalar uygun torkla sıkılır — menteşe cıvataları parçanın bütün ağırlığını taşır ve gevşek kalan bir menteşe zamanla kayar, fuga yeniden bozulur." },
+          { "label": "Önce kilit karşılığı ayarlanır", "verdict": "once-kilit", "explain": "Kilit yalnız kapalı konumu tutar; yükseklik menteşeden belirlenir." },
+          { "label": "İkisi aynı anda ayarlanır", "verdict": "ayni-anda", "explain": "Kilit, menteşe oturmadan doğru konumu bilemez." },
+          { "label": "Kilit hiç ayarlanmaz", "verdict": "kilit-yok", "explain": "Fitil basıncı ve kapanma kilit karşılığıyla tamamlanır." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Yüksekliği kilitle 'düzeltmek' kapıyı kilide zorlar: sert kapanış, hızlı aşınma, bir süre sonra tam kapanmama."
+    },
+    {
+      "id": 5,
+      "instruction": "Yeni parçayı gövdeye bağlayacaksın. Montaj yüzeyleri çıplak metal.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.zimpara-bolgesi",
+        "question": "Montaj yüzeyi nasıl bırakılır?",
+        "options": [
+          { "label": "Korunmuş olarak: iki metalin sıkışarak temas ettiği yüzeyler nemin en uzun kaldığı yerlerdir ve çıplak bırakıldığında korozyon buradan başlar — üstelik takıldıktan sonra görülmez", "verdict": "yuzey-koru", "correct": true, "explain": "İki parçanın cıvatayla sıkıştırıldığı yüzey, korozyon açısından aracın en zor bölgelerinden biridir. Sebebi basittir: oraya nem girer ama kolay çıkmaz ve kurumaz; kılcal bir aralıkta tutulan su, açıkta duran sudan çok daha uzun süre kalır. Bunun üstüne bir de yüzeyler çıplak metalse tepkime hemen başlar ve aylarca kimse görmez, çünkü bölge kapalıdır. Ortaya çıktığında ise genelde geç kalınmıştır: cıvata çevresinde kabarma, paslanmış bir montaj yüzeyi ve bazen sökülemeyen bir bağlantı. Doğru uygulama, montaj yüzeylerinin uygun biçimde korunmasıdır — hem yeni parçanın hem gövdenin tarafı. Farklı metaller söz konusuysa — örneğin alüminyum bir panel ile çelik bir gövde — iş daha da hassastır: malzeme dersinde gördüğün galvanik korozyon tam bu temas yüzeyinde oluşur ve üretici burada yalıtıcı katman, özel kaplamalı bağlantı elemanı ya da yapıştırıcı şart koşabilir; kılavuz ne diyorsa o uygulanır. İkinci bir nokta, parçanın kesilmiş ya da işlenmiş kenarlarıdır — kenarlar fabrika kaplamasının en ince olduğu yerdir ve korunmadıklarında pas oradan yürür. Üçüncü nokta contalar ve pullardır: ezilmiş, sertleşmiş ya da eksik bir conta hem su yolu açar hem parçanın oturuşunu bozar; yenilenir." },
+          { "label": "Çıplak bırakılır, cıvata sıkışınca su girmez", "verdict": "ciplak", "explain": "Kılcal aralık suyu tutar ve kurutmaz; korozyon oradan başlar." },
+          { "label": "Yağlanır", "verdict": "yagla", "explain": "Yağ koruma sağlamaz ve bağlantı yüzeyinde kaymaya yol açar." },
+          { "label": "Yalnız görünen kenarlar korunur", "verdict": "gorunen", "explain": "Asıl risk görünmeyen temas yüzeyindedir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Nemin en uzun kaldığı yer, iki metalin sıkışarak temas ettiği yüzey. Ve orası takıldıktan sonra görünmüyor."
+    },
+    {
+      "id": 6,
+      "instruction": "Ayar tamam. Cıvataları sıkacaksın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.bagaj-kapagi",
+        "question": "Sıkma nasıl yapılır?",
+        "options": [
+          { "label": "Kılavuzun verdiği torkla ve sırayla, parçayı yerinde tutan referans noktadan başlayarak — sıkarken parçanın kaymadığı kontrol edilir ve sıkma bittikten sonra fuga yeniden ölçülür", "verdict": "tork-sira", "correct": true, "explain": "Sıkma, ayarın son adımı değil; ayarı bozabilecek bir adımdır. Bu yüzden üç kural birlikte uygulanır. Birincisi tork: cıvatalar 'elle sıkarım tutar' mantığıyla değil, kılavuzun verdiği değerle sıkılır. Az sıkılan bir bağlantı zamanla gevşer ve fuga yeniden bozulur; fazla sıkılan bir bağlantı ise dişi sıyırabilir, ince sacı çukurlaştırabilir ve panelde gerilim bırakabilir — gerilmiş bir panel ısındığında ve soğuduğunda hafifçe hareket eder ve bu, boyada zamanla iz üretir. İkincisi sıra: parçayı asıl konumda tutan referans bağlantıdan başlanır ve dışa doğru gidilir; rastgele sıkma sırası parçayı sıkma sırasında kaydırır ve ayarlanmış fuga bozulur. Üçüncüsü kontrol: her cıvata sıkıldıkça parçanın kaymadığı gözle takip edilir ve sıkma bitince fuga yeniden ölçülür — sıkma öncesi ölçülen değerle sonrasının aynı olması gerekir; değilse parça kaymıştır ve gevşetilip yeniden ayarlanır. Bir de bağlantı elemanının kendisi vardır: söküm dersinde gördüğün gibi kaplamalı ve gerdirilerek sıkılan elemanlar tek kullanımlıktır ve yenilenir; hangisi olduğu kılavuzdan okunur. Son adım her zaman aynı: hareketli parça birkaç kez açılıp kapatılır ve fuga son hâliyle kayda geçirilir." },
+          { "label": "Elle sıkılır, tutması yeterlidir", "verdict": "elle", "explain": "Az sıkma gevşemeye, fazla sıkma gerilime ve diş sıyırmaya yol açar." },
+          { "label": "Rastgele sırayla, hepsi sıkılınca aynı", "verdict": "rastgele", "explain": "Sıra parçayı kaydırır ve ayarı bozar." },
+          { "label": "En sıkı sıkılan en iyisidir", "verdict": "en-siki", "explain": "Fazla sıkma sacı çukurlaştırır ve panelde gerilim bırakır." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Sıkma ayarın son adımı değil, ayarı bozabilecek adım. Sıkma öncesi ve sonrası fuga aynı olmalı."
+    },
+    {
+      "id": 7,
+      "instruction": "Cıvatalı parça değişimini tamamladın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kaput-kaporta",
+        "question": "Bu işin kalitesi neyle ölçülür?",
+        "options": [
+          { "label": "Fuganın iki eksende de eşit olması, hareketli parçanın zorlanmadan kapanması, montaj yüzeylerinin korunmuş olması ve ölçümlerin kayda geçmesiyle — dördü birden sağlanmadan iş bitmiş sayılmaz", "verdict": "dort-olcut", "correct": true, "explain": "Cıvatalı parça değişimi bu alanın en çok yapılan işlerinden biridir ve tam da bu yüzden en çok savsaklanan işidir — 'söktüm, taktım, oldu' diye bakılır. Oysa kalitesi dört ölçütle belirlenir ve dördü de kontrol edilebilir. Birincisi fuga: hem aralık hem yüzey hizası, parçanın iki ucunda ve komşularıyla birlikte eşit olmalıdır; bu ışıkta görünen ve müşterinin ilk fark ettiği şeydir. İkincisi işlev: hareketli bir parça zorlanmadan kapanmalı, fitil çevresinde eşit basmalı ve kilit temiz kavramalıdır; zorlanarak kapanan bir kapı bugün çalışır, altı ay sonra çalışmaz. Üçüncüsü koruma: montaj yüzeyleri, kenarlar ve iç yüzey korunmuş olmalıdır — bu, teslimde görünmeyen ve yıllar sonra fark edilen katmandır, korozyon dersinin dürüstlük sınavı burada da geçerlidir. Dördüncüsü kayıt: baştaki ve sondaki ölçümler yazılmış olmalıdır; bu hem kendi kontrolündür hem sonradan çıkacak tartışmanın hakemi. Bir de görünmeyen bir beşinci ölçüt var: kullanılan parçanın ne olduğu müşteriye doğru söylenmiş olmalıdır. Orijinal, eşdeğer ya da çıkma bir parça takıldıysa bu bilgi saklanmaz — fiyatı da değeri de farklıdır ve müşterinin bilme hakkıdır." },
+          { "label": "Yalnız fuganın düzgün görünmesiyle", "verdict": "yalniz-fuga", "explain": "İşlev, koruma ve kayıt da ölçüttür." },
+          { "label": "Süreyle", "verdict": "sure", "explain": "Süre bir sonuç, ölçüt değil." },
+          { "label": "Müşterinin memnuniyetiyle", "verdict": "memnuniyet", "explain": "Memnuniyet önemli ama görünmeyen katman teslimde denetlenemez." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Dört ölçüt: fuga, işlev, koruma, kayıt. Beşincisi parçanın ne olduğunu doğru söylemek. Sırada kaynaklı parça."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Bir uçtaki fugayı düzeltirken diğer uç bozuluyor. Ne yapılır?",
+        "a": "yapi-bozuk",
+        "options": [
+          { "verdict": "yapi-bozuk", "label": "Ayar zorlanmaz: cıvatalı parçanın ayar payı üretim toleransı içindir, gövde deformasyonunu telafi etmez — çapraz ölçüye dönülür ve yapı kontrol edilir", "explain": "Sapma varsa iş artık panel işi değildir; karar kılavuzun, doğrulama gövde ölçüm sistemininidir. Farkı 'idare edecek' orta bir noktada bırakmak iki uçta da bozuk bir fuga verir ve su ile rüzgâr sesi olarak geri gelir. Cıvatayı zorlayıp paneli yerine çekmek deliği ovalleştirir." },
+          { "verdict": "parca", "label": "Yeni parça kalitesizdir", "explain": "Belirti yapıyı işaret ediyor; önce o kontrol edilir." },
+          { "verdict": "sik", "label": "Daha sıkı sıkılır", "explain": "Zorlama paneli gerer." },
+          { "verdict": "orta", "label": "Orta noktada bırakılır", "explain": "Şikâyet geri gelir." }
+        ]
+      },
+      {
+        "q": "Kapı yüksekliği yanlış. Kilit karşılığını kaydırmak çözer mi?",
+        "a": "once-mentese",
+        "options": [
+          { "verdict": "once-mentese", "label": "Hayır: yükseklik ve konum menteşeden belirlenir, kilit yalnız kapalı konumu tutar — önce menteşeden fuga ve hiza oturtulur, kilit en son o konuma göre ayarlanır", "explain": "Kilitle 'düzeltilen' yükseklik kapıyı kapanırken kilide zorlar: sert kapanış, hızlı aşınma ve bir süre sonra tam kapanmama. Fitilin çevre boyunca eşit basması da kilitle değil kapının konumuyla belirlenir." },
+          { "verdict": "once-kilit", "label": "Evet, kilitten ayarlanır", "explain": "Kilit konumu belirlemez." },
+          { "verdict": "ayni-anda", "label": "İkisi aynı anda ayarlanır", "explain": "Kilit, menteşe oturmadan doğru konumu bilemez." },
+          { "verdict": "kilit-yok", "label": "Kilit hiç ayarlanmaz", "explain": "Fitil basıncı kilit karşılığıyla tamamlanır." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2'deki 1,2 mm ve 0,3 mm SENARYO okumalarıdır; istenen FARKTIR (0,9 mm). Ders hiçbir araç için kabul edilebilir fuga aralığı ya da yüzey hizası iddia etmiyor.",
+    "sourceRequired": "Sıkma torkları ve sıkma sırası, hangi bağlantı elemanının tek kullanımlık olduğu, kabul edilebilir fuga aralığı ve yüzey hizası, farklı metal temasında şart koşulan yalıtım ve bağlantı elemanı tipi, montaj yüzeyi koruma ürünleri bilinçle VERİLMEDİ; hepsi araca ve ürüne özgüdür ve üreticinin onarım kılavuzundan okunur.",
+    "kapsam": "Taşıyıcı parça değişimi ve gövde ölçüm sistemiyle doğrulama KAPSAM DIŞIDIR; ders cıvatalı dış panel değişimini ve ayarını öğretiyor.",
+    "kaynak": "Bu alan kullanıcının açık talebiyle eklendi (talep birebir: 'birde alanlara kaportayı ekleyelim'); konu başlıkları MEB Otomotiv Gövde ve Boya dalının çerçevesini takip ediyor, kazanım numarası iddiası yok.",
+    "reviewedByMechanic": false
+  }
+}

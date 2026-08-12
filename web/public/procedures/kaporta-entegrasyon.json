@@ -1,0 +1,178 @@
+{
+  "id": "kaporta.entegrasyon",
+  "area": "kaporta",
+  "stage": 10,
+  "title": "Ustalık Sınavı: Yandan Darbe Almış Araç",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 55,
+  "prerequisites": ["kaporta.kapi-fugasi"],
+  "learningGoals": [
+    "Bir işi baştan sona okumak: hasarın yolunu, malzemeyi, sınırı ve sırayı birlikte değerlendirmek",
+    "Hangi kısmın bu atölyede yapılabileceğine, hangisinin yapılamayacağına karar vermek",
+    "İşin bitişini kanıtla tanımlamak: aynı ölçümü tekrarlayarak doğrulamak"
+  ],
+
+  "safety": [
+    { "rule": "Kaynak yapılacaksa aracın enerjisi kesilir ve doğrulanır; yakıt sistemi, hava yastığı ve gergi birimleri ile varsa yüksek gerilim sistemi güvenceye alınır, kaynak dönüş kablosu iş noktasına yakın bağlanır", "why": "Enerjili bir araçta kaynak akımı beklenmedik yollardan döner ve hem elektronik birimlere hem kişiye zarar verir; yakıt ve gaz üreteci içeren birimler ısı ve kıvılcıma yakın bırakılmaz", "blocksStart": true },
+    { "rule": "Taşıyıcı yapıya (direk, eşik, taşıyıcı ayak, şasi bölgeleri) üreticinin onarım kılavuzu olmadan ısıtma, düzeltme, kesme ve ekleme yapılmaz", "why": "Bu elemanlar aracın kaza davranışını belirler; yöntem ve sınır kılavuza aittir", "blocksStart": true },
+    { "rule": "Malzeme sınıfı bilinmiyorsa ısı gündeme alınmaz", "why": "Yüksek ve ultra yüksek mukavemetli çelikte ısıtma çoğu zaman yasaktır ve sınıf gözle ayırt edilemez; ısıtılmış eleman kusursuz görünüp kalıcı olarak zayıflar", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.olcum-mastari", "label": "Ölçüm mastarı", "required": true },
+    { "id": "tool.kalinlik-olcer", "label": "Kalınlık ölçer", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Araç geldi: yandan darbe almış, arka kapı belirgin biçimde ezik. B direği ve eşik gözle sağlam görünüyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.arka-kapi-paneli",
+        "question": "İşe nereden başlanır?",
+        "options": [
+          { "label": "Üç soruyla: bu bölge taşıyıcı mı, parçalar nasıl bağlanmış, ve hasar nereye kadar gitmiş — teklif ve yöntem ancak bu üçünün cevabından sonra konuşulur", "verdict": "uc-soru", "correct": true, "explain": "Bu alanın bütün derslerinde tekrarlanan üç soru, bir işin başında sorulmadığında sonunda bedelini ödetiyor. Birincisi taşıyıcılıktır: dokunulacak bölge yalnız görünüşü mü taşıyor, yoksa aracın yükünü ve kaza davranışını mı? Cevap 'taşıyıcı' ise iş baştan farklı bir kategoriye girer ve kılavuz zorunlu hâle gelir. İkincisi birleşim türüdür: parça cıvatalı mı, punta kaynaklı mı, yapıştırılmış mı, perçinli mi? Fabrikanın kurduğu birleşim türü aynı türle yeniden kurulur; bu, hem mukavemeti hem korozyon davranışını belirler ve işin süresini de büyük ölçüde bu tayin eder. Üçüncüsü hasarın yoludur: darbe enerjisi girdiği yerde kalmaz — yapı boyunca ilerler ve etkisini çoğu zaman göründüğünden uzakta gösterir. Bu üçüncü soru bu vakada özellikle kritik, çünkü gözle görünen tek şey ezik bir kapı; oysa yandan gelen bir darbede enerji kapıdan direğe, direkten eşiğe ve tabana geçebilir. Gözle 'sağlam görünmek' bu soruların hiçbirinin cevabı değildir. Bu yüzden ilk iş sökmek ya da fiyat vermek değil, ölçmek ve bakmaktır: fuga, çapraz, karşı taraf simetrisi, kapı açıklıkları, iç panellerin altı ve eşiğin içi." },
+          { "label": "Kapı değişimi için hemen fiyat verilir", "verdict": "fiyat", "explain": "Hasarın nereye gittiği bilinmeden verilen fiyat yanlış çıkar." },
+          { "label": "Kapı düzeltilip boyanır, gerisi görünmüyor", "verdict": "duzelt-boya", "explain": "Görünmeyen kısım işin asıl belirleyicisi." },
+          { "label": "Müşteriye sigorta yönlendirmesi yapılır", "verdict": "sigorta", "explain": "Yönlendirme ayrı konu; teşhis yine de gerekir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Taşıyıcı mı, nasıl bağlanmış, hasar nereye gitti. Üçü sorulmadan ne teklif ne yöntem konuşulur."
+    },
+    {
+      "id": 2,
+      "instruction": "Arka kapı açıklığının çaprazlarını ölçtün: bir köşegen 1486 mm, diğeri 1472 mm. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.olcum-mastari",
+        "unit": "mm",
+        "acceptRange": [13, 15]
+      },
+      "camera": "kaporta",
+      "hint": "1486 eksi 1472.",
+      "teachingNote": "14 mm fark — ve bu, işin baştan farklı bir kategoriye girdiğini söyleyen tek ölçümdür. Çaprazların eşit olmaması, kapı açıklığının dikdörtgenliğini kaybettiğini, yani gövdenin kendisinde bir değişim olduğunu gösterir. Kapı ne kadar düzgün onarılırsa onarılsın, oturacağı çerçeve çarpıksa sonuç tutmaz; ayar yalnız hatayı bir kenardan diğerine taşır. Buradan üç sonuç birden çıkar. Birincisi kapsamdır: iş artık 'kapı onarımı' değildir ve teklif de ona göre kurulmalıdır — hasarın görünen kısmı işin küçük parçasıdır. İkincisi sınırdır: çapraz ölçüm bir işaret verir, yapısal doğrulama vermez; aracın referans noktalarına göre gerçekte ne kadar saptığı gövde ölçüm sistemiyle belirlenir ve düzeltme yöntemi üreticinin onarım kılavuzundan okunur. Bu iki şey bu atölyede yoksa işin o kısmı burada yapılmaz. Üçüncüsü kanıttır: bu değer yazılır, çünkü onarımın sonunda aynı noktalar tekrar ölçülecek ve işin gerçekten düzelip düzelmediği bu karşılaştırmayla gösterilecektir. Karşı taraf da ölçülür — simetri, aracın kendi içinde taşıdığı en güvenilir referanstır ve dışarıdan hiçbir veri gerektirmez. Kabul edilebilir çapraz toleransı ve referans noktaları araca özgüdür; buradaki iki sayı senaryo okumasıdır."
+    },
+    {
+      "id": 3,
+      "instruction": "İç kaplamayı söktün: B direğinin alt bölgesinde ve eşik sacında hafif bir buruşma var, dışarıdan görünmüyordu.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.direk-b",
+        "question": "Bu bulgu işi nasıl değiştirir?",
+        "options": [
+          { "label": "Kökten değiştirir: hasar taşıyıcı yapıya ulaşmış demektir — bu noktadan sonra yöntem, kesim hattı, ısı kullanımı ve hangi elemanın değişeceği üreticinin onarım kılavuzuna aittir, ustanın tercihine değil", "verdict": "tasiyici-hasar", "correct": true, "explain": "Bu, bütün alanın en keskin karar noktası ve gözle görünenin neden yetmediğinin en iyi örneği. Dışarıdan bakan biri ezik bir kapı görür; iç kaplama söküldüğünde ortaya çıkan hafif buruşma ise bambaşka bir şey söyler — darbe enerjisi kapıda durmamış, direğe ve eşiğe geçmiştir. Hasar okuma dersinde geçen kural burada tam olarak işliyor: enerji girdiği yerde kalmaz, yapı boyunca ilerler ve en uygun yolu bulur. Buruşmanın 'hafif' görünmesi de yanıltıcıdır; taşıyıcı elemanlarda önemli olan görünen deformasyonun büyüklüğü değil, elemanın artık tasarlandığı gibi davranıp davranmayacağıdır. Buradan sonrası bu alanın kırmızı çizgisidir. Kesim hattı nerede olacak, hangi eleman düzeltilebilir hangisi değişmeli, hangi bölge kesinlikle kesilemez, birleştirme hangi yöntemle yapılacak — bunların hepsi araca özgüdür ve üreticinin onarım kılavuzunda tarif edilir. Kılavuz yoksa iş yapılmaz; kaynaklı parça dersindeki cümle burada da geçerlidir: eksik olan beceri değil, veridir. Bir de dürüstlük tarafı vardır — bu bulguyu görüp müşteriye söylememek, işi küçük göstererek almanın en tehlikeli biçimidir, çünkü sonucu bir kazada ortaya çıkar." },
+          { "label": "Değiştirmez, buruşma hafif; düzeltilip boyanır", "verdict": "hafif", "explain": "Taşıyıcıda ölçüt görünen büyüklük değil, elemanın davranışıdır." },
+          { "label": "Isıtılarak düzeltilir", "verdict": "isit", "explain": "Malzeme sınıfı bilinmeden ısı gündeme alınmaz." },
+          { "label": "Macunla düzlenip kapatılır", "verdict": "macun", "explain": "Macun mukavemet vermez, kaybı gizler." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Dışarıdan ezik bir kapı, içeriden taşıyıcı hasar. Bu noktadan sonra karar ustanın değil kılavuzun."
+    },
+    {
+      "id": 4,
+      "instruction": "Kılavuz temin edildi. Arka kapı değişecek, eşik bölgesinde kaynaklı bir onarım öngörülüyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.punta-noktasi",
+        "question": "Kaynağa başlamadan önce ne yapılır?",
+        "options": [
+          { "label": "Enerji kesilir ve kesildiği doğrulanır; yakıt sistemi, hava yastığı ve gergi birimleri ile varsa yüksek gerilim sistemi güvenceye alınır; kaynak dönüş kablosu iş noktasına yakın bağlanır ve bölgedeki yanıcı malzeme uzaklaştırılır", "verdict": "guvenlik-zinciri", "correct": true, "explain": "Kaynak, bu alanın geri dönüşü en zor işlemi olduğu için hazırlığı da en katı olanıdır ve dört ayrı başlık içerir. Birincisi enerjidir: araç enerjili durumdayken yapılan kaynak, akımın beklenmedik yollardan dönmesine yol açar; bu yol üzerindeki elektronik birimler zarar görebilir. Enerjinin kesildiği yalnız varsayılmaz, doğrulanır. İkincisi gaz üreteci içeren ve basınçlı birimlerdir — hava yastığı ve emniyet kemeri gergi birimleri ısı ve kıvılcıma yakın bırakılmaz; bunların sökümü ve saklanması bu dersin kapsamı dışındadır ve ayrı bir yetki ister. Üçüncüsü yakıt ve yanıcı malzemedir: hat, depo ve çevredeki döşeme ısı bölgesinden uzaklaştırılır ya da korunur. Dördüncüsü dönüş kablosunun bağlanma yeridir ve birleştirme dersinde geçtiği gibi en çok atlanan noktadır: kablo iş noktasına yakın bağlanmazsa akım kendi yolunu seçer ve o yol üzerindeki bir rulmandan ya da bağlantıdan geçebilir; sonucu aylar sonra ortaya çıkan bir arıza olur. Bu dördü tamamlandıktan sonra bile bir şey daha vardır: elektrikli araçta yüksek gerilim sistemi ayrı bir yetki alanıdır ve bu ders onu kapsamaz. Hangi birimin nasıl güvenceye alınacağı araca özgüdür ve kılavuzda yazar." },
+          { "label": "Doğrudan kaynağa başlanır, kısa bir işlem", "verdict": "dogrudan", "explain": "Kaynak akımı ve ısı kısa sürede kalıcı zarar üretir." },
+          { "label": "Yalnız akü sökülür, gerisi gerekmez", "verdict": "yalniz-aku", "explain": "Yakıt, gaz üreteci içeren birimler ve dönüş kablosu da ele alınır." },
+          { "label": "Dönüş kablosu araca herhangi bir yerden bağlanır", "verdict": "uzak-kablo", "explain": "Uzak bağlantıda akım kendi yolunu seçer." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Enerji, gaz üreteci içeren birimler, yakıt, dönüş kablosu. Dördü tamamlanmadan kaynağa başlanmaz."
+    },
+    {
+      "id": 5,
+      "instruction": "Yapısal onarım bitti. Şimdi geri kalan işin sırasını planlıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.esik-saci",
+        "question": "Doğru sıra nedir?",
+        "options": [
+          { "label": "Yapı → korozyon koruması ve dikiş sızdırmazlığı → yüzey hazırlığı → astar → boya → vernik → kürlenme → doğrulama ölçümü; koruma boyadan ÖNCE gelir çünkü kesilen her dikiş ve açılan her metal korunmadan kapatılmaz", "verdict": "dogru-sira", "correct": true, "explain": "Bu sıra, bu alanın bütün derslerinin özeti gibidir ve her adımı bir öncekinin üstüne oturur. Önce yapı düzelir, çünkü geometrisi bozuk bir gövdede yapılan hiçbir yüzey işi tutmaz — fuga oturmaz, panel hizalanmaz. Sonra koruma gelir ve bu, en çok atlanan adımdır: kaynakta kesilen dikişin sızdırmazlığı yenilenir, gövde boşluklarındaki koruma geri konur, açığa çıkan metal korunmadan bırakılmaz. Bunlar atlanırsa iş bir yıl sonra kabarma ve pas olarak döner — teşhis dersinde gördüğümüz tam olarak buydu. Sonra yüzey hazırlığı gelir: zımpara kademeleri atlanmadan, geçiş yeterince geniş açılarak, temizlik zımparadan sonra tekrarlanarak. Sonra astar, sonra boya, sonra vernik. En sonda kürlenme vardır ve bir bekleme değil, işin parçasıdır. Ve sıranın gerçek sonu boya değil, doğrulamadır: başta alınan çapraz ve fuga ölçümleri tekrarlanır, kalınlıklar okunur, su testi yapılır. 'Göz kararı düzgün duruyor' bir doğrulama değildir. Sırayı bozmanın tipik biçimi, işi görünür kısmından başlatmaktır — panel düzeltilip boyanır, koruma sonraya bırakılır ve sonra ulaşılamaz hâle gelir. Cıvatalı parça dersindeki ilke burada da geçerli: takıldıktan sonra ulaşılamayacak her yüzey, takılmadan önce halledilir." },
+          { "label": "Boya önce yapılır, koruma sonra eklenir", "verdict": "boya-once", "explain": "Kapatıldıktan sonra o yüzeylere ulaşılamaz." },
+          { "label": "Hazırlık atlanır, kalın astar telafi eder", "verdict": "kalin-astar", "explain": "Kalın astar zımpara izini ve dalgalanmayı gizlemez, büyütür." },
+          { "label": "Kürlenme beklenmez, araç teslim edilir", "verdict": "kurulme-yok", "explain": "Kürlenme işin parçasıdır; erken teslim iz ve şikâyet üretir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Koruma boyadan önce. Kapatıldıktan sonra ulaşılamayacak her yüzey, kapatılmadan önce halledilir."
+    },
+    {
+      "id": 6,
+      "instruction": "İş bitti. Müşteri aracı almaya geliyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.tasiyici-ayak",
+        "question": "İşin bittiğini ne kanıtlar?",
+        "options": [
+          { "label": "Başta alınan ölçümlerin tekrarlanması: çapraz ve fuga aynı noktalardan yeniden ölçülür, kalınlıklar okunur, su testi yapılır ve yapılan işlem ile kullanılan malzemeler kayda geçer — görünüş bir kanıt değildir", "verdict": "olcumle-kanit", "correct": true, "explain": "Bu alanın en önemli alışkanlığı burada kuruluyor: iş, 'bitti' denildiğinde değil, başlangıçtaki ölçümler tekrarlanıp karşılaştırıldığında biter. Üç sebebi var. Birincisi teknik: yapısal bir onarımda gözle değerlendirme yetersizdir — panel düzgün görünürken açıklık hâlâ birkaç milimetre çarpık olabilir ve bu, kapının zamanla oturmaması, contanın eşit basmaması ve su geçirmesi olarak döner. İkincisi öğrenmedir: ölçümü tekrarlamayan usta, yönteminin işe yarayıp yaramadığını hiçbir zaman öğrenmez; her iş bir öncekinin tekrarı olur. Üçüncüsü kayıttır ve müşteriyi de korur — hangi ölçüm alındı, hangi parça değişti, hangi bölge kaynaklandı, hangi koruma yenilendi, kürlenme için ne kadar beklenmesi gerekiyor. Bu kayıt, aracın gelecekteki her değerlendirmesinde işe yarar ve olası bir tartışmada tarafların elinde nesnel bir belge bırakır. Teslimde söylenmesi gereken iki şey daha vardır: kürlenme süresi boyunca ne yapılmaması gerektiği yazılı verilir, ve yapılan işin kapsamı açıkça anlatılır — komşu panele açılım yapıldıysa, taşıyıcı bölgede işlem yapıldıysa bunlar gizlenmez. Bu alanın bütün dersleri boyunca tekrarlanan cümle burada son kez geçerli: yapan da yapmayan da aynı görünen aracı teslim eder; fark, bir yıl sonra ortaya çıkar." },
+          { "label": "Aracın düzgün görünmesi", "verdict": "gorunum", "explain": "Görünüş, geometrinin ve korumanın kanıtı değildir." },
+          { "label": "Kapının rahat kapanması", "verdict": "kapi", "explain": "Kilit ayarıyla da kapanır; ölçüm gerekir." },
+          { "label": "Müşterinin memnun olması", "verdict": "memnuniyet", "explain": "Memnuniyet o günkü görüntüye dayanır." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "İş 'bitti' denince değil, baştaki ölçüm tekrarlanıp karşılaştırılınca biter. Görünüş kanıt değildir."
+    },
+    {
+      "id": 7,
+      "instruction": "Sınavın son sorusu.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kaput-kaporta",
+        "question": "Bu alanın ustalık ölçütü nedir?",
+        "options": [
+          { "label": "Neyi yapabileceğini bilmek kadar neyi yapmayacağını bilmek: kılavuz yoksa, malzeme sınıfı bilinmiyorsa, donanım yoksa ya da bölge taşıyıcıysa işin o kısmı reddedilir — ve bu karar müşteriye açıkça söylenir", "verdict": "sinir-bilgisi", "correct": true, "explain": "Bu alanın on aşaması boyunca öğrenilen her şey iki gruba ayrılıyor. Birinci grup beceriler: sacı okumak, göçüğün merkezini bulmak, doğru altlıkla çekiçlemek, macunu ince atmak, astarı zımparalamak, rengi kartla doğrulamak, tabancayı ayarlamak, kusuru derinliğine göre sınıflandırmak, suyun yolunu izlemek, fugayı ve çaprazı birlikte okumak. İkinci grup ise sınırlar: kılavuzsuz taşıyıcı yapıya dokunmamak, malzeme sınıfı bilinmiyorsa ısıyı gündeme almamak, kaynak öncesi enerjiyi kesip doğrulamak, korumasız metal bırakmamak, uygun solunum koruması olmadan püskürtmemek, bekleme süresini tahmin etmemek, pasın üstünü kapatmamak, belirtiyi susturmamak. İkinci grup, birincisinden daha zor öğrenilir çünkü her biri kısa vadede iş kaybı gibi görünür. Ama bu alanın tekrar eden cümlesi tam olarak bunu anlatıyor: reddedilen iş, kötü yapılan işten ucuzdur. Ve buna eşlik eden ikinci cümle: bu işin büyük kısmı teslim gününde görünmez — koruma, sızdırmazlık, kürlenme, hazırlık. Yapan usta ile yapmayan usta aynı gün aynı görünen aracı teslim eder ve aynı faturayı keser; fark, aracın bir yıl sonra hangi hâlde olacağıdır. Ustalık, o farkı görülmediği hâlde yapmaktır. Kaporta alanı burada tamamlandı." },
+          { "label": "Her işi yapabilmek", "verdict": "her-is", "explain": "Sınır tanımayan usta gecikmeli hasar üretir." },
+          { "label": "En hızlı ve en ucuz sonucu vermek", "verdict": "hiz", "explain": "Hızın bedelini görünmeyen adımlar öder." },
+          { "label": "Müşteriyi her durumda memnun etmek", "verdict": "memnuniyet", "explain": "Bugünkü memnuniyet bir yıl sonrasının teminatı değildir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Ustalık, farkı görülmediği hâlde yapmak. Beceriden zor öğrenilen şey sınırdır."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Kapı açıklığının çaprazları arasında belirgin fark var. Bu ne demektir?",
+        "a": "tasiyici-hasar",
+        "options": [
+          { "verdict": "tasiyici-hasar", "label": "Gövdenin geometrisi değişmiştir: iş artık kapı onarımı değildir ve yöntem üreticinin onarım kılavuzuna, doğrulama gövde ölçüm sistemine aittir", "explain": "Çarpık bir açıklıkta kapı ayarı hatayı bir kenardan diğerine taşır. Çapraz ölçüm bir işaret verir, yapısal doğrulama vermez. Karşı taraf da ölçülür; simetri aracın kendi içindeki en güvenilir referanstır ve değerler onarım sonrası tekrarlanmak üzere yazılır." },
+          { "verdict": "hafif", "label": "Hafif sapmadır, ayarla kapanır", "explain": "Ayar hatayı yalnız taşır." },
+          { "verdict": "isit", "label": "Isıtılarak düzeltilir", "explain": "Malzeme sınıfı bilinmeden ısı gündeme alınmaz." },
+          { "verdict": "macun", "label": "Macunla düzlenir", "explain": "Macun mukavemet vermez." }
+        ]
+      },
+      {
+        "q": "Yapısal onarımdan sonra doğru iş sırası nedir?",
+        "a": "dogru-sira",
+        "options": [
+          { "verdict": "dogru-sira", "label": "Yapı → korozyon koruması ve dikiş sızdırmazlığı → yüzey hazırlığı → astar → boya → vernik → kürlenme → doğrulama ölçümü", "explain": "Koruma boyadan önce gelir: kesilen her dikiş ve açığa çıkan her metal korunmadan kapatılmaz, çünkü kapatıldıktan sonra o yüzeylere ulaşılamaz. Atlanırsa iş bir yıl sonra kabarma ve pas olarak döner. Sıranın sonu boya değil, baştaki ölçümlerin tekrarıdır." },
+          { "verdict": "boya-once", "label": "Önce boya, sonra koruma", "explain": "Kapatılan yüzeye ulaşılamaz." },
+          { "verdict": "kalin-astar", "label": "Hazırlık atlanır, kalın astar telafi eder", "explain": "Kalın astar dalgalanmayı büyütür." },
+          { "verdict": "kurulme-yok", "label": "Kürlenme beklenmeden teslim edilir", "explain": "Erken teslim kalıcı iz üretir." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2'deki 1486 mm ve 1472 mm SENARYO okumalarıdır; istenen FARKTIR (14 mm). Ders hiçbir araç için kabul edilebilir çapraz toleransı iddia etmiyor.",
+    "sourceRequired": "Çapraz ölçüm referans noktaları ve toleransları, kesim hatları ve kesilemeyecek bölgeler, malzeme sınıfları ve ısıtma yasakları, birleştirme yöntemi ve punta düzeni, tork değerleri ve tek kullanımlık bağlantı elemanları, korozyon koruması ve dikiş sızdırmazlığı malzemeleri, hava yastığı ve gergi birimlerinin güvenceye alınma yöntemi ile kürlenme süreleri bilinçle VERİLMEDİ; hepsi araca ve ürüne özgüdür ve üreticinin onarım kılavuzundan okunur.",
+    "kapsam": "Şasi çekme, gövde ölçüm sistemiyle yapısal doğrulama, hava yastığı ve gergi birimlerinin sökümü ile saklanması, ADAS kalibrasyonu ve elektrikli araçta yüksek gerilim müdahalesi KAPSAM DIŞIDIR; ders okuma, karar, sıra ve sınırı öğretiyor.",
+    "kaynak": "Bu alan kullanıcının açık talebiyle eklendi (talep birebir: 'birde alanlara kaportayı ekleyelim'); konu başlıkları MEB Otomotiv Gövde ve Boya dalının çerçevesini takip ediyor, kazanım numarası iddiası yok.",
+    "reviewedByMechanic": false
+  }
+}

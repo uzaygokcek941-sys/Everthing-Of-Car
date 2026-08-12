@@ -1,0 +1,176 @@
+{
+  "id": "aksesuar.uzaktan-kumanda",
+  "area": "aksesuar-ses",
+  "stage": 1,
+  "title": "Uzaktan Kumanda, Alıcı ve Immobilizer Sınırı",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 30,
+  "prerequisites": ["aksesuar.merkezi-kilit"],
+  "learningGoals": [
+    "Uzaktan kumandanın kilit zincirinin neresinde durduğunu bilmek",
+    "Kumanda arızasını menzil, pil, alıcı ve modül olarak ayırmak",
+    "Immobilizer sınırını tanımak ve orada durmak"
+  ],
+
+  "safety": [
+    { "rule": "Anahtar ve kumanda müşteride kaç adet var, işe başlamadan yazılır", "why": "Bazı araçlarda yeni anahtar tanıtma işlemi mevcut anahtarların tamamını siler; sayılmadan başlanan iş müşteriyi ikinci anahtarsız bırakır", "blocksStart": true },
+    { "rule": "Immobilizer ve anahtar tanıtma işlemine bu uygulamada girilmez", "why": "Yetkisiz anahtar tanıtma hem aracın güvenlik sistemini devre dışı bırakabilir hem de hukuki sorumluluk doğurur; iş yetkili servisin ve belgeli kişinin işidir", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.multimetre", "label": "Multimetre", "required": true },
+    { "id": "tool.plastik-sokme-spatulasi", "label": "Plastik söküm spatulası", "required": false },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Zincirin başına dönüyorsun. Kumanda tuşuna basıldığında ne oluyor?",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.anten",
+        "question": "Uzaktan kumanda zincirin neresindedir?",
+        "options": [
+          { "label": "En başındadır: yalnız isteği taşır. Kumanda bir radyo vericisidir, araçtaki alıcı onu duyar ve modüle iletir; kilitleyen şey hâlâ kapıdaki motordur", "verdict": "istek-kaynagi", "correct": true, "explain": "Uzaktan kumanda anlaşıldığında merkezî kilit arızalarının yarısı kendiliğinden ayrışır. Kumanda küçük bir radyo vericisidir; tuşa basıldığında kısa bir mesaj yayınlar. Araçta bu mesajı dinleyen bir alıcı vardır — bazı araçlarda ayrı bir modül, bazılarında gövde modülünün içinde, bazılarında camdaki ya da tavandaki bir antene bağlı. Alıcı mesajı doğrular ve modüle 'kilitle' ya da 'aç' isteğini iletir. Bundan sonrası önceki derste öğrenilen zincirdir: modül her kapıdaki motora enerji gönderir. Buradan çıkan pratik sonuç şudur: kumandayla ilgili bir arıza asla kapı motorlarını etkilemez. Düğmeyle kilitleniyor ama kumandayla kilitlenmiyorsa motorlar, modül çıkışları, sigorta ve besleme sağlamdır — sorun kesinlikle zincirin ilk üç halkasındadır: kumandanın kendisi, radyo yolu ya da alıcı. Tersi de doğrudur: kumandayla çalışıp düğmeyle çalışmıyorsa alıcı ve modül sağlamdır. Bu tek gözlem, sökülecek kapı sayısını sıfıra indirebilir." },
+          { "label": "Sonundadır: kumanda kilidi doğrudan çeker", "verdict": "dogrudan", "explain": "Kumanda hiçbir mekanik parçaya bağlı değildir; yalnız mesaj yayınlar." },
+          { "label": "Kumanda motorlara doğrudan enerji gönderir", "verdict": "enerji", "explain": "Enerjiyi modül gönderir; kumandanın pili yalnız vericiyi besler." },
+          { "label": "Kumanda ile immobilizer aynı şeydir", "verdict": "ayni", "explain": "Ayrı sistemlerdir; biri kilidi açar, diğeri motorun çalışmasına izin verir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Kumanda yalnız istek taşır. Bu cümle 'kumandayla olmuyor' şikâyetinde zincirin dörtte üçünü tek hamlede eliyor."
+    },
+    {
+      "id": 2,
+      "instruction": "Müşteri 'kumanda bazen çalışıyor bazen çalışmıyor' diyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kapi-modulu",
+        "question": "İlk sorulacak sorular hangileri?",
+        "options": [
+          { "label": "Nerede çalışmıyor, ne kadar mesafeden, hangi tuş, kaç kumanda var ve diğeri de aynı mı — çünkü ikinci kumanda hazır bir karşılaştırma aracıdır", "verdict": "sorular", "correct": true, "explain": "Aralıklı arızalarda soru sormak ölçüm yapmaktan daha hızlıdır. Beş soru ayırt edicidir. Birincisi yer: yalnız belirli bir yerde mi olmuyor? Radyo yolu ortama duyarlıdır; bazı otoparklar, alışveriş merkezleri ve yüksek gerilim hatlarının yakını yayın karışması üretir ve orada hiçbir kumanda çalışmaz — bu bir arıza değildir ve parça değiştirmek çözmez. İkincisi mesafe: eskiden on metreden çalışıp şimdi bir metreden çalışıyorsa bu kademeli bir zayıflamadır ve neredeyse her zaman pildir. Üçüncüsü tuş: yalnız bir tuş mu çalışmıyor? O zaman sorun radyo yolunda değil, kumandanın içindeki o tuşun temasındadır — sıvı girmiş ya da tuş yastığı aşınmış olabilir. Dördüncüsü kaç kumanda var. Beşincisi ve en değerlisi: ikinci kumanda da aynı davranıyor mu? İkincisi sorunsuz çalışıyorsa alıcı ve modül sağlamdır, arıza birinci kumandadadır. İkincisi de aynıysa şüphe araç tarafına, alıcıya döner. Bu beş soru hiçbir alet gerektirmez ve çoğu vakayı bitirir." },
+          { "label": "Doğrudan alıcı modülü değiştirilir", "verdict": "alici-degistir", "explain": "Aralıklı arızada en pahalı parçayla başlamak tahmindir." },
+          { "label": "Kapı sökülür", "verdict": "sok", "explain": "Kumanda arızası kapıdaki motorlarla ilgisizdir." },
+          { "label": "Akü değiştirilir", "verdict": "aku", "explain": "Zayıf akü kumandayı seçici biçimde etkilemez." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "İkinci kumanda bedava bir test cihazıdır. Müşterinin cebinde duran bu araç, çoğu zaman en hızlı ayırıcıdır."
+    },
+    {
+      "id": 3,
+      "instruction": "Kumandayı açtın, pilin üzerindeki gerilimi ölçtün: yeni pil 3,1 V, mevcut pil 2,5 V. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.multimetre-aksesuar",
+        "unit": "V",
+        "acceptRange": [0.55, 0.65]
+      },
+      "camera": "aksesuar",
+      "hint": "3,1 eksi 2,5.",
+      "teachingNote": "0,6 voltluk bu fark kumanda pillerinin en yanıltıcı özelliğini gösteriyor: pil bittiğinde birden ölmez, gerilimi düşer ve verici zayıflar. Sonuç aralıklı çalışmadır — yakından çalışır, uzaktan çalışmaz, soğukta hiç çalışmaz. Soğuk vurgusu önemlidir: kimyasal pillerin iç direnci soğukta artar, bu yüzden 'yalnız sabahları olmuyor' şikâyeti çoğu zaman pildir. Ölçümün püf noktası şudur: pil TAKILIYKEN ve tuşa basılırken ölçülmelidir; boştaki bir pil neredeyse her zaman iyi görünür, çünkü zayıflığı ancak akım çekildiğinde ortaya çıkar. Pil tipi ve kabul edilebilir asgari gerilim üreticiye özgüdür ve bu ders bir sınır vermiyor; ölçülen şey yeni pille eski pil arasındaki farktır. Pil değişirken kumandanın contası ve kapağı düzgün oturtulur — gevşek kapak nem alır ve devreyi yer."
+    },
+    {
+      "id": 4,
+      "instruction": "Pil yeni, yine de çalışmıyor. Kumandanın devre kartına bakıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kapi-saci",
+        "question": "Kumandanın kendisinde en sık ne bozulur?",
+        "options": [
+          { "label": "Tuş temasları ve pil yayları: aşınma, kir ve nem yüzünden temas kesilir; ikinci sırada devre kartındaki lehim çatlağı gelir", "verdict": "temas", "correct": true, "explain": "Kumanda cebe girer, düşer, terler, yıkanır ve her gün onlarca kez basılır; arızalarının çoğu bu fiziksel ömürden doğar. Birinci sıradaki sebep tuş temasıdır: tuşun altındaki iletken yastık aşınır ya da üzerine biriken kir teması engeller; belirti bir tuşun çalışmaması ya da çok kuvvetli basınca çalışmasıdır. İkinci sebep pil yaylarıdır — oksitlenen ya da yorulan yay pili tam tutmaz, kumanda sallandığında ya da düştüğünde bağlantı kesilir; belirti tam olarak 'bazen çalışıyor'dur. Üçüncü sebep lehim çatlağıdır: düşen bir kumandada kartın üzerindeki bir bacak çatlar ve arıza sıcaklıkla açılıp kapanır. Dördüncüsü sıvıdır; içeri giren su ya da ter kart üzerinde iz bırakır ve zamanla bakırı yer. Kontrol sırası ucuzdan pahalıya işler: önce pil ve yaylar, sonra tuş yüzeyi ve temas yastığı, sonra kart görsel olarak — çatlak lehim ve yeşil oksit izleri çıplak gözle görülür. Bu kontrollerin hiçbiri parça gerektirmez ve çoğu vakayı burada bitirir. Kartın kendisi bozuksa kumanda değişir ve o noktada araca tanıtma gerekir — orası bu dersin sınırıdır." },
+          { "label": "Anten kablosu kopar", "verdict": "anten", "explain": "Kumandanın anteni kartın üzerindedir; kopması nadirdir." },
+          { "label": "Kumanda yazılımı bozulur", "verdict": "yazilim", "explain": "Kumandanın kodu kalıcıdır; kendiliğinden bozulması beklenmez." },
+          { "label": "Kumandalar zamanla frekans kaydırır", "verdict": "frekans", "explain": "Frekans sabittir; zayıflayan şey vericinin gücüdür." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "'Bazen çalışıyor' cümlesinin arkasında en sık pil yayı vardır. Bedava kontrol, sık sonuç."
+    },
+    {
+      "id": 5,
+      "instruction": "İki kumanda da çalışmıyor, piller yeni. Şüphe araç tarafına geçti.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.haberlesme-hatti",
+        "question": "Araç tarafında hangi ihtimaller var ve sıralama nedir?",
+        "options": [
+          { "label": "Önce alıcının beslemesi ve şasesi, sonra anten bağlantısı, sonra alıcı modülünün kendisi — ve her şeyden önce araçta bir yayın karışması olup olmadığı", "verdict": "besleme-once", "correct": true, "explain": "İki kumandanın birden çalışmaması araç tarafını işaret eder ama hangi parçayı işaret ettiğini söylemez; sıra yine ucuzdan pahalıya kurulur. Sıfırıncı adım ortamdır: aracı başka bir yere çekip denemek. Atölyenin içindeki bir kaynak makinesi, bir şarj cihazı ya da yakındaki bir verici, aracın alıcısını sağırlaştırabilir ve bu bir arıza değildir; araç yer değiştirince çalışıyorsa iş bitmiştir. Birinci adım alıcının beslemesi ve şasesidir — alıcı çoğu araçta gövde modülünün bir parçasıdır ya da ona bağlıdır; besleme yoksa hiçbir kumanda duyulmaz. İkinci adım anten yoludur: bazı araçlarda alıcı, cama ya da tavana gömülü bir antene ince bir kabloyla bağlanır ve o kablonun soketi döşeme sökümlerinde sık sık çıkarılıp takılmadan bırakılır — menzilin birden düşmesi bunun tipik belirtisidir. Üçüncü adım alıcı modülüdür ve sona bırakılır, çünkü hem pahalıdır hem de birçok araçta değiştikten sonra araca tanıtılması gerekir. Dördüncü ve unutulan ihtimal: araç bir 'öğrenme' durumundan çıkamamış ya da aküsü uzun süre sökük kalmış olabilir; bazı araçlarda bu durum sistemin yeniden eşleşmesini gerektirir ve bu işlem üretici yöntemine göre yapılır." },
+          { "label": "Doğrudan alıcı modülü değiştirilir", "verdict": "modul", "explain": "Besleme, şase ve anten bakılmadan pahalı parça değişmez." },
+          { "label": "Bütün kapı motorları değiştirilir", "verdict": "motorlar", "explain": "Düğmeyle çalışıyorsa motorlar sağlamdır." },
+          { "label": "Araç yazılımı güncellenir", "verdict": "yazilim", "explain": "Bu kapsam dışıdır ve belirtiyi açıklamaz." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Sıfırıncı adım: aracı başka yere çek. Bedava, hızlı ve bazı vakalarda tek gereken şey."
+    },
+    {
+      "id": 6,
+      "instruction": "Kumanda kilidi açıyor ama araç çalışmıyor. Gösterge panelinde bir uyarı yanıyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kapi-modulu",
+        "question": "Bu iki sistem aynı mı?",
+        "options": [
+          { "label": "Hayır: kilit kumandası kapıyı açar, immobilizer motorun çalışmasına izin verir; ikisi ayrı sistemdir ve immobilizer bu uygulamanın sınırıdır", "verdict": "ayri-sistem", "correct": true, "explain": "Bu ayrım hem teknik hem hukuki olarak önemlidir. Uzaktan kumanda konfor sistemidir: kapıyı kilitler ve açar, olmasa da araç çalışır. Immobilizer ise bir hırsızlık önleme sistemidir ve motorun çalışmasına izin verme kararını verir; anahtarın içindeki ya da anahtara gömülü bir çipin araca tanıtılmış olmasını arar, tanımıyorsa yakıt ya da ateşleme verilmez. Çoğu araçta ikisi aynı anahtarın gövdesinde bulunur ve bu yüzden karıştırılır — ama biri çalışıp diğeri çalışmayabilir. Kilit açılıyor ama araç çalışmıyorsa kumandanın vericisi ve alıcısı sağlamdır; sorun immobilizer tarafındadır. Bu noktada bu uygulamanın kırmızı çizgisi devreye girer: anahtar tanıtma, çip kopyalama ya da immobilizer devre dışı bırakma işlemleri burada öğretilmez. Sebebi ikilidir. Teknik sebep: birçok araçta tanıtma işlemi mevcut bütün anahtarları siler ve yanlış yapılan bir işlem aracı hiç çalışmaz hâle getirir. Hukuki sebep: aracın hırsızlık korumasını yetkisiz biçimde aşmak sorumluluk doğurur ve müşterinin kim olduğunu doğrulama yükümlülüğü vardır. Ustanın burada yapacağı şey bellidir: belirtiyi doğru adlandırır, immobilizer olduğunu söyler ve yetkili servise yönlendirir. Sınırı bilmek de bir ustalıktır." },
+          { "label": "Evet, aynı sistemin iki adıdır", "verdict": "ayni", "explain": "Aynı anahtarda bulunmaları aynı sistem oldukları anlamına gelmez." },
+          { "label": "Immobilizer sökülüp iptal edilebilir", "verdict": "iptal", "explain": "Hırsızlık korumasının iptali bu uygulamanın kırmızı çizgisidir." },
+          { "label": "Kumanda pili değişirse düzelir", "verdict": "pil", "explain": "Kilit zaten açılıyor; pil sağlamdır." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "İkinci kırmızı çizgi ailesine bir üye: immobilizer. Uygulama sınırı öğretiyor, sınırın ötesini değil."
+    },
+    {
+      "id": 7,
+      "instruction": "Müşteri 'ikinci bir kumanda daha istiyorum' diyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.anten",
+        "question": "Ne yapılır?",
+        "options": [
+          { "label": "Mevcut anahtar sayısı ve aracın tanıtma yöntemi öğrenilir; işlem üreticiye özgüdür ve mevcut anahtarları silme riski taşır — bu uygulama işlemi öğretmiyor, riski ve yönlendirmeyi öğretiyor", "verdict": "riski-anlat", "correct": true, "explain": "Yeni kumanda ekleme masum bir istek gibi görünür ama üç gerçek risk taşır ve ustanın görevi bunları müşteriye söylemektir. Birinci risk silmedir: birçok araçta tanıtma işlemi 'mevcut listeyi sil, yeniden yaz' biçiminde çalışır; yani yeni anahtar tanıtılırken müşterinin evdeki yedek anahtarı geçersiz hâle gelir. Bu yüzden işe başlamadan önce müşterinin kaç anahtarı olduğu sorulur ve HEPSİNİN getirilmesi istenir. İkinci risk kilitlenmedir: bazı araçlar arka arkaya başarısız denemelerden sonra bir süre işlem kabul etmez ya da yanlış yöntemle sistem kilitlenir ve araç çalışmaz hâle gelir — o noktada iş yetkili servise gider ve maliyet katlanır. Üçüncü risk sorumluluktur: aracın kime ait olduğu doğrulanmadan anahtar çoğaltmak hem etik hem hukuki bir sorundur; ruhsat ve kimlik istenmesi bir güvensizlik değil, mesleğin gereğidir. Bu uygulama tanıtma işleminin adımlarını öğretmiyor çünkü işlem araca özgüdür ve yanlış aktarılan bir adım doğrudan zarar üretir. Öğrettiği şey şudur: riski bil, doğru soruyu sor, sınırı söyle ve yetkili yere yönlendir. Kumandanın pil ve tuş bakımı ise tamamen bu alanın işidir ve müşteriye orada gerçek fayda sağlanır." },
+          { "label": "İnternetten uygun kumanda alınıp tanıtılır", "verdict": "internet", "explain": "Tanıtma yöntemi ve uyumluluk araca özgüdür; yanlış işlem mevcut anahtarları silebilir." },
+          { "label": "Eski kumanda kopyalanır", "verdict": "kopyala", "explain": "Kopyalama immobilizer sınırına girer ve bu uygulamada öğretilmez." },
+          { "label": "Gerek yok, tek kumanda yeterlidir", "verdict": "gereksiz", "explain": "Müşterinin ihtiyacı geçerlidir; verilecek cevap risk ve yönlendirmedir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Aşama 1'in son dersi kapı körüğü: kumanda ve modül sağlamken kabloyu koparan yer orası."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Düğmeyle kilitleniyor ama uzaktan kumandayla kilitlenmiyor. Ne anlaşılır?",
+        "a": "istek-kaynagi",
+        "options": [
+          { "verdict": "istek-kaynagi", "label": "Kapı motorları, modül çıkışları, sigorta ve besleme sağlamdır; arıza kumanda, radyo yolu ya da alıcıdadır", "explain": "Uzaktan kumanda zincirin yalnız ilk halkasıdır: bir radyo vericisidir, araçtaki alıcı mesajı duyar ve modüle iletir. Kilitleyen şey hâlâ kapıdaki motordur. Düğme çalışıyorsa zincirin kapı tarafı çalışıyor demektir, bu yüzden hiçbir kapıyı sökmeye gerek yoktur." },
+          { "verdict": "dogrudan", "label": "Kumanda kilidi doğrudan çeker", "explain": "Kumandanın mekanik bağlantısı yoktur." },
+          { "verdict": "enerji", "label": "Kumanda motorlara enerji gönderir", "explain": "Enerjiyi modül gönderir." },
+          { "verdict": "ayni", "label": "Kumanda ile immobilizer aynı şeydir", "explain": "Ayrı sistemlerdir." }
+        ]
+      },
+      {
+        "q": "Kumanda kilidi açıyor ama araç çalışmıyor. Bu hangi sistemdir ve ne yapılır?",
+        "a": "ayri-sistem",
+        "options": [
+          { "verdict": "ayri-sistem", "label": "Immobilizer — ayrı bir sistemdir ve bu uygulamanın sınırıdır; belirti doğru adlandırılır ve yetkili servise yönlendirilir", "explain": "Kilit kumandası kapıyı açar, immobilizer motorun çalışmasına izin verir; ikisi aynı anahtar gövdesinde bulunsa da ayrı sistemlerdir. Kilit açılıyorsa verici ve alıcı sağlamdır. Anahtar tanıtma, çip kopyalama ve immobilizer iptali burada öğretilmez: yanlış işlem mevcut anahtarları siler ya da aracı çalışmaz bırakır, ayrıca hırsızlık korumasını yetkisiz aşmak sorumluluk doğurur." },
+          { "verdict": "ayni", "label": "Aynı sistemin iki adıdır", "explain": "Ayrı sistemlerdir." },
+          { "verdict": "iptal", "label": "Immobilizer iptal edilir", "explain": "Kırmızı çizgidir." },
+          { "verdict": "pil", "label": "Kumanda pili değiştirilir", "explain": "Kilit zaten açılıyor." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 3,1 V ve 2,5 V SENARYO okumalarıdır; istenen FARKTIR (0,6 V) ve ders bir asgari pil gerilimi sınırı vermiyor. Pil tipi ve sınır üreticiye özgüdür.",
+    "sourceRequired": "Kumanda pil tipi ve asgari gerilimi, çalışma frekansı, menzil değeri, alıcı besleme gerilimi ve anahtar tanıtma yöntemi bilinçle VERİLMEDİ; hepsi araca ve üreticiye özgüdür.",
+    "kapsam": "Anahtar tanıtma, çip kopyalama, immobilizer iptali ve modül kodlama KAPSAM DIŞIDIR ve öyle kalacaktır — ders yalnız sınırı, riski ve yönlendirmeyi öğretiyor. Uzaktan kumanda ve alıcı modülü sahnede modellenmedi; adım hedefleri mevcut parçalara bağlandı ve bileşenler metinde anlatıldı.",
+    "reviewedByMechanic": false
+  }
+}

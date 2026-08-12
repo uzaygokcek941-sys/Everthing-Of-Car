@@ -1,0 +1,177 @@
+{
+  "id": "elektrik.devre-elemanlari",
+  "area": "arac-elektrik",
+  "stage": 2,
+  "title": "Devrenin Dört Parçası: Kaynak, Koruma, İletken, Tüketici",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 25,
+  "prerequisites": ["elektrik.multimetre-gerilim", "elektrik.multimetre-akim"],
+  "learningGoals": [
+    "Her devrede aynı dört parçayı ve dönüş yolunu görmek",
+    "Açık devre ile kısa devrenin belirtilerini birbirinden ayırmak",
+    "Yolda kaybolan gerilimi ölçerek kötü bağlantıyı görünür kılmak"
+  ],
+
+  "safety": [
+    { "rule": "Devreye enerji vermeden önce dönüş yolunun nereden geçtiği bilinir", "why": "Şase bağlantısı yanlış bir noktaya alınırsa akım hesapta olmayan bir yoldan döner. Bu yol çoğu zaman ince bir kablo, bir boru ya da bir tel olur ve o parça ısınır. Araç yangınlarının bir kısmı buradan çıkar", "blocksStart": true },
+    { "rule": "Sigortası çıkarılmış bir devre besleme atlatılarak çalıştırılmaz", "why": "Sigortayı atlayarak kablo doğrudan beslenirse devrenin tek koruması ortadan kalkar. Kısa devre hâlinde akımı kesecek bir şey kalmaz ve kablo yalıtımı erir", "blocksStart": true },
+    { "rule": "Ölçüm probları devrede unutulmaz", "why": "Unutulan bir prob, kaput kapandığında ya da parça hareket ettiğinde iki noktayı birbirine köprüler. Bu, ölçüm bittikten sonra ortaya çıkan bir kısa devredir", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.multimetre", "label": "Dijital multimetre", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Tezgâhta far devresi kurulu: akü, sigorta kutusu, kablo demeti, far ve şase bağlantısı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kablo-demeti",
+        "question": "Bu devrede hangi parça hangi işi yapıyor?",
+        "options": [
+          { "label": "Akü kaynak, sigorta koruma, kablo ve şase iletken, far tüketici; akım aküden çıkar ve akünün diğer ucuna geri döner", "verdict": "dort-parca", "correct": true, "explain": "Araçtaki her devre aynı dört parçadan kurulur ve bu dördü tanıdığında hiç görmediğin bir devreyi de okuyabilirsin. Kaynak enerjiyi verir: akü ya da alternatör. Koruma bir sorun çıktığında yolu keser: sigorta ya da devre kesici. İletken enerjiyi taşır: artı taraftaki kablo ve dönüşteki şase. Tüketici enerjiyi işe çevirir: lamba ışığa, motor harekete, ısıtıcı ısıya. Beşinci bir unsur da vardır: kumanda, yani anahtar ya da röle. En sık atlanan nokta şudur — akım tüketiciye gitmekle kalmaz, kaynağa geri dönmek zorundadır. Dönüş yolu araçta genellikle gövdenin kendisidir ve arızaların büyük kısmı tam olarak orada, dönüş tarafındadır." },
+          { "label": "Far kaynak, akü tüketicidir", "verdict": "ters", "explain": "Enerjiyi veren akü, harcayan fardır. Ters okumak bütün teşhisi ters çevirir." },
+          { "label": "Sigorta akımı üretir", "verdict": "sigorta-uretir", "explain": "Sigorta üretmez, gerektiğinde keser. Koruma parçasıdır." },
+          { "label": "Şase yalnız gövdeyi tutar, elektrikle ilgisi yoktur", "verdict": "sase-mekanik", "explain": "Şase bu devrenin dönüş iletkenidir; elektriksel olarak kablo kadar önemlidir." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Kaynak, koruma, iletken, tüketici ve dönüş yolu. Bir arıza aramaya başladığında ilk iş, bu beşinin bu devrede nerede olduğunu göstermektir."
+    },
+    {
+      "id": 2,
+      "instruction": "Far yanmıyor. İki farklı arıza tipi düşünüyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.far-ampulu",
+        "question": "Açık devre ile kısa devre belirti olarak nasıl ayrılır?",
+        "options": [
+          { "label": "Açık devrede yol kesiktir, akım akmaz ve sigorta sağlam kalır; kısa devrede akım tüketiciyi atlayarak döner, akım fırlar ve sigorta atar", "verdict": "acik-kisa-ayrimi", "correct": true, "explain": "Açık devre, yolun bir yerinden kopmasıdır: kopmuş kablo, atmış sigorta, yanmış ampul, çıkmış soket. Akım hiç akmaz, tüketici çalışmaz ve sigorta sağlam kalır — çünkü sigortayı attıracak bir akım yoktur. Kısa devre tam tersidir: akım tüketiciye uğramadan, dirençsiz bir yoldan kaynağa döner. Direnç neredeyse sıfır olduğu için akım fırlar ve sigorta görevini yaparak devreyi keser. Bu yüzden 'sigorta atıyor' şikâyeti ile 'hiç çalışmıyor' şikâyeti seni iki farklı yöne gönderir: biri temas ve kopukluk arar, diğeri yalıtımı sıyrılmış ve gövdeye değen bir kablo arar. İkisini karıştırmak, aramayı yanlış yerden başlatır." },
+          { "label": "İkisi de aynı belirtiyi verir, ayrılamaz", "verdict": "ayni", "explain": "Ayrılırlar: sigortanın atıp atmadığı tek başına yönü belirler." },
+          { "label": "Açık devrede sigorta atar", "verdict": "acikta-sigorta", "explain": "Açık devrede akım akmaz; sigortayı attıracak bir akım yoktur." },
+          { "label": "Kısa devrede tüketici daha parlak çalışır", "verdict": "parlak", "explain": "Kısa devrede akım tüketiciye uğramaz; tüketici hiç çalışmaz." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Sigorta sana ilk bilgiyi bedava verir: atmışsa fazla akım geçmiştir, sağlamsa yol kesiktir. Daha hiçbir alet bağlamadan aramanın yönünü seçmiş olursun."
+    },
+    {
+      "id": 3,
+      "instruction": "Devreye kumanda anahtarı eklenecek. Anahtarın yeri tartışılıyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sigorta.1",
+        "question": "Kumanda anahtarı devrenin neresine konur?",
+        "options": [
+          { "label": "Artı taraf üzerinde, sigortadan sonra ve tüketiciden önce; şase tarafına konmaz", "verdict": "arti-tarafta", "correct": true, "explain": "Anahtar kapalıyken tüketici üzerinde gerilim bulunmaması istenir. Anahtar artı tarafa konursa kapalı konumda besleme kesilir ve tüketicinin uçlarında gerilim kalmaz; bir kabloya dokunulduğunda ya da soket ayrıldığında beklenmedik bir enerji bulunmaz. Şase tarafına konan anahtar da lambayı söndürür — akım yolu yine kesiktir — ama besleme tüketicinin ucuna kadar canlı kalır. Sıyrılmış bir yalıtım orada gövdeye değerse anahtar kapalıyken bile kısa devre olur. Sigortanın anahtardan önce olmasının sebebi de aynıdır: koruma, koruduğu yolun en başında durur." },
+          { "label": "Şase tarafına konur, daha güvenlidir", "verdict": "sase-tarafi", "explain": "Tam tersi: şase tarafındaki anahtar, tüketiciye kadar olan bütün yolu canlı bırakır." },
+          { "label": "Fark etmez, devre iki türlü de çalışır", "verdict": "farketmez", "explain": "Çalışması aynıdır ama güvenliği aynı değildir; kural buradan gelir." },
+          { "label": "Sigortadan önce konur", "verdict": "sigortadan-once", "explain": "O zaman sigorta yalnız anahtar kapalıyken korur; koruma her zaman yolun başında olur." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Sıra hep aynı mantığı taşır: koruma en başta, kumanda ortada, tüketici sonda, dönüş şaseden. Bir şemayı bu sırayla okumaya başlarsan çoğu devreyi ezberlemeden anlarsın."
+    },
+    {
+      "id": 4,
+      "instruction": "Far yanıyor ama sönük. Akü kutbunda 12,40 V ölçtün. Ampulün uçlarında ise 11,90 V okuyorsun. Aradaki farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.multimetre-ekran",
+        "unit": "V",
+        "acceptRange": [0.45, 0.55]
+      },
+      "camera": "tezgah",
+      "hint": "12,40 eksi 11,90.",
+      "teachingNote": "Bu yarım volt kaybolmadı; yolun üzerinde harcandı. Gerilim, akımın geçtiği her direncin üzerinde bir miktar düşer ve sağlıklı bir devrede kablonun direnci çok küçük olduğu için bu düşüş neredeyse hiç yoktur. Ölçülebilir bir kayıp varsa yolda olmaması gereken bir direnç var demektir: gevşemiş soket, korozyonlu kutup, ezilmiş kablo ya da paslanmış şase noktası. Ampulün sönük yanmasının sebebi budur — üzerine düşen gerilim azalmıştır. Aşama 9'daki gerilim düşümü testi bu ölçümün sistemli hâlidir."
+    },
+    {
+      "id": 5,
+      "instruction": "Kaybın nerede olduğunu bulacaksın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sase-noktasi",
+        "question": "Kaybı bulmak için ölçüm nasıl daraltılır?",
+        "options": [
+          { "label": "Devre çalışırken parça parça ölçülür: her bağlantının iki ucu arasındaki gerilime bakılır, kayıp hangi parçanın üzerindeyse arıza oradadır", "verdict": "parca-parca", "correct": true, "explain": "Toplam kaybı bildiğinde sıradaki soru şudur: bu yarım volt yolun neresinde harcanıyor? Cevabı bulmak için devre çalışır hâldeyken art arda kısa ölçümler yapılır. Sağlam bir kablonun iki ucu arasında neredeyse sıfır okunur, çünkü direnci yok denecek kadar azdır. Kötü bir bağlantının iki ucu arasında ise kaybın büyük kısmı görünür. Şase noktası özellikle şüphelidir, çünkü orada iki farklı metal, boya, pas ve nem bir aradadır. Kritik nokta: bu ölçüm devre kapalıyken yapılamaz. Akım akmıyorsa hiçbir direncin üzerinde gerilim düşmez ve en kötü bağlantı bile sıfır okur. Ölçüm yük altında yapılır." },
+          { "label": "Devre kapalıyken parçaların direnci tek tek ölçülür", "verdict": "kapali-direnc", "explain": "Bir başlangıç olabilir ama zayıf bir bağlantı küçük ölçüm akımıyla düşük direnç gösterip yük altında çökebilir. Karar yük altında verilir." },
+          { "label": "Bütün kablolar değiştirilir", "verdict": "hepsini-degistir", "explain": "Ölçümle bulunabilecek bir arızayı parça değiştirerek aramak, elektrikte en pahalı yoldur." },
+          { "label": "Akü değiştirilir", "verdict": "aku", "explain": "Akü kutbunda 12,40 V var; kaynak işini yapıyor. Kayıp yolun üzerinde." }
+        ]
+      },
+      "camera": "tezgah",
+      "hint": "Ölçüm yük altında, yani far yanarken yapılır.",
+      "teachingNote": "Elektrik arızalarının en büyük kısmı parçanın kendisinde değil, parçaya giden ve parçadan dönen yoldadır. Yolun ölçümü de ancak akım akarken anlamlıdır."
+    },
+    {
+      "id": 6,
+      "instruction": "Kayıp şase noktasında çıktı: boyalı bir yüzeye sıkılmış bir kablo pabucu.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sase-noktasi",
+        "question": "Şase noktası nasıl yapılır?",
+        "options": [
+          { "label": "Temas yüzeyindeki boya ve pas temizlenir, pabuç çıplak metale sıkılır, sonra üstü koruyucuyla kapatılır", "verdict": "ciplak-metale", "correct": true, "explain": "Boya bir yalıtkandır; üzerine sıkılan pabuç ilk gün bir miktar temas verir ama zamanla gevşer ve arada direnç büyür. Doğru yöntem temas yüzeyini çıplak metale kadar temizlemek, pabucu doğrudan oraya sıkmak ve ondan sonra dışarıdan gelecek neme karşı üstünü kapatmaktır. Ayrıca farklı metallerin doğrudan teması nemle birlikte korozyonu hızlandırır; uygun pabuç ve koruyucu kullanılır. Şase noktaları araçta genellikle numaralandırılmıştır ve birden çok devre aynı noktayı paylaşır; bu yüzden tek bir kötü şase, birbiriyle ilgisiz görünen birkaç arızayı aynı anda üretebilir. 'Sinyal verince silecek yavaşlıyor' gibi tuhaflıklar neredeyse her zaman ortak bir şase noktasını işaret eder." },
+          { "label": "Pabuç boyanın üstüne sıkılır, sıkı olduktan sonra temas eder", "verdict": "boya-ustune", "explain": "Boya yalıtkandır; sıkılık geçici bir temas verir, sonra direnç büyür." },
+          { "label": "Şase kablosu doğrudan akünün eksi kutbuna çekilir", "verdict": "akuye-cek", "explain": "Bazı durumlarda yapılır ama standart yol gövdedir; asıl mesele temasın temiz olmasıdır." },
+          { "label": "Şase noktası önemsizdir, akım nasılsa döner", "verdict": "onemsiz", "explain": "Dönüş yolu gidiş yolu kadar önemlidir; arızaların büyük kısmı burada." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Birbiriyle alakasız görünen iki arıza aynı anda ortaya çıkıyorsa, ortak bir şase noktası ara. Bu, elektrikçilerin en hızlı kısayollarından biridir."
+    },
+    {
+      "id": 7,
+      "instruction": "Şase temizlendi, far normal yandı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.far-ampulu",
+        "question": "Onarımın doğrulaması nasıl yapılır?",
+        "options": [
+          { "label": "Aynı ölçüm tekrarlanır: kaynak ile tüketici arasındaki kayıp artık yok denecek kadar küçük olmalı", "verdict": "olcumu-tekrarla", "correct": true, "explain": "Onarımdan önce elinde bir sayı vardı: yolda kaybolan yarım volt. Onarımdan sonra aynı ölçümü aynı koşulda tekrarlarsın; kayıp neredeyse sıfıra inmişse arıza gerçekten giderilmiştir. 'Şimdi daha parlak yanıyor' bir izlenimdir, ölçüm ise kanıttır ve müşteriye de gösterilebilir. Bu alışkanlık aynı zamanda ikinci bir kötü bağlantıyı yakalar: bazen şase düzeltilir ama kaybın bir kısmı hâlâ soketten gelir. Ölçüm bunu söyler, göz söylemez." },
+          { "label": "Gözle bakılır, parlaklık yeterli görünüyorsa tamamdır", "verdict": "gozle", "explain": "Parlaklık farkı gözle güvenilir biçimde ayırt edilemez; kaybın bir kısmı sürüyor olabilir." },
+          { "label": "Müşteri denesin, sorun çıkarsa gelir", "verdict": "musteri", "explain": "Doğrulamayı müşteriye devretmek işi yarım bırakmaktır." },
+          { "label": "Sigorta değiştirilip kapanır", "verdict": "sigorta-degistir", "explain": "Sigorta atmadı; değiştirmenin bu arızayla ilgisi yok." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Onarım öncesi bir sayı, onarım sonrası aynı sayı. İkisi arasındaki fark, yaptığın işin kanıtıdır."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Açık devre ile kısa devre belirtiyle nasıl ayrılır?",
+        "a": "sigorta-yonu-verir",
+        "options": [
+          { "verdict": "sigorta-yonu-verir", "label": "Açık devrede akım akmaz ve sigorta sağlam kalır; kısa devrede akım fırlar ve sigorta atar", "explain": "Açık devre yolun kesilmesidir: kopmuş kablo, çıkmış soket, yanmış ampul. Akım hiç akmadığı için sigorta sağlam kalır ve tüketici çalışmaz. Kısa devrede ise akım tüketiciye uğramadan, direnci neredeyse sıfır olan bir yoldan kaynağa döner; akım fırlar ve sigorta devreyi keser. Bu yüzden 'sigorta atıyor' şikâyeti yalıtımı sıyrılmış bir kabloya, 'hiç çalışmıyor' şikâyeti ise kopukluk ve temasa yönlendirir. Aramanın yönü daha ilk bakışta belirlenmiş olur." },
+          { "verdict": "ayrilamaz", "label": "Ayrılamaz, ikisi de aynı görünür", "explain": "Ayrılır; sigortanın durumu tek başına yön verir." },
+          { "verdict": "ses", "label": "Sesinden anlaşılır", "explain": "Bu devrelerde ses bir gösterge değildir." },
+          { "verdict": "koku", "label": "Yalnız yanık kokusundan", "explain": "Koku geç ve tehlikeli bir göstergedir; ölçüm ve sigorta durumu önce gelir." }
+        ]
+      },
+      {
+        "q": "Kaynakla tüketici arasındaki gerilim farkı neden yalnız devre çalışırken ölçülür?",
+        "a": "akim-akmadan-dusmez",
+        "options": [
+          { "verdict": "akim-akmadan-dusmez", "label": "Gerilim ancak akım akarken direnç üzerinde düşer; devre kapalıyken en kötü bağlantı bile sıfır okur", "explain": "Bir direncin üzerinde gerilimin düşmesi için içinden akım geçmesi gerekir. Devre çalışmıyorsa akım yoktur ve yolun üzerindeki kötü bir bağlantı hiçbir iz bırakmaz; alet iki tarafta da aynı gerilimi okur ve her şey sağlam görünür. Yük altında ise o bağlantının üzerinde kayıp ortaya çıkar ve tüketiciye ulaşan gerilim azalır. Bu, süreklilik testinin neden yetmediğini de açıklar: küçük ölçüm akımı zayıf bir yoldan rahatça geçer, gerçek yük geçemez." },
+          { "verdict": "alet", "label": "Aletin çalışması için devrenin canlı olması gerekir", "explain": "Voltmetre kapalı devrede de ölçer; mesele aletin değil, gerilim düşümünün akıma bağlı olmasıdır." },
+          { "verdict": "guvenlik", "label": "Yalnız güvenlik gereği", "explain": "Sebep güvenlik değil, ölçülen olayın doğasıdır." },
+          { "verdict": "farketmez", "label": "Fark etmez, kapalı devrede de ölçülür", "explain": "Kapalı devrede kayıp görünmez; en kötü bağlantı bile sıfır okur." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 4'teki 12,40 V ve 11,90 V SENARYO okumalarıdır. Öğrenciden istenen bir üretici sınırı değil, iki okumanın FARKIDIR (0,50 V). sourceRequired bu yüzden gerekmedi.",
+    "sourceRequired": "Kabul edilebilir azami gerilim düşümü değerleri (devre başına ve bağlantı başına) araca ve devreye özgüdür; bu derste bilinçli olarak VERİLMEDİ. Ders kaybın varlığını görmek ve yerini daraltmak üzerine kuruldu; eşik değerler aşama 9'da kaynakla birlikte eklenecek.",
+    "kapsam": "Anahtar ve röle modelde yok; kumanda adımı seçim olarak öğretiliyor. Şase noktası tek bir plaka olarak temsil ediliyor, boya ve korozyon dokusu yok.",
+    "reviewedByMechanic": false
+  }
+}

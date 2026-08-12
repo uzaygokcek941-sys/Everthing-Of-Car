@@ -1,0 +1,176 @@
+{
+  "id": "aksesuar.kamera-neden",
+  "area": "aksesuar-ses",
+  "stage": 6,
+  "title": "Kamera Ne İşe Yarar: Kanıt, Kapsama ve Sınırlar",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 25,
+  "prerequisites": ["aksesuar.anten-ve-ayna"],
+  "learningGoals": [
+    "Araç kamerasının neden takıldığını ve kaydın hangi koşulda işe yaradığını anlamak",
+    "Ön ve arka kameranın neyi gördüğünü, neyi görmediğini bilmek",
+    "Montajcının hangi vaadi verebileceğini ve hangisini asla veremeyeceğini ayırmak"
+  ],
+
+  "safety": [
+    { "rule": "Kamera, sürücünün görüş alanını kapatacak biçimde yerleştirilmez", "why": "Ön camda yanlış konumlandırılmış bir cihaz görüşü engeller; bu doğrudan trafik güvenliği sorunudur ve muayenede de karşına çıkar", "blocksStart": true },
+    { "rule": "Kaydın nasıl kullanılacağı konusunda hukuki tavsiye verilmez", "why": "Cihaz takmak teknik bir iştir; kaydın delil olarak kullanılması, kabin içi ses ve görüntü kaydı ve kaydın paylaşılması kişisel verilerin korunması mevzuatının konusudur ve usta bu konuda yönlendirme yapamaz", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true },
+    { "id": "tool.multimetre", "label": "Multimetre", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Müşteri 'arabama ön ve arka kamera taktırmak istiyorum' diyor. Önce neden istediğini anlıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-kamera",
+        "question": "Araç kamerası esas olarak ne işe yarar?",
+        "options": [
+          { "label": "Kaza, çarpıp kaçma ya da tartışma anında olayın kendi kaydını üretir; kimin ne yaptığı sözle değil görüntüyle ortaya çıkar", "verdict": "kanit", "correct": true, "explain": "Bir kazadan ya da bir tartışmadan sonra geriye iki şey kalır: tarafların anlattığı ve varsa üçüncü bir kayıt. Anlatılan taraflıdır, kayıt değildir. Araç kamerasının bütün değeri buradadır — olay anında kimsenin hazırlanmadığı bir kayıt üretir. İşe yaradığı durumlar bellidir: önden ya da arkadan çarpılma, şerit ihlali, kırmızı ışık, park hâlindeyken çizilme ya da çarpılıp kaçılma, yol kenarında çıkan bir tartışma. İkinci bir değeri daha vardır ve müşteri genelde bunu düşünmez: kamera aracın kendi hafızasıdır; sürücü kendi hatasını da görür ve bu, filo araçlarında sürüş kalitesini doğrudan değiştirir. Ama kaydın işe yaraması iki şarta bağlıdır ve montajcının işi tam olarak bu iki şartı sağlamaktır: kayıt olay anında gerçekten yapılıyor olmalı ve kayıt olaydan sonra silinmemiş olmalıdır. İkisi de teknik iştir — besleme, kart, döngü ve olay kilidi doğru kurulmazsa kamera takılıdır ama kanıt yoktur. Bu aşamanın tamamı bu iki şartın nasıl sağlandığını öğretiyor." },
+          { "label": "Aracın güvenliğini artırır, kaza olmasını engeller", "verdict": "onler", "explain": "Kamera kaydeder, müdahale etmez; kazayı önleyen sistemler ayrıdır." },
+          { "label": "Aracın değerini artırmak için takılır", "verdict": "deger", "explain": "İkincil bir etkidir; asıl işlev kayıttır." },
+          { "label": "Yalnız yolculuk videosu çekmek için", "verdict": "video", "explain": "Cihaz bunu da yapar ama takılma sebebi olay kaydıdır." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Kamera olayı engellemez, olayın kaydını üretir. Bu ayrım müşteriye ilk cümlede söylenir."
+    },
+    {
+      "id": 2,
+      "instruction": "İki cihazın kapsama açısını karşılaştırdın: dar açılı modelde 140 derece, geniş açılı modelde 170 derece okudun. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.on-kamera",
+        "unit": "derece",
+        "acceptRange": [29.5, 30.5]
+      },
+      "camera": "aksesuar",
+      "hint": "170 eksi 140.",
+      "teachingNote": "30 derecelik bu fark küçük duruyor ama sahada kararı belirleyen şeydir. Geniş açı yanlardan gelen aracı ve yol kenarını daha çok kadraja alır; kavşak çarpışmalarında ve yandan sıyırmalarda fark eden şey budur. Bedeli de vardır: aynı görüntü sensörü daha geniş bir alana yayıldığı için uzaktaki bir plaka daha az noktaya düşer, ayrıca kenarlarda görüntü esner. Dar açı ise öndeki aracın plakasını daha okunur verir ama yandan gelen ihlali kaçırabilir. Doğru seçim işin türüne bağlıdır ve montajcının müşteriye soracağı soru şudur: şehir içi mi, uzun yol mu, park hâlinde çizilme derdi mi? Şehir içi ve park için geniş açı, uzun yolda plaka okunurluğu için daha dar açı mantıklıdır. Buradaki iki değer karşılaştırma için verilmiş senaryo okumalarıdır; bir cihazın gerçek kapsama açısı üreticinin verisidir ve montajdan önce o cihazın kendi belgesinden okunur."
+    },
+    {
+      "id": 3,
+      "instruction": "Müşteri 'arka kamera ne işe yarar, geri görüş kamerası zaten var' diyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.arka-kamera",
+        "question": "Kayıt yapan arka kamera ile geri görüş kamerası arasındaki fark nedir?",
+        "options": [
+          { "label": "Geri görüş kamerası yalnız geri viteste ekrana görüntü verir ve kaydetmez; kayıt kamerası sürekli çalışır ve arkadan gelen olayı kayda alır", "verdict": "kayit-vs-goruntu", "correct": true, "explain": "İki cihaz benzer görünür ama işleri tamamen farklıdır. Fabrikadan gelen geri görüş kamerası bir park yardımcısıdır: yalnız geri vitese alındığında devreye girer, görüntüyü ekrana verir ve hiçbir yere kaydetmez; vites değişince kapanır. Kayıt kamerası ise araç çalıştığı sürece — park modu varsa dururken de — kayıt yapar ve arkadan gelen olayı yakalar. Arka kaydın neden gerektiğini müşteri genelde tek bir olayı duyunca anlar: arkadan çarpılma. Bu durumda ön kamera hiçbir şey görmez, çünkü olay kadrajın dışındadır. İkinci tipik olay park hâlinde arkadan sıyırıp kaçmadır ve kayıt olmadan sorumluyu bulmak neredeyse imkânsızdır. Üçüncüsü, arkadan çok yakın takip eden bir aracın davranışıdır. Bu yüzden ön ve arka birlikte satılır: ikisi birlikte aracın çevresini kapatır, tek başına ön kamera aracın yalnız yarısını korur. Not: bazı sistemlerde arka kamera hem kayıt yapar hem geri vitese alındığında ekrana görüntü verebilir; bu cihaz ve araç bağımlıdır, montaj öncesinde netleştirilir." },
+          { "label": "Aynı şeydir, ikisi de kaydeder", "verdict": "ayni", "explain": "Fabrika geri görüş kamerası kaydetmez." },
+          { "label": "Arka kamera yalnız park için gerekir", "verdict": "park", "explain": "Arkadan çarpılma sürüş sırasında da olur." },
+          { "label": "Arka kamera gereksizdir", "verdict": "gereksiz", "explain": "Aracın arkası ön kameranın kadrajı dışındadır." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Tek başına ön kamera aracın yarısını korur. İkisinin birlikte satılmasının sebebi bu."
+    },
+    {
+      "id": 4,
+      "instruction": "Müşteri 'gece de görür mü' diye soruyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-cam",
+        "question": "Gece kaydında asıl belirleyici nedir?",
+        "options": [
+          { "label": "Işık: sensörün az ışıkta ne kadar temiz görüntü ürettiği ve kameranın baktığı cam bölgesinin temizliği belirler; çözünürlük tek başına gece görüntüsünü kurtarmaz", "verdict": "isik", "correct": true, "explain": "Gece kaydında en çok yanılınan nokta çözünürlüktür. Yüksek çözünürlük gündüz görüntüsünde ayrıntı verir ama gece asıl sorun ayrıntı değil, ışık azlığıdır. Az ışıkta görüntü sensörü sinyali yükseltir ve yükseltilen sinyalle birlikte gürültü de büyür; sonuç, tanesi belli, plakası okunmayan bir görüntüdür. Bu yüzden gece performansını belirleyen şeyler farklıdır: sensörün ışık toplama kabiliyeti, lensin ışık geçirgenliği ve cihazın karşıdan gelen farla nasıl baş ettiği. İkinci ve montajcıyı doğrudan ilgilendiren etken camdır — kameranın baktığı cam bölgesi kirliyse ya da içeriden buğuluysa gece görüntüsü bariz bozulur, çünkü her ışık noktası kirin üzerinde dağılır. Bu yüzden kamera silecek süpürme alanının içine yerleştirilir. Üçüncü etken yansımadır: gösterge panelinin üzerine konan açık renkli bir eşya ya da cihazın kendi ekranı gece camda yansır ve kaydın ortasına bir hayalet görüntü koyar; bu yüzden ön kamera cama mümkün olduğunca yakın oturtulur. Bir cihazın gece performansı için ürünün kendi belgesine bakılır; bu ders bir marka ya da sayı vermiyor." },
+          { "label": "Yalnız çözünürlük belirler, en yüksek çözünürlük her koşulda iyi görür", "verdict": "cozunurluk", "explain": "Az ışıkta gürültü artar; çözünürlük tek başına yetmez." },
+          { "label": "Gece kayıt yapılamaz", "verdict": "yapilamaz", "explain": "Yapılır; kalitesi ışık koşullarına bağlıdır." },
+          { "label": "Farların gücü belirler", "verdict": "far", "explain": "Farlar yalnız önü aydınlatır; kaydın kalitesini sensör belirler." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Kameranın baktığı cam bölgesi kirliyse en pahalı cihaz bile gece işe yaramaz. Montaj konumunun sebebi bu."
+    },
+    {
+      "id": 5,
+      "instruction": "Müşteri 'kaza olursa kayıt kesin durur mu' diye soruyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kamera-kablosu",
+        "question": "Kaydın kaybolmasının en yaygın üç sebebi nedir?",
+        "options": [
+          { "label": "Kart dolduğunda döngüsel kayıt eski dosyanın üzerine yazar, kart sessizce bozulmuştur ya da olay anında besleme kesilmiştir", "verdict": "dongu-kart-besleme", "correct": true, "explain": "Kamera takılı olduğu hâlde kaydın bulunamaması sahada sık görülür ve üç sebebi vardır. Birincisi döngüsel kayıttır: cihaz kartı dolduğunda durmaz, en eski dosyanın üzerine yazarak devam eder. Bu, cihazın sürekli çalışabilmesi için gereklidir ama şu anlama gelir — bir olay yaşandıktan sonra araç günlerce kullanılmaya devam ederse o kayıt silinir. Çözüm, olay kilidi denen işlevdir: cihaz sarsıntı algıladığında o anki dosyayı korumalı klasöre alır ve üzerine yazılmasını engeller; ayrıca kullanıcı bir tuşla kaydı elle de kilitleyebilir. Müşteriye söylenmesi gereken cümle şudur: bir olay olursa aracı hemen kullanmayı bırak ya da kaydı kilitle. İkinci sebep karttır — hafıza kartı sürekli üzerine yazılan bir ortamdır ve zamanla yorulur; bozulan kart genelde sessizce bozulur, cihaz çalışıyor görünür ama dosya yazılmaz. Bu yüzden kartın belirli aralıklarla kontrol edilmesi ve biçimlendirilmesi teslimde anlatılır. Üçüncü sebep beslemedir: çarpma anında besleme kesilirse cihaz o anki dosyayı düzgün kapatamaz; iyi cihazlar bunun için içeride küçük bir enerji deposu taşır. Montajcının payına düşen kısım nettir — besleme bağlantısını sağlam ve doğru noktadan almak." },
+          { "label": "Kamera bozulur", "verdict": "bozulur", "explain": "Cihaz arızası daha nadirdir; ilk üç sebep bunlardır." },
+          { "label": "Kayıt bulutta saklandığı için kaybolmaz", "verdict": "bulut", "explain": "Çoğu cihaz karta yazar; bulut ayrı bir özelliktir." },
+          { "label": "Kayıt hiç kaybolmaz", "verdict": "kaybolmaz", "explain": "Döngüsel kayıt eski dosyanın üzerine yazar." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Olay kilidi bu işin en önemli tek işlevi. Teslimde müşteriye mutlaka gösterilir."
+    },
+    {
+      "id": 6,
+      "instruction": "Müşteri 'içeriyi de kaydetsin, konuşmalar da kaydolsun' diyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.tavan-kaplamasi",
+        "question": "Usta ne yapar?",
+        "options": [
+          { "label": "Montajı teknik olarak yapabilir ama kabin içi ses ve görüntü kaydının ve kaydın paylaşılmasının kişisel verilerin korunması mevzuatına tabi olduğunu söyler ve hukuki tavsiye vermez", "verdict": "sinir", "correct": true, "explain": "Bu, kamera işinin usta tarafında bittiği yerdir ve sınır net çizilmelidir. Teknik iş şudur: cihaz takılır, beslemesi verilir, kaydı doğrulanır. Bunun ötesi hukuktur. Aracın dışını çeken bir kayıt ile kabin içini ve içerideki konuşmaları kaydeden bir sistem aynı şey değildir: ikincisinde araçta bulunan başka insanların sesi ve görüntüsü kaydedilir ve bu kişisel veridir. Ticari taşımacılıkta, yolcu taşıyan araçlarda ve şirket filolarında bu konunun ayrıca bilgilendirme ve yasal dayanak gerektirdiği bilinir. Ustanın doğru davranışı üç adımdır: birincisi, cihazın kabin içi kayıt yapıp yapmadığını ve mikrofonunun kapatılabildiğini müşteriye göstermek; ikincisi, kaydın kimde duracağını ve kimin erişebileceğini müşterinin belirlemesi gerektiğini söylemek; üçüncüsü, 'bu kayıtla şunu yapabilirsin' türünden bir hukuki yönlendirme yapmamak. Kaydın bir uyuşmazlıkta nasıl kullanılacağı, üçüncü kişilerle paylaşılıp paylaşılamayacağı ve sosyal medyada yayınlanmasının sonuçları hukukçunun alanıdır. Bu ders montajı öğretir, hukuki tavsiye vermez." },
+          { "label": "Müşteri istediği için sınırsız kayıt kurulur", "verdict": "sinirsiz", "explain": "Kabin içi kayıt kişisel veri üretir; sınır anlatılır." },
+          { "label": "İş reddedilir", "verdict": "ret", "explain": "Montaj teknik olarak yapılabilir; anlatılması gereken sınırdır." },
+          { "label": "Usta hukuki yol gösterir", "verdict": "hukuk", "explain": "Hukuki tavsiye ustanın alanı değildir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Bu kırmızı çizgi airbag ve immobilizer kadar net: montajı yap, hukuku yorumlama."
+    },
+    {
+      "id": 7,
+      "instruction": "Müşteriye ne sattığını netleştiriyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-kamera",
+        "question": "Bu iş neden sanayide iyi kazandırıyor?",
+        "options": [
+          { "label": "Talep yüksek, iş kısa sürüyor ve kalitesi görünmeyen yerde: kablo gizleme, besleme seçimi ve kayıt doğrulama; kötü montajın bedeli müşteriye sonradan çıkıyor", "verdict": "talep-ve-kalite", "correct": true, "explain": "Bu montajın ekonomisi basittir. Talep yüksektir çünkü neredeyse herkesin bir 'keşke kaydı olsaydı' hikâyesi vardır. İş bir usta için birkaç saattir. Buna karşılık işin kalitesi tamamen görünmeyen yerdedir ve müşteri farkı ancak bir olay yaşandığında anlar. Kötü montaj şöyle görünür: kablo kapı fitilinin altına sıkıştırılmış ve kapı her kapandığında eziliyor, besleme rastgele bir sigortadan alınmış ve o devrenin sigortası her attığında kamera da ölüyor, kablo direk kaplamasının içinden hava yastığının şişme yolunun üstünden geçirilmiş, park modu doğrudan aküye bağlanmış ve araç birkaç gün durunca akü bitiyor, kart hiç test edilmemiş ve ilk günden yazmıyor. Bunların hepsi ilk gün çalışıyor görünür. İyi montaj ise şunu satar: kablo hiç görünmez, besleme doğru devreden alınır, park modu aküyü korur, kart doğrulanır ve müşteriye olay kilidinin nasıl kullanılacağı gösterilir. Bu aşamanın kalan beş dersi tam olarak bu farkı öğretiyor — ve bu fark, aynı işi yapan iki ustadan birinin neden daha çok kazandığının cevabıdır." },
+          { "label": "Cihaz pahalı olduğu için", "verdict": "cihaz", "explain": "Kazanç cihazda değil işçilikte." },
+          { "label": "İş kolay olduğu için", "verdict": "kolay", "explain": "Görünen kısmı kolay; kalitesi görünmeyen kısımda." },
+          { "label": "Herkes yapabildiği için", "verdict": "herkes", "explain": "Herkes takar; az kişi doğru takar." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Sırada cihaz seçimi: çözünürlük, gece görüşü, park modu ve depolama."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Müşteri kaza yaşadı ama kayıt bulunamıyor. En yaygın sebep nedir?",
+        "a": "dongu-kart-besleme",
+        "options": [
+          { "verdict": "dongu-kart-besleme", "label": "Döngüsel kayıt eski dosyanın üzerine yazmıştır, kart bozulmuştur ya da olay anında besleme kesilmiştir", "explain": "Cihaz kart dolduğunda durmaz, en eskinin üzerine yazar; olaydan sonra araç kullanılmaya devam ederse kayıt silinir. Çözüm olay kilididir — sarsıntıda dosya korumalı klasöre alınır ya da kullanıcı elle kilitler. Kart sessizce bozulabilir; besleme kesildiğinde de dosya düzgün kapanmayabilir." },
+          { "verdict": "bozulur", "label": "Kamera bozulmuştur", "explain": "Cihaz arızası daha nadirdir." },
+          { "verdict": "bulut", "label": "Kayıt buluttadır", "explain": "Çoğu cihaz karta yazar." },
+          { "verdict": "kaybolmaz", "label": "Kayıt kaybolmaz", "explain": "Döngüsel kayıt üzerine yazar." }
+        ]
+      },
+      {
+        "q": "Müşteri kabin içi ses kaydı istiyor. Usta ne yapar?",
+        "a": "sinir",
+        "options": [
+          { "verdict": "sinir", "label": "Montajı yapar ama kabin içi kaydın kişisel veri ürettiğini söyler ve hukuki tavsiye vermez", "explain": "Araçta bulunan başka kişilerin sesi ve görüntüsü kişisel veridir. Usta cihazın mikrofonunun kapatılabildiğini gösterir, kaydın kimde duracağını müşterinin belirlemesi gerektiğini söyler ve kaydın nasıl kullanılacağı konusunda yönlendirme yapmaz." },
+          { "verdict": "sinirsiz", "label": "Sınırsız kayıt kurar", "explain": "Sınır anlatılmadan kurulmaz." },
+          { "verdict": "ret", "label": "İşi reddeder", "explain": "Montaj teknik olarak yapılabilir." },
+          { "verdict": "hukuk", "label": "Hukuki yol gösterir", "explain": "Ustanın alanı değildir." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2'deki 140 ve 170 derece SENARYO okumalarıdır; istenen FARKTIR (30 derece) ve ders herhangi bir cihazın gerçek kapsama açısını iddia etmiyor.",
+    "sourceRequired": "Cihaz markası, modeli, sensör özellikleri, gerçek kapsama açısı, gece performansı ve olay kilidi davranışı bilinçle VERİLMEDİ; hepsi ürüne özgüdür ve montajdan önce cihazın kendi belgesinden okunur.",
+    "kapsam": "Kaydın hukuki değeri, delil olarak sunulması, kabin içi kaydın koşulları ve kaydın paylaşılması KAPSAM DIŞIDIR — kişisel verilerin korunması mevzuatının konusudur ve bu ders yalnız sınırı bildirir. Marka önerisi ve cihaz karşılaştırması da kapsam dışı.",
+    "kaynak": "Bu aşama MEB çerçeve programında YOKTUR; proje kararıyla eklendi. Teknik temelini bu alanın kendi derslerinden alıyor.",
+    "reviewedByMechanic": false
+  }
+}

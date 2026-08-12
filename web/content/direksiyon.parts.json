@@ -1,0 +1,44 @@
+{
+  "model": "direksiyon",
+  "file": "/models/direksiyon.glb",
+  "license": {
+    "source": "scripts/build-models.mjs — kod ile üretildi",
+    "author": "Everything For My Car",
+    "license": "Proje içi üretim — üçüncü taraf lisans yükümlülüğü yok",
+    "url": ""
+  },
+  "parts": {
+    "part.direksiyon-simidi": "direksiyon_simidi",
+    "part.airbag-modulu": "airbag_modulu",
+    "part.spiral-kablo": "spiral_kablo",
+    "part.aci-sensoru": "aci_sensoru",
+    "part.direksiyon-mili": "direksiyon_mili",
+    "part.mil-mafsali": "mil_mafsali",
+    "part.kremayer-kutusu": "kremayer_kutusu",
+    "part.kremayer-pinyonu": "kremayer_pinyonu",
+    "part.kremayer-baski-civatasi": "kremayer_baski_civatasi",
+    "part.koruk-sol": "koruk_sol",
+    "part.koruk-sag": "koruk_sag",
+    "part.rot-cubugu-sol": "rot_cubugu_sol",
+    "part.rot-cubugu-sag": "rot_cubugu_sag",
+    "part.rot-basi-sol": "rot_basi_sol",
+    "part.rot-basi-sag": "rot_basi_sag",
+    "part.hidrolik-pompa": "hidrolik_pompa",
+    "part.pompa-kasnagi": "pompa_kasnagi",
+    "part.hidrolik-deposu": "hidrolik_deposu",
+    "part.basinc-hortumu": "basinc_hortumu",
+    "part.donus-hortumu": "donus_hortumu",
+    "part.eps-motoru": "eps_motoru",
+    "part.tork-sensoru": "tork_sensoru",
+    "part.eps-kontrol-unitesi": "eps_kontrol_unitesi",
+    "part.basinc-test-cihazi": "basinc_test_cihazi"
+  },
+  "_notes": {
+    "kapsam": "Direksiyon alanının sahnesi: zincirin tamamı (simit, airbag modülü, spiral kablo, açı sensörü, mil, mafsal, kremayer, pinyon, körükler, rot çubukları, rot başları) ile hidrolik yardım (pompa, kasnak, depo, basınç ve dönüş hortumu) ve elektrik yardım (EPS motoru, tork sensörü, kontrol ünitesi). Basınç test cihazı ölçüm dersleri için ayrıca var.",
+    "olcek": "Metre. X = araç eni (+X sağ), Y = yukarı, Z = ön-arka (+Z sürücüye doğru). Simit y=0.95'te ve sürücüye bakar; kremayer y=0.74'te araç enine uzanır.",
+    "airbag": "airbag_modulu bilinçli olarak UYARI malzemesiyle (kırmızı, hafif ışıklı) üretildi. Bu parça derste sökülmez; rengi sınırı görünür kılmak içindir. Aynı sebeple spiral_kablo ayrı bir mesh: simidin arkasındaki bu parça yanlış işlemde kopar ve airbag devresini keser.",
+    "hidrolik-ve-eps-birlikte": "Gerçek bir araçta hidrolik ve elektrik yardım aynı anda BULUNMAZ; sahnede ikisi birden var çünkü aynı sahne her iki sistem ailesinin derslerinde kullanılıyor. Ders metinleri hangi sistemden söz ettiğini açıkça söyler.",
+    "nokta-yasagi": "Mesh adlarında nokta yok: GLTFLoader düğüm adındaki nokta karakterini siler. part.* anahtarları alt çizgili mesh adlarına eşlenir.",
+    "eksik": "Direksiyon kolonu ayar mekanizması, kilit silindiri, kayış-kasnak sistemi ve teşhis cihazı modellenmedi; ilgili dersler bunları metinde anlatıyor. Rot başı bu sahnede ayrıca üretildi ve lastik sahnesindeki part.rot-basi ile karışmasın diye sol/sağ olarak adlandırıldı."
+  }
+}

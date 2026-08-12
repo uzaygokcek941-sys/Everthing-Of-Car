@@ -1,0 +1,171 @@
+{
+  "id": "aksesuar.cam-sikisma-korumasi",
+  "area": "aksesuar-ses",
+  "stage": 2,
+  "title": "Sıkışma Koruması ve Öğrenme İşlemi",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 30,
+  "prerequisites": ["aksesuar.cam-krikosu"],
+  "learningGoals": [
+    "Sıkışma korumasının nasıl algıladığını ve neden bir güvenlik işlevi olduğunu bilmek",
+    "Öğrenmenin ne zaman gerektiğini tanımak",
+    "Korumayı iptal etmenin neden yapılmadığını bilmek"
+  ],
+
+  "safety": [
+    { "rule": "Sıkışma koruması hiçbir koşulda iptal edilmez ya da devre dışı bırakılmaz", "why": "Bu işlev çocuk elini ve boynunu koruyan bir güvenlik donanımıdır; şikâyet varsa sebebi giderilir, işlev kapatılmaz", "blocksStart": true },
+    { "rule": "Koruma denemesi elle değil, uygun bir yumuşak cisimle yapılır", "why": "İşlevi parmakla denemek, koruma çalışmıyorsa doğrudan yaralanma demektir", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.pens-ampermetre", "label": "Pens ampermetre", "required": true },
+    { "id": "tool.multimetre", "label": "Multimetre", "required": false },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Cam otomatik kapanırken önüne bir cisim koyuyorsun ve cam duruyor, sonra geri iniyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.cam-motoru",
+        "question": "Sistem sıkışmayı nasıl anlıyor?",
+        "options": [
+          { "label": "Motoru izleyerek: bir engel varken motor zorlanır, akımı yükselir ve dönme hızı düşer; modül bu değişimi görüp camı durdurur ve geri indirir", "verdict": "motoru-izle", "correct": true, "explain": "Sıkışma korumasının en çok şaşırtan yanı, camın önünde bir sensör olmamasıdır. Sistem engeli görmez, engeli MOTORDAN anlar. Cam normal koşulda belli bir dirençle hareket eder ve motor buna karşılık gelen bir akım çeker, belli bir hızda döner. Önüne bir engel geldiğinde iki şey aynı anda olur: direnç artar, motorun akımı yükselir ve dönme hızı düşer. Modül motorun bu davranışını sürekli izler — birçok araçta motorun içindeki bir konum sensörü ya da motorun kendi akım dalgalanması hız bilgisini verir. Beklenenden fazla zorlanma görüldüğünde modül kararı verir: camı durdur ve belli bir miktar geri indir. Buradan iki önemli sonuç çıkar. Birincisi koruma bir karşılaştırmaya dayanır: sistemin 'normal direncin ne olduğunu' biliyor olması gerekir; bu bilgi öğrenme sırasında kaydedilir ve öğrenme yoksa koruma ya hiç çalışmaz ya yanlış çalışır. İkincisi mekanik durum doğrudan korumayı etkiler: kirli ya da kurumuş bir kanal sürtünmeyi artırır, sistem bunu sıkışma sanır ve cam kendiliğinden geri iner. Yani 'cam kapanmıyor, sürekli geri iniyor' şikâyeti çoğu zaman elektronik değil, mekanik bir şikâyettir." },
+          { "label": "Camın kenarındaki bir sensör engeli görür", "verdict": "sensor", "explain": "Bazı özel uygulamalar hariç, ölçülen şey motorun zorlanmasıdır." },
+          { "label": "Cam basıncı ölçen bir fitil vardır", "verdict": "fitil", "explain": "Bu yöntem bazı kayar kapılarda kullanılır; camlarda genel yöntem motor izlemedir." },
+          { "label": "Sürücü tuşu bırakınca durur, koruma diye bir şey yoktur", "verdict": "yok", "explain": "Otomatik kapanma sırasında tuş bırakılmıştır; koruma bağımsız çalışır." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Sistem engeli görmüyor, motorun zorlandığını görüyor. Bu tek cümle 'cam sürekli geri iniyor' şikâyetinin de cevabı."
+    },
+    {
+      "id": 2,
+      "instruction": "Bir araçta cam otomatik kapanırken yolun ortasında duruyor ve geri iniyor. Mekanik direnci ölçtün: bu kapıda 8,6 A, sorunsuz kapıda 4,1 A. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.pens-ampermetre",
+        "unit": "A",
+        "acceptRange": [4.3, 4.7]
+      },
+      "camera": "aksesuar",
+      "hint": "8,6 eksi 4,1.",
+      "teachingNote": "4,5 amperlik bu fark, korumanın neden devreye girdiğini açıklıyor: sistem yanılmıyor, cam gerçekten zorlanıyor. Bu ölçüm teşhisin yönünü tamamen değiştirir — modül, düğme ya da yazılım aranmaz, mekanik direncin sebebi aranır. Sıralama şudur: kılavuz kanalların içi temizlenir (yıllarca biriken toz ve kurumuş kir sürtünmeyi büyütür), kanalın kadifemsi yüzeyi uygun bir kayganlaştırıcıyla bakımdan geçirilir — silikon ya da yağ esaslı yanlış bir ürün lastiği şişirip durumu kötüleştirebilir, bu yüzden ürün araca uygun olmalıdır. Sonra camın hizası kontrol edilir; eğri cam kanalda sürekli sürter. En son mekanizmanın hareketli noktaları yağlanır. Bu bakımdan sonra akım düşer ve koruma yanlış devreye girmeyi bırakır. Kabul edilebilir akım sınırı araca özgüdür ve bu ders bir sınır vermiyor; karşılaştırma aynı araçtaki sorunsuz kapıyla yapılıyor."
+    },
+    {
+      "id": 3,
+      "instruction": "Aküyü söküp taktın. Şimdi cam otomatik kalkmıyor, yalnız tuş basılı tutulduğunda çalışıyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kapi-modulu",
+        "question": "Bu bir arıza mı?",
+        "options": [
+          { "label": "Hayır — sistem uç konumlarını ve normal direnci unutmuştur; öğrenme yapılana kadar otomatik işlev ve koruma çalışmaz, bu bir koruma davranışıdır", "verdict": "ogrenme-gerek", "correct": true, "explain": "Bu, bu alanda en sık 'yeni arıza çıkardın' suçlamasına yol açan durumdur ve aslında sistemin doğru davranışıdır. Koruma bir karşılaştırmaya dayanır: modülün camın nerede tam kapandığını, nerede tam açıldığını ve yol boyunca normal direncin ne olduğunu biliyor olması gerekir. Bu bilgi kalıcı değildir; besleme kesildiğinde ya da modül/motor/kriko değiştiğinde kaybolur. Modül bu bilgiye sahip değilken sorumlu davranır: otomatik kapanmayı devre dışı bırakır ve yalnız tuş basılı tutulduğunda cama enerji verir. Sebep açıktır — normal direnci bilmeden otomatik kapanma yapmak, bir engeli fark edememek demektir; tuş basılı tutuluyorsa sorumluluk sürücüdedir. Öğrenme işlemi bu bilgiyi yeniden kaydeder ve genellikle camın tam açık ve tam kapalı konumlarında belli bir süre tutulmasını içerir; ama işlemin tam adımları araçtan araca değişir ve bu ders bir yöntem vermiyor, üretici belgesine bakılır. Öğrenmenin ne zaman gerektiğini bilmek şu üç durumda işi kurtarır: akü söküldüğünde, cam sistemi parçalarından biri değiştiğinde ve cam hizası ayarlandığında." },
+          { "label": "Evet, modül bozulmuştur", "verdict": "modul", "explain": "Akü sökümünden sonra beklenen bir davranıştır; parça değişmez." },
+          { "label": "Evet, motor zarar görmüştür", "verdict": "motor", "explain": "Motor tuşla çalışıyor; sağlamdır." },
+          { "label": "Sigorta atmıştır", "verdict": "sigorta", "explain": "Cam tuşla çalışıyorsa besleme vardır." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Akü sökülünce 'bozulan' camların çoğu bozulmamıştır. Bunu bilmek hem müşteriyi hem ustayı yanlış suçlamadan kurtarır."
+    },
+    {
+      "id": 4,
+      "instruction": "Öğrenme sonrası camı bir kez tam aşağı, bir kez tam yukarı çalıştırıyorsun.",
+      "interaction": {
+        "type": "pull",
+        "target": "part.kapi-cami",
+        "requiresGesture": true
+      },
+      "camera": "aksesuar",
+      "hint": "Camı tam alt konuma indir.",
+      "teachingNote": "Öğrenmenin mantığı şudur: sistem camı bir uçtan bir uca götürerek yolun haritasını çıkarır — nerede duruyor, ne kadar direnç var, tam kapanma noktası nerede. Bu yüzden öğrenme yarım strokla yapılmaz; cam iki uca da tam gitmelidir. İşlem sırasında camın önünde hiçbir engel olmamalı ve kapı normal konumda olmalıdır, çünkü öğrenilen direnç o andaki koşullara göre kaydedilir. Kanal kirliyken yapılan bir öğrenme, kirli hâli 'normal' kabul eder; sonra kanal temizlenince sistem bu kez fazla hassas davranır. Doğru sıra bu yüzden nettir: önce mekanik bakım ve hiza, sonra öğrenme. Bu sıra bu uygulamanın diğer alanlarında da tekrar eden bir kuraldır — önce mekanik, sonra elektronik."
+    },
+    {
+      "id": 5,
+      "instruction": "Müşteri 'bu koruma beni rahatsız ediyor, kapatabilir misin' diyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kapi-cami",
+        "question": "Ne cevap verilir?",
+        "options": [
+          { "label": "Kapatılmaz — bu bir güvenlik donanımıdır; rahatsızlığın sebebi bulunup giderilir, çünkü koruma sebepsiz devreye girmiyordur", "verdict": "kapatilmaz", "correct": true, "explain": "Bu istek makul bir yerden gelir: cam kapanmıyorsa müşteri bunu bir kusur olarak yaşar. Ama sıkışma koruması bir konfor ayarı değil, bir güvenlik işlevidir; camın kapanma kuvveti bir çocuğun parmağını ya da boynunu ciddi biçimde yaralayacak düzeydedir ve bu işlev tam olarak onun için vardır. Kapatmak üç açıdan yanlıştır. Güvenlik açısından: koruma kapalıyken araçta çocuk varsa risk gerçektir ve bu risk montajı yapan kişinin sorumluluğuna geçer. Teknik açıdan: koruma sebepsiz devreye girmez — devreye giriyorsa gerçekten fazla direnç vardır ve o direnç yalnız korumayı değil, motoru ve krikoyu da yormaktadır; kapatmak belirtiyi susturur, arızayı büyütür. Meslek açısından: bir güvenlik donanımını devre dışı bırakmak, ustayı arızanın değil sonucun sorumlusu yapar. Doğru cevap müşteriyi geri çevirmek değil, gerçek çözümü sunmaktır: kanal temizliği ve bakımı, cam hizası, gerekirse öğrenme. Bunlar yapıldıktan sonra koruma yanlış devreye girmeyi bırakır ve müşteri hem güvenli hem çalışan bir cam alır. Anlatım da önemlidir — 'kapatamam' demek yerine 'bu koruma çocuk parmağı için var, ama sebebini bulup düzelteceğim' demek işi de ilişkiyi de kurtarır." },
+          { "label": "Kapatılır, müşterinin isteği önceliklidir", "verdict": "kapat", "explain": "Güvenlik donanımı müşteri isteğiyle iptal edilmez; sorumluluk montajı yapana geçer." },
+          { "label": "Modül değiştirilir", "verdict": "modul", "explain": "Modül suçsuzsa değiştirmek hem pahalı hem sonuçsuzdur." },
+          { "label": "Cam motoru daha güçlüsüyle değiştirilir", "verdict": "guclu-motor", "explain": "Daha güçlü motor sıkışma kuvvetini artırır; tehlikeyi büyütür." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Koruma sebepsiz devreye girmiyor — belirtiyi susturmak arızayı büyütür. Bu cümle bu uygulamanın her alanında geçerli."
+    },
+    {
+      "id": 6,
+      "instruction": "İşi bitirdin, korumanın çalıştığını doğrulaman gerekiyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.cam-krikosu",
+        "question": "Koruma nasıl denenir?",
+        "options": [
+          { "label": "Yumuşak ama sıkıştırılamayan bir cisimle (kalın bir tahta ya da katlanmış havlu gibi), cam otomatik kapanırken; el ya da parmak asla kullanılmaz", "verdict": "cisimle", "correct": true, "explain": "Denemenin kuralı basittir ve sebebi ciddidir: koruma çalışmıyorsa parmakla yapılan deneme doğrudan yaralanmadır. Bu yüzden deneme her zaman bir cisimle yapılır. Cisim iki özellik taşımalıdır. Birincisi yeterince sert olmalı — sünger gibi kolayca ezilen bir malzeme direnç üretmez, sistem sıkışmayı algılamaz ve 'koruma çalışmıyor' diye yanlış sonuç çıkarılır. İkincisi camı çizmemeli ve kırmamalı; bu yüzden çıplak metal kullanılmaz, kalın bir tahta parçası ya da katlanmış kalın bir bez uygundur. Deneme cam otomatik kapanma modundayken yapılır, çünkü tuş basılı tutulurken birçok araçta koruma devre dışıdır — bu bilinçli bir tasarımdır: sürücü tuşu basılı tuttuğu sürece camın buz ya da sıkı fitil gibi bir direnci yenmesine izin verilir. Beklenen sonuç camın durup belli bir miktar geri inmesidir. Deneme camın farklı yüksekliklerinde birkaç kez tekrarlanır, çünkü koruma stroğun bazı bölgelerinde farklı davranabilir; özellikle tam kapanmaya çok yakın son bölgede birçok araçta koruma bilinçli olarak devre dışıdır, aksi hâlde cam fitile bastığı anda kendini sıkışma sanardı." },
+          { "label": "Parmakla denenir, en gerçekçi test budur", "verdict": "parmak", "explain": "Koruma çalışmıyorsa test doğrudan yaralanmayla biter." },
+          { "label": "Süngerle denenir", "verdict": "sunger", "explain": "Sünger ezilir, direnç üretmez ve yanlış sonuç verir." },
+          { "label": "Denemeye gerek yok, öğrenme yapıldıysa çalışır", "verdict": "gereksiz", "explain": "Güvenlik işlevi varsayımla teslim edilmez, denenerek doğrulanır." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Tam kapanmaya yakın son bölgede korumanın devre dışı olması bir arıza değil, tasarımdır — fitile basmak sıkışma sayılmaz."
+    },
+    {
+      "id": 7,
+      "instruction": "Teslim öncesi son adım.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kapi-ic-dosemesi",
+        "question": "Müşteriye ne söylenir?",
+        "options": [
+          { "label": "Yapılan işin ne olduğu, korumanın denendiği ve akü sökülürse otomatik işlevin yeniden öğrenme isteyebileceği — çünkü bu bilinmezse müşteri ileride haksız yere arıza sanır", "verdict": "bilgilendir", "correct": true, "explain": "Bu alandaki işlerin çoğu görünmezdir: kanal temizlendi, hiza düzeltildi, öğrenme yapıldı — hiçbiri gözle görülmez ve müşteri yalnız camın çalıştığını görür. Bu yüzden teslim konuşması işin bir parçasıdır ve üç başlığı vardır. Birincisi ne yapıldığı: 'kanal kirlenmiş ve kurumuştu, temizleyip bakımını yaptım, cam hizasını düzelttim' cümlesi müşteriye parça değiştirmeden çözülen bir sorunun değerini anlatır. İkincisi korumanın denendiğidir; bir güvenlik işlevinin doğrulandığını söylemek güven verir. Üçüncüsü ve en faydalısı bir uyarıdır: akü sökülürse ya da uzun süre boşalırsa otomatik iniş-kalkış çalışmayabilir ve öğrenme gerekebilir. Bu bilgi verilmezse müşteri altı ay sonra akü değiştirdiğinde 'senin yaptığın iş bozuldu' diye döner; verilirse aynı müşteri sorunu kendisi tanır. Dördüncü ve dürüstlük gerektiren nokta şudur: aynı yaşta olan diğer kapıların kanalları da benzer durumdadır, bugün yapılmadıysa yakında sıra onlara gelecektir — bu bir satış cümlesi değil, gerçeğin söylenmesidir ve üç kategoriyle sunulur: şimdi gerekli, takip edilmeli, iyi durumda." },
+          { "label": "Bir şey söylemeye gerek yok, cam çalışıyor", "verdict": "sessiz", "explain": "Görünmez işler anlatılmazsa hem değeri anlaşılmaz hem ileride haksız suçlama gelir." },
+          { "label": "Yalnız fatura verilir", "verdict": "fatura", "explain": "Teslim konuşması işin parçasıdır." },
+          { "label": "Diğer kapıların da hemen yapılması şart koşulur", "verdict": "sart", "explain": "Gerçek söylenir ama karar müşterinindir; üç kategoriyle sunulur." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Aşama 2'nin son dersi ayna ve ısıtma: aynı kapıda kalan iki işlev daha."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Sıkışma koruması engeli nasıl algılar?",
+        "a": "motoru-izle",
+        "options": [
+          { "verdict": "motoru-izle", "label": "Motoru izleyerek: engel varken akım yükselir ve dönme hızı düşer, modül bunu görüp camı durdurup geri indirir", "explain": "Camın önünde bir sensör yoktur; sistem engeli motorun zorlanmasından anlar. Bunun iki sonucu vardır: koruma bir karşılaştırmaya dayanır ve normal direnci bilmesi gerekir (bu yüzden öğrenme şarttır), ayrıca kirli ya da kurumuş kanal sürtünmeyi artırınca sistem bunu sıkışma sanar — 'cam sürekli geri iniyor' şikâyeti çoğu zaman mekaniktir." },
+          { "verdict": "sensor", "label": "Cam kenarındaki sensör görür", "explain": "Ölçülen şey motorun zorlanmasıdır." },
+          { "verdict": "fitil", "label": "Basınç ölçen fitil vardır", "explain": "Camlarda genel yöntem motor izlemedir." },
+          { "verdict": "yok", "label": "Böyle bir koruma yoktur", "explain": "Otomatik kapanmada tuş bırakılmıştır; koruma bağımsız çalışır." }
+        ]
+      },
+      {
+        "q": "Akü söküldükten sonra cam otomatik kalkmıyor, yalnız tuş basılıyken çalışıyor. Sebep nedir?",
+        "a": "ogrenme-gerek",
+        "options": [
+          { "verdict": "ogrenme-gerek", "label": "Sistem uç konumları ve normal direnci unuttu; öğrenme yapılana kadar otomatik işlev devre dışıdır", "explain": "Koruma bir karşılaştırmaya dayanır ve bu bilgi besleme kesildiğinde ya da motor/kriko/modül değiştiğinde kaybolur. Modül bilgi yokken sorumlu davranır: otomatik kapanmayı kapatır, yalnız tuş basılıyken enerji verir. Doğru sıra önce mekanik bakım ve hiza, sonra öğrenmedir — kirli kanalla yapılan öğrenme kirli hâli normal kabul eder." },
+          { "verdict": "modul", "label": "Modül bozulmuştur", "explain": "Beklenen davranıştır." },
+          { "verdict": "motor", "label": "Motor zarar görmüştür", "explain": "Tuşla çalışıyor, sağlamdır." },
+          { "verdict": "sigorta", "label": "Sigorta atmıştır", "explain": "Besleme var." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2'deki 8,6 A ve 4,1 A SENARYO okumalarıdır; istenen FARKTIR (4,5 A) ve ders bir azami akım sınırı vermiyor — karşılaştırma aynı araçtaki sorunsuz kapıyla yapılıyor.",
+    "sourceRequired": "Öğrenme işleminin adımları, azami motor akımı, kanal kayganlaştırıcı ürün tipi ve korumanın devre dışı kaldığı son bölge ölçüsü bilinçle VERİLMEDİ; hepsi araca ve üretici belgesine aittir. Yanlış kayganlaştırıcı lastiği şişirebileceği için ürün seçimi araca uygun olmalıdır.",
+    "kapsam": "Sıkışma korumasının iptali KAPSAM DIŞIDIR ve öğretilmez — güvenlik donanımıdır. Modül kodlama ve teşhis cihazıyla öğrenme yaptırma bu uygulamada yok; ders yalnız öğrenmenin NE ZAMAN gerektiğini ve sırayı öğretiyor.",
+    "reviewedByMechanic": false
+  }
+}

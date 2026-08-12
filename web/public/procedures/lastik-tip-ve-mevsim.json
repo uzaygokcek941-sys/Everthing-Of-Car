@@ -1,0 +1,179 @@
+{
+  "id": "lastik.tip-ve-mevsim",
+  "area": "lastik-tekerlek",
+  "stage": 1,
+  "title": "Yaz, Kış, Dört Mevsim ve Run-Flat",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 30,
+  "prerequisites": ["lastik.yanak-okuma"],
+  "learningGoals": [
+    "M+S ile üç tepeli kar tanesi işareti arasındaki farkı bilmek",
+    "Kış lastiğini kış lastiği yapan şeyin desen değil karışım olduğunu açıklamak",
+    "Run-flat lastiğin neden TPMS'siz kullanılamayacağını anlamak"
+  ],
+
+  "safety": [
+    { "rule": "Aynı araçta farklı mevsim lastikleri karışık kullanılmaz", "why": "Farklı karışımlar farklı tutuş verir; fren ve virajda araç öngörülemez biçimde davranır", "blocksStart": true },
+    { "rule": "Run-flat lastik, üretici izin vermedikçe onarılmaz", "why": "Basınçsız gidilmiş bir run-flat'in iç yapısı gözle görülmeyen biçimde zarar görmüş olabilir; onarılıp yola çıkarılırsa dağılır", "blocksStart": true },
+    { "rule": "TPMS'i olmayan bir araçta run-flat kullanılmaz", "why": "Run-flat'in amacı basınç sıfırken bir süre gidebilmektir; sürücü inişi hissetmediği için uyarı sistemi olmadan basınçsız kilometrelerce gidilir", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "İki lastik var. Birinin yanağında M+S yazıyor, diğerinde hem M+S hem de içinde kar tanesi olan üç tepeli dağ işareti var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik-yanagi",
+        "question": "Aradaki fark ne?",
+        "options": [
+          { "label": "M+S yalnız desen beyanıdır, üretici kendisi koyar; üç tepeli kar tanesi ise kar performansı testinden geçmiş olmayı gösterir", "verdict": "test-farki", "correct": true, "explain": "Bu iki işaret aynı şeyi söylemez ve karıştırılmaları sahadaki en yaygın yanlıştır. M+S (çamur ve kar) bir desen tanımıdır: lastiğin sırtında belirli ölçüde boşluk ve blok yapısı bulunduğunu üreticinin kendi beyanıyla belirtir. Bağımsız bir kar testi gerektirmez, bu yüzden yalnız M+S taşıyan bir lastik gerçek kış şartlarında beklendiği gibi davranmayabilir. Üç tepeli dağ ve içindeki kar tanesi işareti ise farklıdır: bu işareti taşıyabilmek için lastiğin karda tanımlı bir performans testinden geçmesi gerekir. Yani biri bir tarif, diğeri bir sonuçtur. Kış şartlarının ciddi olduğu yerlerde ve kış lastiği zorunluluğunu düzenleyen mevzuatlarda esas alınan işaret genellikle bu ikincisidir. Ustanın işi, müşteriye 'M+S yazıyor, kış lastiğidir' dememektir." },
+          { "label": "İkisi de aynı şeydir, biri kısaltmasıdır", "verdict": "ayni", "explain": "Aynı değil: biri beyan, diğeri test sonucu." },
+          { "label": "Kar tanesi işareti yalnız süstür", "verdict": "sus", "explain": "Süs değil; taşınabilmesi için tanımlı bir testten geçilmesi gerekir." },
+          { "label": "M+S daha üstün bir işarettir", "verdict": "ms-ustun", "explain": "Tersine: M+S daha zayıf bir beyandır, test şartı yoktur." }
+        ]
+      },
+      "camera": "yanak",
+      "teachingNote": "Bir işaretin ne söylediğini bilmek kadar ne söylemediğini bilmek de önemlidir. M+S 'kış lastiği' demez, 'deseni şu tarife uyar' der."
+    },
+    {
+      "id": 2,
+      "instruction": "Müşteri soruyor: deseni derin bir yaz lastiği kışın iş görmez mi?",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik",
+        "question": "Kış lastiğini kış lastiği yapan asıl şey nedir?",
+        "options": [
+          { "label": "Kauçuk karışımı: soğukta esnek kalacak biçimde üretilir. Desen ve lameller bunun üstüne gelir", "verdict": "karisim", "correct": true, "explain": "Lastiğin yola tutunması, kauçuğun yol yüzeyindeki mikro pürüzlere anlık olarak uyabilmesiyle olur; bunun için kauçuğun esnek olması gerekir. Yaz lastiğinin karışımı sıcakta en iyi çalışacak biçimde ayarlanmıştır ve sıcaklık düştükçe sertleşir. Sertleşen kauçuk yüzeye uyum sağlayamaz, temas fiilen küçülür ve tutuş düşer — desen ne kadar derin olursa olsun. Kış lastiğinin karışımı ise düşük sıcaklıkta esnek kalacak biçimde hazırlanır; asıl fark budur ve gözle görülmez. Bunun üstüne desen gelir: kış deseninde bloklar üzerinde lamel denen ince kesikler bulunur, bu kesikler karla ve buzla kenar teması üretir ve suyu emer. Yani sıralama şudur — önce karışım, sonra lamel, sonra kanal yapısı. Yalnız desene bakarak karar vermek bu yüzden yanlıştır." },
+          { "label": "Yalnız desenin derinliği", "verdict": "desen-derinligi", "explain": "Derinlik su tahliyesine yardım eder ama soğukta sertleşen kauçuğu esnetmez." },
+          { "label": "Daha yumuşak bir jant kullanılması", "verdict": "jant", "explain": "Jantın malzemesiyle ilgisi yok; fark lastiğin karışımında." },
+          { "label": "Daha düşük basınçla kullanılması", "verdict": "basinc", "explain": "Basınç ayrı bir konudur ve üretici değerinin dışına çıkılmaz." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bu dersin özeti: gözle görülmeyen fark, gözle görülen farktan daha belirleyici. Karışımı yanaktan okuyamazsın; işaretinden ve ürün bilgisinden bilirsin."
+    },
+    {
+      "id": 3,
+      "instruction": "Başka bir müşteri kış lastiklerini yaz boyunca da kullanmak istiyor: nasılsa iyi lastik diyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik",
+        "question": "Ne olur?",
+        "options": [
+          { "label": "Sıcakta yumuşak karışım çabuk aşınır; yol tutuşu ve fren mesafesi yaz lastiğine göre kötüleşir", "verdict": "sicakta-kotu", "correct": true, "explain": "Kış karışımı soğukta esnek kalmak üzere tasarlandığı için sıcakta gereğinden yumuşak davranır. Bunun üç sonucu olur. Birincisi aşınmadır: yumuşak kauçuk sıcak asfaltta hızla eksilir, müşteri kış lastiğini bir yaz içinde bitirir ve kışa yeni lastikle girmek zorunda kalır. İkincisi tutuştur; yumuşayan bloklar viraj ve fren altında bükülür, temas kararsızlaşır ve fren mesafesi aynı şartlarda yaz lastiğine göre uzar. Üçüncüsü ıslak zemindir: kış deseni sıcak ve ıslak asfalt için değil, kar ve buz için tasarlanmıştır. Yani kış lastiğini yazın kullanmak hem pahalı hem güvensizdir. Aynı mantık tersi için de geçerlidir ve orada sonuç daha ağırdır: yaz lastiğiyle kışa girmek fren mesafesini belirgin biçimde uzatır." },
+          { "label": "Hiçbir şey olmaz, kış lastiği her mevsim daha iyidir", "verdict": "her-mevsim-iyi", "explain": "Kış lastiği sıcakta yumuşar; hem çabuk biter hem daha az tutar." },
+          { "label": "Sadece biraz daha gürültülü olur", "verdict": "gurultu", "explain": "Gürültü sonuçlardan yalnız biri; asıl konu aşınma ve tutuş." },
+          { "label": "Yakıt tüketimi düşer", "verdict": "yakit", "explain": "Tersine, yumuşak karışım yuvarlanma direncini artırır." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Müşteriye maliyet üzerinden anlatmak burada işe yarar: yazın kullanılan kış lastiği tasarruf değil, erken masraf üretir."
+    },
+    {
+      "id": 4,
+      "instruction": "Üçüncü müşteri dört mevsim lastik istiyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik",
+        "question": "Dört mevsim lastik ne vaat eder?",
+        "options": [
+          { "label": "Bir uzlaşma: iki uçta da özel lastikler kadar iyi değildir, ama iki takım lastik ve mevsimlik değişim gerektirmez", "verdict": "uzlasma", "correct": true, "explain": "Dört mevsim lastik, karışımı ve deseni iki uç şart arasında dengelemek üzere tasarlanır. Bu tanımı gereği bir uzlaşmadır: sıcakta yaz lastiği kadar kararlı, karda kış lastiği kadar tutucu değildir. Buna karşılık iki takım lastik alma, mevsimlik değiştirme ve depolama yükünü ortadan kaldırır. Bu yüzden doğru soru 'iyi mi kötü mü' değil, 'bu araç nerede ve nasıl kullanılıyor' sorusudur. Kışı sert geçen, karlı ve buzlu yolların olduğu bir bölgede sürekli araç kullanan biri için yetersiz kalır. Kışı ılıman geçen bir şehirde, kar gördüğünde aracı kullanmayabilen biri için makul bir seçimdir. Ayrıca dört mevsim lastikler kendi aralarında da farklıdır: bazıları üç tepeli kar tanesi işaretini taşır, bazıları yalnız M+S beyanı verir; bu ayrım lastiğin kışa yaklaşımını doğrudan gösterir." },
+          { "label": "Her mevsimde yaz ve kış lastiği kadar iyi performans", "verdict": "her-sey", "explain": "Tasarımı gereği uzlaşmadır; iki uçta da özel lastiklerin gerisinde kalır." },
+          { "label": "Yalnız yazın kullanılabilir", "verdict": "yalniz-yaz", "explain": "Amacı iki mevsimi de karşılamak; kışa yaklaşımı işaretinden okunur." },
+          { "label": "Kış lastiği zorunluluğunun olduğu her yerde geçerlidir", "verdict": "her-yerde-gecerli", "explain": "Geçerlilik mevzuatın hangi işareti kabul ettiğine bağlıdır; varsayılamaz." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Doğru öneri, müşterinin kullanımını sormadan verilemez. Bu ders ürünü değil soruyu öğretiyor: nerede, ne kadar, hangi şartta?"
+    },
+    {
+      "id": 5,
+      "instruction": "Bir araca run-flat lastik takılı. Yanağı belirgin biçimde kalın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik-yanagi",
+        "question": "Run-flat nasıl çalışır?",
+        "options": [
+          { "label": "Takviyeli yanak, basınç sıfırken aracın ağırlığını sınırlı bir hız ve mesafede taşır; bu yüzden TPMS zorunludur", "verdict": "takviyeli-yanak", "correct": true, "explain": "Normal bir lastikte aracın ağırlığını taşıyan şey kauçuk değil, içindeki basınçlı havadır; hava kaçtığında yanak ezilir ve lastik jantla yol arasında dağılır. Run-flat lastikte yanak, havasız durumda da aracın ağırlığını bir süre taşıyabilecek biçimde takviye edilmiştir. Böylece basınç tamamen kaybolsa bile araç güvenli bir yere kadar sınırlı bir hızla ve sınırlı bir mesafede gidebilir; bu sınırları lastik ve araç üreticisi belirler, tahminle uzatılmaz. Buradaki asıl incelik şudur: takviyeli yanak sayesinde sürücü basıncın düştüğünü direksiyonda hissetmez. Uyarı gelmezse basınçsız hâlde kilometrelerce gidilir ve lastik içeriden ısınıp dağılır. Bu yüzden run-flat, lastik basınç uyarı sistemi olmayan bir araçta kullanılmaz — sistem burada bir konfor özelliği değil, işleyişin parçasıdır." },
+          { "label": "İçinde jel bulunur, delik kendiliğinden kapanır", "verdict": "jel", "explain": "O ayrı bir teknolojidir (kendinden yapışkanlı lastik); run-flat'in ilkesi yanak takviyesidir." },
+          { "label": "Basıncı düşük kullanılmak için üretilmiştir", "verdict": "dusuk-basinc", "explain": "Normal kullanımda basıncı üretici değerindedir; takviye yalnız basınç kaybı hâli içindir." },
+          { "label": "İkinci bir iç lastiği vardır", "verdict": "ic-lastik", "explain": "İç lastik ayrı ve eski bir yapıdır; run-flat'te yanak takviyelidir." }
+        ]
+      },
+      "camera": "yanak",
+      "teachingNote": "Bir parçanın çalışma ilkesini bilmek, hangi sistemle birlikte çalışması gerektiğini de söyler. Run-flat ile TPMS ayrılmaz bir çifttir."
+    },
+    {
+      "id": 6,
+      "instruction": "Müşterinin bir run-flat lastiği patlamış. Yalnız onu değiştirmek istiyor ve elde standart lastik var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik",
+        "question": "Ne yapılır?",
+        "options": [
+          { "label": "Aynı akstaki iki lastiğin tipi aynı olur; araç üreticisi açıkça izin vermedikçe run-flat ile standart karıştırılmaz", "verdict": "karistirma", "correct": true, "explain": "Run-flat ve standart lastiğin yanak sertlikleri farklıdır; bu, aynı akstaki iki tekerleğin viraj ve fren altında farklı bükülmesi anlamına gelir. Araç, aynı yükte iki farklı tepki veren tekerlekle dengesiz davranır ve bu fark özellikle acil bir manevrada ortaya çıkar. Ayrıca süspansiyon ayarları da lastik tipine göre yapılmış olabilir. Bu yüzden kural aynı akstaki eşitliktir. Aracın orijinal donanımı run-flat ise dört lastiğin de run-flat olması esastır; müşteri standart lastiğe geçmek istiyorsa bu tüm takımı kapsayan bir karardır ve o zaman araçta yedek lastik ya da tamir kiti bulunması gerekir — çünkü run-flat'li araçların çoğunda yedek yoktur." },
+          { "label": "Takılır, tek lastik fark etmez", "verdict": "tek-lastik", "explain": "Yanak sertliği farkı aynı akstaki iki tekerleği farklı davrandırır." },
+          { "label": "Standart lastik takılır ama basıncı yükseltilir", "verdict": "basinc-artir", "explain": "Basınç yanak yapısındaki farkı gidermez; ayrıca üretici değerinin dışına çıkılmaz." },
+          { "label": "Arka aksa takılırsa sorun olmaz", "verdict": "arkaya", "explain": "Aynı aks kuralı arka için de geçerlidir." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bu alanın tekrar eden kuralı: aynı aksta ölçü, yapı, desen, mevsim ve tip aynı olur. Beşinci madde run-flat ile giriyor."
+    },
+    {
+      "id": 7,
+      "instruction": "Kış lastiği sezonu geliyor, müşteri ne zaman değiştireceğini soruyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik",
+        "question": "Nasıl cevap verilir?",
+        "options": [
+          { "label": "Teknik zaman sıcaklığa ve bölgeye göre belirlenir; zorunluluk varsa kapsamını ve tarihini yürürlükteki mevzuat söyler", "verdict": "mevzuat-ve-sicaklik", "correct": true, "explain": "İki ayrı soru vardır ve karıştırılmamalıdır. Teknik soru şudur: lastik ne zaman iş görmeye başlar? Cevap sıcaklıktır — kış lastiği havalar soğuduğunda, yaz lastiği ısındığında avantajlı hâle gelir; karar takvimden çok bölgenin ve o yılın hava durumundan çıkar. Hukuki soru ise ayrıdır: kış lastiği kullanımı bazı araç sınıfları ve bazı dönemler için zorunlu olabilir; bu zorunluluğun kapsamı, tarihleri ve kabul edilen işaret ülkeye ve yıla göre değişir. Bu yüzden ders belirli bir tarih vermiyor; usta yürürlükteki düzenlemeye bakar ve müşteriye ikisini ayrı ayrı söyler. Ayrıca değişim sırasında her lastiğin diş derinliği ölçülür ve depodan gelen takımın yanak durumu kontrol edilir — sezon değişimi, yılda iki kez gelen ücretsiz bir muayene fırsatıdır." },
+          { "label": "Her yıl aynı tarihte değiştirilir", "verdict": "sabit-tarih", "explain": "Bölge ve o yılın hava durumu değişir; mevzuat tarihleri de sabit varsayılamaz." },
+          { "label": "Kar yağınca değiştirilir", "verdict": "kar-yaginca", "explain": "Kış lastiğinin avantajı kardan önce, sıcaklık düştüğünde başlar." },
+          { "label": "Zorunluluk yoksa hiç değiştirilmez", "verdict": "zorunlu-degilse", "explain": "Zorunluluk hukuki bir alt sınırdır; teknik gerekçe ondan bağımsız." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Mevzuata bağlı her cevapta ustanın doğru cümlesi şudur: yürürlükteki düzenleme şunu söylüyor — ezberden değil, o günkü kaynaktan."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "M+S işareti ile üç tepeli kar tanesi işareti arasındaki fark nedir?",
+        "a": "beyan-test",
+        "options": [
+          { "verdict": "beyan-test", "label": "M+S üreticinin desen beyanıdır; üç tepeli kar tanesi tanımlı bir kar performansı testinden geçmiş olmayı gösterir", "explain": "M+S bağımsız bir test gerektirmez, yalnız sırt yapısının bir tarife uyduğunu söyler. Kar tanesi işareti ise taşınabilmesi için testten geçilmesini şart koşar. Kış lastiği zorunluluğunu düzenleyen mevzuatlarda genellikle esas alınan işaret bu ikincisidir; 'M+S yazıyor, kış lastiğidir' demek bu yüzden yanlıştır." },
+          { "verdict": "ayni-sey", "label": "Aynı şeyin iki gösterimi", "explain": "Biri beyan, diğeri test sonucu — aynı değil." },
+          { "verdict": "marka", "label": "Farklı markaların kendi işaretleri", "explain": "İkisi de markadan bağımsız, tanımlı işaretlerdir." },
+          { "verdict": "olcu", "label": "Ölçüyle ilgili işaretler", "explain": "Ölçü ayrı bir kodla verilir." }
+        ]
+      },
+      {
+        "q": "Run-flat lastik neden TPMS'siz bir araçta kullanılmaz?",
+        "a": "hissedilmez",
+        "options": [
+          { "verdict": "hissedilmez", "label": "Takviyeli yanak sayesinde sürücü basınç kaybını hissetmez; uyarı gelmezse basınçsız kilometrelerce gidilir ve lastik dağılır", "explain": "Run-flat'in çalışma ilkesi, havasız durumda ağırlığı yanağın taşımasıdır. Bu, aracı sürülebilir tuttuğu için basınç kaybı direksiyonda belli olmaz. Uyarı sistemi olmadan sürücü durumu fark etmez, üreticinin izin verdiği sınırlı hız ve mesafe aşılır ve lastik içeriden ısınıp dağılır. Burada TPMS bir konfor değil, sistemin parçasıdır." },
+          { "verdict": "basinc-tutmaz", "label": "Basıncı tutamadığı için", "explain": "Normal kullanımda basıncını tutar; mesele kaybın fark edilmemesi." },
+          { "verdict": "yasak", "label": "Yalnız mevzuat yasakladığı için", "explain": "Sebep teknik; mevzuat bunun sonucu." },
+          { "verdict": "sensor-zorunlu", "label": "Sensör lastiğin içine sabitlendiği için", "explain": "Sensör konumu ayrı konu; sebep uyarının olmaması." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "sourceRequired": "Bu derste hiçbir sayısal değer kullanılmadı ve künye gerektiren hiçbir iddia yok. Kış lastiğine geçiş için sahada söylenen sıcaklık eşiği bilinçle VERİLMEDİ: yaygın olarak tekrarlanan bir pratik kuraldır, künyelenmeden yazılırsa uydurma değer olur. Aynı şekilde run-flat'in basınçsız gidebileceği hız ve mesafe de verilmedi — lastik ve araç üreticisi belirler.",
+    "mevzuat": "Kış lastiği zorunluluğunun kapsamı, tarihleri ve kabul edilen işaret ülkeye ve yıla göre değişir. Ders bilinçle tarih vermiyor, yürürlükteki düzenlemeye bakılmasını söylüyor.",
+    "kapsam": "Kendinden yapışkanlı lastikler, ses sönümleyici köpüklü lastikler ve zincir kullanımı kapsam dışı. TPMS'in kendisi 6. aşamada işleniyor.",
+    "reviewedByMechanic": false
+  }
+}

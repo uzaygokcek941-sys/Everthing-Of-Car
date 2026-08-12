@@ -1,0 +1,173 @@
+{
+  "id": "elektrik.aydinlatma-arizasi",
+  "area": "arac-elektrik",
+  "stage": 5,
+  "title": "Yanmayan Lamba: Besleme mi, Şase mi, Lamba mı?",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 25,
+  "prerequisites": ["elektrik.far-degisimi", "elektrik.sase-arizasi"],
+  "learningGoals": [
+    "Arızayı besleme, şase ve tüketici arasında üç ölçümle bölmek",
+    "Test lambası ile voltmetrenin neyi farklı gösterdiğini bilmek",
+    "Gerilim var ama lamba yanmıyor durumunu yük altında ölçerek açıklamak"
+  ],
+
+  "safety": [
+    { "rule": "Ölçüm probları soket pinlerini genişletmeyecek biçimde kullanılır", "why": "Genişleyen pin bir daha sıkı kavramaz ve ölçüm sırasında kalıcı bir aralıklı arıza üretilmiş olur. Ölçüm arka taraftan ya da uygun ince uçla yapılır", "blocksStart": true },
+    { "rule": "Kumanda uçlarına test lambası bağlanmaz", "why": "Test lambası devreden kayda değer akım çeker. Kontrol ünitesi çıkışı gibi düşük akımlı bir uçta bu yük çıkışı bozabilir; oralarda voltmetre kullanılır", "blocksStart": true },
+    { "rule": "Arıza ararken sigorta atlatılmaz ve tüketici doğrudan beslenmez", "why": "Doğrudan besleme, arızalı bir devrede korumasız bir akım yolu açar. Test yapılacaksa sigortalı köprü kullanılır", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.multimetre", "label": "Dijital multimetre", "required": true },
+    { "id": "tool.test-lambasi", "label": "Test lambası", "required": false },
+    { "id": "tool.sema", "label": "Araç devre şeması", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Sağ arka lamba yanmıyor. Diğer bütün lambalar normal.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.far-ampulu",
+        "question": "Arızanın kapsamı nereyi işaret eder?",
+        "options": [
+          { "label": "Tek lamba etkilendiğine göre arıza o kolun kendisindedir: ampulü, soketi, kendi kablosu ya da kendi şase ucu", "verdict": "kendi-kolu", "correct": true, "explain": "Araçtaki tüketiciler paralel bağlıdır ve her birinin kaynağa kendi yolu vardır. Bu yüzden tek bir lambanın etkilenmesi, ortak besleme ve ortak şasenin sağlam olduğunu söyler — onlar bozuk olsaydı aynı gruptaki diğer lambalar da etkilenirdi. Arama alanı böylece o kolun kendisine iner: ampul, soket, o kola ait kablo ve o kolun şase bağlantısı. Bu tek soru, ölçüme başlamadan önce ihtimallerin büyük kısmını eler. Tersi de geçerlidir: birkaç lamba birlikte zayıfladıysa ortak noktaya bakılır, bütün araç etkilendiyse kaynağa." },
+          { "label": "Ortak şase noktasında", "verdict": "ortak-sase", "explain": "Ortak nokta bozuk olsaydı aynı şaseyi paylaşan diğer lambalar da etkilenirdi." },
+          { "label": "Akü zayıftır", "verdict": "aku", "explain": "Akü bütün aracı etkiler; burada tek kol etkilenmiş." },
+          { "label": "Ana sigorta atmıştır", "verdict": "ana-sigorta", "explain": "Ana sigorta atsaydı devrenin tamamı ölürdü." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Arızanın kapsamı yerini söyler. Bu cümleyi seri-paralel dersinde öğrendin; burası onun sahadaki ilk kullanımı."
+    },
+    {
+      "id": 2,
+      "instruction": "Ölçüm için soketi ayır.",
+      "interaction": {
+        "type": "press-and-pull",
+        "target": "part.far-soketi"
+      },
+      "camera": "tezgah",
+      "hint": "Tırnağa bas, gövdeden çek.",
+      "teachingNote": "Ampulü söküp gözle bakmak da bir adımdır ama tek başına karar vermez: sağlam görünen bir ampul içten kopmuş olabilir ve ince bir kopukluğu gözle ayırt etmek her zaman mümkün değildir."
+    },
+    {
+      "id": 3,
+      "instruction": "Soket ayrık. Ölçüm sırasını kuracaksın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.far-soketi",
+        "question": "Hangi üç ölçüm arızayı böler?",
+        "options": [
+          { "label": "Besleme ucu ile gövde arası, şase ucu ile gövde arası, bir de ampulün kendisi; üçü arızayı besleme, dönüş ve tüketici arasında ayırır", "verdict": "uc-olcum", "correct": true, "explain": "Bir tüketicinin çalışması için üç şey gerekir: gelen besleme, giden dönüş ve sağlam bir tüketici. Üç ölçüm bunları tek tek sınar. Besleme ucu ile gövde arasında tam gerilim okunmuyorsa arıza yukarıdadır — sigorta, anahtar, röle ya da o kablo. Şase ucu ile gövde arasında kayda değer bir gerilim okunuyorsa dönüş yolu dirençlidir. İkisi de temizse geriye ampul kalır ve o da ayrıca ölçülür. Bu sıra bakılacak yer sayısını her adımda azaltır ve hiçbir noktayı atlamaz; ikisiyle yetinmek çoğu zaman yanlış parçayı suçlamakla biter." },
+          { "label": "Yalnız ampulün direncine bakmak yeterli", "verdict": "sadece-ampul", "explain": "Ampul sağlam çıkarsa hâlâ iki dal açıktır; besleme ve dönüş ayrıca sınanır." },
+          { "label": "Sigortaya bakmak yeterli", "verdict": "sigorta", "explain": "Sigorta bir başlangıçtır ama sağlam sigorta besleme yolunun tamamını garanti etmez." },
+          { "label": "Hata kodu okunur", "verdict": "kod", "explain": "Bazı araçlarda ampul arızası kod üretir ama kod arızanın hangi noktada olduğunu söylemez." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Üç ölçüm, üç dal: besleme, dönüş, tüketici. Aydınlatma arızalarının neredeyse tamamı bu üçünün birindedir."
+    },
+    {
+      "id": 4,
+      "instruction": "Ampul sağlam çıktı, beslemede tam gerilim var. Lamba yanarken şase ucu ile gövde arasında 1,10 V ölçtün; sağlam çalışan komşu lambada aynı ölçüm 0,05 V. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.multimetre-ekran",
+        "unit": "V",
+        "acceptRange": [1.0, 1.1]
+      },
+      "camera": "tezgah",
+      "hint": "1,10 eksi 0,05.",
+      "teachingNote": "Şase ucu ile gövde elektriksel olarak aynı nokta olmalıydı; aralarında bir volta yakın fark bulunması, dönüş yolunda ciddi bir direnç olduğunun kanıtıdır. Kaybolan bu gerilim ampule ulaşmıyor; lamba bu yüzden sönük yanıyor ya da hiç yanmıyor. Referansı yine araçtan aldın: aynı işi gören komşu lamba."
+    },
+    {
+      "id": 5,
+      "instruction": "Yanındaki çırak, 'ben voltmetreyle baktım, gerilim vardı' diyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.multimetre-ekran",
+        "question": "Voltmetre gerilim gösterdiği hâlde lamba neden yanmayabilir?",
+        "options": [
+          { "label": "Voltmetre neredeyse hiç akım çekmez; kopmaya yakın ya da çok dirençli bir yol yüksüz ölçümde tam gerilim gösterebilir, yük bağlanınca çöker", "verdict": "yuksuz-olcum", "correct": true, "explain": "Voltmetrenin iç direnci çok yüksektir ve bu kasıtlıdır: ölçtüğü devreyi bozmaması gerekir. Ama bu özellik bir tuzak da yaratır. Yalnız birkaç teli kalmış bir kablo ya da paslı bir bağlantı, voltmetrenin çektiği o minicik akımı rahatça geçirir ve ekranda tam gerilim görünür. Lamba bağlandığında ise gerçek akım istenir, zayıf yol taşıyamaz ve gerilim çöker. Bu yüzden 'gerilim var' cümlesi tek başına yeterli değildir; ölçüm yük altında yapılmalı ya da yük uygulayan bir test lambası kullanılmalıdır. Test lambası devreden gerçek bir akım çeker: zayıf yolda ya hiç yanmaz ya çok sönük yanar ve arızayı hemen ele verir. Kumanda uçlarında ise test lambası kullanılmaz, çünkü çektiği akım hassas çıkışlara zarar verebilir." },
+          { "label": "Voltmetre bozuktur", "verdict": "alet-bozuk", "explain": "Alet doğru okur; okuduğu şey yüksüz gerilimdir ve devrenin taşıma kapasitesini göstermez." },
+          { "label": "Ampul mutlaka bozuktur", "verdict": "ampul", "explain": "Ampul bu senaryoda sağlam çıktı; sorun yolun yük altındaki davranışında." },
+          { "label": "Gerilim varsa lamba her hâlükârda yanar", "verdict": "yanar", "explain": "Yüksüz ölçümdeki gerilim, akım taşıma kapasitesini garanti etmez." }
+        ]
+      },
+      "camera": "tezgah",
+      "hint": "Voltmetre yol var mı der; test lambası yol yükü taşıyor mu der.",
+      "teachingNote": "Bu, elektrikteki en pahalı yanılgının ikinci yüzüdür. Süreklilik testinde 'ötüyor' ne kadar yetersizse, gerilim ölçümünde 'var' da o kadar yetersizdir. Karar her zaman yük altında verilir."
+    },
+    {
+      "id": 6,
+      "instruction": "Müşteri, arkadaki ampulleri LED tipiyle değiştirmek istiyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.role",
+        "question": "Ampul tipini değiştirmenin devre açısından sonucu ne olur?",
+        "options": [
+          { "label": "Çekilen akım değişir; ampul denetimi yapan devreler bunu arıza sanabilir ve sinyal ritmi ya da uyarı davranışı değişebilir", "verdict": "akim-degisir", "correct": true, "explain": "Araçtaki bazı devreler ampulün çektiği akımı ölçerek onun sağlam olup olmadığını anlar. Çok daha az akım çeken bir ampul takıldığında bu devre 'ampul yanmış' sonucuna varır: gösterge uyarısı yanar, sinyal ritmi hızlanır ya da lamba hiç çalışmaz. Piyasada bu farkı kapatmak için ek direnç kullanılır; ama o direnç, tasarruf edilen enerjiyi ısıya çevirir, bulunduğu yerde ısınır ve montajı dikkat ister. Ayrıca ışık dağılımı meselesi vardır: gövde ve yansıtıcı belirli bir ışık kaynağına göre tasarlanmıştır, farklı bir kaynak huzmeyi bozabilir. Karar teknik olarak alınır: aracın devresi bu değişimi kaldırıyor mu, gövde uygun mu, mevzuat izin veriyor mu." },
+          { "label": "Hiçbir şey değişmez, ampul ampuldür", "verdict": "degismez", "explain": "Çekilen akım değişir ve akımı denetleyen devreler bundan etkilenir." },
+          { "label": "Sigorta değeri de büyütülmelidir", "verdict": "sigorta-buyut", "explain": "Akım azalıyorsa sigorta büyütülmez; sigorta zaten kabloya göre seçilir." },
+          { "label": "Yalnız rengi değişir", "verdict": "renk", "explain": "Renk de değişebilir ama devre açısından asıl fark çekilen akımdadır." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Bir tüketiciyi değiştirmek, onun devredeki elektriksel imzasını da değiştirir. Akımı denetleyen bir sistem varsa o imza, sistemin gözünde bir arıza hâline gelebilir."
+    },
+    {
+      "id": 7,
+      "instruction": "Şase onarıldı, lamba normal yandı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sase-noktasi",
+        "question": "Kapatmadan önce ne yapılır?",
+        "options": [
+          { "label": "Aynı ölçüm yük altında tekrarlanır ve komşu lambayla karşılaştırılır; ayrıca aynı şaseyi paylaşan diğer devreler de denenir", "verdict": "tekrarla-ve-komsulari-dene", "correct": true, "explain": "Doğrulamanın ilk yarısı ölçümdür: şase ucu ile gövde arasındaki fark komşu lambadaki değere inmişse dönüş yolu onarılmıştır. İkinci yarısı kapsamdır. Şase noktaları çoğu zaman birden çok devre tarafından paylaşılır; onarırken o noktadaki diğer pabuçları da söküp taktıysan onların da düzgün oturduğunu görmen gerekir. Bu yüzden aynı şaseyi kullanan lambalar, sinyaller ve varsa diğer tüketiciler kısaca denenir. Bir arızayı onarırken komşusunu bozmak bu meslekte sık görülür ve müşteri geri geldiğinde ilk suçlanan son dokunulan yerdir." },
+          { "label": "Lambanın yandığını görmek yeterli", "verdict": "yandi", "explain": "Yanıyor olması kaybın tamamen gittiğini göstermez; ölçüm gerekir." },
+          { "label": "Sigorta değiştirilir", "verdict": "sigorta", "explain": "Sigorta atmamıştı; değiştirmenin bu arızayla ilgisi yok." },
+          { "label": "Müşteriye gece denemesi söylenir", "verdict": "musteri", "explain": "Doğrulamayı müşteriye devretmek işi yarım bırakmaktır." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Ortak bir noktaya dokunduysan, o noktayı paylaşan her şeyi denemeden işi kapatma."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Yanmayan bir lambada hangi üç ölçüm arızayı böler?",
+        "a": "besleme-donus-tuketici",
+        "options": [
+          { "verdict": "besleme-donus-tuketici", "label": "Besleme ucu ile gövde arası, şase ucu ile gövde arası ve ampulün kendisi", "explain": "Bir tüketicinin çalışması için üç şey gerekir: gelen besleme, giden dönüş ve sağlam tüketici. Besleme ucunda tam gerilim yoksa arıza yukarıdadır — sigorta, anahtar, röle ya da kablo. Şase ucu ile gövde arasında kayda değer gerilim varsa dönüş yolu dirençlidir. İkisi de temizse geriye ampul kalır. Üç ölçüm hiçbir dalı atlamadan arama alanını her adımda küçültür; ikisiyle yetinmek çoğu zaman yanlış parçayı suçlamakla biter." },
+          { "verdict": "sadece-ampul", "label": "Yalnız ampulün ölçülmesi", "explain": "Ampul sağlam çıksa bile besleme ve dönüş dalları açık kalır." },
+          { "verdict": "sigorta-kod", "label": "Sigorta ve hata kodu", "explain": "İkisi de başlangıçtır ama arızanın noktasını vermez." },
+          { "verdict": "gozle", "label": "Gözle muayene yeterlidir", "explain": "İçten kopmuş bir ampul ve boya altındaki kötü şase gözle görünmez." }
+        ]
+      },
+      {
+        "q": "Voltmetre gerilim gösterdiği hâlde lamba neden yanmayabilir?",
+        "a": "yuksuz-olcum",
+        "options": [
+          { "verdict": "yuksuz-olcum", "label": "Voltmetre neredeyse hiç akım çekmez; zayıf bir yol yüksüz ölçümde tam gerilim gösterip yük bağlanınca çöker", "explain": "Voltmetrenin iç direnci çok yüksektir, bu yüzden ölçtüğü devreden kayda değer akım çekmez. Kopmaya yakın bir kablo ya da paslı bir bağlantı bu minicik akımı rahatça geçirir ve ekranda tam gerilim görünür; lamba bağlandığında gerçek akım istenir, zayıf yol taşıyamaz ve gerilim çöker. Bu yüzden karar yük altında verilir ya da devreden gerçek akım çeken bir test lambası kullanılır. Test lambası hassas kumanda uçlarında kullanılmaz, çünkü çektiği akım o çıkışlara zarar verebilir." },
+          { "verdict": "alet-bozuk", "label": "Alet bozuktur", "explain": "Alet doğru okur; okuduğu şey yüksüz gerilimdir." },
+          { "verdict": "ampul", "label": "Ampul her zaman bozuktur", "explain": "Ampul sağlam olsa da yol yükü taşıyamıyorsa lamba yanmaz." },
+          { "verdict": "imkansiz", "label": "Gerilim varsa lamba yanar", "explain": "Yüksüz gerilim, akım taşıma kapasitesini garanti etmez." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 4'teki 1,10 V ve 0,05 V SENARYO okumalarıdır. Öğrenciden istenen bir üretici sınırı değil, arızalı kol ile sağlam komşu koldaki okumaların FARKIDIR (1,05 V). sourceRequired bu yüzden gerekmedi.",
+    "sourceRequired": "Kabul edilebilir azami şase gerilim düşümü, ampul akımları ve LED dönüşümünde kullanılan direnç değerleri bu derste VERİLMEDİ; araca ve parçaya özgüdür.",
+    "kapsam": "Test lambası modelde yok; voltmetre-test lambası farkı seçim olarak öğretiliyor. Arka lamba ayrı bir mesh olarak modellenmedi, far gövdesi hedef olarak kullanılıyor — arka aydınlatma grubu ileride model işidir.",
+    "mevzuat": "Ampul tipi değişiminin ışık dağılımı ve onay yönünden sınırlı olduğu anlatıldı; madde numarası ve yönetmelik adı iddia edilmedi.",
+    "reviewedByMechanic": false
+  }
+}

@@ -1,0 +1,182 @@
+{
+  "id": "motor.krank-yatak",
+  "area": "motor-mekanik",
+  "stage": 8,
+  "title": "Krank Yatakları: Vuruntuyu Okumak, Boşluğu Ölçmek",
+  "vehicleClass": "binek-arac",
+  "estimatedMinutes": 32,
+  "prerequisites": ["motor.piston-biyel", "motor.yag-basinci"],
+  "learningGoals": [
+    "Yatak vuruntusunu devir ve yük davranışından tanımak",
+    "Muylu ovalliğini iki dik doğrultudaki ölçümün farkıyla bulmak",
+    "Yatak yüzeyindeki izi okuyup sebebini adlandırmak"
+  ],
+
+  "safety": [
+    { "rule": "Vuruntu duyulan motor çalıştırılmaz", "why": "Yatak vuruntusu, yağ filminin çoktan kesildiğini gösterir. Her ek dakika muyluyu daha çok aşındırır ve tamir edilebilir bir motoru rektifiye edilemez hâle getirir", "blocksStart": true },
+    { "rule": "Yatak kepleri numarasız ve yönsüz sökülmez", "why": "Ana yatak kepleri blokla birlikte işlenmiştir. Yerleri ya da yönleri değişirse yatak yuvası yuvarlaklığını kaybeder ve yeni yatak da sarar", "blocksStart": true },
+    { "rule": "Plastik ölçüm teli takılıyken krank çevrilmez", "why": "Tel dönme sırasında sürüklenir, ezilme genişliği anlamını kaybeder ve muyluya kalıntı bulaşır", "blocksStart": false },
+    { "rule": "Yatak yuvası ve muylu tozdan korunur", "why": "Yağ filmi çok incedir; o aralığa giren toz doğrudan muyluyu çizer", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.mikrometre", "label": "Dış çap mikrometresi", "required": true },
+    { "id": "tool.plastik-tel", "label": "Plastik ölçüm teli (boşluk teli)", "required": true },
+    { "id": "tool.tork-anahtari", "label": "Tork anahtarı", "required": true },
+    { "id": "tool.temiz-bez", "label": "Tiftiksiz bez", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Şikâyet: motorun altından derin bir vuruntu geliyor. Düşük devirde ve yük altında belirgin, motor ısındıkça artıyor, yağ basınç lambası bazen kısa süre yanıyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.krank-mili",
+        "question": "Bu tablo neyi gösterir?",
+        "options": [
+          { "label": "Krank yatak boşluğu açılmış; yağ filmi kesiliyor ve muylu yatağa vuruyor", "verdict": "yatak-asinmasi", "correct": true, "explain": "Yatak vuruntusu üç işaretiyle tanınır. Birincisi sesin derinden, motorun alt yarısından gelmesidir. İkincisi yük altında artmasıdır: yük arttıkça yağ filmine binen basınç büyür ve zaten ince olan film kesilir. Üçüncüsü ısıyla kötüleşmesidir; yağ ısınınca incelir ve taşıma gücü düşer. Yağ basınç lambasının ara ara yanması tabloyu tamamlar, çünkü açılmış yatak boşluğu yağın kaçıp basıncın düşmesi demektir. Bu üç belirti bir aradaysa motor durdurulur; çalışmaya devam etmesi hasarı büyütür." },
+          { "label": "Supap boşluğu açılmış", "verdict": "supap", "explain": "Supap sesi üstten gelir, devrin yarısı hızındadır ve yükle bu kadar belirgin değişmez." },
+          { "label": "Egzoz manifolt contası kaçırıyor", "verdict": "manifolt", "explain": "Manifolt sesi tıslamadır ve motor ısındıkça kaybolur; burada tam tersi oluyor." },
+          { "label": "Marş dişlisi volana sürtüyor", "verdict": "mars", "explain": "Marş sesi yalnız çalıştırma anında olur, sürüş sırasında ve yük altında değil." }
+        ]
+      },
+      "camera": "motor-alt",
+      "teachingNote": "Bir sesi teşhis ederken üç soruyu birlikte sor: nereden geliyor, devirle nasıl değişiyor, yük ve ısıyla nasıl değişiyor. Üçünün cevabı birlikte, sesin tarifinden çok daha kesin bir sonuç verir."
+    },
+    {
+      "id": 2,
+      "instruction": "Karter indirildi, bir ana yatak kabuğu elinde. Yüzeyin geniş bir bölgesinde üst kaplama gitmiş, altındaki farklı renkli tabaka görünüyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.ana-yatak",
+        "question": "Bu iz neyi söyler?",
+        "options": [
+          { "label": "Yatak kaplaması aşınıp bitmiş; yağ filmi uzun süredir yetersizmiş", "verdict": "kaplama-bitmis", "correct": true, "explain": "Yatak kabuğu tek parça metal değil, katmanlıdır: sert bir çelik sırt ve üzerinde yumuşak bir kayma kaplaması. Kaplama, içine küçük parçacıkları gömerek muyluyu koruyacak kadar yumuşaktır ve normal çalışmada yavaş aşınır. Altındaki farklı renkli tabakanın geniş bir alanda görünmesi, kaplamanın tamamen tükendiği anlamına gelir; bundan sonra sürtünen şey muylu ile sert tabakadır ve muylu hızla zarar görür. İzin biçimi de bilgi verir: her yöne dağılmış çizikler kirliliği, tek tarafta toplanmış aşınma ise eğrilik ya da yuvarlaklık bozukluğunu gösterir." },
+          { "label": "Normal rodaj izi, sorun yok", "verdict": "rodaj", "explain": "Rodaj izi hafif ve düzgündür; alttaki tabakayı geniş alanda ortaya çıkarmaz." },
+          { "label": "Yatak yanlış takılmış", "verdict": "yanlis-takma", "explain": "Yanlış montaj genellikle tek noktada keskin bir iz bırakır; buradaki geniş ve düzgün aşınma yağ filmi yetersizliğini gösterir." },
+          { "label": "Yağ çok kalın kullanılmış", "verdict": "kalin-yag", "explain": "Fazla kalın yağ soğukta akışı zorlaştırır ama tipik sonucu bu tek biçimli kaplama tükenmesi değildir." }
+        ]
+      },
+      "camera": "tezgah",
+      "hint": "Kabuğu ışığa tut ve izin yönüne bak: çizgiler mi var, tek tarafta mı toplanmış, yoksa düzgün mü aşınmış?",
+      "teachingNote": "Yatak kabuğu, motorun içinde ne olduğunu anlatan en okunaklı parçadır. Değiştirmeden önce mutlaka okunur; attığın kabuk bir daha sana bir şey anlatmaz."
+    },
+    {
+      "id": 3,
+      "instruction": "Muyluyu mikrometreyle ölçtün. Bir doğrultuda 47,96 mm, ona dik doğrultuda 47,91 mm. Ovalliği gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.krank-mili",
+        "unit": "mm",
+        "acceptRange": [0.03, 0.08]
+      },
+      "camera": "tezgah",
+      "hint": "47,96 eksi 47,91.",
+      "teachingNote": "Bu da kılavuzdan bağımsız bir kanıttır: muylu yeni hâlinde her doğrultuda aynı çaptadır, yani mükemmele yakın yuvarlaktır. Aşınma ise yönlüdür, çünkü yük hep aynı yönden gelir. Dolayısıyla iki dik doğrultudaki farkın kendisi doğrudan ovallik demektir ve bunu bulmak için üretici verisine ihtiyacın yok. Kılavuzun sınırı bir sonraki soruyu, yani rektifiyeye gidip gitmeyeceğini cevaplar. Ölçüm muylunun iki ucunda da tekrarlanır; oradaki fark konikliği verir."
+    },
+    {
+      "id": 4,
+      "instruction": "Yeni yatakları takacaksın. Boşluğu montajdan önce doğrulaman gerek.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.ana-yatak",
+        "question": "Yatak boşluğu nasıl kontrol edilir?",
+        "options": [
+          { "label": "Muylunun üzerine plastik ölçüm teli konur, kep torkuna sıkılır, sökülünce ezilen telin genişliği kendi ölçeğinde okunur", "verdict": "plastik-tel", "correct": true, "explain": "Plastik tel, kep sıkıldığında yatak boşluğu kadar bir aralıkta ezilir ve ne kadar dar bir aralıkta kaldıysa o kadar geniş yayılır. Paketin üzerindeki ölçek, ezilmiş genişliği doğrudan boşluk değerine çevirir. Yöntemin şartı, tel takılıyken krankın kesinlikle çevrilmemesidir; dönerse tel sürüklenir ve okuma anlamını kaybeder. Ayrıca yüzeyler kuru olmalıdır, çünkü yağ telin yayılmasını değiştirir. Alternatif yöntem muylu çapı ile yatak iç çapını ayrı ayrı ölçüp çıkarmaktır; ikisi birbirini doğrular." },
+          { "label": "Sentil yaprağı muylu ile yatak arasına sokulur", "verdict": "sentil", "explain": "Yatak boşluğu sentil yaprağının girebileceğinden çok küçüktür ve yaprak zorlanırsa yatağı çizer." },
+          { "label": "Elle sallayarak boşluk hissedilir", "verdict": "elle", "explain": "Elle hissedilebilen boşluk zaten çoktan sınırın dışındadır; ölçüm bunun için değildir." },
+          { "label": "Yeni yatak takıldıysa boşluk otomatik doğrudur", "verdict": "yeni-otomatik", "explain": "Yeni yatak doğru boşluğu ancak muylu ve yuva ölçüsündeyse verir; aşınmış muyluda vermez." }
+        ]
+      },
+      "camera": "motor-alt",
+      "teachingNote": "Bu ölçüm, motorun bir daha açılıp açılmayacağını belirleyen tek sayıdır. Boşluk küçükse yağ filmi kurulamaz ve yatak sarar; büyükse basınç düşer, yağ kaçar ve vuruntu başlar. İki hata da aynı sona varır, o yüzden tahmin edilmez, ölçülür."
+    },
+    {
+      "id": 5,
+      "instruction": "Yatak kabuklarını yuvalarına yerleştiriyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.ana-yatak",
+        "question": "Kabuk montajında hangisi doğrudur?",
+        "options": [
+          { "label": "Kabuğun tırnağı yuvadaki çentiğe oturur, sırtına asla yağ ya da zımpara değmez, yağ yalnız çalışma yüzeyine sürülür", "verdict": "tirnak-sirt-temiz", "correct": true, "explain": "Kabuğun sırtı ile yuva arasındaki temas, ısıyı yataktan bloğa taşıyan yoldur; araya yağ, kir ya da zımpara izi girerse ısı geçişi bozulur ve yatak aşırı ısınır. Bu yüzden sırt kuru ve temiz kalır. Tırnak ise kabuğun dönmesini engeller ve yuvadaki çentiğe oturur; yanlış oturursa kabuk kep sıkılırken ezilir. Yağ yalnız muyluya bakan çalışma yüzeyine sürülür, çünkü ilk çalıştırmada yağ basıncı oluşana kadar tek koruma odur. Kabuk hiçbir koşulda eğelenmez ya da inceltilmez; boşluk ayarı kabuk kalınlığı seçilerek yapılır." },
+          { "label": "Sırtına da yağ sürülür, montaj kolaylaşsın", "verdict": "sirta-yag", "explain": "Sırttaki yağ ısı geçişini bozar ve kabuğun yuvada kaymasına yol açar." },
+          { "label": "Boşluk fazlaysa kabuk biraz eğelenir", "verdict": "egele", "explain": "Eğelenen kabuk yuvarlaklığını kaybeder ve yağ filmi hiç kurulamaz. Boşluk kabuk kalınlığı seçilerek ayarlanır." },
+          { "label": "Tırnağın yeri önemli değil, kabuk zaten sıkışır", "verdict": "tirnak-onemsiz", "explain": "Tırnak yanlış yerdeyse kep sıkılırken kabuk ezilir ve yatak daha ilk dönüşte biter." }
+        ]
+      },
+      "camera": "motor-alt",
+      "teachingNote": "Yataklar, doğru yapıldığında hiç fark edilmeyen ama yanlış yapıldığında motoru saatler içinde bitiren parçalardır. Buradaki her kural bir arıza raporundan doğmuştur."
+    },
+    {
+      "id": 6,
+      "instruction": "Yataklar takıldı, kepler torkuna sıkıldı. Motoru toplamadan önce sebebi düşünüyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.krank-mili",
+        "question": "Yatakları bitiren sebep aranmazsa ne olur?",
+        "options": [
+          { "label": "Aynı sebep yeni yatakları da bitirir; yağ yolu, yağ basıncı, filtre ve emiş süzgeci kontrol edilmeden motor toplanmaz", "verdict": "sebebi-bul", "correct": true, "explain": "Yatak aşınmasının arkasında neredeyse her zaman yağ tarafında bir sebep vardır: geciken yağ değişimleri, tıkanmış emiş süzgeci, zayıflamış yağ pompası, tıkalı bir yağ kanalı ya da uygunsuz yağ. Bunlardan biri duruyorsa yeni yataklar da aynı yoldan gider ve bu kez suçlanan usta olur. Bu yüzden karter içi ve emiş süzgeci temizlenir, yağ kanalları basınçlı yıkanır, pompa kontrol edilir ve motor toplandıktan sonra yağ basıncı ölçülerek doğrulanır. Ayrıca sarmış bir yatağın metal talaşı yağ sistemine dağılmıştır; sistem yıkanmadan toplanan motor kendi talaşıyla yeniden aşınır." },
+          { "label": "Yeni yatak sorunu çözer, sebep aramaya gerek yok", "verdict": "yeni-yeter", "explain": "Yatak bir sonuçtur. Sebep dururken sonucu değiştirmek zaman kazandırmaz, sadece erteler." },
+          { "label": "Daha kalın yağ kullanmak yeterlidir", "verdict": "kalin-yag", "explain": "Kalın yağ vuruntuyu bir süre örter ama soğukta akışı zorlaştırır ve asıl sebebi gizler." },
+          { "label": "Yağ katkısı eklerim", "verdict": "katki", "explain": "Katkı, ölçülen bir boşluğu kapatmaz. Mekanik bir sorun kimyasalla çözülmez." }
+        ]
+      },
+      "camera": "motor-alt",
+      "teachingNote": "Bu prosedürün özeti tek cümledir: yatak değiştirmek kolaydır, yatağı bitiren şeyi bulmak ustalıktır."
+    },
+    {
+      "id": 7,
+      "instruction": "Motor toplandı, yağı kondu. İlk çalıştırma.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.krank-mili",
+        "question": "İlk çalıştırmada ne yapılır?",
+        "options": [
+          { "label": "Önce yağ sistemi doldurulup basınç oluşturulur, sonra çalıştırılır; basınç görülmezse hemen durdurulur", "verdict": "basinc-once", "correct": true, "explain": "Yeni toplanan bir motorda yağ kanalları boştur ve marşla çalıştırıldığında yağın yataklara ulaşması saniyeler alır. O saniyeler, yepyeni yatakların kuru döndüğü en riskli andır. Bu yüzden mümkünse ateşleme devre dışı bırakılıp marşla yağ basıncı oluşturulur, ya da üreticinin öngördüğü ön yağlama yöntemi uygulanır. Motor çalıştıktan sonra ilk bakılacak şey yağ basıncıdır: birkaç saniye içinde basınç görülmezse motor derhal durdurulur. Bu tek kural, birçok yeni toplanmış motoru kurtarmıştır." },
+          { "label": "Doğrudan çalıştırılır, yağ nasılsa gider", "verdict": "direkt-calistir", "explain": "Gider ama saniyeler sonra; o saniyelerde yataklar kuru döner." },
+          { "label": "Yüksek devirde birkaç dakika çalıştırılır", "verdict": "yuksek-devir", "explain": "Yeni yataklar ve segmanlar için ilk dakikalar en hassas dönemdir; yüksek devir zarar verir." },
+          { "label": "Basınç lambası sönmezse birkaç dakika beklenir", "verdict": "bekle", "explain": "Lamba sönmüyorsa yağ gitmiyor demektir; beklemek hasarı büyütmekten başka bir şey yapmaz." }
+        ]
+      },
+      "camera": "motor-ust",
+      "hint": "Yağ basıncını lambadan değil, mümkünse mekanik manometreden izle.",
+      "teachingNote": "İyi toplanmış bir motoru ilk otuz saniyede bitirmek mümkündür. O otuz saniyeyi hazırlıkla geçiren usta bütün emeğini korumuş olur."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Muylu ovalliği neden iki dik doğrultudaki ölçümün farkıyla bulunur?",
+        "a": "asinma-yonlu",
+        "options": [
+          { "verdict": "asinma-yonlu", "label": "Muylu yeni hâlinde her yönde aynı çaptadır; aşınma ise yük yönünde toplanır", "explain": "Bir muylu üretildiğinde pratik olarak mükemmel yuvarlaktır, yani hangi doğrultuda ölçersen ölç aynı çapı okursun. Çalışma sırasında ise yük hep aynı yönden gelir ve aşınma o yönde birikir; muylu yavaşça yumurta biçimini alır. Dolayısıyla iki dik doğrultuda ölçüp farkı almak doğrudan ovalliği verir ve bu sonuç için üretici verisine ihtiyaç yoktur. Kılavuzun sınırı bir sonraki soruyu, rektifiyeye gidip gitmeyeceğini cevaplar. Aynı ölçüm muylunun iki ucunda tekrarlanırsa aradaki fark konikliği verir." },
+          { "verdict": "olcum-hatasi", "label": "Ölçüm hatasını azaltmak için", "explain": "Tekrar ölçmek hatayı azaltır ama dik doğrultu seçmenin sebebi aşınmanın yönlü olmasıdır." },
+          { "verdict": "kolaylik", "label": "İki yönden ölçmek daha kolay olduğu için", "explain": "Kolaylıkla ilgisi yoktur." },
+          { "verdict": "gereksiz", "label": "Gereksizdir, tek ölçüm yeter", "explain": "Tek ölçüm bir çap verir; muylunun yuvarlak olup olmadığını söylemez." }
+        ]
+      },
+      {
+        "q": "Yatak kabuğunun sırtına neden yağ sürülmez?",
+        "a": "isi-gecisi",
+        "options": [
+          { "verdict": "isi-gecisi", "label": "Sırt ile yuva arasındaki temas ısıyı bloğa taşır; araya giren yağ bu geçişi bozar", "explain": "Yatak çalışırken ciddi miktarda ısı üretir ve bu ısının atıldığı yol, kabuğun sırtı ile yuva arasındaki sıkı metal temasıdır. Araya yağ, kir ya da zımpara izi girdiğinde temas bozulur, ısı yatakta birikir ve kaplama yumuşayıp erimeye başlar. Ayrıca yağlı sırt kabuğun yuvada kaymasına yol açar. Bu yüzden sırt kuru ve temiz bırakılır; yağ yalnız muyluya bakan çalışma yüzeyine sürülür, çünkü orada ilk çalıştırmada tek koruma odur." },
+          { "verdict": "kayar", "label": "Yalnız kaymaması için", "explain": "Kayma gerçek bir risktir ama asıl sebep ısı geçişidir." },
+          { "verdict": "temizlik", "label": "Temizlik alışkanlığı", "explain": "Alışkanlık değil, ısı yönetimi gereğidir." },
+          { "verdict": "farketmez", "label": "Fark etmez, yağ zaten dağılır", "explain": "Sırttaki yağ dağılmaz, orada kalır ve yalıtkan bir tabaka gibi davranır." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 47,96 ve 47,91 mm senaryo okumalarıdır; istenen bir üretici sınırı değil, iki okumanın FARKIDIR (0,05 mm ovallik). Aynı kılavuzdan bağımsız yaklaşım motor.piston-biyel, motor.kam-mili ve motor.yag-basinci derslerinde de kullanıldı.",
+    "sourceRequired": "Yatak boşluğu sınırı, ovallik ve koniklik sınırları, kep torku ve rektifiye kademeleri araca özgüdür; bu derste hiçbiri için sayı verilmedi.",
+    "kapsam": "Krank mili ve ana yatak blok gövdesinin içinde duruyor; kesit görünümü yok. Plastik tel ölçümü sahnede animasyonla değil teşhis adımıyla öğretiliyor.",
+    "reviewedByMechanic": false
+  }
+}

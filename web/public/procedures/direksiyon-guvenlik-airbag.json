@@ -1,0 +1,178 @@
+{
+  "id": "direksiyon.guvenlik-airbag",
+  "area": "direksiyon",
+  "stage": 0,
+  "title": "Airbag ve Spiral Kablo: Bu Alanın Kırmızı Çizgisi",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 30,
+  "prerequisites": [],
+  "learningGoals": [
+    "Direksiyon simidini sökmenin neden ayrı bir güvenlik işi olduğunu bilmek",
+    "Sistemi güvenli hâle getirmenin ilkesini ve neden beklendiğini açıklamak",
+    "Spiral kablonun neden merkezde sabitlendiğini kavramak"
+  ],
+
+  "safety": [
+    { "rule": "Airbag sistemine, üreticinin prosedürü ve gerekli yetki olmadan müdahale edilmez", "why": "Modülün içinde gaz üreten bir patlayıcı vardır; yanlış işlemde açılır ve ciddi yaralanma üretir. Bu ders airbag SÖKMEYİ öğretmez, sınırı öğretir", "blocksStart": true },
+    { "rule": "Kontak kapatılıp akü ayrıldıktan sonra üreticinin belirttiği süre beklenmeden hiçbir işlem yapılmaz", "why": "Sistemde yedek enerji depolanır; akü ayrılsa bile modül bir süre daha tetiklenebilir durumdadır", "blocksStart": true },
+    { "rule": "Sökülmüş bir airbag modülü yüzü yukarı bakacak şekilde, sert ve düz bir zemine konur", "why": "Beklenmedik biçimde açılırsa yüzü aşağıysa yerden itilerek fırlar; yukarı bakan bir modül enerjisini yukarı boşaltır", "blocksStart": true },
+    { "rule": "Modül taşınırken kablo ucundan tutulmaz ve düşürülmez", "why": "Darbe ve kablodan çekme tetikleyiciyi zorlayabilir", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.multimetre", "label": "Dijital multimetre", "required": true },
+    { "id": "tool.teshis-cihazi", "label": "Teşhis cihazı", "required": true },
+    { "id": "tool.pense-anahtar", "label": "Kutup anahtarı", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Bir iş geldi: direksiyon simidinin sökülmesi gerekiyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.airbag-modulu",
+        "question": "İlk soru ne?",
+        "options": [
+          { "label": "Bu araçta airbag sistemi var mı ve üreticinin bu iş için öngördüğü prosedür ile yetki şartı ne", "verdict": "prosedur-ve-yetki", "correct": true, "explain": "Direksiyon simidi, üzerinde sürücü airbagi taşıyan bir parçadır; onu sökmek bir mekanik iş değil, bir güvenlik sistemine müdahaledir. Modülün içinde bir gaz jeneratörü bulunur — kimyasal olarak çok kısa sürede yüksek hacimde gaz üreten, yani kontrollü bir patlayıcı. Bu yüzden işin ilk adımı somun sökmek değil, iki soruyu yanıtlamaktır: bu araçta sistem nasıl kurulmuş ve üretici bu işlem için hangi sırayı, hangi bekleme süresini ve hangi yetkiyi şart koşuyor. Birçok ülkede airbag ve gergili emniyet kemeri sistemlerine müdahale ayrı bir eğitim ve yetki gerektirir; bazı işlemler yalnız yetkili servislerde yapılabilir. Bu ders airbag sökmeyi öğretmez ve öğretmeyi amaçlamaz — öğrettiği şey sınırın nerede olduğu, sistemin nasıl güvenli hâle getirildiği ve hangi işin bu sınırın ötesinde kaldığıdır. Sınırı bilmeyen bir usta, kendini ve müşteriyi tehlikeye atar." },
+          { "label": "Hangi anahtar takımı gerekeceği", "verdict": "alet", "explain": "Alet seçimi işin en küçük parçası; önce güvenlik ve yetki şartı belirlenir." },
+          { "label": "Simidin ne kadar sürede söküleceği", "verdict": "sure", "explain": "Süre değil, sistemin nasıl güvenli hâle getirileceği belirleyici." },
+          { "label": "Müşterinin ne kadar ödeyeceği", "verdict": "fiyat", "explain": "Güvenlik sistemine müdahale fiyatla değil, prosedür ve yetkiyle belirlenir." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Bu alan, projedeki diğer alanlardan bir yönüyle ayrılıyor: burada bir işi YAPMAMAYI bilmek de öğrenilen bir beceri."
+    },
+    {
+      "id": 2,
+      "instruction": "Prosedür okundu. İlk teknik adım sistemin enerjisini kesmek.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.spiral-kablo",
+        "question": "Akü ayrıldıktan sonra neden hemen işleme geçilmez?",
+        "options": [
+          { "label": "Sistemde yedek enerji depolanmıştır: akü ayrılsa bile modül bir süre daha tetiklenebilir, bu yüzden üreticinin verdiği süre beklenir", "verdict": "yedek-enerji", "correct": true, "explain": "Airbag sistemi, bir kazada akü kablosu koptuktan sonra bile çalışabilmek zorundadır — çarpma anında araç elektriği kesilebilir ve sistemin yine de tetiklenmesi gerekir. Bunu sağlamak için kontrol ünitesinde yedek enerji depolanır. Bu tasarım kaza anında hayat kurtarır ama atölyede tam tersi bir risk üretir: akü ayrıldığı hâlde sistem hâlâ silahlıdır. Bu yüzden bütün üreticiler akünün ayrılmasından sonra belirli bir bekleme süresi şart koşar; süre bitene kadar konnektörlere dokunulmaz. Süre araca göre değişir ve tahmin edilmez, üreticinin belgesinden okunur. Beklemenin doğru yapıldığı ölçülerek de doğrulanabilir: sistem besleme hattındaki gerilimin sıfıra yakın düştüğü görülür. Bu adım sabır meselesi gibi görünür ama atlandığında sonucu geri alınamaz — modül elde patlayabilir." },
+          { "label": "Kontrol ünitesi ısındığı için", "verdict": "isinma", "explain": "Isı değil; depolanmış yedek enerji söz konusu." },
+          { "label": "Hata kodları silinsin diye", "verdict": "kod", "explain": "Kodlar ayrı bir konu; bekleme enerjinin boşalması için." },
+          { "label": "Gerekmez, akü ayrılınca sistem ölür", "verdict": "gerekmez", "explain": "Sistem kaza anında elektrik kesilse de çalışacak biçimde tasarlanmıştır." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Bir sistemin hayat kurtaran özelliği, atölyede tam tersi bir risk üretebilir. Tasarımın amacını bilmek, riski de anlatır."
+    },
+    {
+      "id": 3,
+      "instruction": "Akü ayrıldı. Besleme hattında ölçtüğün gerilim ilk anda 12,4 V, üreticinin verdiği süre dolduğunda 0,3 V. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.spiral-kablo",
+        "unit": "V",
+        "acceptRange": [12.05, 12.15]
+      },
+      "camera": "direksiyon",
+      "hint": "12,4 eksi 0,3.",
+      "teachingNote": "12,1 V'luk bu düşüş, beklemenin gerçekten işe yaradığının ölçülmüş kanıtı. Buradaki asıl ders şu: bekleme süresi bir gelenek değil, ölçülebilir bir olayın süresidir — depolanmış enerji boşalır. Sürenin kendisi araca özgüdür ve üreticinin belgesinden okunur; bu ders bir dakika sayısı vermiyor. Ölçüm ayrıca bir alışkanlık kuruyor: güvenlik adımının yapıldığını varsaymak yerine doğrulamak."
+    },
+    {
+      "id": 4,
+      "instruction": "Simit sökülmeden önce direksiyonun düz konumda sabitlenmesi isteniyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.spiral-kablo",
+        "question": "Neden?",
+        "options": [
+          { "label": "Spiral kablo sınırlı sayıda tur sarılabilir; simit yokken direksiyon çevrilirse kablo kopar ve airbag devresi kesilir", "verdict": "spiral", "correct": true, "explain": "Direksiyon simidi döner, ama üzerindeki airbag ve düğmeler elektrik bağlantısı ister. Bu bağlantıyı sağlayan parça spiral kablodur: dönen simit ile sabit kolon arasında, kendi üzerine sarılıp açılan yassı bir şerittir. Sarılabileceği tur sayısı sınırlıdır ve direksiyonun sağa ve sola dönebildiği toplam tur sayısına göre ayarlanmıştır — yani spiral kablo, direksiyon düzken tam ortadadır ve iki yöne eşit hareket payı bırakır. Simit söküldüğünde bu denge kaybolabilir: kolon serbest kalır, biri farkında olmadan çevirir ve kablo bir yönde sonuna gelip kopar. Kopmuş bir spiral kablo yalnız korna ve düğmeleri değil, airbag devresini de keser; sistem arıza verir ve modül gerektiğinde açılmayabilir. Bu yüzden simit sökülmeden önce direksiyon düz konuma getirilir ve kolon dönmeyecek biçimde sabitlenir; birçok araçta bunun için bir kilitleme aparatı ya da bant kullanılır. Aynı sebeple montajda spiral kablonun merkezlenmiş olduğu doğrulanır." },
+          { "label": "Simit daha kolay sökülsün diye", "verdict": "kolaylik", "explain": "Kolaylık değil; spiral kablonun kopmasını önlemek için." },
+          { "label": "Ön düzen bozulmasın diye", "verdict": "on-duzen", "explain": "Ön düzen ayrı bir konu; buradaki sebep spiral kablo." },
+          { "label": "Gerekmez, kolon serbest kalabilir", "verdict": "gerekmez", "explain": "Serbest kolon çevrilirse spiral kablo kopar." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Küçük ve ucuz bir parça, koca bir güvenlik sistemini taşıyor. Spiral kablo koptuğunda airbag sessizce devre dışı kalır."
+    },
+    {
+      "id": 5,
+      "instruction": "Airbag modülü simitten ayrıldı ve elinde duruyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.airbag-modulu",
+        "question": "Nereye ve nasıl konur?",
+        "options": [
+          { "label": "Yüzü yukarı bakacak biçimde, sert ve düz bir zemine, kimsenin önünde durmadığı bir yere", "verdict": "yuzu-yukari", "correct": true, "explain": "Sökülmüş bir airbag modülü, hâlâ içinde gaz jeneratörü olan bir parçadır ve beklenmedik biçimde açılma ihtimali sıfır değildir. Bu ihtimalin sonucunu belirleyen şey modülün nasıl konduğudur. Yüzü yukarı bakan bir modül açıldığında enerjisini yukarı, boşluğa boşaltır. Yüzü aşağı konmuş bir modül ise açıldığında zemine dayanır ve kendisi bir mermi gibi yukarı fırlar — aradaki fark, bir yaralanma ile ölümcül bir kaza arasındaki farktır. Aynı sebeple modül yumuşak bir yüzeye, üst üste ya da bir şeyin altına konmaz; taşırken kablosundan tutulmaz ve düşürülmez. Depolanacaksa üreticinin öngördüğü biçimde, ayrı ve işaretli bir yerde saklanır. Hurdaya ayrılacak modüller için ayrı bir prosedür vardır ve bunlar normal atık olarak atılmaz — patlayıcı içeren bir parçadır ve mevzuata göre imha edilir." },
+          { "label": "Yüzü aşağı bakacak biçimde konur", "verdict": "yuzu-asagi", "explain": "Açılırsa zemine dayanıp yukarı fırlar; en tehlikeli konum budur." },
+          { "label": "Koltuğun üstüne bırakılır", "verdict": "koltuk", "explain": "Yumuşak yüzey ve kontrolsüz konum; sert ve düz zemine konur." },
+          { "label": "Kablosundan asılır", "verdict": "kablo", "explain": "Kablodan tutmak ve asmak tetikleyiciyi zorlar." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Bu kural tek bir cümleyle özetlenebilir ve hayat kurtarır: yüzü yukarı, sert zemin, kimsenin önünde değil."
+    },
+    {
+      "id": 6,
+      "instruction": "İş bitti, her şey yerine takıldı. Kontak açıldığında panelde airbag uyarı lambası yanıyor ve sönmüyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.aci-sensoru",
+        "question": "Ne yapılır?",
+        "options": [
+          { "label": "Teşhis cihazıyla sistem okunur, hata kodları alınır ve sebebi giderildikten sonra silinir; lamba yanarken araç teslim edilmez", "verdict": "oku-ve-gider", "correct": true, "explain": "Airbag uyarı lambası sistemin kendi kendini denetlemesinin sonucudur ve yandığında tek bir şey söyler: sistem şu anda güvenilir değil. Bir kazada modül açılmayabilir ya da yanlış zamanda açılabilir. Bu yüzden lamba yanan bir araç teslim edilmez. Doğru yol teşhis cihazıyla sistemi okumaktır: kod, hangi devrede sorun olduğunu söyler. Simit sökümü sonrası en sık görülen sebepler bellidir — konnektör tam oturmamıştır, spiral kablo merkezlenmemiş ya da zedelenmiştir, ya da işlem sırasında devre açık kaldığı için sistem bunu arıza olarak kaydetmiştir. Kod okunur, sebep giderilir ve ancak ondan sonra silinir. Kodu sebebi gidermeden silmek en tehlikeli kısayoldur: lamba söner, sistem arızalı kalır ve kimse fark etmez. Silme işleminden sonra kontak kapatılıp açılır ve lambanın normal açılış testini yapıp söndüğü fiilen görülür." },
+          { "label": "Kod silinir, lamba söner, iş biter", "verdict": "sil", "explain": "Sebebi gidermeden silmek sistemi arızalı ama sessiz bırakır." },
+          { "label": "Ampul sökülür", "verdict": "ampul", "explain": "Uyarıyı görünmez kılmak sistemi çalışır hâle getirmez." },
+          { "label": "Bir süre sürülürse kendiliğinden söner", "verdict": "bekle", "explain": "Sistem kendi kendini onarmaz; kod okunup sebep giderilir." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Elektrik alanında öğrenilen kural burada da geçerli ve burada daha ağır: kod bir sonucu bildirir, silmek sebebi gidermez."
+    },
+    {
+      "id": 7,
+      "instruction": "Bu dersin sınırını belirliyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.direksiyon-simidi",
+        "question": "Bu alan neyi öğretir, neyi öğretmez?",
+        "options": [
+          { "label": "Sınırı, güvenli hâle getirme ilkesini ve doğrulamayı öğretir; airbag modülünün sökülmesi, onarımı ve imhası yetki ve üretici prosedürü gerektiren ayrı bir iştir", "verdict": "sinir", "correct": true, "explain": "Bir mesleği öğrenmenin bir parçası da, hangi işin kendi yetkinliğinin dışında olduğunu bilmektir. Direksiyon alanı; boşluk ölçmeyi, kremayeri, hidrolik ve elektrik yardımlı sistemleri, teşhisi ve bakımı öğretir. Airbag modülünün sökülmesi, taşınması, saklanması ve imhası ise ayrı bir konudur: patlayıcı içeren bir parçadır, çoğu yerde mevzuatla düzenlenmiştir ve üreticinin kendi prosedürü ile belirli bir yetki gerektirir. Bu dersin verdiği şey üç maddedir — sistemin neden tehlikeli olduğu, güvenli hâle getirmenin ilkesi (enerjiyi kes, süreyi bekle, ölçerek doğrula) ve spiral kablo gibi kolayca zarar gören parçaların neden dikkat istediği. Bunun ötesindeki her iş için doğru cevap bellidir: prosedüre ve yetkiye bakılır, yoksa iş yapılmaz ve yönlendirilir. Bu, bilgisizlik değil mesleki olgunluktur; aynı sınır bu projede fren sistemi için de konmuştu." },
+          { "label": "Her şeyi öğretir; usta her işi yapabilmelidir", "verdict": "her-sey", "explain": "Bazı işler yetki ve mevzuata bağlıdır; sınır bilinçle konur." },
+          { "label": "Hiçbir şey öğretmez, konu tamamen dışarıdadır", "verdict": "hicbir", "explain": "Sınırın kendisi ve güvenli hâle getirme ilkesi öğretilir." },
+          { "label": "Yalnız hata kodu okumayı öğretir", "verdict": "kod", "explain": "Kod okuma bir parça; ders güvenlik ilkesini de veriyor." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Bu alanın ilk dersi bir işi yapmayı değil, nerede duracağını öğretiyor. Sonraki bütün dersler bu sınırın içinde kalıyor."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Akü ayrıldıktan sonra neden üreticinin verdiği süre beklenir?",
+        "a": "yedek-enerji",
+        "options": [
+          { "verdict": "yedek-enerji", "label": "Sistemde yedek enerji depolanmıştır; akü ayrılsa bile modül bir süre daha tetiklenebilir", "explain": "Airbag sistemi bir kazada akü kablosu koptuktan sonra bile çalışabilmek zorundadır, bu yüzden kontrol ünitesinde yedek enerji depolanır. Bu tasarım kazada hayat kurtarır ama atölyede tam tersi bir risk üretir: akü ayrıldığı hâlde sistem hâlâ silahlıdır. Süre araca göre değişir, tahmin edilmez ve beklemenin işe yaradığı besleme hattındaki gerilimin düştüğü görülerek doğrulanabilir." },
+          { "verdict": "isinma", "label": "Kontrol ünitesi soğusun diye", "explain": "Isı değil, depolanmış enerji söz konusu." },
+          { "verdict": "kod", "label": "Hata kodları silinsin diye", "explain": "Kodlar ayrı bir konu." },
+          { "verdict": "gereksiz", "label": "Gerekmez, akü ayrılınca sistem ölür", "explain": "Sistem elektrik kesilse de çalışacak biçimde tasarlanmıştır." }
+        ]
+      },
+      {
+        "q": "Simit sökülmeden önce direksiyon neden düz konumda sabitlenir?",
+        "a": "spiral-kablo",
+        "options": [
+          { "verdict": "spiral-kablo", "label": "Spiral kablo sınırlı sayıda tur sarılabilir; kolon serbestken çevrilirse kablo kopar ve airbag devresi kesilir", "explain": "Spiral kablo, dönen simit ile sabit kolon arasında elektrik bağlantısını sağlayan, kendi üzerine sarılıp açılan yassı bir şerittir ve direksiyon düzken tam ortadadır. Simit söküldüğünde kolon serbest kalır; biri farkında olmadan çevirirse kablo bir yönde sonuna gelip kopar. Kopmuş spiral kablo yalnız korna ve düğmeleri değil airbag devresini de keser — sistem arıza verir ve modül gerektiğinde açılmayabilir." },
+          { "verdict": "kolaylik", "label": "Sökme işlemi kolaylaşsın diye", "explain": "Kolaylık değil, kablonun kopmasını önlemek için." },
+          { "verdict": "on-duzen", "label": "Ön düzen ayarı bozulmasın diye", "explain": "Ön düzen ayrı bir konu." },
+          { "verdict": "gereksiz", "label": "Gerekmez", "explain": "Serbest kolon çevrilirse spiral kablo kopar." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 12,4 V ve 0,3 V SENARYO okumalarıdır. İstenen FARKTIR (12,1 V) ve dersin gösterdiği şey beklemenin ölçülebilir bir olaya karşılık geldiğidir.",
+    "sourceRequired": "Akü ayrıldıktan sonra beklenecek SÜRE bilinçle VERİLMEDİ: araca ve üreticiye özgüdür, künyesiz bir dakika sayısı yazmak doğrudan güvenlik riski üretir. Ders süreyi değil, sürenin kaynağını ve doğrulama yöntemini öğretiyor.",
+    "kapsam": "Bu ders airbag modülünün SÖKÜLMESİNİ, onarımını, saklanmasını ve imhasını ÖĞRETMEZ; bunlar yetki ve üretici prosedürü gerektiren ayrı işlerdir ve ders bunu açıkça söylüyor. Öğretilen şey sınır, güvenli hâle getirme ilkesi ve doğrulama. Gergili emniyet kemeri ve yan hava yastıkları kapsam dışı.",
+    "reviewedByMechanic": false
+  }
+}

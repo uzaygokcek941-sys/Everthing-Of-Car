@@ -1,0 +1,178 @@
+{
+  "id": "kaporta.yuzey-hazirligi",
+  "area": "kaporta",
+  "stage": 5,
+  "title": "Yüzey Hazırlığı: Zımpara Kademeleri ve Temizlik",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 40,
+  "prerequisites": ["kaporta.plastik-onarim"],
+  "learningGoals": [
+    "Boyanın tutmasını boyanın değil altındaki hazırlığın belirlediğini görmek",
+    "Zımpara kademelerinin neden atlanmadığını ve geçişin neden geniş açıldığını bilmek",
+    "Silikon ve yağ kalıntısının neden en pahalı kusuru ürettiğini anlamak"
+  ],
+
+  "safety": [
+    { "rule": "Zımpara ve taşlama işinde uygun solunum koruması, göz koruması ve toz emişi kullanılır", "why": "Boya, macun ve astar tozu solunum yoluyla kalıcı zarar verir; bazı eski boya sistemlerinin tozu ayrıca zararlıdır", "blocksStart": true },
+    { "rule": "Alüminyum ve çelik için ayrı zımpara ve ayrı ekipman kullanılır", "why": "Çelik parçacıklarının alüminyum yüzeye bulaşması korozyon başlatır", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.zimpara-makinesi", "label": "Zımpara makinesi", "required": true },
+    { "id": "tool.silikon-sokucu", "label": "Silikon sökücü temizleyici", "required": true },
+    { "id": "tool.olcum-mastari", "label": "Ölçüm mastarı", "required": true },
+    { "id": "tool.cizgi-lambasi", "label": "Çizgi lambası", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Onarılan bölgeyi boyaya hazırlayacaksın. Yüzey henüz eski boyalı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.zimpara-bolgesi",
+        "question": "Boyanın tutmasını asıl ne belirler?",
+        "options": [
+          { "label": "Altındaki hazırlık: temizlik, doğru zımpara kademesi ve geçişin açılması — iyi boya kötü hazırlığı kurtarmaz ama kötü boya iyi hazırlığı öldürür, yani ikisi de gerekli ama sıra bellidir", "verdict": "hazirlik-belirler", "correct": true, "explain": "Bu alanın en çok tekrarlanan cümlesi budur ve sebebi basit: boya bir yapıştırıcıdır ve her yapıştırıcı gibi tutunacağı yüzeye bağımlıdır. Bir yüzeyin boyayı tutması üç şeye bakar. Birincisi temizlik: yüzeyde yağ, silikon, mum ya da parmak izi varsa boya oraya değil o kalıntının üstüne yapışır ve kalıntı bir gün yüzeyden ayrıldığında boya da onunla gider. İkincisi doku: boyanın tutunacağı mikroskobik bir pürüz gerekir; cam gibi parlak bir yüzey mekanik tutunma sağlamaz, bu yüzden yüzey belirli bir kademeyle zımparalanır. Üçüncüsü geçiş: onarım bölgesi ile çevresindeki sağlam boya arasında ani bir basamak varsa yeni katman o basamağı kapatamaz ve orada bir hat görünür. Bu üçünün ortak özelliği, yapıldığında görünmemesidir — hazırlık iyi yapıldığında kimse fark etmez; kötü yapıldığında ise sonuç boyanın kabahati sanılır. Müşteri 'boyanız kalitesiz' der, oysa boya masumdur. Bir de sıra vardır ve değişmez: temizlik zımparadan önce ve zımparadan sonra tekrarlanır, çünkü zımpara kalıntıyı temizlemez, çiziğin içine yedirir — plastik dersinde gördüğün ilkenin aynısı sacda da geçerlidir." },
+          { "label": "Boyanın markası", "verdict": "marka", "explain": "İyi ürün gereklidir ama kötü hazırlığı kurtarmaz." },
+          { "label": "Kat sayısı", "verdict": "kat", "explain": "Kalın kat tutunma üretmez; yalnız kusuru büyütür." },
+          { "label": "Boyacının hızı", "verdict": "hiz", "explain": "Hız bir teknik ayrıntı; tutunma hazırlıkla belirlenir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Hazırlık iyi yapıldığında kimse fark etmez; kötü yapıldığında sonuç boyanın kabahati sanılır."
+    },
+    {
+      "id": 2,
+      "instruction": "Geçiş bölgesini iki farklı işte ölçtün: iyi açılmış geçiş 90 mm, dar açılmış geçiş 35 mm. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.olcum-mastari",
+        "unit": "mm",
+        "acceptRange": [53, 57]
+      },
+      "camera": "kaporta",
+      "hint": "90 eksi 35.",
+      "teachingNote": "55 milimetrelik bu fark, bir onarımın görünüp görünmemesini belirleyen şeydir. Geçiş — atölye dilinde 'yumuşatma' — onarım bölgesindeki katmanların kenarının, sağlam boyaya doğru giderek incelerek açılmasıdır. Amacı basit: gözün ve elin bir basamak yakalamasını engellemek. Dar açılan bir geçişte katmanlar kısa bir mesafede biter, yani kenarda bir eğim değil bir basamak vardır; üzerine atılan astar ve boya o basamağı kapatmaz, tam tersine belirginleştirir — parlak yüzey basamağı gizlemez, ışığı kırdığı için büyütür. Sonuç, belirli bir açıdan bakınca görünen bir daire ya da hattır ve müşteri onu ilk güneşli günde bulur. Geniş açılan bir geçişte ise katmanlar uzun bir mesafede incelir; eğim o kadar yumuşaktır ki ne göz ne el yakalar. Geçiş açmanın bedeli zaman ve biraz daha geniş bir boya alanıdır; açmamanın bedeli ise işin geri gelmesidir. Uygulamada geçişin genişliği katman sayısına ve kalınlığına göre değişir — macun, astar ve boya için farklı genişlikler açılır ve her katmanın kenarı bir öncekinin kenarını aşacak biçimde kademelenir. Bu ders hiçbir ürün için geçiş genişliği ya da zımpara kademesi vermiyor; buradaki iki sayı senaryo okumasıdır ve ürünün teknik belgesi bağlayıcıdır."
+    },
+    {
+      "id": 3,
+      "instruction": "Kaba zımparadan doğrudan en ince kademeye geçmeyi düşünüyorsun; zaman kazandıracak.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.zimpara-bolgesi",
+        "question": "Kademe atlanabilir mi?",
+        "options": [
+          { "label": "Atlanamaz: her kademe bir öncekinin bıraktığı çizikleri siler — atlanan kademe, ince zımparanın silemeyeceği derin çizikleri yüzeyde bırakır ve o çizikler boyanın altından geri çıkar", "verdict": "kademe-atlanmaz", "correct": true, "explain": "Zımparalama, yüzeyi düzleştirmek değil, çizik boyutunu kontrollü biçimde küçültmektir. Kaba bir zımpara malzemeyi hızlı alır ama derin çizikler bırakır; bir sonraki kademe o çizikleri kendi daha sığ çizikleriyle değiştirir; sonraki kademe bunu tekrarlar. Böylece yüzeydeki iz, artık boyanın altında görünmeyecek kadar küçülür. Bir kademe atlandığında ise ince zımpara, kaba zımparanın derin çiziklerini silecek kadar malzeme almaz — yalnız çiziklerin arasındaki tepeleri düzler. Sonuç, gözle bakınca düzgün görünen ama içinde derin çizikler taşıyan bir yüzeydir. O çizikler astarla kısmen dolar, boyanın altında bir süre gizlenir ve sonra ortaya çıkar: kuruma sırasında çözücü çekildikçe katman biraz büzülür ve alttaki iz yüzeye vurur. Buna atölye dilinde 'zımpara izi çıktı' denir ve düzeltmesi baştan yapmaktan pahalıdır, çünkü artık boyayı da kaldırman gerekir. İkinci bir konu kademeler arası kontroldür: her kademeden sonra yüzey temizlenir ve ışıkla bakılır; kalan izi görmek için pek çok atölye ince bir kontrol katmanı — kılavuz kat — kullanır, üzerine hafifçe püskürtülen bu ince toz katman zımparalandığında çukurlarda kalır ve düzgün olmayan yerleri açık eder. Hangi kademelerin hangi sırayla kullanılacağı ürüne ve işe bağlıdır ve ürünün teknik belgesinde yazar." },
+          { "label": "Atlanabilir, zaman kazandırır", "verdict": "atlanir", "explain": "Derin çizikler kalır ve boyanın altından geri çıkar." },
+          { "label": "Astar zaten çizikleri kapatır", "verdict": "astar-kapatir", "explain": "Astar sığ izleri kapatır; derin çizik kuruma sırasında yüzeye vurur." },
+          { "label": "Yalnız görünen yüzeyde önemlidir", "verdict": "gorunen", "explain": "Kural bütün boyanacak yüzeyde geçerlidir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Zımparalama düzleştirmek değil, çizik boyutunu kontrollü küçültmek. Atlanan kademe boyanın altından geri çıkar."
+    },
+    {
+      "id": 4,
+      "instruction": "Yüzey zımparalandı, tozunu aldın. Boyaya geçmek üzeresin.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.boya-tabancasi",
+        "question": "Son temizlik neden ayrı bir adım?",
+        "options": [
+          { "label": "Silikon ve yağ kalıntısı su ve tozla gitmez, özel temizleyici ister: kalırsa boya orada tutunmaz ve yüzeyde krater biçiminde çukurlar açılır — bu kusurun tek çözümü baştan yapmaktır", "verdict": "silikon-temizlik", "correct": true, "explain": "Atölyede boyanın en tanınmış düşmanı silikondur ve tanınmasının sebebi bıraktığı izin çok belirgin olmasıdır: boya, silikon bulaşmış noktada yüzeye yayılmak yerine geri çekilir ve orada küçük yuvarlak bir çukur — krater — açılır. Bir kez oluştuğunda üstüne kat atmak işe yaramaz; yeni kat da aynı yerde çekilir. Tek çözüm o bölgeyi zımparalayıp temizleyip baştan yapmaktır. Silikonun kaynakları sinsidir: parlatma ve cila ürünleri, lastik ve plastik bakım spreyleri, bazı yağlayıcılar, hatta el kremi. Yüzeyde gözle görünmez, suyla akmaz, tozla gitmez — bu yüzden ayrı bir ürünle, uygun bezle ve doğru yöntemle alınır. Yöntemin kendisi de önemlidir: temizleyici bir bezle sürülür ve KURUMADAN ikinci temiz bir bezle silinir; kurumaya bırakılırsa çözünen kalıntı yüzeyde yeniden dağılarak kalır — yani temizlik yapılmış gibi görünüp kirlilik yayılmış olur. Bezin kendisi de temiz ve tüy bırakmayan cinsten olmalıdır. Bir de sıra vardır: son temizlik, tozun alınmasından sonra ve boyadan hemen önce yapılır; arada geçen sürede yüzeye elle dokunulmaz, çünkü parmak izi de bir yağ lekesidir. Hangi temizleyicinin kullanılacağı ve bekleme süresi ürünün teknik belgesinde yazar." },
+          { "label": "Su ile yıkamak yeterlidir", "verdict": "su", "explain": "Silikon ve yağ suyla gitmez." },
+          { "label": "Hava tabancasıyla üflemek yeterlidir", "verdict": "hava", "explain": "Hava tozu alır, yağı almaz; ayrıca hattaki nem ve yağ yüzeye bulaşabilir." },
+          { "label": "Zımpara zaten temizler", "verdict": "zimpara", "explain": "Zımpara kalıntıyı çiziğin içine yedirir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Temizleyici kurumadan ikinci bezle silinir. Kurumaya bırakılırsa kirlilik temizlenmez, yüzeye yayılır."
+    },
+    {
+      "id": 5,
+      "instruction": "Onarım bölgesinin bir kenarında eski boya kat kat kalkmış görünüyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.arka-kapi-paneli",
+        "question": "Bu bölgede nereye kadar inilir?",
+        "options": [
+          { "label": "Sağlam ve iyi tutunmuş katmana kadar: gevşek ya da yapışması bozulmuş her katman kaldırılır — üstüne atılan yeni boya, altındaki gevşek katmanla birlikte kalkar", "verdict": "saglam-katman", "correct": true, "explain": "Yeni boya, altındaki katmanın taşıyabileceğinden fazlasını taşıyamaz. Yapışması bozulmuş bir eski katmanın üzerine ne kadar iyi bir sistem kurarsan kur, o katman bir gün yüzeyden ayrıldığında senin işin de onunla birlikte kalkar — ve müşteri haklı olarak senin işini suçlar. Bu yüzden hazırlığın bir adımı da 'nereye kadar inileceğine' karar vermektir. Yöntem şudur: şüpheli bölge kontrol edilir — kenarlarından kaldırılmaya çalışılır, gevşek yerler açılır ve sağlam katmana ulaşılana kadar devam edilir. Bazen bu, yalnız üst katın alınmasıyla biter; bazen astara kadar, bazen çıplak metale kadar inmek gerekir. Ne kadar ineceğine yüzey karar verir, senin planın değil. İkinci konu, ortaya çıkan katman geçişleridir: farklı katmanlar açığa çıktığında yüzeyde halka halka bir görüntü oluşur ve bu halkaların her biri arasında bir basamak vardır; hepsi geçiş açılarak yumuşatılır. Üçüncü konu, çıplak metale inilen yerlerdir — korozyon dersinin kuralı burada da geçerlidir: çıplak metal aynı gün korunur ve uygun astarla kapatılır. Bir de bilinmesi gereken bir ihtimal var: eski boyanın türü yeni sistemle uyumsuz olabilir; bu durumda ya yalıtıcı bir ara katman gerekir ya eski katman tamamen kaldırılır. Bu karar ürünün teknik belgesine bakarak verilir." },
+          { "label": "Yalnız gözle bozuk görünen yer alınır", "verdict": "gozle", "explain": "Gevşeme görünen sınırın ötesine gider; kenarlar kontrol edilir." },
+          { "label": "Üstünden geçilir, yeni boya tutar", "verdict": "ustunden", "explain": "Yeni boya gevşek katmanla birlikte kalkar." },
+          { "label": "Her zaman çıplak metale kadar inilir", "verdict": "metale-kadar", "explain": "Gereksiz derinlik ek iş ve ek risk; ne kadar inileceğine yüzey karar verir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Ne kadar ineceğine yüzey karar verir, senin planın değil. Gevşek katmanın üstüne kurulan sistem onunla birlikte kalkar."
+    },
+    {
+      "id": 6,
+      "instruction": "Hazırlık bitti ama atölyede zımpara ve taşlama işi sürüyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.tavan-paneli",
+        "question": "Ortam neden hazırlığın parçası?",
+        "options": [
+          { "label": "Havada uçuşan toz hazırlanmış yüzeye çöker ve boyanın altında kalır: temiz yüzey kirli ortamda uzun süre temiz kalmaz, bu yüzden boya ile hazırlık arasındaki süre kısa tutulur ve alan ayrılır", "verdict": "ortam-onemli", "correct": true, "explain": "Hazırlığın en kırılgan tarafı, sonucunun havada asılı duran görünmez bir şeyle bozulabilmesidir. Zımpara ve taşlama tozu havada uzun süre kalır ve yavaşça yüzeylere çöker; hazırlanmış bir panel açıkta beklerken üzeri kaplanır. O toz astarın ya da boyanın altında kalır ve yüzeyde küçük kabartılar olarak görünür — sonradan zımparalayıp cilalayarak düzeltmek mümkündür ama bu ek iş, ek zaman ve ek risk demektir. Bunun önlemi üç adımdır. Birincisi zaman: hazırlıkla boya arasındaki süre olabildiğince kısa tutulur; yüzey akşamdan hazırlanıp sabaha bırakılmaz — üstelik çıplak metal varsa bu ayrıca korozyon riskidir. İkincisi alan: toz üreten işler ile boya yapılan alan ayrılır; ideal olan boyanın ayrı, havası filtrelenmiş bir bölmede yapılmasıdır. Üçüncüsü maskeleme ve son temizlik: boyanmayacak yüzeyler kapatılır, boya öncesi yüzey yapışkan bezle silinerek üzerine çökmüş toz alınır. Bu maddelerin hiçbiri boyayla ilgili değildir ama boyanın sonucunu doğrudan belirler — ve tam bu yüzden bu alanda 'boya kalitesi' denilen şeyin büyük kısmı aslında ortam ve hazırlık kalitesidir. Boya kabini kurulumu ve havalandırma şartları bu dersin kapsamı dışındadır." },
+          { "label": "Ortamın etkisi yoktur", "verdict": "etkisiz", "explain": "Havada asılı toz hazırlanmış yüzeye çöker." },
+          { "label": "Boyadan hemen önce üflemek yeterlidir", "verdict": "ufle", "explain": "Üfleme tozu havaya kaldırır ve tekrar çöker; alan ayrımı gerekir." },
+          { "label": "Yüzey akşamdan hazırlanıp sabaha bırakılabilir", "verdict": "sabaha", "explain": "Toz çöker ve çıplak metal varsa korozyon başlar." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "'Boya kalitesi' denilen şeyin büyük kısmı aslında ortam ve hazırlık kalitesi."
+    },
+    {
+      "id": 7,
+      "instruction": "Yüzey hazırlığını tamamladın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kaput-kaporta",
+        "question": "Hazırlığın bittiğine nasıl karar verilir?",
+        "options": [
+          { "label": "Yüzey elle ve ışıkla kontrol edilir, geçişler basamaksızdır, zımpara izi kalmamıştır ve son temizlik yapılmıştır — 'gözüme iyi geldi' bu aşamada kabul edilmez çünkü boya kusuru gizlemez, büyütür", "verdict": "kontrol-listesi", "correct": true, "explain": "Bu aşamada verilecek 'bitti' kararı, bütün işin kaderini belirler; çünkü bundan sonrası geri dönüşü pahalı bir yol. Kontrol dört başlıkta yapılır. Birincisi düzlük: çizgi lambasıyla farklı açılardan bakılır ve avuç içi ince bez üzerinden yüzeyde gezdirilir — göz uzun dalgayı, el yerel farkı bulur. İkincisi geçiş: onarım bölgesinin kenarında elle hissedilen bir basamak kalmamalıdır; parmak ucu basamağı bulurken göz bulmayabilir. Üçüncüsü çizik: son zımpara kademesinin ötesinde derin bir iz kalmamalıdır ve bu, ışığı yandan tutarak kontrol edilir; şüphe varsa kılavuz kat kullanılır. Dördüncüsü temizlik: toz alınmış, silikon sökücüyle son silme yapılmış ve yüzeye çıplak elle dokunulmamış olmalıdır. Bu dördü tamamsa hazırlık bitmiştir. Ve bu noktada bir gerçek daha hatırlanır: bundan sonraki her katman kusuru gizlemez, büyütür. Parlak bir yüzey ışığı yansıtır ve altındaki her dalgayı, her izi, her basamağı görünür kılar — mat ve tozlu bir yüzeyde fark edilmeyen bir kusur, vernikten sonra ilk bakışta göze çarpar. Bu yüzden bu aşamada harcanan bir saat, boya aşamasında harcanacak yarım günü önler. Sırada macun var: hazırlığın en çok istismar edilen adımı." },
+          { "label": "Gözle düzgün görünüyorsa", "verdict": "goz", "explain": "Boya kusuru gizlemez, büyütür." },
+          { "label": "Süre dolduğunda", "verdict": "sure", "explain": "Süre bir ölçüt değil." },
+          { "label": "Macun aşamasında zaten düzelir", "verdict": "macun", "explain": "Macun hazırlığın yerini almaz; kalın macun kendi kusurunu üretir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Bundan sonraki her katman kusuru gizlemez, büyütür. Burada harcanan bir saat, boyada harcanacak yarım günü önler."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Kaba zımparadan doğrudan en ince kademeye geçilirse ne olur?",
+        "a": "kademe-atlanmaz",
+        "options": [
+          { "verdict": "kademe-atlanmaz", "label": "İnce zımpara derin çizikleri silecek kadar malzeme almaz, yalnız aralarındaki tepeleri düzler: yüzey düzgün görünür ama çizikler kalır ve kuruma sırasında katman büzüldükçe yüzeye vurur", "explain": "Zımparalama düzleştirmek değil, çizik boyutunu kontrollü küçültmektir. Her kademe bir öncekinin izini kendi daha sığ iziyle değiştirir. Kademeler arasında yüzey temizlenip ışıkla kontrol edilir; kalan izi görmek için kılavuz kat kullanılır." },
+          { "verdict": "atlanir", "label": "Sorun olmaz, zaman kazandırır", "explain": "Çizikler boyanın altından geri çıkar." },
+          { "verdict": "astar-kapatir", "label": "Astar çizikleri kapatır", "explain": "Astar yalnız sığ izleri kapatır." },
+          { "verdict": "gorunen", "label": "Yalnız görünen yüzeyde önemlidir", "explain": "Bütün boyanacak yüzeyde geçerlidir." }
+        ]
+      },
+      {
+        "q": "Yüzeyde silikon kalıntısı kalırsa ne olur?",
+        "a": "silikon-temizlik",
+        "options": [
+          { "verdict": "silikon-temizlik", "label": "Boya o noktada yayılmak yerine geri çekilir ve krater biçiminde çukur açılır; üstüne kat atmak işe yaramaz, tek çözüm o bölgeyi baştan yapmaktır", "explain": "Kaynakları sinsidir: parlatma ürünleri, lastik ve plastik bakım spreyleri, bazı yağlayıcılar, el kremi. Suyla gitmez, tozla gitmez. Temizleyici bir bezle sürülüp KURUMADAN ikinci temiz bezle silinir — kurumaya bırakılırsa kalıntı yüzeye yeniden dağılır." },
+          { "verdict": "su", "label": "Su ile yıkamak yeterlidir", "explain": "Silikon suyla gitmez." },
+          { "verdict": "hava", "label": "Hava tabancası yeterlidir", "explain": "Hava tozu alır, yağı almaz." },
+          { "verdict": "zimpara", "label": "Zımpara temizler", "explain": "Zımpara kalıntıyı çiziğin içine yedirir." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2'deki 90 mm ve 35 mm SENARYO okumalarıdır; istenen FARKTIR (55 mm). Ders hiçbir ürün için geçiş genişliği ya da zımpara kademesi iddia etmiyor.",
+    "sourceRequired": "Zımpara kademe numaraları ve sıraları, geçiş genişlikleri, temizleyici ürün adları ve bekleme süreleri, eski boya sistemiyle uyumluluk ve yalıtıcı ara katman şartları, ortam sıcaklık ve nem koşulları bilinçle VERİLMEDİ; hepsi ürüne özgüdür ve ürünün teknik belgesinden okunur.",
+    "kapsam": "Boya kabini kurulumu, havalandırma şartları ve atık yönetimi mevzuatı KAPSAM DIŞIDIR; ders yüzey hazırlığının mantığını ve kontrolünü öğretiyor.",
+    "kaynak": "Bu alan kullanıcının açık talebiyle eklendi (talep birebir: 'birde alanlara kaportayı ekleyelim'); konu başlıkları MEB Otomotiv Gövde ve Boya dalının çerçevesini takip ediyor, kazanım numarası iddiası yok.",
+    "reviewedByMechanic": false
+  }
+}

@@ -1,0 +1,175 @@
+{
+  "id": "aksesuar.silecek-mekanizmasi",
+  "area": "aksesuar-ses",
+  "stage": 3,
+  "title": "Silecek Mekanizması ve Park Konumu",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 30,
+  "prerequisites": ["aksesuar.ayna-ve-isitma"],
+  "learningGoals": [
+    "Tek motorun iki kolu nasıl sürdüğünü ve park konumunun neden ayrı bir devre olduğunu bilmek",
+    "Kolların doğru açıda takılmasının neden kritik olduğunu görmek",
+    "Cam yıkama devresini silecek devresinden ayırmak"
+  ],
+
+  "safety": [
+    { "rule": "Mekanizmaya el uzatılmadan önce enerji kesilir ve silecek kolu emniyete alınır", "why": "Silecek düzeneği park konumunu tamamlamak için enerji kesildikten sonra bile hareket edebilir; parmak kol ile cam arasında sıkışır", "blocksStart": true },
+    { "rule": "Kollar takılmadan silecek çalıştırılmaz", "why": "Boşta dönen mil kendi strok sınırını aşabilir ve bağlantı kollarını eğer", "blocksStart": true },
+    { "rule": "Kuru cam üzerinde silecek çalıştırılmaz", "why": "Kuru sürtünme hem lastiği yırtar hem camda çizik bırakır", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.multimetre", "label": "Multimetre", "required": true },
+    { "id": "tool.pens-ampermetre", "label": "Pens ampermetre", "required": false },
+    { "id": "tool.tornavida-seti", "label": "Tornavida seti", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Ön camın altındaki kapağı açtın. İki silecek kolu ve tek bir motor var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.silecek-motoru",
+        "question": "Tek motor iki kolu nasıl sürüyor?",
+        "options": [
+          { "label": "Motorun dönüşü bir krank ve bağlantı kollarıyla ileri-geri salınıma çevrilir; iki kol aynı mekanizmaya bağlı olduğu için hareketleri birbirine kilitlidir", "verdict": "krank-baglanti", "correct": true, "explain": "Silecek motoru sürekli tek yönde döner; camdaki ileri-geri hareket motordan değil, mekanizmadan gelir. Motorun mili üzerinde bir krank kolu vardır ve bu kol her tam turda bir ileri bir geri hareket üretir; bu salınım bağlantı çubuklarıyla iki silecek miline dağıtılır. Yapının en önemli sonucu şudur: iki kolun hareketi mekanik olarak birbirine bağlıdır, ayrı ayrı hareket edemezler. Bu yüzden 'bir silecek çalışıyor diğeri durmuş' şikâyeti asla elektriksel değildir — motor ikisini birden sürüyordur; duran koldaki bağlantı gevşemiş, mil dişlisi sıyrılmış ya da bağlantı çubuğunun ucundaki plastik yatak dağılmıştır. Bu tek çıkarım teşhis süresini büyük ölçüde kısaltır. İkinci önemli nokta silecek milinin kola bağlanış biçimidir: mil ve kol dişlidir ve konik bir yüzeyle birbirine oturur; somun gevşediğinde kol milde kayar, motor doğru çalıştığı hâlde silecek yanlış yerde durur ya da cam kenarına vurur. Belirti 'silecekler kaydı' diye gelir ve çözümü parça değil, doğru açıda yeniden sıkmaktır." },
+          { "label": "Her kolun kendi motoru vardır", "verdict": "iki-motor", "explain": "Bazı özel uygulamalarda vardır ama yaygın düzen tek motor ve bağlantı kollarıdır." },
+          { "label": "Motor doğrudan kolu ileri geri döndürür", "verdict": "dogrudan", "explain": "Motor tek yönde döner; salınımı krank üretir." },
+          { "label": "Hidrolik bir düzenek kolları iter", "verdict": "hidrolik", "explain": "Silecek düzeneği tamamen mekaniktir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "'Bir silecek duruyor' şikâyeti elektriksel değildir. Tek motor, tek mekanizma — durduysa bağlantı kopmuştur."
+    },
+    {
+      "id": 2,
+      "instruction": "Sileceği kapattın ama kol camın ortasında kaldı, aşağı inmedi.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.silecek-kolu",
+        "question": "Park konumu neden ayrı bir devredir?",
+        "options": [
+          { "label": "Sürücü anahtarı kapattığında motorun beslemesi hemen kesilmez; motor içindeki park kontağı, kol alt konuma gelene kadar enerjiyi kendisi sürdürür", "verdict": "park-kontagi", "correct": true, "explain": "Silecek anahtarı kapatıldığı anda motorun durması istenmez, çünkü kol camın ortasında kalır ve görüşü keser. Bunu çözmek için motorun içine ek bir kontak konur — park kontağı. Motorun dişli kutusunun içinde, mille birlikte dönen bir disk ve üzerinde iletken bir iz vardır; kol alt konuma geldiğinde bu iz kontağı keser. Anahtar kapatıldığında besleme anahtardan değil, bu kontaktan gelmeye devam eder ve motor kendi kendine dönüp park konumuna ulaşınca durur. Yani park konumu bir ayar değil, ayrı bir elektriksel yoldur. Bunu bilmenin üç pratik karşılığı vardır. Birincisi 'silecek kapatınca ortada kalıyor' şikâyeti neredeyse her zaman park kontağı, oksitlenmiş disk ya da o hattaki bir kopuktur — motor sağlamdır, çünkü çalışıyordur. İkincisi bu kontak aynı zamanda aralıklı çalışma işlevinin de referansıdır; bozulduğunda aralıklı konum da düzensizleşir. Üçüncüsü motor değiştikten sonra silecek yanlış yerde duruyorsa sorun kontak değil, kolların yanlış açıda takılmış olmasıdır — çünkü park konumunu mekanizma belirler, kol ise mile sonradan takılır." },
+          { "label": "Park konumu yalnız kolun kendi ağırlığıyla oluşur", "verdict": "agirlik", "explain": "Kol yaylıdır ve mekanizma onu geri götürür; yerçekimi değil, elektrik ve mekanizma belirler." },
+          { "label": "Sürücü anahtarı kapatınca motor anında durur", "verdict": "aninda", "explain": "Anında dursaydı kol camın ortasında kalırdı; park kontağı bunu önler." },
+          { "label": "Park konumu bir yazılım ayarıdır", "verdict": "yazilim", "explain": "Çoğu araçta mekanik bir kontakla çözülür." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Anahtar kapandıktan sonra hâlâ enerji taşıyan bir yol var. Bu, silecek devresinin anlaşılmasında en kritik ayrıntı."
+    },
+    {
+      "id": 3,
+      "instruction": "Silecek çok yavaş çalışıyor ve ısınıyor. Motorun akımını ölçtün: bu araçta 9,4 A, sağlam bir araçta 3,6 A. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.pens-ampermetre",
+        "unit": "A",
+        "acceptRange": [5.6, 6.0]
+      },
+      "camera": "aksesuar",
+      "hint": "9,4 eksi 3,6.",
+      "teachingNote": "5,8 amperlik bu fark motorun zorlandığını söylüyor ama nedenini söylemiyor; nedeni ayırmak için tek bir hamle yeter — kollar sökülür ve motor boşta çalıştırılır. Boşta akım normale dönüyorsa motor sağlamdır ve direnç mekanizmadadır: silecek millerinin yatakları kurumuş ya da paslanmıştır, bağlantı çubuklarının uçları sıkışmıştır. Bu yataklar bakım isteyen ve neredeyse hiç bakım görmeyen noktalardır; temizlenip uygun gresle yağlandığında akım düşer. Boşta da akım yüksekse motorun kendi dişli kutusu ya da sargısı bitmiştir. Üçüncü bir ihtimal daha vardır ve unutulur: silecek lastikleri sertleşmiş ya da cam kuru ise sürtünme baştan yüksektir; bu durumda ölçüm ıslak camda tekrarlanır. Kabul edilebilir akım araca ve motora özgüdür ve bu ders bir sınır vermiyor; karşılaştırma sağlam bir araçla yapılıyor."
+    },
+    {
+      "id": 4,
+      "instruction": "Motoru değiştirdin. Kolları takacaksın.",
+      "interaction": {
+        "type": "unscrew",
+        "target": "part.silecek-kolu",
+        "turns": 4,
+        "direction": "ccw",
+        "requiresGesture": true
+      },
+      "camera": "aksesuar",
+      "hint": "Kol somununu saat yönünün tersine dört tur çevir.",
+      "teachingNote": "Kol takmanın kuralı tek cümledir: motor park konumundayken kollar takılır. Sıra şudur — yeni motor bağlanır, kollar takılmadan kısa bir süre çalıştırılıp KAPATILIR, böylece mekanizma kendi park konumuna oturur. Ancak ondan sonra kollar mile, üreticinin belirlediği park işaretine göre takılır ve somunları sıkılır. Bu sıra atlanırsa silecek doğru çalışır ama yanlış yerde durur; kol ya camın ortasında kalır ya da alt fitile vurup zamanla motoru zorlar. İkinci ayrıntı sıkma yüzeyidir: mil ve kol konik dişli bir yüzeyle oturur, bu yüzeyler yağlı ya da kirliyse kol zamanla kayar ve aynı şikâyet birkaç hafta sonra geri döner; yüzeyler kuru ve temiz olmalıdır. Kol somununun sıkma torku araca özgüdür ve bu ders bir değer vermiyor — ama gevşek bırakılan somun kolu kaydırır, aşırı sıkılan somun mili ya da kolu çatlatır."
+    },
+    {
+      "id": 5,
+      "instruction": "Kollar takıldı. Silecek çalışıyor ama alt konumda cam kenarındaki fitile hafifçe vuruyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-cam",
+        "question": "Ne yapılır?",
+        "options": [
+          { "label": "Kol somunu gevşetilip kol üretici park işaretine göre birkaç diş kaydırılır; kol eğilerek ayarlanmaz", "verdict": "kolu-kaydir", "correct": true, "explain": "Silecek kolunun cam üzerindeki konumu, kolun mile hangi dişte oturduğuyla belirlenir; ayar noktası burasıdır. Somun gevşetilir, kol milden çıkarılır, bir ya da iki diş kaydırılarak geri takılır ve sıkılır. Küçük bir diş kayması cam üzerinde birkaç santimlik fark yaratır, bu yüzden ayar denenerek yapılır. Yapılmayacak olan şey kolu eğerek ayarlamaya çalışmaktır: kol yaylı bir parçadır ve eğilmesi hem cama uyguladığı baskıyı bozar hem de bir daha düzeltilemeyecek biçimde deforme eder. Baskının bozulması doğrudan silme kalitesini düşürür — kol camın bir bölgesine az basar, orada iz kalır. İkinci sık hata fitile vurmayı önemsiz saymaktır: her strok sonunda alınan darbe hem mekanizmayı hem motoru yorar, zamanla bağlantı yatakları dağılır ve fitil yırtılır. Üçüncü nokta iki kolun birbirine göre konumudur; kollar birbirine çok yakın park ediyorsa yüksek hızda çakışabilirler, bu yüzden ayar tek kolla değil ikisi birlikte kontrol edilerek yapılır. Park işaretleri ve doğru konum araca özgüdür; bu ders bir ölçü vermiyor." },
+          { "label": "Kol elle bükülerek yukarı alınır", "verdict": "buk", "explain": "Kol yaylıdır; bükmek cam baskısını bozar ve silme kalitesini düşürür." },
+          { "label": "Fitil kesilir", "verdict": "fitil-kes", "explain": "Fitil su ve rüzgâr yalıtımıdır; kesilmez." },
+          { "label": "Normaldir, zamanla oturur", "verdict": "normal", "explain": "Her strokta alınan darbe mekanizmayı ve motoru yorar." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Ayar noktası kolun mile oturduğu diştir. Kolu bükmek ayar değil, kalıcı hasardır."
+    },
+    {
+      "id": 6,
+      "instruction": "Müşteri 'su fışkırtmıyor ama silecek çalışıyor' diyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sigorta-kutusu-aksesuar",
+        "question": "Bu iki sistem arasındaki ilişki nedir?",
+        "options": [
+          { "label": "Ayrı devrelerdir: yıkama kendi pompası, deposu ve hortumlarıyla çalışır — silecek çalışıyorsa yalnız yıkama tarafı aranır ve orada mekanik tıkanma elektrik arızasından daha olasıdır", "verdict": "ayri-devre", "correct": true, "explain": "Silecek ve cam yıkama aynı kolla kumanda edilir ama iki ayrı devredir; yıkamanın kendi küçük elektrik pompası, kendi deposu ve kendi hortum yolu vardır. Silecek çalışıyorsa besleme ve sigortanın bir kısmı zaten kanıtlanmıştır — ama yıkamanın kendi sigortası olabilir, önce ona bakılır. Sonrasında arama sırası mekanikten elektriğe doğrudur, çünkü bu devrede tıkanma arızadan daha sıktır. Birincisi depodur: boş ya da donmuş olabilir; kışın su katılmış bir depo donar ve pompa çalışsa da hiçbir şey gelmez, üstelik donan su depoyu ve pompayı çatlatabilir. İkincisi fıskiyelerdir: delikleri kireç ya da cila artığıyla tıkanır; ince bir tel ya da iğneyle açılır ve hava tutularak temizlenir. Üçüncüsü hortumlardır — motor bölmesindeki titreşimle soketinden çıkabilir ya da çatlayabilir; bu durumda pompa sesi duyulur ama su cama gelmez, çoğu zaman motor bölmesine akar. Dördüncüsü pompanın kendisidir: çalışırken sesi duyulmalıdır, ses yoksa besleme ölçülür. Bir ipucu: cam yıkama düğmesine basıldığında birçok araçta silecek de otomatik çalışır; bu çalışıyorsa kol anahtarı sağlamdır." },
+          { "label": "Aynı devredir, silecek çalışıyorsa yıkama da çalışmalı", "verdict": "ayni", "explain": "Kumanda ortak, devre ayrıdır." },
+          { "label": "Pompa silecek motorundan güç alır", "verdict": "pompa-motor", "explain": "Pompanın kendi elektrik motoru vardır." },
+          { "label": "Yıkama mekanik bir pompayla, kolu çekerek çalışır", "verdict": "mekanik", "explain": "Modern araçlarda elektrikli pompa kullanılır." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Bu devrede tıkanma arızadan sıktır: önce depo, fıskiye ve hortum; pompa en sona."
+    },
+    {
+      "id": 7,
+      "instruction": "İş bitti, teslim öncesi.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.silecek-motoru",
+        "question": "Silecek işinde son doğrulama nedir?",
+        "options": [
+          { "label": "Bütün kademeler ıslak camda denenir, park konumu kapatılarak iki kez kontrol edilir, yıkama ile birlikte çalışma denenir ve kolların birbirine değmediği yüksek kademede görülür", "verdict": "tam-deneme", "correct": true, "explain": "Doğrulama beş başlıktır ve hepsi ıslak camda yapılır — kuru camda deneme hem lastiği yırtar hem camı çizer. Birincisi kademelerdir: aralıklı, yavaş ve hızlı ayrı ayrı denenir; aralıklı kademe park kontağını da kullandığı için orada bir düzensizlik varsa burada görünür. İkincisi park konumudur ve iki kez denenir: silecek çalışırken kapatılır, kolun tam alt konuma gidip durduğu görülür; bir kez doğru durması tesadüf olabilir, ikinci deneme onu doğrular. Üçüncüsü yıkamayla birlikte çalışmadır: yıkama düğmesine basıldığında su cama düzgün ve iki tarafa dengeli gelmeli, silecek eşlik etmelidir; fıskiyelerin yönü camın üst yarısına gelecek şekilde ayarlanır, çünkü silecek suyu aşağı süpürür. Dördüncüsü yüksek kademede kolların birbirine ya da fitile değmediğidir — çakışma en çok yüksek hızda ortaya çıkar. Beşincisi silme kalitesidir: cam üzerinde iz, atlama ya da titreme varsa lastikler sertleşmiştir ve bu bir bakım kalemi olarak müşteriye söylenir. Son olarak cam altındaki kapak ve fitiller yerine tam oturtulur; yarım oturan kapak hem su alır hem yüksek hızda titrer." },
+          { "label": "Bir kez açıp kapatmak yeterlidir", "verdict": "bir-kez", "explain": "Kademeler ve park konumu ayrı ayrı doğrulanmalıdır." },
+          { "label": "Kuru camda denemek daha net sonuç verir", "verdict": "kuru", "explain": "Kuru deneme lastiği yırtar ve camı çizer." },
+          { "label": "Müşteri yağmurda dener", "verdict": "musteri", "explain": "Doğrulama teslimden önce yapılır." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Aşama 3'ün ikinci dersi yağmur sensörü: aynı camın arkasında duran ve cam değişince en çok sorun çıkaran parça."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Bir silecek çalışıyor, diğeri hiç hareket etmiyor. Bu elektriksel bir arıza mıdır?",
+        "a": "krank-baglanti",
+        "options": [
+          { "verdict": "krank-baglanti", "label": "Hayır — tek motor iki kolu aynı mekanizmayla sürer; duran koldaki bağlantı, mil dişlisi ya da yatak arızalıdır", "explain": "Motorun tek yönlü dönüşü bir krankla salınıma çevrilir ve bağlantı çubuklarıyla iki mile dağıtılır; kollar mekanik olarak birbirine kilitlidir, ayrı ayrı hareket edemezler. Bu yüzden tek kolun durması elektrik değil mekanik bir kopmadır. Kol milde kaymışsa da benzer şikâyet gelir ve çözüm doğru açıda yeniden sıkmaktır." },
+          { "verdict": "iki-motor", "label": "Her kolun kendi motoru vardır", "explain": "Yaygın düzen tek motordur." },
+          { "verdict": "dogrudan", "label": "Motor kolu doğrudan ileri geri çevirir", "explain": "Salınımı krank üretir." },
+          { "verdict": "hidrolik", "label": "Hidrolik düzenek iter", "explain": "Düzenek mekaniktir." }
+        ]
+      },
+      {
+        "q": "Silecek kapatıldığında kol camın ortasında kalıyor. Sebep nedir?",
+        "a": "park-kontagi",
+        "options": [
+          { "verdict": "park-kontagi", "label": "Park kontağı ya da o hattaki bağlantı arızalıdır; motor sağlamdır çünkü çalışıyor", "explain": "Anahtar kapatıldığında besleme kesilmez; motorun içindeki park kontağı, kol alt konuma gelene kadar enerjiyi sürdürür ve orada keser. Yani park konumu ayrı bir elektriksel yoldur. Aynı kontak aralıklı çalışmanın da referansıdır, bozulduğunda aralıklı kademe de düzensizleşir. Motor değişiminden sonraki yanlış park ise kontak değil, kolların yanlış dişte takılmış olmasıdır." },
+          { "verdict": "agirlik", "label": "Kol kendi ağırlığıyla inmeli", "explain": "Konumu mekanizma ve elektrik belirler." },
+          { "verdict": "aninda", "label": "Motor anahtar kapanınca anında durur", "explain": "Anında dursa kol ortada kalırdı." },
+          { "verdict": "yazilim", "label": "Yazılım ayarıdır", "explain": "Çoğu araçta mekanik kontakla çözülür." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 9,4 A ve 3,6 A SENARYO okumalarıdır; istenen FARKTIR (5,8 A) ve ders bir azami akım sınırı vermiyor — karşılaştırma sağlam bir araçla yapılıyor.",
+    "sourceRequired": "Silecek motoru azami akımı, kol somunu sıkma torku, park işareti konumu, silecek lastiği ölçüsü ve yıkama suyu katkı oranı bilinçle VERİLMEDİ; hepsi araca ve ürüne özgüdür.",
+    "kapsam": "Arka silecek düzeneği aynı mantıkla çalışır ama ayrı motorludur; ayrı ders olarak işlenmiyor. Cam değişimi ve fitil yenileme kapsam dışıdır. Yağmur sensörü bir sonraki dersin konusu.",
+    "reviewedByMechanic": false
+  }
+}

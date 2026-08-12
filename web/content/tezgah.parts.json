@@ -1,0 +1,60 @@
+{
+  "model": "tezgah",
+  "file": "/models/tezgah.glb",
+  "license": {
+    "source": "scripts/build-models.mjs — kod ile üretildi",
+    "author": "Everything For My Car",
+    "license": "Proje içi üretim — üçüncü taraf lisans yükümlülüğü yok",
+    "url": ""
+  },
+  "parts": {
+    "part.olcu-aletleri": "olcu_aletleri_tepsisi",
+    "part.kumpas": "kumpas",
+    "part.egzersiz-civata.1": "egzersiz_civata_1",
+    "part.egzersiz-civata-yeni.1": "egzersiz_civata_yeni_1",
+    "part.flans-civata": "flans_civata",
+    "part.egzersiz-dis-deligi": "egzersiz_dis_deligi"
+  },
+  "props": {
+    "dekor.cirir-kolu": {
+      "file": "/models/vendor/ratchet_wrench/ratchet_wrench.gltf",
+      "at": [-0.2, 0.93, -0.22],
+      "rotateX": 1.5708,
+      "rotateY": 0.5,
+      "credit": "John Hutcheson — CC0"
+    },
+    "dekor.yildiz-anahtar": {
+      "file": "/models/vendor/combination_wrench/combination_wrench.gltf",
+      "at": [0.08, 0.93, -0.27],
+      "rotateY": 1.4,
+      "credit": "BKS — CC0"
+    },
+    "dekor.kurbagacik": {
+      "file": "/models/vendor/adjustable_wrench/adjustable_wrench.gltf",
+      "at": [0.56, 0.93, -0.2],
+      "rotateX": 1.5708,
+      "rotateY": -0.4,
+      "credit": "Mateusz Sadek — CC0"
+    },
+    "dekor.tornavida": {
+      "file": "/models/vendor/screwdriver/screwdriver.gltf",
+      "at": [0.6, 0.93, 0.22],
+      "rotateX": 1.5708,
+      "rotateY": 1.0,
+      "credit": "PierreB3D — CC0"
+    },
+    "dekor.alet-cantasi": {
+      "file": "/models/vendor/metal_toolbox/metal_toolbox.gltf",
+      "at": [-1.05, 0, 0.1],
+      "rotateY": 0.3,
+      "credit": "Mateusz Sadek — CC0"
+    }
+  },
+  "_notes": {
+    "kapsam": "Aşama 1-2 tezgâh egzersizleri: ölçü aletleri, cıvata sökme-takma, diş açma.",
+    "olcek": "Metre. Tezgâh yüzeyi y=0.90; parçalar yüzeyin üstünde durur.",
+    "yapisal": "tezgah_yuzeyi, tezgah_ayak_sol, tezgah_ayak_sag, mengene, kumpas_cene, mikrometre, flans_civata_flansi, egzersiz_plakasi bir adımın hedefi değildir; bağlam ve görsel bütünlük içindir.",
+    "olcu-aletleri": "part.olcu-aletleri tek bir alet değil, aralarından seçim yapılan tepsidir; kumpas ve mikrometre tepsinin üstünde ayrı mesh olarak durur.",
+    "nokta-yasagi": "Mesh adlarında nokta yok: three.js GLTFLoader düğüm adındaki '.', ':', '/', '[', ']' karakterlerini siler."
+  }
+}

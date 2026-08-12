@@ -1,0 +1,173 @@
+{
+  "id": "aksesuar.dis-aksesuar-montaj",
+  "area": "aksesuar-ses",
+  "stage": 5,
+  "title": "Tampon, Spoiler ve Çıta Montajı",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 35,
+  "prerequisites": ["aksesuar.aydinlatma-degisim"],
+  "learningGoals": [
+    "Dış parçaların gövdeye üç ayrı yolla tutunduğunu ve her yolun ayrı kuralı olduğunu bilmek",
+    "Gövdeye delik açmanın neden son çare olduğunu görmek",
+    "Yüzey hazırlığının yapıştırmalı montajda tek belirleyici olduğunu anlamak"
+  ],
+
+  "safety": [
+    { "rule": "Tampon sökülürken içindeki sensör, kamera ve lamba soketleri ayrılmadan parça çekilmez", "why": "Tampon çekildiğinde gerilen soketler kopar; park sensörü ve kamera kabloları kısa ve pahalıdır", "blocksStart": true },
+    { "rule": "Gövdeye yeni delik açılmadan önce arkasında ne olduğu doğrulanır", "why": "Sacın arkasında kablo demeti, yakıt hattı, fren hattı ya da hava yastığı sensörü olabilir; kör delme bunları keser", "blocksStart": true },
+    { "rule": "Tampon iki kişiyle taşınır ve bir yüzeye yatırılarak konur", "why": "Boyalı yüzey en küçük temasta çizilir ve boya işi bu projenin kapsamı dışındadır", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.plastik-sokme-spatulasi", "label": "Plastik söküm spatulası", "required": true },
+    { "id": "tool.tornavida-seti", "label": "Tornavida seti", "required": true },
+    { "id": "tool.multimetre", "label": "Multimetre", "required": false },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Tamponu söküp yerine yeni bir parça takacaksın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.tampon",
+        "question": "Dış parçalar gövdeye kaç yolla tutunur?",
+        "options": [
+          { "label": "Üç yolla: vida/cıvata, klips ve yapıştırma bant; çoğu parça üçünü birden kullanır ve hepsi çözülmeden parça çıkmaz", "verdict": "uc-yol", "correct": true, "explain": "Dış parça sökümünde en sık yapılan hata, üç bağlantı yolundan yalnız birini görüp diğerlerini zorlamaktır. Birincisi vida ve cıvatalardır ve bunlar genellikle görünmez yerlerdedir: tekerlek davlumbazının içinde (tekerlek çevrilerek ya da lastik sökülerek ulaşılır), aracın altında, kaputun altındaki üst kenarda ve far gruplarının yanında. Bir tampon için bu vidalar bazen on beş yirmi adettir ve biri kalırsa parça çıkmaz. İkincisi kliptir; kapı döşemesindekiyle aynı mantık geçerlidir — kuvvet klipsin üstüne, dik olarak uygulanır. Dış parçalarda ek olarak kayar tırnaklar bulunur: parça çamurluğun altına ya da farın yanına bir dil gibi girer ve çekerek değil, kaydırarak kurtulur; yanlış yönde çekmek bu dilleri kırar. Üçüncüsü yapıştırma bantlardır ve özellikle çıta, spoiler ve marşpiyellerde kullanılır. Bu üçünün hangisinin nerede olduğunu bilmeden yapılan söküm, kırık tırnak ve çatlak parçayla biter. Bilgi kaynağı sırayla şudur: aracın servis belgesi, sökülmüş bir örneğin arka yüzü ve fenerle boşluktan bakmak." },
+          { "label": "Yalnız vidalarla", "verdict": "vida", "explain": "Klips ve yapıştırma da kullanılır; yalnız vidaları sökmek parçayı çıkarmaz." },
+          { "label": "Yalnız kliplerle", "verdict": "klips", "explain": "Gizli vidalar kalırsa parça zorlanır ve kırılır." },
+          { "label": "Manyetik olarak", "verdict": "manyetik", "explain": "Dış parçalar mekanik olarak bağlanır." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Kayar tırnak dış parçalara özgü dördüncü bir ayrıntı: çekilerek değil, kaydırılarak kurtulur."
+    },
+    {
+      "id": 2,
+      "instruction": "Tampon gevşedi, çekmek üzeresin.",
+      "interaction": {
+        "type": "pull",
+        "target": "part.tampon",
+        "requiresGesture": true
+      },
+      "camera": "aksesuar",
+      "hint": "Önce soketleri ayır, sonra iki kişiyle eşit çek.",
+      "teachingNote": "Modern bir tamponun arkasında çoğu zaman elektrik vardır: sis lambaları, park sensörleri, ön kamera, dış sıcaklık sensörü ve bazı araçlarda yıkama fıskiyesi. Tampon soketler ayrılmadan çekilirse kablolar gerilir ve ya soket dili kırılır ya kablo kopar; park sensörü kabloları özellikle kısadır. Doğru sıra: tampon bir miktar öne alınır, aradan el sokulacak kadar boşluk yapılır, bütün soketler kilitlerine basılarak ayrılır, varsa fıskiye hortumu çıkarılır, ancak ondan sonra parça tamamen alınır. Taşırken iki kişi olur ve parça bir sehpaya ya da temiz bir örtüye yatırılır — boyalı yüzey beton üzerinde bir saniyede çizilir. Sökülen vidalar geldikleri yere göre ayrılır; tamponda birden çok boy vida vardır ve uzun olanı yanlış yere takmak plastiği ya da sacı deler."
+    },
+    {
+      "id": 3,
+      "instruction": "Müşteri gövdeye vidalanan bir yan basamak taktırmak istiyor. Montaj için delik gerekiyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kapi-saci",
+        "question": "Gövdeye delik açmak ne demektir?",
+        "options": [
+          { "label": "Son çaredir: her delik kaplamayı kaldırır ve pas başlangıcı yaratır; önce fabrikanın hazır bıraktığı montaj noktaları ve dişli somunlar aranır, delme kaçınılmazsa kesim yüzeyi korunur ve sızdırmaz hâle getirilir", "verdict": "son-care", "correct": true, "explain": "Araç gövdesi çıplak sac değildir: üzerinde katmanlar hâlinde bir koruma vardır — daldırma kaplama, astar, boya ve alttaki bölgelerde ek koruyucu. Bir delik açıldığında bu katmanların hepsi o noktada kesilir ve geriye çıplak kenar kalır. Nem ve tuz oradan girer, pas kenar boyunca ilerler ve bir yıl sonra ortaya çıkan şey aksesuar montajının değil, gövdenin sorunudur. Bu yüzden sıra nettir. Birinci tercih fabrikanın bıraktığı montaj noktalarıdır: birçok araçta yan basamak, çeki demiri ya da tavan barı için hazır dişli somunlar ya da kör tapayla kapatılmış delikler bulunur; bunlar hem doğru yerdedir hem gövde yükünü taşıyacak biçimde güçlendirilmiştir. İkinci tercih mevcut cıvatalardır. Üçüncü ve son çare delmedir ve o zaman kural şudur: delinecek noktanın arkasında ne olduğu MUTLAKA doğrulanır (kablo demeti, yakıt hattı, fren hattı ya da sensör olabilir), delik açıldıktan sonra kenarı çapaktan arındırılır, uygun bir koruyucuyla kaplanır ve montajda sızdırmaz bir conta ya da macun kullanılır. Ayrıca yük taşıyan bir parça yalnız ince sacın üzerine bağlanmaz; sac altına takviye plakası konur, aksi hâlde yük sacı yırtar. Son not: taşıyıcı bir aksesuarın (çeki demiri gibi) montajı ayrı bir uzmanlık ve sorumluluk alanıdır, bu ders kapsamında değildir." },
+          { "label": "Normaldir, aksesuar montajı böyle yapılır", "verdict": "normal", "explain": "Delik son çaredir; her delik pas başlangıcıdır." },
+          { "label": "Delik açılır ama kapatmaya gerek yoktur", "verdict": "kapatma-yok", "explain": "Korunmayan kesim kenarı pasın başlangıç noktasıdır." },
+          { "label": "Hiçbir koşulda delik açılmaz", "verdict": "asla", "explain": "Bazı montajlarda kaçınılmazdır; kural doğru yapmaktır." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Her delik bir pas başlangıcı. Fabrikanın hazır bıraktığı noktaları aramak beş dakika, pası onarmak bir gövde işi."
+    },
+    {
+      "id": 4,
+      "instruction": "Çıtayı yapıştırma bantla takacaksın. Yüzey sıcaklığını ölçtün: gölgede 12 °C, güneşte 31 °C. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.multimetre-aksesuar",
+        "unit": "°C",
+        "acceptRange": [18.5, 19.5]
+      },
+      "camera": "aksesuar",
+      "hint": "31 eksi 12.",
+      "teachingNote": "19 derecelik bu fark, aynı aracın aynı gün içinde iki farklı montaj koşulu sunduğunu gösteriyor ve yapıştırmalı montajda koşul sonucu belirler. Yapıştırma bantlar bir sıcaklık aralığında yapışır; soğukta yapıştırıcı akmaz, yüzeye tam temas etmez ve bant birkaç hafta içinde kenarından kalkar. Aşırı sıcakta ise erken tutar ve parça düzeltilemez, ayrıca boya yüzeyi genleşmiş hâldeyken yapışan bant soğuyunca gerilim üretir. Doğru koşul ürünün belirttiği aralıktır ve bu ders bir değer vermiyor — ürün kılavuzuna bakılır. Üç pratik not: araç soğuksa gövde ısıtılır (sıcak hava tabancasıyla dikkatle ya da kapalı ısıtmalı ortamda beklemesi sağlanır), yüzey ıslak ya da nemliyse hiç başlanmaz, ve montajdan sonra ürünün istediği süre boyunca araç yıkanmaz. Bandın nihai yapışma gücüne saatler içinde ulaştığı unutulmamalıdır: ilk dakikalarda sağlam duran bir parça, ertesi gün gerçek testini verir."
+    },
+    {
+      "id": 5,
+      "instruction": "Yapıştırmadan önceki adımdasın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kapi-saci",
+        "question": "Yapıştırmalı montajda tek belirleyici nedir?",
+        "options": [
+          { "label": "Yüzey hazırlığı: cila, parlatıcı, silikon, toz ve nem tamamen temizlenmeden yapılan hiçbir yapıştırma tutmaz — bant kaliteli olsa bile", "verdict": "yuzey", "correct": true, "explain": "Yapıştırmalı montajda başarısızlığın neredeyse tek sebebi yüzeydir ve bu, bandın markasıyla telafi edilemez. Araç boyasının üzerinde çoğu zaman cila ya da koruyucu bir katman vardır; bu katmanların işi tam olarak bir şeyin yüzeye yapışmasını zorlaştırmaktır. Bant bu katmanın üstüne yapışır, katman da boyanın üstünde durur — parça düşerken bandın üstünde cila tabakası görülür ve bu, hatanın nerede olduğunu tam olarak söyler. Doğru hazırlık üç adımdır. Birincisi temizliktir: yüzey uygun bir temizleyiciyle silinir; sabunlu su tek başına cilayı almaz. İkincisi kurutmadır — temizleyici tamamen uçmalı, ıslak yüzeye yapıştırılmaz. Üçüncüsü, birçok ürünün istediği yüzey hazırlayıcının uygulanmasıdır; bu ürün boyanın üstünde banda tutunacak bir ara katman bırakır. Bunların hangisinin gerekli olduğu ürüne özgüdür ve bu ders bir ürün belirtmiyor. İki not daha: parça yapıştırılmadan ÖNCE bantsız olarak yerine tutulup konumu işaretlenir, çünkü bant değdikten sonra kaydırma şansı yoktur; ve yapıştırdıktan sonra parça, ürünün istediği süre boyunca ve tüm yüzey boyunca eşit bastırılır — köşeden bastırıp ortayı boş bırakmak, ortada tutunmamış bir bölge bırakır ve o bölge rüzgârda titremeye başlar." },
+          { "label": "Bandın markası", "verdict": "marka", "explain": "Kaliteli bant kirli yüzeye de tutmaz." },
+          { "label": "Ne kadar kuvvetle bastırıldığı", "verdict": "kuvvet", "explain": "Basınç gerekli ama hazırlıksız yüzeyde yeterli değildir." },
+          { "label": "Parçanın ağırlığı", "verdict": "agirlik", "explain": "Ağırlık bant seçimini etkiler ama tutmamanın sebebi yüzeydir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Düşen parçanın bandında cila görünür — hatanın nerede olduğunu parçanın kendisi söyler."
+    },
+    {
+      "id": 6,
+      "instruction": "Tampon geri takılıyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.far-grubu",
+        "question": "Takarken hangi sıra izlenir?",
+        "options": [
+          { "label": "Önce soketler takılıp işlevler denenir, sonra parça kayar tırnaklara oturtulur, sonra klipsler, en son vidalar; boşluklar iki tarafta eşit olacak şekilde kontrol edilerek sıkılır", "verdict": "sira", "correct": true, "explain": "Dış parça montajında sıra, hem işin görüntüsünü hem de bir daha sökülüp sökülmeyeceğini belirler. Birinci adım elektriktir: bütün soketler takılır ve parça yerine oturtulmadan sis lambası, park sensörü ve varsa kamera denenir — çünkü bir sokete unutulduğunda ya da yarım takıldığında bunu parça takılıyken fark etmek, işin tamamını geri almak demektir. İkinci adım kayar tırnaklardır: parça çamurluk ve far kenarındaki dillere doğru yönde kaydırılarak oturtulur; bu adım atlanıp doğrudan bastırılırsa diller kırılır ve parça o köşeden sürekli açık kalır. Üçüncü adım klipslerdir; avuç içiyle ve klipsin tam üstünden bastırılır. Dördüncü adım vidalardır ve önemli bir ayrıntı taşır: vidalar önce hepsi hafifçe takılır, parçanın konumu ve boşlukları ayarlanır, ancak ondan sonra sırayla sıkılır — tek tek sıkarak ilerlemek parçayı bir yöne çeker ve boşluklar bir tarafta açık, diğerinde kapalı kalır. Beşinci ve görünen sonucu belirleyen adım boşluk kontrolüdür: tamponun kaput, çamurluk ve far ile arasındaki aralık iki tarafta eşit olmalı, yüzeyler aynı düzlemde bitmelidir. Eşit olmayan boşluk müşterinin ilk fark ettiği şeydir ve çoğu zaman bir vidanın yanlış sırayla sıkılmasından doğar." },
+          { "label": "Önce vidalar sıkılır, sonra soketler takılır", "verdict": "vida-once", "explain": "Soket unutulduğunda parça yeniden sökülür." },
+          { "label": "Parça bastırılarak oturtulur, tırnaklar kendiliğinden girer", "verdict": "bastir", "explain": "Kayar tırnaklar doğru yönde kaydırılmazsa kırılır." },
+          { "label": "Vidalar tek tek sonuna kadar sıkılır", "verdict": "tek-tek", "explain": "Parça bir yöne çekilir ve boşluklar eşitsiz kalır." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Boşlukların eşitliği müşterinin ilk baktığı şey. Bütün vidaları hafif takıp sonra sıkmak bunu bedavaya çözüyor."
+    },
+    {
+      "id": 7,
+      "instruction": "İş bitti.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.stop-lambasi",
+        "question": "Dış aksesuar işinde teslim öncesi ne doğrulanır?",
+        "options": [
+          { "label": "Tamponla ilgili bütün elektrik denenir, boşluklar ve yüzey hizası kontrol edilir, yeni açılan her delik korunmuş ve sızdırmaz hâle getirilmiş olur, park sensörü varsa çalışması ve yanlış uyarı vermemesi doğrulanır", "verdict": "tam-kontrol", "correct": true, "explain": "Bu işin teslim listesi dört başlıktır. Birincisi elektriktir: sis lambaları, park sensörleri, kamera, dış sıcaklık göstergesi ve varsa fıskiye denenir — tampon sökümü bu devrelerin hepsine dokunmuştur. Park sensörü için araç yavaşça bir engele yaklaştırılarak ya da elle deneme yapılarak hem çalıştığı hem de boşta yanlış uyarı vermediği görülür; yanlış konumda ya da tam oturmamış bir sensör sürekli alarm verir ve bu, montajın en sık geri dönme sebebidir. İkincisi görünümdür: boşluklar iki tarafta eşit mi, yüzeyler aynı düzlemde mi, hiçbir klips açık kalmış mı. Üçüncüsü gövde korumasıdır: açılan her delik çapaktan arındırılmış, korunmuş ve sızdırmaz hâle getirilmiş olmalı; bu adım atlandığında sonucu bir yıl sonra pas olarak görünür ve o zaman kimse sebebini bu montaja bağlamaz. Dördüncüsü yapıştırmalı parçaların bakım bilgisidir: müşteriye ürünün istediği süre boyunca aracı yıkamaması ve basınçlı suyu doğrudan parçanın kenarına tutmaması söylenir. Son bir dürüstlük notu: sonradan takılan dış parçalar aracın hava akışını, sensör görüş alanını ve bazı durumlarda yasal uygunluğunu etkileyebilir; keskin kenarlı ya da öne çıkan parçalar yaya güvenliği açısından sorunludur ve bu, montajı yapan kişinin söylemesi gereken bir şeydir." },
+          { "label": "Parça yerinde duruyorsa iş tamamdır", "verdict": "duruyor", "explain": "Elektrik, boşluk ve gövde koruması ayrıca doğrulanır." },
+          { "label": "Park sensörü zaten fabrika işidir, denenmez", "verdict": "sensor-deneme-yok", "explain": "Tampon söküldüğü için sensörlerin tamamına dokunulmuştur." },
+          { "label": "Delikler zamanla kendiliğinden kapanır", "verdict": "delik", "explain": "Korunmayan kesim kenarı paslanır." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Aşama 5'in son dersi: anten ve dış dikiz aynası — ikisi de küçük görünen ama su ve sinyal taşıyan parçalar."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Aksesuar montajı için gövdeye delik açmak ne demektir?",
+        "a": "son-care",
+        "options": [
+          { "verdict": "son-care", "label": "Son çaredir: her delik kaplamayı keser ve pas başlatır; önce fabrikanın hazır montaj noktaları aranır", "explain": "Gövdede daldırma kaplama, astar ve boya katmanları vardır; delik bu katmanları o noktada keser ve nem çıplak kenardan girer. Birçok araçta yan basamak, tavan barı ya da benzeri için hazır dişli somunlar bulunur. Delme kaçınılmazsa arkasında ne olduğu doğrulanır (kablo, yakıt hattı, fren hattı), kenar çapaktan arındırılıp korunur ve montaj sızdırmaz yapılır; yük taşıyan parçalarda sac altına takviye konur." },
+          { "verdict": "normal", "label": "Normaldir, montaj böyle yapılır", "explain": "Her delik pas başlangıcıdır." },
+          { "verdict": "kapatma-yok", "label": "Kapatmaya gerek yoktur", "explain": "Korunmayan kenar paslanır." },
+          { "verdict": "asla", "label": "Hiçbir koşulda açılmaz", "explain": "Bazen kaçınılmazdır; kural doğru yapmaktır." }
+        ]
+      },
+      {
+        "q": "Yapıştırma bantla takılan bir çıta birkaç hafta sonra kenarından kalktı. En olası sebep nedir?",
+        "a": "yuzey",
+        "options": [
+          { "verdict": "yuzey", "label": "Yüzey hazırlığı: cila, silikon, toz ya da nem temizlenmeden yapıştırılmış", "explain": "Bant boyanın değil, üzerindeki cila katmanının üstüne yapışır ve o katman boyadan ayrılır; düşen parçanın bandında cila görülür. Doğru hazırlık uygun temizleyiciyle silme, tam kurutma ve ürünün istediği yüzey hazırlayıcıdır. Ayrıca montaj sıcaklığı ürünün aralığında olmalı, parça yapıştırmadan önce konumu işaretlenmeli ve tüm yüzey boyunca eşit bastırılmalıdır." },
+          { "verdict": "marka", "label": "Bandın markası kötüydü", "explain": "Kaliteli bant da kirli yüzeye tutmaz." },
+          { "verdict": "kuvvet", "label": "Yeterince bastırılmadı", "explain": "Basınç gerekli ama hazırlıksız yüzeyde yetmez." },
+          { "verdict": "agirlik", "label": "Parça ağırdı", "explain": "Asıl sebep yüzeydir." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 4'teki 12 °C ve 31 °C SENARYO okumalarıdır; istenen FARKTIR (19 °C) ve ders bir montaj sıcaklığı aralığı vermiyor — aralık ürüne özgüdür.",
+    "sourceRequired": "Yapıştırma bandı tipi ve montaj sıcaklık aralığı, yüzey hazırlayıcı ürünü, bekleme ve yıkama süresi, tampon vidalarının sıkma torku ve gövde delme sonrası koruyucu ürünü bilinçle VERİLMEDİ; hepsi araca ve ürüne özgüdür.",
+    "kapsam": "Boya, gövde plastik onarımı ve göçük düzeltme KAPSAM DIŞIDIR — ayrı uzmanlıklardır ve bu projede yok. Çeki demiri gibi yük taşıyan aksesuarların montajı ayrı bir sorumluluk alanıdır ve bu ders kapsamında değildir. Park sensörü ve kamera sistemlerinin kalibrasyonu kapsam dışı; ders yalnız söküm sonrası işlevsel denemeyi öğretiyor.",
+    "reviewedByMechanic": false
+  }
+}

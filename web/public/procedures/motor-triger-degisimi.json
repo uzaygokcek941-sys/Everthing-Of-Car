@@ -1,0 +1,184 @@
+{
+  "id": "motor.triger-degisimi",
+  "area": "motor-mekanik",
+  "stage": 7,
+  "title": "Triger Kayışı: İşaret Hizalama ve Bir Dişin Bedeli",
+  "vehicleClass": "binek-arac",
+  "estimatedMinutes": 40,
+  "prerequisites": ["motor.senteye-getirme", "motor.supap-ayari"],
+  "learningGoals": [
+    "Kayış değişimini kilometreye değil, kilometre ile süreden hangisi önce dolarsa ona bağlamak",
+    "İşaretleri sökmeden önce hizalamak ve montajdan sonra iki tam turla doğrulamak",
+    "Bir diş kaymanın girişimli motorda ne demek olduğunu bilmek"
+  ],
+
+  "safety": [
+    { "rule": "Kayış sökülüyken krank ve kam milleri birbirinden bağımsız çevrilmez", "why": "Girişimli motorda piston ile supap aynı hacmi paylaşır ve çarpışmayı yalnız kayış engeller. Kayış yokken milleri ayrı ayrı çevirmek supabı pistona vurdurur", "blocksStart": true },
+    { "rule": "Motor daima normal dönüş yönünde çevrilir", "why": "Ters çevirmek gergi tarafını boşa alır; kayış gevşeyen tarafta diş atlayabilir ve ayar sessizce bozulur", "blocksStart": true },
+    { "rule": "Motor toplanmadan marş verilmez", "why": "İşaret kontrolü elle iki tam tur çevirerek yapılır. Yanlış ayarlı motora marş vermek, elle fark edilebilecek bir teması hasara çevirir", "blocksStart": true },
+    { "rule": "Kayış tornavida ya da kaldıraçla kasnağa geçirilmez", "why": "Zorlanan kayışın iç kordu görünmeden kopar. Dışarıdan sağlam görünen kayış birkaç bin kilometre sonra tek parça hâlinde kopar", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.lokma-seti", "label": "Lokma seti", "required": true },
+    { "id": "tool.tork-anahtari", "label": "Tork anahtarı", "required": true },
+    { "id": "tool.sabitleme-aparati", "label": "Kam/krank sabitleme aparatı", "required": false },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Müşteri: kayışın değişme kilometresi dolmadı, 40 bin daha var. Ama araç 9 yaşında ve kayış hiç değişmemiş.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.triger-kayisi",
+        "question": "Ne yaparsın?",
+        "options": [
+          { "label": "Kilometre ve süreden hangisi önce dolarsa ona uyarım; süre dolduysa kayış değişir", "verdict": "sure-de-sayar", "correct": true, "explain": "Triger kayışı kauçuk ve kord malzemesinden yapılır ve bu malzemeler zamanla, araç hiç kullanılmasa bile yaşlanır. Isı çevrimleri, ozon ve yağ buharı kauçuğu sertleştirir; sertleşen kayış dişlerinin dibinden çatlamaya başlar. Bu yüzden üreticiler iki sınır verir: bir kilometre ve bir süre. Hangisi önce dolarsa değişim zamanı gelmiştir. Az kullanılan araçlarda tehlikeli olan tam da budur, çünkü sürücü kilometreye bakıp kendini güvende sanır." },
+          { "label": "Kilometre dolmadıysa beklerim", "verdict": "km-bekle", "explain": "Kilometre tek başına yaşlanmayı ölçmez. Dokuz yıllık kayış, düşük kilometrede de kırılganlaşmıştır." },
+          { "label": "Kayışı çıkarıp bakarım, çatlak yoksa bırakırım", "verdict": "gozle-bak", "explain": "Çatlaklar çoğu zaman dişlerin dibinde başlar ve kayış takılıyken görünmez. Ayrıca sökülen kayış zaten tekrar takılmaz." },
+          { "label": "Sesine bakarım, ses yoksa sağlamdır", "verdict": "ses-yok", "explain": "Triger kayışı kopmadan önce çoğunlukla hiç ses vermez. Sessizlik burada bir kanıt değildir." }
+        ]
+      },
+      "camera": "motor-on",
+      "teachingNote": "Bu, müşteriye gerekmiyor demenin en pahalı olduğu işlerden biridir. Girişimli bir motorda kopan kayış, kayış fiyatının onlarca katı bir onarım demektir."
+    },
+    {
+      "id": 2,
+      "instruction": "Kapaklar açıldı. Sökmeye başlamadan önceki tek zorunlu adım var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.triger-isareti",
+        "question": "Kayışı sökmeden önce ne yapılır?",
+        "options": [
+          { "label": "Motor sentye getirilip kam ve krank işaretleri hizalanır, konum kendi işaretimle de teyit edilir", "verdict": "isaretleri-hizala", "correct": true, "explain": "Kayış söküldüğü anda kam ile krank arasındaki tek bağ ortadan kalkar ve motorun zaman ayarını hatırlayan hiçbir şey kalmaz. Bu yüzden söküm öncesi motor referans konumuna getirilir ve kasnaklar üzerindeki fabrika işaretleri karşılıklarıyla hizalanır. Deneyimli usta buna kendi işaretini de ekler: kayış ile kasnağın üzerine boya kalemiyle çizgi çeker ve dişleri sayar. Fabrika işareti silinmiş ya da kirli olduğunda kurtaran şey o ikinci işarettir." },
+          { "label": "Kayışı keser, yenisini aynı konumda takarım", "verdict": "kes-tak", "explain": "Kesilen kayış konumu koruyacağını garanti etmez ve milleri serbest bırakır. Referans, işaretlerdir." },
+          { "label": "Fotoğraf çekmek yeterli", "verdict": "fotograf", "explain": "Fotoğraf yardımcı olur ama diş sayısını göstermez ve açıyı ölçmez. İşaretlerin fiziksel hizalanması gerekir." },
+          { "label": "Yeni kayışta işaretler zaten var", "verdict": "yeni-kayis", "explain": "Yeni kayıştaki çizgiler montaj kolaylığı içindir ve motorun işaretlerinin yerini tutmaz." }
+        ]
+      },
+      "camera": "motor-on",
+      "hint": "İşaretleri hizaladıktan sonra bir kez daha kontrol et; sentye getirirken bir tur fazla ya da eksik çevirmek çok yaygındır.",
+      "teachingNote": "Bu işte ustayı çıraktan ayıran tek fark budur: usta sökmeden önce nereye geri döneceğini yazar."
+    },
+    {
+      "id": 3,
+      "instruction": "Kayış çıktı. Müşteri masrafı düşürmek için sadece kayışın değişmesini istiyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.gergi-rulmani",
+        "question": "Ne önerirsin?",
+        "options": [
+          { "label": "Gergi ve avare rulmanlar kayışla birlikte, kayışla tahrik ediliyorsa su pompası da değişir", "verdict": "set-halinde", "correct": true, "explain": "Gergi rulmanı kayışla aynı yaşta ve aynı ısı altında çalışmış bir rulmandır. Sıkışan ya da boşluk yapan bir gergi, yepyeni kayışı birkaç bin kilometrede kesip atar; sonuçta hem kayış hem de bütün işçilik yeniden ödenir. Aynısı su pompası için de geçerlidir: kayışla tahrik ediliyorsa pompanın rulmanı da aynı ömrü paylaşır ve arıza çıkarsa kayışı sökmek yine gerekir. Bu yüzden bu iş set hâlinde yapılır; ikinci kez sökmenin işçiliği, parçaların fiyatından yüksektir." },
+          { "label": "Sadece kayışı değiştiririm, diğerleri sağlam", "verdict": "sadece-kayis", "explain": "Sağlam görünmek yeterli değil. Kayışı kesen şey çoğu zaman kayışın kendisi değil, sıkışan bir rulmandır." },
+          { "label": "Rulmanları elle çevirip pürüzsüzse bırakırım", "verdict": "elle-cevir", "explain": "El ile kontrol kaba bir eleme yapar ama yükte ısınıp sıkışan rulmanı yakalamaz." },
+          { "label": "Su pompasını hiç karıştırmam, ayrı iştir", "verdict": "pompa-ayri", "explain": "Kayışla tahrik ediliyorsa ayrı iş değildir; aynı sökümün içindedir ve sonradan arızası aynı sökümü tekrarlatır." }
+        ]
+      },
+      "camera": "motor-on",
+      "teachingNote": "Müşteriye maliyeti anlatırken parça fiyatını değil, ikinci kez sökme işçiliğini anlat. Karar o zaman kendiliğinden verilir."
+    },
+    {
+      "id": 4,
+      "instruction": "Yeni kayış, gergi ve rulmanlar takıldı, işaretler hizalı, gerginlik prosedüre göre ayarlandı. Şimdi krank kasnağını elle, normal dönüş yönünde iki tam tur çevir.",
+      "interaction": {
+        "type": "rotate",
+        "target": "part.krank-kasnagi",
+        "direction": "cw",
+        "turns": 2,
+        "requiresGesture": true
+      },
+      "camera": "motor-on",
+      "commonMistake": {
+        "if": "ters-yon",
+        "feedback": "Ters yöne çeviriyorsun. Motor daima normal dönüş yönünde çevrilir; ters çevirmek gergi tarafını boşa alır ve kayış diş atlayabilir."
+      },
+      "hint": "Hareket sırasında bir yerde sertleşme hissedersen dur. Zorlama; o direnç supap ile pistonun temas ettiğinin ilk işareti olabilir.",
+      "teachingNote": "Neden iki tur? Çünkü kam mili krankın yarısı hızda döner: kam milinin bir tam turu, krankın iki turuna karşılık gelir. İşaretlerin yeniden buluşması ancak iki krank turundan sonra beklenebilir. Tek tur çevirip işaretlere bakmak ayarı doğrulamaz."
+    },
+    {
+      "id": 5,
+      "instruction": "İki tur döndü. İşaretlere bakıyorsun: kam kasnağındaki işaret hedefin bir diş yanında duruyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.triger-isareti",
+        "question": "Ne yaparsın ve bu neyi gösterir?",
+        "options": [
+          { "label": "Kayışı gevşetip bir diş düzeltir, tekrar iki tur çevirip yeniden kontrol ederim", "verdict": "duzelt-tekrar", "correct": true, "explain": "Bir diş kayma, motorun zaman ayarının birkaç derece kaymış olması demektir. Bu kadarı bile emme ve egzozun açılma anlarını bozar: motor zor çalışır, güç kaybeder, yakıt tüketimi artar ve bazı motorlarda supap pistona yaklaşır. Düzeltme şu an basittir çünkü motor hâlâ senin elinde ve marş verilmemiştir. Düzelttikten sonra iki tur tekrar çevrilir ve işaretler tekrar kontrol edilir; düzeltmenin işe yaradığını gösteren şey ikinci kontroldür, ilk hizalama değil." },
+          { "label": "Bir diş fark etmez, çalıştırıp dinlerim", "verdict": "farketmez", "explain": "Bir diş, dişlerin sayısına bağlı olarak birkaç derecelik bir kaymadır ve motorun çalışmasını ölçülebilir biçimde bozar. Girişimli motorda ayrıca temas riski taşır." },
+          { "label": "Kayışı biraz daha gererek işareti çekerim", "verdict": "gererek-cek", "explain": "Gerginlik ayarı konumu düzeltmez; fazla gerginlik rulmanları ve kayışı yorar." },
+          { "label": "Marş verip dinler, sorun yoksa bırakırım", "verdict": "mars-ver", "explain": "Marş, elle fark edilebilecek bir teması hasara dönüştürür. Kontrol her zaman elle yapılır." }
+        ]
+      },
+      "camera": "motor-on",
+      "teachingNote": "Bu adım prosedürün varlık sebebidir: iki tur çevirip bakma alışkanlığı olmasaydı, o bir diş ancak motor çalıştıktan sonra ortaya çıkacaktı ve o an düzeltmek artık ucuz olmayacaktı."
+    },
+    {
+      "id": 6,
+      "instruction": "Çırak soruyor: bir diş kayarsa gerçekten ne olur?",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.triger-kayisi",
+        "question": "Girişimli motorda kayma ve kopmanın sonucu nedir?",
+        "options": [
+          { "label": "Girişimli motorda piston ile supap aynı hacmi paylaşır; senkron bozulunca supap pistona çarpar ve supaplar eğilir", "verdict": "girisimli-hasar", "correct": true, "explain": "Girişimli tasarımda piston en üst noktasına çıktığında, açık bir supabın bulunduğu hacme girer. Normalde bu asla olmaz çünkü kayış ikisini senkron tutar ve supap o anda kapalıdır. Senkron bozulduğunda piston yukarı çıkarken supap hâlâ açıktır ve ikisi çarpışır. Küçük kaymalarda supaplar eğilir; kayış tamamen koparsa kam mili durur, krank dönmeye devam eder ve supaplar sırayla vurulur, ağır durumlarda pistonlar ve kapak da zarar görür. Girişimsiz tasarımda ise motor durur ama parça kırılmaz; her motorun hangi tasarımda olduğu bilinmelidir." },
+          { "label": "Motor sadece durur, hiçbir parça zarar görmez", "verdict": "sadece-durur", "explain": "Bu, girişimsiz tasarım için doğrudur ve günümüz motorlarının çoğu girişimlidir. Varsayım olarak kabul edilemez." },
+          { "label": "Sadece performans düşer", "verdict": "performans", "explain": "Küçük kaymada performans düşer ama risk bununla sınırlı değildir." },
+          { "label": "Yalnız arıza lambası yanar", "verdict": "lamba", "explain": "Lamba yanabilir; mekanik hasarı önlemez." }
+        ]
+      },
+      "camera": "motor-on",
+      "teachingNote": "Bu bilgi, işe verilen özenin sebebidir. Bir dişi önemsiz sayan usta, bu prosedürün neden bu kadar ayrıntılı yazıldığını anlamamıştır."
+    },
+    {
+      "id": 7,
+      "instruction": "Ayar doğrulandı, kapaklar takıldı, araç teslime hazır.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.gergi-rulmani",
+        "question": "Teslimden önce son olarak ne yapılır?",
+        "options": [
+          { "label": "Değişim tarihi ve kilometresi yazılıp araca etiketlenir, motor çalıştırılıp ses ve gerginlik dinlenir", "verdict": "kayit-ve-dinle", "correct": true, "explain": "Triger kayışının bir sonraki değişimi, bu değişimin tarihine ve kilometresine göre hesaplanır. Bu bilgi yazılmazsa sonraki usta ya da sonraki sahip aynı belirsizliğe düşer ve çoğu zaman gereğinden geç değiştirilir. Motor bölmesine yapıştırılan küçük bir etiket bu belirsizliği kalıcı olarak çözer. Ayrıca motor çalıştırılıp dinlenir: gergi rulmanından gelen ıslık ya da uğultu, gerginliğin fazla olduğunun ilk işaretidir." },
+          { "label": "Araç çalışıyorsa kayıt gerekmez", "verdict": "kayit-gereksiz", "explain": "Kayıt bugünü değil, altı yıl sonrasını korur." },
+          { "label": "Kilometre yeter, tarih gerekmez", "verdict": "sadece-km", "explain": "Kayış zamanla da yaşlanır; tarihsiz kayıt eksik kayıttır." },
+          { "label": "Birkaç yüz kilometre sonra gerginliği tekrar ayarlarım", "verdict": "sonra-ayarla", "explain": "Otomatik gergili sistemlerde sonradan ayar yapılmaz; prosedür ne diyorsa o geçerlidir." }
+        ]
+      },
+      "camera": "motor-on",
+      "teachingNote": "Bu işin son parçası bir etikettir ve maliyeti sıfırdır. Yazılmayan bakım, yapılmamış bakımla aynı sonucu doğurur."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Montajdan sonra krank neden bir değil iki tam tur çevrilir?",
+        "a": "kam-yarim-hiz",
+        "options": [
+          { "verdict": "kam-yarim-hiz", "label": "Kam mili krankın yarısı hızda döner; işaretler ancak iki krank turunda yeniden buluşur", "explain": "Dört zamanlı çevrimde bir tam çevrim iki krank turu sürer ve kam mili bu sürede yalnız bir tur atar. Dolayısıyla kam kasnağındaki işaret, krank bir tur döndüğünde başlangıç yerine değil tam karşısına gelir. İşaretlerin birlikte yeniden hizalanması ancak iki krank turundan sonra beklenebilir. Tek tur çevirip işaretlere bakan usta, hizasız görüntüyü hata sanar ya da gerçek hatayı göremez." },
+          { "verdict": "kayis-otursun", "label": "Kayışın kasnaklara oturması için", "explain": "Kayışın oturması ek bir yarar olabilir ama iki turun sebebi çevrimin kendisidir." },
+          { "verdict": "gerginlik", "label": "Gerginliğin dengelenmesi için", "explain": "Gerginlik ayrı bir adımdır; tur sayısını çevrim belirler." },
+          { "verdict": "gelenek", "label": "Alışkanlık, teknik gerekçesi yok", "explain": "Gerekçesi doğrudan kam ile krank arasındaki 1:2 oranıdır." }
+        ]
+      },
+      {
+        "q": "Triger kayışı neden yalnız kilometreye göre değil, süreye göre de değiştirilir?",
+        "a": "kaucuk-yaslanir",
+        "options": [
+          { "verdict": "kaucuk-yaslanir", "label": "Kauçuk ve kord malzemesi araç kullanılmasa bile ısı ve ortam etkisiyle yaşlanır", "explain": "Kayış lastik ve kord karışımıdır; bu malzemeler ısı çevrimleri, ozon ve yağ buharı etkisiyle zamanla sertleşir ve esnekliğini kaybeder. Sertleşen kayış dişlerinin dibinden çatlamaya başlar ve bu çatlaklar kayış takılıyken görünmez. Bu yüzden üretici iki sınır verir ve hangisi önce dolarsa değişim gerekir. Az kullanılan araçlar tam da bu yüzden risklidir: sürücü düşük kilometreye bakıp kendini güvende sanar, oysa kayış yaşça çoktan dolmuştur." },
+          { "verdict": "uretici-satis", "label": "Üreticiler daha çok parça satmak için", "explain": "Malzeme yaşlanması ölçülebilir bir olgudur; ticari bir tercih değildir." },
+          { "verdict": "yag-bulasir", "label": "Zamanla üzerine yağ bulaştığı için", "explain": "Yağ bulaşması ayrı ve acil bir arızadır, normal yaşlanmanın açıklaması değildir." },
+          { "verdict": "gerginlik-dusme", "label": "Gerginliği zamanla düştüğü için", "explain": "Gerginlik düşüşü gergi sisteminin işidir; değişim sınırının sebebi malzemenin yaşlanmasıdır." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "sourceRequired": "Değişim aralığı (kilometre ve yıl), gerginlik değeri, kasnak cıvatası torku ve motorun girişimli olup olmadığı araca özgüdür. Bu derste hiçbir araç için sayı verilmedi; öğretilen şey hangi sorunun kılavuza sorulacağıdır.",
+    "kapsam": "Kayış tek şerit olarak modellenmiştir ve diş geometrisi yoktur; bir diş kayma senaryosu bu yüzden animasyonla değil teşhis adımıyla öğretiliyor. Zincirli sistemler ayrı bir derstir.",
+    "reviewedByMechanic": false
+  }
+}

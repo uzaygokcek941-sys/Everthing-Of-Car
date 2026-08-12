@@ -1,0 +1,229 @@
+{
+  "area": "aksesuar-ses",
+  "title": "Aksesuar ve Ses Sistemleri",
+  "goal": "Araca sonradan takılan ya da fabrikadan gelen konfor, aksesuar ve ses donanımlarını; gövde elektriğinin bir parçası olarak görmek, doğru bağlamak, sökerken zarar vermemek ve bir aksesuarın başka sistemleri nasıl bozabileceğini bilmek.",
+  "framework": "MEB Motorlu Araçlar Teknolojisi Çerçeve Öğretim Programı — iki ders bu alanı besliyor. (1) Otomotiv Konfor Sistemleri Dersi (11-12. sınıf, haftada 3 saat, s. 59): 'Gövde Konfor Sistemleri' birimi 8 kazanım (merkezî kilit, otomatik camlar, elektrikli aynalar, ısıtmalı cam ve aynalar, sunroof, elektrik kumandalı koltuklar, silecek ve cam yıkama, yağmur sensörü) ve 'Sürüş Konfor Sistemleri' birimi 8 kazanım (start-stop, park manevra asistanı, akıllı far, hız sabitleyici, takip mesafesi, şerit değiştirme asistanı, haberleşme ve yol takip, yokuş/iniş destek). (2) Gövde Plastik Onarımı Dersi (11-12, haftada 4 saat, s. 63): 'Dış Aksesuarlar' birimi 6 kazanım (tampon/marşpiyel/panjur, spoiler ve yan çıtalar, çamurluk ve davlumbaz, far ve stop/sinyal lambaları, fitiller ve takozlar, anten ve dış dikiz aynası) ve 'Kabin İç Donanımları ve Döşeme' birimi 7 kazanım. Ayrıca Otomotiv Periyodik Bakım Dersi'nde aydınlatma sisteminin periyodik bakımı ve bakım sonrası ikaz ışıklarının silinmesi kazanımları var.",
+  "ustalikTanimi": "Bir aksesuar hiçbir zaman yalnız kendisi değildir; araca eklendiği anda o aracın elektrik sisteminin, gövdesinin ve haberleşme ağının bir parçası olur. Bu alandaki ustalık üç şeydir. Birincisi, çalıştırmak değil DOĞRU BAĞLAMAK: nereden besleneceği, hangi şaseyi kullanacağı, hangi sigortadan geçeceği ve uykuda ne kadar akım çekeceği baştan kararlaştırılır. İkincisi, sökerken zarar vermemek — bu alanın işçiliğinin yarısı klips, döşeme ve boya ile geçer ve kırılan bir klips, yapılan işin tamamını değersizleştirir. Üçüncüsü, bir aksesuarın başka bir sistemi nasıl bozabileceğini önceden görmek: yanlış çekilen bir güç kablosu radyoda parazit, hatalı bir bağlantı akü boşalması, gövdede açılan bir delik ise pas ve su sızıntısı üretir. Usta, işi bittikten sonra aracın diğer bütün sistemlerinin hâlâ çalıştığını kontrol eder.",
+  "stages": [
+    {
+      "title": "Güvenlik ve gövde elektriğinin haritası",
+      "procedures": [
+        {
+          "id": "aksesuar.guvenlik-elektrik",
+          "title": "Aksesuar işinin elektrik güvenliği ve kırmızı çizgileri",
+          "status": "yazildi"
+        },
+        {
+          "id": "aksesuar.govde-agi",
+          "title": "Modüller ve haberleşme hattı: aksesuar nereye bağlanır",
+          "status": "yazildi"
+        },
+        {
+          "id": "aksesuar.sokme-teknigi",
+          "title": "Klips, döşeme ve kaplama: zarar vermeden sökmek",
+          "status": "yazildi"
+        }
+      ]
+    },
+    {
+      "title": "Merkezî kilit ve kapı sistemleri",
+      "procedures": [
+        {
+          "id": "aksesuar.merkezi-kilit",
+          "title": "Merkezî kilit sisteminin kontrolü ve elemanları",
+          "status": "yazildi"
+        },
+        {
+          "id": "aksesuar.uzaktan-kumanda",
+          "title": "Uzaktan kumanda, alıcı ve immobilizer sınırı",
+          "status": "yazildi"
+        },
+        {
+          "id": "aksesuar.kapi-kablo-gecisi",
+          "title": "Kapı körüğü ve kopan kablolar",
+          "status": "yazildi"
+        }
+      ]
+    },
+    {
+      "title": "Camlar ve aynalar",
+      "procedures": [
+        {
+          "id": "aksesuar.cam-krikosu",
+          "title": "Otomatik cam kumandası ve kriko mekanizması",
+          "status": "yazildi"
+        },
+        {
+          "id": "aksesuar.cam-sikisma-korumasi",
+          "title": "Sıkışma koruması ve öğrenme işlemi",
+          "status": "yazildi"
+        },
+        {
+          "id": "aksesuar.ayna-ve-isitma",
+          "title": "Elektrikli ayna, ısıtmalı cam ve ayna",
+          "status": "yazildi"
+        }
+      ]
+    },
+    {
+      "title": "Silecek ve cam yıkama",
+      "procedures": [
+        {
+          "id": "aksesuar.silecek-mekanizmasi",
+          "title": "Silecek mekanizması ve park konumu",
+          "status": "yazildi"
+        },
+        {
+          "id": "aksesuar.yagmur-sensoru",
+          "title": "Yağmur sensörü ve cam değişimi sonrası",
+          "status": "yazildi"
+        }
+      ]
+    },
+    {
+      "title": "Koltuk, sunroof ve tavan",
+      "procedures": [
+        {
+          "id": "aksesuar.elektrikli-koltuk",
+          "title": "Elektrik kumandalı koltuk ve hafıza",
+          "status": "yazildi"
+        },
+        {
+          "id": "aksesuar.sunroof",
+          "title": "Sunroof mekanizması ve su tahliyesi",
+          "status": "yazildi"
+        }
+      ]
+    },
+    {
+      "title": "Aydınlatma ve dış aksesuar",
+      "procedures": [
+        {
+          "id": "aksesuar.aydinlatma-degisim",
+          "title": "Far, stop ve sinyal: değişim ve ayar",
+          "status": "yazildi"
+        },
+        {
+          "id": "aksesuar.dis-aksesuar-montaj",
+          "title": "Tampon, spoiler ve çıta montajı",
+          "status": "yazildi"
+        },
+        {
+          "id": "aksesuar.anten-ve-ayna",
+          "title": "Anten ve dış dikiz aynası değişimi",
+          "status": "yazildi"
+        }
+      ]
+    },
+    {
+      "title": "Araç kamerası: ön ve arka kayıt sistemi",
+      "procedures": [
+        {
+          "id": "aksesuar.kamera-neden",
+          "title": "Kamera ne işe yarar: kanıt, kapsama ve sınırlar",
+          "status": "yazildi"
+        },
+        {
+          "id": "aksesuar.kamera-secimi",
+          "title": "Kamera seçimi: çözünürlük, gece görüşü, park modu ve depolama",
+          "status": "yazildi"
+        },
+        {
+          "id": "aksesuar.kamera-on-montaj",
+          "title": "Ön cam montajı: konum, kablo gizleme ve besleme",
+          "status": "yazildi"
+        },
+        {
+          "id": "aksesuar.kamera-arka-montaj",
+          "title": "Arka cam ve arka kamera: kablonun araç boyunca çekilmesi",
+          "status": "yazildi"
+        },
+        {
+          "id": "aksesuar.kamera-park-modu",
+          "title": "Park modu ve akü koruması: sürekli besleme nasıl bağlanır",
+          "status": "yazildi"
+        },
+        {
+          "id": "aksesuar.kamera-teslim",
+          "title": "Kayıt doğrulama, kart bakımı ve müşteriye teslim",
+          "status": "yazildi"
+        }
+      ]
+    },
+    {
+      "title": "Ses sisteminin temelleri",
+      "procedures": [
+        {
+          "id": "aksesuar.ses-zinciri",
+          "title": "Kaynak, anfi, hoparlör: zincir ve empedans",
+          "status": "yazildi"
+        },
+        {
+          "id": "aksesuar.ses-kablolama",
+          "title": "Güç, şase ve sinyal kablolaması",
+          "status": "yazildi"
+        },
+        {
+          "id": "aksesuar.parazit-teshisi",
+          "title": "Parazit ve uğultu: kaynağını bulmak",
+          "status": "yazildi"
+        }
+      ]
+    },
+    {
+      "title": "Ses sistemi montajı",
+      "procedures": [
+        {
+          "id": "aksesuar.bas-unite-montaj",
+          "title": "Baş ünite değişimi ve fabrika entegrasyonu",
+          "status": "yazildi"
+        },
+        {
+          "id": "aksesuar.hoparlor-montaj",
+          "title": "Hoparlör montajı, kapı yalıtımı ve faz",
+          "status": "yazildi"
+        }
+      ]
+    },
+    {
+      "title": "Arıza teşhis",
+      "procedures": [
+        {
+          "id": "aksesuar.cam-calismiyor",
+          "title": "Cam çalışmıyor",
+          "status": "yazildi"
+        },
+        {
+          "id": "aksesuar.ses-gelmiyor",
+          "title": "Ses gelmiyor ya da tek hoparlör çalışıyor",
+          "status": "yazildi"
+        },
+        {
+          "id": "aksesuar.aku-bosaliyor",
+          "title": "Araç bekledikçe akü boşalıyor: parazit akım",
+          "status": "yazildi"
+        }
+      ]
+    },
+    {
+      "title": "Ustalık sınavı",
+      "procedures": [
+        {
+          "id": "aksesuar.entegrasyon",
+          "title": "Montajdan sonra çıkan üç şikâyet: sebep hangi işte",
+          "status": "yazildi"
+        }
+      ]
+    }
+  ],
+  "_notes": {
+    "status": "Müfredat TAMAMLANDI. 31/31 prosedür yazıldı — 11 aşama: güvenlik ve gövde elektriği, merkezî kilit, camlar ve aynalar, silecek, koltuk ve sunroof, aydınlatma ve dış aksesuar, araç kamerası, ses temelleri, ses montajı, arıza teşhis, ustalık sınavı.",
+    "kamera-asamasi": "Aşama 6 (Araç kamerası) MEB çerçeve programında YOKTUR; kullanıcının açık talebiyle eklendi ve gerekçesi saha gerçeğidir: kaza, çarpıp kaçma ya da tartışma hâlinde kamera kaydı kanıt değeri taşır, talep yüksektir ve sanayi sitesinde bu montajı yapan usta iyi kazanır. Teknik temelini bu alanın kendi derslerinden alıyor (besleme seçimi, şase, kablo güzergâhı, söküm tekniği, uykudaki akım) — yani yeni bir bilgi alanı değil, öğrenilenlerin para kazandıran bir uygulaması. Ses dersleri gibi bu aşama da 'MEB kazanımı' diye sunulmayacak, kaynağı proje olarak işaretlenecek. Hukuki not derslerde yer alacak: kayıt cihazı sürücünün kendi aracında delil üretebilir ama kabin içi ses/görüntü kaydı ve kaydın paylaşılması KVKK kapsamındadır; ders yalnız montajı öğretir, hukuki tavsiye vermez.",
+    "kapsam": "31 prosedür, 11 aşama. Sürüş Konfor Sistemleri biriminin sürücü destek işlevleri (park asistanı, akıllı far, hız sabitleyici, takip mesafesi, şerit değiştirme, yokuş destek) bu alanda AYRI DERS olarak işlenmiyor: bunların kalibrasyonu ve teşhisi kamera/radar sistemlerine bağlı ve proje kapsamı dışında; ilgili yerlerde ayırt edici olarak anılıyor. Kabin İç Donanımları ve Döşeme birimi yalnız söküm tekniği düzeyinde ele alınıyor, döşeme onarımı kapsam dışı. Gövde plastik onarımı, boya ve göçük düzeltme ayrı derslerdir ve bu projede yok.",
+    "meb-boslugu": "ÖNEMLİ: MEB çerçeve programında ses sistemi, multimedya ya da hoparlör/anfi konulu AYRI BİR ÖĞRENME BİRİMİ YOKTUR — metin arandı ve bulunamadı. Bu alanın ses tarafı MEB'den değil, projenin kendi kapsam tanımından geliyor ve teknik temelini Araç Elektrik ve Elektronik alanından alıyor (devre, gerilim düşümü, şase, sigorta, parazit). Ses dersleri bu yüzden 'MEB kazanımı' diye sunulmayacak; kaynağı projenin kendisi olarak işaretlenecek. Dış aksesuar ve anten kısmı ise MEB'de vardır (Gövde Plastik Onarımı → Dış Aksesuarlar).",
+    "olcumDegerleri": "Bu alanda da FARK DESENİ kullanılacak: hoparlör empedansı, akım çekişi, gerilim düşümü ve parazit akım gibi değerler araca ve ürüne özgüdür; öğrenciden üretici sınırı değil ölçülen iki değer arasındaki fark istenecek. Uykudaki parazit akım sınırı, sigorta amperi ve kablo kesiti gibi güvenlik değerleri künyesiz VERİLMEYECEK.",
+    "kirmizi-cizgi": "İki sınır var. Birincisi AIRBAG ve SRS: direksiyon, koltuk, tavan ve kapı döşemelerinin bir kısmında hava yastığı ve gergili kemer bileşenleri bulunur; bu bölgelerde söküm yapılacaksa Direksiyon alanındaki aynı sınır geçerlidir — enerji kesilir, süre beklenir, doğrulanır ve modüle müdahale edilmez. İkincisi ARAÇ HABERLEŞME AĞI: aksesuar bağlantısı için veri hattına izinsiz müdahale, kablo delme ya da hatalı adaptör kullanımı birden çok modülü devre dışı bırakabilir; üretici arayüzü ya da uygun adaptör kullanılır.",
+    "sira": "MEB birim sırası korundu: gövde konfor sistemleri (kilit, cam, ayna, sunroof, koltuk, silecek, yağmur sensörü) sırasıyla aşama 1-4'te, dış aksesuarlar aşama 5'te. Ses sistemi aşama 6-7'de kendi bloğunda. Güvenlik/harita aşaması öne, teşhis ve entegrasyon sona konuldu — diğer dört alanla aynı desen.",
+    "model": "Sahne henüz yok. Gerekecek parçalar: kapı modülü ve kablo körüğü, merkezî kilit motoru, cam krikosu ve cam motoru, elektrikli ayna, silecek motoru ve kolu, yağmur sensörü, koltuk motoru, sunroof motoru ve tahliye hortumu, far/stop/sinyal, tampon ve çıta, anten, baş ünite, ön ve arka hoparlör, anfi, kablo demeti, sigorta kutusu, şase noktası. Multimetre ve pens ampermetre ölçüm dersleri için ayrıca gerekli."
+  }
+}

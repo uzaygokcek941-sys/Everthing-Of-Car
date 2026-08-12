@@ -1,0 +1,177 @@
+{
+  "id": "elektrik.parazit-akim",
+  "area": "arac-elektrik",
+  "stage": 9,
+  "title": "Aküyü Bitiren Kaçak Akım",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 30,
+  "prerequisites": ["elektrik.multimetre-akim", "elektrik.sigorta", "elektrik.gerilim-dusumu"],
+  "learningGoals": [
+    "Ampermetreyi akünün eksi hattına seri bağlayarak kapalı araçtaki akımı ölçmek",
+    "Modüller uykuya geçmeden yapılan ölçümün neden yanıltıcı olduğunu açıklamak",
+    "Sigorta çekme yöntemiyle kaçağın hangi devrede olduğunu bulmak"
+  ],
+
+  "safety": [
+    { "rule": "Ampermetre yalnız akım kademesinde ve akım girişindeyken seri bağlanır", "why": "Volt girişinde kalan bir prob ile seri bağlantı kurulursa alet devreyi kısa devre eder; en iyi ihtimalle aletin sigortası gider", "blocksStart": true },
+    { "rule": "Ölçüm bağlıyken marş basılmaz", "why": "Marş akımı ampermetrenin sigortasını anında atırır, bazı aletlerde kalıcı hasar bırakır. Marşa ancak alet devreden çıkarıldıktan sonra izin verilir", "blocksStart": true },
+    { "rule": "Ölçüm her zaman eksi hattından yapılır", "why": "Artı kutupla çalışmak, anahtarın ya da probun gövdeye değmesi hâlinde kısa devre demektir; eksi taraf gövdeyle aynı potansiyeldedir ve güvenlidir", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.multimetre", "label": "Dijital multimetre (akım kademesi)", "required": true },
+    { "id": "tool.pense-anahtar", "label": "Kutup anahtarı", "required": true },
+    { "id": "tool.sigorta-cekici", "label": "Sigorta çekici", "required": true },
+    { "id": "tool.sema", "label": "Araç devre şeması", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Müşteri: araç birkaç gün durunca marş basmıyor, takviyeyle çalışıyor. Akü ve şarj sistemi kontrol edildi, ikisi de sağlam.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.aku",
+        "question": "Bu tarif neyi işaret ediyor?",
+        "options": [
+          { "label": "Araç dururken akünün boşalması: kontak kapalıyken de akım çeken bir şey var", "verdict": "kacak-akim", "correct": true, "explain": "Üç bilgiyi yan yana koy: akü sağlam, şarj sistemi sağlam, ama araç birkaç gün durunca bitiyor. Akü kendi kendine de boşalır, ama bu haftalar süren yavaş bir olaydır. Birkaç günde bitiyorsa, kontak kapalıyken bile bir şey akım çekiyor demektir. Buna kaçak akım denir. Araçlarda kapalıyken çalışan birkaç şey her zaman vardır — hafızalar, alarm, anahtarsız giriş alıcısı — ve bunların hepsi birlikte çok küçük bir akım çeker. Arıza, bu küçük akımın üstüne binen fazladan bir tüketicidir: kapanmayan bir röle, sönmeyen bir bagaj lambası, uykuya geçmeyen bir modül, yanlış bağlanmış bir aksesuar. Teşhisin ilk adımı bu akımı ölçmek, ikinci adımı hangi devrede olduğunu bulmaktır." },
+          { "label": "Akü ömrünü tamamlamış", "verdict": "aku-eski", "explain": "Akü zaten kontrol edilip sağlam bulundu; bu cevap verilen bilgiyi yok sayıyor." },
+          { "label": "Alternatör şarj etmiyor", "verdict": "alternator", "explain": "Şarj sistemi kontrol edilmiş. Ayrıca şarj arızasında araç kullanıldıkça biter, dururken değil." },
+          { "label": "Marş motoru arızalı", "verdict": "mars", "explain": "Takviyeyle çalışıyor; marş motoru sağlam, sorun akünün boşalmasında." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "\"Dururken bitiyor\" ile \"kullanırken bitiyor\" iki ayrı arızadır. Birincisi kaçak akım, ikincisi şarj sistemi. Müşterinin cümlesi bu ayrımı zaten yapıyor."
+    },
+    {
+      "id": 2,
+      "instruction": "Ölçüme hazırlanıyorsun. Aleti devreye alacaksın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.aku-eksi-kelepce",
+        "question": "Ampermetre nereye ve nasıl bağlanır?",
+        "options": [
+          { "label": "Eksi kelepçe ayrılır, alet kelepçe ile kutup arasına seri bağlanır; aracın bütün akımı aletin içinden geçer", "verdict": "eksi-seri", "correct": true, "explain": "Kaçak akım, aracın tamamının çektiği akımdır; onu ölçmek için akünün tek çıkış yolunu aletin içinden geçirmek gerekir. Eksi kelepçe sökülür, ampermetrenin bir probu kutba, diğeri sökülen kelepçeye tutulur. Artık aracın bütün akımı aletin içinden akar ve ekranda okunur. Neden eksi taraf: artı kutupla uğraşırken anahtarın gövdeye değmesi kısa devre demektir, eksi taraf zaten gövdeyle aynı potansiyeldedir. Bağlantı kurulmadan önce aletin akım kademesinde ve akım girişinde olduğu iki kez kontrol edilir; volt girişinde unutulmuş bir prob, bu bağlantıda aleti kısa devre hâline getirir." },
+          { "label": "Bir prob aküye, diğeri gövdeye konur", "verdict": "paralel", "explain": "Bu, ampermetreyi paralel bağlamaktır ve aküyü kısa devre eder. Ampermetre her zaman seri bağlanır." },
+          { "label": "Artı kelepçe ayrılıp oradan ölçülür", "verdict": "arti-taraf", "explain": "Ölçüm çalışır ama artı kutupta çalışmak gereksiz risktir; sonuç aynıdır." },
+          { "label": "Sigorta kutusundan ölçülür", "verdict": "sigorta-kutusu", "explain": "Tek bir devrenin akımını verir, toplam kaçağı vermez. O adım sonra gelecek." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Akım ölçümünün tek kuralı bu derste de değişmiyor: seri. Değişen tek şey, ölçülen devrenin aracın tamamı olması."
+    },
+    {
+      "id": 3,
+      "instruction": "Alet bağlandı, ekran ilk anda yüksek bir değer gösteriyor ve yavaşça düşüyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.multimetre-ekran",
+        "question": "Ne yapmalısın?",
+        "options": [
+          { "label": "Modüller uykuya geçene kadar beklenir; kapılar kapalı, kontak kapalı, hiçbir şeye dokunulmaz", "verdict": "uyku-bekle", "correct": true, "explain": "Modern araçta onlarca elektronik modül vardır ve bunlar kontak kapandıktan sonra hemen kapanmaz; bir süre uyanık kalıp işlerini bitirir, sonra uyku moduna geçer. Bu süre araca göre dakikalarla ölçülür. Bekleme bitmeden okunan değer normalin kat kat üstündedir ve arıza sanılır. Beklerken hiçbir şey yapılmaz: kapı açılmaz, kontak çevrilmez, kumandaya basılmaz — bunların her biri modülleri yeniden uyandırır ve süre baştan başlar. Kapıların kapalı sayılması için kapı kilit dilleri elle kapalı konuma getirilir ya da kapı düğmesi basılı tutulur. Değer düşüp sabitlendiğinde okunan sayı gerçek kaçak akımdır." },
+          { "label": "İlk okunan yüksek değer kaydedilir", "verdict": "ilk-deger", "explain": "O değer uyanık modüllerin akımıdır; arıza değil, normal davranıştır. Sağlam araçta da yüksek okunur." },
+          { "label": "Kapı açılıp kapatılarak sistem sıfırlanır", "verdict": "kapi", "explain": "Tam tersi: kapı açmak modülleri uyandırır ve bekleme baştan başlar." },
+          { "label": "Kontak açılıp kapatılır", "verdict": "kontak", "explain": "Kontağa dokunmak da uyandırır. Ölçüm boyunca araca hiç dokunulmaz." }
+        ]
+      },
+      "camera": "tezgah",
+      "hint": "Sabırsızlık bu ölçümde yanlış teşhis üretir.",
+      "teachingNote": "Bu ölçümün en sık yapılan hatası erken okumaktır. Bekleme süresi ölçümün parçasıdır, ölçümden önceki bir ara değil."
+    },
+    {
+      "id": 4,
+      "instruction": "Bekleme bitti, değer sabitlendi: 0,52 A. Aynı modelin sağlam bir örneğinde bu değer 0,03 A. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.multimetre-ekran",
+        "unit": "A",
+        "acceptRange": [0.45, 0.53]
+      },
+      "camera": "tezgah",
+      "hint": "0,52 eksi 0,03.",
+      "teachingNote": "Fazladan çekilen bu akım, akünün birkaç günde bitmesinin sebebidir. Sayının kendisi hangi devre olduğunu söylemez, yalnızca bir kaçak bulunduğunu kanıtlar. Sıradaki iş, bu akımın hangi yoldan aktığını bulmaktır."
+    },
+    {
+      "id": 5,
+      "instruction": "Kaçak doğrulandı. Alet bağlı ve okurken sigortaları teker teker çekeceksin.",
+      "interaction": {
+        "type": "unscrew",
+        "target": "part.sigorta.2",
+        "tool": "tool.sigorta-cekici",
+        "turns": 0.5,
+        "direction": "ccw",
+        "requiresGesture": true
+      },
+      "camera": "tezgah",
+      "hint": "Sigortayı çek ve ekrana bak: değer düştü mü?",
+      "teachingNote": "Yöntem basittir: alet bağlı ve okuyorken sigortalar teker teker çekilir. Bir sigorta çekildiğinde akım belirgin biçimde düşüyorsa, kaçak o sigortanın beslediği devrededir. Değişmiyorsa sigorta geri takılır ve sıradakine geçilir. Çekilen sigorta geri takılmadan bir sonrakine geçilmez, yoksa hangi devrenin açık olduğu karışır. Sigorta çekmek bazı modülleri uyandırabilir; her çekmeden sonra değerin oturması beklenir. Bu yöntem arızayı bulmaz, arızanın adresini bulur."
+    },
+    {
+      "id": 6,
+      "instruction": "Bagaj aydınlatma devresinin sigortası çekildiğinde akım normale indi.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sigorta-kutusu",
+        "question": "Sıradaki adım nedir?",
+        "options": [
+          { "label": "O devredeki tüketiciler tek tek ayrılıp akıma bakılır; kaçağı üreten parça bulunur", "verdict": "devreyi-incele", "correct": true, "explain": "Sigorta bir devrenin tamamını besler ve o devrede birden fazla tüketici olabilir. Doğru adres bulundu ama fail henüz bulunmadı. Şemaya bakılıp o sigortanın neleri beslediği çıkarılır, sonra her biri sırayla ayrılıp akıma bakılır. Bagaj aydınlatmasında en sık çıkan şey, kapak kapanınca basılı kalmayan bir müşir ya da mekanik olarak sıkışmış bir lamba anahtarıdır; lamba sürekli yanar ve kimse görmez, çünkü bagaj kapalıyken kimse bakmaz. Fail bulunup değiştirildikten sonra ölçüm baştan tekrarlanır." },
+          { "label": "Sigorta yerinden çıkarılıp öyle bırakılır", "verdict": "sigortayi-cikar", "explain": "Bu, arızayı gidermek değil devreyi iptal etmektir. O devredeki diğer tüketiciler de birlikte gider." },
+          { "label": "Daha büyük amperli sigorta takılır", "verdict": "buyuk-sigorta", "explain": "Sigortanın bu arızayla ilgisi yok; ayrıca büyük sigorta kabloyu korumasız bırakır." },
+          { "label": "Akü değiştirilir", "verdict": "aku-degistir", "explain": "Yeni akü de aynı kaçak yüzünden bitecektir. Sebep giderilmeden parça değiştirilmez." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Sigorta çekme yöntemi devreyi verir, parçayı vermez. Aradaki farkı bilmeyen usta doğru devrede yanlış parça değiştirir."
+    },
+    {
+      "id": 7,
+      "instruction": "Sıkışmış bagaj lambası anahtarı değiştirildi. Onarımı doğrulayacaksın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.multimetre-ekran",
+        "question": "Doğrulama nasıl yapılır?",
+        "options": [
+          { "label": "Bütün sigortalar yerine takılır, ölçüm baştan kurulur ve modüller yeniden uykuya geçtikten sonra okunur", "verdict": "bastan-olc", "correct": true, "explain": "Doğrulama teşhisin aynısıdır: alet yeniden seri bağlanır, araç kapatılır, modüllerin uyuması beklenir ve değer okunur. Sigortaların hepsinin yerinde olduğu tek tek kontrol edilir — teşhis sırasında çekilen bir sigortanın unutulması, müşteriye ikinci bir arıza teslim etmek demektir. Değer normale inmişse iş bitmiştir. İnmemişse ikinci bir kaçak vardır: birden fazla kaçağın aynı anda bulunması nadir değildir ve büyük olanı giderildiğinde küçük olanı görünür hâle gelir. Son olarak akü şarj edilir, çünkü teşhis boyunca zaten boşalmıştır; şarj edilmeden teslim edilen araç ertesi gün yine çalışmaz." },
+          { "label": "Aracın çalışması yeterli kanıttır", "verdict": "calisiyor", "explain": "Araç kaçak varken de çalışır; arıza günler sonra ortaya çıkar. Ölçüm yapılmadan iş kapanmaz." },
+          { "label": "Bagaj lambası sönüyorsa yeterli", "verdict": "lamba-sonuyor", "explain": "Doğru yönde bir işaret ama ikinci bir kaçağı görmez. Kanıt sayıdır." },
+          { "label": "Bir hafta beklenip müşteriye sorulur", "verdict": "bekle", "explain": "Dakikalar içinde ölçümle kanıtlanabilecek bir şey için müşteriyi denek yapmak olur." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Bu arıza, doğrulaması yapılmadan kapatıldığında geri gelen arızaların başında gelir. Sebebi basit: kaçak akım gözle görülmez, yalnız ölçülür."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Kaçak akım ölçümünde neden beklemek gerekir?",
+        "a": "moduller-uyusun",
+        "options": [
+          { "verdict": "moduller-uyusun", "label": "Modüller kontak kapandıktan sonra bir süre uyanık kalır; uykuya geçmeden okunan değer normalin çok üstündedir", "explain": "Araçtaki elektronik modüller kontak kapanınca hemen kapanmaz, işlerini bitirip uyku moduna geçer. Bu süre boyunca okunan akım gerçek kaçağın kat kat üstündedir ve arıza sanılır. Beklerken araca hiç dokunulmaz: kapı açmak, kontak çevirmek ya da kumandaya basmak modülleri uyandırır ve bekleme baştan başlar. Değer düşüp sabitlendiğinde okunan sayı gerçek kaçak akımdır." },
+          { "verdict": "aletin-isinmasi", "label": "Alet ısınıp kararlı okusun diye", "explain": "Aletin ısınmasıyla ilgisi yok; beklenen şey aracın kendi davranışıdır." },
+          { "verdict": "aku-otursun", "label": "Akü gerilimi otursun diye", "explain": "Yüzey şarjının oturması gerilim ölçümünde önemlidir; burada ölçülen akımdır." },
+          { "verdict": "gerekmez", "label": "Gerekmez, ilk değer okunur", "explain": "İlk değer uyanık modüllerin akımıdır; sağlam araçta da yüksektir." }
+        ]
+      },
+      {
+        "q": "Sigorta çekme yöntemi neyi bulur?",
+        "a": "devreyi",
+        "options": [
+          { "verdict": "devreyi", "label": "Kaçağın hangi devrede olduğunu; arızalı parçayı değil", "explain": "Alet bağlıyken sigortalar tek tek çekilir; akım belirgin biçimde düştüğünde kaçak o sigortanın beslediği devrededir. Ama bir sigorta birden fazla tüketici besler, dolayısıyla bulunan şey adrestir, fail değildir. Sonraki adım o devredeki tüketicileri tek tek ayırıp akıma bakmaktır. Çekilen her sigorta, bir sonrakine geçmeden geri takılır; yoksa hangi devrenin açık olduğu karışır." },
+          { "verdict": "parcayi", "label": "Doğrudan arızalı parçayı", "explain": "Devreyi verir; parçayı bulmak için o devrede ayrıca daraltma yapılır." },
+          { "verdict": "akuyu", "label": "Akünün durumunu", "explain": "Akü ayrı bir testle değerlendirilir; bu yöntem akımın yolunu arar." },
+          { "verdict": "sase", "label": "Şase arızasını", "explain": "Şase arızası gerilim düşümü testiyle bulunur; bu yöntem kaçağın devresini arar." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 4'teki 0,52 A ve 0,03 A SENARYO okumalarıdır. Öğrenciden istenen bir üretici sınırı değil, arızalı araç ile sağlam aracın okumaları arasındaki FARKTIR (0,49 A). sourceRequired bu yüzden gerekmedi.",
+    "sourceRequired": "Kabul edilebilir azami kaçak akım değeri ve modüllerin uyku süresi araca özgüdür; bu derste bilinçle VERİLMEDİ. Ders, aynı modelin sağlam bir örneğiyle karşılaştırma üzerine kuruldu. Eşik kullanılacaksa servis kılavuzundan alınır.",
+    "kapsam": "Sahnede iki sigortalı basit bir kutu var; gerçek araçta birden çok sigorta kutusu bulunur ve hepsi taranır. Sigorta çekme adımında mevcut unscrew hareketi kullanıldı, yeni etkileşim tipi gerekmedi.",
+    "reviewedByMechanic": false
+  }
+}

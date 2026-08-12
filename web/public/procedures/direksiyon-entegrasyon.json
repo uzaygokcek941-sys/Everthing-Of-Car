@@ -1,0 +1,178 @@
+{
+  "id": "direksiyon.entegrasyon",
+  "area": "direksiyon",
+  "stage": 9,
+  "title": "Aynı Şikâyet, Üç Farklı Alan: Direksiyon mu, Lastik mi, Fren mi",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 50,
+  "prerequisites": ["direksiyon.merkeze-donmeme"],
+  "learningGoals": [
+    "Bir şikâyeti alanlara bölerek doğru başlangıç noktasını seçmek",
+    "Ayırt edici soruyu bulmak ve önce onu sormak",
+    "Kendi alanının sınırını bilip gerektiğinde yönlendirmek"
+  ],
+
+  "safety": [
+    { "rule": "Yol testi trafiğe uygun, boş ve düz bir yolda yapılır", "why": "Bu derste birden çok koşul denenir ve sürücünün dikkati bölünür", "blocksStart": true },
+    { "rule": "Fren şüphesi olan araçta fren denemesi güvenli mesafede ve düşük hızda yapılır", "why": "Fren tarafı bu projenin kapsamı dışıdır; yalnız ayırt etme amaçlı gözlem yapılır", "blocksStart": true },
+    { "rule": "Boşluk, ayrılma ya da destek kaybı şüphesi varsa araç yola çıkarılmaz", "why": "Zincirde ayrılma riski varken yol testi tehlikelidir", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.manometre", "label": "Lastik basınç manometresi", "required": true },
+    { "id": "tool.teshis-cihazi", "label": "Teşhis cihazı", "required": true },
+    { "id": "tool.kriko-sehpa", "label": "Kriko ve sehpa", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Müşteri geliyor: 'Araba sağa çekiyor, direksiyonda titreşim var ve bazen ses geliyor.' Üç şikâyet bir arada.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.direksiyon-simidi",
+        "question": "Nereden başlarsın?",
+        "options": [
+          { "label": "Üç şikâyeti ayırıp her birinin koşulunu sorarım; birbirine bağlı mı yoksa ayrı ayrı mı olduklarını belirlerim", "verdict": "ayir-ve-kosul-sor", "correct": true, "explain": "Birden çok şikâyet geldiğinde en büyük hata onları tek bir arıza sanmaktır. Üçü aynı sebepten de doğabilir — örneğin gevşek bir tekerlek bijonu hem titreşim hem ses hem de yön kararsızlığı üretebilir — ama üç ayrı sebep de olabilir ve bu daha sıktır. Ayırmanın yolu her birine kendi koşul sorusunu sormaktır. Çekme: her yolda mı, hangi hızda, fren yaparken değişiyor mu? Titreşim: belirli bir hız aralığında mı, direksiyonda mı koltukta mı, fren yaparken mi? Ses: ne zaman, hangi yönde, motor devriyle değişiyor mu? Bu dokuz cevap alındığında üç şikâyet ya tek bir sebepte birleşir ya da ayrı kollara gider. İkinci adım önceliklendirmedir: güvenliği en çok ilgilendiren önce ele alınır. Üçüncüsü ve bu dersin asıl konusu, her şikâyetin hangi ALANA ait olduğunu belirlemektir — çünkü yanlış alanda başlayan teşhis, doğru yöntemle bile yanlış sonuca varır. Usta ile parça değiştiren arasındaki fark burada bir kez daha görünür: biri şikâyeti bölüp haritalar, diğeri en çok duyduğu parçayı değiştirir." },
+          { "label": "Üçü tek arızadır, en pahalı parçadan başlanır", "verdict": "tek-ariza", "explain": "Üç ayrı sebep daha sıktır; ayırmadan başlanmaz." },
+          { "label": "Doğrudan ön düzen ayarına alınır", "verdict": "ayar", "explain": "Ayar bu üç şikâyetin yalnız birine dokunabilir." },
+          { "label": "Müşteriye en belirgin olanı sorulur, diğerleri atlanır", "verdict": "birini-sec", "explain": "Atlanan şikâyet birkaç gün sonra geri gelir." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Yanlış alanda başlayan teşhis, doğru yöntemle bile yanlış sonuca varıyor. Önce alan, sonra yöntem."
+    },
+    {
+      "id": 2,
+      "instruction": "Çekme şikâyetini ele alıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.rot-basi-sol",
+        "question": "Hangi soru alanı belirler?",
+        "options": [
+          { "label": "Çekme yalnız fren yapınca mı oluyor, sürekli mi; ve aynı yol iki yönde sürüldüğünde taraf değiştiriyor mu", "verdict": "fren-mi-surekli-mi", "correct": true, "explain": "Bu iki soru üç alanı birbirinden ayırır. Birinci soru freni eler: çekme yalnız fren pedalına basıldığında ortaya çıkıyorsa kaynak fren sistemidir — sıkışmış bir kaliper, tıkanmış bir hortum ya da dengesiz balata. Bu, bu projenin kapsamı dışındadır ve doğru davranış işi oraya yönlendirmektir; ek bir doğrulama da sürüş sonrası tekerlek göbeklerinin sıcaklığını karşılaştırmaktır, biri belirgin sıcaksa fren sürtüyordur. İkinci soru yolu eler: aynı yol iki yönde sürüldüğünde çekme taraf değiştiriyorsa suçlu yol eğimidir, araçta sorun yoktur. İkisi de elendiyse geriye iki alan kalır — lastik ve geometri. Lastik tarafı, iki ön lastiği sağ-sol değiştirerek ayrılır: çekme taraf değiştiriyorsa suçlu lastiktir, aynı tarafta kalıyorsa geometridir. Bu üç eleme hiçbir alet gerektirmez, yarım saat sürer ve şikâyeti tek bir alana indirger. Sonra o alanın kendi yöntemi devreye girer: geometriyse yanal kayma ve ön düzen ölçümü, lastikse Lastik ve Tekerlek alanındaki çekme teşhisi." },
+          { "label": "Doğrudan ön düzen ölçümüne gidilir", "verdict": "on-duzen", "explain": "Fren ve yol elenmeden ölçüm yanıltıcı olabilir." },
+          { "label": "Lastikler değiştirilir", "verdict": "lastik-degistir", "explain": "Değiştirmeden önce yer değiştirerek test edilir." },
+          { "label": "Çekme normaldir, her araçta olur", "verdict": "normal", "explain": "Belirgin çekme normal sayılmaz." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Üç eleme, sıfır alet, yarım saat: fren mi, yol mu, lastik mi, geometri mi."
+    },
+    {
+      "id": 3,
+      "instruction": "Aynı yolu iki yönde sürdün: gidişte sağa 2,4 m sapma, dönüşte de sağa 2,1 m sapma (100 m'de).",
+      "interaction": {
+        "type": "measure",
+        "target": "part.direksiyon-simidi",
+        "unit": "m",
+        "acceptRange": [0.25, 0.35]
+      },
+      "camera": "direksiyon",
+      "hint": "2,4 eksi 2,1.",
+      "teachingNote": "0,3 m'lik bu küçük fark çok şey söylüyor: iki yönde de sapma AYNI TARAFA ve neredeyse aynı büyüklükte. Yol eğimi olsaydı dönüşte sapma ters tarafa geçerdi ve fark büyük çıkardı. Demek ki suçlu araçtır ve yol elendi. Buradaki asıl ders, bir farkın küçük çıkmasının da bir bulgu olduğudur — bu projede genellikle farkın büyüklüğü bilgi verdi, burada küçüklüğü veriyor. Kalan 0,3 m ise ölçüm hassasiyeti, rüzgâr ve yol yüzeyinin doğal değişkenliğiyle açıklanabilir; her ölçümde bir miktar dağılım normaldir ve sıfır fark beklenmez. Sapma değerleri araca ve yola özgüdür; bu ders bir sınır vermiyor, gösterdiği şey iki yönlü testin nasıl okunacağı."
+    },
+    {
+      "id": 4,
+      "instruction": "Titreşim şikâyetine geçtin.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kremayer-kutusu",
+        "question": "Alanı hangi soru belirler?",
+        "options": [
+          { "label": "Titreşim belirli bir hız aralığında gelip geçiyor mu, fren yapınca mı çıkıyor, yoksa bozuk yolda mı belirginleşiyor", "verdict": "hiz-fren-yol", "correct": true, "explain": "Üç koşul üç alana işaret eder ve ayrım neredeyse kesindir. Belirli bir hız aralığında ortaya çıkıp o aralık geçilince kaybolan titreşim, dönen kütlenin dengesizliğidir — balans, jant salgısı ya da lastik içi düzensizlik; alan Lastik ve Tekerlek'tir ve orada öğrenilen ön-arka yer değiştirme yöntemiyle doğrulanır. Yalnız fren yapılırken ortaya çıkan titreşim fren diskinin ya da kampananın düzensizliğidir; alan fren sistemidir ve bu projenin kapsamı dışındadır. Bozuk yolda belirginleşen, düz yolda kaybolan titreşim ise zincirdeki boşluğu ya da gevşek bir bağlantıyı işaret eder; alan direksiyon ve ön takımdır. Dördüncü bir ihtimal daha vardır: hidrolikte hava varsa direksiyon çevrilirken titreşim hissedilir ve depoda köpük görülür. Bu dört koşul sorulduğunda ve tek bir alana indirildiğinde teşhis hızlanır; sorulmadığında ise en sık görülen sonuç, gereksiz bir balans ve devam eden bir şikâyettir. Titreşimin nerede hissedildiği de bilgi verir — direksiyonda hissedilen genellikle ön, koltukta hissedilen arka tarafı işaret eder." },
+          { "label": "Her titreşimde balans yapılır", "verdict": "balans", "explain": "Koşul sorulmadan işlem yapılmaz; gereksiz balans en sık sonuç." },
+          { "label": "Titreşim her zaman direksiyon kaynaklıdır", "verdict": "direksiyon", "explain": "Balans, fren ve boşluk da titreşim üretir." },
+          { "label": "Titreşim değerlendirilmez", "verdict": "yok-say", "explain": "Alan ayrımı için koşulları sorulur." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Titreşimin nerede hissedildiği de bilgi: direksiyonda hissedilen ön, koltukta hissedilen arka tarafı gösteriyor."
+    },
+    {
+      "id": 5,
+      "instruction": "Ses şikâyeti kaldı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.hidrolik-deposu",
+        "question": "Ses hangi alana ait?",
+        "options": [
+          { "label": "Motor dururken de duyuluyorsa mekanik, yalnız çalışırken duyuluyorsa hidrolik, yalnız fren yapınca çıkıyorsa fren, yalnız yolda ve hızla artıyorsa tekerlek yatağı", "verdict": "dort-kosul", "correct": true, "explain": "Ses ayrımı dört koşulla yapılır ve her biri farklı bir alana götürür. Motor dururken de duyulan ses hidrolik olamaz; kaynak mekaniktir ve direksiyon zincirindeki boşluklar ile gevşek bağlantılar aranır. Yalnız motor çalışırken duyulan ıslık ya da gurultu hidrolik devreyi işaret eder ve sıra bellidir: seviye ve köpük, emiş tarafı, kayış, en son pompa. Yalnız fren yapılırken çıkan ses fren sisteminindir ve kapsam dışıdır. Yalnız araç hareket hâlindeyken duyulan, hızla birlikte artan ve virajda değişen uğultu ise tekerlek göbeği yatağını işaret eder; alan Lastik ve Tekerlek'tir ve orada uğultu teşhisi olarak işlenmişti — ayırt edici deneme, virajda sesin artıp azalmasıdır çünkü viraj yatağa yük bindirir. Bu dört koşul birbirini dışlar ve bu yüzden çok güçlüdür: doğru sorular sorulduğunda ses, dinlemeye başlamadan önce bile bir alana indirgenmiş olur. Bu ders boyunca tekrarlanan ilke burada da geçerli — doğru soru, aletten önce gelir." },
+          { "label": "Bütün sesler direksiyon sistemine aittir", "verdict": "hepsi-direksiyon", "explain": "Fren, tekerlek yatağı ve hidrolik ayrı alanlar." },
+          { "label": "Ses duyulur duyulmaz pompa değiştirilir", "verdict": "pompa", "explain": "Koşul sorulmadan parça değişmez." },
+          { "label": "Ses geçici olur, beklenir", "verdict": "bekle", "explain": "Kaynak bulunmadan beklenmez." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Dört koşul birbirini dışlıyor. Doğru sorular sorulunca ses, dinlemeye başlamadan önce bir alana iniyor."
+    },
+    {
+      "id": 6,
+      "instruction": "Üç şikâyet üç ayrı alana ayrıldı: çekme geometri, titreşim balans, ses fren.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.eps-kontrol-unitesi",
+        "question": "Şimdi ne yaparsın?",
+        "options": [
+          { "label": "Kendi alanımdaki işi yaparım, diğerleri için ne bulduğumu ve nereye gidilmesi gerektiğini açıkça yazarım; sıralamayı güvenliğe göre kurarım", "verdict": "kendi-alanini-yap-yonlendir", "correct": true, "explain": "Bu dersin ve bu alanın kapanış ilkesi budur. Bir usta her işi yapmak zorunda değildir; yapmak zorunda olduğu şey, neyin nerede olduğunu bilmek ve dürüstçe söylemektir. Kendi alanındaki iş yapılır ve ölçümle kapatılır. Diğer alanlar için bulgular yazılır — 'sürüş sonrası sağ ön göbek diğerlerinden belirgin sıcak, fren tarafına bakılması gerekiyor' cümlesi, o işi yapmasa bile ustanın işini yapmış olduğunu gösterir. Sıralama güvenliğe göre kurulur: fren şüphesi varsa o önce ele alınır, çünkü diğer iki şikâyet konfor ve aşınmayla ilgiliyken fren doğrudan durma mesafesiyle ilgilidir. Müşteriye anlatırken de bu sıra korunur ve her madde koşuluyla söylenir. Buradaki asıl mesleki tavır şudur: bilmediğini ya da yetkin olmadığını gizlemek, bir işi yanlış yapmaktan daha tehlikelidir; çünkü müşteri sorunun çözüldüğünü sanarak yola çıkar. Bu alan ilk dersinde airbag sınırıyla başlamıştı ve son dersinde aynı yere geliyor — sınırı bilmek, mesleğin kendisi." },
+          { "label": "Üçünü de ben yaparım, yetkim olmasa da", "verdict": "hepsini-yap", "explain": "Yetki ve kapsam dışına çıkmak riskli; sınır bilinir." },
+          { "label": "Yalnız kendi işimi yaparım, diğerlerini söylemem", "verdict": "soyleme", "explain": "Müşteri sorunun çözüldüğünü sanarak yola çıkar." },
+          { "label": "Hepsini erteler, müşteriyi geri gönderirim", "verdict": "ertele", "explain": "Yapılabilecek iş yapılır, diğerleri yönlendirilir." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Bilmediğini gizlemek, bir işi yanlış yapmaktan tehlikeli. Müşteri çözüldüğünü sanarak yola çıkıyor."
+    },
+    {
+      "id": 7,
+      "instruction": "Alan kapanıyor. Bu alanda öğrendiklerini bir cümleye indir.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.mil-mafsali",
+        "question": "Direksiyon alanının özü nedir?",
+        "options": [
+          { "label": "Direksiyon bir zincirdir; her şikâyet zincirin bir halkasında ya da ona eklenen yardım katmanında oluşur ve iş, zinciri bölerek yeri ölçmektir", "verdict": "zincir-ve-olcum", "correct": true, "explain": "Bu alan tek bir fikir üzerine kuruldu: direksiyon bir kumanda değil, simitten tekerleğe uzanan bir zincirdir — simit, mil, mafsal, kutu, rot çubuğu, rot başı. Buna bir de yardım katmanı eklenir ve o katman zinciri değiştirmez, ona kuvvet ekler; bu yüzden yardım tamamen kaybolsa bile araç yönetilebilir kalır. Sürücünün getirdiği bütün şikâyetler — boşluk, ağırlık, ses, merkeze dönmeme, tek yöne zorluk — bu iki yapıdan birinde oluşur. Ustalık, şikâyeti dinleyip parça değiştirmek değil, zinciri bölerek boşluğun ya da direncin hangi halkadan geldiğini ÖLÇMEKTİR. Alan boyunca aynı araçlar tekrar tekrar kullanıldı: koşulu belirtilmemiş ölçüm anlamsızdır, tekrarlanmayan ölçüm sonuç değildir, sağ-sol karşılaştırması üretici değeri bilinmese bile yorumlanabilir bir bulgu verir, ve bir belirtiyi görünmez kılmak onu gidermek değildir. Son olarak, alan sınırla açıldı ve sınırla kapanıyor: airbag, kilit ve başka alanların işleri. Bir işi yapmamayı bilmek de mesleğin parçasıdır ve bunu söylemek dürüstlüktür." },
+          { "label": "En pahalı parçayı değiştirip denemek", "verdict": "pahali-parca", "explain": "Bu alan boyunca reddedilen yaklaşım." },
+          { "label": "Şikâyeti dinleyip his ile karar vermek", "verdict": "his", "explain": "His başlangıç; karar ölçümle verilir." },
+          { "label": "Her sorunu ayar ile çözmek", "verdict": "ayar", "explain": "Ayarın etki alanı dar ve sınırı var." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Alan sınırla açıldı, sınırla kapanıyor. Bir işi yapmamayı bilmek de mesleğin parçası."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Çekme şikâyetinde alanı belirleyen sorular nelerdir?",
+        "a": "fren-mi-surekli-mi",
+        "options": [
+          { "verdict": "fren-mi-surekli-mi", "label": "Yalnız fren yapınca mı oluyor, ve aynı yol iki yönde sürüldüğünde taraf değiştiriyor mu", "explain": "Birinci soru freni eler: yalnız pedala basınca çıkıyorsa kaynak fren sistemidir ve sürüş sonrası göbek sıcaklıkları karşılaştırılarak doğrulanır. İkinci soru yolu eler: taraf değiştiriyorsa suçlu yol eğimidir. İkisi de elendiyse geriye lastik ve geometri kalır; iki ön lastiği sağ-sol değiştirmek bunları ayırır — çekme taraf değiştiriyorsa lastik, aynı tarafta kalıyorsa geometri. Üç eleme, sıfır alet." },
+          { "verdict": "on-duzen", "label": "Doğrudan ön düzen ölçümü", "explain": "Fren ve yol elenmeden ölçüm yanıltır." },
+          { "verdict": "lastik-degistir", "label": "Lastikler değiştirilir", "explain": "Önce yer değiştirerek test edilir." },
+          { "verdict": "normal", "label": "Çekme normaldir", "explain": "Belirgin çekme normal sayılmaz." }
+        ]
+      },
+      {
+        "q": "Üç şikâyet üç farklı alana ayrıldı. Ne yapılır?",
+        "a": "kendi-alanini-yap-yonlendir",
+        "options": [
+          { "verdict": "kendi-alanini-yap-yonlendir", "label": "Kendi alanındaki iş yapılır, diğerleri için bulgular yazılıp yönlendirilir; sıralama güvenliğe göre kurulur", "explain": "Bir usta her işi yapmak zorunda değildir; neyin nerede olduğunu bilmek ve dürüstçe söylemek zorundadır. Fren şüphesi varsa güvenlik gereği o önce ele alınır. 'Sağ ön göbek belirgin sıcak, fren tarafına bakılmalı' cümlesi, o işi yapmasa bile ustanın işini yaptığını gösterir. Bilmediğini gizlemek bir işi yanlış yapmaktan tehlikelidir, çünkü müşteri sorunun çözüldüğünü sanarak yola çıkar." },
+          { "verdict": "hepsini-yap", "label": "Yetki olmasa da hepsi yapılır", "explain": "Kapsam dışına çıkmak riskli." },
+          { "verdict": "soyleme", "label": "Diğerleri söylenmez", "explain": "Müşteri çözüldüğünü sanır." },
+          { "verdict": "ertele", "label": "Hepsi ertelenir", "explain": "Yapılabilecek iş yapılır." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 2,4 m ve 2,1 m (100 m'de) SENARYO okumalarıdır; istenen FARKTIR (0,3 m) ve gösterilen şey farkın KÜÇÜK çıkmasının da bir bulgu olduğudur — iki yönde aynı tarafa sapma, yolu eler. Sapma sınırı verilmiyor.",
+    "sourceRequired": "Sapma sınırları, ön düzen açıları, balans toleransları ve fren değerleri bilinçle VERİLMEDİ; araca, üreticiye ve alana özgüdür. Fren sistemi bu projenin kapsamı dışında olduğu için hiçbir fren değeri verilmedi.",
+    "kapsam": "Bu ders bir sentez dersidir; yeni bir işlem öğretmez, alan ayrımını ve yönlendirmeyi öğretir. Fren sistemi kapsam dışıdır ve yalnız ayırt etme amacıyla anıldı. Balans, uğultu ve çekme teşhisleri Lastik ve Tekerlek alanında; süspansiyon ve gövde deformasyonu proje kapsamı dışında. Alan airbag sınırıyla açıldı ve sınır bilinciyle kapanıyor.",
+    "reviewedByMechanic": false
+  }
+}

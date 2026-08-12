@@ -1,0 +1,168 @@
+{
+  "id": "motor.manifolt",
+  "area": "motor-mekanik",
+  "stage": 6,
+  "title": "Emme ve Egzoz Manifoltu: Conta Kaçağı ve Sıkma Sırası",
+  "vehicleClass": "binek-arac",
+  "estimatedMinutes": 25,
+  "prerequisites": ["temel.civata-sokme-takma", "motor.hava-filtresi"],
+  "learningGoals": [
+    "Soğukta duyulup ısınınca kaybolan sesi egzoz manifolt contasına bağlamak",
+    "Isı görmüş cıvatayı kırmadan sökmek",
+    "Conta yüzeyini merkezden dışa, kademeli sıkmak ve neden böyle olduğunu bilmek"
+  ],
+
+  "safety": [
+    { "rule": "Egzoz tarafına motor tamamen soğumadan el sürülmez", "why": "Egzoz manifoltu çalışan motorda yüzlerce dereceye çıkar ve rengi değişmediği için sıcak olduğu anlaşılmaz. Temas anında derin yanık yapar", "blocksStart": true },
+    { "rule": "Motor çalışırken emme kaçağı yanıcı sprey ile aranmaz", "why": "Yaygın yöntem budur ama sıcak egzoz manifoltunun yanında yanıcı sprey püskürtmek motor bölmesinde yangın başlatır. Kaçak duman testi ya da sabunlu su ile aranır", "blocksStart": true },
+    { "rule": "Sökülen cıvatalar sırasıyla dizilir", "why": "Manifolt cıvataları çoğu zaman farklı boydadır. Karışırsa kısa cıvata derin deliğe girer ve hiç tutmaz, uzun cıvata dibe dayanır ve sıkıldığını sanırsın", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.lokma-12", "label": "12 mm lokma", "required": true },
+    { "id": "tool.circir", "label": "3/8\" cırcır kolu", "required": true },
+    { "id": "tool.pas-sokucu", "label": "Pas sökücü sprey", "required": true },
+    { "id": "tool.raspa", "label": "Conta yüzeyi raspası", "required": true },
+    { "id": "tool.cetvel", "label": "Gönye / çelik cetvel", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Şikâyet: motor soğukken tıkırtıya benzer bir tıslama var, birkaç dakika sonra ses kayboluyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.egzoz-manifoldu",
+        "question": "Isınınca kaybolan bu ses en çok neyi düşündürür?",
+        "options": [
+          { "label": "Egzoz manifolt contası kaçırıyor", "verdict": "manifolt-contasi", "correct": true, "explain": "Metal ısındıkça genleşir. Soğuk motorda conta yüzeyindeki küçük aralık açıktır ve egzoz gazı oradan kaçarken tıslama duyulur. Motor ısınıp manifolt genleşince aralık kapanır ve ses kesilir. 'Isınınca geçiyor' ifadesi bu arızanın imzasıdır; başka hiçbir arıza bu kadar düzenli olarak ısıyla kaybolmaz." },
+          { "label": "Supap boşluğu açılmış", "verdict": "supap-boslugu", "explain": "Supap tıkırtısı da soğukta belirgindir ama ısınınca tamamen kaybolmaz, hafifler. Ayrıca sesi tıslama değil, düzenli metalik tıkırtıdır ve motor devriyle birlikte hızlanır." },
+          { "label": "Egzoz borusu arkada delinmiş", "verdict": "boru-delik", "explain": "Boru kaçağı sıcaklıkla kapanmaz; boru genleşse de delik kapanmaz. Ayrıca sesi motor bölmesinden değil araç altından gelir." },
+          { "label": "Hidrolik supap iticileri boşalmış", "verdict": "itici", "explain": "İticiler yağ basıncı toplayınca sesi keser, bu birkaç saniye sürer; dakikalar değil. Ve ses tıslama değil, tıkırtıdır." }
+        ]
+      },
+      "camera": "motor-arka",
+      "teachingNote": "Sesin ne zaman kaybolduğu, sesin kendisinden daha çok bilgi verir. Bir arızayı sesin tarifiyle değil, sesin davranışıyla teşhis etmeyi öğren: ne zaman başlıyor, ne zaman bitiyor, devirle değişiyor mu."
+    },
+    {
+      "id": 2,
+      "instruction": "Cıvataları sökmeye hazırlanıyorsun. Egzoz tarafındaki cıvatalar yıllarca ısı görmüş.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.manifolt-civata",
+        "question": "Isı görmüş manifolt cıvatası nasıl sökülür?",
+        "options": [
+          { "label": "Pas sökücü verip beklerim, sonra önce hafifçe sıkma yönüne kımıldatıp geri gevşetirim", "verdict": "sikip-gevset", "correct": true, "explain": "Pas dişlerin arasını doldurur ve doğrudan gevşetmeye çalışırsan bütün kuvvet cıvatanın en zayıf kesitine biner. Önce sıkma yönünde birkaç derece kımıldatmak pası kırar ve dişin serbest kalmasını sağlar; ardından gevşetme çok daha az kuvvetle olur. Bu ileri-geri hareketi tekrarlanarak ilerlenir. Egzoz cıvatası kırılırsa iş, bir conta işinden matkapla cıvata çıkarma işine döner." },
+          { "label": "Uzun kol takıp tek hamlede gevşetirim", "verdict": "uzun-kol", "explain": "Uzun kol torku artırır ama pası çözmez. Pas kilitli dişte artan tork, cıvatayı gevşetmeden kafasından koparır. Kırılan cıvatanın gövdesi kapağın içinde kalır." },
+          { "label": "Kaynak makinesiyle ısıtıp söktürürüm", "verdict": "isit", "explain": "Isıtmak bazen gerekir ama en son çaredir ve yakındaki conta, kablo, yakıt hattı için ciddi risktir. İlk hamle her zaman kimyasal ve mekaniktir." },
+          { "label": "Darbeli tabanca ile hızlıca sökerim", "verdict": "darbeli", "explain": "Darbeli tabanca pası kırmakta işe yarayabilir ama zayıflamış egzoz cıvatasında kopma ihtimalini de artırır. Sonucu görmeden yüksek darbeye geçmek kumardır." }
+        ]
+      },
+      "camera": "motor-arka",
+      "hint": "Pas sökücüyü sıkıp hemen sökmeye başlama; sıvının dişe yürümesi için zaman gerekir.",
+      "teachingNote": "Kırılan bir egzoz cıvatası ustanın en çok zaman kaybettiği şeydir. Söküme başlamadan önce harcanan on dakika, kırıldıktan sonra harcanacak üç saatin yerine geçer."
+    },
+    {
+      "id": 3,
+      "instruction": "Manifolt cıvatalarını sök.",
+      "interaction": {
+        "type": "unscrew",
+        "target": "part.manifolt-civata",
+        "count": 4,
+        "turns": 6,
+        "tool": "tool.lokma-12"
+      },
+      "camera": "motor-on",
+      "commonMistake": {
+        "if": "yanlis-alet",
+        "feedback": "Bu cıvatalar 12 mm. Yakın ölçüde bir lokma, ısıyla zaten yorulmuş kafayı yuvarlar."
+      },
+      "hint": "Hepsini önce birer tur gevşet, sonra sırayla çıkar; manifolt tek noktadan asılı kalmasın.",
+      "teachingNote": "Çıkardığın cıvataları söküldükleri düzende bir karton üzerine dizmek alışkanlık meselesi değil, zorunluluktur. Manifolt cıvatalarında boy farkı görsel olarak zor ayırt edilir."
+    },
+    {
+      "id": 4,
+      "instruction": "Manifolt çıktı. Yeni contayı takmadan önce yüzeyleri hazırlıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.emme-manifoldu",
+        "question": "Yüzey hazırlığında hangisi doğrudur?",
+        "options": [
+          { "label": "Eski conta kalıntısını yüzeyi çizmeden temizler, manifolt yüzeyini gönye ile kontrol eder, çarpıksa taşlatırım", "verdict": "temizle-gonye", "correct": true, "explain": "Egzoz manifoltu her ısınma-soğuma çevriminde genleşip büzülür ve yıllar içinde çarpılabilir. Çarpık bir manifolt yeni conta ile de sızdırır — conta boşluğu doldurur, eğriliği düzeltmez. Gönyeyi yüzeye dayayıp ışığa tutmak eğriliği anında gösterir. Temizlikte ise yüzeyi çizecek sert taşlama diskinden kaçınılır; her çizik yeni bir kaçak yoludur." },
+          { "label": "Contayı yerine koyup takarım, yüzey zaten düz olur", "verdict": "direkt-tak", "explain": "Isı gören bir manifoltun düz kaldığını varsaymak, işi ikinci kez sökmeyi göze almaktır. Kontrol iki dakika sürer." },
+          { "label": "Eğrilik varsa contayı çift takarım", "verdict": "cift-conta", "explain": "Çift conta sıkma yükünü doğru dağıtmaz ve ısı altında kayar. Ayrıca manifoltun oturma yüksekliğini değiştirip cıvata boylarını yanlış hâle getirir." },
+          { "label": "Silikon conta ile takviye ederim", "verdict": "silikon", "explain": "Egzoz sıcaklığında sıradan silikon yanar ve gözenekli bir kalıntıya döner. Üretici sıvı conta öngörmüyorsa kullanılmaz." }
+        ]
+      },
+      "camera": "motor-on",
+      "teachingNote": "Kaçakların çoğu contadan değil, contanın oturduğu yüzeyden kaynaklanır. Yeni conta, kötü yüzeyi kurtarmaz."
+    },
+    {
+      "id": 5,
+      "instruction": "Manifoltu yerine koydun, cıvataları elle başlattın. Sıra sıkmada.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.manifolt-civata",
+        "question": "Cıvatalar hangi sırayla sıkılır?",
+        "options": [
+          { "label": "Ortadan başlayıp dışa doğru, birkaç kademede ve kılavuzdaki torka kadar", "verdict": "ortadan-disa", "correct": true, "explain": "Uzun bir manifolt tek parça bir yay gibidir. Bir uçtan sıkmaya başlarsan o uç yüzeye yapışır, contayı oradan ezer ve manifolt diğer uca doğru hafifçe kalkar — sonra o ucu sıkmak için contayı fazla ezmen gerekir. Ortadan başlayıp dışa doğru ilerlemek, contanın altındaki boşluğu kenarlara doğru süren bir hareket gibidir: yük eşit dağılır. Kademeli sıkmak (önce hepsi hafif, sonra hepsi orta, sonra tam tork) aynı amaca hizmet eder." },
+          { "label": "Bir uçtan başlayıp diğer uca doğru sırayla", "verdict": "uctan-uca", "explain": "En yaygın hatadır. Manifolt sıkıldığı uca doğru yatar ve karşı uçta conta tam oturmaz; ilk ısınmada oradan kaçak başlar." },
+          { "label": "Her cıvatayı tek seferde tam torka sıkarım, sıra fark etmez", "verdict": "tek-seferde", "explain": "Sıra fark eder çünkü her sıkılan cıvata, komşularının oturma yüksekliğini değiştirir. Tek seferde tam tork, ilk sıkılan cıvatanın yükünü sonrakiler geldiğinde yanlış kılar." },
+          { "label": "Köşelerden başlayıp ortaya doğru", "verdict": "kosedan-ortaya", "explain": "Bu, çarpılmayı ortada toplar: kenarlar oturur, orta bölge kabarık kalır. Doğru yön daima merkezden dışa." }
+        ]
+      },
+      "camera": "motor-on",
+      "teachingNote": "Sıkma sırası kuralı bir gelenek değil, malzemenin davranışının sonucudur. Aynı mantık silindir kapağında, karterde, supap kapağında ve flanşlı her bağlantıda geçerlidir: merkezden dışa, kademeli."
+    },
+    {
+      "id": 6,
+      "instruction": "İş bitti. Emme tarafında kaçak kalmadığını doğrulaman gerek.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.emme-manifoldu",
+        "question": "Emme kaçağı güvenli biçimde nasıl aranır?",
+        "options": [
+          { "label": "Duman testi ya da conta hattına sabunlu su sürüp kabarcık aramak", "verdict": "duman-sabun", "correct": true, "explain": "Emme manifoldu rölantide vakum altındadır; kaçak varsa ölçülmemiş hava içeri girer, karışım fakirleşir, rölanti yükselir ve dalgalanır. Duman testinde sisteme düşük basınçlı duman verilir ve kaçak noktasından duman çıkar — kaçağın yerini doğrudan gösterir. Sabunlu su ise basınç verilebilen sistemlerde kabarcık yapar. İkisi de yanıcı değildir ve sıcak egzoz manifoltunun yanında güvenle kullanılır." },
+          { "label": "Motor çalışırken conta hattına yanıcı sprey sıkıp devir değişimini dinlemek", "verdict": "yanici-sprey", "explain": "Bu yöntem gerçekten kaçağı bulur ama sıcak egzoz manifoltu ve kıvılcım kaynaklarının yanında yanıcı sprey püskürtmek motor bölmesi yangınının bilinen sebebidir. Sonuç aynı, risk kıyaslanamaz." },
+          { "label": "Rölanti düzgünse kaçak yok demektir", "verdict": "rolanti-duzgun", "explain": "Küçük kaçakları motor kontrol ünitesi yakıt düzeltmesiyle bir süre gizler; rölanti düzgün görünür ama düzeltme değerleri sınırdadır. Düzgün rölanti kaçak olmadığının kanıtı değildir." },
+          { "label": "Arıza kodu yoksa temizdir", "verdict": "kod-yok", "explain": "Kod, yakıt düzeltmesi sınırı aşınca gelir. Sınırın altındaki kaçak kod üretmez ama yakıt tüketimini ve sürüş hissini bozar." }
+        ]
+      },
+      "camera": "motor-ust",
+      "hint": "Rölantiyi kulakla da dinle: emme kaçağında ses ıslığa yakın ve devirle birlikte değişir.",
+      "teachingNote": "Bir yöntem yaygın diye güvenli değildir. Ustalık, aynı sonucu veren iki yöntemden risksiz olanı seçmektir — özellikle risk senin değil, aracın ve yanındakilerin üzerindeyse."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Egzoz manifolt kaçağının sesi neden motor ısınınca kaybolur?",
+        "a": "genlesme",
+        "options": [
+          { "verdict": "genlesme", "label": "Manifolt ısınıp genleşir ve conta yüzeyindeki aralık kapanır", "explain": "Metal ısındıkça büyür. Soğukken conta yüzeyinde kalan çok küçük aralık, manifolt genleştikçe kapanır ve gaz kaçışı durur. Bu yüzden arıza kendini yalnız soğuk çalıştırmada gösterir ve sürücü çoğu zaman geçti sanıp önemsemez. Geçmemiştir; her soğuk çalıştırmada kaçak tekrar açılır ve conta yüzeyi gaz akışıyla yavaşça aşınır." },
+          { "verdict": "yag-doldurur", "label": "Yağ buharı aralığı doldurur", "explain": "Egzoz tarafında sızdırmazlığı sağlayan yağ değildir; zaten yanma sıcaklığında yağ orada kalmaz." },
+          { "verdict": "kurum", "label": "Kurum birikip deliği tıkar", "explain": "Kurum birikebilir ama bu dakikalar içinde ve her seferinde aynı şekilde tekrarlanan bir olay değildir." },
+          { "verdict": "ses-aliskanlik", "label": "Ses devam eder, sürücü alışır", "explain": "Alışma öznel bir açıklamadır; dinlendiğinde ses gerçekten kesilir." }
+        ]
+      },
+      {
+        "q": "Flanşlı bir bağlantıda cıvatalar neden merkezden dışa doğru sıkılır?",
+        "a": "yuk-dagilimi",
+        "options": [
+          { "verdict": "yuk-dagilimi", "label": "Yük eşit dağılsın ve parça çarpılmadan otursun diye", "explain": "Her sıkılan cıvata parçayı o noktadan yüzeye çeker ve komşu bölgeleri hafifçe kaldırır. Merkezden dışa ilerlemek, contanın altındaki boşluğu kenarlara doğru süren bir hareket yaratır ve son cıvatalar sıkıldığında yük düzgün dağılmış olur. Uçtan başlanırsa parça yatar; köşelerden başlanırsa orta bölge kabarık kalır. Aynı kural silindir kapağı, karter, supap kapağı ve her flanş için geçerlidir." },
+          { "verdict": "kolay-erisim", "label": "Ortadaki cıvatalara erişim daha kolay olduğu için", "explain": "Erişim kolaylığının sıkma sırasıyla ilgisi yoktur; kural malzemenin davranışından gelir." },
+          { "verdict": "gelenek", "label": "Geleneksel yöntem böyle, teknik sebebi yok", "explain": "Teknik sebebi vardır ve ölçülebilir: yanlış sırada sıkılan flanşta conta baskısı eşitsiz dağılır." },
+          { "verdict": "tork-tasarrufu", "label": "Daha az tork gerektirdiği için", "explain": "Gereken tork değişmez; değişen, o torkun yüzeye nasıl dağıldığıdır." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "sourceRequired": "Manifolt cıvatası torku ve sıkma kademeleri araca özgüdür; kılavuzdan okunur. Bu derste sayı verilmedi, sıra ve yöntem öğretildi.",
+    "kapsam": "Manifolt cıvatası tek mesh ile temsil edilir; gerçekte cıvata sayısı araca göre değişir. Sıkma sırası adımı bu yüzden animasyon değil, teşhis adımı olarak yazıldı.",
+    "reviewedByMechanic": false
+  }
+}

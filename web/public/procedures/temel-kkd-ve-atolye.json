@@ -1,0 +1,140 @@
+{
+  "id": "temel.kkd-ve-atolye",
+  "area": "motor-mekanik",
+  "stage": 0,
+  "title": "Kişisel Koruyucu Donanım ve Çalışma Alanı",
+  "vehicleClass": "atolye",
+  "estimatedMinutes": 10,
+  "prerequisites": [],
+  "learningGoals": [
+    "Motor bölmesinde çalışırken hangi korumanın neden gerektiğini bilmek",
+    "Yangın sınıfını tanıyıp doğru söndürücüyü seçmek",
+    "Zemini ve havalandırmayı işe başlamadan önce güvenli hale getirmek"
+  ],
+
+  "safety": [
+    { "rule": "Yüzük, saat, künye ve bileklik çıkarılır", "why": "Metal takı hem elektrik köprüsü kurar hem parçaya takılır; takılan bir yüzük parmağı deriden sıyırır. Bu yaralanma geri dönmez", "blocksStart": true },
+    { "rule": "Kapalı burunlu ayakkabı ve tam kapalı üst giysi", "why": "Düşen parça, sıcak sıvı ve keskin sac için tek gerçek koruma budur", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.is-gozlugu", "label": "İş gözlüğü", "required": true },
+    { "id": "tool.eldiven", "label": "Mekanik eldiveni", "required": false },
+    { "id": "tool.yangin-tupu-abc", "label": "ABC kuru kimyevi tozlu söndürücü", "required": true },
+    { "id": "tool.emici-talas", "label": "Emici talaş / granül", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Motor bölmesinde çalışacaksın. Dolaptan ne alırsın?",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kkd-dolabi",
+        "question": "Motor bölmesi işi için doğru donanım hangisi?",
+        "options": [
+          { "label": "Gözlük, kapalı giysi, kapalı ayakkabı; takılar çıkarılır", "verdict": "tam-kkd", "correct": true, "explain": "Gözlük sıçrayan yağ ve akü asidine, kapalı giysi sıcak parçaya, ayakkabı düşen alete karşıdır. Takı hem elektrik köprüsü kurar hem parçaya takılır." },
+          { "label": "Sadece eldiven yeterli, gerisi abartı", "verdict": "sadece-eldiven", "explain": "Eldiven en az koruyan parçadır ve bazı işlerde tehlikelidir: dönen parçanın yanında eldiven eli içine çeker. Göz koruması eldivenden önce gelir." },
+          { "label": "Gözlüğü sadece taşlama ve zımparada takarım", "verdict": "sadece-taslamada", "explain": "Göz yaralanmalarının çoğu taşlamada değil, basınçlı sıvı ve pas parçacığında olur. Fren hidroliği ve akü asidi göze girerse kalıcı hasar bırakır." },
+          { "label": "Yüzüğü çıkarmaya gerek yok, dikkat ederim", "verdict": "yuzuk-kalsin", "explain": "Dikkat, elektriği yalıtmaz. Yüzük akünün artı kutbuyla şaseyi birleştirirse saniyeler içinde kızarır; parçaya takılırsa parmağı sıyırır." }
+        ]
+      },
+      "camera": "atolye-genel",
+      "teachingNote": "Bu derste yanlış cevap dersi tamamlamanı engeller. Atölyede güvenlik sorusunun ikinci denemesi yoktur."
+    },
+    {
+      "id": 2,
+      "instruction": "Söndürücünün manometresini oku. İbre yeşil bölgede mi?",
+      "interaction": {
+        "type": "measure",
+        "target": "part.yangin-tupu",
+        "unit": "bar",
+        "bookValue": 14,
+        "acceptRange": [12, 16]
+      },
+      "camera": "atolye-genel",
+      "hint": "İbre yeşilin solundaysa tüp boşalmıştır, sağındaysa aşırı basınçlıdır. İkisi de kullanılamaz demektir.",
+      "teachingNote": "Buradaki değer egzersiz içindir; gerçek söndürücünün yeşil bandı kendi manometresinde basılıdır. Söndürücü kontrolü aylık yapılır, yangın çıkınca değil."
+    },
+    {
+      "id": 3,
+      "instruction": "Tezgâhın altında dökülen benzin tutuştu. Hangi söndürücüyü alırsın?",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.yangin-tupu",
+        "question": "Akaryakıt yangınında doğru söndürücü hangisi?",
+        "options": [
+          { "label": "ABC kuru kimyevi tozlu söndürücü", "verdict": "abc", "correct": true, "explain": "Sıvı yakıt yangını B sınıfıdır. ABC tozlu söndürücü hem sıvıyı hem elektrikli ekipmanı kapsar; atölyede tek tüple gitmek istiyorsan bu olmalı." },
+          { "label": "Su hortumu, en hızlı ulaşan o", "verdict": "su", "explain": "Su benzinden ağırdır; altına iner, yanan yakıtı yüzdürüp yayar. Küçük bir yangını atölye yangınına çevirmenin en hızlı yolu budur." },
+          { "label": "Üstüne bez atıp bastırırım", "verdict": "bez", "explain": "Küçük bir tavada işe yarayabilir ama dökülmüş yakıtta bez de tutuşur. Elinle yangına yaklaşman gereken hiçbir yöntem doğru yöntem değildir." },
+          { "label": "Havalandırmayı açıp dumanı boşaltırım", "verdict": "havalandirma", "explain": "Hava vermek yangını besler. Önce söndürülür, sonra havalandırılır." }
+        ]
+      },
+      "camera": "atolye-genel"
+    },
+    {
+      "id": 4,
+      "instruction": "Aracın altında zeminde yağ birikintisi var. İşe başlamadan önce?",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.calisma-alani",
+        "question": "Zemindeki yağ ne yapılır?",
+        "options": [
+          { "label": "Emici talaş dökülür, süpürülür, zemin kurulanır", "verdict": "temizle", "correct": true, "explain": "Yağlı zeminde ayak kayar; elinde ağır parça varken kaymak, kırık ya da ezilme demektir. Temizlik işin parçasıdır, işten sonra yapılan bir jest değil." },
+          { "label": "Üstüne karton serilir", "verdict": "karton", "explain": "Karton yağı emmez, üzerinde kayar. Yağı gizlemiş, tehlikeyi görünmez yapmış olursun." },
+          { "label": "Dikkatli basarak çalışırım", "verdict": "dikkat", "explain": "Kayma zaten dikkatsizlikten değil, sürtünmenin bitmesinden olur. Dikkat sürtünme üretmez." },
+          { "label": "İş bitince temizlerim", "verdict": "sonra", "explain": "Kayma riski tam da iş sırasında, elin doluyken var. İş bitince temizlik, riski geçirdikten sonra önlem almaktır." }
+        ]
+      },
+      "camera": "atolye-genel"
+    },
+    {
+      "id": 5,
+      "instruction": "Motoru çalıştırıp rölantide dinlemen gerekiyor, kapılar kapalı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.calisma-alani",
+        "question": "Kapalı atölyede motor çalıştırmadan önce?",
+        "options": [
+          { "label": "Egzoza tahliye hortumu bağlanır ya da dışarı verilir", "verdict": "egzoz-tahliye", "correct": true, "explain": "Egzozdaki karbonmonoksit renksiz ve kokusuzdur; uyarısı yoktur, baş ağrısını fark ettiğinde zaten etkilenmişsindir. Tahliye bağlamak tek gerçek çözümdür." },
+          { "label": "Kapıyı aralar, kısa tutarım", "verdict": "kapi-arala", "explain": "Aralık kapı hava akımı üretmez. 'Kısa tutmak' da doz sorununu çözmez, sadece geciktirir." },
+          { "label": "Vantilatörü açarım", "verdict": "vantilator", "explain": "Vantilatör gazı karıştırır, dışarı atmaz. Atölyenin tamamına yayarsın." },
+          { "label": "Maske takarım", "verdict": "maske", "explain": "Toz maskesi karbonmonoksidi tutmaz. Gaz maskesi bile bu iş için doğru çözüm değil; kaynağı dışarı vermek gerekir." }
+        ]
+      },
+      "camera": "atolye-genel",
+      "teachingNote": "Karbonmonoksit atölye kazalarında en sinsi olanıdır çünkü hiçbir duyu organı onu haber vermez."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Dönen parçanın (kayış, fan, matkap) yanında eldiven neden tehlikelidir?",
+        "a": "eli-iceri-ceker",
+        "options": [
+          { "verdict": "eli-iceri-ceker", "label": "Eldivenin ucu takılır ve eli parçanın içine çeker", "explain": "Çıplak el sıyrılıp kurtulabilir; eldiven yakalandığında eli beraberinde götürür. Dönen parçanın yanında eldiven çıkarılır." },
+          { "verdict": "kavrama-azalir", "label": "Kavrama gücü azaldığı için", "explain": "Kavrama da azalır ama asıl tehlike bu değil; asıl tehlike eldivenin parçaya kapılmasıdır." },
+          { "verdict": "sicaklik", "label": "Sıcaklığı hissetmediğin için", "explain": "Bu ayrı bir sakınca ama dönen parçadaki asıl ölümcül risk kapılmadır." },
+          { "verdict": "tehlikeli-degil", "label": "Tehlikeli değildir, her zaman eldiven takılır", "explain": "Her zaman değil. Eldiven kimyasal, keskin sac ve sıcak parça için takılır; dönen parçada çıkarılır." }
+        ]
+      },
+      {
+        "q": "Akaryakıt yangınına su sıkarsan ne olur?",
+        "a": "yakit-yuzer-yayilir",
+        "options": [
+          { "verdict": "yakit-yuzer-yayilir", "label": "Yakıt suyun üstünde yüzer ve yangın yayılır", "explain": "Benzin sudan hafiftir; su altına iner ve yanan yakıtı taşıyarak yayar. B sınıfı yangında su kullanılmaz." },
+          { "verdict": "soner", "label": "Söner, su her yangını söndürür", "explain": "Su yalnız A sınıfında (katı yanıcılar) doğru seçimdir." },
+          { "verdict": "duman-artar", "label": "Sadece duman artar", "explain": "Sorun duman değil, yangının alanı büyütmesidir." },
+          { "verdict": "patlar", "label": "Kesin patlama olur", "explain": "Patlama şart değil ama yayılma her seferinde olur. Yanlış olmasının sebebi bu." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "sourceRequired": "Manometre değeri (14 bar) egzersiz verisidir; gerçek söndürücünün çalışma bandı kendi etiketinde yazar. Kaynak künyesi gerektiren araç değeri bu derste yok.",
+    "reviewedByMechanic": false
+  }
+}

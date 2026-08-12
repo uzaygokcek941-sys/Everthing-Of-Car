@@ -1,0 +1,174 @@
+{
+  "id": "aksesuar.kamera-park-modu",
+  "area": "aksesuar-ses",
+  "stage": 6,
+  "title": "Park Modu ve Akü Koruması: Sürekli Besleme Nasıl Bağlanır",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 35,
+  "prerequisites": ["aksesuar.kamera-arka-montaj"],
+  "learningGoals": [
+    "Park modunun araç kapalıyken ne yaptığını ve bunun aküye maliyetini bilmek",
+    "Uykudaki akım farkını ölçüp yorumlamak",
+    "Akü korumasını doğru kurmak ve müşteriye sınırlarını anlatmak"
+  ],
+
+  "safety": [
+    { "rule": "Park modu, akü koruması kurulmadan teslim edilmez", "why": "Korumasız sürekli besleme, aracı birkaç gün bekleyen bir müşteride akünün tamamen boşalmasına yol açar; bu, montajın doğrudan ürettiği bir arızadır", "blocksStart": true },
+    { "rule": "Sürekli besleme bağlantısı yapılırken enerji kesilir ve kesildiği ölçülerek doğrulanır", "why": "Sürekli beslemeli hat kontak kapalıyken de canlıdır; 'kontağı kapattım' demek bu hatta hiçbir şey ifade etmez", "blocksStart": true },
+    { "rule": "Eklenen hat ayrıca sigortalanır ve mevcut sigorta değeri büyütülmez", "why": "Sigorta kabloyu korur; büyütülen sigorta kabloyu korumasız bırakır ve kısa devrede kablo yanar", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.multimetre", "label": "Multimetre", "required": true },
+    { "id": "tool.pens-ampermetre", "label": "Pens ampermetre", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true },
+    { "id": "tool.tornavida-seti", "label": "Tornavida seti", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Müşteri park modu istiyor. Cihazın ne yapacağını anlıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-kamera",
+        "question": "Park modu araç kapalıyken ne yapar?",
+        "options": [
+          { "label": "Cihaz uyanık kalır ve ya sürekli kaydeder, ya sarsıntı veya hareket bekleyip olay olunca kaydeder, ya da çok seyrek kayıtla bekler — hangisi seçilirse akü tüketimi o kadar değişir", "verdict": "uc-bicim", "correct": true, "explain": "Park modu tek bir şey değildir; cihazdan cihaza değişen üç ayrı çalışma biçimi vardır ve akü tüketimini belirleyen tam olarak bu seçimdir. Birincisi sürekli kayıttır: cihaz araç dururken de normal kayda devam eder. En çok bilgi veren ama en çok tüketen yöntemdir ve kartı da hızla doldurur. İkincisi olay tetiklemelidir: cihaz uyur, yalnız bir sarsıntı algıladığında ya da gördüğü görüntüde hareket olduğunda uyanır ve o anı kaydeder. Tüketimi belirgin biçimde düşüktür ve çoğu müşteri için doğru seçimdir — park hâlinde önemli olan zaten olayın kendisidir, boş bir otoparkın saatlerce kaydı değil. Üçüncüsü zaman aralıklı kayıttır: cihaz çok seyrek kare alır ve saatlerce süren beklemeyi kısa bir görüntüye sıkıştırır; olayın ne zaman olduğunu gösterir ama ayrıntı vermez. Hangi biçim seçilirse seçilsin ortak bir gerçek vardır: cihaz araç kapalıyken de elektrik çekiyordur ve bu elektrik aküden gelir. Bu yüzden park modu kararı, akü koruması kararıyla aynı cümlede verilir. Cihazın hangi modda ne kadar çektiği ürüne özgüdür ve belgesinden okunur." },
+          { "label": "Hiçbir şey yapmaz, yalnız araç çalışınca kaydeder", "verdict": "kapali", "explain": "O zaman park modu olmaz; park modu araç kapalıyken çalışır." },
+          { "label": "Aracı korur, hırsızı engeller", "verdict": "korur", "explain": "Kaydeder, engellemez; alarm ayrı bir sistemdir." },
+          { "label": "Akü tüketmez", "verdict": "tuketmez", "explain": "Uyanık kalan her cihaz akü tüketir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Park modu üç ayrı biçim: sürekli, olay tetiklemeli, zaman aralıklı. Çoğu müşteri için doğrusu olay tetiklemeli."
+    },
+    {
+      "id": 2,
+      "instruction": "Uykudaki akımı iki kez ölçtün: park modu kapalıyken 0,031 A, açıkken 0,26 A. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.pens-ampermetre",
+        "unit": "amper",
+        "acceptRange": [0.224, 0.234]
+      },
+      "camera": "aksesuar",
+      "hint": "0,26 eksi 0,031.",
+      "teachingNote": "0,229 amperlik bu fark, park modunun aküye ödettiği bedeldir ve bu montajın en önemli sayısıdır. Bu ölçüm aşama 0'daki uykudaki akım dersinin doğrudan devamıdır ve aynı disiplinle yapılır: araç tamamen kapatılır, kapılar kapalı olacak biçimde kilitlenir ve araç kendi uyku moduna girene kadar beklenir — modüller hemen uyumaz, bu yüzden erken yapılan ölçüm her zaman yüksek çıkar ve yanıltır. Sonra hat üzerinden akım okunur. İki okumanın farkı, eklenen cihazın araç dururken çektiği akımdır ve yalnız bu fark montajcının sorumluluğudur; aracın kendi uykudaki akımı zaten vardır ve ona karışılmaz. Bu farkın anlamı zamanla ortaya çıkar: küçük bir akım bile günlerce sürerse aküden ciddi bir enerji çeker ve akünün durumu kötüyse — kışsa, akü eskiyse, araç kısa mesafelerde kullanılıp hiç tam dolmuyorsa — araç birkaç gün sonra çalışmaz. Bu yüzden ölçüm bir sayı toplamak için değil, bir karar vermek için yapılır: bu araçta park modu korumasıyla kurulabilir mi, kesme eşiği nereye ayarlanmalı, müşteriye ne söylenmeli. Akünün kapasitesi, sağlığı ve güvenli boşalma sınırı araca özgüdür; bu ders bir sınır ya da kaç gün dayanacağı değeri vermiyor."
+    },
+    {
+      "id": 3,
+      "instruction": "Park modu için besleme bağlayacaksın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sigorta-kutusu-aksesuar",
+        "question": "Park modlu bir cihaz kaç uçla bağlanır?",
+        "options": [
+          { "label": "Üç uçla: sürekli besleme, kontakla kesilen besleme ve şase; cihaz ilk ikisini karşılaştırarak aracın açık mı kapalı mı olduğunu anlar", "verdict": "uc-uc", "correct": true, "explain": "Park modlu montajın bağlantı mantığı buradadır ve anlaşıldığında her cihazda aynıdır. Cihazın sürekli beslemeye ihtiyacı vardır, çünkü araç kapalıyken de çalışacaktır. Ama yalnız sürekli beslemeye bağlanırsa cihaz aracın kapandığını hiç bilemez ve park moduna geçemez; sürekli normal modda kalır ve aküyü hızla bitirir. Bu yüzden ikinci bir uç daha bağlanır: kontakla kesilen besleme. Cihaz bu iki ucu karşılaştırır — ikisinde de gerilim varsa araç çalışıyordur ve normal kayıt yapılır; sürekli uçta gerilim var ama kontak ucu ölmüşse araç kapanmıştır ve park moduna geçilir. Üçüncü uç şasedir ve önceki derslerdeki kurallarla bağlanır: mevcut bir şase noktasına, temas yüzeyi temizlenerek. Bağlantı sırasında iki hata çok yapılır. Birincisi, iki ucun da sürekli beslemeye bağlanmasıdır — cihaz aracı hep açık sanar ve aküyü bitirir. İkincisi, iki ucun da kontakla kesilene bağlanmasıdır — cihaz araç kapanınca tamamen kapanır ve park modu hiç çalışmaz; üstelik müşteri bunu ancak bir olay yaşandığında fark eder. Bu yüzden bağlantı bittikten sonra iki durum da denenir: araç açıkken cihaz normal modda mı, kapatıldıktan sonra park moduna geçiyor mu. Bazı cihazlar bu üç ucu tek bir özel besleme kablosunda toplar ve koruma da o kablonun içindedir." },
+          { "label": "Tek uçla, doğrudan aküye", "verdict": "tek-uc", "explain": "Cihaz aracın kapandığını anlayamaz ve park moduna geçemez." },
+          { "label": "İki ucun ikisi de sürekli beslemeye", "verdict": "iki-surekli", "explain": "Cihaz aracı hep açık sanar." },
+          { "label": "İki ucun ikisi de kontakla kesilene", "verdict": "iki-kesilen", "explain": "Araç kapanınca cihaz tamamen kapanır; park modu hiç çalışmaz." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Üç uç: sürekli, kontakla kesilen, şase. Cihaz ilk ikisini karşılaştırarak aracın durumunu anlar."
+    },
+    {
+      "id": 4,
+      "instruction": "Akü korumasını kuruyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.ana-kablo-demeti",
+        "question": "Koruma ne yapar?",
+        "options": [
+          { "label": "Akü gerilimi belirlenen seviyenin altına indiğinde ya da belirlenen süre dolduğunda cihazın beslemesini keser; böylece aracın çalışacak kadar enerjisi kalır", "verdict": "kesme", "correct": true, "explain": "Koruma, park modunu satılabilir kılan tek şeydir ve iki farklı ölçüte göre çalışır. Birincisi gerilim eşiğidir: koruma akü gerilimini izler ve belirlenen seviyenin altına indiğinde cihazın beslemesini keser. Mantık şudur — akü boşaldıkça gerilimi düşer, yani gerilim akünün ne kadar kaldığının kaba bir göstergesidir; kesme seviyesi, araç hâlâ çalışabilecek durumdayken devreye girecek biçimde seçilir. İkincisi süre sınırıdır: koruma, araç kapandıktan sonra belirlenen süre dolduğunda beslemeyi keser, akünün durumuna bakmadan. Çoğu koruma ikisini birlikte kullanır ve hangisi önce gerçekleşirse o keser. Bu koruma üç yerde bulunabilir: cihazın kendi ayarında, cihazla birlikte gelen özel besleme kablosunun içinde ya da ayrı bir kesici parçada. Hangisi kullanılırsa kullanılsın kural aynıdır: koruma kurulmadan park modu teslim edilmez. Ayarın seçiminde iki gerçek göz önünde tutulur — soğuk havada akünün verebileceği enerji düşer ve eski bir akü aynı gerilimde çok daha az enerji taşır. Bu yüzden kışa girerken ve akü yaşlıyken daha erken kesen bir ayar mantıklıdır. Kesme gerilimi ve süre değerleri cihaza, araca ve akünün durumuna özgüdür; bu ders bir değer vermiyor." },
+          { "label": "Aküyü şarj eder", "verdict": "sarj", "explain": "Koruma şarj etmez; yalnız tüketimi keser." },
+          { "label": "Cihazı hızlandırır", "verdict": "hiz", "explain": "Korumanın kayıt kalitesiyle ilgisi yoktur." },
+          { "label": "Gerekmez, cihaz kendi kapanır", "verdict": "gereksiz", "explain": "Cihazın kendi kapanma ayarı yoksa akü biter; koruma zorunludur." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Koruma iki ölçütle çalışır: gerilim eşiği ve süre. Kışta ve eski aküde daha erken kesen ayar mantıklı."
+    },
+    {
+      "id": 5,
+      "instruction": "Sigorta kutusunun kapağını açıp bağlantıyı gözden geçiriyorsun.",
+      "interaction": {
+        "type": "pull",
+        "target": "part.sigorta-kutusu-aksesuar",
+        "requiresGesture": true
+      },
+      "camera": "aksesuar",
+      "hint": "Kapağı klipslerinden yavaşça çıkar.",
+      "teachingNote": "Bu son gözden geçirme, bir ay sonra geri gelmeyi engelleyen adımdır. Beş şey kontrol edilir. Birincisi, eklenen hattın kendi sigortasının takılı olduğu ve cihazın gerektirdiği değerde olduğu — küçük görünen bu ayrıntı, kısa devrede aracın mı yoksa yalnız kameranın mı etkileneceğini belirler. İkincisi, aracın kendi sigortasının yerinde ve değerinde kaldığı; büyütülmüş bir sigorta kabloyu korumasız bırakır. Üçüncüsü, bağlantı elemanının yönüdür — yuvanın besleme tarafı ölçülerek bulunmuş ve eleman ona göre takılmış olmalı; ters takılan eleman aracın kendi devresini yeni sigortanın arkasına düşürür ve bir gün o devre sorun yaşadığında yanlış sigorta atar, kimse de sebebini bulamaz. Dördüncüsü, kabloların kutunun kapağını kapatmaya engel olmadığı; zorlanarak kapatılan bir kapak kabloyu ezer. Beşincisi, bağlantıların titreşimde gevşemeyecek biçimde yapıldığı. Ve kutuya bir not bırakmak, bu işin iyi ustayı belli eden alışkanlığıdır: hangi yuvadan besleme alındığı küçük bir etiketle yazılırsa iki yıl sonra bu araca bakan başka bir usta — ya da sen — beş dakikada anlar. Sigorta değerleri araca ve cihaza özgüdür; bu ders bir değer vermiyor."
+    },
+    {
+      "id": 6,
+      "instruction": "Bir ay sonra müşteri geliyor: 'araç iki gün durunca çalışmıyor.'",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.pens-ampermetre",
+        "question": "Nasıl teşhis edilir?",
+        "options": [
+          { "label": "Uykudaki akım ölçülür, sonra kamera hattı ayrılıp ölçüm tekrarlanır: fark kameradan geliyorsa koruma çalışmıyordur, fark yoksa sorun aracın kendisinde ya da akünün durumundadır", "verdict": "ayirarak-olc", "correct": true, "explain": "Bu şikâyet kamera montajından sonra geldiği için ilk şüphe montajdadır — anten dersindeki kuralın aynısı: şikâyet bir montajdan sonra başlıyorsa şüphe önce o montajdadır. Ama şüphe kanıtla ayrılır, tahminle değil. Yöntem şudur: araç tamamen kapatılır, uyku moduna girmesi beklenir ve uykudaki akım ölçülür; sonra kameranın hattı ayrılıp ölçüm tekrarlanır. İki okumanın farkı kameranın gerçekte ne çektiğini söyler. Buradan üç sonuç çıkar. Birincisi, kamera hattı ayrılınca akım belirgin düşüyorsa koruma çalışmıyor demektir — kesme ayarı yanlış seçilmiş, koruma hiç kurulmamış ya da cihaz beklenen sürede uykuya geçmiyor olabilir; ayar gözden geçirilir. İkincisi, kamera ayrılmasına rağmen akım hâlâ yüksekse sorun kamerada değildir ve aracın kendi devrelerinde bir tüketici uyanık kalıyordur; bu, aşama 0'daki parazit akım dersinin konusudur ve sigortalar teker teker ayrılarak bulunur. Üçüncüsü, akım normalse ve araç yine de çalışmıyorsa sorun tüketimde değil akünün kendisindedir — eski ya da zayıf bir akü normal bir tüketimi bile iki gün taşıyamaz ve bu durumda kamerayı suçlamak yanlıştır, akü test edilir. Doğru sıra ölçmektir; tartışmak değil." },
+          { "label": "Kamera hemen sökülür", "verdict": "sok", "explain": "Sebep ölçülmeden sökmek, sorun kamerada değilse hiçbir şey çözmez." },
+          { "label": "Yeni akü satılır", "verdict": "aku-sat", "explain": "Önce tüketim ölçülür; akü suçlanmadan önce elenmesi gerekenler var." },
+          { "label": "Park modu iptal edilir", "verdict": "iptal", "explain": "Müşterinin istediği işlevi kaldırmak, sebebi bulmak değildir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Ayırarak ölç: kamerayla ve kamerasız. Fark neyi gösteriyorsa sorumlu odur — tahmin değil, iki okuma."
+    },
+    {
+      "id": 7,
+      "instruction": "Park modu kuruldu ve doğrulandı. Müşteriye anlatıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sase-noktasi-aksesuar",
+        "question": "Müşteriye ne söylenir?",
+        "options": [
+          { "label": "Park modunun akü çektiği, korumanın belli bir noktada kestiği, uzun süre park edilecekse ya da akü eskiyse kaydın kesileceği ve bunun bir arıza olmadığı", "verdict": "sinirlari-anlat", "correct": true, "explain": "Park modunun sınırlarını anlatmak, montajın son ve en çok atlanan adımıdır — ve müşteri memnuniyetsizliğinin çoğu buradan çıkar. Söylenecek dört şey var. Birincisi, park modunun bedava olmadığıdır: cihaz araç dururken de akü çeker ve bu, aracın uzun süre çalıştırılmadığı durumlarda hissedilir. İkincisi, korumanın ne yaptığıdır: akü belli bir seviyeye indiğinde ya da belli bir süre geçtiğinde cihazın beslemesi kesilir, yani araç birkaç gün beklerse park kaydı bir noktadan sonra durur — bu bir arıza değil, aracın çalışabilmesini garanti eden korumadır. Bu cümle söylenmezse müşteri kaydın kesildiğini görüp 'cihaz bozuk' diye geri gelir. Üçüncüsü mevsim ve akü yaşıdır: kışın akünün verebileceği enerji düşer, eski bir akü aynı yükü çok daha kısa taşır; yani aynı sistem yazın sorunsuz çalışırken kışın daha erken kesebilir. Dördüncüsü uzun süreli parktır: araç haftalarca kullanılmayacaksa park modunun kapatılması ya da cihazın beslemesinin ayrılması önerilir. Bunlara ek olarak, kısa mesafede kullanılan bir araçta akünün zaten hiç tam dolmadığı hatırlatılır. Bu konuşma iki dakika sürer ve sonraki şikâyetlerin yarısını ortadan kaldırır." },
+          { "label": "Hiçbir şey; sistem çalışıyor", "verdict": "sessiz", "explain": "Sınırlar anlatılmazsa koruma devreye girdiğinde arıza sanılır." },
+          { "label": "Kamera hiç akü tüketmez denir", "verdict": "tuketmez", "explain": "Doğru değil ve müşteriye yanlış beklenti verir." },
+          { "label": "Sorun çıkarsa gelsin denir", "verdict": "gelsin", "explain": "Önceden anlatılan sınır, sonradan çözülen şikâyetten ucuzdur." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Koruma devreye girdiğinde kayıt durur — bu arıza değil. Bu tek cümle söylenmezse müşteri geri gelir."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Park modlu cihaz kaç uçla bağlanır ve neden?",
+        "a": "uc-uc",
+        "options": [
+          { "verdict": "uc-uc", "label": "Üç uçla: sürekli besleme, kontakla kesilen besleme ve şase; cihaz ilk ikisini karşılaştırarak aracın açık mı kapalı mı olduğunu anlar", "explain": "Yalnız sürekli beslemeye bağlanırsa cihaz aracın kapandığını bilemez, normal modda kalır ve aküyü hızla bitirir. Yalnız kontakla kesilene bağlanırsa araç kapanınca tamamen kapanır ve park modu hiç çalışmaz. Bağlantıdan sonra iki durum da denenir: açıkken normal mod, kapalıyken park modu." },
+          { "verdict": "tek-uc", "label": "Tek uçla, doğrudan aküye", "explain": "Cihaz aracın kapandığını anlayamaz." },
+          { "verdict": "iki-surekli", "label": "İki ucu da sürekli beslemeye", "explain": "Cihaz aracı hep açık sanar." },
+          { "verdict": "iki-kesilen", "label": "İki ucu da kontakla kesilene", "explain": "Park modu hiç çalışmaz." }
+        ]
+      },
+      {
+        "q": "Kamera takıldıktan sonra araç iki gün durunca çalışmıyor. Nasıl ilerlenir?",
+        "a": "ayirarak-olc",
+        "options": [
+          { "verdict": "ayirarak-olc", "label": "Uykudaki akım kamerayla ve kamerasız iki kez ölçülür; fark sorumluyu gösterir", "explain": "Araç uyku moduna girene kadar beklenir, sonra ölçülür. Fark kameradan geliyorsa koruma çalışmıyordur ve ayar gözden geçirilir. Kamera ayrılınca da akım yüksekse sorun aracın kendi devrelerindedir — parazit akım dersinin konusu. Akım normalse ve araç yine çalışmıyorsa akü test edilir." },
+          { "verdict": "sok", "label": "Kamera hemen sökülür", "explain": "Sebep ölçülmeden sökmek çözmez." },
+          { "verdict": "aku-sat", "label": "Yeni akü satılır", "explain": "Önce tüketim ölçülür." },
+          { "verdict": "iptal", "label": "Park modu iptal edilir", "explain": "İşlevi kaldırmak sebebi bulmak değildir." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2'deki 0,031 A ve 0,26 A SENARYO okumalarıdır; istenen FARKTIR (0,229 A) ve ders kabul edilebilir bir uykudaki akım sınırı vermiyor.",
+    "sourceRequired": "Kabul edilebilir uykudaki akım sınırı, park modu kesme gerilimi ve süresi, cihazın modlara göre tüketimi, sigorta değerleri, akü kapasitesi ve güvenli boşalma sınırı ile 'kaç gün dayanır' değeri bilinçle VERİLMEDİ; hepsi araca, aküye ve cihaza özgüdür.",
+    "kapsam": "Akü testi ve şarj sistemi teşhisi bu dersin KAPSAMI DIŞINDA — elektrik alanının konusu, ders yalnız yönlendiriyor. İkinci akü kurulumu, güç dağıtım sistemi değişikliği ve sigorta değeri büyütme kapsam dışı.",
+    "kaynak": "Bu aşama MEB çerçeve programında YOKTUR; proje kararıyla eklendi. Uykudaki akım ölçümü bu alanın aşama 0 dersinin doğrudan devamıdır.",
+    "reviewedByMechanic": false
+  }
+}

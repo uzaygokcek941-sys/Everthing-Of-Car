@@ -1,0 +1,177 @@
+{
+  "id": "direksiyon.eps-ariza",
+  "area": "direksiyon",
+  "stage": 4,
+  "title": "EPS Uyarı Lambası ve Destek Kaybı",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 40,
+  "prerequisites": ["direksiyon.eps-yapisi"],
+  "learningGoals": [
+    "Uyarı lambasını bir sonuç olarak okumak ve kodu sebeple karıştırmamak",
+    "Destek kaybının sırasını takip ederek kaynağı bulmak",
+    "Aralıklı arızalarda dondurulmuş veriyi ve koşulları kullanmak"
+  ],
+
+  "safety": [
+    { "rule": "Destek kaybı olan araç, sürücüye durum anlatılmadan teslim edilmez", "why": "Yardımsız direksiyon özellikle düşük hızda ve manevrada şaşırtıcı derecede ağırdır; sürücü hazırlıksız yakalanır", "blocksStart": true },
+    { "rule": "Kod, sebebi giderilmeden silinmez", "why": "Silinen kod yalnız uyarıyı kaldırır; sistem arızalı ve sessiz kalır", "blocksStart": true },
+    { "rule": "Konnektörlerle kontak açıkken oynanmaz", "why": "Canlı devrede konnektör hareketi yeni ve yanıltıcı kodlar üretir, modülü bozabilir", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.teshis-cihazi", "label": "Teşhis cihazı", "required": true },
+    { "id": "tool.multimetre", "label": "Dijital multimetre", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Araç geldi: panelde EPS uyarı lambası yanıyor ve direksiyon ağır.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.eps-kontrol-unitesi",
+        "question": "İlk iş ne?",
+        "options": [
+          { "label": "Teşhis cihazıyla EPS ve ilgili sistemlerden kodlar okunur, kodların dondurulmuş verisi ve oluşma sırası kaydedilir", "verdict": "kodlari-oku", "correct": true, "explain": "Uyarı lambası bir arıza adı değil, sistemin kendi denetiminin sonucudur ve tek bir şey söyler: 'şu anda güvenilir değilim'. Neyin güvenilir olmadığını yalnız kod söyler, bu yüzden ilk iş okumaktır. Ama okumanın da bir yöntemi vardır. Birincisi kapsam: kodlar yalnız EPS'ten değil, ilgili bütün sistemlerden okunur — EPS girdilerini fren/ABS, motor ve gövde modüllerinden aldığı için oradaki bir arıza EPS'te kendini gösterir. İkincisi sıralamadır: birden fazla kod varsa hangisinin önce oluştuğu belirleyicidir; sonrakiler çoğu zaman ilkinin sonucudur ve ilk kodu düzeltmek diğerlerini de kaldırır. Üçüncüsü dondurulmuş veridir: kod kaydedildiği andaki araç hızı, gerilim, sıcaklık ve sensör değerleri saklanır ve bu, arızanın hangi koşulda oluştuğunu anlatır. Dördüncüsü kodun aktif mi geçmiş mi olduğudur — aktif kod şu anda var olan bir sorunu, geçmiş kod aralıklı bir sorunu işaret eder. Bütün bunlar kaydedilmeden hiçbir şeye dokunulmaz, çünkü ilk okuma bir daha elde edilemez: silinen ya da kontak çevrimiyle kaybolan bilgi geri gelmez." },
+          { "label": "Kod silinir, lamba söner, denenir", "verdict": "sil", "explain": "İlk okuma bir daha elde edilemez; silmeden önce kaydedilir." },
+          { "label": "Modül doğrudan değiştirilir", "verdict": "modul", "explain": "Kod okunmadan parça değiştirilmez; sebep başka sistemde olabilir." },
+          { "label": "Akü kutup başı sökülüp takılır", "verdict": "aku", "explain": "Bu da bilgiyi siler ve teşhisi zorlaştırır." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "İlk okuma bir daha elde edilemez. Silmeden önce kod, sıra, dondurulmuş veri ve aktif/geçmiş durumu kaydedilir."
+    },
+    {
+      "id": 2,
+      "instruction": "Kod okundu ve besleme gerilimiyle ilgili bir kayıt var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.eps-motoru",
+        "question": "Bu kod ne anlatır?",
+        "options": [
+          { "label": "Modül, yük altında beslemesinin yetersiz kaldığını görmüş; sorun modülde değil besleme yolunda ya da akü ve şarj tarafında olabilir", "verdict": "besleme-yolu", "correct": true, "explain": "Gerilimle ilgili bir kod, modülün kendi kendine 'bana gelen enerji yeterli değil' demesidir ve bu, modülün arızalı olduğu anlamına gelmez. EPS motoru destek verirken belirgin akım çeker; bu anda besleme yolundaki her direnç bir gerilim düşümüne dönüşür. Adaylar sırayla elenir. Birincisi akü ve kutup başlarıdır: yaşlanmış bir akü ya da oksitlenmiş bir kutup başı, yüksüz ölçümde normal görünüp yük altında çöker. İkincisi şase bağlantısıdır — paslanmış ya da gevşemiş bir şase noktası en sık atlanan sebeptir ve tam olarak bu tabloyu üretir. Üçüncüsü sigorta yuvası ve konnektörlerdir; oksitlenmiş bir uç dirençlenir. Dördüncüsü şarj sistemidir: alternatör yetersizse gerilim genel olarak düşük kalır ve EPS ilk şikâyet edenlerden biri olur. Doğru ölçüm yöntemi elektrik alanında öğrenilen gerilim düşümü ölçümüdür — sistem yük altındayken modülün besleme ve şase uçlarında ölçülen değer aküyle karşılaştırılır. Bu ölçüm yapılmadan modül değiştirilirse yeni modül aynı kodu üretir." },
+          { "label": "Modül bozulmuştur, değiştirilir", "verdict": "modul-bozuk", "explain": "Kod modülün şikâyeti; sebep besleme yolunda olabilir." },
+          { "label": "Tork sensörü arızalıdır", "verdict": "sensor", "explain": "Kod besleme ile ilgili; sensör ayrı bir kayıt üretirdi." },
+          { "label": "Kod önemsizdir, silinir", "verdict": "onemsiz", "explain": "Destek kaybının doğrudan sebebi olabilir." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Yüksüz ölçüm yanıltır. Bu devrede karar, yük altında alınan gerilim düşümü ölçümüyle verilir."
+    },
+    {
+      "id": 3,
+      "instruction": "Ölçtün: akü uçlarında 13,9 V, modülün besleme ucunda yük altında 13,1 V. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.eps-kontrol-unitesi",
+        "unit": "V",
+        "acceptRange": [0.75, 0.85]
+      },
+      "camera": "direksiyon",
+      "hint": "13,9 eksi 13,1.",
+      "teachingNote": "0,8 V'luk bu düşüş, aküden çıkan enerjinin bir kısmının yolda harcandığını gösteriyor. Bu ölçümün gücü, tek bir noktaya bakmak yerine iki noktayı karşılaştırmasında: aküde gerilim normal olduğu hâlde modülde düşükse, arıza aküde ya da modülde değil ARADAKİ yoldadır — kablo, konnektör, sigorta yuvası ya da şase. Aynı ölçüm şase tarafında da tekrarlanır; şase düşümü çoğu zaman gözden kaçar ve tek başına bu tabloyu üretebilir. Ölçümün yük altında yapılması şart: yüksüz ölçümde aynı yol sağlam görünür, çünkü akım geçmedikçe direnç gerilim düşümüne dönüşmez. Kabul edilebilir gerilim düşümü sınırı araca özgüdür ve bu ders bir değer vermiyor; öğrettiği şey iki nokta karşılaştırmasının kendisi."
+    },
+    {
+      "id": 4,
+      "instruction": "Başka bir araçta kod tork sensörüyle ilgili ve destek tamamen kesilmiş.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.tork-sensoru",
+        "question": "Sistem neden desteği tamamen kesiyor?",
+        "options": [
+          { "label": "Sensöre güvenemediğinde yanlış yönde ya da yanlış miktarda destek verme riski doğar; sistem bu yüzden bilinçle güvenli tarafa geçer", "verdict": "guvenli-tarafa", "correct": true, "explain": "Bu davranış bir arıza değil, bir tasarım kararıdır ve mantığı anlaşıldığında teşhis de kolaylaşır. EPS motoru güçlüdür ve simidi kendi başına çevirebilecek kapasitededir; desteğin miktarını ve yönünü belirleyen tek girdi ise tork sensöründen gelir. Sensörün iki kanalı beklenen ilişkiyi bozduğunda modül artık hangi yöne ne kadar destek vereceğini güvenle bilemez. Bu durumda iki seçenek vardır: tahmin ederek destek vermeye devam etmek ya da desteği tamamen kesmek. Birincisi, sürücünün istemediği yöne kuvvet uygulayan bir direksiyon demektir ve bu kabul edilemez; bu yüzden bütün üreticiler ikinciyi seçer. Sonuç, sürücü açısından ağır ama yönetilebilir bir direksiyondur — mekanik zincir yerinde olduğu için araç yönetilebilir kalır, alanın ikinci dersinde öğrenilen şey budur. Teşhis açısından çıkarım şudur: 'destek yok' belirtisi tek başına motorun ya da modülün bozuk olduğunu göstermez; sistemin kendini kapatmış olması da aynı belirtiyi verir ve hangisi olduğunu kod ile canlı veri söyler. Sensör kolonun içinde olduğu için genellikle ayrı değişmez; değişecek birim üreticinin tanımına göre belirlenir." },
+          { "label": "Motoru korumak için", "verdict": "motor-korumasi", "explain": "Isıl koruma ayrı bir davranış; buradaki sebep yanlış destek riski." },
+          { "label": "Yazılım hatasıdır", "verdict": "yazilim", "explain": "Bilinçli bir güvenlik davranışıdır." },
+          { "label": "Akü tasarrufu için", "verdict": "tasarruf", "explain": "Sebep enerji değil, güvenlik." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "'Destek yok' tek başına parça arızası demek değil. Sistemin kendini kapatması da aynı belirtiyi verir."
+    },
+    {
+      "id": 5,
+      "instruction": "Üçüncü araçta lamba bazen yanıp bazen sönüyor; atölyede hiç tekrarlanmıyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.eps-kontrol-unitesi",
+        "question": "Aralıklı arıza nasıl yakalanır?",
+        "options": [
+          { "label": "Dondurulmuş verideki koşullar okunur, aynı koşullar oluşturulmaya çalışılır ve canlı veri kaydedilerek sürüş yapılır; kablo demeti ve konnektörler hareket ettirilerek denenir", "verdict": "kosullari-tekrarla", "correct": true, "explain": "Aralıklı arızanın tek düşmanı sabır ve yöntemdir. İlk kaynak dondurulmuş veridir: kod hangi hızda, hangi gerilimde, hangi sıcaklıkta ve direksiyon hangi konumdayken kaydedilmiş? Bu bilgiler arızanın tarifini verir — soğukta mı oluyor, yalnız park manevrasında mı, bozuk yolda mı. İkincisi sürücüyle konuşmaktır; 'ne zaman oluyor' sorusu çoğu zaman dondurulmuş veriyi doğrular ya da tamamlar. Üçüncüsü canlı veri kaydıdır: teşhis cihazı sürüş boyunca ilgili değerleri kaydeder ve arıza anında hangi değerin kaçtığı sonradan incelenir; bu, atölyede tekrarlanamayan arızalarda en güçlü araçtır. Dördüncüsü mekanik provokasyondur — motor çalışırken kablo demeti, konnektörler ve şase noktaları elle hafifçe hareket ettirilir; temassızlık varsa değer o anda sıçrar. Bu işlem kontak kapalıyken konnektör sökmekle karıştırılmamalıdır; burada yapılan şey demeti oynatarak titreşimi taklit etmektir. Aralıklı arızalarda en sık suçlular bellidir: oksitlenmiş konnektör uçları, sürtünmüş kablo yalıtımı, gevşek şase ve ısındıkça temassızlaşan bir bağlantı. Hiçbiri bulunamazsa araç kodla birlikte gözlem altına alınır; tahminle parça değiştirilmez." },
+          { "label": "Tekrarlanmıyorsa arıza yoktur, kod silinir ve teslim edilir", "verdict": "yok-say", "explain": "Kod kaydedilmiş bir olayı gösterir; aralıklı arıza yok sayılmaz." },
+          { "label": "Bütün parçalar sırayla değiştirilir", "verdict": "hepsini-degistir", "explain": "Pahalı ve yöntemsiz; canlı veri ve provokasyonla aranır." },
+          { "label": "Müşteriye 'bir şey yok' denir", "verdict": "bir-sey-yok", "explain": "Kayıtlı kod varken bu doğru değil ve güveni yıkar." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Atölyede tekrarlanmayan arızada en güçlü araç canlı veri kaydı. İkincisi demeti oynatarak titreşimi taklit etmek."
+    },
+    {
+      "id": 6,
+      "instruction": "Sebep bulundu ve giderildi.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.direksiyon-simidi",
+        "question": "Kod ne zaman ve nasıl silinir?",
+        "options": [
+          { "label": "Sebep giderildikten sonra silinir; ardından kontak çevrimi yapılıp araç denenir ve kodun geri gelmediği doğrulanır", "verdict": "sebep-sonra-sil", "correct": true, "explain": "Sıra bozulmaz: önce sebep, sonra silme, sonra doğrulama. Kodu sebebi gidermeden silmek en tehlikeli kısayoldur çünkü lamba söner ve sistem arızalı olduğu hâlde sessiz kalır; sürücü her şeyin yolunda olduğunu sanır ve destek tam ihtiyaç duyduğu anda kaybolur. Silme işleminden sonra kontak kapatılıp açılır ve sistemin kendi açılış denetimini yapıp lambayı söndürdüğü fiilen görülür — lambanın hiç yanmaması da, sürekli yanması da anormaldir; normal olan kısa süre yanıp sönmesidir. Ardından araç denenir: mümkünse arızanın oluştuğu koşullar tekrarlanır, park manevrası yapılır, düşük ve yüksek hızda destek farkı hissedilir. Son olarak kodlar tekrar okunur ve yeni bir kayıt olmadığı görülür. Bir kod silindikten sonra hemen geri geliyorsa sebep hâlâ oradadır; birkaç gün sonra geliyorsa aralıklı bir sorun vardır ve araç bu bilgiyle takip edilir. Yapılan iş, kod numarası ve giderilen sebeple birlikte kaydedilir; bu kayıt bir sonraki arızada doğrudan yol gösterir." },
+          { "label": "Sebep bulunmadan silinir, geri gelirse bakılır", "verdict": "once-sil", "explain": "Silinen bilgi geri gelmez ve sistem sessizce arızalı kalır." },
+          { "label": "Silmeye gerek yok, kendiliğinden gider", "verdict": "kendiliginden", "explain": "Bazı kodlar silinmeden kalır; doğrulama için silinip yeniden bakılır." },
+          { "label": "Akü sökülerek silinir", "verdict": "aku-sok", "explain": "Diğer sistemlerin öğrenilmiş verilerini de siler; teşhis cihazıyla silinir." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Lambanın hiç yanmaması da anormal. Normal olan açılışta kısa süre yanıp sönmesi."
+    },
+    {
+      "id": 7,
+      "instruction": "Destek kaybı olan bir araç servise gelemedi, sürücü telefonda ne yapması gerektiğini soruyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.direksiyon-simidi",
+        "question": "Ne söylenir?",
+        "options": [
+          { "label": "Araç yönetilebilir ama direksiyon özellikle düşük hızda çok ağır olacak; hız düşürülüp ani manevradan kaçınılmalı, güvenli bir yerde durulup araç çektirilmeli", "verdict": "yonetilebilir-ama-agir", "correct": true, "explain": "Doğru bilgi hem paniği hem de fazla güveni önler. Mekanik zincir yerinde olduğu için araç yönetilebilir kalır — bu, alanın ikinci dersinde öğrenilen şeydir ve sürücüye söylenmesi gereken ilk cümledir. Ama 'yönetilebilir' kelimesi yanıltmamalıdır: destek kaybolduğunda direksiyon özellikle düşük hızda, park hâlinde ve manevrada şaşırtıcı derecede ağırlaşır ve sürücü buna hazırlıksız yakalanır; en riskli an, sürücünün hafif bir direksiyon beklediği anda ağır bir direksiyonla karşılaşmasıdır. Bu yüzden söylenecekler nettir: hızı düşür, ani manevradan kaçın, iki elle sıkı tut, güvenli bir yerde dur ve aracı çektir. 'Nasılsa çevriliyor' diyerek yola devam etmek doğru değildir, çünkü acil bir kaçınma manevrası gerektiğinde gereken kuvvet bulunamayabilir. İkinci bir uyarı da eklenir: destek kaybıyla birlikte başka uyarı lambaları da yanıyorsa ya da direksiyon kendiliğinden bir tarafa çekiyorsa araç hiç sürülmemeli, bulunduğu yerden çektirilmelidir. Sürücüye durumu açıkça anlatmak, bu işin teknik kısmı kadar önemli bir parçasıdır." },
+          { "label": "Sorun yok, normal sürebilir", "verdict": "normal-sur", "explain": "Düşük hızda ağırlık ciddidir; acil manevrada kuvvet yetmeyebilir." },
+          { "label": "Direksiyon kilitlenir, araç hiç sürülemez", "verdict": "kilit", "explain": "Kilitlenmez; mekanik zincir yerinde." },
+          { "label": "Aküyü söküp takarsa düzelir", "verdict": "aku", "explain": "Sebebi gidermez, bilgiyi siler ve yanıltıcı bir düzelme hissi verir." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Sürücüye doğru bilgi vermek işin teknik kısmı kadar önemli. Ne panik, ne fazla güven."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Tork sensörü kodunda sistem neden desteği tamamen kesiyor?",
+        "a": "guvenli-tarafa",
+        "options": [
+          { "verdict": "guvenli-tarafa", "label": "Sensöre güvenemediğinde yanlış yönde ya da miktarda destek verme riski doğar; sistem bilinçle güvenli tarafa geçer", "explain": "Desteğin yönünü ve miktarını belirleyen tek girdi tork sensöründen gelir. İki kanal beklenen ilişkiyi bozduğunda modül tahmin ederek destek vermek yerine kesmeyi seçer — çünkü ilki, sürücünün istemediği yöne kuvvet uygulayan bir direksiyon demektir. Mekanik zincir yerinde olduğu için araç ağır ama yönetilebilir kalır. Teşhiste çıkarım: 'destek yok' tek başına parça arızası göstermez." },
+          { "verdict": "motor-korumasi", "label": "Motoru korumak için", "explain": "Isıl koruma ayrı bir davranış." },
+          { "verdict": "yazilim", "label": "Yazılım hatasıdır", "explain": "Bilinçli güvenlik davranışı." },
+          { "verdict": "tasarruf", "label": "Akü tasarrufu için", "explain": "Sebep güvenlik." }
+        ]
+      },
+      {
+        "q": "Aralıklı EPS arızası atölyede tekrarlanmıyor. Nasıl yakalanır?",
+        "a": "kosullari-tekrarla",
+        "options": [
+          { "verdict": "kosullari-tekrarla", "label": "Dondurulmuş verideki koşullar okunur, canlı veri kaydedilerek sürüş yapılır ve kablo demeti hareket ettirilerek denenir", "explain": "Dondurulmuş veri arızanın tarifini verir: hangi hızda, gerilimde, sıcaklıkta ve direksiyon hangi konumdayken oluştu. Sürücüyle konuşmak bunu tamamlar. Canlı veri kaydı, atölyede tekrarlanamayan arızalarda en güçlü araçtır. Motor çalışırken demet ve şase noktalarını oynatmak titreşimi taklit eder ve temassızlığı ortaya çıkarır. Hiçbiri bulunamazsa araç gözlem altına alınır; tahminle parça değiştirilmez." },
+          { "verdict": "yok-say", "label": "Kod silinir ve teslim edilir", "explain": "Kayıtlı kod bir olayı gösterir." },
+          { "verdict": "hepsini-degistir", "label": "Parçalar sırayla değiştirilir", "explain": "Pahalı ve yöntemsiz." },
+          { "verdict": "bir-sey-yok", "label": "Müşteriye bir şey yok denir", "explain": "Kayıtlı kod varken doğru değil." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 13,9 V ve 13,1 V SENARYO okumalarıdır ve ölçüm yük altında alınmıştır; istenen FARKTIR (0,8 V) ve gösterilen şey iki nokta karşılaştırmasının arızayı aradaki yola yerleştirmesidir. Kabul edilebilir gerilim düşümü sınırı verilmiyor.",
+    "sourceRequired": "Kabul edilebilir gerilim düşümü, kod numaraları, tork sensörü gerilim aralıkları ve üreticiye özgü silme/doğrulama prosedürleri bilinçle VERİLMEDİ; araca ve üreticiye özgüdür.",
+    "kapsam": "Onarım sonrası konum ve tork öğrenme bir sonraki ders. Modül ve kolon değişiminin kendisi kapsam dışı; ders teşhisi ve karar sırasını öğretiyor. Simit ve airbag sökümü alanın kırmızı çizgisi olarak kapsam dışı.",
+    "reviewedByMechanic": false
+  }
+}

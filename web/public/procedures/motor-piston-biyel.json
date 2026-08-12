@@ -1,0 +1,183 @@
+{
+  "id": "motor.piston-biyel",
+  "area": "motor-mekanik",
+  "stage": 8,
+  "title": "Piston ve Biyel: Silindir Aşınmasını Ölçmek, Segmanı Doğru Takmak",
+  "vehicleClass": "binek-arac",
+  "estimatedMinutes": 35,
+  "prerequisites": ["motor.silindir-kapagi", "temel.olcu-aletleri"],
+  "learningGoals": [
+    "Silindir aşınmasını üst ve alt ölçümün farkıyla ortaya çıkarmak",
+    "Piston ve biyeli söküldüğü silindire ve yöne göre işaretlemek",
+    "Segman ağızlarının neden aynı hizaya getirilmediğini bilmek"
+  ],
+
+  "safety": [
+    { "rule": "Silindir ağzındaki tırnak temizlenmeden piston yukarı çıkarılmaz", "why": "Aşınan silindirin üst ucunda, segmanların ulaşmadığı yerde bir çıkıntı kalır. Piston o çıkıntıya zorlanırsa segman yuvası kırılır ve piston hurdaya çıkar", "blocksStart": true },
+    { "rule": "Biyel gövdesi çıplak metal aletle vurulmaz", "why": "Biyel yüksek gerilim altında çalışan bir parçadır. Yüzeyindeki tek bir çentik, çatlağın başlayacağı noktayı belirler", "blocksStart": true },
+    { "rule": "Yataklar ve muylular tozdan korunur", "why": "Yağ filmi çok incedir. O aralığa giren tek bir toz tanesi muyluyu çizer ve çizik kalıcıdır", "blocksStart": false },
+    { "rule": "Sökülen her parça hangi silindirden çıktığı yazılarak ayrılır", "why": "Parçalar birbirine aşınarak uyum kazanmıştır; karışırsa hiçbiri kendi yerine dönmez ve yeniden kullanılamaz", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.ic-mikrometre", "label": "İç çap komparatörü / iç mikrometre", "required": true },
+    { "id": "tool.sentil", "label": "Sentil takımı", "required": true },
+    { "id": "tool.segman-pensesi", "label": "Segman sıkıştırma pensesi", "required": true },
+    { "id": "tool.temiz-bez", "label": "Tiftiksiz bez", "required": true },
+    { "id": "tool.tork-anahtari", "label": "Tork anahtarı", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Motor yağ yakıyor, egzozdan mavimsi duman geliyor ve kartere basınç vuruyor. Kapak açıldı, silindirlere bakıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.silindir-1",
+        "question": "Silindir üst ucundaki belirgin tırnak ne anlama gelir?",
+        "options": [
+          { "label": "Silindir aşınmış; tırnak, segmanların ulaşamadığı bölgede kalan orijinal çaptır", "verdict": "asinma-tirnagi", "correct": true, "explain": "Segmanlar silindirin içinde belli bir aralıkta gidip gelir ve o aralığı aşındırır. En üst birkaç milimetre ise segmanların hiç ulaşmadığı yerdir ve orada silindir hâlâ orijinal çapındadır. Aradaki fark bir basamak, yani tırnak olarak elle bile hissedilir. Bu tırnağın varlığı silindirin aşındığının doğrudan kanıtıdır ve büyüklüğü aşınmanın kabaca ölçüsüdür. Yağ yakma ve karter basıncı da aynı tabloyu tamamlar: aşınan silindirde segmanlar tam sızdıramaz." },
+          { "label": "Kurum birikintisi, temizlenince geçer", "verdict": "kurum", "explain": "Kurum yumuşaktır ve tırnak gibi keskin bir basamak oluşturmaz; tırnak metalin kendisindedir." },
+          { "label": "Üretimden kalan bir pah", "verdict": "pah", "explain": "Üretim pahı düzgün ve simetriktir; aşınma tırnağı ise segman hareket sınırında keskin bir basamaktır." },
+          { "label": "Silindir kapağı contası izidir", "verdict": "conta-izi", "explain": "Conta izi silindirin ağzının dışında, blok yüzeyinde kalır; silindirin iç çeperinde değil." }
+        ]
+      },
+      "camera": "motor-ust",
+      "teachingNote": "Bu tırnak, motorun kendi geçmişini yazdığı yerdir. Ne kadar belirginse motor o kadar çalışmıştır. Elini sokup hissetmek bile ilk fikri verir."
+    },
+    {
+      "id": 2,
+      "instruction": "Aşınmayı sayıyla göstereceksin. İç çap komparatörüyle silindiri iki yükseklikte ölçtün: hemen tırnağın altında 76,28 mm, silindirin en altında 76,04 mm. Aradaki farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.silindir-1",
+        "unit": "mm",
+        "acceptRange": [0.2, 0.28]
+      },
+      "camera": "motor-ust",
+      "hint": "76,28 eksi 76,04.",
+      "teachingNote": "Bu sayı bir üretici sınırı değil, senin ürettiğin kanıttır. Silindirin alt ucu neredeyse hiç aşınmaz çünkü segmanlar orada yavaşlar ve basınç düşüktür; üst bölge ise en yüksek basınç ve en zayıf yağlama altındadır. Dolayısıyla alt ölçüm sana bu silindirin başlangıç çapını bedavaya verir ve iki ölçümün farkı doğrudan aşınmadır. Ayrıca aynı yükseklikte birbirine dik iki doğrultuda da ölçülür; aradaki fark ovalliktir."
+    },
+    {
+      "id": 3,
+      "instruction": "Pistonları çıkarmaya hazırlanıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.piston",
+        "question": "Sökmeden önce ne yapılır?",
+        "options": [
+          { "label": "Her piston ve biyel, silindir numarası ve ön yönü ile işaretlenir; biyel kapakları kendi biyeliyle eşleştirilir", "verdict": "isaretle", "correct": true, "explain": "Piston, biyel ve biyel kapağı yıllarca birlikte aşınarak uyum kazanmış parçalardır. Biyel kapağı kendi biyeliyle birlikte işlenmiştir ve başka bir biyele takıldığında yatak yuvası tam yuvarlak olmaz; sonuç yatak boşluğunun bozulması ve kısa sürede yatak sarmasıdır. Piston da genellikle yönlüdür: tepesindeki ok ya da çentik motorun önünü gösterir ve ters takılan piston, supap ceplerini yanlış tarafa getirir. Bu yüzden söküm sırasında hem numara hem yön yazılır." },
+          { "label": "Hepsi aynı olduğu için işaret gerekmez", "verdict": "hepsi-ayni", "explain": "Yeni parçalar aynıdır; çalışmış parçalar değildir. Aşınma her birini kendi yerine özel hâle getirir." },
+          { "label": "Sadece numara yeter, yön önemli değil", "verdict": "sadece-numara", "explain": "Piston tepesindeki ok ya da çentik yönü belirtir; ters takılan piston supap ceplerini yanlış tarafa getirir." },
+          { "label": "Biyel kapaklarını karıştırabilirim, hepsi aynı ölçüdedir", "verdict": "kapak-karis", "explain": "Kapak kendi biyeliyle birlikte işlenmiştir. Karışırsa yatak yuvası yuvarlaklığını kaybeder." }
+        ]
+      },
+      "camera": "motor-ust",
+      "hint": "İşaretlemeyi keskin uçla değil, boya kalemiyle ya da hafif nokta zımbasıyla yap; derin çentik gerilim yığar.",
+      "teachingNote": "Bu işte sökerken harcanan dikkat, montajda iki kat geri döner. İşaretsiz sökülen bir motor, montajda tahminle toplanır."
+    },
+    {
+      "id": 4,
+      "instruction": "Yeni segmanları takacaksın. Segmanları piston üzerine yerleştirdin.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.piston",
+        "question": "Segman ağızları nasıl konumlandırılır?",
+        "options": [
+          { "label": "Ağızlar birbirinden açılı olarak dağıtılır ve hiçbiri piston pimi ekseniyle aynı hizaya getirilmez", "verdict": "agizlari-dagit", "correct": true, "explain": "Her segmanın bir ağzı, yani açık bir aralığı vardır ve o aralık sızdırmazlığın en zayıf noktasıdır. Bütün ağızlar aynı hizada olursa aralıklar üst üste gelir ve yanma gazına silindir çeperi boyunca kesintisiz bir kaçış yolu açılır; sonuç kompresyon kaybı ve yağ yakmadır. Bu yüzden ağızlar birbirine göre açılı dağıtılır ve böylece her ağzın önünde başka bir segmanın gövdesi bulunur. Ayrıca piston pimi ekseni hizasından da kaçınılır, çünkü orası piston yan yükünün en yüksek olduğu bölgedir. Açı düzeni motora göre değişir, kılavuzdan bakılır." },
+          { "label": "Hepsi aynı hizaya getirilir, montaj kolay olsun", "verdict": "ayni-hiza", "explain": "Bu, kaçak için doğrudan bir kanal açmaktır. Yeni segmanlı motor ilk günden yağ yakar." },
+          { "label": "Ağızların yeri motor çalışınca kendiliğinden dağılır", "verdict": "kendiliginden", "explain": "Segmanlar yuvalarında bir miktar döner ama montajdaki hizalanma ilk çalışma anında kaçak demektir ve o an rodaj için en kritik andır." },
+          { "label": "Ağızlar egzoz tarafına toplanır", "verdict": "egzoz-tarafi", "explain": "Toplandıkları her yön aynı sorunu üretir; mesele yön değil, üst üste gelmemeleridir." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Segman ağzı düzeni, gözle görülmeyen ama sonucu doğrudan görülen ayarlardan biridir. Yanlış yapıldığında motor çalışır, hatta iyi çalışır; sadece yağ yakar ve kimse sebebini aramaz."
+    },
+    {
+      "id": 5,
+      "instruction": "Piston silindire girecek. Segmanlar sıkıştırma pensesiyle toplandı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.biyel",
+        "question": "Pistonu silindire indirirken neye dikkat edilir?",
+        "options": [
+          { "label": "Biyel muylusu çizilmesin diye biyel saplamalarına koruyucu geçirilir, piston el baskısıyla itilir, direnç varsa durulur", "verdict": "koruyucu-el-baskisi", "correct": true, "explain": "Piston silindire girerken biyelin alt ucu krank muylusunun yanından geçer ve biyel saplamaları o parlak yüzeyi çizmeye çok müsaittir; bu yüzden saplamalara plastik ya da hortum parçası geçirilir. Piston ise çekiçle değil, el baskısıyla ya da tahta sapın hafif dokunuşuyla itilir. Bir direnç hissedilirse zorlanmaz: neredeyse her zaman bir segman sıkıştırma pensesinden kaçmış demektir ve zorlanırsa segman kırılır. Piston geri çekilir, segman düzeltilir, tekrar denenir." },
+          { "label": "Çekiçle vurularak indirilir", "verdict": "cekic", "explain": "Metal çekiç piston tepesini ezer ve kaçan segmanı kırar. Direnç bir uyarıdır, aşılacak bir engel değil." },
+          { "label": "Yağ sürmeden takılır, temiz kalsın", "verdict": "yagsiz", "explain": "İlk çalışmada yağ basıncı oluşana kadar tek koruma montajda sürülen yağdır. Kuru montaj çizik demektir." },
+          { "label": "Direnç varsa biraz zorlanır, segman kendiliğinden oturur", "verdict": "zorla", "explain": "Kaçan segman zorlanınca oturmaz, kırılır. Ve kırık parça silindirin içinde kalabilir." }
+        ]
+      },
+      "camera": "motor-ust",
+      "hint": "Silindir çeperine ve piston eteğine montaj yağı sür; ilk dönüşte yağ filmi ancak o sayede oluşur.",
+      "teachingNote": "Bu adımda ustayı ele veren şey kullandığı kuvvettir. Doğru yapılan montajda piston avuç içiyle iner."
+    },
+    {
+      "id": 6,
+      "instruction": "Biyel kapağı takılacak. Kapak cıvataları kılavuzda tork artı açı olarak veriliyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.biyel",
+        "question": "Biyel kapağı cıvataları için ne yaparsın?",
+        "options": [
+          { "label": "Kapağı kendi biyeline ve doğru yöne takar, cıvataları yenileriyle değiştirir, tork ve açı kademelerini sırayla uygularım", "verdict": "yeni-civata-tork-aci", "correct": true, "explain": "Açı kademesi olan her cıvata akma sınırına kadar gerdirilmiştir ve tek kullanımlıktır; biyel cıvatası bunun en kritik örneğidir çünkü koptuğunda biyel serbest kalır ve motoru içeriden parçalar. Kapak ayrıca kendi biyeline ve doğru yöne takılır: kapak ile biyel birlikte işlendiği için tek bir doğru konumu vardır ve çoğu biyelde bunu gösteren bir çentik ya da numara bulunur. Ters takılan kapakta yatak yuvası yuvarlak olmaz, yağ filmi kurulamaz ve yatak kısa sürede sarar." },
+          { "label": "Eski cıvataları kullanırım, sağlam görünüyorlar", "verdict": "eski-civata", "explain": "Akma sınırına gerilmiş cıvatada hasar gözle görülmez. Biyel cıvatasının kopması onarılabilir bir arıza değildir." },
+          { "label": "Kapağı hangi yöne takarsam takayım olur", "verdict": "yon-farketmez", "explain": "Kapak biyeliyle birlikte işlenmiştir; tek doğru yönü vardır." },
+          { "label": "Sadece torka sıkarım, açı kademesi ihmal edilebilir", "verdict": "sadece-tork", "explain": "Kılavuz açı istiyorsa gerginlik ancak açıyla doğru kurulur; eksik açı gevşek bağlantı demektir." }
+        ]
+      },
+      "camera": "motor-alt",
+      "teachingNote": "Bu cıvatalar motorun içindeki en kritik bağlantılardandır. Kopan bir biyel cıvatası bloğu deler; o yüzden burada tereddüt yoktur, cıvata yenilenir."
+    },
+    {
+      "id": 7,
+      "instruction": "Bir silindir bitti. Krankı elle çeviriyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.biyel",
+        "question": "Her biyelden sonra krankı elle çevirmenin amacı nedir?",
+        "options": [
+          { "label": "Sıkışma ya da sertlik olup olmadığını, hasar büyümeden anlamak", "verdict": "sikisma-kontrol", "correct": true, "explain": "Doğru monte edilmiş bir motor elle, düzgün ve tekdüze bir dirençle döner. Bir noktada belirgin sertleşme hissedilirse bu neredeyse her zaman bir montaj hatasıdır: yanlış yatak, ters takılmış kapak, unutulmuş bir parça ya da yanlış boşluk. O anda fark edilirse tek yapılacak iş o biyeli sökmektir. Bütün motor toplandıktan sonra fark edilirse aynı hata her şeyin yeniden sökülmesi demektir. Bu yüzden kontrol her parçadan sonra, tek tek yapılır." },
+          { "label": "Yağın dağılması için", "verdict": "yag-dagitma", "explain": "Yağ dağıtımı yararlıdır ama asıl amaç kontroldür." },
+          { "label": "Segmanların oturması için", "verdict": "segman-otursun", "explain": "Segmanlar rodajda oturur; elle çevirmek onları oturtmaz." },
+          { "label": "Gerek yok, sonunda bir kez çevirmek yeterli", "verdict": "sonunda", "explain": "Sonunda çevirmek hatayı yine bulur ama artık hangi parçadan geldiğini söylemez ve bütün motorun sökülmesini gerektirir." }
+        ]
+      },
+      "camera": "motor-alt",
+      "hint": "Direnç düzgün ve tekrarlanabilir olmalı; her turda aynı yerde artan bir sertlik varsa dur.",
+      "teachingNote": "Bu alışkanlık motor toplamanın temel kuralıdır: her adımda kontrol et, çünkü hatanın maliyeti onu ne kadar geç bulduğunla doğru orantılıdır."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Silindir aşınması neden üst ve alt ölçümün farkıyla bulunur?",
+        "a": "alt-referans",
+        "options": [
+          { "verdict": "alt-referans", "label": "Silindirin alt ucu neredeyse hiç aşınmaz; orası orijinal çapı bedavaya verir", "explain": "Segmanlar silindirin alt ucunda yavaşlar ve orada yanma basıncı çok düşüktür, dolayısıyla o bölge pratik olarak aşınmaz. Bu, elinde bedava bir referans olduğu anlamına gelir: silindirin kendi başlangıç çapı. Üst bölge ise en yüksek basınç ve en zayıf yağlama altındadır ve aşınma orada toplanır. İki ölçümün farkı doğrudan aşınma miktarını verir ve bunun için üretici verisine ihtiyaç yoktur. Aynı yükseklikte birbirine dik iki doğrultuda ölçüm ise ovalliği ortaya çıkarır." },
+          { "verdict": "olcum-kolay", "label": "Alttan ölçmek daha kolay olduğu için", "explain": "Kolaylık değil, referans meselesidir." },
+          { "verdict": "yag-birikir", "label": "Altta yağ biriktiği için ölçüm daha doğru olur", "explain": "Yağ ölçümü bozar; ölçüm öncesi yüzey temizlenir." },
+          { "verdict": "fark-yok", "label": "Fark yoktur, tek ölçüm yeterlidir", "explain": "Tek ölçüm bir çap verir ama neye göre aşındığını söylemez." }
+        ]
+      },
+      {
+        "q": "Segman ağızları neden aynı hizaya getirilmez?",
+        "a": "kacis-yolu",
+        "options": [
+          { "verdict": "kacis-yolu", "label": "Üst üste gelen ağızlar yanma gazına kesintisiz bir kaçış yolu açar", "explain": "Her segmanın ağzı, yani açık aralığı, sızdırmazlığın en zayıf noktasıdır. Ağızlar aynı hizada olursa bu zayıf noktalar üst üste gelir ve gaz, silindir çeperi boyunca aşağıya kesintisiz bir kanal bulur. Sonuç kompresyon kaybı, kartere gaz kaçışı ve yağ yakmadır. Ağızlar açılı dağıtıldığında her ağzın önünde başka bir segmanın gövdesi bulunur ve kaçış yolu kesilir. Ayrıca piston pimi ekseni hizasından kaçınılır, çünkü orası yan yükün en yüksek olduğu bölgedir." },
+          { "verdict": "denge", "label": "Pistonun dengesi bozulmasın diye", "explain": "Segman ağzının kütlesel etkisi ihmal edilebilir; mesele sızdırmazlıktır." },
+          { "verdict": "montaj", "label": "Montaj kolaylığı için", "explain": "Aynı hizaya getirmek montajı kolaylaştırır; kural tam tersini ister çünkü sebep sızdırmazlıktır." },
+          { "verdict": "gurultu", "label": "Gürültüyü azaltmak için", "explain": "Gürültüyle ilgisi yoktur." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2'deki 76,28 ve 76,04 mm senaryo okumalarıdır; istenen bir üretici sınırı değil, iki okumanın FARKIDIR (0,24 mm). Aynı kılavuzdan bağımsız yaklaşım motor.kam-mili (kardeş loblar) ve motor.yag-basinci (psi-bar dönüşümü) derslerinde de kullanıldı. Kabul sınırı, ovallik sınırı ve rektifiye kademeleri araca özgüdür ve verilmedi.",
+    "sourceRequired": "Biyel cıvatası tork ve açı kademeleri, segman ağzı açıları, piston-silindir boşluğu ve segman ağız aralığı araca özgüdür; bu derste hiçbiri için sayı verilmedi.",
+    "kapsam": "Blok kesiti modellenmedi; piston, biyel ve krank mili blok gövdesinin içinde duruyor ve yalnız hedef olduklarında vurgulanıyor. Kesit görünümü ileride ayrı bir sahne gerektirir.",
+    "reviewedByMechanic": false
+  }
+}

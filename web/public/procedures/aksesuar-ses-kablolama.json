@@ -1,0 +1,174 @@
+{
+  "id": "aksesuar.ses-kablolama",
+  "area": "aksesuar-ses",
+  "stage": 7,
+  "title": "Ses Sistemi Kablolaması: Kesit, Sigorta ve Şase",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 40,
+  "prerequisites": ["aksesuar.ses-zinciri"],
+  "learningGoals": [
+    "Güç kablosunu doğru kesitte seçmek ve sigortasını doğru yere koymak",
+    "Gerilim düşümünü yük altında ölçüp sistemin gücünü nerede kaybettiğini görmek",
+    "Şaseyi ses sisteminin eşit ortağı olarak kurmak"
+  ],
+
+  "safety": [
+    { "rule": "Güç kablosunun sigortası aküye mümkün olduğunca YAKIN takılır ve bağlantı yapılırken akü ucu ayrılmış olur", "why": "Aküden çekilen kalın kablo, sigortasız kaldığı her santimde korumasızdır; gövdeye değdiğinde akım çok yüksek bir değere fırlar ve kablo saniyeler içinde tutuşur", "blocksStart": true },
+    { "rule": "Kablo motor bölmesinden kabine mevcut bir lastik geçmeden ya da uygun bir koruyucu geçme takılarak geçirilir", "why": "Çıplak sac deliğinden geçen kalın bir kablonun yalıtımı titreşimle kesilir ve tam o korumasız noktada gövdeye kısa devre yapar", "blocksStart": true },
+    { "rule": "Sigorta değeri kabloya göre seçilir, cihaza göre büyütülmez", "why": "Sigorta cihazı değil kabloyu korur; kablodan büyük seçilen sigorta yangına kadar giden bir hatayı sessizce mümkün kılar", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.multimetre", "label": "Multimetre", "required": true },
+    { "id": "tool.pens-ampermetre", "label": "Pens ampermetre", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true },
+    { "id": "tool.tornavida-seti", "label": "Tornavida seti", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Bagajdaki yükselticiye güç çekeceksin.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.ses-guc-kablosu",
+        "question": "Güç kablosu nereden alınır ve sigortası nereye konur?",
+        "options": [
+          { "label": "Doğrudan akünün artı ucundan alınır ve sigorta akünün hemen yanına, kablonun başına konur; sigorta yükselticiyi değil kablonun tamamını korur", "verdict": "akuye-yakin", "correct": true, "explain": "Bu, ses montajının en önemli tek kuralıdır ve ihlal edildiğinde sonucu yangındır. Yükseltici, aracın mevcut devrelerinden alınamayacak kadar çok akım çeker; bu yüzden beslemesi doğrudan aküden gelir. Ama aküden çekilen bir kablo, aracın en tehlikeli kablosudur: akü çok yüksek akım verebilir ve bu kablo gövdeye değerse akım devasa bir değere fırlar. Sigortanın işi tam burada anlaşılır — sigorta yükselticiyi korumaz, KABLOYU korur. Kablonun aküden çıktığı noktadan sigortaya kadar olan kısım korumasızdır; bu yüzden o mesafe olabildiğince kısa tutulur, sigorta akünün hemen yanına konur. Sigortadan sonraki bütün hat korunmuş olur. Uygulamada beş nokta atlanmaz. Birincisi, bağlantı yapılırken akünün ucu ayrılır. İkincisi, akü ucundaki bağlantı düzgün bir pabuçla yapılır, tel ucu sıkıştırılıp bırakılmaz. Üçüncüsü, sigorta tutucusu titreşimden korunacak biçimde sabitlenir, kabloya asılı bırakılmaz. Dördüncüsü, yükselticinin kendi girişinde de bir sigorta bulunur ve ikisi birbirinin yerine geçmez. Beşincisi, kablo motor bölmesinde ısı kaynaklarından ve hareketli parçalardan uzak, aracın kendi demetiyle birlikte gider. Sigorta değeri kablonun kesitine ve sistemin çektiği akıma göre belirlenir; bu ders bir değer vermiyor." },
+          { "label": "Sigorta yükselticinin yanına konur", "verdict": "anfi-yani", "explain": "O zaman kablonun neredeyse tamamı korumasız kalır." },
+          { "label": "En yakın sigorta kutusundan alınır", "verdict": "kutu", "explain": "Kutu devreleri bu akımı taşımaz." },
+          { "label": "Sigortasız çekilir, yükselticinin kendi sigortası yeter", "verdict": "sigortasiz", "explain": "Yükselticinin sigortası cihazı korur, aradaki kabloyu değil." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Sigorta cihazı değil kabloyu korur. Aküden sigortaya kadar olan mesafe korumasızdır — o yüzden kısadır."
+    },
+    {
+      "id": 2,
+      "instruction": "Kablo kesitini seçiyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.ses-guc-kablosu",
+        "question": "Kesit neye göre seçilir?",
+        "options": [
+          { "label": "Sistemin çektiği akıma VE kablonun uzunluğuna göre; akım arttıkça ve kablo uzadıkça daha kalın kesit gerekir — şase kablosu da aynı kesittedir", "verdict": "akim-ve-boy", "correct": true, "explain": "Kablo kesiti bir tercih değil, bir hesabın sonucudur ve iki değişkeni vardır. Birincisi akımdır: sistem ne kadar güç çekiyorsa kablodan o kadar akım geçer. İkincisi uzunluktur ve genelde unutulur — aynı akım, uzun bir kabloda daha çok kayıp üretir, çünkü kablonun kendi direnci uzunlukla artar. Bagajdaki bir yükseltici, motor bölmesindeki aküden bakıldığında aracın bir ucundan diğerine uzanır; yani ses sistemi kablolaması neredeyse her zaman uzun hat problemidir. İnce kablo seçilirse üç sonuç doğar. Birincisi güç kaybıdır: gerilimin bir kısmı kabloda ısıya dönüşür, yükseltici beklenen gücü veremez ve müşteri 'sistem zayıf' der — oysa cihaz sağlamdır. İkincisi ısınmadır ve tehlikelidir: aşırı zorlanan bir kablo yalıtımını bozacak kadar ısınabilir. Üçüncüsü sinsidir: yükseltici gerilim düştüğünde sesi bozmaya başlar ve bu bozulmuş sinyal hoparlörleri yakar — yani ince kablo, hoparlör arızası olarak geri döner. Kesit seçiminde şase kablosu da unutulmaz: dönüş yolu gidiş yoluyla aynı akımı taşır ve aynı kalınlıkta olur. Kesit tabloları kablo cinsine ve sistemin akımına göredir; bu ders bir değer vermiyor, üreticinin tablosu kullanılır." },
+          { "label": "Ne bulunursa, önemli olan bağlanmasıdır", "verdict": "farketmez", "explain": "İnce kablo hem güç kaybettirir hem ısınır." },
+          { "label": "Yalnız cihazın gücüne göre", "verdict": "guc", "explain": "Uzunluk da hesaba girer; ses sistemi hattı uzundur." },
+          { "label": "Şase kablosu daha ince olabilir", "verdict": "ince-sase", "explain": "Dönüş yolu aynı akımı taşır; aynı kalınlıkta olur." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "İnce kablo hoparlör arızası olarak geri döner: gerilim düşer, yükseltici sesi bozar, bozuk sinyal hoparlörü yakar."
+    },
+    {
+      "id": 3,
+      "instruction": "Sistem çalışırken yükselticinin girişinde ölçtün: sessizken 13,9 V, ses yüksekken 12,6 V. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.multimetre-aksesuar",
+        "unit": "volt",
+        "acceptRange": [1.25, 1.35]
+      },
+      "camera": "aksesuar",
+      "hint": "13,9 eksi 12,6.",
+      "teachingNote": "1,3 voltluk bu düşüş, hattın yükü taşırken ne kaybettiğini gösteriyor ve ses sisteminde en çok bilgi veren ölçümdür. Sessizken sistem neredeyse akım çekmez, bu yüzden ölçülen değer akünün gerilimine yakındır. Ses yükseldiğinde yükseltici akım çekmeye başlar ve kabloda, bağlantılarda ve şasede biriken direnç kendini gerilim düşüşü olarak gösterir. Yani bu ölçüm hattın kalitesini yük altında sınar — durgun hâlde her hat mükemmel görünür, gerçek karakteri yük altında ortaya çıkar. Sebepler sırayla elenir: kablo kesiti yetersiz olabilir, akü ya da şase bağlantısı gevşek ve oksitli olabilir, sigorta tutucusunda kötü bir temas olabilir ya da şase noktası boyalı bir yüzeye bağlanmış olabilir. Ölçümün önemli bir inceliği vardır: aynı düşüş ayrı ayrı da ölçülür — akünün artı ucu ile yükselticinin artı girişi arasında bir ölçüm, yükselticinin şase ucu ile akünün eksi ucu arasında bir ölçüm; böylece kaybın gidiş yolunda mı dönüş yolunda mı olduğu ayrılır. Şaşırtıcı olan şudur: sahada kaybın büyük kısmı çoğu zaman dönüş yolundadır, yani şasededir, çünkü şase gidiş kablosu kadar özenle yapılmaz. Kabul edilebilir düşüş sınırı sisteme ve cihaza özgüdür; bu ders bir sınır vermiyor."
+    },
+    {
+      "id": 4,
+      "instruction": "Şase bağlantısını yapıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sase-noktasi-aksesuar",
+        "question": "Ses sisteminin şasesi nasıl bağlanır?",
+        "options": [
+          { "label": "Kısa tutulur, gövdenin sağlam bir noktasına bağlanır, temas yüzeyi metale kadar temizlenir ve güç kablosuyla aynı kesitte olur", "verdict": "kisa-temiz-kalin", "correct": true, "explain": "Ses sisteminde şase, güç kablosunun eşit ortağıdır ve kötü bir şase bütün sistemi iki ayrı biçimde bozar. Birincisi güç kaybıdır: akımın dönüş yolu zayıfsa yükselticiye ulaşan gerilim düşer ve sistem gücünü veremez. İkincisi gürültüdür ve bir sonraki dersin ana konusudur: şase üzerinde oluşan küçük gerilim farkları sinyal hattına gürültü olarak biner, sistemden vınlama ya da cızırtı gelir. Doğru şasenin dört kuralı var. Birincisi kısalıktır — şase kablosu ne kadar kısaysa o kadar iyidir ve bu yüzden yükselticinin yakınındaki bir nokta seçilir; şaseyi ta aküye kadar geri götürmek uzun bir dönüş yolu üretir. İkincisi yüzeydir: seçilen nokta gövdenin sağlam bir bölgesi olmalı ve temas yüzeyi boyadan, pastan ve kaplamadan metale kadar temizlenmelidir. Üçüncüsü kesittir: dönüş yolu gidiş yoluyla aynı akımı taşır, dolayısıyla aynı kalınlıkta olur — bu kural en çok ihlal edileni ve gerilim düşümü ölçümünde hemen ortaya çıkanıdır. Dördüncüsü bağlantı kalitesidir: uygun bir pabuç, iyi sıkılmış bir cıvata ve temas yüzeyinin sonradan paslanmayacak biçimde korunması. Son bir not: bütün ses bileşenleri mümkünse aynı şase noktasını kullanır — farklı noktalara dağıtılan şaseler aralarında küçük gerilim farkları üretir ve bu, gürültünün en klasik sebebidir." },
+          { "label": "Uzun bir kabloyla aküye geri götürülür", "verdict": "akuye", "explain": "Uzun dönüş yolu hem kayıp hem gürültü üretir." },
+          { "label": "Boyalı bir yüzeye vidalanır", "verdict": "boyali", "explain": "Boya yalıtkandır; yüzey metale kadar açılır." },
+          { "label": "Güç kablosundan ince olabilir", "verdict": "ince", "explain": "Aynı akımı taşır; aynı kesitte olur." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Bütün ses bileşenleri aynı şase noktasını kullanır. Dağıtılan şase, gürültünün en klasik sebebi."
+    },
+    {
+      "id": 5,
+      "instruction": "Kabloyu motor bölmesinden kabine geçireceksin.",
+      "interaction": {
+        "type": "pull",
+        "target": "part.ana-kablo-demeti",
+        "requiresGesture": true
+      },
+      "camera": "aksesuar",
+      "hint": "Aracın kendi kablo demetinin geçtiği lastik geçmeyi bul ve kabloyu oradan geçir.",
+      "teachingNote": "Motor bölmesi ile kabin arasındaki duvar, aracın en kritik geçiş noktasıdır: bir tarafta ısı, titreşim, su ve yakıt buharı; diğer tarafta insanlar var. Bu yüzden geçiş kuralları serttir. Birincisi, mevcut bir geçiş kullanılır — aracın kendi kablo demeti bu duvardan bir lastik geçme içinden geçer ve yeni kablo aynı yerden, geçmenin içinden geçirilir. İkincisi, yeni bir delik açmak son çaredir ve açılırsa mutlaka uygun bir koruyucu geçme takılır; çıplak sac kenarı, üzerinden geçen kablonun yalıtımını titreşimle keser ve tam o noktada gövdeye kısa devre olur — bu, yüksek akım taşıyan bir ses kablosunda yangın demektir. Üçüncüsü, geçiş sızdırmaz kalır: açılan ya da genişletilen her delik uygun bir malzemeyle kapatılır, yoksa oradan motor bölmesinin sesi, kokusu ve suyu kabine dolar. Dördüncüsü, kablo motor bölmesi tarafında egzoz ve soğutma bileşenlerinden, kayışlardan ve hareketli her şeyden uzak tutulur, aracın kendi demetiyle birlikte sabitlenir. Beşincisi ve unutulanı: kablo hiçbir yerde gergin bırakılmaz, çünkü motor titreşimle hareket eder ve gergin bir kablo o hareketi taşıyamaz. Bu kuralların hepsi aslında kapı körüğü dersinde öğrenilen mantığın aynısı: aracın hareket eden ya da ayrılan iki parçası arasındaki her geçiş, üreticinin çözdüğü yerden yapılır."
+    },
+    {
+      "id": 6,
+      "instruction": "Sinyal kablosunu da çekeceksin.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.rca-kablosu",
+        "question": "Sinyal kablosu nereden geçirilir?",
+        "options": [
+          { "label": "Güç kablosunun karşı tarafından, aracın diğer yanından geçirilir; zorunlu bir kesişme olursa dik açıyla kesiştirilir", "verdict": "karsi-taraf", "correct": true, "explain": "Bu kural ses montajının en çok bilinen ve en çok ihlal edilenidir. Güç kablosundan geçen akım çevresinde kendi etkisini üretir ve yanından uzun mesafe paralel giden bir sinyal kablosuna bu etki gürültü olarak biner — sonuç, motor devriyle birlikte değişen bir vınlama ya da hoparlörlerden gelen sürekli bir uğultudur. Çözüm basittir ve kablo çekilirken bedavadır, sonradan düzeltmek ise her şeyi yeniden sökmektir: güç kablosu aracın bir yanından, sinyal kabloları diğer yanından çekilir. İkisi aynı taraftan gitmek zorundaysa aralarına mesafe konur; kesişmeleri gerekiyorsa dik açıyla kesişirler, çünkü dik kesişmede etkileşim en aza iner. Üç ek nokta var. Birincisi, sinyal kablosunun kılıfının bütünlüğü önemlidir — ezilmiş, keskin kıvrılmış ya da soketi gevşemiş bir sinyal kablosu korumasını kaybeder. İkincisi, sinyal kabloları da güç kabloları gibi sabitlenir; boşta sallanan kablo hem aşınır hem soketlerini zorlar. Üçüncüsü, kullanılmayan sinyal kabloları kesilmez, düzgünce toplanır. Anten dersinde aynı kuralı radyo için görmüştün: anten kablosu da güç kablolarıyla paralel uzun mesafe gitmez. Bu tekrar bir tesadüf değil — hepsi aynı fiziğin sonucu." },
+          { "label": "Güç kablosuyla birlikte, aynı bağla bağlanarak", "verdict": "birlikte", "explain": "Paralel giden iki kablo, sisteme gürültü olarak geri döner." },
+          { "label": "Fark etmez, kablolar korumalıdır", "verdict": "farketmez", "explain": "Koruma yardımcı olur ama uzun paralel mesafeyi kurtarmaz." },
+          { "label": "Motor bölmesinden geçirilir", "verdict": "motor", "explain": "Sinyal kablosunun motor bölmesinde işi yoktur." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Güç bir yandan, sinyal diğer yandan. Kablo çekilirken bedava; sonradan düzeltmek her şeyi söktürür."
+    },
+    {
+      "id": 7,
+      "instruction": "Kablolama bitti. Enerji vermeden önce.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.anfi",
+        "question": "Enerji verilmeden önce ne kontrol edilir?",
+        "options": [
+          { "label": "Hiçbir çıplak telin gövdeye değmediği, kutupların doğru olduğu, sigortanın değerinde ve tutucusunda oturduğu, kabloların hiçbir yerde ezilmediği ve bütün bağlantıların sıkı olduğu", "verdict": "son-kontrol", "correct": true, "explain": "Bu kontrol, ses montajında geri dönüşü olmayan hataların önündeki son duraktır. Beş madde vardır. Birincisi kısa devre kontrolüdür: her bağlantı noktasında çıplak tel kalmamalı, pabuçların dışında iletken görünmemeli ve hiçbir uç gövdeye değmemelidir — özellikle akü ve şase uçlarında. İkincisi kutup kontrolüdür: artı ve eksi karıştırıldığında birçok cihaz anında ölür ve bunun geri dönüşü yoktur; renk kodu ve işaretler iki kere okunur. Üçüncüsü sigortadır: doğru değerde mi, tutucusuna tam oturmuş mu, tutucu sabitlenmiş mi. Dördüncüsü mekanik kontroldür: kablolar hiçbir yerde ezilmiyor, keskin kenardan geçmiyor, hareketli parçaya değmiyor ve kaplamaların altında sıkışmıyor. Beşincisi bağlantı sıkılığıdır — gevşek bir güç bağlantısı zamanla ısınır, oksitlenir ve önce ses bozulur sonra bağlantı tamamen kaybolur. Ancak bu beş madde tamamlandıktan sonra akü ucu takılır ve sistem ilk kez çalıştırılır. İlk çalıştırma da kademelidir: ses en düşük seviyede açılır, hoparlörler tek tek dinlenir, sonra seviye yavaşça yükseltilir. Bu sırada burnunu da kullan — ısınan bir bağlantının kokusu, ölçüm aletinden önce haber verir. Bir sonraki ders bu sistemde ortaya çıkan gürültüyü teşhis etmeyi öğretiyor." },
+          { "label": "Doğrudan enerji verilir, sorun varsa sigorta atar", "verdict": "sigorta-atar", "explain": "Ters kutup birçok cihazı sigorta atmadan öldürür." },
+          { "label": "Yalnız sigortaya bakılır", "verdict": "sigorta", "explain": "Kutup ve kısa devre ayrıca kontrol edilir." },
+          { "label": "Ses açılarak denenir", "verdict": "ses-ac", "explain": "İlk çalıştırma en düşük seviyededir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "İlk çalıştırma en düşük seviyede. Isınan bağlantının kokusu ölçüm aletinden önce haber verir."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Ses sisteminin güç kablosunda sigorta nereye konur ve neyi korur?",
+        "a": "akuye-yakin",
+        "options": [
+          { "verdict": "akuye-yakin", "label": "Akünün hemen yanına, kablonun başına konur ve cihazı değil kablonun tamamını korur", "explain": "Aküden çıkan kablonun sigortaya kadar olan kısmı korumasızdır; o mesafe olabildiğince kısa tutulur ve sigortadan sonraki hat korunmuş olur. Yükselticinin kendi girişindeki sigorta cihazı korur, bunun yerine geçmez. Bağlantı yapılırken akü ucu ayrılır, düzgün bir pabuç kullanılır ve sigorta tutucusu titreşime karşı sabitlenir." },
+          { "verdict": "anfi-yani", "label": "Yükselticinin yanına", "explain": "Kablonun neredeyse tamamı korumasız kalır." },
+          { "verdict": "kutu", "label": "Sigorta kutusundan alınır", "explain": "Kutu devreleri bu akımı taşımaz." },
+          { "verdict": "sigortasiz", "label": "Sigortasız çekilir", "explain": "Aküden çekilen korumasız kablo yangın riskidir." }
+        ]
+      },
+      {
+        "q": "Ses yükseldiğinde yükselticinin girişindeki gerilim belirgin düşüyor. Bu ne demek?",
+        "a": "hat-yetersiz",
+        "options": [
+          { "verdict": "hat-yetersiz", "label": "Hat yükü taşıyamıyor: kesit yetersiz, bağlantılar gevşek ya da şase kötü olabilir", "explain": "Durgun hâlde her hat mükemmel görünür; gerçek karakteri yük altında ortaya çıkar. Kayıp gidiş yolunda mı dönüş yolunda mı diye iki ayrı ölçüm yapılır — sahada kaybın büyük kısmı genelde şasededir, çünkü şase gidiş kablosu kadar özenle yapılmaz. Gerilim düştüğünde yükseltici sesi bozar ve bozuk sinyal hoparlörleri yakar." },
+          { "verdict": "normal", "label": "Normaldir, önemsenmez", "explain": "Yük altındaki düşüş hattın kalitesini söyler." },
+          { "verdict": "aku", "label": "Akü bitmiştir", "explain": "Önce hat elenir; akü tek başına bu tabloyu açıklamaz." },
+          { "verdict": "anfi", "label": "Yükseltici bozuktur", "explain": "Ölçüm cihazın girişinde yapıldı; kayıp hattadır." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 13,9 V ve 12,6 V SENARYO okumalarıdır; istenen FARKTIR (1,3 V) ve ders kabul edilebilir bir gerilim düşümü sınırı vermiyor.",
+    "sourceRequired": "Kablo kesiti tabloları, sigorta değeri, sistemin çektiği akım, kabul edilebilir gerilim düşümü, şase kablosu uzunluğu ve pabuç ölçüleri bilinçle VERİLMEDİ; hepsi sisteme ve ürüne özgüdür, üreticinin tablosundan okunur.",
+    "kapsam": "Aracın şarj sistemi kapasitesini artırma, ikinci akü ve güç dağıtım değişiklikleri KAPSAM DIŞIDIR. Gövdeye yeni delik açma ve motor bölmesi bileşenlerine müdahale kapsam dışı.",
+    "kaynak": "Ses dersleri MEB çerçeve programının aksesuar modülüyle birebir eşleşmiyor; bu aşama proje kararıyla kuruldu. Sigorta, şase ve kablo geçişi kuralları bu alanın aşama 0 derslerinin devamıdır.",
+    "reviewedByMechanic": false
+  }
+}

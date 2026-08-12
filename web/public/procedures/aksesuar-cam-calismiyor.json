@@ -1,0 +1,174 @@
+{
+  "id": "aksesuar.cam-calismiyor",
+  "area": "aksesuar-ses",
+  "stage": 9,
+  "title": "Şikâyet: Cam Çalışmıyor",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 40,
+  "prerequisites": ["aksesuar.hoparlor-montaj"],
+  "learningGoals": [
+    "Şikâyeti aletten önce bir tabloya dönüştürmek",
+    "Elektrik var hareket yok ile elektrik yok ayrımını ölçerek yapmak",
+    "Mekanik sebebi elektronik sebepten önce elemek"
+  ],
+
+  "safety": [
+    { "rule": "Kapı döşemesi sökülürken sarı konektörlü hiçbir birime dokunulmaz", "why": "Kapı içinde yan darbe hava yastığı bulunabilir; bu alanın değişmeyen sınırı", "blocksStart": true },
+    { "rule": "Cam mekanizmasında çalışırken cam iki noktadan sabitlenir", "why": "Kriko sökülünce cam serbest kalır ve kapı içine düşer; düşen cam hem kırılır hem eli keser", "blocksStart": true },
+    { "rule": "Sıkışma koruması iptal edilmez", "why": "Koruma bir güvenlik cihazıdır; belirtiyi susturmak arızayı büyütür", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.multimetre", "label": "Multimetre", "required": true },
+    { "id": "tool.plastik-sokme-spatulasi", "label": "Plastik söküm spatulası", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true },
+    { "id": "tool.tornavida-seti", "label": "Tornavida seti", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Müşteri 'camım çalışmıyor' diyor. Aleti henüz eline almadın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kapi-ic-dosemesi",
+        "question": "İlk ne yapılır?",
+        "options": [
+          { "label": "İki eksenli tablo çıkarılır: hangi cam çalışmıyor ve hangi düğmeden denendi — sürücü konsolundan mı, kendi kapısındaki düğmeden mi; dört cam tek tek her iki kaynaktan denenir", "verdict": "tablo", "correct": true, "explain": "Bu tablo bu alanın en çok işe yarayan aletidir ve hiçbir masrafı yoktur. İki ekseni vardır: satırlarda hangi cam, sütunlarda hangi düğme. Ortaya çıkan desen sebebi neredeyse tek başına söyler. Birinci desen: bir cam iki düğmeden de çalışmıyor — sorun o kapıya ait, yani o kapının motoru, mekanizması, kablosu ya da kendi modülü. İkinci desen: bir cam yalnız kendi düğmesinden çalışmıyor ama sürücü konsolundan çalışıyor — sorun o kapının düğmesinde. Üçüncü desen: bütün camlar sürücü konsolundan çalışmıyor ama kendi düğmelerinden çalışıyor — sorun ortak olan yerde, konsol düğme grubunda ya da onun beslemesinde. Dördüncü desen: hiçbir cam hiçbir düğmeden çalışmıyor — sorun bütün sistemin ortak halkasında: sigorta, ana besleme ya da bir kilit ayarı. Beşinci ve unutulan desen: sürücü kapısındaki emniyet kilidi açıktır ve arka camları kilitlemiştir; bu arıza değildir ve tabloyu çıkaran usta bunu ilk dakikada görür. Bu alanın merkez kuralı burada uygulanıyor: hepsini etkileyen arıza ortak halkadadır, birini etkileyen arıza o birinin kendi halkasındadır. Tabloyu çıkarmadan söküme başlayan usta, doğru kapıyı sökme şansını yarıya indirir." },
+          { "label": "Kapı döşemesi sökülür", "verdict": "sok", "explain": "Hangi kapının söküleceği tabloyla belirlenir." },
+          { "label": "Motor değiştirilir", "verdict": "motor", "explain": "En pahalı hamleyle başlamak." },
+          { "label": "Sigorta değiştirilir", "verdict": "sigorta", "explain": "Sigorta ortak halkadır; tek cam sorununu açıklamaz." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Hepsi mi, biri mi. Bu tek soru şüphelilerin çoğunu eler ve hiçbir masrafı yok."
+    },
+    {
+      "id": 2,
+      "instruction": "Tablo: yalnız sol arka cam, iki düğmeden de çalışmıyor. Motor ucunda düğmeye basılıyken ölçtün — sağ arkada 11,8 V, sol arkada 0,4 V. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.multimetre-aksesuar",
+        "unit": "volt",
+        "acceptRange": [11.3, 11.5]
+      },
+      "camera": "aksesuar",
+      "hint": "11,8 eksi 0,4.",
+      "teachingNote": "11,4 voltluk bu fark teşhisi ikiye böler ve hangi yarıda olduğunu söyler. Çalışan kapıda motorun ucuna gerilim geliyor, çalışmayan kapıda gelmiyor. Yani sorun motorda değil, motora kadar olan yolda: düğme, modül, kablo ya da kapı körüğündeki geçiş. Bu ölçümün doğru yapılışının iki inceliği var. Birincisi, ölçüm düğmeye BASILIYKEN yapılır; basılmayan bir devrede zaten gerilim beklenmez ve ölçüm hiçbir şey söylemez. İkincisi, cam motoru iki yönde çalışır ve iki ucu da sırayla besleme olur — yani hem yukarı hem aşağı komutu ayrı ayrı denenir; yalnız bir yönde gerilim geliyorsa arıza yönü belirleyen taraftadır. Şimdi arama daralır ve ucuzdan pahalıya sıralanır: önce körükteki kablo — bu alanın kapı kablo geçişi dersinde öğrenilen tek hareketli geçiş ve kopmaların en yaygın yeri, kapı açıkken ve kapalıyken ölçüm farklıysa suçlu odur; sonra soketler ve modülün çıkışı; sonra düğmenin kendisi. Eğer ölçüm tersini söyleseydi, yani motor ucunda gerilim VAR ama cam hareket etmiyor olsaydı, teşhis tamamen başka bir yöne giderdi — sıradaki adım o durumu işliyor. Kabul edilebilir gerilim düşümü sınırı araca özgüdür; bu ders bir sınır vermiyor."
+    },
+    {
+      "id": 3,
+      "instruction": "Başka bir araçta tablo aynı ama ölçüm farklı: motor ucunda 12,1 V var, cam yine hareket etmiyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.cam-motoru",
+        "question": "Bu ne demek?",
+        "options": [
+          { "label": "Elektrik motora ulaşıyor ama iş çıkmıyor: ya motor bitmiştir ya mekanizma sıkışmıştır — ikisi akım ölçümüyle ayrılır", "verdict": "elektrik-var-hareket-yok", "correct": true, "explain": "Bu tablo teşhisin ikinci yarısıdır ve iki şüpheli bırakır. Birinci şüpheli motordur: içindeki sargı kopmuş ya da fırçaları bitmiş olabilir. İkinci şüpheli mekanizmadır: kriko sıkışmış, kanal kirlenip lastikleri sertleşmiş ya da bir parça yerinden çıkmış olabilir. Bu ikisi tahminle değil ölçümle ayrılır ve ayıran şey akımdır. Motor beslenirken çektiği akım okunur ve üç sonuçtan biri çıkar. Birincisi, akım neredeyse sıfır: motor hiç akım çekmiyor demektir, yani içi kopuktur — motor değişir. İkincisi, akım çok yüksek ve motor zorlanıyor, belki hafif bir uğultu duyuluyor ama cam kımıldamıyor: motor sağlam ama mekanizma onu bırakmıyor demektir, sorun sıkışmadır. Üçüncüsü, akım normal aralıkta ve motor dönüyor ama cam hareket etmiyor: motor ile kriko arasındaki bağlantı ayrılmış, dişli sıyırmış ya da halat kopmuştur. Bir de duyma testi vardır ve bedavadır: düğmeye basıldığında kapının içinden bir ses geliyorsa motor çalışıyordur ve sorun ondan sonrasındadır; hiç ses gelmiyorsa motor ya da beslemesi ölüdür. Bu, cam krikosu dersinde öğrenilen dinleme testinin aynısı. Motorun normal çektiği akım araca ve motora özgüdür; bu ders bir değer vermiyor." },
+          { "label": "Kesin motor bitmiştir", "verdict": "motor-bitti", "explain": "Sıkışmış mekanizma da aynı belirtiyi verir; akımla ayrılır." },
+          { "label": "Düğme bozuktur", "verdict": "dugme", "explain": "Düğme sağlam olmasa motor ucuna gerilim gelmezdi." },
+          { "label": "Modül arızalıdır", "verdict": "modul", "explain": "Modül komutu vermiş; gerilim motora ulaşıyor." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Elektrik var hareket yok: iki şüpheli, tek ayırıcı — akım. Sıfır akım kopuk motor, yüksek akım sıkışmış mekanizma."
+    },
+    {
+      "id": 4,
+      "instruction": "Üçüncü araçta cam çalışıyor ama çok yavaş ve bazen duruyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.cam-krikosu",
+        "question": "Nereden başlanır?",
+        "options": [
+          { "label": "Önce mekanik: kanal ve lastiklerin temizliği ve bakımı yapılır, ancak ondan sonra elektronik tarafa bakılır — kirli bir mekanizmada yapılan öğrenme işlemi arızayı normal olarak kaydeder", "verdict": "once-mekanik", "correct": true, "explain": "Bu, bu alanın en çok tekrarlanan kuralıdır ve cam, koltuk, sunroof derslerinin hepsinde çıktı: önce mekanik, sonra elektronik. Sebebi şudur — camın içinde hareket ettiği kanallar lastik ve kadifemsi bir malzemeyle kaplıdır; bu malzeme zamanla kurur, sertleşir ve toz tutar. Cam bu kanalda sürtünerek ilerler ve sürtünme arttıkça motor zorlanır, hız düşer, bazen koruma devreye girip camı durdurur. Belirti elektroniktir ama sebep tamamen mekaniktir. Şimdi asıl tehlike: birçok araçta cam sistemi bir öğrenme işlemiyle uç konumları ve normal direnci kaydeder. Bu işlem kirli ve sıkışan bir mekanizmada yapılırsa sistem o zorlanmayı normal olarak öğrenir — sonuç, korumanın körelmesi ve gerçek bir sıkışmada devreye girmemesidir. Yani sırayı bozmak yalnız işi eksik bırakmaz, güvenliği de bozar. Doğru sıra: kanallar temizlenir, uygun bir bakım maddesiyle bakımı yapılır — kanal malzemesine zarar vermeyen bir ürün seçilir ve gres gibi ağır maddeler kullanılmaz, çünkü toz tutar ve durumu kötüleştirir; camın kanala oturuşu kontrol edilir, kriko ve rayları gözden geçirilir; sonra cam elle denenir. Ancak bunlar bittikten sonra öğrenme işlemi yapılır ve elektronik tarafa geçilir. Kullanılacak ürün ve öğrenme işleminin adımları araca özgüdür; bu ders bunları vermiyor." },
+          { "label": "Önce öğrenme işlemi yapılır", "verdict": "ogrenme", "explain": "Kirli mekanizmada yapılan öğrenme arızayı normal kaydeder." },
+          { "label": "Motor değiştirilir", "verdict": "motor", "explain": "Motor zorlanıyor olabilir ama sebep mekanizmada." },
+          { "label": "Koruma iptal edilir", "verdict": "iptal", "explain": "Koruma bir güvenlik cihazıdır; iptal edilmez." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Kirli mekanizmada yapılan öğrenme, korumayı köreltir. Sırayı bozmak işi değil güvenliği bozar."
+    },
+    {
+      "id": 5,
+      "instruction": "Dördüncü araçta cam yukarı çıkarken kendiliğinden geri iniyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kapi-cami",
+        "question": "Bu neyin belirtisi?",
+        "options": [
+          { "label": "Sıkışma koruması çalışıyor ve haklı: motorun zorlandığını görüyor. Sebep aranır — kirli kanal, sertleşmiş fitil, donmuş cam ya da besleme kesildikten sonra yapılmamış öğrenme işlemi", "verdict": "koruma-hakli", "correct": true, "explain": "Sıkışma koruması bir engeli görmez — motorun beklenenden fazla zorlandığını görür ve öyle bir durumda camı geri indirir. Yani bu belirti korumanın bozulduğunu değil çalıştığını gösterir; sorulacak soru 'koruma neden yanlış çalışıyor' değil, 'motor neden zorlanıyor' olmalıdır. Sebepler sırayla elenir. Birincisi kanaldır ve en yaygınıdır: kuruyup sertleşmiş bir kanal sürtünmeyi artırır ve motor sanki bir engel varmış gibi zorlanır — bir önceki adımdaki bakım burada da ilk iştir. İkincisi mevsimdir: kışın buzlanmış ya da donmuş bir cam gerçekten zorlanır ve koruma haklı olarak devreye girer; müşteriye bu anlatılır. Üçüncüsü öğrenme işlemidir: akü sökülmüş, sigorta atmış ya da modül beslemesi kesilmişse sistem uç konumlarını unutmuş olabilir ve normal direnci bilmediği için erken tepki verir; öğrenme işlemi yapılır — ama mekanik bakım YAPILDIKTAN sonra. Dördüncüsü mekanizmanın kendisidir: kriko eğilmiş, bir ray oynamış ya da cam kanala düzgün oturmuyorsa zorlanma gerçektir ve mekanik onarım gerekir. Yapılmayacak tek şey nettir ve bu alanın kuralıdır: korumayı iptal ederek belirtiyi susturmak. Koruma iptal edilirse bir gün gerçekten bir el ya da bir çocuğun parmağı sıkışır ve cam durmaz. Belirtiyi susturan çözüm arızayı büyütür." },
+          { "label": "Koruma bozulmuştur, iptal edilir", "verdict": "iptal", "explain": "Koruma çalışıyor; iptal etmek güvenlik cihazını kaldırmaktır." },
+          { "label": "Motor güçsüzdür, değiştirilir", "verdict": "motor", "explain": "Önce zorlanmanın sebebi aranır." },
+          { "label": "Normaldir, alışılır", "verdict": "normal", "explain": "Sebebi olan bir davranış; sebebi aranır." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Koruma engeli görmüyor, zorlanmayı görüyor. Soru şu: motor neden zorlanıyor?"
+    },
+    {
+      "id": 6,
+      "instruction": "İlk araca dönüyorsun. Körükteki kabloyu kontrol edeceksin.",
+      "interaction": {
+        "type": "pull",
+        "target": "part.kapi-korugu",
+        "requiresGesture": true
+      },
+      "camera": "aksesuar",
+      "hint": "Körüğün ucunu gövdeden çıkar ve içindeki kabloları gör.",
+      "teachingNote": "Körük, aracın tek hareketli kablo geçişidir ve bu yüzden kopmaların en yaygın yeridir. Kapı her açılıp kapandığında içindeki teller bükülür; yıllar içinde teller tek tek kopar, önce arada kesilme sonra tamamen ölüm gelir. Teşhisin en güzel yanı, bu arızanın kendini ele vermesidir: kapı açıkken ve kapalıyken ölçüm farklı çıkar. Uygulama şudur — kablo hattının direnci ya da üzerindeki gerilim kapı kapalıyken bir kez, kapı açıkken bir kez ölçülür; iki okuma arasında belirgin fark varsa kopuk körüğün içindedir ve bu, kapı kablo geçişi dersinde ölçtüğün desenin aynısıdır. Kopuk bulunduğunda onarımın da kuralları var. Birincisi, ek körüğün İÇİNDE yapılmaz; eklerin bükülme bölgesine denk gelmesi yeni kopmayı garanti eder — ekler körüğün dışında ve mümkünse farklı noktalarda kaydırılarak yapılır. İkincisi, kullanılan kablo çok telli ve esnek olmalıdır; sert bir kablo bükülmeye dayanmaz. Üçüncüsü, kablo körüğün içinde gergin bırakılmaz, kapı açıkken bile pay kalır. Dördüncüsü, birden çok tel koptuysa tek tek eklemek yerine o bölümü komple yenilemek daha kalıcıdır. Beşincisi ve atlanmayanı: körük yerine tam oturtulur, yoksa kapı içine su girer ve bu su cam mekanizmasını, modülü ve hoparlörü bulur."
+    },
+    {
+      "id": 7,
+      "instruction": "Arıza bulundu ve giderildi. Teslim öncesi.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kapi-modulu",
+        "question": "Ne doğrulanır?",
+        "options": [
+          { "label": "Dört cam iki düğme kaynağından da denenir, sıkışma koruması yumuşak bir engelle güvenli biçimde sınanır, gerekiyorsa öğrenme işlemi yapılır ve su bariyeri ile döşeme eksiksiz yerine takılır", "verdict": "tam-dogrulama", "correct": true, "explain": "Teslim doğrulaması, teşhisin başındaki tablonun aynısıyla yapılır ve bu tesadüf değil: başladığın yerde bitirirsin. Dört cam, iki düğme kaynağından tek tek denenir — çünkü bir kapıda çalışırken başka bir sokete dokunulmuş ve yarım kalmış olabilir. İkinci madde korumadır: onarım mekanizmaya dokunduysa korumanın çalıştığından emin olunur; sınama, camın kapanma yoluna yumuşak ve kalın bir engel konarak yapılır — parmakla değil. Üçüncüsü öğrenme işlemidir: mekanizmaya dokunulduysa ya da besleme kesildiyse uç konumlar yeniden öğretilir ve bu, mekanik bakımdan SONRA yapılır. Dördüncüsü kapının diğer işlevleridir: kilit, ayna, hoparlör ve kapı lambası denenir. Beşincisi su bariyeridir ve bu alanın her kapı dersinde tekrarlanır — eksik ya da yarım yapıştırılmış bariyer suyu kabine taşır. Altıncısı döşemedir: bütün klipsler tam oturmuş, hiçbiri kırık kalmamış ve kablolar sıkışmamış olmalı. Son olarak müşteriye söylenecek bir cümle vardır: kanal bakımı yapıldıysa camın ilk günlerde daha rahat çalışacağı ve bu bakımın periyodik olduğu anlatılır — bir yıl sonra aynı şikâyetle gelmek bakımın değil kanalın doğasıdır." },
+          { "label": "Yalnız arızalı cam denenir", "verdict": "tek-cam", "explain": "Sökülen kapıda başka bir soket yarım kalmış olabilir." },
+          { "label": "Koruma denenmez", "verdict": "koruma-yok", "explain": "Mekanizmaya dokunulduysa koruma sınanır." },
+          { "label": "Bariyer sonra takılır", "verdict": "bariyer", "explain": "Döşeme kapanmadan bariyer eksiksiz yerine oturur." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Başladığın yerde bitir: teslimde aynı tablo yeniden çıkarılır. Sırada 'ses gelmiyor'."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "'Cam çalışmıyor' şikâyetinde aletten önce ne yapılır?",
+        "a": "tablo",
+        "options": [
+          { "verdict": "tablo", "label": "İki eksenli tablo: dört cam × iki düğme kaynağı tek tek denenir", "explain": "Desen sebebi söyler: bir cam iki düğmeden de çalışmıyorsa sorun o kapıda; yalnız kendi düğmesinden çalışmıyorsa düğmede; hepsi konsoldan çalışmıyorsa konsol grubunda; hiçbiri hiçbir düğmeden çalışmıyorsa ortak halkada. Ayrıca emniyet kilidi açık olabilir — bu arıza değildir ve tabloyu çıkaran ilk dakikada görür." },
+          { "verdict": "sok", "label": "Kapı döşemesi sökülür", "explain": "Hangi kapının söküleceğini tablo belirler." },
+          { "verdict": "motor", "label": "Motor değiştirilir", "explain": "En pahalı hamleyle başlamak." },
+          { "verdict": "sigorta", "label": "Sigorta değiştirilir", "explain": "Ortak halka; tek cam sorununu açıklamaz." }
+        ]
+      },
+      {
+        "q": "Motor ucunda gerilim var ama cam hareket etmiyor. Nasıl ilerlenir?",
+        "a": "elektrik-var-hareket-yok",
+        "options": [
+          { "verdict": "elektrik-var-hareket-yok", "label": "İki şüpheli kalır — bitmiş motor ya da sıkışmış mekanizma; akım ölçülerek ayrılır", "explain": "Akım neredeyse sıfırsa motor içi kopuktur. Akım çok yüksek ve motor zorlanıyorsa mekanizma sıkışmıştır. Akım normal ve motor dönüyor ama cam durmuşsa bağlantı ayrılmış, dişli sıyırmış ya da halat kopmuştur. Bedava bir ön test de var: düğmeye basıldığında kapıdan ses geliyorsa motor çalışıyordur." },
+          { "verdict": "motor-bitti", "label": "Kesin motor bitmiştir", "explain": "Sıkışma da aynı belirtiyi verir." },
+          { "verdict": "dugme", "label": "Düğme bozuktur", "explain": "Gerilim motora ulaşıyor." },
+          { "verdict": "modul", "label": "Modül arızalıdır", "explain": "Modül komutu vermiş." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2'deki 11,8 V ve 0,4 V SENARYO okumalarıdır; istenen FARKTIR (11,4 V) ve ders bir gerilim düşümü sınırı vermiyor.",
+    "sourceRequired": "Cam motorunun normal çektiği akım, kabul edilebilir gerilim düşümü, öğrenme işleminin adımları, kanal bakım ürünü ve sıkışma koruması eşiği bilinçle VERİLMEDİ; hepsi araca özgüdür.",
+    "kapsam": "Yan darbe hava yastığı bileşenlerine müdahale ve sıkışma korumasının iptali KAPSAM DIŞIDIR. Modül yazılımı ve kodlama işlemleri kapsam dışı; araç ağı bu alanın kırmızı çizgisi.",
+    "kaynak": "Bu ders bu alanın aşama 1-2 derslerinin sentezidir; yeni bilgi getirmiyor, öğrenilenleri gerçek bir şikâyet üzerinde sınıyor.",
+    "reviewedByMechanic": false
+  }
+}

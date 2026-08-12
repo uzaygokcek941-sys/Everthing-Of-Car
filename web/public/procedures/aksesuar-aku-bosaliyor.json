@@ -1,0 +1,179 @@
+{
+  "id": "aksesuar.aku-bosaliyor",
+  "area": "aksesuar-ses",
+  "stage": 9,
+  "title": "Şikâyet: Araç Bekledikçe Akü Boşalıyor",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 45,
+  "prerequisites": ["aksesuar.ses-gelmiyor"],
+  "learningGoals": [
+    "Uykudaki akımı doğru koşulda ölçmek ve erken ölçümün neden yanılttığını bilmek",
+    "Eklenen donanımın payını ayırarak kanıtlamak",
+    "Tüketim sorunu ile akünün kendi sorununu ayırmak"
+  ],
+
+  "safety": [
+    { "rule": "Ölçüm için devre ayrılacaksa araç tamamen kapalı olur ve akım yolu çalışma sırasında asla kesilmez", "why": "Marş gibi yüksek akım çeken bir anda seri bağlı bir ölçüm aleti anında zarar görür ve kıvılcım üretir", "blocksStart": true },
+    { "rule": "Akü üzerinde çalışırken kıvılcım ve kısa devre önlenir", "why": "Akü çevresinde yanıcı gaz bulunabilir; ayrıca akünün verebileceği akım çok yüksektir ve gövdeye değen bir anahtar anında kızarır", "blocksStart": true },
+    { "rule": "Sigortalar teker teker ayrılırken araç uyandırılmaz", "why": "Her kapı açılışı ya da kumanda kullanımı modülleri uyandırır ve ölçümü sıfırlar; yanlış ölçüm yanlış parça değişimine yol açar", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.pens-ampermetre", "label": "Pens ampermetre", "required": true },
+    { "id": "tool.multimetre", "label": "Multimetre", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true },
+    { "id": "tool.tornavida-seti", "label": "Tornavida seti", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Müşteri 'araç iki üç gün durunca çalışmıyor' diyor. Şikâyeti alıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.ana-kablo-demeti",
+        "question": "İlk hangi bilgi toplanır?",
+        "options": [
+          { "label": "Şikâyetin ne zaman başladığı ve o tarihte araca ne yapıldığı — kamera, ses sistemi, alarm, takip cihazı gibi bir montaj oldu mu; ayrıca akünün yaşı ve aracın nasıl kullanıldığı", "verdict": "ne-zaman-basladi", "correct": true, "explain": "Bu şikâyette teşhisin yarısı sohbette biter. Dört soru sorulur. Birincisi zamandır: sorun ne zaman başladı ve o tarihte araca bir şey takıldı mı? Kamera, ses sistemi, alarm, takip cihazı ya da bir aksesuar montajından hemen sonra başlayan boşalma neredeyse her zaman o montajdandır — bu alanın tekrarlanan kuralı burada da geçerli: şikâyet bir montajdan sonra başlıyorsa şüphe önce o montajdadır. İkincisi akünün yaşıdır: eski bir akü kapasitesinin çoğunu kaybetmiştir ve normal bir tüketimi bile iki gün taşıyamaz — bu durumda hiçbir tüketici suçlu değildir. Üçüncüsü kullanım biçimidir ve en çok atlanandır: yalnız kısa mesafelerde kullanılan bir araçta akü hiçbir zaman tam dolmaz, her yolculuk marşta harcadığından biraz azını geri koyar ve akü aylar içinde yavaşça biter; bu ne tüketici ne akü arızasıdır, kullanım sonucudur. Dördüncüsü mevsimdir: soğukta akünün verebileceği enerji düşer ve aynı sistem yazın sorunsuz çalışırken kışın aracı çalıştırmaz. Bu dört cevap alındıktan sonra ölçüme geçilir — ve ölçüm zaten bu cevapları doğrulamak ya da çürütmek için yapılır." },
+          { "label": "Doğrudan akü değiştirilir", "verdict": "aku-degistir", "explain": "Tüketim ölçülmeden akü suçlanmaz." },
+          { "label": "Bütün sigortalar çekilir", "verdict": "sigorta", "explain": "Sigorta ayırma ölçümün bir adımıdır, ilk adımı değil." },
+          { "label": "Şarj sistemi sökülür", "verdict": "sarj", "explain": "Önce şikâyetin tarihi ve tüketim ölçülür." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Kısa mesafede kullanılan araçta akü hiç tam dolmaz. Bu ne tüketici ne akü arızası — kullanım sonucu."
+    },
+    {
+      "id": 2,
+      "instruction": "Uykudaki akımı ölçtün: toplam 0,41 A. Sonra eklenen donanımın hattını ayırdın: 0,036 A. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.pens-ampermetre",
+        "unit": "amper",
+        "acceptRange": [0.369, 0.379]
+      },
+      "camera": "aksesuar",
+      "hint": "0,41 eksi 0,036.",
+      "teachingNote": "0,374 amperlik bu fark sorumluyu doğrudan gösteriyor: eklenen donanım ayrıldığında akım neredeyse tamamen düşüyor, yani tüketimi üreten şey aracın kendisi değil sonradan takılan sistem. Bu ölçümün doğru yapılışı bu alanın ilk dersinde öğrenildi ve burada aynen uygulanıyor. Üç şart var. Birincisi bekleme süresidir: araç kapatıldıktan sonra modüller hemen uyumaz; bir süre kendi işlerini bitirirler ve bu süre dolmadan yapılan ölçüm her zaman yüksek çıkar — erken ölçüm, olmayan bir arıza icat eder. İkincisi araç uyanık kalmamalıdır: kapı açmak, kumandaya basmak, kaputu açıp kapatmak modülleri uyandırır ve sayacı sıfırlar; bu yüzden kapı açık kalacaksa kapı düğmesi kapalı konumda tutulur ve araç kilitli sayılır. Üçüncüsü karşılaştırmadır: tek bir okuma bir şey söylemez, iki okuma bir kanıt üretir — donanım bağlıyken ve ayrıldığında. İki okumanın farkı montajın sorumluluğudur ve tartışmayı bitirir. Ölçüm bu farkı gösterdiğinde çözüm bellidir: park modu koruması kurulmamış ya da yanlış ayarlanmıştır, cihaz uykuya geçmiyordur ya da besleme yanlış uca bağlanmıştır — kamera aşamasının park modu dersinde üçü de anlatıldı. Kabul edilebilir uykudaki akım sınırı araca özgüdür; bu ders bir sınır vermiyor, önemli olan farkın kendisidir."
+    },
+    {
+      "id": 3,
+      "instruction": "Başka bir araçta donanım ayrıldığında akım hâlâ yüksek çıkıyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sigorta-kutusu-aksesuar",
+        "question": "Nasıl devam edilir?",
+        "options": [
+          { "label": "Sigortalar teker teker ayrılıp her seferinde akım okunur: akımın düştüğü sigorta hangi devreye aitse tüketici o devrededir", "verdict": "sigorta-ayirma", "correct": true, "explain": "Bu yöntem bu alanın ilk dersinde ve elektrik alanında öğrenilen bölme mantığının en somut hâlidir. Uygulama şudur: araç uyku moduna girmiş ve akım okunur hâldeyken sigortalar sırayla çekilir; her çekişte akım tekrar okunur. Akımın belirgin düştüğü sigorta bulunduğunda, o sigortanın hangi devreyi beslediğine bakılır ve arama o devrenin içinde daralır. Dört incelik atlanmaz. Birincisi, sigorta çekip takmak bazı modülleri uyandırabilir; bu durumda her adımdan sonra yeniden beklemek gerekir ve işlem uzar — ama acele etmek yanlış sonuç üretir. İkincisi, aracın birden fazla sigorta kutusu vardır: motor bölmesinde, kabinde ve bazen bagajda; hepsi taranır. Üçüncüsü, bazı devreler sigortasızdır ya da doğrudan bağlıdır ve bu yöntemle bulunamaz — o zaman ana hatlar tek tek ayrılarak aynı bölme yapılır. Dördüncüsü, bulunan devre bir modülü besliyorsa suçlu modülün kendisi olmayabilir: modülü uyanık tutan bir giriş olabilir — açık kalan bir kapı düğmesi, sıkışmış bir kumanda tuşu, arızalı bir sensör. Bu yüzden 'sigortayı buldum, modülü değiştireyim' demek erken bir karardır; o devrede uyanık kalmaya sebep olan şey aranır. Bu araştırma aracın kendi elektriğine girdiği için elektrik alanının konusudur; bu ders yönlendirmeyi öğretiyor." },
+          { "label": "Akü değiştirilir", "verdict": "aku", "explain": "Tüketim yüksek çıkıyor; akü suçlu değil." },
+          { "label": "Bütün modüller değiştirilir", "verdict": "modul", "explain": "Hangi devrede olduğu bölmeyle bulunur." },
+          { "label": "Araç her gece şarja bağlanır", "verdict": "sarj-et", "explain": "Belirtiyi gizlemek; sebep duruyor." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Sigortayı bulmak modülü suçlamak demek değil. O devrede modülü uyanık TUTAN şey aranır."
+    },
+    {
+      "id": 4,
+      "instruction": "Üçüncü araçta uykudaki akım normal ama araç yine iki günde bitiyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sase-noktasi-aksesuar",
+        "question": "Şimdi nereye bakılır?",
+        "options": [
+          { "label": "Akünün kendisine ve şarj sistemine: tüketim normalse sorun ya akünün kapasitesindedir ya da araç çalışırken aküyü yeterince dolduramıyordur", "verdict": "aku-ve-sarj", "correct": true, "explain": "Ölçüm tüketimin normal olduğunu söylediyse suçlu listesi değişir ve iki isim kalır. Birincisi akünün kendisidir: bir akü zamanla kapasitesini kaybeder ve gerilimi normal görünse bile içinde yeterince enerji tutamaz; bu yüzden 'gerilim normal, akü sağlam' demek yanlıştır — akünün gerçek durumu yük altında test edilerek anlaşılır ve bu test elektrik alanının konusudur. İkincisi şarj sistemidir: araç çalışırken aküyü dolduran sistem beklenen gerilimi üretmiyorsa akü her gün biraz daha eksik başlar ve birkaç hafta içinde araç çalışmaz hâle gelir; bunun kontrolü de elektrik alanında öğrenilir. Üçüncü ve teknik olmayan bir sebep daha vardır ve ilk adımda sorulmuştu: kullanım biçimi. Yalnız kısa mesafelerde kullanılan bir araçta şarj sistemi sağlam olsa bile akü hiçbir zaman tam dolmaz. Bu üç ihtimalin ortak noktası şudur: hiçbiri aksesuar montajının suçu değildir ve doğru davranış müşteriye bunu kanıtla söylemektir — ölçüm sonuçları elinde olduğu için tartışma değil, bilgi verilir. Aksesuar ustasının işi burada biter ve araç elektrik tarafına yönlendirilir; bu yönlendirme bir kusur değil, sınırın doğru çizilmesidir." },
+          { "label": "Aksesuarlar yine de sökülür", "verdict": "sok", "explain": "Ölçüm tüketimin normal olduğunu söyledi." },
+          { "label": "Daha büyük akü takılır", "verdict": "buyuk-aku", "explain": "Sebep bulunmadan kapasite artırmak sorunu erteler." },
+          { "label": "Müşteriye 'normaldir' denir", "verdict": "normal", "explain": "Araç çalışmıyorsa normal değildir; sebep aranır." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Gerilim normal demek akü sağlam demek değil. Akünün gerçek durumu yük altında anlaşılır."
+    },
+    {
+      "id": 5,
+      "instruction": "Dördüncü araçta boşalma park modlu kameradan geliyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-kamera",
+        "question": "Ne yapılır?",
+        "options": [
+          { "label": "Koruma kurulur ya da ayarı düzeltilir: kesme gerilimi ve süresi akünün durumuna göre seçilir, gerekirse park modu olay tetiklemeliye alınır — cihaz sökülmez, işlev korunarak akü korunur", "verdict": "koruma-kur", "correct": true, "explain": "Park modlu bir kameradan gelen boşalma, cihazın arızası değil kurulumun eksiğidir — kamera aşamasının park modu dersinde bu tam olarak anlatıldı: park modu koruma kurulmadan teslim edilmez. Çözüm sırayla şudur. Birincisi, koruma var mı diye bakılır: cihazın kendi ayarında, özel besleme kablosunda ya da ayrı bir kesicide bulunabilir; yoksa eklenir. İkincisi, varsa ayarı gözden geçirilir: kesme gerilimi çok düşük seçilmişse koruma ancak akü tehlikeli seviyeye indiğinde devreye girer ve araç zaten çalışmaz hâle gelir; kesme daha erken bir seviyeye alınır. Üçüncüsü süre sınırıdır: araç genelde kaç gün bekliyorsa ona uygun bir süre seçilir. Dördüncüsü akünün durumudur ve ayarı doğrudan etkiler — eski bir akü ya da kış koşulu daha erken kesen bir ayar gerektirir. Beşincisi park modu biçimidir: sürekli kayıt yerine olay tetiklemeli moda alınırsa tüketim belirgin düşer ve çoğu müşteri için işlev kaybı yok denecek kadar azdır. Yapılmayacak olan da nettir: müşterinin istediği işlevi tamamen kaldırmak ya da cihazı sökmek bir çözüm değil, teslim olmaktır. Doğru iş, işlevi koruyarak aküyü korumaktır. Kesme gerilimi ve süre değerleri cihaza, araca ve akünün durumuna özgüdür; bu ders bir değer vermiyor." },
+          { "label": "Kamera sökülür", "verdict": "sok", "explain": "Müşterinin istediği işlevi kaldırmak çözüm değil." },
+          { "label": "Park modu tamamen iptal edilir", "verdict": "iptal", "explain": "Ayar ve koruma seçenekleri denenmeden iptal edilmez." },
+          { "label": "Daha büyük akü takılır", "verdict": "aku", "explain": "Korumasız tüketim büyük aküyü de bitirir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Doğru iş işlevi koruyarak aküyü korumak. Cihazı sökmek çözüm değil, teslim olmak."
+    },
+    {
+      "id": 6,
+      "instruction": "Beşinci araçta boşalma bir kapı modülünden geliyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kapi-modulu",
+        "question": "Sebep ne olabilir?",
+        "options": [
+          { "label": "Modülü uyanık tutan bir giriş: oksitlenmiş ya da sıkışmış bir kapı düğmesi, bozulmuş bir kilit teması ya da kapı içine giren su yüzünden bozulan bir bağlantı", "verdict": "uyanik-tutan-giris", "correct": true, "explain": "Bir modül kendi başına nadiren uyanık kalır; genelde ona 'bir şey oluyor' diyen bir giriş vardır ve modül o girişi izlemek için uyanık kalır. Kapı modülünde bu girişlerin listesi kısadır ve sırayla elenir. Birincisi kapı düğmesidir: kapının açık olduğunu bildiren küçük anahtar oksitlenmiş ya da sıkışmışsa sistem kapıyı sürekli açık sanar — aracın iç lambası da bu yüzden sönmeyebilir ve bu, bedava bir ipucudur. İkincisi kilit temasıdır: kilidin durumunu bildiren temas bozulmuşsa modül kararsız kalır. İkisinin de ortak sebebi çoğu zaman sudur: kapı içine giren su, bu alanın kapı derslerinde defalarca anlatılan zinciri kurar — bozuk ya da eksik su bariyeri, tıkalı tahliye deliği, yarım oturmuş bir körük. Yani teşhis, elektriksel bir belirtiden mekanik bir sebebe iner ve gerçek onarım orada yapılır: su yolu düzeltilir, oksitlenmiş bağlantı temizlenir ya da parça yenilenir. Üçüncüsü, sonradan yapılan bir montajın bu modüle bağlanmış olmasıdır — alarm, merkezî kilit eklentisi ya da kapı hoparlörü için çekilen bir kablo modülün girişine yanlış bağlanmışsa modül hiç uyumaz. Doğru davranış, belirtiyi susturmak için sigortayı çekmek değil, uyanık tutan girişi bulmaktır." },
+          { "label": "Modül değiştirilir", "verdict": "modul-degistir", "explain": "Modülü uyanık tutan giriş bulunmadan yenisi de uyumaz." },
+          { "label": "Sigortası çekilip bırakılır", "verdict": "sigorta-cek", "explain": "Kapının bütün işlevleri ölür; belirtiyi susturmaktır." },
+          { "label": "Akü her gece sökülür", "verdict": "aku-sok", "explain": "Sebep duruyor ve müşteriye iş yükleniyor." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Elektriksel belirti, mekanik sebebe iniyor: su bariyeri, tıkalı tahliye, yarım körük. Onarım orada yapılır."
+    },
+    {
+      "id": 7,
+      "instruction": "Sebep bulundu ve giderildi. Teslim öncesi.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.pens-ampermetre",
+        "question": "Ne doğrulanır?",
+        "options": [
+          { "label": "Uykudaki akım aynı disiplinle yeniden ölçülür ve düştüğü kanıtlanır; araç bir süre bekletilip tekrar çalıştırılır ve müşteriye iki sayı yan yana gösterilir", "verdict": "yeniden-olc", "correct": true, "explain": "Bu şikâyetin en zor yanı, çözümün hemen görünmemesidir: araç zaten dolu bir aküyle çalışır ve gerçek sınav birkaç gün sonra gelir. Bu yüzden doğrulama ölçümle yapılır, umutla değil. Birincisi, uykudaki akım onarımdan sonra aynı disiplinle yeniden ölçülür — araç kapatılır, uyku moduna girmesi beklenir ve okunur; değerin önceki ölçüme göre belirgin düştüğü görülür. İki sayı yan yana konur ve müşteriye gösterilir: önce şu kadardı, şimdi bu kadar. Bu, hem işin kanıtı hem de aynı tartışmanın bir daha yaşanmamasının garantisidir. İkincisi, mümkünse araç bir süre bekletilip tekrar çalıştırılır; bir gecelik bekleme bile çoğu durumda bilgi verir. Üçüncüsü, akünün durumu hakkında dürüst bir cümle söylenir: tüketim düzeltildi ama akü uzun süre eksik kaldıysa ömründen kaybetmiş olabilir ve bir süre sonra yine sorun çıkarabilir — bu önceden söylenirse bilgi olur, sonradan söylenirse bahane sanılır. Dördüncüsü, sebep bir montajdan geliyorsa aynı hatanın araçtaki başka montajlarda da olup olmadığına bakılır. Beşincisi, yapılan iş yazıya dökülür: hangi devre, hangi ayar, hangi değer — bu not, aracın bir yıl sonraki hâline bakan ustayı saatlerce çalışmaktan kurtarır." },
+          { "label": "Araç çalışıyorsa yeterlidir", "verdict": "calisiyor", "explain": "Dolu aküyle her araç çalışır; sınav birkaç gün sonra." },
+          { "label": "Müşteri birkaç gün deneyip haber versin", "verdict": "musteri", "explain": "Doğrulama ölçümle yapılır, müşteriye bırakılmaz." },
+          { "label": "Akü şarj edilip verilir", "verdict": "sarj", "explain": "Şarj sebebi gidermez; tüketim yeniden ölçülür." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Aşama 9 bitti. İki sayıyı yan yana koy: önce şu kadardı, şimdi bu kadar. Sırada ustalık sınavı."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Uykudaki akım ölçümünde en sık yapılan hata nedir?",
+        "a": "erken-olcum",
+        "options": [
+          { "verdict": "erken-olcum", "label": "Araç uyku moduna girmeden ölçmek ve ölçüm sırasında aracı uyandırmak", "explain": "Modüller araç kapandıktan sonra hemen uyumaz; erken ölçüm her zaman yüksek çıkar ve olmayan bir arıza icat eder. Kapı açmak, kumandaya basmak, kaput açmak da modülleri uyandırıp sayacı sıfırlar. Ayrıca tek okuma bir şey söylemez — donanım bağlıyken ve ayrıldığında iki okuma alınır; fark kanıttır." },
+          { "verdict": "aletsiz", "label": "Yanlış alet kullanmak", "explain": "Doğru alet gerekir ama asıl hata koşuldadır." },
+          { "verdict": "gece", "label": "Gece ölçmek", "explain": "Saatin bir etkisi yoktur." },
+          { "verdict": "motor", "label": "Motor çalışırken ölçmek", "explain": "Uykudaki akım zaten kapalı araçta ölçülür." }
+        ]
+      },
+      {
+        "q": "Uykudaki akım normal çıktı ama araç iki günde bitiyor. Ne yapılır?",
+        "a": "aku-ve-sarj",
+        "options": [
+          { "verdict": "aku-ve-sarj", "label": "Akünün gerçek durumu ve şarj sistemi elektrik tarafında test edilir; kullanım biçimi de sorgulanır", "explain": "Gerilimin normal görünmesi akünün sağlam olduğunu göstermez — gerçek durumu yük altında anlaşılır. Şarj sistemi beklenen gerilimi üretmiyorsa akü her gün biraz eksik başlar. Ayrıca yalnız kısa mesafede kullanılan araçta akü hiç tam dolmaz. Üçü de aksesuar montajının suçu değildir ve doğru davranış bunu ölçümle kanıtlayıp yönlendirmektir." },
+          { "verdict": "sok", "label": "Aksesuarlar yine de sökülür", "explain": "Ölçüm tüketimin normal olduğunu söyledi." },
+          { "verdict": "buyuk-aku", "label": "Daha büyük akü takılır", "explain": "Sebep bulunmadan kapasite artırmak sorunu erteler." },
+          { "verdict": "normal", "label": "Normaldir denir", "explain": "Araç çalışmıyorsa normal değildir." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2'deki 0,41 A ve 0,036 A SENARYO okumalarıdır; istenen FARKTIR (0,374 A) ve ders kabul edilebilir bir uykudaki akım sınırı vermiyor.",
+    "sourceRequired": "Kabul edilebilir uykudaki akım sınırı, modüllerin uyku süresi, park modu kesme gerilimi ve süresi, akü kapasitesi ve yük testi değerleri ile şarj sistemi beklenen gerilimi bilinçle VERİLMEDİ; hepsi araca ve aküye özgüdür.",
+    "kapsam": "Akü yük testi, şarj sistemi teşhisi ve aracın kendi modüllerinin onarımı bu dersin KAPSAMI DIŞINDA — elektrik alanının konusu; ders yalnız sınırı ve yönlendirmeyi öğretiyor. Modül yazılımı ve kodlama kapsam dışı.",
+    "kaynak": "Bu ders bu alanın aşama 0 (uykudaki akım) ve aşama 6 (park modu) derslerinin sentezidir; yeni bilgi getirmiyor, öğrenilenleri gerçek bir şikâyet üzerinde sınıyor.",
+    "reviewedByMechanic": false
+  }
+}

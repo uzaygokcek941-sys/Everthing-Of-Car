@@ -1,0 +1,179 @@
+{
+  "id": "lastik.janttan-sokme",
+  "area": "lastik-tekerlek",
+  "stage": 4,
+  "title": "Lastiği Janttan Sökmek ve Takmak",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 35,
+  "prerequisites": ["lastik.tekerlek-degisimi"],
+  "learningGoals": [
+    "Basıncın tamamen boşaltılmasının neden ilk adım olduğunu bilmek",
+    "TPMS sensörlü bir tekerlekte makinenin nereden çalıştırılacağını bilmek",
+    "Topuk oturtma basıncının geçici olduğunu ve sonra düşürüldüğünü kavramak"
+  ],
+
+  "safety": [
+    { "rule": "Topuk ayırmadan önce valf iğnesi sökülür ve basıncın tamamen bittiği doğrulanır", "why": "İçinde basınç kalan lastikte topuk ayrılırken açığa çıkan enerji ölümcüldür; manometrenin sıfır göstermesi yetmez, iğne çıkarılıp hava akışının kesildiği görülür", "blocksStart": true },
+    { "rule": "Şişirme sırasında tekerleğin üzerine eğilinmez, yandan durulur", "why": "Topuk yerine otururken ya da hasarlı bir lastik patladığında enerji yukarı ve öne savrulur", "blocksStart": true },
+    { "rule": "Topuk oturmuyorsa basınç yükseltilerek zorlanmaz", "why": "Oturmayan topuk bir sebeple oturmuyordur — kayganlaştırıcı eksiği, hasar ya da yanlış ölçü. Basınç yükseltmek lastiği patlatır", "blocksStart": true },
+    { "rule": "Basınçsız gidilmiş lastiğin iç yüzeyi sökme sırasında incelenir", "why": "İç yüzeydeki ezilme ve kararma iç yapının ayrıldığını gösterir; o lastik takılmaz", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.lastik-makinesi", "label": "Lastik sökme makinesi", "required": true },
+    { "id": "tool.valf-anahtari", "label": "Valf iğnesi anahtarı", "required": true },
+    { "id": "tool.topuk-sabunu", "label": "Topuk kayganlaştırıcı", "required": true },
+    { "id": "tool.manometre", "label": "Basınç manometresi", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Tekerlek makineye alınacak. Lastikte hâlâ basınç var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.valf",
+        "question": "İlk iş ne?",
+        "options": [
+          { "label": "Valf iğnesi sökülür ve havanın tamamen bittiği hem duyularak hem manometreyle doğrulanır", "verdict": "igneyi-sok", "correct": true, "explain": "Bu adımın atlanması bu alandaki en ağır kazaların sebebidir. Topuk ayırma kolu lastiğin yanağına büyük bir kuvvet uygular; içeride basınç kalmışsa o kuvvet basınçla birleşir ve topuk aniden ayrıldığında açığa çıkan enerji tekerleği ve kolu savurur. Bu yüzden basınç yalnız düşürülmez, tamamen bitirilir ve bitirildiği doğrulanır. Doğru yol valf iğnesini sökmektir: iğne çıktığında hava serbestçe boşalır, akış durduğunda içeride basınç kalmadığı hem duyulur hem görülür. Manometrenin sıfır göstermesi tek başına yeterli sayılmaz, çünkü tıkalı bir valf ya da bozuk bir gösterge yanıltabilir. İğne söküldüğünde ayrıca valfin durumu da görülmüş olur ve zaten çoğu durumda valf yenilenecektir. Kural kısadır: basınç bitmeden hiçbir mekanik işlem başlamaz." },
+          { "label": "Doğrudan topuk ayırma koluna basılır", "verdict": "dogrudan-ayir", "explain": "İçeride kalan basınç, topuk ayrılırken ölümcül bir enerji açığa çıkarır." },
+          { "label": "Basınç yarıya düşürülür, yeterlidir", "verdict": "yariya", "explain": "Yarım basınç da tehlikelidir; hava tamamen bitirilir." },
+          { "label": "Lastik delinerek boşaltılır", "verdict": "delme", "explain": "Lastiğe zarar verir ve gereksizdir; valf iğnesi bu iş içindir." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bu alandaki iki ölümcül an vardır: sehpasız araç altına girmek ve basınçlı lastiğe müdahale etmek. İkisi de tamamen önlenebilir."
+    },
+    {
+      "id": 2,
+      "instruction": "Tekerlekte doğrudan ölçen bir TPMS sensörü var; sensör valfin gövdesine bağlı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.tpms-sensoru",
+        "question": "Sökme işlemi nereden başlar?",
+        "options": [
+          { "label": "Makinenin kolu ve topuk ayırıcı sensörden uzak bir noktadan çalıştırılır; sensörün konumu işlem boyunca bilinir", "verdict": "sensorden-uzak", "correct": true, "explain": "Doğrudan ölçen sistemlerde sensör tekerleğin içinde, çoğu zaman valfin gövdesine bağlı olarak durur ve kırılgandır. Lastik sökme makinesinin topuk ayırıcısı ya da montaj kolu sensöre denk gelirse gövdesi kırılır, valften kopar ya da gözle görülmeyen bir çatlak alır; sonuncusu en kötüsüdür, çünkü hasar iş bittikten günler sonra ortaya çıkar. Bu yüzden işlem valfin ve dolayısıyla sensörün konumu bilinerek yürütülür: topuk ayırma valften uzak bir noktadan yapılır, montaj kolu valfin hemen yanından değil belirli bir mesafeden çalıştırılır ve lastik döndürülürken sensörün nereye geldiği takip edilir. Sensörün sabitleme somunu ve contası ayrı bir konudur: birçok üretici lastik her söküldüğünde bunların yenilenmesini ister, çünkü eskimiş conta havayı yavaşça kaçırır ve müşteri 'sürekli iniyor' diye geri gelir." },
+          { "label": "Fark etmez, sensör dayanıklıdır", "verdict": "farketmez", "explain": "Sensör kırılgandır; makine kolları ona denk gelirse kırılır ya da çatlar." },
+          { "label": "Sensör önce sökülür, sonra lastik", "verdict": "sensoru-sok", "explain": "Sensör lastiğin içindedir; ona ulaşmak için zaten lastiğin sökülmesi gerekir." },
+          { "label": "Valfin tam üzerinden başlanır", "verdict": "valf-uzeri", "explain": "En riskli nokta orasıdır; sensör valfe bağlıdır." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Görünmeyen bir parçanın nerede olduğunu bilmek, ona zarar vermemenin tek yoludur. TPMS'li tekerlekte valf, sensörün adresidir."
+    },
+    {
+      "id": 3,
+      "instruction": "Lastik söküldü. Yeni lastik takılmadan önce jantın topuk oturma yüzeyine bakıyorsun: pas ve eski montaj kalıntısı var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.jant",
+        "question": "Ne yapılır?",
+        "options": [
+          { "label": "Yüzey temizlenir ve topuk kayganlaştırıcı sürülür; yağ, gres ya da çözücü kullanılmaz", "verdict": "temizle-ve-sabun", "correct": true, "explain": "Lastiğin havayı tutması, topuğun jantın oturma yüzeyine tam ve kesintisiz temas etmesiyle olur. O yüzeydeki pas kabuğu, kum ya da eski montaj kalıntısı temasta mikroskobik boşluklar bırakır ve hava oradan yavaşça kaçar; müşteri haftalar sonra 'bu lastik sürekli iniyor' diye döner, oysa lastik sağlamdır. Bu yüzden jantın topuk yüzeyi her montajda temizlenir. Temizlikten sonra topuk kayganlaştırıcı kullanılır: bu, topuğun jant üzerinde takılmadan kayarak yerine oturmasını sağlar ve hem lastiği hem jantı korur. Kayganlaştırıcı yerine yağ, gres ya da silikon kullanmak iki ayrı hata üretir — bunlar kauçuğu zamanla bozar ve kurumadıkları için topuğun jant üzerinde kaymasına, yani lastiğin jantla birlikte dönmemesine yol açabilir. Doğru ürün su bazlıdır ve kuruduğunda tutuculuk bırakır. Miktar da abartılmaz: yüzeyi ıslatacak kadar yeter." },
+          { "label": "Doğrudan yeni lastik takılır", "verdict": "dogrudan-tak", "explain": "Kirli topuk yüzeyi yavaş hava kaçağının en sık sebebidir." },
+          { "label": "Yüzeye gres sürülür", "verdict": "gres", "explain": "Gres kauçuğu bozar ve kurumadığı için topuk jant üzerinde kayabilir." },
+          { "label": "Sızdırmazlık macunu sürülür", "verdict": "macun", "explain": "Macun bir çözüm değil, kötü yüzeyin üstünü örtmektir; yüzey temizlenir." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bu alanın tekrar eden ilkesi burada da geçerli: sızdırmazlık contadan değil, temiz ve düzgün yüzeyden gelir."
+    },
+    {
+      "id": 4,
+      "instruction": "Yeni lastik janta geçirildi, şişiriliyor. Topuk otururken manometre 3,3 bar gösterdi; topuk oturduktan sonra basınç aracın etiket değeri olan 2,3 bara ayarlandı. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.manometre",
+        "unit": "bar",
+        "acceptRange": [0.98, 1.02]
+      },
+      "camera": "tekerlek",
+      "hint": "3,3 eksi 2,3.",
+      "teachingNote": "1,0 barlık bu fark geçici ve kasıtlıdır: topuğun jant kenarındaki yuvasına oturması için anlık olarak daha yüksek basınç gerekir. Kritik olan, oturma sesi duyulduktan sonra basıncın MUTLAKA aracın etiket değerine düşürülmesidir. Bu adım atlanırsa araç yüksek basınçla yola çıkar ve ortadan aşınmaya başlar — üstelik ustanın kendi elinde oluşmuş bir hatadır. Topuk oturmuyorsa basınç daha da yükseltilerek zorlanmaz; sebep aranır."
+    },
+    {
+      "id": 5,
+      "instruction": "Topuk oturdu. Jant kenarına bakıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik-yanagi",
+        "question": "Ne kontrol edilir?",
+        "options": [
+          { "label": "Yanaktaki oturma çizgisinin jant kenarına çepeçevre eşit mesafede olması; eşit değilse topuk tam oturmamıştır", "verdict": "oturma-cizgisi", "correct": true, "explain": "Lastiğin yanağında, topuğun hemen üstünde ince bir kabartı çizgi bulunur. Topuk düzgün oturduğunda bu çizgi jantın kenarına çepeçevre eşit mesafede kalır. Bir bölgede çizgi jant kenarına yaklaşıyor ya da kayboluyorsa topuk orada tam oturmamıştır. Sonucu iki türlü olur: ya hava o noktadan yavaşça kaçar, ya da lastik jant üzerinde merkezsiz oturduğu için tekerlek dönerken yalpalar — balans makinesinde düzeltilmeye çalışılan ama aslında balans olmayan bir titreşim. Düzeltmesi bellidir: basınç boşaltılır, topuk kayganlaştırıcı yenilenir ve tekrar şişirilir. Aynı kontrol tekerlek makineden inmeden yapılır, çünkü araca takıldıktan sonra fark edilirse iş baştan başlar. Kontrol çıplak gözle ve tekerlek elle döndürülerek yapılır; ölçü aleti gerekmez." },
+          { "label": "Hiçbir şey; basınç tutuyorsa topuk oturmuştur", "verdict": "basinc-tutuyor", "explain": "Yarım oturmuş topuk da bir süre basınç tutabilir; kontrol gözle yapılır." },
+          { "label": "Jantın rengine bakılır", "verdict": "renk", "explain": "Kontrol edilecek şey oturma çizgisinin jant kenarına eşit mesafede olması." },
+          { "label": "Yalnız valften kaçak olup olmadığına bakılır", "verdict": "valf", "explain": "Valf kontrolü ayrı ve gerekli; ama topuk oturması gözle doğrulanır." }
+        ]
+      },
+      "camera": "yanak",
+      "teachingNote": "Ücretsiz ve saniyelik bir kontrol, sonradan saatler süren bir titreşim aramasını önlüyor. Bu alanın karakteri budur."
+    },
+    {
+      "id": 6,
+      "instruction": "Eski valf hâlâ jantın üzerinde ve dış görünüşü iyi.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.valf",
+        "question": "Kullanılmaya devam edilir mi?",
+        "options": [
+          { "label": "Hayır: lastik her değiştiğinde valf de yenilenir; kauçuk valf yaşlanır, TPMS'li valflerde ise conta ve somun üreticinin istediği şekilde yenilenir", "verdict": "valfi-yenile", "correct": true, "explain": "Kauçuk valf gövdesi tıpkı lastiğin kendisi gibi yaşlanır: ısı, ozon ve zamanla sertleşir, dibinden çatlar ve o çatlaklar dışarıdan bakınca görünmez. Yaşlı bir valf yüksek hızda merkezkaç kuvvetiyle dışa doğru esner ve sızdırmaya başlar; bu, tam da en tehlikeli anda basınç kaybı demektir. Valf, lastiğe göre çok ucuz bir parçadır ve lastik zaten söküktür — yenilememek için hiçbir teknik gerekçe yoktur. TPMS'li tekerleklerde durum biraz farklıdır: orada valf sensörün bir parçasıdır ve sensörün kendisi her montajda yenilenmez, ancak üreticinin öngördüğü servis takımı (conta, somun, bazen valf iğnesi) değiştirilir. Bu takımın atlanması, TPMS'li araçlarda 'lastik sürekli iniyor' şikâyetinin en sık sebeplerinden biridir. Ayrıca metal valf ile alüminyum jant arasında korozyon oluşabileceği unutulmaz." },
+          { "label": "Evet, dışı iyiyse sorun yok", "verdict": "disi-iyi", "explain": "Çatlaklar dipte ve içeride oluşur; dıştan görünmez." },
+          { "label": "Evet, yalnız kapağı değiştirilir", "verdict": "kapak", "explain": "Kapak ayrı bir parça; gövdenin yaşlanmasını gidermez." },
+          { "label": "Yalnız kaçak varsa değiştirilir", "verdict": "kacak-varsa", "explain": "Kaçak ortaya çıktığında araç zaten yolda olur; valf koruyucu olarak yenilenir." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "En ucuz parçayı yenilememek, en pahalı sonucu üretir. Lastik söküklüyken valf değiştirmenin ek maliyeti yok denecek kadar azdır."
+    },
+    {
+      "id": 7,
+      "instruction": "Lastik takıldı, basınç ayarlandı. Tekerlek makineden iniyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.balans-makinesi",
+        "question": "Sıradaki iş ne?",
+        "options": [
+          { "label": "Balans: janttan sökülüp takılan her lastik yeniden balans edilir, çünkü kütle dağılımı değişmiştir", "verdict": "balans", "correct": true, "explain": "Balans, tekerleğin dönme ekseni etrafındaki kütle dağılımının dengelenmesidir ve bu denge lastiğin jant üzerindeki konumuna bağlıdır. Lastik janttan söküldüğünde eski denge tamamen ortadan kalkar: yeni lastiğin kendi ağırlık dağılımı farklıdır, jant üzerine farklı bir açıyla oturmuştur ve eski ağırlıklar artık anlamsızdır. Bu yüzden janttan sökülüp takılan her tekerlek istisnasız yeniden balans edilir; 'yeni lastik zaten dengelidir' cümlesi yanlıştır, hiçbir lastik kusursuz dengede üretilmez. Balans öncesinde jant üzerindeki eski ağırlıklar sökülür ve yapıştırma ağırlıkların bıraktığı kalıntı temizlenir, yoksa yeni ölçüm eski hatanın üstüne yapılır. Balans işleminin kendisi bir sonraki aşamanın konusudur; buradaki ders, sökme–takma işinin balanssız tamamlanmış sayılmadığıdır." },
+          { "label": "Doğrudan araca takılır, balans gerekmez", "verdict": "gereksiz", "explain": "Lastiğin jant üzerindeki konumu değişti; eski denge geçersiz." },
+          { "label": "Yalnız yeni lastikse balans yapılır", "verdict": "yalniz-yeni", "explain": "Aynı lastik sökülüp takılsa bile konumu değiştiği için balans gerekir." },
+          { "label": "Balans yalnız titreşim şikâyeti varsa yapılır", "verdict": "sikayet-varsa", "explain": "Şikâyet beklemek, müşteriyi dengesiz tekerlekle yola çıkarmak demektir." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "İşler zincirlidir: sökme–takma balansla, balans doğru basınç ve torkla tamamlanır. Zincirin bir halkası eksikse iş bitmemiştir."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Topuk ayırmadan önce neden valf iğnesi sökülür?",
+        "a": "basinc-bitsin",
+        "options": [
+          { "verdict": "basinc-bitsin", "label": "İçeride basınç kalmadığı kesin olarak doğrulansın diye; kalan basınç topuk ayrılırken ölümcül enerji açığa çıkarır", "explain": "Topuk ayırma kolu yanağa büyük kuvvet uygular; içeride basınç varsa ikisi birleşir ve topuk aniden ayrıldığında tekerlek ve kol savrulur. İğne söküldüğünde hava serbestçe boşalır ve akışın durduğu hem duyulur hem görülür. Manometrenin sıfır göstermesi tek başına yeterli sayılmaz: tıkalı valf ya da bozuk gösterge yanıltabilir." },
+          { "verdict": "hizli", "label": "Daha hızlı boşalsın diye", "explain": "Hız bir yan fayda; sebep tamamen güvenlik." },
+          { "verdict": "valf-degisecek", "label": "Valf zaten değişeceği için", "explain": "Valf değişir ama sökmenin sebebi basıncın bittiğini doğrulamak." },
+          { "verdict": "gereksiz", "label": "Gerekmez, manometre sıfır gösteriyorsa yeter", "explain": "Gösterge yanıltabilir; akışın kesildiği fiilen görülür." }
+        ]
+      },
+      {
+        "q": "Topuk oturtma basıncı neden sonra düşürülür?",
+        "a": "gecici",
+        "options": [
+          { "verdict": "gecici", "label": "Yüksek basınç yalnız topuğu yuvasına oturtmak için geçici olarak uygulanır; kalıcı değer aracın etiketindeki değerdir", "explain": "Topuğun jant kenarındaki yuvasına oturması için anlık olarak daha yüksek basınç gerekir. Oturma sesi duyulduktan sonra basınç mutlaka aracın etiket değerine düşürülür; atlanırsa araç yüksek basınçla yola çıkar ve ortadan aşınmaya başlar. Topuk oturmuyorsa basınç daha da yükseltilerek zorlanmaz — kayganlaştırıcı, hasar ya da ölçü uyumsuzluğu araştırılır." },
+          { "verdict": "yanak", "label": "Yanak zarar görmesin diye", "explain": "Doğru ama esas sebep etiket değerinin kalıcı değer olması." },
+          { "verdict": "gerekmez", "label": "Düşürülmez, o basınçta kalır", "explain": "Bu, ustanın kendi elinde oluşturduğu bir yüksek basınç hatası olur." },
+          { "verdict": "manometre", "label": "Manometre o kadar yüksek okumaz", "explain": "Okur; mesele okumak değil, doğru değere ayarlamak." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 4'teki 3,3 bar ve 2,3 bar SENARYO değerleridir. 3,3 bar bir topuk oturtma SINIRI değildir ve hedef olarak öğretilmiyor; istenen FARKTIR (1,0 bar) ve dersin gösterdiği şey yüksek basıncın geçici olduğudur. Azami topuk oturtma basıncı lastiğe ve makineye özgüdür, bilinçle verilmedi.",
+    "sourceRequired": "Künye gerektiren hiçbir üretici değeri kullanılmadı.",
+    "kapsam": "Sahnede lastik sökme makinesi YOK; makinenin kullanımı metinde anlatılıyor. Kolsuz makineler, iç lastikli ve ticari araç lastikleri kapsam dışı. Balans bir sonraki aşamada.",
+    "reviewedByMechanic": false
+  }
+}

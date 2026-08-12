@@ -1,0 +1,169 @@
+{
+  "id": "motor.volan-kece",
+  "area": "motor-mekanik",
+  "stage": 8,
+  "title": "Volan ve Arka Keçe: Kaçağı Değil Sebebini Değiştirmek",
+  "vehicleClass": "binek-arac",
+  "estimatedMinutes": 30,
+  "prerequisites": ["motor.krank-yatak", "temel.tork-anahtari"],
+  "learningGoals": [
+    "Motor ile şanzıman arasındaki yağ kaçağının kaynağını ayırmak",
+    "Keçeyi değiştirmeden önce karter havalandırmasını kontrol etmek",
+    "Volan yüzeyini okumak ve volan cıvatalarının neden yenilendiğini bilmek"
+  ],
+
+  "safety": [
+    { "rule": "Şanzıman desteklenmeden ayrılmaz", "why": "Şanzıman tek başına ağırdır ve bağlantısı çözüldüğü anda kendi ağırlığıyla düşer. Altında çalışan biri varsa sonuç ağır yaralanmadır", "blocksStart": true },
+    { "rule": "Volan sökülürken krank döndürmeye karşı sabitlenir", "why": "Volan cıvataları yüksek torkludur; krank serbestken anahtar beklenmedik anda boşa gider ve el dişli çarklar arasına gider", "blocksStart": true },
+    { "rule": "Volan iki elle ve dengeli tutulur", "why": "Volan ağırdır ve tek elle tutulduğunda düşer; düşen volanın dişli tacı zarar görür ve dengesi bozulur", "blocksStart": false },
+    { "rule": "Keçe yuvasına ve krank ucuna alet çentiği atılmaz", "why": "Yuvadaki tek bir çentik keçenin oturmasını bozar ve yeni keçe ilk günden sızdırır", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.torx-e14", "label": "E14 çok köşe / torx lokma", "required": true },
+    { "id": "tool.tork-anahtari", "label": "Tork anahtarı", "required": true },
+    { "id": "tool.kece-catali", "label": "Keçe çıkarma çatalı", "required": true },
+    { "id": "tool.kece-surucu", "label": "Keçe yerleştirme aparatı", "required": true },
+    { "id": "tool.volan-sabitleyici", "label": "Volan sabitleme aparatı", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Motor ile şanzımanın birleştiği yerden yağ damlıyor. Debriyaj da kaymaya başlamış.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.arka-kece",
+        "question": "Kaçağın kaynağını nasıl daraltırsın?",
+        "options": [
+          { "label": "İki aday var: krank arka keçesi ve şanzıman giriş mili keçesi. Sıvının cinsine ve izin yönüne bakarım", "verdict": "iki-aday", "correct": true, "explain": "O birleşme yerinde birbirine çok yakın iki keçe vardır ve ikisi de aynı noktadan damlatır: motorun arka keçesi ve şanzımanın giriş mili keçesi. Ayırt etmenin en pratik yolu sıvının kendisidir; motor yağı ile şanzıman yağı renk, koku ve kıvam olarak farklıdır. İkinci yol izin yönüdür: temizleyip kısa bir süre çalıştırdıktan sonra ıslaklığın hangi taraftan başladığına bakılır. Debriyajın kayması ise bulguyu tamamlar, çünkü balataya bulaşan yağ sürtünmeyi bitirir ve debriyaj tutmaz. Yağ hangisinden geliyorsa debriyaj takımı da onunla birlikte yenilenir." },
+          { "label": "Doğrudan arka keçeyi değiştiririm", "verdict": "direkt-kece", "explain": "Yanlış keçeyi değiştirmek, aynı işçiliği ikinci kez yapmak demektir. Şanzımanı indirmek bu işin en uzun kısmıdır." },
+          { "label": "Karter contasıdır, oradan akıyordur", "verdict": "karter-conta", "explain": "Karter contası kaçağı aracın altına, daha önden damlar; volan bölgesinde toplanmaz." },
+          { "label": "Debriyaj kaydığına göre sorun sadece debriyajdadır", "verdict": "sadece-debriyaj", "explain": "Debriyaj kayması burada sonuçtur. Yağ kaynağı bulunmadan takılan yeni debriyaj da kısa sürede kayar." }
+        ]
+      },
+      "camera": "motor-alt",
+      "teachingNote": "Birbirine çok yakın iki keçe varsa, hangisinin kaçırdığını sökmeden önce belirlemeye çalış. Sıvının cinsi çoğu zaman tek başına yeter."
+    },
+    {
+      "id": 2,
+      "instruction": "Kaçağın motor tarafından, arka keçeden geldiği anlaşıldı. Keçeyi sipariş etmeden önce bir kontrol daha yapıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.arka-kece",
+        "question": "Keçeyi değiştirmeden önce ne kontrol edilir?",
+        "options": [
+          { "label": "Karter havalandırması; tıkalıysa karter basıncı yükselir ve yağı keçeden dışarı iter", "verdict": "karter-havalandirma", "correct": true, "explain": "Karter içinde, segmanlardan sızan az miktarda yanma gazı yüzünden sürekli bir basınç oluşur ve bu basınç havalandırma sistemiyle emme tarafına alınır. Sistem tıkandığında basınç boşalacak yer bulamaz ve en zayıf noktadan, yani keçelerden dışarı çıkar; yanında yağı da sürükler. Bu durumda keçe arızalı değildir, basınca dayanamamıştır. Havalandırma tıkalı bırakılıp keçe değiştirilirse yeni keçe de kısa sürede aynı şekilde kaçırır ve bu kez suçlanan usta olur. Kontrolü basittir: yağ doldurma kapağı çalışırken açıldığında güçlü bir basınç ya da duman çıkışı varsa sistem tıkalıdır." },
+          { "label": "Kontrol gerekmez, keçe eskimiştir", "verdict": "eskimis", "explain": "Keçe eskiyebilir ama aynı işçiliği ikinci kez yapmamak için sebep önce elenmelidir." },
+          { "label": "Yağ markasını kontrol ederim", "verdict": "yag-marka", "explain": "Uygun viskozite önemlidir ama keçeyi dışarı iten şey basınçtır." },
+          { "label": "Krank ucu çapını ölçerim, yeterlidir", "verdict": "cap-olc", "explain": "Krank ucundaki aşınma izi de kontrol edilir ama havalandırma bu arızanın en sık atlanan sebebidir." }
+        ]
+      },
+      "camera": "motor-ust",
+      "hint": "Krank ucundaki keçe temas izini de kontrol et; derin bir kanal açılmışsa yeni keçe aynı yerde oturup yine sızdırır.",
+      "teachingNote": "Bu adım bu prosedürün kalbidir. Keçe değiştirmek kolaydır; keçeyi zorlayan basıncı bulmak, işi bir kez yapmanın yoludur."
+    },
+    {
+      "id": 3,
+      "instruction": "Şanzıman ayrıldı, debriyaj söküldü. Volan cıvatalarını sök.",
+      "interaction": {
+        "type": "unscrew",
+        "target": "part.volan",
+        "count": 6,
+        "turns": 7,
+        "tool": "tool.torx-e14"
+      },
+      "camera": "motor-alt",
+      "commonMistake": {
+        "if": "yanlis-alet",
+        "feedback": "Volan cıvataları çok köşe ya da torx başlıdır ve yüksek torkludur. Yakın ölçüde bir uç yuvayı ilk hamlede yuvarlar."
+      },
+      "hint": "Krankı sabitleme aparatıyla tut; volanı tornavidayla kilitlemeye çalışma, dişli tacına zarar verirsin.",
+      "teachingNote": "Volan sökülürken cıvataların yerini de işaretle. Bazı motorlarda volanın krank üzerinde tek bir doğru konumu vardır ve bunu bir pim ya da asimetrik delik düzeni belirler; yanlış konumda takılan volan motor dengesini bozar."
+    },
+    {
+      "id": 4,
+      "instruction": "Volan elinde. Debriyaj yüzeyine bakıyorsun: mavimsi lekeler ve saç teli inceliğinde çatlaklar var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.volan",
+        "question": "Bu yüzey ne anlatır ve ne yapılır?",
+        "options": [
+          { "label": "Aşırı ısınma izi; yüzey ölçüsündeyse taşlanır, çatlaklar derinse volan yenilenir", "verdict": "isinma-izi", "correct": true, "explain": "Mavimsi renk, metalin çok yüksek sıcaklığa çıktığını gösterir ve bu genellikle kayan bir debriyajın ürettiği ısıdan gelir. Isı çevrimleri yüzeyde ince ısı çatlakları bırakır. Yüzeydeki hafif izler ve ince çatlaklar taşlanarak alınabilir, ama taşlama payı sınırlıdır ve fazla taşlanan volan debriyaj baskısının çalışma yüksekliğini bozar. Derin çatlaklar ise taşlamayla gitmez; o volan yenilenir. Çift kütleli volanda ise taşlama söz konusu değildir; iki kütle arasındaki serbest hareket ve ses kontrol edilir, sınırın dışındaysa komple değişir." },
+          { "label": "Normaldir, debriyaj takınca geçer", "verdict": "normal", "explain": "Isı çatlağı geçmez; yeni balata aynı bozuk yüzeye oturur ve kısa sürede yeniden kayar." },
+          { "label": "Zımpara ile temizlerim", "verdict": "zimpara", "explain": "Zımpara yüzeyi düzleştirmez, yalnız parlatır. Düzlük ancak taşlama ile sağlanır." },
+          { "label": "Ters çevirip diğer yüzünü kullanırım", "verdict": "ters-cevir", "explain": "Volanın tek çalışma yüzeyi vardır; ters takılamaz." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Volan yüzeyi, debriyajın geçmişini yazdığı yerdir. Mavi lekeler kaymanın, derin çizikler ise perçinin yüzeye değdiğinin işaretidir."
+    },
+    {
+      "id": 5,
+      "instruction": "Eski keçe çıkarıldı, yuva temizlendi. Yeni keçeyi takıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.arka-kece",
+        "question": "Keçe montajında hangisi doğrudur?",
+        "options": [
+          { "label": "Dudak yağ tarafına bakacak şekilde, aparatla ve yuvaya dik olarak, kılavuzun verdiği derinliğe kadar itilir", "verdict": "dudak-aparat-derinlik", "correct": true, "explain": "Keçenin ince dudağı ve içindeki yay, basıncın geldiği tarafa, yani motorun iç tarafına bakmalıdır; basınç dudağı mile bastırır ve sızdırmazlık böyle kurulur. Ters takılan keçede basınç dudağı milden uzaklaştırır ve keçe hiç tutmaz. Yerleştirme çekiçle değil, keçenin dış çapına oturan bir aparatla yapılır; tek noktadan vurmak keçeyi eğri sokar ve eğri oturan keçe sızdırır. Derinlik de önemlidir: krank ucunda eski keçenin açtığı bir kanal varsa, yeni keçe kılavuzun izin verdiği ölçüde farklı bir derinliğe oturtularak temiz bir yüzeye alınabilir." },
+          { "label": "Çekiçle yavaşça vurularak oturtulur", "verdict": "cekic", "explain": "Tek noktadan gelen darbe keçeyi eğri sokar; eğri keçe sızdırır." },
+          { "label": "Dudak dışarı baksın ki toz girmesin", "verdict": "dudak-disari", "explain": "Ters takılan keçede basınç dudağı milden ayırır ve keçe görevini hiç yapmaz." },
+          { "label": "Yuvaya sıvı conta sürülür", "verdict": "sivi-conta", "explain": "Üretici öngörmüyorsa sürülmez; taşan conta krank ucuna ve debriyaja bulaşır." }
+        ]
+      },
+      "camera": "motor-alt",
+      "hint": "Keçenin dudağını parmağınla zorlama ve montajda kılavuz ne diyorsa onu uygula: bazı keçeler kuru, bazıları hafif yağlı takılır.",
+      "teachingNote": "Keçe küçük ve ucuz bir parçadır ama onu değiştirmek için şanzımanı indirmen gerekir. Bu yüzden burada acele etmek, bütün günü ikinci kez harcamak demektir."
+    },
+    {
+      "id": 6,
+      "instruction": "Volan geri takılacak.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.volan",
+        "question": "Volan cıvataları için ne yaparsın?",
+        "options": [
+          { "label": "Kılavuz yenilenmesini istiyorsa yeni cıvata kullanır, delikleri temizler, kılavuzun istediği kilitleyiciyi uygular ve çapraz, kademeli olarak torkuna sıkarım", "verdict": "yeni-capraz-tork", "correct": true, "explain": "Volan cıvataları yüksek tork altında çalışır ve birçok motorda açı kademelidir, yani tek kullanımlıktır; kılavuz yenilenmesini istiyorsa tartışma yoktur. Diş dipleri ve cıvata delikleri temizlenir, çünkü delikte kalan yağ sıkma sırasında hidrolik gibi davranır ve gerçek gerginliği bozar. Kılavuz diş kilitleyici öngörüyorsa uygulanır; öngörmüyorsa sürülmez, çünkü sürtünmeyi değiştirip torku anlamsız kılar. Sıkma çapraz ve kademeli yapılır ki volan krank flanşına eşit otursun; eğri oturan volan titreşim üretir ve arka keçeyi kısa sürede yeniden bitirir." },
+          { "label": "Eski cıvataları maksimum güçle sıkarım", "verdict": "eski-guclu", "explain": "Güç değil, ölçü gerekir. Fazla sıkma cıvatayı koparır; kopan volan cıvatası ağır hasar demektir." },
+          { "label": "Sıra fark etmez, hepsi aynı torkta", "verdict": "sira-farketmez", "explain": "Sıra volanın flanşa eşit oturmasını sağlar; sırasız sıkma volanı eğri oturtur." },
+          { "label": "Her cıvataya bol miktarda kilitleyici sürerim", "verdict": "bol-kilitleyici", "explain": "Kılavuz ne diyorsa o uygulanır; fazlası sürtünmeyi değiştirir ve tork değerini anlamsız kılar." }
+        ]
+      },
+      "camera": "motor-alt",
+      "teachingNote": "Bu işin sonunda üç şey birlikte doğru olmalı: keçe sızdırmıyor, volan düz oturmuş, karter havalandırması çalışıyor. Üçünden biri eksikse yağ birkaç ay içinde geri gelir."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Tıkalı karter havalandırması keçe kaçağına nasıl yol açar?",
+        "a": "basinc-iter",
+        "options": [
+          { "verdict": "basinc-iter", "label": "Karterde biriken basınç boşalacak yer bulamaz ve yağı en zayıf noktadan, keçeden dışarı iter", "explain": "Segmanlardan karterin içine sürekli az miktarda yanma gazı sızar ve bu gaz havalandırma sistemiyle emme tarafına alınır. Sistem tıkandığında gaz birikir, karter içi basınç yükselir ve bu basınç en zayıf noktadan çıkış arar. Keçeler tam da o zayıf noktalardır; basınç yağı da sürükleyerek dışarı iter. Bu durumda keçe bozuk değil, dayanamamıştır. Havalandırma açılmadan keçe değiştirilirse yeni keçe de aynı şekilde kaçırır. Kontrolü basittir: motor çalışırken yağ doldurma kapağı açıldığında güçlü basınç ya da duman çıkışı varsa sistem tıkalıdır." },
+          { "verdict": "yag-inceltir", "label": "Yağı inceltir", "explain": "Havalandırma tıkanıklığı yağı zamanla kirletebilir ama keçeyi bozan mekanizma basınçtır." },
+          { "verdict": "isitir", "label": "Motoru ısıtır", "explain": "Isınma soğutma sisteminin işidir." },
+          { "verdict": "ilgisi-yok", "label": "İlgisi yoktur, keçe sadece eskir", "explain": "Sık tekrarlayan keçe kaçaklarının en yaygın gizli sebebi budur." }
+        ]
+      },
+      {
+        "q": "Keçenin dudağı neden yağ tarafına bakar?",
+        "a": "basinc-bastirir",
+        "options": [
+          { "verdict": "basinc-bastirir", "label": "Basınç dudağı mile bastırır; ters takılırsa basınç dudağı milden ayırır", "explain": "Keçe, ince bir dudak ve onu mile bastıran küçük bir yaydan oluşur. Sızdırmazlık, dudağın mile sürekli ve düzgün temas etmesiyle sağlanır. Dudak basıncın geldiği tarafa baktığında basınç bu teması güçlendirir, yani sistem kendi kendini sızdırmaz hâle getirir. Ters takıldığında ise basınç dudağın arkasından gelir ve onu milden uzaklaştırır; keçe daha ilk çalıştırmada sızdırır. Bu yüzden montajda dudağın hangi yöne baktığı, keçenin markasından da malzemesinden de önemlidir." },
+          { "verdict": "toz", "label": "Toz girmesini engellemek için", "explain": "Toz koruması bazı keçelerde ikinci bir dudakla sağlanır; ana dudak basınç tarafına bakar." },
+          { "verdict": "montaj", "label": "Montaj kolaylığı için", "explain": "Kolaylıkla ilgisi yoktur." },
+          { "verdict": "farketmez", "label": "Fark etmez, iki yönde de çalışır", "explain": "Ters takılan keçe çalışmaz; bu, yeni keçenin sızdırmasının en sık sebebidir." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "sourceRequired": "Volan cıvatası tork ve açı kademeleri, keçe oturma derinliği, volan taşlama payı ve çift kütleli volan serbest hareket sınırı araca özgüdür; bu derste hiçbiri için sayı verilmedi.",
+    "kapsam": "Şanzımanın indirilmesi bu dersin kapsamı dışında bırakıldı; aktarma organları ayrı bir alandır. Volan ve keçe tek gövde olarak modellendi, debriyaj takımı modelde yok.",
+    "reviewedByMechanic": false
+  }
+}

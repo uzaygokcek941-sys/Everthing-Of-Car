@@ -1,0 +1,179 @@
+{
+  "id": "lastik.onarim-siniri",
+  "area": "lastik-tekerlek",
+  "stage": 9,
+  "title": "Delik Onarımı: Nerede Onarılır, Nerede Onarılmaz",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 30,
+  "prerequisites": ["lastik.janttan-sokme", "lastik.basinc-etkileri"],
+  "learningGoals": [
+    "Onarılabilir bölge ile onarılamaz bölgeyi ayırmak",
+    "Dıştan tıkacın neden yeterli bir onarım sayılmadığını bilmek",
+    "Basınçsız gidilmiş bir lastiğin neden onarılmadığını açıklamak"
+  ],
+
+  "safety": [
+    { "rule": "Yanağı delinmiş, kesilmiş ya da kabarmış lastik onarılmaz", "why": "Yanak lastiğin en çok esneyen ve en ince yeridir; oradaki bir onarım yol şartlarında tutmaz ve lastik patlar", "blocksStart": true },
+    { "rule": "Basınçsız ya da ileri derecede düşük basınçla gidilmiş lastik, iç yüzeyi incelenmeden onarılmaz", "why": "Isınan iç yapı ayrışmış olabilir; dışarıdan sağlam görünen lastik yolda dağılır", "blocksStart": true },
+    { "rule": "Run-flat lastik, üretici açıkça izin vermedikçe onarılmaz", "why": "Basınçsız gidilmiş takviyeli yanağın iç hasarı gözle güvenilir biçimde değerlendirilemez", "blocksStart": true },
+    { "rule": "Onarım sonrası lastik mutlaka yeniden balans edilir", "why": "Onarım malzemesi ve sökme–takma işlemi kütle dağılımını değiştirir", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.lastik-makinesi", "label": "Lastik sökme makinesi", "required": true },
+    { "id": "tool.manometre", "label": "Basınç manometresi", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true },
+    { "id": "tool.onarim-seti", "label": "Onarım seti (mantar tıkaç ve yama)", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Lastiğin sırtına bir vida batmış. Müşteri onarım istiyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik",
+        "question": "İlk soru ne?",
+        "options": [
+          { "label": "Delik nerede: yalnız sırtın orta bölgesindeki delikler onarılabilir, omuz ve yanak onarılmaz", "verdict": "bolge", "correct": true, "explain": "Onarımın mümkün olup olmadığını belirleyen ilk şey deliğin yeridir. Lastiğin sırtı, altındaki çelik kuşaklar sayesinde nispeten sert ve az esneyen bir bölgedir; buradaki bir delik, düzgün yapılmış bir onarımla kalıcı olarak kapatılabilir. Omuz bölgesi ise sırt ile yanağın birleştiği yerdir ve her turda bükülür; oradaki bir onarım sürekli çalışan bir bölgede durduğu için tutmaz. Yanak en ince ve en çok esneyen yerdir — orada onarım hiçbir koşulda kabul edilmez. Bu yüzden ilk iş deliğin yerini belirlemek ve onarılabilir bölgenin içinde olup olmadığına karar vermektir; sınırın tam olarak nereden geçtiği ve kabul edilen azami delik çapı, lastik üreticisinin ve ilgili standardın belirlediği değerlerdir. İkinci bir kural daha vardır: birbirine çok yakın iki delik ya da daha önce onarılmış bir bölgenin yanındaki yeni bir delik, tek tek onarılabilir olsalar bile birlikte reddedilebilir. Karar gözle değil, belgeye bakılarak verilir." },
+          { "label": "Delik ne kadar büyük", "verdict": "cap", "explain": "Çap da şart ama önce bölge belirlenir; yanaktaki delik çapı ne olursa olsun onarılmaz." },
+          { "label": "Lastik kaç yaşında", "verdict": "yas", "explain": "Yaş ayrı bir değerlendirme; onarım kararının ilk sorusu bölge." },
+          { "label": "Müşteri ne kadar ödeyecek", "verdict": "fiyat", "explain": "Onarılabilirlik teknik bir karardır, fiyatla belirlenmez." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Onarım kararı üç soruyla verilir: nerede, ne kadar büyük, lastiğe ne olmuş. Üçünden biri olumsuzsa onarım yapılmaz."
+    },
+    {
+      "id": 2,
+      "instruction": "Delik sırtın orta bölgesinde. Yanındaki usta dıştan tıkaç çakalım, iş biter diyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik",
+        "question": "Bu doğru mu?",
+        "options": [
+          { "label": "Hayır: lastik janttan sökülüp iç yüzeyi incelenmeli ve onarım içeriden yapılmalıdır; dıştan tıkaç geçici bir yol çözümüdür", "verdict": "icerden", "correct": true, "explain": "Lastiği sökmeden dışarıdan çakılan tıkaç iki ayrı işi birden atlar. Birincisi incelemedir: batan cismin iç yüzeyde ne yaptığı, kordları kesip kesmediği, lastiğin basınçsız gidilip gidilmediği ancak içeriden bakılarak görülür — dışarıdan bakan biri sağlam bir lastik ile iç yapısı ayrışmış bir lastiği ayırt edemez. İkincisi sızdırmazlıktır: kalıcı onarım, deliği hem doldurmalı hem de lastiğin iç yüzeyindeki hava geçirmez tabakayı yeniden kapatmalıdır. Bunu yapan yöntem, delik kanalını dolduran bir gövde ile iç yüzeye yapıştırılan yamanın birleştiği tek parça onarımdır. Dıştan çakılan tıkaç kanalı doldurur ama iç tabakayı kapatmaz; nemin kordlara ulaşmasını engellemez ve zamanla korozyon başlatır. Bu yüzden dıştan tıkaç, yol kenarında en yakın atölyeye ulaşmak için kabul edilebilir geçici bir çözümdür, kalıcı onarım değildir. Atölyede yapılacak iş lastiği sökmekle başlar." },
+          { "label": "Doğru, tıkaç kalıcı çözümdür", "verdict": "tikac", "explain": "İç tabakayı kapatmaz ve iç inceleme yapılmamış olur." },
+          { "label": "Doğru, hızlı ve ucuz", "verdict": "hizli", "explain": "Hız ve maliyet, atlanan incelemenin yerini tutmaz." },
+          { "label": "Doğru ama yalnız arka lastikte", "verdict": "arka", "explain": "Aks farkı bu kararı değiştirmez; onarım usulü aynıdır." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bir işlemin neyi atladığını görmek, onun neden yetersiz olduğunu da gösterir. Dıştan tıkaç hem incelemeyi hem iç sızdırmazlığı atlıyor."
+    },
+    {
+      "id": 3,
+      "instruction": "Lastik söküldü. Müşteri bir süre inik gitmiş olabilirim diyor. Ölçtüğün basınç 1,2 bar, aracın etiket değeri 2,3 bar. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.manometre",
+        "unit": "bar",
+        "acceptRange": [1.05, 1.15]
+      },
+      "camera": "tekerlek",
+      "hint": "2,3 eksi 1,2.",
+      "teachingNote": "1,1 barlık bu eksiklik, lastiğin etiket değerinin yarısına yakın bir basınçla çalıştığı anlamına geliyor. Basınç dersinde öğrenilen şey burada karar veriyor: düşük basınçta yanak her turda aşırı bükülür, ürettiği ısı kauçuğun kordlara tutunmasını zayıflatır ve iç yapı ayrışmaya başlar. Bu hasar dışarıdan görünmez ve hava basıldıktan sonra da geri gelmez. Bu yüzden ölçülen düşük basınç, onarım kararının önüne geçen bir bulgudur: lastiğin iç yüzeyi incelenmeden onarıma geçilmez."
+    },
+    {
+      "id": 4,
+      "instruction": "Lastiğin iç yüzeyine fenerle bakıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik-yanagi",
+        "question": "Ne aranır?",
+        "options": [
+          { "label": "Ezilme, kararma, katman ayrılması ve kauçuk tozu: bunlar iç yapının basınçsız çalışmadan zarar gördüğünü gösterir ve lastik onarılmaz", "verdict": "ic-hasar", "correct": true, "explain": "Basınçsız ya da çok düşük basınçla gidilmiş bir lastiğin içinde arananlar bellidir. Yanağın iç yüzeyinde parlak ya da kararmış bir bant, kauçuğun kendi üzerine katlanıp sürtündüğü yerdir. Elle dokunulduğunda pürüzlenmiş, tozlanmış bir yüzey, kauçuğun ufalanmaya başladığını gösterir. Katmanların ayrıldığı yerlerde yüzey kabarır ya da parmakla bastırıldığında altı boş hissedilir. Bu bulgulardan herhangi biri varsa lastik onarılmaz ve kullanılmaz — delik ne kadar küçük ve ne kadar iyi yerde olursa olsun. Sebebi şudur: onarım deliği kapatır ama zayıflamış iç yapıyı geri getirmez; o lastik ısındığında dağılmaya devam edecektir. Bu karar müşteriye zor anlatılan kararlardan biridir, çünkü lastik dışarıdan sapasağlam görünür. Anlatılması gereken şey görünmeyen hasarın ne olduğu ve neden geri dönüşsüz olduğudur; iç yüzey müşteriye gösterilebilirse en ikna edici kanıt odur." },
+          { "label": "Yalnız deliğin çıkış noktası", "verdict": "delik", "explain": "Delik de incelenir ama asıl aranan basınçsız çalışmanın izleri." },
+          { "label": "Hiçbir şey; dıştan sağlamsa yeter", "verdict": "distan", "explain": "İç hasar dışarıdan görünmez; inceleme tam da bunun için." },
+          { "label": "Üretim tarihi", "verdict": "tarih", "explain": "Tarih ayrı bir değerlendirme; burada aranan iç yapı hasarı." }
+        ]
+      },
+      "camera": "yanak",
+      "teachingNote": "Görünmeyen hasarı arayan bir inceleme, bu meslekte en çok hayat kurtaran alışkanlıklardan biri. Kanıt müşteriye gösterilebiliyorsa karar da kolay anlaşılır."
+    },
+    {
+      "id": 5,
+      "instruction": "Bu lastik reddedildi. Başka bir araçta run-flat lastiğe vida batmış ve basınç hiç düşmemiş.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik-yanagi",
+        "question": "Onarılır mı?",
+        "options": [
+          { "label": "Üretici açıkça izin vermedikçe onarılmaz: takviyeli yanağın basınçsız gidilip gidilmediği ve iç hasarı gözle güvenilir biçimde değerlendirilemez", "verdict": "onarilmaz", "correct": true, "explain": "Run-flat lastiğin bütün amacı, basınç sıfırken bile aracı bir süre taşıyabilmektir; bunu takviyeli yanağıyla yapar. Ama bu yetenek bir bedelle gelir: lastik basınçsız çalışırken yanak büyük bir yükü tek başına taşır, ısınır ve iç yapısı zarar görür — üstelik sürücü aracı normal sürdüğü için bunun ne kadar sürdüğünü çoğu zaman kendisi de bilmez. Standart bir lastikte basınçsız gidildiğini iç yüzeydeki izlerden okumak mümkündür; run-flat'te ise takviye tabakası bu izleri güvenilir biçimde değerlendirmeyi zorlaştırır. Bu belirsizlik yüzünden birçok üretici run-flat onarımını hiç kabul etmez, kabul edenler ise dar şartlar koyar: belirli bir bölge, belirli bir delik çapı, basınçsız hiç gidilmemiş olması ve yetkili bir değerlendirme. Bu yüzden karar tahminle verilmez — lastiğin üreticisinin ne dediğine bakılır ve şüphe hâlinde onarılmaz. Aynı ihtiyat, ses sönümleyici köpük içeren ve kendinden yapışkanlı lastikler için de geçerlidir; onların iç yüzeyi zaten kaplıdır ve onarım usulü farklıdır." },
+          { "label": "Onarılır, basınç düşmediğine göre sorun yok", "verdict": "onarilir", "explain": "Basıncın düşmemesi iç hasarın olmadığını kanıtlamaz." },
+          { "label": "Onarılır, standart lastikle aynı usul geçerlidir", "verdict": "ayni-usul", "explain": "Takviyeli yanak iç değerlendirmeyi zorlaştırır; usul aynı değildir." },
+          { "label": "Yalnız dıştan tıkaç çakılır", "verdict": "tikac", "explain": "Dıştan tıkaç kalıcı onarım sayılmaz; run-flat'te hiç uygun değil." }
+        ]
+      },
+      "camera": "yanak",
+      "teachingNote": "Bir parçanın ek yeteneği varsa, o yeteneğin bedelini de bilmek gerekir. Run-flat'in bedeli, hasarının görünmez olmasıdır."
+    },
+    {
+      "id": 6,
+      "instruction": "İlk araçta delik uygun bölgede, iç yüzey temiz, basınç kaybı da yeni. Onarım yapıldı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.balans-makinesi",
+        "question": "Sıradaki iş ne?",
+        "options": [
+          { "label": "Kaçak kontrolü ve ardından balans: lastik söküldüğü ve kütle eklendiği için eski denge geçersizdir", "verdict": "kacak-ve-balans", "correct": true, "explain": "Onarım yapıldıktan sonra iki doğrulama gerekir. Birincisi kaçak kontrolüdür: lastik şişirilir ve onarım bölgesine sabunlu su sürülerek ya da tekerlek su dolu bir tekneye batırılarak kabarcık aranır. Aynı kontrol valf ve topuk çevresi için de yapılır — lastik zaten sökülmüşken bu üç noktanın hepsi bir arada doğrulanır. İkincisi balanstır ve bu, sık atlanan bir adımdır. Lastik janttan söküldü, farklı bir açıyla yeniden oturtuldu ve üstüne onarım malzemesi eklendi; bu üç değişikliğin her biri kütle dağılımını değiştirir, yani eski balans artık geçerli değildir. Balans yapılmadan teslim edilen bir araç titreşimle geri döner ve müşteri bunu haklı olarak onarıma bağlar. Üçüncü olarak basınç aracın etiket değerine ayarlanır ve valf kapağı takılır — topuk oturtma sırasında yükseltilen basınç mutlaka düşürülmelidir." },
+          { "label": "Doğrudan araca takılır", "verdict": "dogrudan", "explain": "Kaçak kontrolü ve balans atlanamaz; kütle dağılımı değişti." },
+          { "label": "Yalnız basınç ayarlanır", "verdict": "basinc", "explain": "Basınç gerekli ama kaçak kontrolü ve balans da şart." },
+          { "label": "Balans yalnız titreşim şikâyeti gelirse yapılır", "verdict": "sikayet", "explain": "Şikâyet beklemek, müşteriyi dengesiz tekerlekle yola çıkarmak demektir." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bu alanın bütün işleri aynı biçimde bitiyor: yapılan iş, yapıldığı yerde ölçülerek doğrulanıyor."
+    },
+    {
+      "id": 7,
+      "instruction": "İki araç, iki farklı sonuç: biri onarıldı, diğerinin lastiği reddedildi.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik",
+        "question": "Kayda ve müşteriye ne geçer?",
+        "options": [
+          { "label": "Onarımın yeri ve usulü, red kararının gerekçesi ve gözlenen iç hasar, yapılan doğrulamalar; onarılan lastiğin hangi tekerleğe takıldığı da yazılır", "verdict": "kayit", "correct": true, "explain": "Onarım işleri, sonucu uzun süre sonra ortaya çıkabilen işlerdir; bu yüzden kayıt hem müşteriyi hem ustayı korur. Onarılan lastik için yazılacaklar bellidir: deliğin yeri, kullanılan onarım usulü, kaçak kontrolünün ve balansın yapıldığı, son basınç değeri ve lastiğin hangi tekerleğe takıldığı. Bu son bilgi önemlidir — ileride aynı lastikte ikinci bir delik açılırsa, önceki onarımın yerine göre karar verilir. Reddedilen lastik için ise gerekçe açıkça yazılır: hangi bulgu görüldü, neden geri dönüşsüz sayıldı. Bu, müşterinin 'lastiği boşuna değiştirtti' düşüncesine karşı ustanın tek savunmasıdır ve mümkünse iç yüzey gösterilerek anlatılır. Müşteriye ayrıca onarımın bir sınırı olduğu söylenir: onarılmış bir lastik, üreticinin belirlediği koşullar dışında hız ve yük bakımından eskisiyle aynı sayılmayabilir. Bu cümle satış kaygısıyla değil, doğru bilgi verme sorumluluğuyla söylenir." },
+          { "label": "Yalnız yapılan işlem yazılır", "verdict": "islem", "explain": "Red kararının gerekçesi de yazılmalı; sonradan sorulur." },
+          { "label": "Sözlü anlatım yeterli", "verdict": "sozlu", "explain": "Onarım işlerinde sonuç uzun süre sonra çıkabilir; yazılı kayıt korur." },
+          { "label": "Reddedilen lastik için bir şey yazılmaz", "verdict": "yazilmaz", "explain": "Reddin gerekçesi en çok sorgulanan karardır; yazılması şart." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bu alanın son dersi de aynı yerde bitiyor: yapılan iş kadar, yapılmayan işin gerekçesi de kayda geçer."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Dıştan çakılan tıkaç neden kalıcı onarım sayılmaz?",
+        "a": "iki-atlama",
+        "options": [
+          { "verdict": "iki-atlama", "label": "İki işi birden atlar: lastiğin iç yüzeyi incelenmemiş olur ve hava geçirmez iç tabaka kapatılmaz", "explain": "Batan cismin kordları kesip kesmediği ve lastiğin basınçsız gidip gitmediği ancak içeriden bakılarak görülür; dışarıdan bakan biri sağlam bir lastikle iç yapısı ayrışmış bir lastiği ayırt edemez. Ayrıca kalıcı onarım, delik kanalını doldurmanın yanında iç yüzeydeki hava geçirmez tabakayı da kapatmalıdır. Dıştan tıkaç bunu yapmaz, nemin kordlara ulaşmasını engellemez. Yol kenarında en yakın atölyeye ulaşmak için geçici olarak kabul edilebilir." },
+          { "verdict": "pahali", "label": "Pahalı olduğu için", "explain": "Aksine ucuzdur; sorun teknik yetersizliği." },
+          { "verdict": "gorunur", "label": "Dışarıdan görünür kaldığı için", "explain": "Görünüm değil, iç inceleme ve iç sızdırmazlık meselesi." },
+          { "verdict": "sayilir", "label": "Sayılır, kalıcı bir çözümdür", "explain": "İç tabakayı kapatmaz ve inceleme atlanmış olur." }
+        ]
+      },
+      {
+        "q": "Basınçsız gidilmiş bir lastikte delik uygun bölgede olsa bile neden onarım yapılmayabilir?",
+        "a": "ic-yapi",
+        "options": [
+          { "verdict": "ic-yapi", "label": "Düşük basınçta yanak aşırı bükülüp ısınır, iç yapı ayrışır; bu hasar geri gelmez ve onarım deliği kapatsa da zayıflamış yapıyı geri getirmez", "explain": "İç yüzeyde ezilme, kararma, katman ayrılması ya da kauçuk tozu aranır. Bu bulgulardan biri varsa lastik onarılmaz — delik ne kadar küçük ve ne kadar iyi yerde olursa olsun — çünkü o lastik ısındığında dağılmaya devam eder. Karar müşteriye zor anlatılır çünkü lastik dışarıdan sağlam görünür; iç yüzeyi göstermek en ikna edici kanıttır." },
+          { "verdict": "yas", "label": "Lastik yaşlanmıştır", "explain": "Yaş ayrı bir değerlendirme; buradaki sebep ısı hasarı." },
+          { "verdict": "balans", "label": "Balansı bozulmuştur", "explain": "Balans yeniden yapılabilir; iç yapı hasarı geri gelmez." },
+          { "verdict": "onarilir", "label": "Onarılır, basınç tekrar yükseltilir", "explain": "Basınç geri gelir ama ayrışmış iç yapı geri gelmez." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 1,2 bar ve 2,3 bar SENARYO okumalarıdır; 2,3 bar belirli bir araca ait etiket değeri olarak öğretilmiyor. İstenen FARKTIR (1,1 bar) ve dersin gösterdiği şey düşük basınçla çalışmanın onarım kararının önüne geçtiğidir.",
+    "sourceRequired": "Onarılabilir bölgenin sınırları, kabul edilen azami delik çapı ve iki delik arasındaki asgari mesafe bilinçle VERİLMEDİ: bu değerler lastik üreticisinin ve ilgili standardın belirlediği değerlerdir, künyesiz yazılırsa uydurma değer olur. Ders sayıyı değil, kararın hangi üç soruyla verildiğini öğretiyor.",
+    "kapsam": "Onarım işleminin ayrıntılı uygulaması (raspalama, çözücü, kürleme süresi) kapsam dışı — ürüne özgüdür ve setin talimatı izlenir. İç lastikli ve ticari araç lastikleri de kapsam dışı.",
+    "reviewedByMechanic": false
+  }
+}

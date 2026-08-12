@@ -1,0 +1,188 @@
+{
+  "id": "motor.yag-ve-filtre",
+  "area": "motor-mekanik",
+  "stage": 4,
+  "title": "Motor Yağı ve Yağ Filtresi Değişimi",
+  "vehicleClass": "binek-arac",
+  "estimatedMinutes": 22,
+  "prerequisites": ["temel.kaldirma-sehpalama", "temel.civata-sokme-takma", "temel.tork-anahtari"],
+  "learningGoals": [
+    "Yağı doğru sıcaklıkta ve tam boşaltmak",
+    "Karter tapası contasını ve aşırı sıkma riskini yönetmek",
+    "Filtre değişiminde çift conta tuzağını görmek",
+    "Değişim sonrası seviyeyi doğru sırayla doğrulamak"
+  ],
+
+  "safety": [
+    { "rule": "Araç sehpada olmadan altına girilmez", "why": "Yağ değişimi aracın altında uzun süre kalmayı gerektirir. Krikonun üstünde geçirilen her dakika risktir", "blocksStart": true },
+    { "rule": "Sıcak yağ yakar", "why": "Çalışma sıcaklığındaki motor yağı ciddi yanık bırakır ve tapa çıkarken elin üstüne akar. Eldiven ve kol koruması şart", "blocksStart": true },
+    { "rule": "Eski yağ kanalizasyona ya da toprağa dökülmez", "why": "Bir litre atık yağ büyük hacimde suyu kullanılamaz hale getirir. Toplama kabına alınır ve lisanslı toplayıcıya verilir; bu yasal bir yükümlülüktür", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.lokma-17", "label": "17 mm lokma (karter tapası)", "required": true },
+    { "id": "tool.circir", "label": "1/2\" cırcır kolu", "required": true },
+    { "id": "tool.filtre-anahtari", "label": "Yağ filtresi anahtarı", "required": true },
+    { "id": "tool.yag-kabi", "label": "Atık yağ toplama kabı", "required": true },
+    { "id": "tool.huni", "label": "Huni", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Yağı boşaltmadan önce motorun sıcaklığına karar ver.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.karter",
+        "question": "Yağ hangi sıcaklıkta boşaltılır?",
+        "options": [
+          { "label": "Motor ılıkken — çalışma sıcaklığına yakın ama yakmayacak kadar soğumuş", "verdict": "ilik", "correct": true, "explain": "Sıcak yağ akıcıdır ve askıdaki kurumu, metal tozunu yanında sürükler. Amaç yalnız yağı boşaltmak değil, kiri de birlikte dışarı almak. Motoru çalıştırıp birkaç dakika beklemek bu yüzden işin parçasıdır." },
+          { "label": "Motor buz gibi soğukken", "verdict": "soguk", "explain": "Soğuk yağ koyudur; karterin dibinde ve kanallarda kalır. Kirin bir kısmı çökelmiş halde içeride kalır ve yeni yağa karışır." },
+          { "label": "Motor kaynar sıcakken, hemen kapatıp açarım", "verdict": "kaynar", "explain": "Akıcılık en iyi noktadadır ama tapa çıkarken elinin üstüne çok sıcak yağ gelir. Kazanç, yanık riskine değmez; birkaç dakika beklenir." },
+          { "label": "Fark etmez, yağ nasılsa akar", "verdict": "farketmez", "explain": "Akar ama tamamı akmaz. Karterde kalan koyu yağ, yeni yağı ilk dakikadan itibaren kirletir." }
+        ]
+      },
+      "camera": "arac-alt",
+      "teachingNote": "Çırakla ustayı ayıran ilk fark burada: çırak yağı boşaltır, usta kiri boşaltır."
+    },
+    {
+      "id": 2,
+      "instruction": "Toplama kabını altına al, karter tapasını sök.",
+      "interaction": {
+        "type": "rotate",
+        "target": "part.karter-tapasi",
+        "direction": "ccw",
+        "turns": 4,
+        "tool": "tool.lokma-17",
+        "requiresGesture": true
+      },
+      "camera": "arac-alt",
+      "commonMistake": {
+        "if": "ters-yon",
+        "feedback": "Sökmek saat yönünün tersidir. Alüminyum kartere sıkma yönünde asılmak dişi anında sıyırır."
+      },
+      "hint": "Son turları elle çevir ve tapayı yağın akış yönüne ters tarafa çek. Yoksa tapa elinden kayıp toplama kabının dibine düşer.",
+      "teachingNote": "Kabı tapanın tam altına değil, biraz ileriye koy: basınçla çıkan ilk yağ dik değil, eğik fışkırır."
+    },
+    {
+      "id": 3,
+      "instruction": "Tapa elinde. Takmadan önce ne yaparsın?",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.karter-tapasi",
+        "question": "Karter tapası nasıl takılır?",
+        "options": [
+          { "label": "Yeni conta pulu takar, kılavuzdaki torkla sıkarım", "verdict": "yeni-pul", "correct": true, "explain": "O pul ezilerek sızdırmazlık yapar; bir kez ezilmiştir ve ikinci kez aynı işi yapmaz. Yeni pul kuruş hesabıdır, sızdıran karter iş kaybıdır. Tork değeri kılavuzdan okunur, elle 'yeterince' diye sıkılmaz." },
+          { "label": "Eski pulu kullanırım, sağlam görünüyor", "verdict": "eski-pul", "explain": "Görünüşü sağlamdır ama ezilme payı bitmiştir. Sızdırma hemen başlamaz; birkaç gün sonra park yerinde damla olarak ortaya çıkar ve suçlu yağı değiştiren kişidir." },
+          { "label": "Dişine teflon bant sararım", "verdict": "teflon", "explain": "Teflon bant diş üzerinden sızdırmazlık yapan bağlantılar içindir. Karter tapası yüzeyden, pulla sızdırmazlık yapar. Bant ayrıca kopup yağ devresine karışabilir." },
+          { "label": "Sızdırmasın diye iyice sıkarım", "verdict": "asiri-sik", "explain": "Karterlerin çoğu alüminyum ya da ince sacdır. Aşırı sıkma dişi sıyırır; o noktadan sonra iş tapa takmak değil, karter tamiri ya da değişimidir." }
+        ]
+      },
+      "camera": "arac-alt",
+      "teachingNote": "Karter tapası, aşırı sıkmanın en pahalıya patladığı yerdir. Sıyrılan diş için helicoil bir çare ama karterin sökülmesini gerektirir."
+    },
+    {
+      "id": 4,
+      "instruction": "Filtre anahtarıyla eski yağ filtresini sök.",
+      "interaction": {
+        "type": "rotate",
+        "target": "part.yag-filtresi",
+        "direction": "ccw",
+        "turns": 3,
+        "tool": "tool.filtre-anahtari",
+        "requiresGesture": true
+      },
+      "camera": "motor-alt",
+      "commonMistake": {
+        "if": "ters-yon",
+        "feedback": "Sökmek saat yönünün tersidir. Filtreyi sıkma yönünde zorlamak gövdeyi ezer ve anahtarın kavrayacağı yüzeyi bitirir."
+      },
+      "hint": "Filtre dolu ve ağırdır; gevşedikten sonra düz aşağı indir, yan yatırma.",
+      "teachingNote": "Filtre gövdesi ezilirse anahtar boşa döner. O noktada kalan yol gövdeyi delip tornavidayla çevirmektir — kirli, uzun ve gereksiz bir iş."
+    },
+    {
+      "id": 5,
+      "instruction": "Yeni filtreyi takmadan önce blok yüzeyine bak.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.yag-filtresi",
+        "question": "Yeni filtre takılmadan önce ne kontrol edilir?",
+        "options": [
+          { "label": "Eski contanın blokta kalmadığını doğrularım; yeni contaya parmağımla ince yağ sürerim", "verdict": "conta-kontrol", "correct": true, "explain": "Eski lastik conta bazen filtreyle gelmez, blok yüzeyine yapışık kalır. Yeni filtre onun üstüne takılırsa iki conta üst üste biner: bağlantı ilk yağ basıncında fırlar ve motor saniyeler içinde tüm yağını atar. Yeni contaya sürülen ince yağ ise contanın sıkarken burulmasını önler." },
+          { "label": "Doğrudan yeni filtreyi takarım, kontrol gereksiz", "verdict": "dogrudan-tak", "explain": "Çift conta bu yüzden olur. Bakılmayan yüzey, bakılan yüzeyden farklı görünmez — fark ancak motor çalışınca ortaya çıkar ve o zaman iş biter." },
+          { "label": "Contayı gres ya da sıvı conta ile kaplarım", "verdict": "gres", "explain": "Gres ısıyla erir ve yağa karışır; sıvı conta ise lastik contanın oturmasını bozar. Sürülecek şey motorun kendi yağıdır." },
+          { "label": "Filtreyi yağla doldurup takarım", "verdict": "doldur", "explain": "Bazı dik montajlı filtrelerde yapılır ama yatay montajda dökülür ve blok yüzeyini yağlar; conta kayar. Asıl kritik adım bu değil, eski contanın kontrolüdür." }
+        ]
+      },
+      "camera": "motor-alt",
+      "teachingNote": "Çift conta, bu meslekte 'bir kez yapılır' denen hatalardandır. Motor yağsız kalınca yatak sarar ve fatura yağ değişiminin yüz katıdır."
+    },
+    {
+      "id": 6,
+      "instruction": "Yeni filtreyi tak. Conta yüzeye değdikten sonra elinle sık.",
+      "interaction": {
+        "type": "rotate",
+        "target": "part.yag-filtresi",
+        "direction": "cw",
+        "turns": 1,
+        "requiresGesture": true
+      },
+      "camera": "motor-alt",
+      "commonMistake": {
+        "if": "ters-yon",
+        "feedback": "Takmak saat yönündedir."
+      },
+      "hint": "Conta yüzeye değdiği andan itibaren yaklaşık dörtte üç tur. Filtrenin gövdesinde bu talimat genelde yazılıdır.",
+      "teachingNote": "Yağ filtresi tork anahtarıyla sıkılmaz, elle sıkılır. Anahtar takmak contayı ezer; ezilen conta hem sızdırır hem de bir sonraki değişimde filtreyi sökülemez hale getirir. Anahtar yalnız sökmek içindir."
+    },
+    {
+      "id": 7,
+      "instruction": "Yeni yağı doldurdun. Sırada ne var?",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.yag-cubugu",
+        "question": "Doldurduktan sonra seviye nasıl doğrulanır?",
+        "options": [
+          { "label": "Çalıştırıp yağ lambası sönene kadar beklerim, durdururum, birkaç dakika bekleyip çubuktan bakarım", "verdict": "calistir-bekle-bak", "correct": true, "explain": "Yeni filtre boştur ve motor çalışınca dolar; seviye o anda düşer. Lambanın sönmesi yağın devreye ulaştığını gösterir. Motor durunca yağın kartere inmesi için birkaç dakika beklenir, ancak ondan sonra okunan değer gerçektir. Bu arada tapa ve filtre çevresinde sızdırma var mı diye bakılır." },
+          { "label": "Doldurur doldurmaz çubuktan bakar, işi bitiririm", "verdict": "hemen-bak", "explain": "Filtre henüz boş. Şu an gördüğün seviye motor çalışınca düşecek ve araç eksik yağla yola çıkacak." },
+          { "label": "Kutudaki litre yazıyor, çubuğa bakmaya gerek yok", "verdict": "litre-yeter", "explain": "Kutudaki değer nominaldir; karterde kalan eski yağ ve filtre hacmi işi değiştirir. Son söz her zaman çubuğundur." },
+          { "label": "Fazladan yarım litre koyarım, eksik kalmasın", "verdict": "fazla-koy", "explain": "Fazla yağ krank miline çarpar, köpürür ve köpüren yağ basınç taşımaz. Ayrıca keçeleri zorlar. Fazla yağ, eksik yağ kadar zararlıdır." }
+        ]
+      },
+      "camera": "motor-ust",
+      "teachingNote": "İş, yağ dolunca değil, seviye doğrulanıp sızdırma kontrolü yapılınca biter. Aracı müşteriye vermeden önce altına son bir kez bakılır."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Eski conta blokta kalır ve yeni filtre üstüne takılırsa ne olur?",
+        "a": "cift-conta-firlar",
+        "options": [
+          { "verdict": "cift-conta-firlar", "label": "Çift conta ilk basınçta fırlar, motor yağını saniyeler içinde kaybeder", "explain": "İki conta üst üste bindiğinde filtre bloğa tam oturmaz ve sızdırmazlık yüzeyi kaçar. Yağ basıncı devreye girdiği anda bağlantı boşalır. Sürücü uyarı lambasını gördüğünde motor çoktan yağsız dönmüştür; sonuç genelde sarmış yataktır." },
+          { "verdict": "biraz-sizdirir", "label": "Sadece biraz sızdırır", "explain": "Bazen ilk dakikalarda öyle görünür ama bu bir damlatma arızası değil, ani boşalma arızasıdır." },
+          { "verdict": "filtre-tikanir", "label": "Filtre tıkanır", "explain": "Tıkanma ayrı bir konu. Buradaki sorun süzme değil, sızdırmazlık." },
+          { "verdict": "sorun-yok", "label": "Çift conta daha iyi sızdırmazlık yapar", "explain": "Tam tersi. Sızdırmazlık tek ve düzgün oturan bir contayla olur; ikincisi yüzeyi bozar." }
+        ]
+      },
+      {
+        "q": "Yağ filtresi neden tork anahtarıyla değil elle sıkılır?",
+        "a": "conta-ezilir",
+        "options": [
+          { "verdict": "conta-ezilir", "label": "Lastik conta ezilir; sızdırır ve filtre bir daha sökülemez", "explain": "Filtrenin sızdırmazlığı metal diş değil, ezilerek oturan lastik contadır. Talimat 'conta temas ettikten sonra yaklaşık dörtte üç tur' şeklindedir ve el bunu hissedebilir. Anahtarla eklenen kuvvet contayı görevini yapamayacak kadar ezer, üstelik bir sonraki değişimde filtreyi kavranamaz hale getirir." },
+          { "verdict": "tork-anahtari-sigmaz", "label": "Tork anahtarı oraya sığmadığı için", "explain": "Erişim sorunu olabilir ama sebep bu değil; sığsa da kullanılmaz." },
+          { "verdict": "filtre-plastik", "label": "Filtre plastik olduğu için", "explain": "Filtre gövdesi genelde sactır. Sorun malzeme değil, contanın çalışma biçimi." },
+          { "verdict": "farketmez", "label": "Fark etmez, tork anahtarı da kullanılabilir", "explain": "Kullanılmaz. Üreticinin filtre gövdesine bastığı talimat el sıkmasıdır." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "sourceRequired": "Bu derste araca özgü sayısal değer bilerek verilmedi. Karter tapası torku, yağ tipi (viskozite ve onay kodu) ve yağ miktarı araca özgüdür; üretici kılavuzundan okunur ve kaynaksız yayınlanmaz. 'Conta temasından sonra ~3/4 tur' filtre üreticilerinin gövdeye bastığı genel talimattır, araca özgü değildir.",
+    "kapsam": "Aracın altı ve motor bloğu modeli gerekiyor. Model gelene kadar adımlar metinle oynanır; tapa ve filtre dönüşü animasyonlu değildir.",
+    "reviewedByMechanic": false
+  }
+}

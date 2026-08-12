@@ -1,0 +1,149 @@
+{
+  "id": "temel.sikismis-civata",
+  "area": "motor-mekanik",
+  "stage": 2,
+  "title": "Sıkışmış ve Turlamış Cıvata",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 16,
+  "prerequisites": ["temel.el-aletleri", "temel.civata-sokme-takma"],
+  "learningGoals": [
+    "Dönmeyen cıvatada zorlamadan önce doğru sırayı uygulamak",
+    "Isının nerede işe yaradığını, nerede yangın çıkardığını ayırmak",
+    "Başı yalanmış cıvatada kalan seçenekleri ve risklerini bilmek"
+  ],
+
+  "safety": [
+    { "rule": "Yakıt hattı, fren hidroliği ve plastik parçanın yakınında alev kullanılmaz", "why": "Benzin buharı alevden uzakta bile tutuşur; fren hidroliği ısınınca kaynar ve sıçrar. Isıtma kararı, çevresinde ne olduğuna bakılarak verilir", "blocksStart": true },
+    { "rule": "Isıtılan parçaya çıplak elle dokunulmaz, üstüne su dökülmez", "why": "Kızgın metale su değince buhar patlaması olur ve parça çatlar", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.pas-sokucu", "label": "Pas sökücü sprey", "required": true },
+    { "id": "tool.lokma-13", "label": "13 mm lokma", "required": true },
+    { "id": "tool.circir", "label": "1/2\" cırcır kolu", "required": true },
+    { "id": "tool.ekstraktor", "label": "Cıvata ekstraktörü", "required": false },
+    { "id": "tool.uzatma-borusu", "label": "Uzatma borusu", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Cıvata dönmüyor. İlk hamlen ne olur?",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.egzersiz-civata.1",
+        "question": "Dönmeyen cıvatada ilk yapılacak nedir?",
+        "options": [
+          { "label": "Pas sökücü sıkıp beklerim, sonra başına hafifçe vururum", "verdict": "pas-sokucu", "correct": true, "explain": "Pas sökücü dişin arasına kılcal yolla sızar ve bunun için zamana ihtiyacı var — sıkıp hemen çevirmek spreyi boşa harcamaktır. Başa vurulan hafif darbe pas bağını kırar ve sıvının içeri girmesini kolaylaştırır." },
+          { "label": "Anahtara uzatma borusu takıp bastırırım", "verdict": "uzatma-borusu", "explain": "Moment artar ama cıvatanın dayanımı artmaz. En muhtemel sonuç cıvatanın kopması ya da başının yalanmasıdır — ikisi de işi büyütür." },
+          { "label": "Hemen ekstraktör takarım", "verdict": "hemen-ekstraktor", "explain": "Ekstraktör son çaredir, ilk hamle değil. Başı sağlam bir cıvatada ekstraktöre geçmek, elindeki en kolay tutamağı delerek yok etmektir." },
+          { "label": "Daha büyük anahtar alırım", "verdict": "buyuk-anahtar", "explain": "Sorun anahtarın gücü değil, dişteki pas bağı. Aynı hatayı daha fazla kuvvetle tekrarlamış olursun." }
+        ]
+      },
+      "camera": "bench-close",
+      "teachingNote": "Sıralama şudur: bekle, kıpırdat, ısıt, kes. Her adım bir öncekini çözemediğinde geçilir; atlanan adım işi büyütür."
+    },
+    {
+      "id": 2,
+      "instruction": "Pas sökücü işledi. Şimdi önce sıkma yönünde hafifçe kıpırdat.",
+      "interaction": {
+        "type": "rotate",
+        "target": "part.egzersiz-civata.1",
+        "direction": "cw",
+        "turns": 1,
+        "tool": "tool.lokma-13",
+        "requiresGesture": true
+      },
+      "camera": "bench-close",
+      "commonMistake": {
+        "if": "ters-yon",
+        "feedback": "Bu adımda sökme değil, sıkma yönüne kıpırdatıyoruz. Doğrudan sökmeye asılmak pas bağını kırmadan cıvatayı koparabilir."
+      },
+      "hint": "Çok az. Amaç sökmek değil, oturmuş pas bağını kırıp pas sökücüye yol açmak.",
+      "teachingNote": "Sıkışmış cıvatayı önce hafifçe sıkmak sezgiye ters gelir ama kilitlenmiş dişi gevşetmenin en ucuz yoludur. Bu hareket cıvatanın kopma sınırına yaklaşmadan bağı bozar."
+    },
+    {
+      "id": 3,
+      "instruction": "Şimdi sök. Yavaş ve kesintisiz çek.",
+      "interaction": {
+        "type": "rotate",
+        "target": "part.egzersiz-civata.1",
+        "direction": "ccw",
+        "turns": 5,
+        "tool": "tool.lokma-13",
+        "requiresGesture": true
+      },
+      "camera": "bench-close",
+      "commonMistake": {
+        "if": "ters-yon",
+        "feedback": "Sökmek saat yönünün tersidir."
+      },
+      "hint": "Ani ve sarsıntılı çekme. Sarsıntı kuvveti anlık zirveye çıkarır; cıvata tam orada kopar.",
+      "teachingNote": "Zorlanan cıvata çıkarken direnç artarsa dur. Artan direnç genelde dişin sıyrılmaya başladığını söyler."
+    },
+    {
+      "id": 4,
+      "instruction": "Bir sonraki cıvata daha da sıkı. Yanından yakıt hattı geçiyor. Isıtır mısın?",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.egzersiz-civata.1",
+        "question": "Yakıt hattının yanındaki sıkışmış cıvatada ısı kullanılır mı?",
+        "options": [
+          { "label": "Hayır. Alev yerine mekanik yolları denerim", "verdict": "isitma-yok", "correct": true, "explain": "Isı sıkışmış cıvatanın en etkili çözümlerinden biridir ama yanıcı bir şeyin yanında değil. Benzin buharı alevin doğrudan değmesini beklemez. Burada darbeli tornavida, ekstraktör ya da parçayı sökülmüş halde ısıtmak kalır." },
+          { "label": "Evet, kısa süre tutarsam sorun olmaz", "verdict": "kisa-sure", "explain": "Tutuşma süreye değil, buharın alevle buluşmasına bağlıdır. Kısa süre bu riski küçültmez." },
+          { "label": "Evet, yanına ıslak bez koyarım", "verdict": "islak-bez", "explain": "Islak bez ısıyı biraz keser ama yakıt buharını engellemez. Ayrıca kızgın metale değen su buhar patlaması yapar." },
+          { "label": "Evet, yakıt hattını elimle iterim", "verdict": "hatti-it", "explain": "İtilen hat gerilir ve rekorundan sızdırabilir. Yanıcı kaynağı alevden uzaklaştırmaya çalışmak, alevi oradan çekmenin yerini tutmaz." }
+        ]
+      },
+      "camera": "bench-close",
+      "teachingNote": "Isıtma metali genleştirip pas bağını kırar; doğru uygulanınca cıvata yerine somunu ya da içine girdiği parçayı ısıtırsın."
+    },
+    {
+      "id": 5,
+      "instruction": "Bir cıvatanın başı yalandı, lokma boşa dönüyor. Ne yaparsın?",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.egzersiz-civata.1",
+        "question": "Turlamış (başı yalanmış) cıvatada doğru yol hangisi?",
+        "options": [
+          { "label": "Sıkışmalı (turlamış cıvata) lokma ya da ekstraktör kullanırım", "verdict": "ekstraktor", "correct": true, "explain": "Bu lokmaların içi ters helis kanallıdır; çevirdikçe yalanmış başa gömülüp kavrar. Tutamak kaldıysa önce bunu dene — ekstraktör başı delmeyi gerektirdiği için bir adım sonrasıdır." },
+          { "label": "Pense ile kavrarım", "verdict": "pense", "explain": "Pense zaten yuvarlanmış başı iyice yuvarlar ve elindeki son tutamağı da bitirir." },
+          { "label": "Başına somun kaynatırım", "verdict": "kaynak", "explain": "Bu gerçekten çalışan bir usta yöntemidir — kaynak ısısı aynı zamanda pas bağını da kırar. Ama kaynak makinesi, uygun erişim ve çevrede yanıcı olmaması gerekir; ilk seçenek değildir." },
+          { "label": "Keskiyle kanal açıp tornavida ile çeviririm", "verdict": "keski", "explain": "Küçük cıvatada bazen işe yarar ama darbe parçaya iletilir ve kanal açarken başı büsbütün bitirebilirsin. Sıkışmalı lokma varken buna gerek yok." }
+        ]
+      },
+      "camera": "bench-close"
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Pas sökücü sıkıp hemen çevirmek neden işe yaramaz?",
+        "a": "sizmasi-zaman-alir",
+        "options": [
+          { "verdict": "sizmasi-zaman-alir", "label": "Dişin arasına sızması zaman alır", "explain": "Sıvı kılcal yolla dişin içine yürür. Yüzeyi ıslatmak paslı dişi çözmez; birkaç dakika beklemek spreyin tek işe yarama koşuludur." },
+          { "verdict": "yagli-oldugu-icin", "label": "Yağlı olduğu için anahtar kayar", "explain": "Anahtar cıvatanın başını kavrar, dişini değil. Kayma sorunu değil." },
+          { "verdict": "isinmasi-gerekir", "label": "Önce ısınması gerekir", "explain": "Pas sökücü ısıtılmaz. Isı ayrı bir yöntemdir." },
+          { "verdict": "yarar-hemen", "label": "İşe yarar, beklemeye gerek yok", "explain": "Bekleme adımı atlanınca sprey yalnız dış yüzeyi ıslatmış olur." }
+        ]
+      },
+      {
+        "q": "Ekstraktör cıvatanın içinde kırılırsa neden büyük sorundur?",
+        "a": "sert-celik-delinmez",
+        "options": [
+          { "verdict": "sert-celik-delinmez", "label": "Ekstraktör çeliği cıvatadan sert ve gevrektir, normal matkap onu delemez", "explain": "Kırılan parça yerinde kalır ve üstünden delmeye çalışan matkap ucu körelir. Bu noktadan sonra iş genelde erozyon tezgâhına ya da parçanın değişimine gider. Bu yüzden ekstraktöre asılmadan önce iyi düşünülür." },
+          { "verdict": "pahali", "label": "Ekstraktör pahalı olduğu için", "explain": "Maliyet sorunu değil; asıl sorun kırılan parçanın çıkarılamaması." },
+          { "verdict": "dis-bozulur", "label": "Sadece dişi bozar", "explain": "Diş onarılabilir bir hasardır; içeride kalan sert çelik parça çoğu zaman onarılamaz." },
+          { "verdict": "sorun-degil", "label": "Sorun değil, mıknatısla çıkar", "explain": "Sıkışarak kırılan parça mıknatısla gelmez; zaten sıkıştığı için kırılmıştır." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "sourceRequired": "Bu derste araca özgü sayısal değer yoktur; tümü yöntem bilgisidir.",
+    "reviewedByMechanic": false
+  }
+}

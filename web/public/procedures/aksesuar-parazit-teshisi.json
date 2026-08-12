@@ -1,0 +1,178 @@
+{
+  "id": "aksesuar.parazit-teshisi",
+  "area": "aksesuar-ses",
+  "stage": 7,
+  "title": "Parazit Teşhisi: Vınlama, Cızırtı ve Uğultunun Kaynağı",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 40,
+  "prerequisites": ["aksesuar.ses-kablolama"],
+  "learningGoals": [
+    "Gürültünün karakterinden kaynağını daraltmak",
+    "Şase farkını ölçüp şase döngüsünü görmek",
+    "Zinciri bölerek gürültünün nereden bindiğini kanıtlamak"
+  ],
+
+  "safety": [
+    { "rule": "Teşhis sırasında ses kademeli açılır ve hoparlörler yüksek seviyede bozuk sinyalle sürülmez", "why": "Bozulmuş bir sinyal, gücünden bağımsız olarak hoparlörü yakabilir; ayrıca kapalı kabinde yüksek ses işitmeye zarar verir", "blocksStart": true },
+    { "rule": "Motor çalışırken yapılan ölçümlerde hareketli parçalardan ve sıcak yüzeylerden uzak durulur", "why": "Kayış, fan ve egzoz motor çalışırken canlıdır; ölçüm probu ya da el bir anda kapılabilir", "blocksStart": true },
+    { "rule": "Gürültüyü susturmak için şase bağlantısı kesilmez ya da bir koruma kaldırılmaz", "why": "Belirtiyi susturan çözüm arızayı büyütür — bu alanın değişmeyen kuralı; gürültünün sebebi bulunup giderilir", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.multimetre", "label": "Multimetre", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true },
+    { "id": "tool.plastik-sokme-spatulasi", "label": "Plastik söküm spatulası", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Müşteri 'sistemden vınlama geliyor' diyor. Önce gürültüyü dinliyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.hoparlor-kapi",
+        "question": "Teşhisin ilk adımı nedir?",
+        "options": [
+          { "label": "Gürültünün neyle değiştiğini bulmak: motor devriyle mi, ses seviyesiyle mi, kontak konumuyla mı, yoksa belirli bir tüketici çalışınca mı — bu tek soru şüphelilerin çoğunu eler", "verdict": "neyle-degisiyor", "correct": true, "explain": "Ses gürültüsü tarif edilmesi zor bir şikâyettir ve bu yüzden teşhis kelimelerle değil davranışla yapılır. Sorulacak tek soru şudur: gürültü neyle birlikte değişiyor? Cevap dört gruptan birine düşer ve her grup farklı bir yere bakar. Birincisi, gürültü motor devriyle birlikte yükselip alçalıyorsa — gaza basınca tizleşen bir vınlama — kaynak aracın şarj sistemi ve şasedir; en yaygın olan budur. İkincisi, gürültü ses seviyesiyle birlikte artıyorsa kaynak sinyal zincirindedir: kaynak cihazın çıkışı, ayar seviyeleri ya da bozulmuş bir sinyal. Üçüncüsü, gürültü ses seviyesinden bağımsız ve sabitse yükselticinin girişine ya da beslemesine bir şey biniyordur. Dördüncüsü, gürültü belirli bir tüketici çalışınca çıkıyorsa — silecek, fan, yakıt pompası, dönüş sinyali — o tüketicinin devresi sinyal hattını etkiliyordur. Bu ayrımı yapmadan kablo değiştirmeye başlamak, saatlerce parça değiştirip aynı yere dönmek demektir. Dinleme disiplini de vardır: gürültü hem motor çalışırken hem kontak açık motor kapalıyken dinlenir, çünkü ikisi arasındaki fark şarj sistemini işaret eder." },
+          { "label": "Sinyal kabloları değiştirilir", "verdict": "kablo-degis", "explain": "Sebep daraltılmadan parça değiştirmek en pahalı yol." },
+          { "label": "Yükseltici değiştirilir", "verdict": "anfi-degis", "explain": "En son sırada; önce gürültünün karakteri belirlenir." },
+          { "label": "Ses seviyesi kısılır", "verdict": "kis", "explain": "Belirtiyi susturmak arızayı çözmez." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Tek soru: gürültü neyle değişiyor? Motor devri, ses seviyesi, kontak konumu ya da belirli bir tüketici — dördü dört ayrı yere bakar."
+    },
+    {
+      "id": 2,
+      "instruction": "İki cihazın şase noktaları arasındaki gerilimi ölçtün: sistem kapalıyken 0,02 V, çalışırken 0,45 V. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.multimetre-aksesuar",
+        "unit": "volt",
+        "acceptRange": [0.41, 0.45]
+      },
+      "camera": "aksesuar",
+      "hint": "0,45 eksi 0,02.",
+      "teachingNote": "0,43 voltluk bu fark, gürültünün en yaygın sebebinin doğrudan kanıtıdır. Beklenti şudur: gövdenin iki noktası arasında gerilim olmamalıdır, çünkü ikisi de aynı metaldir ve ikisine de şase denir. Gerçekte gövde mükemmel bir iletken değildir; üzerinden akım geçtiğinde iki nokta arasında küçük bir gerilim farkı oluşur. Sistem kapalıyken bu fark yok denecek kadar küçüktür; sistem çalışıp akım çekmeye başlayınca büyür. Sorun şudur: baş ünite bir noktadan, yükseltici başka bir noktadan şaselenmişse ikisinin sıfır kabul ettiği seviye farklıdır. Sinyal kablosu bu iki cihaz arasındaki farkı da taşır ve bu fark hoparlörden gürültü olarak duyulur — buna şase döngüsü denir ve vınlamanın klasik sebebidir. Ölçüm nasıl yapılır: multimetrenin bir ucu bir cihazın şase noktasına, diğer ucu öbür cihazın şase noktasına değecek biçimde bağlanır ve sistem çalışırken okunur. Okunan değer ne kadar büyükse döngü o kadar güçlüdür. Çözüm parça değiştirmek değildir: bütün ses bileşenleri aynı noktadan, temiz ve kısa bir bağlantıyla şaselenir. Kabul edilebilir şase farkı sınırı sisteme özgüdür; bu ders bir sınır vermiyor, önemli olan farkın varlığıdır."
+    },
+    {
+      "id": 3,
+      "instruction": "Şase döngüsünü doğruluyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sase-noktasi-aksesuar",
+        "question": "Şase döngüsü nasıl giderilir?",
+        "options": [
+          { "label": "Bütün ses bileşenleri aynı şase noktasına, kısa ve metale kadar temizlenmiş bağlantılarla toplanır; sorun sürerse baş ünitenin şasesi ile yükselticinin şasesi arasındaki fark ayrıca aranır", "verdict": "tek-nokta", "correct": true, "explain": "Şase döngüsünün çözümü ekleme değil, düzeltmedir. Birinci adım toplamaktır: yükseltici, işlemci ve varsa diğer ses bileşenleri aynı şase noktasını kullanır; böylece hepsinin sıfır kabul ettiği seviye aynı olur ve aralarındaki fark ortadan kalkar. İkinci adım kalitedir: o noktadaki temas yüzeyi boyadan ve pastan metale kadar temizlenir, uygun pabuç kullanılır ve cıvata iyi sıkılır — kötü bir tek nokta, iyi dağıtılmış iki noktadan daha çok gürültü üretir. Üçüncü adım kısalıktır: şase kablosu ne kadar kısaysa üzerinde o kadar az gerilim oluşur. Dördüncü adım baş ünitedir ve atlanır: baş ünite aracın kendi kablo demetinden şaselenir ve o şase, bagajdaki yükselticinin şasesinden uzaktır; ikisi arasındaki fark sinyal hattına biner. Bu durumda bakılacak yer aracın kendi şase noktalarının durumudur — gevşemiş ya da oksitlenmiş fabrika şase bağlantıları hem bu gürültüyü hem başka arızaları üretir ve temizlenip sıkılır. Yapılmaması gerekenler de nettir: gürültüyü bastırmak için sinyal hattına gelişigüzel bir eleman eklemek, şase bağlantısını kesmek ya da cihazı gövdeden yalıtmak — bunlar belirtiyi susturur, sebebi bırakır ve bu alanın değişmeyen kuralına aykırıdır. Bazı kurulumlarda uygun bir yalıtım elemanı gerçekten gerekir ama bu, şase düzeltildikten SONRA ve son çare olarak düşünülür." },
+          { "label": "Sinyal hattına gürültü bastırıcı takılır", "verdict": "bastirici", "explain": "Belirtiyi susturur, sebebi bırakır; önce şase düzeltilir." },
+          { "label": "Yükselticinin şasesi kesilir", "verdict": "kes", "explain": "Şase kesilirse sistem hiç çalışmaz." },
+          { "label": "Ses seviyesi düşük tutulur", "verdict": "kis", "explain": "Çözüm değil, gizleme." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Kötü bir tek nokta, iyi dağıtılmış iki noktadan daha çok gürültü üretir. Önce topla, sonra kaliteyi düzelt."
+    },
+    {
+      "id": 4,
+      "instruction": "Gürültü hâlâ var. Zinciri bölerek arıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.rca-kablosu",
+        "question": "Bölme testi nasıl yapılır?",
+        "options": [
+          { "label": "Sinyal kablosu yükselticinin girişinden ayrılır: gürültü devam ediyorsa kaynak yükseltici tarafındadır, kesiliyorsa gürültü kaynaktan ya da sinyal hattından geliyordur", "verdict": "bolme", "correct": true, "explain": "Bölme testi bu uygulamanın en güçlü aletidir ve elektrik alanında öğrenilen 'zinciri ikiye böl' mantığının aynısıdır. Uygulaması şudur: sinyal kablosu yükselticinin girişinden çıkarılır ve sistem yine çalıştırılır. İki sonuç vardır ve her biri şüphelilerin yarısını eler. Birinci sonuç: gürültü devam ediyor. O hâlde gürültü sinyalle gelmiyordur; kaynak yükselticinin kendi beslemesinde, şasesinde ya da hoparlör hattındadır. Bakılacak yerler: besleme kablosunun güzergâhı, şase kalitesi ve hoparlör kablolarının güç kablolarıyla paralel gidip gitmediği. İkinci sonuç: gürültü kesildi. O hâlde gürültü sinyal yoluyla giriyordur ve arama daha da bölünür — kısa bir yedek sinyal kablosuyla cihazlar yan yana denenir; gürültü kayboluyorsa sorun kablonun kendisinde ya da güzergâhındadır, sürüyorsa kaynak cihazın çıkışındadır. Aynı yöntem hoparlör tarafında da kullanılır: hoparlörler tek tek ayrılarak gürültünün hepsinden mi yoksa birinden mi geldiği bulunur. Her bölmede tek bir şey değiştirilir — iki şeyi birden değiştiren usta, sonucun hangisinden geldiğini asla bilemez." },
+          { "label": "Bütün kablolar aynı anda değiştirilir", "verdict": "hepsi", "explain": "Sonucun hangisinden geldiği bilinemez." },
+          { "label": "Sistem tamamen sökülür", "verdict": "sok", "explain": "Bölme testi sökmeden sonucu verir." },
+          { "label": "Yeni yükseltici denenir", "verdict": "yeni-anfi", "explain": "Parça değiştirmeden önce zincir bölünür." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Her bölmede tek bir şey değiştir. İki şeyi birden değiştiren, sonucun hangisinden geldiğini asla bilemez."
+    },
+    {
+      "id": 5,
+      "instruction": "Gürültü motor devriyle birlikte tizleşiyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.anfi",
+        "question": "Bu karakter neyi gösterir?",
+        "options": [
+          { "label": "Kaynak aracın şarj sistemidir: şarj dalgalanması şase ya da besleme yoluyla sinyale biniyordur; önce şase ve güzergâh, sonra şarj sisteminin kendisi kontrol edilir", "verdict": "sarj-kaynakli", "correct": true, "explain": "Motor devriyle birlikte yükselen bir vınlama, ses sistemlerinde en tanınan gürültüdür ve kaynağı bellidir: araç çalışırken elektriği üreten sistem, düzgün bir gerilim değil, üzerinde küçük dalgalanmalar olan bir gerilim üretir ve bu dalgalanmanın hızı motor devriyle değişir. Bu yüzden gürültü de devirle birlikte tizleşir. Normalde bu dalgalanma araç elektriğinde sorun yaratmaz — sorun, dalgalanmanın ses sisteminin sinyal yoluna sızmasıdır. Sızma iki kapıdan olur ve sırayla elenir. Birinci kapı şasedir: cihazlar farklı noktalardan şaselenmişse aradaki fark bu dalgalanmayı taşır; önceki adımda ölçtüğün şase farkı tam olarak budur. İkinci kapı güzergâhtır: sinyal kablosu güç kablosuyla paralel gidiyorsa dalgalanma oraya biner. Bu iki kapı kapatıldığında gürültü büyük olasılıkla biter. Bitmiyorsa üçüncü ihtimal aracın kendi şarj sistemidir — yaşlanmış bir şarj bileşeni normalden çok daha büyük dalgalanma üretir ve bu, ses sisteminden önce aracın kendi elektriğinde de belirti verir. Bu noktada iş ses montajından çıkar ve elektrik alanının konusu olur: şarj sisteminin çıkışındaki dalgalanmanın ölçülmesi gerekir. Ölçüm yöntemi ve kabul edilebilir dalgalanma sınırı araca özgüdür; bu ders bir değer vermiyor." },
+          { "label": "Hoparlörler bozuktur", "verdict": "hoparlor", "explain": "Hoparlör arızası motor devrini takip etmez." },
+          { "label": "Sinyal kablosu kısadır", "verdict": "kisa", "explain": "Uzunluk değil, güzergâh ve şase belirleyici." },
+          { "label": "Ses seviyesi yüksektir", "verdict": "seviye", "explain": "Bu gürültü seviyeden bağımsız olarak devri takip eder." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Devirle tizleşen vınlama: iki kapı var — şase ve güzergâh. İkisi kapanınca genelde biter."
+    },
+    {
+      "id": 6,
+      "instruction": "Başka bir araçta kontak açılıp kapanırken hoparlörlerden patlama sesi geliyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.bas-unite",
+        "question": "Bu neyin belirtisi?",
+        "options": [
+          { "label": "Sıralama sorunu: yükseltici, kaynak cihazdan önce açılıyor ya da ondan sonra kapanıyordur; 'açıl' ucunun bağlantısı ve gecikmesi kontrol edilir", "verdict": "siralama", "correct": true, "explain": "Açılış ve kapanışta duyulan patlama, arıza değil sıralama sorunudur ve mantığı anlaşıldığında kolay çözülür. Sistem açılırken kaynak cihazın çıkışında kısa süreli bir sıçrama olur; yükseltici o anda çoktan açıksa bu sıçramayı yükseltir ve hoparlörden bir patlama olarak duyulur. Doğru sıra şudur: önce kaynak cihaz açılıp kararlı hâle gelir, sonra yükseltici açılır; kapanışta ise tam tersi — önce yükseltici kapanır, sonra kaynak. Bu sırayı sağlayan şey yükselticinin 'açıl' ucudur: kaynak cihaz açıldığında bu uca gerilim verir ve yükselticiyi uyandırır. Sorun genelde bu ucun yanlış bağlanmasından çıkar — sürekli beslemeye ya da kontakla kesilen bir uca bağlandığında yükseltici kaynak cihazdan bağımsız açılıp kapanır ve sıralama bozulur. İyi yükselticilerin içinde ayrıca kısa bir gecikme devresi vardır ve bu patlamayı zaten önler; yoksa dışarıdan gecikmeli bir düzenek kullanılabilir. Patlamanın önemsenmesi gereken bir yanı da vardır: hoparlörün konisine ani ve sert bir hareket yaptırır ve zamanla hoparlöre zarar verir; yani 'alışırız' denecek bir şey değildir. Kontrol sırası: açıl ucu doğru yere bağlı mı, kaynak cihaz o ucu gerçekten sürüyor mu, yükselticinin gecikme ayarı var mı." },
+          { "label": "Hoparlörler yanmıştır", "verdict": "yanik", "explain": "Yanmış hoparlör ses vermez; buradaki patlama açılış anında." },
+          { "label": "Normaldir, alışılır", "verdict": "normal", "explain": "Koni sert hareket eder; zamanla hoparlöre zarar verir." },
+          { "label": "Sigorta zayıftır", "verdict": "sigorta", "explain": "Sigortanın açılış sırasıyla ilgisi yoktur." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Açılış patlaması sıralama sorunu: önce kaynak açılır sonra yükseltici, kapanışta tersi. 'Alışırız' denmez — hoparlöre zarar verir."
+    },
+    {
+      "id": 7,
+      "instruction": "Gürültü giderildi. Kontrolü tamamlıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.rca-kablosu",
+        "question": "Teşhis bittiğinde ne yapılır?",
+        "options": [
+          { "label": "Gürültünün gerçekten gittiği bütün koşullarda denenir: motor kapalı ve çalışır, farklı ses seviyeleri, silecek ve fan gibi tüketiciler çalışırken; sonra sökülen her şey yerine takılır", "verdict": "tum-kosullar", "correct": true, "explain": "Gürültü teşhisinde en sık yapılan hata, tek bir koşulda sessizliği görüp işi bitmiş saymaktır. Oysa gürültü koşula bağlıdır ve bir koşulda susan gürültü başka koşulda geri gelir. Doğrulama listesi şudur. Birincisi motor durumudur: sistem hem kontak açık motor kapalıyken hem motor çalışırken dinlenir, çünkü şarj kaynaklı gürültü yalnız ikincisinde çıkar. İkincisi ses seviyesidir: düşük, orta ve yüksek seviyede dinlenir — bazı gürültüler yalnız düşük seviyede duyulur, çünkü müzik onları örtmez. Üçüncüsü diğer tüketicilerdir: silecek çalıştırılır, fan kademeleri denenir, dönüş sinyali verilir, farlar açılır ve her birinde gürültü dinlenir; bu adım, belirli bir devrenin sinyale bindiği durumları yakalar. Dördüncüsü kaynaktır: farklı bir kaynak ve farklı bir parça denenir, çünkü bazı gürültüler kaydın kendisindedir ve sistemin suçu değildir. Beşincisi, sökülen bütün kaplama ve parçaların yerine tam oturtulması ve kabloların hiçbir yerde sıkışmamış olmasıdır — bu, bu alanın her dersindeki son adımın aynısı. Ve kayıt tutulur: hangi değişikliğin gürültüyü ne kadar azalttığı not edilir; aynı araç bir yıl sonra geri geldiğinde bu not işi baştan yapmaktan kurtarır." },
+          { "label": "Tek koşulda sessizse yeterlidir", "verdict": "tek-kosul", "explain": "Gürültü koşula bağlıdır; başka koşulda geri gelir." },
+          { "label": "Müşteri denesin", "verdict": "musteri", "explain": "Doğrulama teslimden önce ustanın işidir." },
+          { "label": "Ses seviyesi sınırlanır", "verdict": "sinirla", "explain": "Belirtiyi gizlemek çözüm değil." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Aşama 7 bitti. Sırada montajın kendisi: baş ünite ve hoparlör değişimi."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Gürültü motor devriyle birlikte tizleşiyor. Nereye bakılır?",
+        "a": "sarj-kaynakli",
+        "options": [
+          { "verdict": "sarj-kaynakli", "label": "Şarj kaynaklı: dalgalanma şase ya da besleme güzergâhı üzerinden sinyale biniyordur", "explain": "Araç çalışırken üretilen gerilimin üzerinde küçük dalgalanmalar vardır ve hızları motor devriyle değişir. Bu dalgalanma iki kapıdan sinyale sızar: farklı noktalardan yapılmış şaseler ve güç kablosuyla paralel giden sinyal kablosu. İkisi kapatıldığında gürültü genelde biter; bitmiyorsa aracın kendi şarj sistemi elektrik alanında ölçülür." },
+          { "verdict": "hoparlor", "label": "Hoparlörler bozuktur", "explain": "Hoparlör arızası motor devrini takip etmez." },
+          { "verdict": "kisa", "label": "Sinyal kablosu kısadır", "explain": "Uzunluk değil güzergâh belirleyici." },
+          { "verdict": "seviye", "label": "Ses seviyesi yüksektir", "explain": "Bu gürültü seviyeden bağımsızdır." }
+        ]
+      },
+      {
+        "q": "Gürültünün sinyalle mi geldiği nasıl kanıtlanır?",
+        "a": "bolme",
+        "options": [
+          { "verdict": "bolme", "label": "Sinyal kablosu yükselticinin girişinden ayrılır: gürültü sürüyorsa kaynak yükseltici tarafında, kesiliyorsa sinyal yolundadır", "explain": "Zinciri ikiye bölmek şüphelilerin yarısını bir hamlede eler. Gürültü sürüyorsa besleme, şase ve hoparlör hattına bakılır; kesiliyorsa kaynak cihazın çıkışı ile kablo ve güzergâh ayrıca bölünerek aranır. Her bölmede tek bir şey değiştirilir." },
+          { "verdict": "hepsi", "label": "Bütün kablolar birden değiştirilir", "explain": "Sonucun hangisinden geldiği bilinemez." },
+          { "verdict": "sok", "label": "Sistem tamamen sökülür", "explain": "Bölme testi sökmeden sonucu verir." },
+          { "verdict": "yeni-anfi", "label": "Yeni yükseltici denenir", "explain": "Parça değiştirmeden önce zincir bölünür." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2'deki 0,02 V ve 0,45 V SENARYO okumalarıdır; istenen FARKTIR (0,43 V) ve ders kabul edilebilir bir şase farkı sınırı vermiyor.",
+    "sourceRequired": "Kabul edilebilir şase gerilim farkı, şarj sistemi dalgalanma sınırı ve ölçüm yöntemi, gürültü bastırma elemanlarının seçimi ve yükseltici gecikme süresi bilinçle VERİLMEDİ; hepsi araca ve ürüne özgüdür.",
+    "kapsam": "Şarj sisteminin ölçülmesi ve onarımı bu dersin KAPSAMI DIŞINDA — elektrik alanının konusu, ders yalnız yönlendiriyor. Fabrika ses işlemcisine ve haberleşme hattına müdahale kapsam dışı; araç ağı bu alanın kırmızı çizgisi.",
+    "kaynak": "Ses dersleri MEB çerçeve programının aksesuar modülüyle birebir eşleşmiyor; bu aşama proje kararıyla kuruldu. Bölme testi ve şase mantığı elektrik alanının derslerinden geliyor.",
+    "reviewedByMechanic": false
+  }
+}

@@ -1,0 +1,177 @@
+{
+  "id": "direksiyon.hidrolik-hava",
+  "area": "direksiyon",
+  "stage": 3,
+  "title": "Sistemde Hava: Belirtisi ve Alınması",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 35,
+  "prerequisites": ["direksiyon.hidrolik-basinc"],
+  "learningGoals": [
+    "Havanın belirtilerini tanımak ve başka arızalardan ayırmak",
+    "Havayı sisteme sokan yolları bilmek",
+    "Hava alma işlemini doğru sırayla ve sabırla yapmak"
+  ],
+
+  "safety": [
+    { "rule": "Hava alma sırasında motor kısa aralıklarla çalıştırılır ve depo hiçbir anda boşaltılmaz", "why": "Sıvısız çalışan pompa saniyeler içinde zarar görür", "blocksStart": true },
+    { "rule": "Araç kaldırılacaksa sehpaya alınır; tekerlekler serbestken kimse yakınında durmaz", "why": "İşlem sırasında direksiyon uçtan uca defalarca çevrilir", "blocksStart": true },
+    { "rule": "Direksiyon uç konuma dayandığında orada bekletilmez", "why": "Uç konum sınırlayıcı valfi açar, sıvıyı ısıtır ve köpürmeyi artırır", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true },
+    { "id": "tool.kriko-sehpa", "label": "Kriko ve sehpa", "required": false },
+    { "id": "tool.temizlik-bezi", "label": "Temizlik bezi", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Şikâyet: direksiyon çevrilirken ses geliyor ve destek düzensiz.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.hidrolik-deposu",
+        "question": "Havayı hangi belirtiler ele verir?",
+        "options": [
+          { "label": "Depoda köpük, çevirirken duyulan ıslık veya gurultu, desteğin gelip gitmesi ve simitte hissedilen titreşim", "verdict": "kopuk-ses-duzensiz", "correct": true, "explain": "Hidrolik sistem sıvıyla çalışır çünkü sıvı sıkışmaz: pompanın ittiği hacim, aynı anda pistonu iter. Sisteme hava girdiğinde bu temel özellik bozulur, çünkü hava sıkışır. Pompanın ürettiği hacmin bir kısmı, sıvıyı itmek yerine hava kabarcıklarını sıkıştırmakla harcanır ve destek kesikli hâle gelir. Belirtiler bu mekanikten doğar. Depodaki köpük en doğrudan kanıttır — dönen sıvı içindeki kabarcıklar depoda toplanır ve sıvı süt gibi görünür. Ses ikinci kanıttır: kabarcıklar pompanın içinde sıkışıp patlarken ıslık ya da gurultu duyulur ve bu ses çoğunlukla direksiyon çevrildiğinde belirginleşir. Üçüncüsü desteğin gelip gitmesidir; sürücü bunu 'bazen ağırlaşıyor' diye tarif eder. Dördüncüsü simitte hissedilen ince bir titreşimdir. Bu belirtilerin birlikte görülmesi havayı işaret eder; tek başına ses ise kayış kaymasıyla da açıklanabilir ve ayrılması gerekir. Havalı bir sistemi öylece bırakmak seçenek değildir: kabarcıklar pompanın içinde yerel olarak yıkıcıdır ve zamanla pompayı yer." },
+          { "label": "Yalnız sıvı seviyesinin yükselmesi", "verdict": "seviye-yukselir", "explain": "Köpük seviyeyi yanıltıcı gösterebilir ama tek belirti bu değil." },
+          { "label": "Direksiyonun tamamen kilitlenmesi", "verdict": "kilit", "explain": "Hava kilitlenme yapmaz; destek düzensizleşir." },
+          { "label": "Hiçbir belirti vermez", "verdict": "belirtisiz", "explain": "Köpük, ses, düzensiz destek ve titreşim tipik belirtilerdir." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Sistem sıvıyla çalışır çünkü sıvı sıkışmaz. Havanın bütün zararı bu tek cümleden çıkıyor."
+    },
+    {
+      "id": 2,
+      "instruction": "Hava sisteme nasıl girmiş olabilir?",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.hidrolik-pompa",
+        "question": "Yolları sırala.",
+        "options": [
+          { "label": "Seviye düşüklüğü, emiş tarafındaki çatlak ya da gevşek kelepçe, açılmış bir hattın toplanması ve depo kapağı ile havalandırmadaki bozukluk", "verdict": "seviye-emis-hat-kapak", "correct": true, "explain": "Havanın girebileceği yerler sınırlıdır ve hepsi düşük basınçlı taraftadır — çünkü basınçlı bir hattaki açıklık sıvıyı dışarı püskürtür, içeri hava almaz. Birinci yol seviyedir: sıvı azaldığında pompanın emiş ağzı zaman zaman havayla karşılaşır, özellikle virajda ve frende sıvı çalkalandığında. İkinci ve en sinsi yol emiş hattıdır. Bu hortum basınçsız olduğu için oradaki bir çatlak, sertleşmiş bir uç ya da gevşemiş bir kelepçe dışarı damla vermez ama içeri hava çeker; yani ortada görünür bir sızıntı olmadan sistem havalanır. Bu yüzden 'seviye düşmüyor, o hâlde hava giremez' akıl yürütmesi yanlıştır. Üçüncü yol bakımdır: her açılan hat, her değiştirilen hortum, her sökülen kutu sisteme hava sokar ve dolum tek başına yeterli olmaz. Dördüncüsü depo tarafıdır — bozuk contalı ya da gevşek bir kapak, tıkalı bir havalandırma sıvının çalkalanmasını ve köpürmesini artırır. Doğru yaklaşım havayı almadan önce nereden girdiğini bulmaktır; kaynağı kapatılmadan alınan hava birkaç gün içinde geri gelir." },
+          { "label": "Yalnız basınç hortumundaki çatlaktan", "verdict": "basinc-hortumu", "explain": "Basınçlı hat sıvı püskürtür, hava çekmez." },
+          { "label": "Egzoz sisteminden", "verdict": "egzoz", "explain": "Tamamen ayrı sistemler." },
+          { "label": "Hava giremez, sistem tamamen kapalıdır", "verdict": "giremez", "explain": "Emiş tarafı ve açılan hatlar hava için açık kapılardır." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Kaynağı kapatılmadan alınan hava birkaç gün içinde geri gelir. Önce nereden girdiği bulunur."
+    },
+    {
+      "id": 3,
+      "instruction": "Hava alma öncesi seviyeyi 47 mm, işlem bittiğinde 39 mm okudun (ikisi de soğuk sistemde). Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.hidrolik-deposu",
+        "unit": "mm",
+        "acceptRange": [7.8, 8.2]
+      },
+      "camera": "direksiyon",
+      "hint": "47 eksi 39.",
+      "teachingNote": "8 mm'lik bu düşüş bir kayıp değil, işlemin başarılı olduğunun kanıtıdır: sistemden çıkan havanın yerini sıvı almıştır. Bu yüzden hava alma sırasında depo sürekli izlenir ve azaldıkça beslenir; seviyenin düşmesi beklenen bir şeydir, telaş sebebi değil. Buradaki asıl ders şudur — hava alma tek seferlik bir işlem değil, seviyenin durulduğu ana kadar süren bir döngüdür. Seviye artık düşmüyor, köpük kayboldu ve ses kesildiyse işlem tamamlanmıştır. Doğru seviye aralığı araca özgüdür ve bu ders bir değer vermiyor; ölçülen şey işlemin ilerlemesi."
+    },
+    {
+      "id": 4,
+      "instruction": "Hava alma işlemini yapacaksın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.direksiyon-simidi",
+        "question": "Doğru yöntem hangisi?",
+        "options": [
+          { "label": "Depo doldurulur, motor çalıştırılmadan direksiyon uçtan uca yavaşça birkaç kez çevrilir, sonra motor kısa süre çalıştırılıp aynı hareket tekrarlanır; seviye sürekli beslenir ve köpük kayboluncaya kadar sürdürülür", "verdict": "once-motorsuz-sonra-kisa", "correct": true, "explain": "Hava alma sabır işidir ve sırası vardır. Önce depo doğru sıvıyla doldurulur. İlk tur motor ÇALIŞTIRILMADAN yapılır: direksiyon uçtan uca yavaşça birkaç kez çevrilir. Bunun sebebi önemlidir — motor çalışmadığı için pompa sıvıyı hızla dolaştırmaz ve kabarcıklar çalkalanıp daha küçük kabarcıklara bölünmez; büyük kabarcıklar depoya yükselip kolayca ayrılır. Havası alınmamış bir sistemde motoru hemen çalıştırmak, havayı sıvıya karıştırıp köpük hâline getirir ve o köpüğü ayırmak çok daha uzun sürer. İkinci aşamada motor kısa süre çalıştırılır ve aynı hareket yavaşça tekrarlanır; sıvı devreyi dolaştıkça kalan hava depoya taşınır. Bu sırada depo sürekli izlenir ve seviye düştükçe beslenir — depo hiçbir anda boşalmamalıdır. Hareketler yavaş olmalıdır; hızlı çevirmek sıvıyı çalkalar ve işi uzatır. Direksiyon uç konumda bekletilmez. İşlem, depodaki köpük kaybolana, ses kesilene ve seviye durulana kadar tekrarlanır; bu bazen birkaç tur, bazen tekrarlanan seanslar alır. Bazı araçlarda üreticinin öngördüğü özel bir yöntem ya da vakumla hava alma kullanılır; varsa o uygulanır." },
+          { "label": "Motor yüksek devirde çalışırken direksiyon hızlıca çevrilir", "verdict": "hizli", "explain": "Hızlı hareket sıvıyı çalkalar, havayı köpüğe çevirir ve işi uzatır." },
+          { "label": "Sistem doldurulur ve beklenir, kendiliğinden çıkar", "verdict": "bekle", "explain": "Hava kendiliğinden tamamen çıkmaz; sıvının dolaşması gerekir." },
+          { "label": "Basınç hortumu gevşetilip hava kaçırılır", "verdict": "hortum-gevset", "explain": "Basınçlı hattı gevşetmek tehlikelidir ve sisteme daha çok hava sokar." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "İlk tur motorsuz. Çalışan pompa havayı sıvıya karıştırıp köpüğe çevirir ve işi uzatır."
+    },
+    {
+      "id": 5,
+      "instruction": "İşlem yapıldı ama köpük bir türlü kaybolmuyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.donus-hortumu",
+        "question": "Ne düşünürsün?",
+        "options": [
+          { "label": "Sisteme hava girmeye devam ediyordur; emiş hattı, kelepçeler ve pompa mili keçesi yeniden aranır", "verdict": "hava-girmeye-devam", "correct": true, "explain": "Hava alma işlemi doğru yapıldığı hâlde köpük geçmiyorsa, çıkarılan havanın yerine yenisi geliyor demektir; yani sorun işlemde değil kaynaktadır. Aranacak yerler bellidir. Birincisi emiş hattıdır — hortumun kendisi, uçları ve kelepçeleri; hortum sertleşmişse ya da ucu genişlemişse sıkı görünse bile hava alır. İkincisi pompanın giriş bağlantısı ve o bölgedeki contadır. Üçüncüsü pompanın mil keçesidir: dışarı biraz sızdıran bir keçe, motor dururken ya da emişte düşük basınç oluştuğunda içeri hava da alabilir. Dördüncüsü seviyedir; sıvı sınırda kaldığında viraj ve frende emiş havaya açılır ve sistem sürekli yeniden havalanır. Beşincisi depo tarafıdır — bozuk kapak contası, tıkalı havalandırma ya da içindeki ayırıcı bölmenin hasarı köpüğün ayrılmasını engeller. Bu noktada yararlı bir ayrım vardır: köpük hiç azalmıyorsa aktif bir hava girişi, azalıp bir süre sonra geri geliyorsa aralıklı bir giriş ya da seviye sorunu düşünülür. Kaynağı bulmadan işlemi tekrarlamak zaman kaybıdır." },
+          { "label": "Sıvı kalitesizdir, değiştirilir", "verdict": "sivi", "explain": "Doğru sıvı kullanıldıysa mesele havanın girmeye devam etmesi." },
+          { "label": "Normaldir, köpük her zaman kalır", "verdict": "normal", "explain": "Sağlıklı sistemde köpük kalmaz." },
+          { "label": "Pompa hemen değiştirilir", "verdict": "pompa", "explain": "Önce hava girişinin kaynağı aranır; pompa en son aday." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Köpük hiç azalmıyorsa aktif giriş var; azalıp geri geliyorsa aralıklı giriş ya da seviye sorunu."
+    },
+    {
+      "id": 6,
+      "instruction": "Bir usta 'ses var, hava vardır, alırım geçer' diyor. Ama seste bir düzen var: yalnız motor devri yükselince artıyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.hidrolik-pompa",
+        "question": "Bu ayrım neden önemli?",
+        "options": [
+          { "label": "Aynı sesi kayış kayması, aşınmış pompa ve dönüşteki kısıtlama da üretir; hava alma işlemi bunların hiçbirini çözmez", "verdict": "ses-tek-kanit-degil", "correct": true, "explain": "Ses tek başına bir teşhis değildir, bir yön göstergesidir; ayırt etmek için sesin ne zaman ve nasıl değiştiğine bakılır. Havanın sesi genellikle direksiyon çevrildiğinde belirginleşir ve depoda köpükle birlikte görülür. Kayış kaymasının sesi ise daha çok motor devri değiştiğinde ya da sisteme yük binen ilk anda duyulur, cıyaklama biçimindedir ve kayışa bakıldığında parlamış yüzey ya da yağ bulaşığı görülür. Aşınmış pompanın sesi süreklidir ve basınç testinde kendini gösterir. Dönüşteki kısıtlama ise sesin yanına yüksek basınç ve hızlı ısınmayı ekler. Bu ayrım yapılmadan yapılan hava alma işlemi zaman kaybıdır ve daha kötüsü, gerçek arıza gecikir: kayışı kayan araç şarj sorununa, aşınmış pompası olan araç tamamen destek kaybına doğru gider. Doğru yaklaşım, sesi duyduğunda hemen işleme başlamak yerine üç soruyu sormaktır — ses ne zaman çıkıyor, depoda köpük var mı, seviye ne durumda. Üç cevap çoğu zaman doğru yolu gösterir." },
+          { "label": "Fark etmez, her seste hava alınır", "verdict": "her-seste", "explain": "Kayış, pompa ve dönüş kısıtlaması aynı sesi üretebilir." },
+          { "label": "Ses her zaman kayıştandır", "verdict": "hep-kayis", "explain": "Kayış adaylardan yalnız biri." },
+          { "label": "Ses önemsizdir, aldırılmaz", "verdict": "onemsiz", "explain": "Ses bir belirtidir ve kaynağı ayrılır." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Üç soru çoğu zaman yeter: ses ne zaman çıkıyor, depoda köpük var mı, seviye ne durumda."
+    },
+    {
+      "id": 7,
+      "instruction": "Hava alındı, köpük kayboldu, ses kesildi.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kremayer-kutusu",
+        "question": "İş nasıl kapanır?",
+        "options": [
+          { "label": "Sistem çalışma sıcaklığına getirilip seviye doğru işarete göre okunur, direksiyon uçtan uca denenerek desteğin iki yönde eşit ve kesintisiz olduğu doğrulanır, bölge temizlenip kısa bir sürüş sonrası tekrar bakılır", "verdict": "isit-oku-dene-dogrula", "correct": true, "explain": "Kapanış üç doğrulamadan oluşur. Birincisi seviyedir ve çalışma sıcaklığında okunur; hava çıktıkça seviye düştüğü için soğuk okuma yanıltır. İkincisi destek doğrulamasıdır: direksiyon iki yönde de uçtan uca yavaşça çevrilir ve desteğin her iki yönde eşit, kesintisiz ve sessiz olduğu hissedilir. Bir yönde zayıflık kalıyorsa bu artık hava değil, kutu içi bir kaçak olabilir ve basınç testine dönülür — yani hava alma, aynı zamanda bir eleme adımıdır: hava çıktıktan sonra kalan her belirti başka bir arızaya aittir. Üçüncüsü görsel kontroldür; dolum sırasında dökülen sıvı silinir, bölge kurulanır ve araç kısa bir sürüşten sonra yeniden bakılır, çünkü hava alma sırasında gevşemiş bir kelepçe ya da tam oturmamış bir bağlantı ancak o zaman kendini gösterir. Son olarak yapılan iş kaydedilir: hangi hava girişi bulundu ve giderildi, kaç seans hava alındı, hangi sıvı kullanıldı. Bir sonraki bakımda köpük tekrar görülürse bu kayıt doğrudan yol gösterir." },
+          { "label": "Soğuk okuma yeterlidir", "verdict": "soguk", "explain": "Hava çıktıkça seviye düşer; geçerli okuma çalışma sıcaklığındakidir." },
+          { "label": "Destek tek yönde denenir", "verdict": "tek-yon", "explain": "İki yön ayrı ayrı denenir; asimetri kutu içi kaçağı işaret eder." },
+          { "label": "Sürüş sonrası kontrol gereksizdir", "verdict": "kontrol-yok", "explain": "Gevşemiş bağlantı ancak sürüşten sonra kendini gösterir." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Hava alma aynı zamanda bir eleme adımı: hava çıktıktan sonra kalan her belirti başka bir arızaya ait."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Hava alma işleminin ilk turu neden motor çalıştırılmadan yapılır?",
+        "a": "once-motorsuz-sonra-kisa",
+        "options": [
+          { "verdict": "once-motorsuz-sonra-kisa", "label": "Çalışan pompa havayı sıvıya karıştırıp köpüğe çevirir; motorsuz turda büyük kabarcıklar depoya yükselip kolayca ayrılır", "explain": "Motor çalışmazken sıvı hızla dolaşmadığı için kabarcıklar küçük kabarcıklara bölünmez ve yüzeye çıkıp ayrılır. Havası alınmamış bir sistemde motoru hemen çalıştırmak köpük üretir ve o köpüğü ayırmak çok daha uzun sürer. İkinci aşamada motor kısa süre çalıştırılıp hareket tekrarlanır; depo hiçbir anda boşalmaz ve hareketler yavaş yapılır." },
+          { "verdict": "hizli", "label": "Yüksek devirde hızlıca çevrilir", "explain": "Çalkalama havayı köpüğe çevirir." },
+          { "verdict": "bekle", "label": "Doldurulup beklenir", "explain": "Hava kendiliğinden tamamen çıkmaz." },
+          { "verdict": "hortum-gevset", "label": "Basınç hortumu gevşetilir", "explain": "Tehlikelidir ve daha çok hava sokar." }
+        ]
+      },
+      {
+        "q": "Hava alındığı hâlde köpük geçmiyorsa ne düşünülür?",
+        "a": "hava-girmeye-devam",
+        "options": [
+          { "verdict": "hava-girmeye-devam", "label": "Sisteme hava girmeye devam ediyordur; emiş hattı, kelepçeler, pompa mili keçesi ve seviye yeniden aranır", "explain": "Çıkarılan havanın yerine yenisi geliyorsa sorun işlemde değil kaynaktadır. Emiş hattı basınçsız olduğu için sıvı sızdırmadan hava alır; sertleşmiş hortum ucu sıkı görünse bile geçirir. Köpük hiç azalmıyorsa aktif bir giriş, azalıp geri geliyorsa aralıklı giriş ya da seviye sorunu düşünülür. Kaynağı bulmadan işlemi tekrarlamak zaman kaybıdır." },
+          { "verdict": "sivi", "label": "Sıvı kalitesizdir", "explain": "Doğru sıvı kullanıldıysa mesele hava girişi." },
+          { "verdict": "normal", "label": "Normaldir", "explain": "Sağlıklı sistemde köpük kalmaz." },
+          { "verdict": "pompa", "label": "Pompa değiştirilir", "explain": "Önce kaynak aranır." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 47 mm ve 39 mm SENARYO okumalarıdır ve ikisi de soğuk sistemde alınmıştır; istenen FARKTIR (8 mm) ve gösterilen şey çıkan havanın yerini sıvının almasıdır. Doğru seviye aralığı verilmiyor.",
+    "sourceRequired": "Sıvı tipi, doğru seviye aralığı ve varsa üreticinin özel hava alma prosedürü (vakumla hava alma dahil) bilinçle VERİLMEDİ; araca özgüdür. Ders genel yöntemi ve sırasını öğretiyor, araca özel adımın belgeden okunacağını söylüyor.",
+    "kapsam": "Basınç testi bir önceki ders. Sızıntı arama kutu-kacak dersinde. Kutu içi kaçak ayrımı basınç dersinde işlendi; burada yalnız eleme adımı olarak anıldı. Elektro-hidrolik sistemler kapsam dışı.",
+    "reviewedByMechanic": false
+  }
+}

@@ -1,0 +1,174 @@
+{
+  "id": "elektrik.role-testi",
+  "area": "arac-elektrik",
+  "stage": 4,
+  "title": "Röle: Küçük Akımla Büyük Akımı Yönetmek",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 25,
+  "prerequisites": ["elektrik.sigorta", "elektrik.seri-paralel"],
+  "learningGoals": [
+    "Rölenin kumanda ve güç devrelerini birbirinden ayırmak",
+    "Röleyi değiştirmeden önce hangi tarafın çalışmadığını ölçümle bulmak",
+    "Kontak aşınmasını gerilim düşümüyle görmek: tıklama sesi kontağın kalitesini söylemez"
+  ],
+
+  "safety": [
+    { "rule": "Röle soketine köprü atarken hangi uçların güç, hangilerinin kumanda olduğu şemadan doğrulanır", "why": "Yanlış iki ucu köprülemek, kumanda devresine güç akımı gönderir. O devrede genellikle ince bir kablo ve bir kontrol ünitesi çıkışı vardır; ikisi de anında zarar görür", "blocksStart": true },
+    { "rule": "Röle soketine tornavida ya da tel sokularak deneme yapılmaz", "why": "Röle soketinin pinleri yüksek akım taşır ve kontrolsüz bir köprü, korumasız bir kısa devre yolu açar. Deneme uygun kesitte ve sigortalı bir köprü kablosuyla yapılır", "blocksStart": true },
+    { "rule": "Yüksek akımlı röle uzun süre elle tetiklenmiş hâlde bırakılmaz", "why": "Marş ya da fan gibi devrelerde tüketici sürekli çalışırsa aşırı ısınır. Test kısa tutulur ve devre kendi kumandasına bırakılır", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.multimetre", "label": "Dijital multimetre", "required": true },
+    { "id": "tool.sema", "label": "Araç devre şeması", "required": true },
+    { "id": "tool.kopru-kablosu", "label": "Sigortalı köprü kablosu", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Farlar yanmıyor. Sigorta sağlam, ampuller sağlam. Sigorta kutusunda küçük bir kutu duruyor: röle.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.role",
+        "question": "Röle ne yapar?",
+        "options": [
+          { "label": "Küçük bir akımla çalışan bir bobin, büyük akımı taşıyan bir kontağı kapatır; kumanda devresi ile güç devresi birbirinden ayrılır", "verdict": "iki-devre", "correct": true, "explain": "Rölenin içinde iki ayrı devre vardır. Kumanda devresi küçük bir bobinden oluşur ve çok az akım çeker; anahtar ya da kontrol ünitesi bu tarafı sürer. Bobin enerjilenince mıknatıslanır ve bir kontağı çeker; kontak da güç devresini kapatarak farı, fanı ya da marşı besler. Bu ayrımın sebebi pratiktir: farın çektiği akım kabin içindeki ince anahtar kablolarından geçirilemez, geçirilse hem kablo kalınlaşır hem anahtar kontakları yanar. Röle sayesinde kalın güç kablosu kısa yoldan gider, kabine yalnız ince kumanda kablosu girer. Teşhis için de aynı ayrım kullanılır: arıza ya kumanda tarafındadır ya güç tarafında. Bu iki dalı ayırmadan röle değiştirmek tahmin sırasıdır." },
+          { "label": "Akımı yükseltir", "verdict": "yukseltir", "explain": "Röle akım üretmez ya da yükseltmez; yalnız hazır bir yolu açıp kapatır." },
+          { "label": "Gerilimi düşürür", "verdict": "gerilim-dusurur", "explain": "Sağlam bir röle kontağı üzerinde kayda değer gerilim düşmez; düşüyorsa kontak aşınmıştır." },
+          { "label": "Sigorta görevi görür", "verdict": "sigorta", "explain": "Koruma sigortanın işidir; röle kumanda elemanıdır." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Röle iki devrenin buluştuğu yerdir: bir tarafta ince kumanda, diğer tarafta kalın güç. Teşhis de bu iki taraftan hangisinin çalışmadığını sormakla başlar."
+    },
+    {
+      "id": 2,
+      "instruction": "Röleyi soketinden çek.",
+      "interaction": {
+        "type": "pull",
+        "target": "part.role",
+        "axis": "y",
+        "distance": 0.25
+      },
+      "camera": "tezgah",
+      "hint": "Düz yukarı çek; yana yatırmak pinleri eğer.",
+      "teachingNote": "Röleyi yana yatırarak çekmek pinleri eğer ve eğilen pin bir daha düzgün oturmaz. Sonuç gevşek temas ve bu dersin sonunda göreceğin türden bir gerilim kaybıdır."
+    },
+    {
+      "id": 3,
+      "instruction": "Röle soketinin uçlarını ölçtün: bobin ucunda kumanda gerilimi geliyor, güç ucunda besleme var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.role-soketi",
+        "question": "Bu iki bulgu ne söylüyor?",
+        "options": [
+          { "label": "Hem kumanda hem besleme röleye kadar geliyor; eksik olan şey rölenin kendisi ya da güç çıkışından sonraki yol", "verdict": "role-veya-cikis", "correct": true, "explain": "Röle soketinde dört soru vardır ve dördü de ayrı ayrı ölçülür: bobine kumanda geliyor mu, bobinin diğer ucu şaseye bağlı mı, güç ucunda besleme var mı, çıkış ucundan tüketiciye giden yol sağlam mı. Bu ölçümler yapıldığında arıza tek bir dala iner. Burada kumanda ve besleme geliyorsa röleye kadar olan her şey sağlamdır; geriye iki ihtimal kalır — rölenin içi çalışmıyordur ya da çıkışından tüketiciye giden yolda kopukluk vardır. İkisini ayırmak da kolaydır: soketteki güç ucu ile çıkış ucu uygun bir köprüyle birleştirildiğinde far yanıyorsa röle suçludur, yanmıyorsa arıza çıkış tarafındadır. Ölçüm sırası, röle değiştirmeden karar vermeni sağlar." },
+          { "label": "Röle kesinlikle sağlamdır", "verdict": "role-saglam", "explain": "Bu ölçümler rölenin içini söylemez; yalnız röleye kadar gelen yolları doğrular." },
+          { "label": "Ampuller bozuktur", "verdict": "ampul", "explain": "Ampuller zaten kontrol edilmişti; bulgular röle bölgesini işaret ediyor." },
+          { "label": "Sigorta atmıştır", "verdict": "sigorta", "explain": "Güç ucunda besleme var; sigorta sağlam demektir." }
+        ]
+      },
+      "camera": "tezgah",
+      "hint": "Röle soketinde dört ayrı soru vardır: kumanda, şase, besleme, çıkış.",
+      "teachingNote": "Röle arızalarında dört uç, dört sorudur. Dördünü ayrı ayrı sorabilen usta, röleyi değiştirmeden hangi dalın bozuk olduğunu söyler."
+    },
+    {
+      "id": 4,
+      "instruction": "Kesinleştirmek için ücretsiz bir test yapıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sigorta-kutusu",
+        "question": "Röleyi değiştirmeden nasıl doğrularsın?",
+        "options": [
+          { "label": "Aynı tipteki başka bir devrenin rölesiyle yer değiştirilir; arıza röleyle birlikte gidiyorsa suçlu rölenin kendisidir", "verdict": "yer-degistirme", "correct": true, "explain": "Sigorta kutusunda genellikle aynı tipten birden çok röle bulunur ve bunlar birbirinin yerine takılabilir. Şüpheli röleyi, çalıştığı bilinen bir devrenin rölesiyle değiştirirsin. Farlar şimdi yanıyor ve o diğer devre bozulduysa arıza rölenin içindedir; kanıt kesindir. Farlar hâlâ yanmıyorsa röle sağlamdır ve arama röle dışına kayar. Bu, motor alanındaki bobin yer değiştirme testinin birebir aynısıdır: tek bir değişkeni taşıyıp belirtinin onu takip edip etmediğine bakmak. Hiçbir parça almadan kanıt üretir. Tek dikkat edilecek şey rölelerin gerçekten aynı tip olmasıdır — bazıları içinde ek eleman taşır ve dışarıdan aynı görünür." },
+          { "label": "Yeni röle sipariş edilip takılır", "verdict": "yeni-al", "explain": "Ücretsiz bir kanıt varken parça almak tahmin sırasıdır." },
+          { "label": "Röle ısıtılıp tekrar denenir", "verdict": "isit", "explain": "Rastgele bir müdahale; kanıt üretmez ve parçaya zarar verir." },
+          { "label": "Röleye vurulur, kontak oturur", "verdict": "vur", "explain": "Vurunca çalışması yapışan kontağı gösteren bir ipucudur ama onarım değildir." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Aynı tipten ikinci bir parça, elindeki en ucuz test aletidir. Bobinlerde, enjektörlerde, rölelerde aynı mantık çalışır."
+    },
+    {
+      "id": 5,
+      "instruction": "Röle sağlam çıktı; yer değiştirince arıza yerinde kaldı. Yeni ölçüm: far yanarken rölenin güç girişinde 12,30 V, çıkışında 11,90 V. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.multimetre-ekran",
+        "unit": "V",
+        "acceptRange": [0.35, 0.45]
+      },
+      "camera": "tezgah",
+      "hint": "12,30 eksi 11,90.",
+      "teachingNote": "Sağlam bir röle kontağının üzerinde neredeyse hiç gerilim düşmez; kontak kapandığında iki uç elektriksel olarak birleşmiş sayılır. Ölçülebilir bir fark varsa kontak yüzeyi aşınmış ya da yanmıştır. Bu, rölenin 'çalışıyor ama iyi çalışmıyor' hâlidir: far yanar ama sönüktür, fan döner ama yavaştır. Röle testinin yalnız 'tıklıyor mu' sorusuyla yapılamamasının sebebi budur — tıklama bobini anlatır, kontağın kalitesini anlatmaz."
+    },
+    {
+      "id": 6,
+      "instruction": "Rölenin kontağı aşınmış. Yenisini takmadan önce sebebi düşünüyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.role",
+        "question": "Röle kontağını ne yıpratır?",
+        "options": [
+          { "label": "Taşıdığından fazla akım ve sık açma kapama; ayrıca gevşek soket teması ısı üreterek kontağı bozar", "verdict": "asiri-akim-ve-temas", "correct": true, "explain": "Röle kontağı her açılıp kapanışta küçük bir ark üretir ve bu ark yüzeyi yavaşça aşındırır. Normal koşullarda bu aşınma rölenin tasarım ömrü boyunca sorun çıkarmaz. Ama devrede olması gerekenden fazla akım varsa — takılan güçlü bir ampul, eklenmiş bir cihaz, sıkışmaya başlamış bir fan motoru — ark büyür ve kontak hızla bozulur. İkinci sebep soket tarafındadır: gevşek bir pin ısı üretir, ısı hem kontağı hem soketi bozar ve iki taraf birbirini kötüleştirir. Bu yüzden yeni röle takarken soket pinlerinin kavraması kontrol edilir ve devrenin çektiği akım ölçülür. Sebep bulunmazsa yeni röle de aynı sürede gider." },
+          { "label": "Rölenin ömrü doludur, sebep aranmaz", "verdict": "omur", "explain": "Ömür bir sebeptir ama erken biten ömrün ayrı bir sebebi vardır; akım ve temas kontrol edilir." },
+          { "label": "Titreşim kontağı aşındırır", "verdict": "titresim", "explain": "Titreşimin mekanik etkileri olabilir ama kontak aşınmasının ana sebebi ark ve ısıdır." },
+          { "label": "Soğuk hava", "verdict": "soguk", "explain": "Sıcaklık dolaylı etkendir; asıl mesele akım ve temas kalitesidir." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Bir parça beklenenden erken bittiyse, yerine yenisini takmadan önce onu erken bitiren koşulu ara. Bu cümle bu müfredatın her aşamasında tekrarlanıyor."
+    },
+    {
+      "id": 7,
+      "instruction": "Yeni röle takıldı, farlar normal yandı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.far-ampulu",
+        "question": "Kapatmadan önce ne doğrulanır?",
+        "options": [
+          { "label": "Röle giriş-çıkış farkı yük altında tekrar ölçülür ve devrenin çektiği akım normal değerinde mi diye bakılır", "verdict": "iki-olcum", "correct": true, "explain": "İki ölçüm iki ayrı soruyu kapatır. Röle üzerindeki gerilim farkının neredeyse sıfıra inmesi, yeni kontağın işini yaptığını gösterir. Devrenin çektiği akımın normal değerinde olması ise kontağı yıpratan sebebin ortadan kalktığını ya da hiç olmadığını gösterir; akım hâlâ yüksekse yeni röle de kısa sürede gider ve asıl arıza tüketici tarafındadır. Ayrıca rölenin sokete tam oturduğu elle çekilerek kontrol edilir. Bu üç kontrol birkaç dakikadır ve işin ikinci kez açılmasını önler." },
+          { "label": "Farların yandığına bakmak yeterli", "verdict": "yaniyor", "explain": "Yanıyor olması kontağın iyi olduğunu ya da akımın normal olduğunu göstermez." },
+          { "label": "Röleye vurup ses dinlenir", "verdict": "ses", "explain": "Tıklama bobinin çalıştığını söyler; kontağın kalitesini söylemez." },
+          { "label": "Hata kodu silinir", "verdict": "kod-sil", "explain": "Kod silmek ölçümün yerini tutmaz." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Röle testinde 'tıklıyor' cümlesi yarım bilgidir. Tıklama bobini, gerilim düşümü ise kontağı anlatır; ikisi ayrı ayrı sorulur."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Röle neden kullanılır?",
+        "a": "kumanda-guc-ayrimi",
+        "options": [
+          { "verdict": "kumanda-guc-ayrimi", "label": "Küçük bir kumanda akımıyla büyük bir güç akımını yönetmek; ince anahtar kablolarından yüksek akım geçirmemek için", "explain": "Rölenin içinde iki devre vardır: az akım çeken bir bobin ve büyük akımı taşıyan bir kontak. Bobin enerjilenince kontağı kapatır ve tüketici beslenir. Böylece kalın güç kablosu kısa yoldan gider, kabine yalnız ince kumanda kablosu girer; anahtar kontakları da yüksek akımdan korunur. Teşhiste de aynı ayrım kullanılır — arıza ya kumanda tarafındadır ya güç tarafında; bu iki dal ayrılmadan röle değiştirmek tahmindir." },
+          { "verdict": "akim-yukselt", "label": "Akımı yükseltmek için", "explain": "Röle akım üretmez; var olan bir yolu açıp kapatır." },
+          { "verdict": "koruma", "label": "Devreyi korumak için", "explain": "Koruma sigortanın işidir." },
+          { "verdict": "gerilim-dusur", "label": "Gerilimi düşürmek için", "explain": "Sağlam kontak üzerinde kayda değer gerilim düşmez." }
+        ]
+      },
+      {
+        "q": "Röle tıklıyor ama far sönük yanıyorsa ne düşünülür?",
+        "a": "kontak-direnci",
+        "options": [
+          { "verdict": "kontak-direnci", "label": "Bobin çalışıyor ama kontak yüzeyi aşınmış; kontak üzerinde gerilim düşüyor", "explain": "Tıklama sesi yalnız bobinin enerjilendiğini ve kontağın hareket ettiğini söyler; kontağın ne kadar iyi temas ettiğini söylemez. Aşınmış ya da yanmış bir kontak yüzeyi devreye direnç ekler, üzerinde gerilim düşer ve tüketiciye ulaşan pay azalır. Belirtisi 'çalışıyor ama zayıf çalışıyor'dur. Kanıtı basittir: far yanarken rölenin giriş ve çıkış uçları arasındaki gerilim ölçülür; sağlam bir kontakta bu fark yok denecek kadar küçüktür." },
+          { "verdict": "bobin", "label": "Bobin bozuktur", "explain": "Bobin bozuk olsaydı tıklama olmaz ve kontak hiç kapanmazdı." },
+          { "verdict": "ampul", "label": "Ampul bozuktur", "explain": "Ampul mümkündür ama röle üzerindeki gerilim farkı ölçülerek önce bu dal elenir." },
+          { "verdict": "normal", "label": "Normaldir, röleler biraz gerilim düşürür", "explain": "Sağlam bir kontak üzerinde kayda değer gerilim düşmez; ölçülebilir kayıp arızadır." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 5'teki 12,30 V ve 11,90 V SENARYO okumalarıdır. Öğrenciden istenen bir üretici sınırı değil, rölenin giriş ve çıkışı arasındaki FARKTIR (0,40 V). sourceRequired bu yüzden gerekmedi.",
+    "sourceRequired": "Röle bobin direnci, kontak akım kapasitesi ve kabul edilebilir kontak gerilim düşümü bu derste sayı olarak VERİLMEDİ; bunlar röle tipine ve araca özgüdür. Röle pin numaralandırması da üreticiye göre değişir ve şemadan okunur.",
+    "kapsam": "Röle sahnede tek bir kutu ve soket olarak modellendi (bu turda eklendi); iç bobin, kontak ve pin geometrisi yok. Köprü ve yer değiştirme testleri seçim olarak öğretiliyor; röleyi soketinden çekme jesti pull ile veriliyor.",
+    "reviewedByMechanic": false
+  }
+}

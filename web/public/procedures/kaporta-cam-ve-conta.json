@@ -1,0 +1,178 @@
+{
+  "id": "kaporta.cam-ve-conta",
+  "area": "kaporta",
+  "stage": 8,
+  "title": "Yapıştırma Cam ve Conta: Bekleme Süresi Bir Güvenlik Konusudur",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 40,
+  "prerequisites": ["kaporta.boya-kusurlari"],
+  "learningGoals": [
+    "Yapıştırma camın bir kapak değil, gövdenin ve güvenlik sisteminin parçası olduğunu bilmek",
+    "Eski yapıştırıcı, yüzey hazırlığı ve hazırlık ürününün neden atlanamaz olduğunu görmek",
+    "Bekleme süresinin bilinmediği bir işte aracın teslim edilemeyeceğini anlamak"
+  ],
+
+  "safety": [
+    { "rule": "Yapıştırma camda üreticinin belirttiği güvenli sürüş bekleme süresi dolmadan araç yola çıkarılmaz", "why": "Ön cam gövde rijitliğine katkı sağlar ve bazı araçlarda yolcu hava yastığı açılırken ona dayanır; tam mukavemete ulaşmamış bir yapıştırma, kaza anında camın yerinden çıkmasına yol açabilir", "blocksStart": true },
+    { "rule": "Bekleme süresi ve ürün verisi bilinmiyorsa iş yapılmaz", "why": "Süre ürüne, sıcaklığa ve neme göre değişir; tahminle verilen bir süre güvenlik kararı değildir", "blocksStart": true },
+    { "rule": "Cam sökme ve takma işleminde kesme yaralanmasına karşı koruyucu eldiven ve gözlük kullanılır, cam iki kişiyle taşınır", "why": "Kırılan cam derin kesik açar; tek kişiyle taşınan cam hem düşer hem sırt yaralanmasına yol açar", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.cam-kesme", "label": "Cam kesme teli", "required": true },
+    { "id": "tool.vantuz", "label": "Vantuz", "required": true },
+    { "id": "tool.olcum-mastari", "label": "Ölçüm mastarı", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Yandan darbe almış aracın ön camı değişecek. Müşteri 'camı takın, hemen gideyim' diyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.direk-a",
+        "question": "Ön cam nedir?",
+        "options": [
+          { "label": "Gövdenin taşıyıcı bütünlüğüne katkı veren ve bazı araçlarda yolcu hava yastığının açılırken dayandığı bir yapı elemanıdır — bu yüzden yapıştırmanın mukavemete ulaşması bir görünüş değil güvenlik meselesidir", "verdict": "yapi-elemani", "correct": true, "explain": "Yapıştırma cam, gövdeye sonradan takılan bir kapak değildir; sistemin bir parçasıdır ve üç ayrı işi vardır. Birincisi yapısaldır: ön cam, A direkleri ve tavan çerçevesiyle birlikte gövdenin burulma ve çökmeye karşı direncine katkı verir. Gövde yapısı dersinde geçen mantık burada da işler — enerjiyi taşıyan bir sistemde her eleman komşularının davranışını değiştirir; camın taşıdığı payı yok saymak, çevresindeki yapının yükünü artırır. İkincisi ve daha doğrudan olanı hava yastığıdır: birçok araçta yolcu tarafındaki hava yastığı yukarı doğru açılır ve doğru konuma gelebilmek için ön cama dayanır. Yapıştırma tam mukavemetine ulaşmamışsa cam bu itmeyle yerinden çıkabilir; o durumda hava yastığı hem yanlış yönde açılır hem koruma işlevini yerine getiremez. Üçüncüsü sızdırmazlıktır ve en az önemli olanıdır — su ve gürültü. Bu üç işlev birlikte şu sonucu verir: cam takıldıktan sonra aracın ne zaman yola çıkabileceği bir nezaket sorusu değil, bir güvenlik kararıdır ve cevabı kullanılan yapıştırıcının teknik belgesinde yazar. Süre ürüne, ortam sıcaklığına ve neme göre değişir; bu ders süre vermiyor ve tahmini bir süre söylemek de bu işte yapılabilecek en tehlikeli şeydir." },
+          { "label": "Sızdırmazlık ve görüş için takılan bir kapaktır", "verdict": "kapak", "explain": "Yapısal katkısı ve hava yastığı bağlantısı var." },
+          { "label": "Yalnız yeni araçlarda yapısaldır", "verdict": "yeni-arac", "explain": "Yapıştırma cam sistemi uzun süredir yaygın kullanımdadır." },
+          { "label": "Yapıştırıcı yalnız camı yerinde tutar", "verdict": "sadece-tutar", "explain": "Yük aktarımı ve hava yastığı desteği de yapıştırmaya bağlıdır." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Cam bir kapak değil, sistemin parçası. 'Ne zaman yola çıkabilirim' sorusu nezaket değil güvenlik kararı."
+    },
+    {
+      "id": 2,
+      "instruction": "Yeni camı yapıştırıcı sürmeden çerçeveye oturttun. Oturma derinliğini iki noktadan ölçtün: bir yanda 14 mm, diğer yanda 9 mm. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.olcum-mastari",
+        "unit": "mm",
+        "acceptRange": [4, 6]
+      },
+      "camera": "kaporta",
+      "hint": "14 eksi 9.",
+      "teachingNote": "5 mm fark — ve bu, camın çerçeveye eğri oturduğunun kanıtıdır. Cam yapıştırılmadan önce yapılan bu kuru deneme, işin en çok atlanan ama en çok kurtaran adımıdır: yapıştırıcı sürülmeden cam yerine konur, oturma derinliği çevresi boyunca birkaç noktadan ölçülür ve ancak eşit çıkarsa devam edilir. Fark çıktıysa üç ihtimal vardır ve üçü de yapıştırıcı sürüldükten sonra fark edilirse iş büyük ölçüde geri dönülemez hâle gelir. Birincisi camın kendisi: yanlış parça ya da farklı bir varyant olabilir. İkincisi çerçevedir ve kaportacı için asıl önemli olan budur — yandan ya da önden darbe almış bir araçta cam çerçevesi de deforme olmuş olabilir; oturma farkı, gövdenin hâlâ düz olmadığını söyleyen bir işarettir ve bu bilgi camdan çok daha önemlidir, çünkü çerçeve eğriyse iş cam işi değil yapı işidir. Üçüncüsü eski yapıştırıcı kalıntısının bir yerde kalın bırakılmış olmasıdır. Bu ölçüm ayrıca yapıştırıcı yatağının nasıl kurulacağını da belirler; eşit olmayan bir boşluğu yapıştırıcıyla doldurmaya çalışmak — yani bir yanda kalın, öbür yanda ince yatak bırakmak — yapıştırmanın davranışını bölgeden bölgeye değiştirir ve bu, yapısal bir parçada kabul edilemez. Yatak yüksekliği, kabul edilebilir oturma toleransı ve kesit ölçüsü ürüne ve araca özgüdür ve teknik belgeden okunur; buradaki iki sayı senaryo okumasıdır."
+    },
+    {
+      "id": 3,
+      "instruction": "Eski camı söktün. Çerçevede eski yapıştırıcının ince bir tabakası duruyor. Kazıyıp temiz metale inmeyi düşünüyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.tavan-paneli",
+        "question": "Eski yapıştırıcı ne kadar sökülür?",
+        "options": [
+          { "label": "Genellikle ince ve düzgün bir tabaka bilinçli olarak bırakılır: yeni yapıştırıcı en iyi kendi cinsine tutunur — ama çıplak metal ya da çizilmiş boya ortaya çıktıysa o bölge ayrıca ele alınır", "verdict": "ince-tabaka", "correct": true, "explain": "Bu adım sezgiye aykırıdır: alışkanlık 'eskiyi tamamen sök, temiz yüzeye uygula' der, oysa yapıştırma camda tersi geçerlidir. Sertleşmiş eski yapıştırıcının ince ve düzgün bir tabakası bırakılır, çünkü yeni yapıştırıcı bu yüzeye, boyaya ya da çıplak metale tutunduğundan daha güvenilir biçimde tutunur. Bırakılan tabakanın iki şartı vardır: ince ve her yerde eşit olmalı, üzerinde gevşek, kabarmış ya da yağlanmış bölge bulunmamalıdır. Sorun, kazıma sırasında ortaya çıkan şeyle başlar. Bıçak boyayı çizerse ya da metale kadar inerse, orada iki ayrı problem doğar: birincisi korozyon — korunmasız metal cam çerçevesinde nemle sürekli temas hâlindedir ve pas dersinde geçtiği gibi su duran yerde başlar; ikincisi yapışma — yapıştırıcı çıplak metale ya da çizilmiş boyaya güvenilir biçimde tutunmaz. Bu yüzden açığa çıkan her nokta, ürünün öngördüğü şekilde ayrıca ele alınır ve öylece bırakılmaz. Üçüncü bir konu da temizliktir: yüzeyde yağ, silikon ya da cam temizleyici kalıntısı varsa yapışma yerel olarak zayıflar — ve bu zayıflık işin ilk gününde değil, aylar sonra su sızıntısı ya da gürültü olarak ortaya çıkar. Ne kadar tabaka bırakılacağı, hangi temizleyici ve hazırlık ürününün kullanılacağı yapıştırıcı üreticisinin belgesinde yazar; bu ders ürün adı vermiyor." },
+          { "label": "Tamamı sökülür, temiz metale inilir", "verdict": "tamami", "explain": "Çıplak metal hem korozyon hem yapışma riski üretir." },
+          { "label": "Hiç sökülmez, üstüne uygulanır", "verdict": "hic", "explain": "Gevşek ve kalın kalıntı yatak yüksekliğini bozar." },
+          { "label": "Yalnız gözle kirli görünen yerler temizlenir", "verdict": "gozle", "explain": "Bırakılan tabaka ince ve her yerde eşit olmalıdır." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Sezgiye aykırı: eski yapıştırıcının ince tabakası bilinçli bırakılır. Yeni yapıştırıcı en iyi kendi cinsine tutunur."
+    },
+    {
+      "id": 4,
+      "instruction": "Yapıştırıcıyı sürmeden önce bir hazırlık ürünü uygulaman gerektiği yazıyor. Zaman kazanmak için atlamayı düşünüyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-kapi-paneli",
+        "question": "Hazırlık ürünü atlanabilir mi?",
+        "options": [
+          { "label": "Atlanamaz: yapışmayı ve kenardaki korumayı kuran adım odur ve atlandığında sonuç ilk gün değil aylar sonra ortaya çıkar — üstelik ortaya çıktığında camı yeniden sökmek gerekir", "verdict": "atlanamaz", "correct": true, "explain": "Cam yapıştırma sistemleri tek bir tüpten ibaret değildir; yapıştırıcı, kendisinden önce uygulanan hazırlık ürünleriyle birlikte çalışan bir sistemdir. Bu ürünler iki iş yapar. Birincisi yapışmayı kurar: uygulandıkları yüzeyi, yapıştırıcının güvenilir biçimde bağlanabileceği bir hâle getirir. Bu adım atlandığında yapıştırıcı yüzeyde durur ama gerçek bir bağ kurmaz — ilk bakışta hiçbir fark görünmez, cam yerindedir ve iş bitmiş gibidir. İkincisi koruma sağlar: camın kenarındaki bant ve çerçeve bölgesi hem nemle hem güneşle sürekli temas hâlindedir ve korunmayan bir yapıştırma zamanla bozulur. Bu iki eksiğin ortak özelliği gecikmeli görünmeleridir; sonuç aylar sonra su sızıntısı, rüzgâr gürültüsü ya da camın kenarında gevşeme olarak çıkar. O noktada yapılacak iş küçük bir düzeltme değildir — cam yeniden sökülür, yüzey yeniden hazırlanır ve iş baştan yapılır; yani atlanan birkaç dakika, bütün işi ikinci kez yaptırır. Bir konu daha var: bu ürünlerin kendi bekleme süreleri vardır — uygulandıktan sonra belirli bir süre beklenmeden yapıştırıcı sürülmez, ve açıldıktan sonra sınırlı bir kullanım ömürleri olabilir. Hangi ürünün nereye uygulanacağı, bekleme süreleri ve raf ömrü yapıştırıcı üreticisinin belgesinde yazar; bu ders ürün adı ve süre vermiyor." },
+          { "label": "Atlanabilir, yapıştırıcı zaten güçlüdür", "verdict": "atlanabilir", "explain": "Yapıştırıcının gücü ancak kurulan bağ kadardır." },
+          { "label": "Yalnız çıplak metalde gerekir", "verdict": "sadece-metal", "explain": "Cam kenarı ve çerçeve için de öngörülür." },
+          { "label": "Fazla yapıştırıcı sürülerek telafi edilir", "verdict": "fazla-yapistirici", "explain": "Miktar, kurulmayan bağı kurmaz." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Eksik yapışma ilk gün görünmez. Aylar sonra çıktığında bedeli küçük bir düzeltme değil, işin tamamı."
+    },
+    {
+      "id": 5,
+      "instruction": "Atölyeye gelen eski bir araçta cam, yapıştırıcıyla değil kalın bir lastik contayla oturuyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.esik-saci",
+        "question": "Bu iki sistem birbirinin yerine kullanılabilir mi?",
+        "options": [
+          { "label": "Kullanılamaz: contayla oturan sistemde cam mekanik olarak sıkışarak tutulur, yapıştırma sistemde ise kimyasal bağla tutulur ve yük taşır — çerçeve, cam ve conta tek bir sisteme göre tasarlanmıştır", "verdict": "farkli-sistem", "correct": true, "explain": "İki farklı cam tutma sistemi vardır ve aralarındaki fark yalnız yöntem değil, işlevdir. Conta sisteminde cam, çevresine geçirilen kalın bir lastik profil sayesinde çerçeveye mekanik olarak sıkışarak oturur; sızdırmazlığı contanın basıncı sağlar ve cam gövdenin yük taşıma davranışına anlamlı bir katkı vermez. Yapıştırma sisteminde ise cam, çerçeveye kimyasal bir bağla bağlanır; sızdırmazlık bu bağın kendisidir ve cam yapının bir parçası hâline gelir. Bu ayrım pratikte üç şeyi belirler. Birincisi parça uyumudur: contalı bir çerçeve, yapıştırma cam için gereken oturma yüzeyine ve kesit geometrisine sahip değildir — birini diğerinin yerine kurmaya çalışmak ne sızdırmazlık ne mukavemet verir. İkincisi arıza biçimidir: contalı sistemde sızıntı genellikle contanın sertleşmesinden, büzülmesinden ya da yanlış oturmasından gelir ve conta yenilenerek çözülür; yapıştırma sistemde sızıntı yapışma kaybının işaretidir ve bu, sızdırmazlık macunuyla üstünden kapatılmaz — çünkü kapatılan şey yalnız suyun yolu olur, kaybolan bağ yerine gelmez. Üçüncüsü karardır: aracın hangi sisteme sahip olduğu işe başlamadan önce belirlenir ve o sistemin gerektirdiği malzeme ve yöntem kullanılır. Contalı sistemde de doğru profilin seçilmesi ve montaj yönteminin doğru uygulanması gerekir; parça ve yöntem araca özgüdür." },
+          { "label": "Kullanılabilir, ikisi de camı yerinde tutar", "verdict": "kullanilabilir", "explain": "Yük taşıma ve sızdırmazlık mekanizmaları farklıdır." },
+          { "label": "Contalı sisteme yapıştırıcı eklenirse daha sağlam olur", "verdict": "ikisi-birden", "explain": "Çerçeve geometrisi buna göre tasarlanmamıştır." },
+          { "label": "Yapıştırma sistemde sızıntı macunla kapatılır", "verdict": "macun", "explain": "Macun suyun yolunu kapatır, kaybolan yapışmayı geri getirmez." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Yapıştırma sistemde sızıntı, yapışma kaybının işareti. Macunla kapatmak yalnız belirtiyi susturur."
+    },
+    {
+      "id": 6,
+      "instruction": "Cam takıldı. Müşteri kapıda bekliyor, yapıştırıcının teknik belgesi elinde yok.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.bagaj-kapagi",
+        "question": "Ne yapılır?",
+        "options": [
+          { "label": "Belge bulunmadan araç teslim edilmez: güvenli sürüş süresi ürüne, sıcaklığa ve neme göre değişir — tahminle söylenen bir süre güvenlik kararı değil, sorumluluğun sessizce müşteriye devredilmesidir", "verdict": "belge-olmadan-teslim-yok", "correct": true, "explain": "Bu, bu dersin kırmızı çizgisidir ve tartışmaya açık değildir. Yapıştırma camda 'araç ne zaman yola çıkabilir' sorusunun cevabı, yapıştırıcının belirli bir mukavemete ulaşma süresidir ve bu süre üç şeye bağlıdır: kullanılan ürün, ortam sıcaklığı ve nem. Aynı ürün soğuk bir günde belirgin biçimde daha uzun süre ister. Bu yüzden süre ne genel bir kuraldan ne tecrübeden okunabilir — yalnız o ürünün teknik belgesinden okunur. Belge yoksa yapılacak şey tahmin etmek değil, belgeyi bulmaktır: ürünün ambalajı, üreticinin yayınladığı doküman ya da tedarikçi. Bulunamıyorsa iş o ürünle yapılmaz. Süreyi tahminle söylemenin iki sonucu vardır. Birincisi doğrudan tehlikedir: erken yola çıkan araçta bir kaza olursa, cam hem yapısal katkısını veremez hem yolcu hava yastığı ona dayanamaz. İkincisi sorumluluğun sessizce el değiştirmesidir — usta 'şu kadar sonra gidebilirsiniz' dediğinde müşteri buna güvenerek yola çıkar; karar aslında ustanındır ama sonucu müşteri yaşar. Doğru davranış üç adımdır: süreyi belgeden okumak, müşteriye yazılı vermek ve süre dolmadan aracı bırakmamak. Bunu söylemek bazen müşteriyi memnun etmez; ama bu alanın tekrar eden cümlesi burada en sert hâliyle geçerlidir — reddedilen iş, kötü yapılan işten ucuzdur. Süreler ürüne özgüdür ve bu ders süre vermiyor." },
+          { "label": "Ortalama bir süre söylenir, çoğu ürün benzerdir", "verdict": "ortalama", "explain": "Süre ürüne, sıcaklığa ve neme göre belirgin biçimde değişir." },
+          { "label": "Araç teslim edilir, müşteri dikkatli sürer", "verdict": "dikkatli", "explain": "Dikkatli sürüş kaza anındaki yükü değiştirmez." },
+          { "label": "Bir gün beklemek her üründe yeterlidir", "verdict": "bir-gun", "explain": "Genel kural yoktur; belge okunur." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Süreyi tahmin etmek, kararı ustanın verip sonucu müşteriye yaşatmasıdır. Belge yoksa iş o ürünle yapılmaz."
+    },
+    {
+      "id": 7,
+      "instruction": "İş tamamlandı, bekleme süresi yazılı verildi.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kaput-kaporta",
+        "question": "Bu dersin özeti nedir?",
+        "options": [
+          { "label": "Cam işi bir montaj değil bir yapıştırma sistemidir: kuru deneme, yüzey hazırlığı, hazırlık ürünü, doğru yatak ve bekleme süresi birlikte çalışır — biri eksikse iş görünüşte biter, işlevde bitmez", "verdict": "sistem", "correct": true, "explain": "Bu dersin adımları tek bir zincir kuruyor ve zincirin her halkası görünmez. Kuru deneme camın ve çerçevenin gerçekten uyduğunu doğruluyor — atlanırsa yapıştırıcı sürüldükten sonra öğreniyorsun. Eski yapıştırıcının doğru miktarda bırakılması yeni bağın zeminini kuruyor. Hazırlık ürünü bağı ve korumayı kuruyor. Doğru yatak, yükün çevre boyunca dengeli dağılmasını sağlıyor. Bekleme süresi ise bütün bunların gerçekten mukavemete dönüşmesini sağlıyor. Ortak yanları şu: hiçbiri teslim gününde görünmüyor. Cam takılıdır, temizdir, su sızdırmaz ve araç gider. Fark, kaza anında ya da aylar sonra ortaya çıkar. Bu yüzden cam işi, bu alanın 'görünmeyen iş' dersinin en keskin örneğidir — yapan usta ile yapmayan usta aynı görünen aracı teslim eder, ama biri sistemin bir parçasını yerine koymuş, diğeri yalnız açıklığı kapatmıştır. Ve bu derste görünmeyen işin bedeli para değil güvenliktir; o yüzden bekleme süresi bir tavsiye değil, işin teslim şartıdır. Sırada su var: cam düzgün takıldığı hâlde araç neden ıslanır ve su gerçekte nereden girer." },
+          { "label": "Doğru cam takılırsa iş biter", "verdict": "dogru-cam", "explain": "Parça doğru olsa da hazırlık ve süre işin parçası." },
+          { "label": "Su sızdırmıyorsa iş doğrudur", "verdict": "su-sizmiyor", "explain": "Sızdırmazlık, yapısal mukavemetin kanıtı değildir." },
+          { "label": "Bekleme süresi müşterinin tercihidir", "verdict": "tercih", "explain": "Güvenlik şartıdır; tercihe bırakılmaz." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Cam işinde görünmeyen işin bedeli para değil güvenlik. Bekleme süresi tavsiye değil, teslim şartı."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Yapıştırıcının teknik belgesi elinde yok, müşteri bekliyor. Ne yapılır?",
+        "a": "belge-olmadan-teslim-yok",
+        "options": [
+          { "verdict": "belge-olmadan-teslim-yok", "label": "Belge bulunmadan araç teslim edilmez; bulunamıyorsa iş o ürünle yapılmaz", "explain": "Güvenli sürüş süresi ürüne, sıcaklığa ve neme göre değişir ve yalnız teknik belgeden okunur. Erken yola çıkan araçta cam yapısal katkısını veremez ve yolcu hava yastığı ona dayanamaz. Süre müşteriye yazılı verilir." },
+          { "verdict": "ortalama", "label": "Ortalama bir süre söylenir", "explain": "Ürünler arasında ve sıcaklıkla belirgin fark vardır." },
+          { "verdict": "dikkatli", "label": "Müşteri dikkatli sürer", "explain": "Dikkatli sürüş kaza anındaki yükü değiştirmez." },
+          { "verdict": "bir-gun", "label": "Bir gün her üründe yeterlidir", "explain": "Genel kural yoktur." }
+        ]
+      },
+      {
+        "q": "Cam çerçevesindeki eski yapıştırıcı ne kadar sökülür?",
+        "a": "ince-tabaka",
+        "options": [
+          { "verdict": "ince-tabaka", "label": "İnce ve her yerde eşit bir tabaka bilinçli bırakılır; çıplak metal ya da çizilmiş boya açığa çıktıysa o bölge ayrıca ele alınır", "explain": "Yeni yapıştırıcı kendi cinsine, boyaya ya da çıplak metale tutunduğundan daha güvenilir biçimde tutunur. Açığa çıkan metal hem korozyon hem yapışma sorunu üretir. Yüzeyde yağ ya da silikon kalıntısı varsa yapışma yerel olarak zayıflar ve bu aylar sonra ortaya çıkar." },
+          { "verdict": "tamami", "label": "Tamamı sökülür, metale inilir", "explain": "Çıplak metal iki ayrı risk üretir." },
+          { "verdict": "hic", "label": "Hiç sökülmez", "explain": "Gevşek ve kalın kalıntı yatağı bozar." },
+          { "verdict": "gozle", "label": "Yalnız kirli görünen yerler", "explain": "Tabaka ince ve her yerde eşit olmalı." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2'deki 14 mm ve 9 mm SENARYO okumalarıdır; istenen FARKTIR (5 mm). Ders hiçbir araç için kabul edilebilir oturma toleransı iddia etmiyor.",
+    "sourceRequired": "Yapıştırıcı ve hazırlık ürünü adları, yatak yüksekliği ve kesiti, kabul edilebilir oturma toleransı, hazırlık ürünlerinin bekleme süreleri ve raf ömrü, güvenli sürüş bekleme süresi ile sıcaklık ve neme bağlı değişimi bilinçle VERİLMEDİ; hepsi ürüne ve araca özgüdür ve üreticinin teknik belgesinden okunur.",
+    "kapsam": "Hava yastığı sisteminin sökümü, onarımı ve testi KAPSAM DIŞIDIR; ders yalnız camın hava yastığı açılımındaki rolünü ve bekleme süresinin neden güvenlik konusu olduğunu anlatıyor. Cam çerçevesinde yapısal deformasyonun doğrulanması gövde ölçüm sistemi gerektirir ve o da kapsam dışıdır.",
+    "kaynak": "Bu alan kullanıcının açık talebiyle eklendi (talep birebir: 'birde alanlara kaportayı ekleyelim'); konu başlıkları MEB Otomotiv Gövde ve Boya dalının çerçevesini takip ediyor, kazanım numarası iddiası yok.",
+    "reviewedByMechanic": false
+  }
+}

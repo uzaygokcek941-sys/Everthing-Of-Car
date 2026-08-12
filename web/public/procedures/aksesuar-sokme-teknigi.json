@@ -1,0 +1,170 @@
+{
+  "id": "aksesuar.sokme-teknigi",
+  "area": "aksesuar-ses",
+  "stage": 0,
+  "title": "Klips, Döşeme ve Kaplama: Zarar Vermeden Sökmek",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 35,
+  "prerequisites": ["aksesuar.guvenlik-elektrik", "aksesuar.govde-agi"],
+  "learningGoals": [
+    "Bir panelin nasıl tutunduğunu sökmeden önce anlamak",
+    "Klips yönünü bularak kuvveti doğru eksende uygulamak",
+    "Söküm sırasını ve geri takma sırasını bir kayıt olarak tutmak"
+  ],
+
+  "safety": [
+    { "rule": "Panel sökülmeden önce akü eksi ucu ayrılmış olur", "why": "Döşemenin arkasındaki demetler sürekli beslemelidir; metal spatula bir uca değdiğinde kısa devre olur", "blocksStart": true },
+    { "rule": "Hava yastığı ya da gergili kemer bileşeni bulunan panellerde önce bekleme süresi tamamlanır ve doğrulanır", "why": "Koltuk, tavan, direk ve bazı kapı döşemelerinde bu bileşenler bulunur; enerji kesilmiş olsa da depolanmış enerji süresi dolmadan sökülmez", "blocksStart": true },
+    { "rule": "Sökülen vidalar ve klipsler geldikleri yere göre ayrı ayrı toplanır", "why": "Aynı panelde farklı boy vidalar bulunur; uzun vidayı kısa yere takmak sacı ya da camı deler", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.plastik-sokme-spatulasi", "label": "Plastik söküm spatulası takımı", "required": true },
+    { "id": "tool.tornavida-seti", "label": "Tornavida seti", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true },
+    { "id": "tool.klips-cikarici", "label": "Klips çıkarıcı", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Kapı iç döşemesini sökeceksin. Elin spatulaya gitmeden önce dur.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kapi-ic-dosemesi",
+        "question": "İlk yapılacak iş nedir?",
+        "options": [
+          { "label": "Panelin nasıl tutunduğu bulunur: kaç vida, nerede gizli, klipsler hangi yönde ve panel kenardan mı yoksa yukarı kaldırılarak mı çıkıyor", "verdict": "once-anla", "correct": true, "explain": "Bu alanın işçilik kalitesi tek bir alışkanlıkta toplanır: kuvvet uygulamadan önce nasıl tutunduğunu bil. Bir iç döşeme genellikle üç ayrı şeyle birden tutunur ve üçü aynı anda çözülmeden panel çıkmaz. Birincisi vidalardır ve neredeyse hepsi gizlidir — kol boşluğunun dibinde, kapı kolunun arkasındaki kapakçığın altında, yansıtıcı bir tapanın ardında ya da kenar fitilinin altında. Görülmeyen bir vida bırakıp çekmek, panelin kendisini ya da vidanın oturduğu plastik kulağı kırar; o kulak kırıldığında panel bir daha asla düzgün oturmaz ve zamanla tıkırdar. İkincisi klipslerdir: panelin arka yüzünde belli aralıklarla dizilmiş, sacdaki deliklere geçen mantar başlı pimler. Üçüncüsü ise askıdır — birçok kapı döşemesi üst kenarından cam kenarına oturur ve bu yüzden panel dışarı doğru değil YUKARI kaldırılarak çıkar. Bu üçünü bilmeden çeken kişi, panel çıkmadığında daha çok kuvvet uygular ve kırılır. Bilgi kaynağı sırayla şudur: aracın kendi servis belgesi, aynı panelin bir örneğinin arka yüzü, ve son çare olarak fener ile boşluktan bakmak." },
+          { "label": "Kenardan spatula sokulup çevrilir, klipsler zaten patlar", "verdict": "spatula-cevir", "explain": "Vida kalmışsa panel değil kulak kırılır; klips yönü bilinmeden uygulanan kuvvet yanlış eksende olur." },
+          { "label": "İki elle kuvvetlice çekilir", "verdict": "cek", "explain": "Askılı panel yukarı kalkarak çıkar; ileri çekmek üst kenarı kırar." },
+          { "label": "Vidaların hepsi görünür, aramaya gerek yok", "verdict": "gorunur", "explain": "Bu panellerde vidaların çoğu tapa, kapakçık ya da fitil altında gizlidir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Bu alanda işçiliğin yarısı klips ve döşeme ile geçiyor. Kırılan bir klips yapılan işin tamamını değersizleştirir çünkü müşteri sesi her gün duyar."
+    },
+    {
+      "id": 2,
+      "instruction": "Gizli vidaları buldun ve söktün. Şimdi klipslere geçiyorsun.",
+      "interaction": {
+        "type": "unscrew",
+        "target": "part.kapi-ic-dosemesi",
+        "turns": 3,
+        "direction": "ccw",
+        "requiresGesture": true
+      },
+      "camera": "aksesuar",
+      "hint": "Vidayı saat yönünün tersine üç tur çevir.",
+      "teachingNote": "Sökülen vidaları geldikleri yere göre ayır. Bir kapı döşemesinde çoğu zaman iki üç farklı boy vida bulunur ve uzun olanı kısa yuvaya takmak ya sacı deler ya cama dayanır. Basit ve işe yarayan yöntem: panelin bir fotoğrafını çek, vidaları çıkardığın sırayla ayrı bir tepsinin ayrı gözlerine koy. Bu bir titizlik gösterisi değil, geri takarken kaybedilen yirmi dakikanın önlenmesidir."
+    },
+    {
+      "id": 3,
+      "instruction": "Spatulayı panelin kenarına sokacaksın. Ama nereye ve hangi yöne?",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kapi-saci",
+        "question": "Klipsi ayırırken kuvvet nereye uygulanır?",
+        "options": [
+          { "label": "Kuvvet klipsin tam üstüne, sac düzlemine dik olarak uygulanır; spatula klipse en yakın noktaya, panel ile sac arasına girer", "verdict": "klipsin-ustune", "correct": true, "explain": "Klips mantar başlı bir pimdir: sacdaki deliğe geçer ve baş kısmı arkadan tutar. Ayrılması için tek gereken şey pimi deliğinden dik olarak geri çekmektir. Sorun şudur ki insan panelin ortasından ya da klipsler arasındaki bir noktadan çeker; o zaman panel bir yay gibi eğilir, kuvvetin çoğu plastiği bükmeye harcanır ve klips ya çıkmaz ya da panelin arkasındaki yuvasını kopararak çıkar. Yuvası kopan bir klips panelde bir delik bırakır ve o nokta bir daha tutmaz. Doğru yöntem üç adımdır. Birincisi klipsin yerini bul: parmakla panelin kenarını bastırdığında sert direnç veren noktalar klipslerin yeridir, ya da sökülmüş bir örneğin arka yüzü aralıklarını gösterir. İkincisi spatulayı o noktaya, panel ile sac arasına yassı biçimde sok — metal tornavida değil, geniş yüzeyli plastik spatula, çünkü metal hem boyayı çizer hem plastiği ezer. Üçüncüsü kaldıraç noktasını sac tarafına ver ve dik, kararlı bir kuvvetle çek; sallamak ve çevirmek klipsi burar. Bir klips 'pat' diye çıkar; çıkmıyorsa yanlış yerdesindir, daha fazla kuvvet çözüm değildir." },
+          { "label": "Panelin ortasından çekilir, en rahat orasıdır", "verdict": "ortadan", "explain": "Panel yay gibi eğilir; kuvvet klipse ulaşmaz, plastiği yorar." },
+          { "label": "Metal tornavida ile kaldırılır", "verdict": "metal", "explain": "Boyayı çizer, plastiği ezer, sacı içeri göçürür." },
+          { "label": "Sağa sola sallayarak çıkarılır", "verdict": "salla", "explain": "Sallamak klipsi burar ve yuvasını koparır." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Klips 'pat' diye çıkar. Çıkmıyorsa daha fazla kuvvet değil, daha doğru yer gerekiyordur — bu cümle bu dersin özeti."
+    },
+    {
+      "id": 4,
+      "instruction": "Panel gevşedi ama hâlâ araca bağlı. Yukarı kaldırıp çıkarıyorsun.",
+      "interaction": {
+        "type": "pull",
+        "target": "part.kapi-ic-dosemesi",
+        "requiresGesture": true
+      },
+      "camera": "aksesuar",
+      "hint": "Panelin üst kenarını cam kenarından kurtaracak şekilde yukarı kaldır.",
+      "teachingNote": "Panel çıktı ama tamamen serbest değil: arkasında düğme soketleri, kapı açma teli ve bazen ayna kablosu var. Paneli tek elle tutup öbür elle soketleri ayırmak yanlıştır; panelin ağırlığı kabloları çeker ve soket dilini kırar. Doğru yöntem paneli dizine ya da bir sehpaya yaslamak, sonra her soketi kendi kilidine basarak ayırmaktır. Kapı açma teli genellikle çevrilerek yuvasından kurtarılır, çekilerek değil."
+    },
+    {
+      "id": 5,
+      "instruction": "Panel çıktı. Arkasında bir naylon ya da keçe örtü var ve kenarları yapışkanla sacın üzerine oturuyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kapi-korugu",
+        "question": "Bu örtü ne işe yarar ve ne yapılır?",
+        "options": [
+          { "label": "Su bariyeridir: camdan içeri sızan suyu döşemeye geçirmeden aşağı yönlendirir; kesilmeden, mümkün olduğunca bütün hâlde ayrılır ve geri yapıştırılır", "verdict": "su-bariyeri", "correct": true, "explain": "Kapının içi ıslak bir bölgedir ve bu tasarım gereğidir. Cam ile fitil arasından her zaman bir miktar su girer; kapı bunu içindeki tahliye delikleriyle aşağı atar. Sac ile iç döşeme arasındaki naylon ya da keçe örtü tam olarak bu suyun kabine geçmesini engeller. Aksesuar işinde bu örtü sık sık kesilir, yırtılır ya da geri yapıştırılmadan bırakılır ve sonucu şudur: kapı döşemesi nemlenir, halının kenarı ıslanır, kabin küflenir, kapıdaki modül ve hoparlör zamanla bozulur. Müşteri bunun sebebini asla ses sistemine bağlamaz ama sebebi odur. Doğru yöntem: örtüyü yapışkanından yavaşça, bütün hâlde ayır; kablo geçirmek için delmek gerekiyorsa mümkün olan en küçük deliği aç ve geçişi tekrar sızdırmaz hâle getir; iş bitince aynı yapışkan bandıyla ya da uygun sızdırmaz macunla kenarları eksiksiz kapat. Bir de kontrol alışkanlığı: örtüyü geri yapıştırmadan önce kapının alt tahliye deliklerinin açık olduğuna bak, tıkalıysa temizle — panel açıkken bu iş beş dakika, panel takılıyken yarım gündür." },
+          { "label": "Ses yalıtımı için konmuştur, atılabilir", "verdict": "yalitim", "explain": "Yalıtıma katkısı olabilir ama varlık sebebi sudur; atmak kabine su geçirir." },
+          { "label": "Montaj artığıdır", "verdict": "artik", "explain": "Fabrikanın bilinçli koyduğu bir bariyerdir." },
+          { "label": "Kesilip atılır, iş bitince yenisi takılır", "verdict": "kes-at", "explain": "Bütün hâlde ayrılıp geri yapıştırılır; kesmek gereksiz risk üretir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Bu örtü bu alanın sessiz kahramanı: kimse görmüyor, ama geri yapıştırılmadığında altı ay sonra ortaya çıkan şikâyetin sebebi bu oluyor."
+    },
+    {
+      "id": 6,
+      "instruction": "İki farklı söküm denemesinde panelin kenar boşluğunu ölçtün: birinde 3,4 mm, diğerinde 1,2 mm. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.multimetre-aksesuar",
+        "unit": "mm",
+        "acceptRange": [2.0, 2.4]
+      },
+      "camera": "aksesuar",
+      "hint": "3,4 eksi 1,2.",
+      "teachingNote": "2,2 milimetrelik bu fark, kırılmış bir klips yuvasının bıraktığı izdir. Panel geri takıldığında gözle bakan kişi çoğu zaman fark etmez; ama boşluk kalan yer titreşimle tıkırdar ve müşteri her yol çukurunda duyar. Bu yüzden geri takmadan önce panelin kenarı boyunca elle bastırılır ve her klipsin oturduğu hissedilir — oturmayan bir nokta varsa ya klips yerinde değildir ya yuvası kırılmıştır. Kırık yuva panelin tamamını değiştirmeyi gerektirmez; birçok araçta klips ayrı satılır ve yapıştırmalı takviye ile yuva onarılabilir. Kabul edilebilir panel boşluğu araca ve panele özgüdür ve bu ders bir sınır vermiyor; ölçülen şey iki söküm arasındaki farktır."
+    },
+    {
+      "id": 7,
+      "instruction": "İş bitti, paneli geri takacaksın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kapi-modulu",
+        "question": "Geri takma sırası nasıl olmalı?",
+        "options": [
+          { "label": "Sökümün tersi: önce soketler ve teller takılır, işlev DENENİR, sonra panel oturtulur — panel takıldıktan sonra denemek yeniden sökmek demektir", "verdict": "once-dene", "correct": true, "explain": "Geri takma, sökümün aynadaki görüntüsüdür ama bir tek fark vardır ve o fark bu adımın tamamıdır: panel oturtulmadan ÖNCE işlev denenir. Sıra şudur. Bütün soketler kilitleri 'klik' sesi verene kadar takılır — yarım takılmış bir soket titreşimle çıkar ve arıza haftalar sonra gelir. Kapı açma teli yuvasına oturtulur ve kapı içeriden bir kez açılıp kapanarak denenir. Su bariyeri eksiksiz yapıştırılır. Ardından akü geri bağlanır ve o kapının bütün işlevleri denenir: cam yukarı aşağı, kilit aç kapa, ayna dört yöne, kapı hoparlörü ve varsa ısıtma. Ancak bunların hepsi çalıştıktan sonra panel yerine oturtulur. Panel takma da kendi sırasını ister: önce üst kenar cam kenarına askılanır, sonra klipsler tek tek avuç içiyle bastırılarak oturtulur — yumrukla değil, avuç içiyle ve klipsin tam üstünden. En son gizli vidalar takılır ve tapalar kapatılır. Son kontrol elle yapılır: panelin kenarı boyunca gezdirilen parmak hiçbir yerde boşluk bulmamalı. Bir kez daha sökmek zorunda kalmamanın tek yolu, sökülüyken denemektir." },
+          { "label": "Panel takılır, sonra denenir", "verdict": "once-tak", "explain": "Bir şey çalışmıyorsa paneli yeniden sökmek gerekir; klipsler her sökümde yorulur." },
+          { "label": "Klipsler yumrukla vurularak oturtulur", "verdict": "yumruk", "explain": "Nokta darbe paneli çatlatır; avuç içiyle ve klipsin üstünden bastırılır." },
+          { "label": "Vidalar önce, klipsler sonra takılır", "verdict": "vida-once", "explain": "Vidalar panel tam oturmadan sıkılırsa plastiği çeker ve kulakları zorlar." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Aşama 0 burada bitiyor: güvenlik ve kırmızı çizgiler, gövde ağının haritası, zarar vermeden söküm. Bundan sonraki bütün dersler bu üçünü varsayıyor."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Bir klipsi ayırırken kuvvet nereye ve nasıl uygulanır?",
+        "a": "klipsin-ustune",
+        "options": [
+          { "verdict": "klipsin-ustune", "label": "Klipsin tam üstüne, sac düzlemine dik ve kararlı bir kuvvetle; spatula panel ile sac arasına klipse en yakın noktadan girer", "explain": "Klips mantar başlı bir pimdir ve deliğinden dik çekilerek çıkar. Panelin ortasından çekmek paneli yay gibi eğer, kuvvet klipse ulaşmaz ve klips yuvasını koparır; yuvası kopan nokta bir daha tutmaz. Metal tornavida boyayı çizer ve plastiği ezer, geniş yüzeyli plastik spatula kullanılır. Sallamak klipsi burar. Klips çıkmıyorsa daha fazla kuvvet değil, doğru yer gerekir." },
+          { "verdict": "ortadan", "label": "Panelin ortasından çekilir", "explain": "Panel eğilir, kuvvet klipse gitmez." },
+          { "verdict": "metal", "label": "Metal tornavida ile kaldırılır", "explain": "Boyayı çizer, sacı göçürür." },
+          { "verdict": "salla", "label": "Sallayarak çıkarılır", "explain": "Klipsi burar ve yuvasını koparır." }
+        ]
+      },
+      {
+        "q": "Kapı sacı ile iç döşeme arasındaki naylon/keçe örtü ne işe yarar?",
+        "a": "su-bariyeri",
+        "options": [
+          { "verdict": "su-bariyeri", "label": "Su bariyeridir; camdan sızan suyu kabine geçirmeden aşağı yönlendirir ve bütün hâlde ayrılıp geri yapıştırılır", "explain": "Kapının içi tasarım gereği ıslak bir bölgedir ve su alt tahliye deliklerinden atılır. Bu örtü kesilir ya da geri yapıştırılmazsa döşeme nemlenir, halı ıslanır, kabin küflenir ve kapıdaki modül ile hoparlör zamanla bozulur. Kablo geçirmek için en küçük delik açılır ve geçiş tekrar sızdırmaz hâle getirilir; panel açıkken tahliye deliklerinin açık olduğu da kontrol edilir." },
+          { "verdict": "yalitim", "label": "Ses yalıtımıdır, atılabilir", "explain": "Varlık sebebi sudur." },
+          { "verdict": "artik", "label": "Montaj artığıdır", "explain": "Fabrikanın bilinçli koyduğu bariyerdir." },
+          { "verdict": "kes-at", "label": "Kesilip atılır", "explain": "Bütün hâlde ayrılıp geri yapıştırılır." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 6'daki 3,4 mm ve 1,2 mm SENARYO okumalarıdır; istenen FARKTIR (2,2 mm) ve ders kabul edilebilir panel kenar boşluğu sınırı vermiyor. Boşluk araca ve panele özgüdür.",
+    "sourceRequired": "Panel montaj vida torkları, klips tipleri ve kod numaraları, kabul edilebilir panel boşluğu ve sızdırmaz macun tipi bilinçle VERİLMEDİ; hepsi araç ve üretici belgesine aittir. Ders yöntemi ve sırayı öğretiyor.",
+    "kapsam": "Döşeme onarımı, kaplama kumaşı değişimi, plastik kaynak ve boya işleri KAPSAM DIŞIDIR; bunlar ayrı derslerdir ve bu projede yok. Airbag ya da gergili kemer bileşeni bulunan panellerin sökümü yalnız güvenli durum ilkesi düzeyinde anlatılıyor, modüle müdahale öğretilmiyor. Bu derste ölçüm hedefi sahnedeki ölçü aletidir; sahnede ayrı bir kumpas modeli yok.",
+    "reviewedByMechanic": false
+  }
+}

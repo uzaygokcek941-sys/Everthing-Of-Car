@@ -1,0 +1,177 @@
+{
+  "id": "direksiyon.bosluk-yeri",
+  "area": "direksiyon",
+  "stage": 1,
+  "title": "Boşluk Zincirin Neresinde: Ayırma Yöntemi",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 40,
+  "prerequisites": ["direksiyon.bosluk-olcumu"],
+  "learningGoals": [
+    "Hareketi zincir boyunca izleyerek boşluğun kaybolduğu halkayı bulmak",
+    "Her halkaya özgü kontrol yöntemini bilmek",
+    "Birden fazla halkadaki küçük boşlukların toplandığını görmek"
+  ],
+
+  "safety": [
+    { "rule": "Araç kaldırılacaksa sehpaya alınır; kriko üstünde altına girilmez", "why": "Bu kontrolde eller aracın altında ve tekerlek yakınında çalışır", "blocksStart": true },
+    { "rule": "Simidi oynatan kişi ile parçaya dokunan kişi birbirini görür ya da duyar; sözsüz çalışılmaz", "why": "Habersiz çevrilen simit, elin mafsal ile gövde arasında kalmasına yol açar", "blocksStart": true },
+    { "rule": "Motor çalışırken kontrol yapılacaksa dönen kayış ve kasnak bölgesinden uzak durulur", "why": "Hidrolik yardımlı araçta bazı kontroller motor çalışırken yapılır", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true },
+    { "id": "tool.kriko-sehpa", "label": "Kriko ve sehpa", "required": true },
+    { "id": "tool.levye", "label": "Levye", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Boşluk ölçüldü ve sınırın üstünde. Şimdi yeri aranıyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.direksiyon-simidi",
+        "question": "Yöntemin özü ne?",
+        "options": [
+          { "label": "Hareket zincir boyunca izlenir: simit küçük hareketlerle oynatılırken her halkanın girişi ve çıkışı ayrı ayrı gözlenir, hareketin kaybolduğu halka suçludur", "verdict": "hareketi-izle", "correct": true, "explain": "Bu yöntemin adı ayırmadır ve mantığı basittir: hareket zincire simitten girer, tekerlekten çıkar. Aradaki her halkanın bir girişi bir de çıkışı vardır. Sağlam bir halkada giriş ne kadar hareket ederse çıkış da o kadar hareket eder. Boşluklu bir halkada ise giriş hareket eder ama çıkış bir süre kımıldamaz — hareket orada 'kaybolur'. Uygulaması iki kişiliktir: biri simidi tekerlek dönmeyecek kadar küçük bir açıyla sürekli sağa sola oynatır (bu hareket ritmik ve sürekli olmalıdır, tek seferlik değil), diğeri elini ve gözünü halka halka gezdirir. Sıra simitten başlar ve tekerleğe kadar gider: simit-mil bağlantısı, mil, mafsal, kutu girişi, kutu çıkışı, rot çubuğu, rot başı. Bu yöntemin en güçlü yanı hiçbir parça sökülmeden, hiçbir parça satın alınmadan yapılabilmesidir. En sık yapılan hata ise ilk bulunan boşlukta durmaktır; zincir sonuna kadar taranır, çünkü birden çok halkada birden boşluk olabilir." },
+          { "label": "En eski parça bulunur ve değiştirilir", "verdict": "eski-parca", "explain": "Yaş bir kanıt değil; boşluk ölçülerek yerinde bulunur." },
+          { "label": "Kutu sökülüp içine bakılır", "verdict": "kutuyu-sok", "explain": "Sökme en son iş; yer sökmeden tespit edilebilir." },
+          { "label": "Araç yol testine çıkarılır", "verdict": "yol-testi", "explain": "Yol testi başka şeyler gösterir; boşluğun yeri durağan kontrolle bulunur." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Bu yöntem hiçbir parça sökmez ve hiçbir para harcamaz. Bu yüzden her zaman ilk yapılan iştir."
+    },
+    {
+      "id": 2,
+      "instruction": "Elini mafsalın iki tarafına koy: bir yanda gelen mil, öbür yanda giden mil.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.mil-mafsali",
+        "question": "Mafsalda boşluk olduğunu ne gösterir?",
+        "options": [
+          { "label": "Gelen mil dönerken giden mil bir an duruyorsa, hareket mafsalın içinde kayboluyordur", "verdict": "giris-cikis-farki", "correct": true, "explain": "Mafsal kontrolü, ayırma yönteminin en temiz uygulandığı yerdir çünkü girişi ve çıkışı elle aynı anda tutulabilir. Baş ve işaret parmağı mafsalın iki yanındaki millere konur; simit oynatıldığında iki milin aynı anda hareket etmesi beklenir. Gelen mil kımıldayıp giden mil bir an sonra kımıldıyorsa aradaki gecikme boşluktur ve parmakla hissedilir; çoğu zaman hafif bir 'tık' olarak da duyulur. Aynı kontrol sırasında bakılacak ikinci şey bağlantı cıvatasıdır: mafsalı mile bağlayan cıvata gevşediğinde ya da yuvası aşındığında tam olarak aynı belirtiyi verir ve bu, aşınmış bir mafsaldan çok daha ucuz bir çözümdür — ama gevşemenin neden olduğu da sorulmalıdır, çünkü kendiliğinden gevşeyen bir cıvatanın yuvası da hasar görmüş olabilir. Kolonun içindeki kayar (teleskopik) bağlantı ve esnek göbekli mafsallar da aynı yöntemle kontrol edilir. Mafsalın kaportanın altında ya da ayak boşluğunda kalması bu kontrolü zorlaştırır; el feneri ve sabır gerektirir, ama atlanmaz — atlanan mafsal, değiştirilen sağlam rot başı demektir." },
+          { "label": "Mafsalın paslı görünmesi", "verdict": "pas", "explain": "Görüntü değil, giriş-çıkış farkı belirleyici." },
+          { "label": "Mafsalın sıcak olması", "verdict": "sicaklik", "explain": "Sıcaklık burada bir gösterge değil." },
+          { "label": "Mafsalda boşluk olmaz, oraya bakılmaz", "verdict": "bakilmaz", "explain": "Mafsal en sık atlanan ve en sık suçlu çıkan halkalardan biridir." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Mafsal cıvatasının gevşemesi, aşınmış mafsalla aynı belirtiyi verir ama çok daha ucuzdur. Önce ona bakılır."
+    },
+    {
+      "id": 3,
+      "instruction": "Kutunun girişindeki hareketi 6,5 mm, kremayer ucundaki karşılığını 6,1 mm ölçtün. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.kremayer-kutusu",
+        "unit": "mm",
+        "acceptRange": [0.35, 0.45]
+      },
+      "camera": "direksiyon",
+      "hint": "6,5 eksi 6,1.",
+      "teachingNote": "0,4 mm'lik bu kayıp kutunun içinde oluyor — giren hareketin bir kısmı çıkışa ulaşmıyor. Bu ölçüm ayırma yönteminin sayısallaştırılmış hâlidir ve iki şey söyler. Birincisi, kutu şüpheliler arasındadır. İkincisi ve daha önemlisi, kutunun katkısı toplam boşluğun içinde ne kadar yer tutuyor bunu görürsün: toplam boşluk büyükken kutu payı küçükse suçlu başka bir halkadır ve kutuya dokunmak şikâyeti çözmez. Kabul edilebilir kutu içi boşluk araca ve kutu tipine özgüdür; bu ders bir sınır vermiyor."
+    },
+    {
+      "id": 4,
+      "instruction": "Sıra rot başında.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.rot-basi-sol",
+        "question": "Rot başındaki boşluk nasıl kontrol edilir?",
+        "options": [
+          { "label": "Parmak mafsalın gövdesi ile bağlandığı parçanın üzerine konur; rot çubuğu oynatıldığında parmağın altında kopuk bir hareket hissediliyorsa boşluk vardır", "verdict": "parmakla-his", "correct": true, "explain": "Rot başı kontrolünün püf noktası gözle değil parmakla yapılmasıdır. Parmak, mafsalın gövdesi ile bağlandığı parçanın birleştiği yere konur — yani hareketin geçtiği sınırın üstüne. Rot çubuğu elle ileri geri oynatıldığında sağlam bir mafsalda parmak tek parça bir hareket hisseder; boşluklu bir mafsalda ise önce bir kopukluk, sonra hareket gelir. Bu 'kopukluk' hissi gözle görülmeyecek kadar küçük olabilir ama parmak onu ayırt eder. Kontrolün iki desteği vardır. Birincisi ses: boşluklu mafsal genellikle hafif bir tıkırtı verir. İkincisi koruyucu körük: yırtılmış bir körük içeri toz ve su almış demektir ve o mafsal, henüz boşluk hissedilmese bile şüphelidir — yağı gitmiş, aşınma başlamıştır. Önemli bir ayrım: rot başı boşluğu ile ön takım (rotil, salıncak, tekerlek göbeği) boşluğu farklı şeylerdir ve farklı yönlerde hissedilir; ikincisi Lastik ve Tekerlek alanında öğrenilen 3-9 / 12-6 sallama yöntemiyle ayrılır. Direksiyon boşluğu ararken karışmaması için kontrol sırasında hareket simitten verilir, tekerlekten değil." },
+          { "label": "Sadece gözle bakılır, boşluk görünür", "verdict": "gozle", "explain": "Boşluk çoğu zaman gözle görülmeyecek kadar küçüktür." },
+          { "label": "Mafsal sökülüp elde çevrilir", "verdict": "sok", "explain": "Sökmeden yerinde kontrol edilebilir; sökme en son iş." },
+          { "label": "Tekerlek tekmelenir", "verdict": "tekme", "explain": "Kontrollü ve tekrarlanabilir bir yöntem değil." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Parmak, gözden hassas. Bu alandaki en iyi ölçü aleti hâlâ elin kendisi."
+    },
+    {
+      "id": 5,
+      "instruction": "Kontrol sırasında kutunun körüğünün yırtık olduğunu gördün.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.koruk-sol",
+        "question": "Bu bulgu ne anlama gelir?",
+        "options": [
+          { "label": "Yırtık körük, içeri toz ve su girmesine izin verir; o bölgedeki aşınma hızlanır ve körük ne kadar zamandır yırtık olduğu bilinmediği için parça şüpheli sayılır", "verdict": "koruma-kalkti", "correct": true, "explain": "Körük bir kapak değil, bir koruma sistemidir: içerideki yağı tutar, dışarıdaki toz ve suyu almaz. Yırtıldığı anda ikisi de tersine döner. Yağ zamanla dışarı sızar, yol tozu ve suyu içeri girer ve hareketli yüzeyler zımpara gibi çalışan bir karışımın içinde çalışmaya başlar. Bu yüzden yırtık körük tek başına bir bulgudur ve şu şekilde değerlendirilir: körük yeni yırtılmışsa parça henüz kurtarılabilir ve körük değişimi yeterli olabilir; uzun süredir yırtıksa aşınma çoktan başlamıştır ve yalnız körüğü değiştirmek, arızayı yeni bir körüğün altına saklamak olur. Ne kadar zamandır yırtık olduğunu anlamanın yolu içeriye bakmaktır — yağ kalmış mı, içerisi kuru ve tozlu mu, yüzeyde çizik ve pas var mı. Aynı mantık rot başı ve rotil körükleri için de geçerlidir ve bu yüzden birçok ülkede yırtık körük muayenede kusur olarak işaretlenir. Kural olarak: körük değişirken içerisi temizlenip yağlanmadan kapatılmaz ve boşluk kontrolü körük değiştikten sonra tekrarlanır." },
+          { "label": "Önemli değil, körük yalnız görsel bir parçadır", "verdict": "onemsiz", "explain": "Körük yağı tutar ve kiri dışarıda bırakır; koruma parçasıdır." },
+          { "label": "Yalnız körük değiştirilir, başka bakılmaz", "verdict": "sadece-koruk", "explain": "İçerinin durumu görülmeden karar verilmez." },
+          { "label": "Körük yırtıksa parça kesinlikle hurdadır", "verdict": "kesin-hurda", "explain": "Yeni yırtılmışsa kurtarılabilir; karar içeriye bakılarak verilir." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Körük, arızanın kendisi değil habercisidir. Ne kadar zamandır yırtık olduğu, kararı belirleyen sorudur."
+    },
+    {
+      "id": 6,
+      "instruction": "Tarama bitti: mafsalda küçük, kutuda küçük, sol rot başında küçük boşluk buldun. Hiçbiri tek başına büyük değil.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.direksiyon-simidi",
+        "question": "Nasıl karar verirsin?",
+        "options": [
+          { "label": "Boşluklar toplanır; sürücünün hissettiği toplamdır. Katkısı en büyük olandan başlanır, her müdahaleden sonra toplam boşluk yeniden ölçülür", "verdict": "toplanir", "correct": true, "explain": "Bu, ayırma yönteminin en çok yanlış anlaşılan sonucudur. Zincirdeki boşluklar birbirini iptal etmez, ARDIŞIK olarak toplanır: simit önce mafsaldaki boşluğu, sonra kutudakini, sonra rot başındakini kat eder ve tekerlek ancak hepsi bittikten sonra döner. Üç küçük boşluk, tek büyük boşlukla aynı şikâyeti üretir. Bunun pratik sonucu şudur: yalnız birini gidermek şikâyeti azaltır ama bitirmez ve müşteri 'para verdim, düzelmedi' diyerek geri gelir. Doğru sıra, katkısı en büyük olandan başlamaktır — hangisinin katkısı büyükse ölçüm sırasında zaten görülmüştür. Her müdahaleden sonra toplam boşluk yeniden ölçülür; sınırın altına inildiyse durulur, inilmediyse sıradakine geçilir. Bu aynı zamanda müşteriye dürüst konuşmanın yoludur: baştan 'üç yerde boşluk var, ikisini şimdi yapalım, üçüncüsünü ölçerek karar verelim' demek, iş bittikten sonra ek fatura çıkarmaktan iyidir. Bu projede daha önce lastikte de aynı desen vardı: birden çok küçük sebep, tek bir belirtide toplanır." },
+          { "label": "Hiçbiri tek başına büyük olmadığı için hiçbiri değiştirilmez", "verdict": "hicbiri", "explain": "Boşluklar toplandığı için hepsi birlikte şikâyeti üretir." },
+          { "label": "Üçü birden hemen değiştirilir, ölçüm gerekmez", "verdict": "hepsi", "explain": "Ölçmeden hepsini değiştirmek gereksiz maliyet üretebilir." },
+          { "label": "En ucuz olan değiştirilir, yeter", "verdict": "en-ucuz", "explain": "Ölçüt fiyat değil, boşluğa katkı miktarı." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Boşluklar toplanır. Tek parça değiştirip 'düzelmedi' denen işlerin çoğunun sebebi bu."
+    },
+    {
+      "id": 7,
+      "instruction": "Müdahale yapıldı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kremayer-kutusu",
+        "question": "İş nasıl kapanır?",
+        "options": [
+          { "label": "Boşluk aynı koşullarda yeniden ölçülür, sonuç kaydedilir ve araç yol testine çıkarılır", "verdict": "olc-kaydet-test", "correct": true, "explain": "Bir onarım, öncesi ve sonrası ölçülmediği sürece tamamlanmış sayılmaz. Yeniden ölçüm ilk ölçümle AYNI koşullarda yapılır — araç tekerlekleri üstünde, tekerlekler düz, yardımlı sistemde motor çalışır durumda — yoksa iki sayı karşılaştırılamaz ve iyileşme kanıtlanamaz. Sonuç kaydedilir: ölçülen değer, koşul ve tarih. Bu kayıt yalnız bugünün işi için değil, aracın gelecekteki bakımı için de değerlidir; boşluğun zaman içinde nasıl arttığı tek bir ölçümden çok daha fazlasını anlatır. Son adım yol testidir, çünkü sürücünün şikâyeti bir sayı değil bir histi ve ancak yolda doğrulanabilir. Yol testinde bakılacak şeyler bellidir: düz gitme, direksiyonun merkeze dönmesi, çevirirken ses ve simidin ortada durup durmadığı. Ayrıca rot başı ya da rot çubuğuyla ilgili herhangi bir parça değiştiyse ön düzen ayarı gerekir — çünkü o parçalar aynı zamanda tekerlek açısını belirler; ayar yapılmadan teslim edilen araçta lastikler hızla ve düzensiz aşınır. Bu, iki alanın birbirine değdiği noktadır ve atlandığında müşteri birkaç bin kilometre sonra bambaşka bir şikâyetle döner." },
+          { "label": "Boşluk hissi geçtiyse ölçüme gerek yok", "verdict": "his-yeterli", "explain": "His öznel; iyileşme aynı koşullarda ölçülerek kanıtlanır." },
+          { "label": "Ölçüm farklı koşullarda yapılabilir", "verdict": "farkli-kosul", "explain": "Koşul değişirse iki sayı karşılaştırılamaz." },
+          { "label": "Rot parçası değişse bile ön düzen ayarı gerekmez", "verdict": "ayar-gereksiz", "explain": "O parçalar tekerlek açısını belirler; ayarsız teslim lastiği yer." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Rot tarafında bir parça değiştiyse ön düzen ayarı işin parçasıdır, ek iş değil."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Zincirde birden fazla halkada küçük boşluk bulundu. Ne yapılır?",
+        "a": "toplanir",
+        "options": [
+          { "verdict": "toplanir", "label": "Boşluklar toplandığı için katkısı en büyük olandan başlanır ve her müdahaleden sonra toplam yeniden ölçülür", "explain": "Zincirdeki boşluklar ardışık olarak toplanır: simit önce mafsaldakini, sonra kutudakini, sonra rot başındakini kat eder ve tekerlek ancak hepsi bittikten sonra döner. Üç küçük boşluk, tek büyük boşlukla aynı şikâyeti üretir; yalnız birini gidermek şikâyeti azaltır ama bitirmez. Her müdahaleden sonra ölçüm tekrarlanır, sınırın altına inildiyse durulur." },
+          { "verdict": "hicbiri", "label": "Hiçbiri tek başına büyük olmadığı için dokunulmaz", "explain": "Toplandıkları için birlikte şikâyeti üretirler." },
+          { "verdict": "hepsi", "label": "Üçü birden ölçmeden değiştirilir", "explain": "Gereksiz maliyet üretebilir." },
+          { "verdict": "en-ucuz", "label": "En ucuz olan değiştirilir", "explain": "Ölçüt fiyat değil, boşluğa katkı." }
+        ]
+      },
+      {
+        "q": "Mafsalda boşluk olduğunu ne gösterir?",
+        "a": "giris-cikis-farki",
+        "options": [
+          { "verdict": "giris-cikis-farki", "label": "Gelen mil dönerken giden milin bir an durması", "explain": "Sağlam bir halkada giriş ne kadar hareket ederse çıkış da o kadar hareket eder; boşluklu halkada hareket içeride kaybolur. Parmaklar mafsalın iki yanındaki millere konarak gecikme hissedilir. Aynı belirtiyi gevşemiş bağlantı cıvatası da verir ve o çok daha ucuz bir çözümdür, o yüzden önce ona bakılır." },
+          { "verdict": "pas", "label": "Mafsalın paslı görünmesi", "explain": "Görüntü değil, giriş-çıkış farkı belirleyici." },
+          { "verdict": "sicaklik", "label": "Mafsalın ısınması", "explain": "Burada gösterge değil." },
+          { "verdict": "bakilmaz", "label": "Mafsalda boşluk olmaz", "explain": "En sık atlanan ve sık suçlu çıkan halkalardan biridir." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 6,5 mm ve 6,1 mm SENARYO okumalarıdır; istenen FARKTIR (0,4 mm) ve gösterilen şey hareketin kutu içinde kaybolduğudur. Kabul edilebilir kutu içi boşluk verilmiyor.",
+    "sourceRequired": "Azami direksiyon boşluğu, kutu içi kabul edilebilir kayıp ve rot başı azami boşluk değerleri bilinçle VERİLMEDİ; araca ve üreticiye özgüdür. Ders yeri bulma yöntemini öğretiyor, sınır tablosu vermiyor.",
+    "kapsam": "Ön takım boşluğu (rotil, salıncak, tekerlek göbeği) bu ders değil; ayırt edici olarak anıldı ve yöntemi Lastik ve Tekerlek alanında işlendi. Kremayer baskı ayarı aşama 2'de ayrı ders. Ön düzen ayarı gerekliliği belirtildi ama uygulaması Lastik ve Tekerlek alanında.",
+    "reviewedByMechanic": false
+  }
+}

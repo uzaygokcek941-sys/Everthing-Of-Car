@@ -1,0 +1,178 @@
+{
+  "id": "elektrik.gerilim-dusumu",
+  "area": "arac-elektrik",
+  "stage": 9,
+  "title": "Gerilim Düşümü Testi: Arızalı Noktayı Sökmeden Bulmak",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 30,
+  "prerequisites": ["elektrik.devre-elemanlari", "elektrik.sase-arizasi", "elektrik.aydinlatma-arizasi"],
+  "learningGoals": [
+    "Gerilim düşümünü devrenin iki ucundan değil, tek bir parçanın iki ucundan ölçmek",
+    "Ölçümün neden yalnız yük altında anlamlı olduğunu açıklamak",
+    "Besleme ve dönüş taraflarını ayrı ayrı ölçerek arızayı tek bir bağlantıya indirmek"
+  ],
+
+  "safety": [
+    { "rule": "Ölçüm devre çalışırken yapılır; eller dönen ve sıcak parçalardan uzak tutulur", "why": "Bu test yük altında yapılmak zorundadır, yani tüketici çalışır hâldedir. Prob tutan el kayış, fan ya da egzoz bölgesindeyse ölçüm sırasında yaralanma olur", "blocksStart": true },
+    { "rule": "Marş devresinde ölçüm kısa tutulur ve yardımcıyla çalışılır", "why": "Marş anındaki ölçümlerde motor dönmeye başlar; araç boşta, el freni çekili olmalı ve marşı veren kişi ölçüm yapanı görmelidir", "blocksStart": true },
+    { "rule": "Prob uçları iki noktaya değdirilirken aralarında köprü kurulmaz", "why": "Yüksek akımlı devrelerde iki prob arasında yanlışlıkla kurulan bir köprü, aletin sigortasını atmakla kalmaz, ark ve yanık üretir", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.multimetre", "label": "Dijital multimetre", "required": true },
+    { "id": "tool.uzatma-prob", "label": "Uzatma prob kablosu", "required": false },
+    { "id": "tool.sema", "label": "Araç devre şeması", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Farlar sönük yanıyor. Ampuller yeni, sigorta sağlam, akü dolu. Gerilim düşümü testi yapacaksın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kablo-demeti",
+        "question": "Gerilim düşümü nasıl ölçülür?",
+        "options": [
+          { "label": "Probların ikisi de aynı iletken parçanın iki ucuna konur; ölçülen şey o parçanın üzerinde harcanan gerilimdir", "verdict": "parcanin-iki-ucu", "correct": true, "explain": "Gerilim düşümü testi, alışılmış gerilim ölçümünün tersine bakar. Normalde bir probu bir noktaya, diğerini gövdeye koyup 'burada kaç volt var' diye sorarsın. Burada ise iki probu da tek bir parçanın iki ucuna koyarsın: kablonun başı ve sonu, kelepçenin iki yanı, sigortanın giriş ve çıkışı. Okuduğun sayı, o parçanın üzerinde harcanan gerilimdir. Sağlam bir iletkenin direnci yok denecek kadar küçüktür, dolayısıyla üzerinde harcanan gerilim de sıfıra yakın olmalıdır. Ölçülebilir bir değer okuyorsan, o parça devreye olmaması gereken bir direnç ekliyor demektir. Testin gücü şudur: hiçbir şey sökmeden, hiçbir bağlantı ayırmadan arızanın hangi santimetrede olduğunu söyler." },
+          { "label": "Bir prob aküye, diğeri tüketiciye konur", "verdict": "aku-tuketici", "explain": "Bu toplam kaybı verir ve iyi bir başlangıçtır, ama kaybın nerede olduğunu söylemez. Daraltmak için tek parçaya bakılır." },
+          { "label": "Devre kapalıyken parçanın direnci ölçülür", "verdict": "direnc", "explain": "Küçük ölçüm akımıyla zayıf bir bağlantı bile düşük direnç gösterir; testin bütün değeri yük altında olmasıdır." },
+          { "label": "Ampulün üzerindeki gerilim ölçülür", "verdict": "ampul-ustu", "explain": "O, tüketiciye kalan paydır ve sonucu gösterir; sebebi göstermez." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Alışılmış ölçüm 'burada gerilim var mı' diye sorar. Gerilim düşümü ölçümü 'bu parça gerilimi yiyor mu' diye sorar. İkinci soru arızayı bulur."
+    },
+    {
+      "id": 2,
+      "instruction": "Ölçümü ne zaman yapacağını belirliyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.far-ampulu",
+        "question": "Test neden yük altında yapılır?",
+        "options": [
+          { "label": "Gerilim ancak akım akarken direnç üzerinde düşer; devre kapalıyken en kötü bağlantı bile sıfır okur", "verdict": "akim-sart", "correct": true, "explain": "Bir direncin üzerinde gerilim düşmesi için içinden akım geçmesi gerekir. Devre kapalıysa akım yoktur ve yolun üzerindeki en kötü bağlantı bile hiçbir iz bırakmaz; alet iki tarafta da aynı gerilimi okur, her şey sağlam görünür. Akım aktığında ise direnç kendini gösterir ve üzerinde harcanan gerilim ölçülebilir hâle gelir. Bu yüzden test, tüketici çalışırken yapılır: farlar yanarken, silecek dönerken, marş basılırken. Aynı sebeple ölçülen kayıp akımla birlikte büyür — düşük akımda görünmeyen bir bağlantı, marş gibi yüksek akımlı bir devrede tam bir arızaya dönüşür. Bu, süreklilik testinin neden yetmediğini de açıklayan ilkedir." },
+          { "label": "Alet ancak canlı devrede çalışır", "verdict": "alet", "explain": "Voltmetre her koşulda ölçer; mesele ölçülen olayın akıma bağlı olmasıdır." },
+          { "label": "Güvenlik gereği", "verdict": "guvenlik", "explain": "Yük altında ölçüm ayrıca dikkat ister ama sebep güvenlik değil, fiziktir." },
+          { "label": "Fark etmez, kapalıyken de ölçülür", "verdict": "farketmez", "explain": "Kapalıyken kayıp görünmez; test anlamsızlaşır." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Yük yoksa kayıp yok. Bu cümle, bu testin neden diğerlerinin yapamadığını yaptığını tek başına açıklar."
+    },
+    {
+      "id": 3,
+      "instruction": "Farlar yanarken besleme tarafını ölçtün: akü artı kutbu ile far soketinin besleme ucu arasında 0,62 V. Sağlam bir devrede aynı ölçüm 0,04 V. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.multimetre-ekran",
+        "unit": "V",
+        "acceptRange": [0.55, 0.65]
+      },
+      "camera": "tezgah",
+      "hint": "0,62 eksi 0,04.",
+      "teachingNote": "Bu iki nokta arasında yalnız kablo, sigorta ve birkaç bağlantı var; hepsi iletken olmalı ve üzerlerinde kayda değer gerilim düşmemeli. Ölçülen bu kayıp, aradaki bir yerde direnç olduğunu söyler ama henüz hangi bağlantıda olduğunu söylemez. Sıradaki adım aynı yöntemi daha küçük parçalara uygulamaktır: sigortanın iki ucu, soketin iki yanı, kelepçenin iki tarafı. Her ölçüm alanı daraltır."
+    },
+    {
+      "id": 4,
+      "instruction": "Besleme tarafında kayıp bulundu. Şimdi dönüş tarafına bakacaksın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sase-noktasi",
+        "question": "Dönüş tarafı neden ayrıca ölçülür?",
+        "options": [
+          { "label": "Devrenin iki yolu vardır ve ikisinde de kayıp olabilir; besleme ile dönüş ayrı ayrı ölçülmezse biri gizli kalır", "verdict": "iki-yol", "correct": true, "explain": "Akım aküden çıkar, tüketiciden geçer ve aküye geri döner. Bu yolun her iki yarısı da iletkendir ve her iki yarısında da kötü bir bağlantı olabilir. Besleme tarafını ölçüp temiz bulmak, dönüş tarafının da temiz olduğu anlamına gelmez; üstelik araçlarda arızaların büyük kısmı dönüş tarafındadır, çünkü orada gövde metali, boya, pas ve nem bir aradadır. Bu yüzden test her zaman iki bacaklıdır: artı kutuptan tüketiciye kadar bir ölçüm, tüketicinin şase ucundan akünün eksi kutbuna kadar ikinci bir ölçüm. Toplam kayıp bu ikisinin toplamıdır ve hangisinin büyük olduğu arızanın hangi tarafta olduğunu söyler." },
+          { "label": "Gerekmez, besleme sağlamsa devre sağlamdır", "verdict": "gerekmez", "explain": "Dönüş tarafı bağımsız bir yoldur; kendi arızasını üretebilir." },
+          { "label": "Şase her zaman sağlamdır, gövde metaldir", "verdict": "sase-saglam", "explain": "Gövde metaldir ama bağlantı noktası boya, pas ve nemle bozulur." },
+          { "label": "Dönüş yalnız yüksek akımlı devrelerde ölçülür", "verdict": "yalniz-yuksek", "explain": "Her devrede ölçülür; yüksek akımda etkisi daha çabuk görünür ama küçük devrelerde de arıza üretir." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Test iki bacaklıdır: gidiş ve dönüş. Tek bacakla yapılan ölçüm, arızanın yarısını görmez."
+    },
+    {
+      "id": 5,
+      "instruction": "İki taraf da ölçüldü. Kaybın büyük kısmı besleme tarafında, sigortadan sonraki bir bağlantıda çıktı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kablo-demeti",
+        "question": "Kaybı tek bir bağlantıya nasıl indirirsin?",
+        "options": [
+          { "label": "Aynı ölçüm giderek daha kısa parçalara uygulanır; her adımda kaybın hangi yarıda olduğuna bakılır", "verdict": "daralt", "correct": true, "explain": "Yöntem baştan sona aynıdır, yalnız ölçtüğün parça küçülür. Önce akü kutbundan tüketiciye kadar ölçersin ve toplam kaybı görürsün. Sonra o yolu ikiye bölecek bir noktaya prob koyarsın: kaybın hangi yarıda olduğu belli olur. Sonra o yarıyı tekrar ikiye bölersin. Birkaç ölçümde arıza tek bir kelepçeye, tek bir sokete ya da tek bir ek yerine iner. Bu noktada gözle bakmak genelde yeterlidir — kararmış bir pin, gevşemiş bir pabuç, yeşermiş bir uç görürsün. Yöntemin güzelliği hiçbir şey sökmeden çalışmasıdır; sökmek zaten temas durumunu değiştirir ve arızayı geçici olarak yok edebilir." },
+          { "label": "Bütün bağlantılar sökülüp temizlenir", "verdict": "hepsini-temizle", "explain": "Bazen sonucu verir ama arızayı bulmaz; sökme sırasında temas durumu değişir ve arıza kaybolur." },
+          { "label": "Demet komple değiştirilir", "verdict": "demet-degistir", "explain": "En pahalı yol; birkaç ölçümle bulunabilecek bir arıza için gereksiz." },
+          { "label": "Devre kapatılıp direnç ölçülür", "verdict": "direnc", "explain": "Küçük ölçüm akımı zayıf bağlantıyı gizler; daraltma da yük altında yapılır." }
+        ]
+      },
+      "camera": "tezgah",
+      "hint": "Böl, ölç, yönü seç. Sonra kalan yarıyı tekrar böl.",
+      "teachingNote": "Bu, sigorta dersindeki böl-ve-ölç yönteminin gerilim tarafındaki hâli. Aynı düşünce biçimi bütün teşhis alanlarında çalışıyor."
+    },
+    {
+      "id": 6,
+      "instruction": "Arıza bulundu: sigorta kutusundaki bir yuva kararmış ve gevşek.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.aku-arti-kutup",
+        "question": "Bu kaybın tüketiciye etkisi nedir?",
+        "options": [
+          { "label": "Tüketiciye ulaşan gerilim azalır; lamba sönük yanar, motor yavaş döner ve kayıp noktası ısınır", "verdict": "paya-dusen-azalir", "correct": true, "explain": "Devredeki toplam gerilim sabittir ve yol üzerindeki her direnç kendi payını alır. Kötü bir bağlantı kendi payını aldığında tüketiciye kalan azalır: ampul sönük yanar, elektrik motoru yavaş döner, ısıtıcı beklenen sıcaklığa çıkamaz. Aynı zamanda o bağlantıda harcanan enerji ısıya dönüşür — bu yüzden kötü bağlantılar ısınır, kararır, plastikleri erir ve zamanla daha da kötüleşir. Yüksek akımlı devrelerde bu ısınma tehlikeli boyuta ulaşabilir. Kayıp bu yüzden yalnız bir performans sorunu değil, aynı zamanda bir güvenlik sorunudur ve bulunduğunda ertelenmez." },
+          { "label": "Hiçbir etkisi olmaz, devre yine çalışır", "verdict": "etkisiz", "explain": "Çalışır ama zayıf çalışır; ayrıca kayıp noktası ısınır." },
+          { "label": "Akım artar, tüketici daha güçlü çalışır", "verdict": "akim-artar", "explain": "Direnç artınca akım azalır; tüketici zayıflar." },
+          { "label": "Yalnız sigortayı attırır", "verdict": "sigorta-atar", "explain": "Tersine, akımı azalttığı için sigorta atmaz. Sinsi olmasının sebebi budur." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Kötü bağlantı sigortayı attırmaz, bu yüzden kendini haber vermez. Onu görünür kılan tek şey yük altındaki gerilim ölçümüdür."
+    },
+    {
+      "id": 7,
+      "instruction": "Yuva onarıldı, farlar normal yandı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.multimetre-ekran",
+        "question": "Onarımın doğrulaması ne olmalı?",
+        "options": [
+          { "label": "Aynı iki bacaklı ölçüm aynı yükte tekrarlanır; besleme ve dönüş kayıpları sağlam bir devrenin değerlerine inmeli", "verdict": "iki-bacak-tekrar", "correct": true, "explain": "Doğrulama, teşhiste kullanılan ölçümün aynısıdır: farlar yanarken besleme tarafı ve dönüş tarafı ayrı ayrı ölçülür. İki değer de sağlam bir devrede beklenen küçük değerlere inmişse onarım tamamdır. Bu hem müşteriye gösterilebilecek bir kanıttır hem de ikinci bir kötü bağlantıyı yakalar: bazen en büyük kayıp giderilir ama ikinci bir noktada daha küçük bir kayıp sürer ve arıza birkaç ay içinde geri gelir. Ölçüm bunu söyler, gözlem söylemez. Bu yüzden onarım öncesi ve sonrası değerler kayda geçirilir." },
+          { "label": "Farların parlaklığına bakmak yeterli", "verdict": "parlaklik", "explain": "Gözle ayırt edilemeyecek bir kayıp sürebilir." },
+          { "label": "Sigorta değiştirilip kapatılır", "verdict": "sigorta", "explain": "Sigorta atmamıştı; bu arızayla ilgisi yok." },
+          { "label": "Devre kapalıyken direnç ölçülür", "verdict": "direnc", "explain": "Kapalı devrede kayıp görünmez; doğrulama da yük altında yapılır." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Bu test hem teşhis hem doğrulama aracıdır. Onarımdan önceki ve sonraki iki sayı, yaptığın işin tek kanıtıdır."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Gerilim düşümü testinde problar nereye konur?",
+        "a": "tek-parcanin-iki-ucu",
+        "options": [
+          { "verdict": "tek-parcanin-iki-ucu", "label": "Tek bir iletken parçanın iki ucuna: kablonun başı ve sonu, bağlantının iki yanı", "explain": "Alışılmış ölçümde bir prob bir noktaya, diğeri gövdeye konur ve 'burada gerilim var mı' sorusu sorulur. Gerilim düşümü testinde ise iki prob da tek bir parçanın iki ucuna konur ve 'bu parça gerilimi yiyor mu' sorusu sorulur. Sağlam bir iletkenin direnci yok denecek kadar küçüktür, üzerinde harcanan gerilim de sıfıra yakın olmalıdır. Ölçülebilir bir değer, o parçanın devreye olmaması gereken bir direnç eklediğini söyler — ve bunu hiçbir şey sökmeden söyler." },
+          { "verdict": "aku-govde", "label": "Biri aküye, biri gövdeye", "explain": "Bu, kaynağın gerilimini ölçer; kaybın yerini vermez." },
+          { "verdict": "tuketici-ustu", "label": "Tüketicinin iki ucuna", "explain": "Bu, tüketiciye kalan payı verir; sonucu gösterir, sebebi değil." },
+          { "verdict": "sase-govde", "label": "Şase ucu ile gövde arasına", "explain": "Bu, dönüş bacağının ölçümüdür ve testin bir parçasıdır ama tanımı değildir." }
+        ]
+      },
+      {
+        "q": "Test neden yalnız yük altında anlamlıdır?",
+        "a": "akim-olmadan-dusmez",
+        "options": [
+          { "verdict": "akim-olmadan-dusmez", "label": "Gerilim ancak akım akarken direnç üzerinde düşer; akım yoksa en kötü bağlantı bile sıfır okur", "explain": "Bir direncin üzerinde gerilim düşmesi için içinden akım geçmesi gerekir. Devre çalışmıyorsa akım yoktur ve yolun üzerindeki kötü bağlantı hiçbir iz bırakmaz; alet iki tarafta da aynı gerilimi okur ve her şey sağlam görünür. Akım aktığında direnç kendini gösterir ve üzerinde harcanan gerilim ölçülebilir. Aynı sebeple kayıp akımla birlikte büyür: düşük akımda görünmeyen bir bağlantı, marş gibi yüksek akımlı bir devrede tam bir arızaya dönüşür." },
+          { "verdict": "alet", "label": "Alet ancak canlı devrede çalıştığı için", "explain": "Voltmetre her koşulda ölçer; mesele ölçülen olayın akıma bağlı olmasıdır." },
+          { "verdict": "isinma", "label": "Bağlantı ısınsın diye", "explain": "Isınma bir sonuçtur, ölçümün şartı değil." },
+          { "verdict": "farketmez", "label": "Fark etmez", "explain": "Yük yoksa kayıp görünmez; test anlamsızlaşır." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 0,62 V ve 0,04 V SENARYO okumalarıdır. Öğrenciden istenen bir üretici sınırı değil, arızalı devre ile sağlam devredeki okumaların FARKIDIR (0,58 V). sourceRequired bu yüzden gerekmedi.",
+    "sourceRequired": "Kabul edilebilir azami gerilim düşümü eşikleri (devre başına, bağlantı başına, şase başına) araca ve devreye özgüdür ve bu derste bilinçli olarak VERİLMEDİ. Ders sağlam bir devreyle karşılaştırma üzerine kuruldu; eşik kullanılacaksa servis kılavuzundan alınır.",
+    "kapsam": "Marş devresi ve alternatör modelde yok; bu derste yüksek akımlı devre örneği metinde geçiyor, sahnede far devresi kullanılıyor. Aşama 6-8 için model eklenince aynı test marş ve şarj devrelerinde tekrar uygulanacak.",
+    "reviewedByMechanic": false
+  }
+}

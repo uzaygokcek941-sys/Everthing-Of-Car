@@ -1,0 +1,179 @@
+{
+  "id": "motor.kapak-contasi",
+  "area": "motor-mekanik",
+  "stage": 6,
+  "title": "Silindir Kapak Contası: Teşhis, Kanıt ve Asıl Sebep",
+  "vehicleClass": "binek-arac",
+  "estimatedMinutes": 28,
+  "prerequisites": ["motor.silindir-kapagi", "motor.sogutma-bakim"],
+  "learningGoals": [
+    "Su-yağ karışmasını ve yanma gazı kaçağını belirtilerinden ayırmak",
+    "Yağ kapağındaki köpüğü tek başına kanıt saymamak",
+    "Contayı değiştirmeden önce contayı patlatan sebebi bulmak"
+  ],
+
+  "safety": [
+    { "rule": "Genleşme deposu kapağı sıcakken açılmaz", "why": "Kapak contası patlaksa sisteme yanma gazı basılır ve basınç normalden yüksektir. Sıcak sistemde kapağı açmak kaynar sıvıyı fışkırtır", "blocksStart": true },
+    { "rule": "Su karışmış yağla motor çalıştırılmaz", "why": "Su, yağ filminin taşıma gücünü bozar. Karışmış yağla dönen her dakika yatakları aşındırır ve conta işini motor revizyonuna çevirir", "blocksStart": true },
+    { "rule": "Yanma gazı testinde test sıvısı cilde ve göze temas etmemeli", "why": "Test sıvısı kimyasal bir göstergedir ve tahriş edicidir. Gözlük ve eldiven takılır", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.gaz-test-kiti", "label": "Yanma gazı test kiti (kimyasal göstergeli)", "required": true },
+    { "id": "tool.basinc-pompasi", "label": "Soğutma sistemi basınç pompası", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true },
+    { "id": "tool.buji-anahtari", "label": "Buji anahtarı", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Araç ısınıyor, soğutucu azalıyor ama yerde ıslaklık yok. Motor çalışırken genleşme deposuna bakıyorsun: düzenli kabarcıklar çıkıyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.genlesme-deposu",
+        "question": "Dışarı kaçak yokken soğutucu nereye gidiyor?",
+        "options": [
+          { "label": "Yanma odasından soğutma kanalına gaz geçiyor; soğutucu da yanma odasına geçip egzozdan buhar olarak çıkıyor", "verdict": "yanma-gazi", "correct": true, "explain": "Kapak contası, yanma odası ile soğutma kanalı arasındaki tek engeldir. Patladığında yanma basıncı soğutma basıncından çok daha yüksek olduğu için önce gaz suya geçer; depoda gördüğün düzenli kabarcıklar budur ve motor devriyle birlikte sıklaşır. Ters yönde de sızıntı olur: soğutucu yanma odasına girer, orada buharlaşır ve egzozdan beyaz duman olarak çıkar. Böylece sıvı dışarı hiç akmadan azalır. Dışarıda ıslaklık aramak bu arızada boşuna zaman kaybıdır." },
+          { "label": "Radyatör kapağı zayıflamış, buharlaşıyor", "verdict": "kapak-zayif", "explain": "Zayıf kapak basıncı düşürür ve taşma kabına sıvı atar; sıvı kaybolmaz, yer değiştirir. Ayrıca kabarcık üretmez." },
+          { "label": "Kalorifer radyatörü içeriye kaçırıyor", "verdict": "kalorifer", "explain": "Kalorifer radyatörü kaçırırsa ayak halısı ıslanır, camlar buğulanır ve kabinde tatlımsı bir koku olur. Depoda kabarcık yapmaz." },
+          { "label": "Termostat kapalı kaldığı için sistem taşıyor", "verdict": "termostat", "explain": "Kapalı termostat motoru kaynatır ve taşma kabına sıvı iter; kabarcık düzeni motor devriyle senkron olmaz." }
+        ]
+      },
+      "camera": "motor-ust",
+      "teachingNote": "Kabarcığın ritmi teşhisin yarısıdır. Kaynamadan gelen kabarcık düzensizdir ve motor devriyle ilgisizdir; yanma gazından gelen kabarcık devirle birlikte hızlanır."
+    },
+    {
+      "id": 2,
+      "instruction": "Şimdi yağa bakacaksın. Yağ çubuğunu çek.",
+      "interaction": {
+        "type": "pull",
+        "target": "part.yag-cubugu",
+        "axis": "y",
+        "distance": 0.3
+      },
+      "camera": "motor-on",
+      "hint": "Çubuğu bir kez çekip sil, geri sok ve tekrar çek; ilk çekişte okuma güvenilir olmaz.",
+      "teachingNote": "Çubuğu silmeden okumak, boruya sürtünmüş yağı okumaktır. Bu alışkanlık seviye ölçümünü de bozar, kirlilik değerlendirmesini de."
+    },
+    {
+      "id": 3,
+      "instruction": "Çubukta yağ kahverengi-krem renkte, kıvamı bal gibi ve seviye maksimum çizgisinin üzerinde.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.yag-cubugu",
+        "question": "Bu tablo neyi söylüyor?",
+        "options": [
+          { "label": "Soğutucu kartere geçmiş: hem emülsiyon var hem seviye artmış", "verdict": "emulsiyon-seviye", "correct": true, "explain": "İki belirti bir arada olduğunda tartışma biter. Yağın süt kahvesi rengine dönmesi, yağ ile suyun karışıp emülsiyon oluşturmasıdır. Ama tek başına bu yeterli kanıt değildir: yalnız kısa mesafe kullanılan araçlarda motor tam ısınmadığı için yoğuşan su, özellikle yağ kapağının altında benzer bir köpük bırakır. Ayırt edici olan seviyedir. Yoğuşma seviyeyi ölçülebilir biçimde artırmaz, soğutma sisteminden gelen sıvı artırır. Maksimumun üzerine çıkmış bir seviye, dışarıdan sisteme sıvı girdiğinin doğrudan kanıtıdır." },
+          { "label": "Yağ değişim zamanı geçmiş, kirlenmiş", "verdict": "kirli-yag", "explain": "Eski yağ koyulaşır ve kararır; krem rengine dönmez. Renk açılması su demektir, kirlenme değil." },
+          { "label": "Yanlış viskozitede yağ konmuş", "verdict": "yanlis-yag", "explain": "Yanlış viskozite kıvamı değiştirir ama rengi değiştirmez ve seviyeyi yükseltmez." },
+          { "label": "Sadece kısa mesafe kullanımından yoğuşma", "verdict": "yogusma", "explain": "Yoğuşma tek başına olsaydı köpük çoğunlukla yağ kapağının altında kalır, seviye de artmazdı. Burada seviye maksimumun üzerinde." }
+        ]
+      },
+      "camera": "motor-on",
+      "teachingNote": "Yağ kapağının altındaki köpüğü görüp doğrudan kapak contası diyen usta çok, ve bir kısmı sağlam motoru söküyor. Tek belirtiyle teşhis kurma; ikinci bir bağımsız belirti ara."
+    },
+    {
+      "id": 4,
+      "instruction": "Bujileri söktün. Üçü kurum rengi normal, birinci silindirinki fabrikadan çıkmış gibi tertemiz ve buhar temizliğine uğramış görünüyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.buji.1",
+        "question": "Tek bujinin aşırı temiz olması ne anlama gelir?",
+        "options": [
+          { "label": "O silindire soğutucu giriyor; buhar kurumu temizlemiş", "verdict": "buhar-temizligi", "correct": true, "explain": "Yanma odasına giren soğutucu yüksek sıcaklıkta buharlaşır ve buhar, buji ucundaki kurumu adeta yıkar. Sonuç, komşularından belirgin biçimde temiz duran tek bir bujidir. Bu bulgunun asıl değeri kaçağın yerini göstermesidir: conta hangi silindirin çevresinde patlamış, oradan anlaşılır. Bir arızada aynı motorda farklı davranan tek bir parça bulmak, o parçanın bulunduğu bölgeyi işaret eder." },
+          { "label": "O bujinin ömrü daha az, yenidir", "verdict": "yeni-buji", "explain": "Tek buji yeni olsa bile bu görünüm oluşmaz; yeni buji temiz görünür ama buhar temizliğinin bıraktığı o karakteristik iz olmaz." },
+          { "label": "O silindirde ateşleme yok, bu yüzden kurum birikmemiş", "verdict": "atesleme-yok", "explain": "Ateşleme olmayan silindirde tam tersi olur: yanmamış yakıt bujiyi ıslatır ve karartır." },
+          { "label": "Rastlantı, buji renkleri her zaman farklıdır", "verdict": "rastlanti", "explain": "Aynı motorda bujiler benzer renkte olur. Belirgin fark rastlantı değil, bilgidir." }
+        ]
+      },
+      "camera": "motor-ust",
+      "hint": "Bujileri söküldükleri silindir sırasına göre diz; hangisinin hangi silindirden geldiğini bilmezsen bulgu işe yaramaz.",
+      "teachingNote": "Buji okuma bu uygulamanın en çok işe yarayan becerilerinden biridir. Buji, silindirin içine bakan tek ucuz penceredir."
+    },
+    {
+      "id": 5,
+      "instruction": "Belirtiler tutarlı ama sökmeden önce kesin kanıt istiyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.radyator-kapagi",
+        "question": "Kapak contasını sökmeden hangi test kanıt sayılır?",
+        "options": [
+          { "label": "Yanma gazı test kiti: depo boşluğundaki havayı test sıvısından geçirir, sıvı renk değiştirirse gaz var demektir", "verdict": "gaz-testi", "correct": true, "explain": "Test kiti soğutma sisteminin üst boşluğundaki havayı, karbondioksite duyarlı bir sıvıdan geçirir. Soğutma sisteminde yanma gazının işi yoktur; sıvı renk değiştiriyorsa yanma odası ile soğutma devresi arasında bir geçiş var demektir. Bu, kapak contası teşhisinin doğrudan kanıtıdır ve motoru sökmeden alınır. Tamamlayıcı test, soğuk sisteme basınç pompasıyla basınç verip düşüşü izlemektir: dışarı kaçak yokken basınç düşüyorsa sıvı içeri gidiyordur." },
+          { "label": "Egzozdan beyaz duman çıkıyorsa kesindir", "verdict": "beyaz-duman", "explain": "Beyaz duman güçlü bir belirtidir ama soğuk havada yoğuşma buharı da beyaz görünür. Belirti evet, kanıt hayır." },
+          { "label": "Kompresyon ölçerim, düşükse contadır", "verdict": "kompresyon", "explain": "Kompresyon düşüklüğü contayı gösterebilir ama supap ve segman da aynı sonucu verir. Tek başına ayırt etmez." },
+          { "label": "Soğutucu azalıyorsa başka kanıta gerek yok", "verdict": "azalma-yeter", "explain": "Azalmanın sebebi dış kaçak, kalorifer radyatörü ya da kapak da olabilir. Azalma bir soru sorar, cevap vermez." }
+        ]
+      },
+      "camera": "motor-ust",
+      "teachingNote": "Sökmeden önce kanıt toplamak, bu meslekte parayı ve itibarı koruyan alışkanlıktır. Söküp bakmak da bir yöntemdir ama yanılırsan bedeli müşteri öder ve bir daha gelmez."
+    },
+    {
+      "id": 6,
+      "instruction": "Teşhis kesin: kapak contası patlak. Contayı değiştirmeye hazırlanıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kapak-contasi",
+        "question": "Contayı takmadan önce hangi soruyu cevaplaman gerekir?",
+        "options": [
+          { "label": "Bu conta neden patladı? Aşırı ısınma, çarpık kapak ya da yanlış sıkma sebep olduysa yenisi de patlar", "verdict": "sebebi-bul", "correct": true, "explain": "Kapak contası kendi kendine yorulup patlayan bir parça değildir; neredeyse her zaman bir sebebin sonucudur. En yaygın sebep aşırı ısınmadır, ve aşırı ısınma da kendi başına gelmez: fan çalışmıyordur, termostat kapalı kalmıştır, su pompası zayıflamıştır, radyatör tıkalıdır. İkinci sık sebep kapağın ya da blok yüzeyinin çarpık olmasıdır; bu yüzden kapak mutlaka gönye ile ölçülür. Üçüncüsü yanlış sıkma sırası ya da tekrar kullanılmış cıvatadır. Sebebi bulmadan takılan yeni conta, aynı senaryoyu birkaç ay sonra tekrarlar ve bu kez suçlanan usta olur." },
+          { "label": "Hangi marka conta daha dayanıklı?", "verdict": "marka", "explain": "Kaliteli conta gereklidir ama patlamanın sebebi conta kalitesi değilse marka değiştirmek sonucu değiştirmez." },
+          { "label": "Contayı yapıştırıcı ile desteklemeli miyim?", "verdict": "yapistirici", "explain": "Kapak contası yapıştırıcı istemez; üretici öngörmüyorsa uygulanan her katman sıkışma yüksekliğini bozar." },
+          { "label": "Bu işi kaç saatte bitiririm?", "verdict": "sure", "explain": "Süre planlaması gereklidir ama işin doğru yapılıp yapılmayacağını belirlemez." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Bu prosedürün asıl dersi budur: kapak contası bir arıza değil, bir belirtidir. Belirtiyi değiştirip sebebi bırakan usta aynı aracı ikinci kez görür."
+    },
+    {
+      "id": 7,
+      "instruction": "Conta değişti, motor toplandı. İşi teslim etmeden önce son adımlar.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kapak-contasi",
+        "question": "Teslimden önce hangisi yapılır?",
+        "options": [
+          { "label": "Yağ ve yağ filtresi değişir, soğutma sistemi yıkanıp doldurulur ve havası alınır; motor ısıtılıp test tekrarlanır", "verdict": "yag-sogutucu-test", "correct": true, "explain": "Karterdeki yağın içinde hâlâ soğutucu vardır ve o yağla çalışmak yeni contayı değil, yatakları riske atar. Soğutma tarafında da yağ kalıntısı bulunur; yağlı soğutucu hortumları şişirir ve ısı transferini düşürür. Bu yüzden iki sıvı da yenilenir. Ardından motor tam ısıtılır, fan devreye girene kadar beklenir ve yanma gazı testi tekrarlanır: değişimin işe yaradığının kanıtı, arızanın kaybolduğunu aynı testle göstermektir. Bazı motorlarda ilk yüzlerce kilometreden sonra ikinci bir yağ değişimi de önerilir." },
+          { "label": "Soğutucuyu tamamlayıp teslim ederim, yağ yeni sayılır", "verdict": "sadece-sogutucu", "explain": "İçinde su bulunan yağ yeni sayılmaz. Görüntüsü düzelse bile yağlama özelliği bozulmuştur." },
+          { "label": "Motoru çalıştırıp kaçak yoksa teslim ederim", "verdict": "kacak-yok", "explain": "Kaçak kontrolü gerekli ama yeterli değil; kirli sıvılar yerinde kaldıysa hasar sessizce devam eder." },
+          { "label": "Yağı değiştiririm, soğutucu zaten yeni dolduruldu", "verdict": "sadece-yag", "explain": "Soğutma tarafında kalan yağ kalıntısı hortumlara ve ısı transferine zarar verir; sistem yıkanmalıdır." }
+        ]
+      },
+      "camera": "motor-ust",
+      "hint": "Testi tekrarlamayı unutma; aynı aletle alınan temiz sonuç, müşteriye gösterebileceğin en somut kanıttır.",
+      "teachingNote": "İşi bitiren şey parçanın takılması değil, arızanın ölçülerek kaybolduğunun gösterilmesidir. Aynı test, önce teşhis aracı sonra teslim belgesidir."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Yağ kapağının altındaki krem rengi köpük neden tek başına kapak contası teşhisi değildir?",
+        "a": "yogusma-karisikligi",
+        "options": [
+          { "verdict": "yogusma-karisikligi", "label": "Kısa mesafe kullanımında yoğuşan su da aynı köpüğü yapar; ayırt edici olan yağ seviyesinin artmasıdır", "explain": "Motor tam ısınmadığında karterdeki nem buharlaşıp atılamaz ve en soğuk yüzeyde, çoğunlukla yağ doldurma kapağının altında yoğuşarak krem rengi bir köpük bırakır. Bu, sağlıklı ama kısa mesafe kullanılan motorlarda sık görülür ve conta ile ilgisi yoktur. Farkı yaratan miktar ve seviyedir: yoğuşma yağ seviyesini ölçülebilir biçimde artırmaz, soğutma sisteminden gelen sıvı artırır. Bu yüzden köpük görüldüğünde ikinci bir bağımsız kanıt aranır: seviye artışı, depoda kabarcık ya da yanma gazı testi." },
+          { "verdict": "yag-markasi", "label": "Bazı yağ markaları doğal olarak açık renklidir", "explain": "Yeni yağ açık renkli olabilir ama emülsiyonun köpüklü kıvamını göstermez." },
+          { "verdict": "kapak-contasi-degil", "label": "O köpük hiçbir zaman kapak contasından kaynaklanmaz", "explain": "Kaynaklanabilir; mesele köpüğün tek başına ayırt edici olmamasıdır." },
+          { "verdict": "sicak-hava", "label": "Sıcak havalarda normaldir", "explain": "Yoğuşma soğuk ve kısa kullanımla ilgilidir; sıcak hava tam tersine yoğuşmayı azaltır." }
+        ]
+      },
+      {
+        "q": "Yeni kapak contasını takmadan önce neden eskisinin patlama sebebi aranır?",
+        "a": "sebep-tekrarlar",
+        "options": [
+          { "verdict": "sebep-tekrarlar", "label": "Conta bir sebebin sonucudur; sebep dururken yeni conta da aynı yoldan patlar", "explain": "Kapak contası tek başına yorulup patlayan bir parça değildir. Arkasında genellikle aşırı ısınma (çalışmayan fan, kapalı kalan termostat, zayıf su pompası, tıkalı radyatör), çarpık kapak ya da blok yüzeyi, veya yanlış sıkma ve tekrar kullanılmış cıvata vardır. Sebep bulunup giderilmeden yapılan değişim, aynı arızayı birkaç ay içinde geri getirir. Üstelik ikinci seferde müşteri parçayı değil ustayı suçlar ve bu haksız da sayılmaz." },
+          { "verdict": "garanti", "label": "Garanti belgesi düzenlemek için", "explain": "Belge gerekçe olabilir ama teknik sebep bu değildir." },
+          { "verdict": "fiyat", "label": "Müşteriye daha yüksek fiyat verebilmek için", "explain": "Sebebi bulmak ek iş çıkarabilir ama amacı fatura büyütmek değil, işin tekrar gelmesini önlemektir." },
+          { "verdict": "gerek-yok", "label": "Gerek yok, conta değişince sorun biter", "explain": "Sebep duruyorsa bitmez; aynı koşullar aynı sonucu üretir." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "sourceRequired": "Bu derste araca özgü sayısal değer bilerek verilmedi. Sistem basıncı, kabul edilebilir basınç düşüşü ve kapak düzlük sınırı üretici kılavuzundan okunur.",
+    "kapsam": "Conta değişiminin sökme ve takma adımları motor.silindir-kapagi dersinde işlendiği için burada tekrarlanmadı; bu ders teşhis, kanıt ve asıl sebep üzerine kuruldu.",
+    "reviewedByMechanic": false
+  }
+}

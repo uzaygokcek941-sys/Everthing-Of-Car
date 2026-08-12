@@ -1,0 +1,173 @@
+{
+  "id": "elektrik.far-degisimi",
+  "area": "arac-elektrik",
+  "stage": 5,
+  "title": "Far Ampulü Değişimi: Ampule Dokunma, Sokete Bak",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 20,
+  "prerequisites": ["elektrik.soket-temizligi", "elektrik.devre-elemanlari"],
+  "learningGoals": [
+    "Ampulü doğru tutmak ve neden cama dokunulmadığını bilmek",
+    "Yanan ampulün sebebini soket ve besleme tarafında aramak",
+    "Ampul değişimini bakım işi değil, kısa bir teşhis fırsatı olarak görmek"
+  ],
+
+  "safety": [
+    { "rule": "Ampul değişimi far söndürülüp kontak kapatıldıktan sonra yapılır", "why": "Yanan bir ampul saniyeler içinde yakacak sıcaklığa ulaşır ve soket canlıyken ayrıldığında pinlerde ark oluşur. Ark hem yanık hem kalıcı temas direnci üretir", "blocksStart": true },
+    { "rule": "Sıcak ampul soğuk suyla temas ettirilmez", "why": "Ani soğuma cam gövdede çatlak yaratır ve basınçlı ampul tiplerinde parçalanma riski doğurur", "blocksStart": true },
+    { "rule": "Ampul camına çıplak elle dokunulmaz", "why": "Elden geçen yağ, cam üzerinde ısının eşit dağılmadığı bir nokta oluşturur. O noktada cam farklı genleşir ve ampul zamanından çok önce kararır ya da çatlar", "blocksStart": false },
+    { "rule": "Kırılan ampul parçaları eldivenle ve kapalı kapta toplanır", "why": "Far gövdesinin içinde kalan küçük parçalar yansıtıcıyı çizer; bazı ampul tipleri ayrıca ayrı toplama gerektirir", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.eldiven", "label": "Temiz eldiven", "required": true },
+    { "id": "tool.multimetre", "label": "Dijital multimetre", "required": false },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Sol far yanmıyor. Ampulü değiştireceksin. Önce soketi ayır: tırnağa bas ve çek.",
+      "interaction": {
+        "type": "press-and-pull",
+        "target": "part.far-soketi"
+      },
+      "camera": "tezgah",
+      "hint": "Tırnak önce; kablodan çekme.",
+      "teachingNote": "Soketi kablodan çekmek pini gövdesinden sıyırır. Bu, değiştirmeye geldiğin ampulden çok daha zor bulunan bir arıza üretir."
+    },
+    {
+      "id": 2,
+      "instruction": "Ampulü yuvasından çıkar.",
+      "interaction": {
+        "type": "pull",
+        "target": "part.far-ampulu",
+        "axis": "z",
+        "distance": 0.25
+      },
+      "camera": "tezgah",
+      "hint": "Ampulü tabanından tut, camından değil.",
+      "teachingNote": "Ampul her zaman metal ya da plastik tabanından tutulur. Cam gövdeye dokunmak, ampulün ömrünü doğrudan kısaltan en yaygın alışkanlıktır."
+    },
+    {
+      "id": 3,
+      "instruction": "Çırak yeni ampulü kutusundan çıkarıp camından tutuyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.far-ampulu",
+        "question": "Ampul camına dokunmak neden sakıncalı?",
+        "options": [
+          { "label": "Elden geçen yağ camda ısının eşit dağılmadığı bir nokta yaratır; o noktada cam farklı genleşir ve ampul erken bozulur", "verdict": "yag-lekesi", "correct": true, "explain": "Far ampulünün camı çalışırken çok yüksek sıcaklığa çıkar ve bu ısının yüzeye eşit dağılması gerekir. Parmaktan bulaşan yağ ince bir tabaka bırakır; o bölge farklı ısınır, cam orada farklı genleşir ve zamanla kararma, çatlama ya da erken kopma ortaya çıkar. Yeni ampul birkaç hafta içinde gittiğinde çoğu zaman sebebi budur ve müşteri haksız yere parçayı ya da seni suçlar. Doğru yol basittir: ampul tabanından tutulur, temiz eldiven kullanılır, yanlışlıkla dokunulduysa cam alkol ve tiftiksiz bezle temizlenir." },
+          { "label": "Elektrik çarpar", "verdict": "carpma", "explain": "Ampul takılı değilken elektrik yoktur; sorun ısı dağılımıdır." },
+          { "label": "Camın rengi değişir, ışık sararır", "verdict": "renk", "explain": "Belirti kararma olabilir ama mekanizma ısı dağılımının bozulmasıdır." },
+          { "label": "Sakıncası yok, sadece görgü kuralı", "verdict": "sakinca-yok", "explain": "Ölçülebilir bir ömür kaybı vardır; kural teknik bir sebebe dayanır." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Bir parçayı nasıl tuttuğun o parçanın ne kadar dayanacağını belirliyorsa, o tutuş işin parçasıdır."
+    },
+    {
+      "id": 4,
+      "instruction": "Eski ampulü inceliyorsun: tabanı yanık ve soketin ucu da kararmış.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.far-soketi",
+        "question": "Bu görüntü ne söyler?",
+        "options": [
+          { "label": "Sokette ısınma var: gevşek ya da korozyonlu temas hem ampulü hem soketi yakıyor, yalnız ampul değiştirmek yetmez", "verdict": "sokette-isinma", "correct": true, "explain": "Ampulün tabanı ve soket ucu birlikte kararmışsa sebep ampulün kendisi değildir. Gevşek ya da oksitlenmiş bir temas direnç üretir, direnç ısı üretir ve ısı hem soketin plastiğini hem ampulün tabanını bozar. Süreç kendi kendini besler: ısındıkça korozyon artar, korozyon arttıkça daha çok ısınır. Bu noktada yalnız ampul değiştirilirse yenisi de kısa sürede gider ve müşteri iki ay sonra aynı şikâyetle döner. Doğru iş soketi de değerlendirmektir: temizlenebilecek durumdaysa temizlenir, pin kavraması zayıfladıysa ya da plastik erimişse soket değiştirilir. Ampul değişimi bu yüzden bakım değil, kısa bir teşhis fırsatıdır." },
+          { "label": "Normaldir, her ampul zamanla kararır", "verdict": "normal", "explain": "Cam içi kararma olabilir ama tabanla soketin birlikte yanmış olması ısınmayı gösterir." },
+          { "label": "Ampul kalitesizdir", "verdict": "kalite", "explain": "Kalite bir etken olabilir ama soket ucundaki kararma temas kaynaklı ısıyı işaret eder." },
+          { "label": "Aracın şarj gerilimi yüksektir", "verdict": "yuksek-gerilim", "explain": "Yüksek şarj gerilimi ampul ömrünü kısaltır ve kontrol edilmelidir; ama o durumda soket ucu değil, ampullerin hepsi birlikte etkilenir." }
+        ]
+      },
+      "camera": "tezgah",
+      "hint": "Ampulün tabanı ile soketin ucu birlikte kararmışsa suçlu temastır.",
+      "teachingNote": "Sökülen parçaya bakmak, yenisini takmadan önceki en ucuz teşhistir. Motor alanında buji rengiyle yaptığın şeyin aynısı."
+    },
+    {
+      "id": 5,
+      "instruction": "Yeni ampulü takacaksın. Rafta farklı güçte bir seçenek de var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.far-ampulu",
+        "question": "Hangi ampul takılır?",
+        "options": [
+          { "label": "Aracın tasarımına uygun tip ve güçte olanı; daha yüksek güçlü ampul soketi, kabloyu ve far gövdesini zorlar", "verdict": "orijinal-guc", "correct": true, "explain": "Far devresinin kablo kesiti, soketi ve sigortası belirli bir güce göre seçilmiştir. Daha yüksek güçlü bir ampul daha çok akım çeker; kablo ve soket bu akıma göre tasarlanmadığı için ısınır, soket erir ve zamanla temas direnci üretir — yani bu dersteki arızanın ta kendisi. Ayrıca far gövdesinin plastiği ve yansıtıcısı belirli bir ısıya göre yapılmıştır; fazla ısı yansıtıcıyı bozar ve ışık dağılımını değiştirir. Bir de trafik boyutu vardır: ışık dağılımı tip onayına bağlıdır, uygun olmayan ampul karşıdan gelen sürücüyü rahatsız eder. Doğru ampul, aracın kendi kılavuzunda yazan tip ve güçtedir." },
+          { "label": "Daha yüksek güçlü olanı, daha iyi aydınlatır", "verdict": "yuksek-guc", "explain": "Daha çok akım çeker; soketi, kabloyu ve far gövdesini zorlar, ışık dağılımını da bozar." },
+          { "label": "Fark etmez, tabanı uyuyorsa takılır", "verdict": "taban-uyuyor", "explain": "Taban uyumu tek başına yeterli değildir; güç ve tip de eşleşmelidir." },
+          { "label": "İki tarafa farklı tip takılabilir", "verdict": "farkli-takim", "explain": "Farklı ampuller farklı renk ve şiddet verir; iki tarafın aynı olması hem görüş hem denetim açısından gereklidir." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Bir tüketiciyi büyütmek, ona giden bütün yolu da büyütmek demektir. Kabloyu, soketi ve sigortayı değiştirmeden ampulü büyütmek zincirin zayıf halkasını yakar."
+    },
+    {
+      "id": 6,
+      "instruction": "Yeni ampul takıldı, soket temizlendi.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.far-ampulu",
+        "question": "Tek far yanmıyorken diğer far neden kontrol edilir?",
+        "options": [
+          { "label": "İki ampul aynı anda takıldıysa benzer ömürdedir; ayrıca sağlam taraf karşılaştırma için referans verir", "verdict": "kardes-referans", "correct": true, "explain": "Sağlam far iki iş görür. Birincisi kıyas: aynı ölçümü orada da yaparsın ve arızalı taraftaki değerin ne kadar saptığını görürsün — bu, kılavuzsuz referans üretmenin elektrikteki hâlidir. İkincisi öngörü: iki ampul genellikle birlikte takılır ve benzer sürede yorulur; biri gittiyse diğeri de yolun sonundadır. Müşteriye bunu söylemek satış değil, ikinci bir ziyaretin önlenmesidir. Ayrıca iki tarafın ampul tipi ve renginin aynı olması gerekir; tek taraf değiştirilirken bu da kontrol edilir." },
+          { "label": "Gerekmez, arızalı olan değişti", "verdict": "gerekmez", "explain": "Sağlam taraf hem referans hem öngörü sağlar; bakmamak bilgi kaybıdır." },
+          { "label": "Yalnız simetri için", "verdict": "simetri", "explain": "Görsel simetri yan fayda; asıl sebep karşılaştırma ve ömür beklentisidir." },
+          { "label": "Müşteriye ek satış yapmak için", "verdict": "satis", "explain": "Gerekçe teknik olmalı: kıyas referansı ve benzer ömür. Gereksiz parça önerisi güveni bozar." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Aracın üzerinde aynı işi gören ikinci bir parça varsa, o senin bedava referansındır. Kam milinde, bujide, farda aynı ilke."
+    },
+    {
+      "id": 7,
+      "instruction": "İş bitiyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kablo-demeti",
+        "question": "Far değişiminden sonra son kontrol nedir?",
+        "options": [
+          { "label": "Kısa ve uzun huzme ayrı ayrı denenir, soketin tam oturduğu doğrulanır ve far ayarının bozulup bozulmadığına bakılır", "verdict": "her-huzme-ve-ayar", "correct": true, "explain": "Bir far ampulünün genellikle iki görevi vardır ve biri çalışırken diğeri çalışmayabilir; bu yüzden kısa ve uzun huzme ayrı ayrı denenir. Soketin tam oturduğu elle çekilerek doğrulanır — yarım oturmuş bir soket ilk günler çalışır, sonra aralıklı arıza üretir. Üçüncü kontrol far ayarıdır: ampul yuvasına doğru oturmadıysa ya da gövdeye müdahale edildiyse ışık demeti kayabilir. Yanlış ayarlanmış far hem sürücünün görüşünü azaltır hem karşıdan geleni rahatsız eder; gerekiyorsa ayar cihazıyla düzeltilir." },
+          { "label": "Farın yandığını görmek yeterli", "verdict": "yandi", "explain": "Tek huzme yanıyor olabilir ve soket yarım oturmuş olabilir; iki durum da sonradan arıza üretir." },
+          { "label": "Yalnız sigortaya bakılır", "verdict": "sigorta", "explain": "Sigorta zaten sağlamdı; buradaki kontroller mekanik ve işlevsel." },
+          { "label": "Motor çalıştırılıp gerilim ölçülür", "verdict": "gerilim-olc", "explain": "Şarj gerilimi ayrı bir kontroldür ve gerekirse yapılır; bu adımın soruları huzme, oturma ve ayardır." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "İşi bitiren şey parçanın takılması değil, o parçanın bütün işlevlerinin denenmesidir. Farda bu, iki huzmeyi de yakmak demektir."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Ampul camına neden çıplak elle dokunulmaz?",
+        "a": "isi-dagilimi",
+        "options": [
+          { "verdict": "isi-dagilimi", "label": "Elden geçen yağ camda ısının eşit dağılmadığı bir nokta yaratır; o bölge farklı genleşir ve ampul erken bozulur", "explain": "Far ampulünün camı çalışırken çok yüksek sıcaklığa çıkar ve ısının yüzeye eşit dağılması gerekir. Parmaktan bulaşan yağ ince bir tabaka bırakır; o bölge farklı ısınır, cam orada farklı genleşir ve zamanla kararma, çatlama ya da erken kopma ortaya çıkar. Yeni ampulün birkaç hafta içinde gitmesinin en yaygın sebebi budur. Ampul tabanından tutulur, temiz eldiven kullanılır; dokunulduysa cam alkol ve tiftiksiz bezle temizlenir." },
+          { "verdict": "carpma", "label": "Elektrik çarpma riski yüzünden", "explain": "Ampul takılı değilken elektrik yoktur; sebep ısı dağılımıdır." },
+          { "verdict": "kir", "label": "Camı kirletip ışığı azalttığı için", "explain": "Görsel kirlilik değil, ısı dağılımının bozulması esas sebeptir." },
+          { "verdict": "gorgu", "label": "Yalnız bir alışkanlık", "explain": "Ölçülebilir bir ömür kaybı vardır; kural tekniktir." }
+        ]
+      },
+      {
+        "q": "Ampulün tabanı ve soketin ucu birlikte kararmışsa ne yapılır?",
+        "a": "soketi-de-degerlendir",
+        "options": [
+          { "verdict": "soketi-de-degerlendir", "label": "Soket de değerlendirilir: gevşek ya da korozyonlu temas ısı üretiyordur, yalnız ampul değiştirmek yetmez", "explain": "Ampulün tabanı ve soket ucu birlikte kararmışsa sebep ampul değildir. Gevşek ya da oksitlenmiş temas direnç üretir, direnç ısı üretir, ısı hem soketin plastiğini hem ampulün tabanını bozar ve süreç kendini besler. Yalnız ampul değiştirilirse yenisi de kısa sürede gider. Soket temizlenebilir durumdaysa temizlenir; pin kavraması zayıfladıysa ya da plastik eridiyse soket değiştirilir. Ampul değişimi bu yüzden bir teşhis fırsatıdır." },
+          { "verdict": "ampul-yeter", "label": "Yalnız ampul değiştirilir", "explain": "Isınmanın sebebi duruyorken yeni ampul de kısa sürede gider." },
+          { "verdict": "gres", "label": "Sokete gres basılır", "explain": "Kirin ve gevşekliğin üstüne basılan gres sorunu çözmez." },
+          { "verdict": "yuksek-guc", "label": "Daha güçlü ampul takılır", "explain": "Daha çok akım, daha çok ısı demektir; arızayı büyütür." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "sourceRequired": "Ampul tipi, gücü ve far ayar değerleri bu derste sayı olarak VERİLMEDİ; bunlar araca özgüdür ve kılavuzdan okunur. Işık dağılımıyla ilgili mevzuat yükümlülüğünün varlığı anlatıldı, madde numarası iddia edilmedi.",
+    "kapsam": "Far tek bir silindir gövdeyle temsil ediliyor; yansıtıcı, ayar vidası ve iki huzmeli ampul yapısı modelde yok. Bu adımlar seçim olarak öğretiliyor.",
+    "etkilesim": "Ampul çıkarma pull ile z ekseninde veriliyor; far gövdesi sahnede Z yönünde durduğu için eksen z seçildi.",
+    "reviewedByMechanic": false
+  }
+}

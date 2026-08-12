@@ -1,0 +1,171 @@
+{
+  "id": "lastik.guvenlik-kaldirma",
+  "area": "lastik-tekerlek",
+  "stage": 0,
+  "title": "Aracı Kaldırmak: Sıra, Nokta ve İkinci Bariyer",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 25,
+  "prerequisites": [],
+  "learningGoals": [
+    "Bijon somunlarının neden araç yerdeyken gevşetildiğini açıklamak",
+    "Kaldırma noktasını seçerken neye bakıldığını bilmek",
+    "Krikonun kaldırma aracı, sehpanın tutma aracı olduğunu ayırt etmek"
+  ],
+
+  "safety": [
+    { "rule": "Araç düz, sert ve yatay zeminde kaldırılır", "why": "Eğimli ya da yumuşak zeminde kriko yana kayar; sıcak asfaltta kriko tabanı gömülür", "blocksStart": true },
+    { "rule": "Kaldırılan araç sehpaya oturtulmadan altına girilmez", "why": "Kriko hidroliği tek bir contaya bağlıdır ve haber vermeden boşalabilir. Ölümlü kazaların çoğu sehpasız çalışmadan çıkar", "blocksStart": true },
+    { "rule": "Karşı tekerlek takozlanır ve el freni çekilir", "why": "Bir tekerlek havadayken araç kalan tekerlekler üzerinde yuvarlanabilir; otomatik şanzımanda P konumu tek başına yeterli değildir", "blocksStart": true },
+    { "rule": "Araçta kimse kalmaz", "why": "İçerideki kişinin ağırlık kaydırması krikoyu dengeden çıkarır", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.kriko", "label": "Kriko", "required": true },
+    { "id": "tool.sehpa", "label": "Sehpa (mapa)", "required": true },
+    { "id": "tool.bijon-anahtari", "label": "Bijon anahtarı", "required": true },
+    { "id": "tool.takoz", "label": "Tekerlek takozu", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Araç yerde, el freni çekili, karşı tekerlek takozlu. Elinde bijon anahtarı var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.bijon.1",
+        "question": "Somunlar ne zaman gevşetilir?",
+        "options": [
+          { "label": "Araç yerdeyken, tekerlek zemine basarken; kaldırdıktan sonra değil", "verdict": "yerde-gevset", "correct": true, "explain": "Somunu gevşetmek için uygulanan kuvvet tekerleği döndürmeye çalışır. Tekerlek yerdeyken zemine basar, sürtünme onu tutar ve bütün kuvvet somuna gider. Tekerlek havadayken ise zorlanan somun yerine tekerlek döner; onu durdurmak için ya frene basacak birini beklersin ya da tekerleği elinle tutmaya çalışırsın — ikisi de hem yavaş hem tehlikelidir. Daha kötüsü, havadaki tekerleğe yandan uygulanan bu kuvvet aracı sehpanın ya da krikonun üzerinde iterek dengeden çıkarır. Kural bu yüzden sabittir: somunlar araç yerdeyken gevşetilir, ama tamamen sökülmez. Yarım tur yeter. Aynı sıra tersine de geçerlidir — son sıkma da araç yere indikten sonra yapılır." },
+          { "label": "Araç kaldırıldıktan sonra, tekerlek serbest kalınca daha kolaydır", "verdict": "havada-gevset", "explain": "Havada tekerlek döner, somun dönmez. Ayrıca yandan uygulanan kuvvet aracı krikodan düşürebilir." },
+          { "label": "Fark etmez, ikisi de olur", "verdict": "farketmez", "explain": "Fark var: havadaki tekerleğe uygulanan yan kuvvet aracı devirebilir." },
+          { "label": "Sehpaya oturttuktan sonra gevşetilir", "verdict": "sehpada", "explain": "Sehpa da devrilebilir. Gevşetme kuvveti her zaman araç kendi tekerlekleri üzerindeyken uygulanır." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bu adımda öğretilen şey bir alışkanlık değil, bir mantık: kuvveti uygularken parçayı ne tutuyor? Cevap \"zemin\" ise araç yerde kalır."
+    },
+    {
+      "id": 2,
+      "instruction": "Somunları yarımşar tur gevşet. Beşini de sırayla, karşılıklı geçerek.",
+      "interaction": {
+        "type": "unscrew",
+        "target": "part.bijon.1",
+        "count": 5,
+        "turns": 1,
+        "tool": "tool.bijon-anahtari"
+      },
+      "camera": "tekerlek",
+      "hint": "Tamamen sökme; yarım tur yeter.",
+      "teachingNote": "Yarım tur, somunun oturma yüzeyinden ayrılması için yeterlidir. Tamamen sökülürse tekerlek kaldırma sırasında oynar ve göbekten düşebilir."
+    },
+    {
+      "id": 3,
+      "instruction": "Krikoyu yerleştireceksin.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kriko-lastik",
+        "question": "Kriko nereye oturur?",
+        "options": [
+          { "label": "Aracın kendi kılavuzunda işaretli kaldırma noktasına — yük taşıyan güçlendirilmiş kesite", "verdict": "kilavuz-noktasi", "correct": true, "explain": "Her aracın altında yalnız birkaç nokta bütün ağırlığı tek bir yerden taşıyacak biçimde güçlendirilmiştir. Bu noktalar araca göre değişir ve yerleri aracın kendi kılavuzunda, çoğu zaman da alt kaportada bir çentik, ok ya da kabartma ile işaretlidir. Doğru nokta bulunmadan kaldırma yapılmaz; çünkü sac panel, yakıt deposu, egzoz, salıncak kolu ya da plastik marşpiyel bu yükü taşımaz. Yanlış noktadan kaldırma önce metali göçürür, sonra kriko o göçük yüzeyde kayar. Kaldırmadan önce krikonun tabanının tam oturduğu, aracın üzerine gelen kısmın da yüzeye tam temas ettiği gözle kontrol edilir; kriko eğik duruyorsa yükü aldığında doğrulmaya çalışır ve kayar." },
+          { "label": "Plastik marşpiyelin ortasına", "verdict": "marspiyel", "explain": "Marşpiyel kaplamadır, taşıyıcı değildir. Altındaki dikiş taşıyıcı olabilir ama kaplamanın kendisi kırılır." },
+          { "label": "Salıncak koluna", "verdict": "salincak", "explain": "Salıncak hareketli bir süspansiyon parçasıdır; kaldırma yükü burçlarını ve rotilini zorlar." },
+          { "label": "Herhangi bir düz sac yüzeye", "verdict": "sac", "explain": "Sac panel bu yükü taşımaz, göçer ve kriko göçük yüzeyde kayar." }
+        ]
+      },
+      "camera": "arac-alti",
+      "teachingNote": "Kaldırma noktası araca özgüdür ve tahminle bulunmaz. Bilinmeyen bir araçta kılavuza bakmak zaman kaybı değil, işin parçasıdır."
+    },
+    {
+      "id": 4,
+      "instruction": "Araç krikoyla kaldırıldı. Şimdi kritik karar.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sehpa-lastik",
+        "question": "Sıradaki hareket ne?",
+        "options": [
+          { "label": "Sehpa taşıyıcı noktanın altına konur ve kriko indirilerek yük sehpaya aktarılır; kriko yükü bırakmış hâlde yerinde kalır", "verdict": "sehpaya-otur", "correct": true, "explain": "Kriko bir kaldırma aracıdır, tutma aracı değildir. Yükü hidrolik bir devre taşır ve o devre tek bir contaya bağlıdır; conta yaşlandığında ya da içine kir kaçtığında kriko haber vermeden, yavaşça iner. Sehpa ise mekaniktir: yükü çelik bir tırnak ve gövde taşır, hidrolik yoktur, sessizce boşalmaz. Bu yüzden araç kaldırıldıktan sonra sehpa taşıyıcı noktanın altına konur, kriko yavaşça indirilerek yük sehpaya aktarılır ve aracın sehpaya gerçekten oturduğu görülür. Kriko tamamen çekilmez; yükü bırakmış hâlde yerinde kalır ve ikinci bariyer olur. Sehpa beklenmedik biçimde kayarsa araç yere değil krikoya düşer." },
+          { "label": "Kriko yeterlidir, doğrudan çalışmaya başlanır", "verdict": "kriko-yeter", "explain": "Hidrolik kriko sessizce boşalabilir. Sehpasız araç altına girilmez." },
+          { "label": "Kriko tamamen çekilir, araç sehpada kalır", "verdict": "kriko-cek", "explain": "Sehpa da kayabilir. Kriko yükü bırakmış hâlde yerinde kalırsa ikinci bariyer olur." },
+          { "label": "İki kriko kullanılır", "verdict": "iki-kriko", "explain": "İki hidrolik devre, tek devreden daha güvenli değildir; ikisi de aynı biçimde boşalır." }
+        ]
+      },
+      "camera": "arac-alti",
+      "teachingNote": "Güvenlikte tek bir bariyere güvenilmez. Sehpa birincil, yükü bırakmış kriko ikincil bariyerdir."
+    },
+    {
+      "id": 5,
+      "instruction": "Aracın gerçekten sehpaya oturduğunu ölçüyle doğrula. Çamurluk kenarının zeminden yüksekliği kriko yükü taşırken 68,5 cm; kriko indirilip yük sehpaya geçtikten sonra 66,0 cm. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.sehpa-lastik",
+        "unit": "cm",
+        "acceptRange": [2.4, 2.6]
+      },
+      "camera": "arac-alti",
+      "hint": "68,5 eksi 66,0.",
+      "teachingNote": "Bu fark bir ölçü değil, bir kanıttır: araç aşağı doğru hareket ettiyse yük gerçekten sehpaya geçmiştir. Hiç oturma olmadıysa araç hâlâ krikonun üzerindedir ve sehpa yalnızca yanında duruyordur. Sehpaya oturtulan aracı ayrıca elle iterek sarsmak da aynı doğrulamayı yapar — oynuyorsa indirilir ve yeniden konumlandırılır."
+    },
+    {
+      "id": 6,
+      "instruction": "Somunları tamamen sök ve tekerleği kendine doğru çekerek göbekten çıkar.",
+      "interaction": {
+        "type": "pull",
+        "target": "part.jant",
+        "axis": "x",
+        "distance": 1
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Tekerlek beklenenden ağırdır ve göbeğe paslanarak yapışmış olabilir. Yapışan tekerlek jantın yüzüne vurularak değil, lastiğin sırtından ya da iç tarafından zorlanır; jant yüzeyine vurmak jantı eğer ve balansı bozar. Son somun çıkarken tekerleği bir elinle tutmak, ayağın üstüne düşmesini önler."
+    },
+    {
+      "id": 7,
+      "instruction": "Tekerlek çıktı, yerde duruyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik",
+        "question": "Sökülen tekerlek nereye konur?",
+        "options": [
+          { "label": "Aracın altına, yatık olarak — sehpa ve kriko boşalırsa araç yere değil tekerleğin üstüne düşer", "verdict": "arac-altina", "correct": true, "explain": "Sökülen tekerlek atıl bir parça değil, bedava bir üçüncü bariyerdir. Aracın altına yatık olarak konduğunda hem sehpa hem kriko boşalsa bile araç zemine kadar inmez; lastiğin yüksekliği kadar bir boşluk kalır ve altta çalışan kişi o boşlukta hayatta kalır. Tekerleği ayakta bırakmak ise iki ayrı risk üretir: dikili duran bir tekerlek en küçük dokunuşta devrilir ve ayağı ezer, ayrıca yuvarlanarak atölyede yol alır. Aynı mantık iş bitene kadar sürer — yeni tekerlek takılmadan önce eski tekerlek altta kalır, takıldıktan sonra çıkarılır." },
+          { "label": "Duvara dayanmış olarak dik bırakılır", "verdict": "duvara-dik", "explain": "Dik tekerlek devrilir ve ayak ezer; ayrıca aracın altındaki boşluğu doldurmaz." },
+          { "label": "Aracın arkasına, yoldan uzağa", "verdict": "arkaya", "explain": "Güvenlidir ama fırsatı kaçırır: tekerlek aracın altındayken üçüncü bariyer olur." },
+          { "label": "Doğrudan lastik sökme makinesine götürülür", "verdict": "makineye", "explain": "İş sırası buysa bile araç kaldırılmış hâlde altına bir engel bırakmak esastır." }
+        ]
+      },
+      "camera": "arac-alti",
+      "teachingNote": "Bu alanın en ucuz güvenlik önlemi budur: zaten elinde olan bir parçayı doğru yere koymak. Hiçbir maliyeti yok, tek gereken alışkanlık."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Bijon somunları neden araç yerdeyken gevşetilir?",
+        "a": "zemin-tutar",
+        "options": [
+          { "verdict": "zemin-tutar", "label": "Tekerleği zemin tutar; havadayken somun yerine tekerlek döner ve yan kuvvet aracı krikodan düşürür", "explain": "Gevşetme kuvveti tekerleği döndürmeye çalışır. Yerde sürtünme onu tutar, bütün kuvvet somuna gider. Havada ise tekerlek döner ve onu durdurmak için uygulanan yan kuvvet aracı kriko ya da sehpa üzerinde iter. Aynı kural sıkmada da geçerlidir: son sıkma araç yere indikten sonra yapılır." },
+          { "verdict": "kolay", "label": "Yerde daha kolay ulaşılır", "explain": "Erişim değil, kuvvetin nereye gittiği belirleyici." },
+          { "verdict": "alet", "label": "Yerdeyken daha uzun anahtar kullanılabilir", "explain": "Anahtar boyu ayrı bir konu; kural tekerleği neyin tuttuğuyla ilgili." },
+          { "verdict": "gelenek", "label": "Alışkanlık, teknik sebebi yok", "explain": "Teknik sebebi var ve doğrudan güvenlikle ilgili." }
+        ]
+      },
+      {
+        "q": "Araç sehpaya oturtulduktan sonra kriko neden yerinde bırakılır?",
+        "a": "ikinci-bariyer",
+        "options": [
+          { "verdict": "ikinci-bariyer", "label": "Yükü bırakmış hâlde ikinci bariyer olsun diye; sehpa kayarsa araç krikoya düşer", "explain": "Güvenlik tek bir parçaya bırakılmaz. Sehpa birincil taşıyıcıdır ama o da kayabilir ya da yanlış yere oturmuş olabilir. Yükü taşımayan ama yerinde duran kriko, bu ihtimalde aracın düşeceği mesafeyi sınırlar. Aynı mantıkla sökülen tekerlek de aracın altına konur ve üçüncü bariyer olur." },
+          { "verdict": "yuk-paylas", "label": "Yükü sehpayla paylaşsın diye", "explain": "Yük paylaştırılmaz; sehpa taşır, kriko boşta bekler. Paylaşırsa sehpanın gerçekten oturduğu anlaşılmaz." },
+          { "verdict": "hizli", "label": "İş bitince hızlı indirmek için", "explain": "Pratik bir yan fayda, ama sebep güvenlik." },
+          { "verdict": "gereksiz", "label": "Gerekmez, çekilebilir", "explain": "Çekilirse tek bariyer kalır." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 5'teki 68,5 cm ve 66,0 cm SENARYO okumalarıdır. Öğrenciden istenen bir üretici değeri değil, yükün sehpaya geçtiğini gösteren FARKTIR (2,5 cm). Gerçek araçta bu fark sehpanın kademesine göre değişir; öğretilen şey sayı değil, oturmanın gözle ve ölçüyle doğrulanmasıdır.",
+    "sourceRequired": "Bu derste künye gerektiren hiçbir üretici değeri kullanılmadı. Kaldırma noktası araca özgüdür ve bilinçle GENEL anlatıldı: ders 'şu noktadan kaldır' demiyor, 'aracın kendi kılavuzundaki noktayı bul' diyor.",
+    "kapsam": "İki sütunlu asansör bu derste yok; atölye tipine göre değişir ve kendi güvenlik prosedürü vardır. Ders kriko + sehpa ile sınırlıdır.",
+    "reviewedByMechanic": false
+  }
+}

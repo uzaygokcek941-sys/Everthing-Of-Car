@@ -1,0 +1,171 @@
+{
+  "id": "aksesuar.yagmur-sensoru",
+  "area": "aksesuar-ses",
+  "stage": 3,
+  "title": "Yağmur Sensörü ve Cam Değişimi Sonrası",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 30,
+  "prerequisites": ["aksesuar.silecek-mekanizmasi"],
+  "learningGoals": [
+    "Yağmur sensörünün suyu değil ışığı ölçtüğünü anlamak",
+    "Cam ile sensör arasındaki temas katmanının neden belirleyici olduğunu görmek",
+    "Cam değişimi sonrası çıkan şikâyetleri doğru adlandırmak"
+  ],
+
+  "safety": [
+    { "rule": "Sensör sökülürken enerji kesilir ve cam kuru olur", "why": "Sensör bölgesindeki soketler ve bazı araçlarda aynı kaide üzerindeki diğer birimler canlıdır; ıslak yüzey hem kaydırır hem kısa devre riski taşır", "blocksStart": true },
+    { "rule": "Sensör camdan zorla kaldırılmaz", "why": "Sensör cama optik bir katmanla yapışıktır; zorlama hem camı çatlatabilir hem katmanı geri kullanılamaz hâle getirir", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.plastik-sokme-spatulasi", "label": "Plastik söküm spatulası", "required": true },
+    { "id": "tool.multimetre", "label": "Multimetre", "required": false },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "İç dikiz aynasının arkasında, ön cama yapışık küçük bir birim var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.yagmur-sensoru",
+        "question": "Yağmur sensörü neyi ölçer?",
+        "options": [
+          { "label": "Suyu değil ışığı: cama gönderdiği ışığın ne kadarının geri döndüğünü ölçer; cam ıslanınca ışığın bir kısmı dışarı kaçar ve geri dönen azalır", "verdict": "isik-olcer", "correct": true, "explain": "Yağmur sensörünün adı yanıltıcıdır; sensör yağmuru göremez, camın optik davranışındaki değişimi ölçer. İçinde bir ışık kaynağı ve bir alıcı vardır. Kaynak, ışığı camın içine belli bir açıyla gönderir; cam kuruyken ışık camın dış yüzeyinden yansıyıp alıcıya döner ve alıcı yüksek bir değer okur. Cam ıslandığında dış yüzeydeki su damlaları ışığın bir kısmının dışarı kaçmasına yol açar; geri dönen ışık azalır. Modül bu azalmayı 'cam ıslandı' diye yorumlar ve silecekleri çalıştırır; azalma ne kadar büyükse silme o kadar sık yapılır. Bu çalışma biçiminin üç sonucu vardır ve üçü de sahada karşımıza çıkar. Birincisi sensörün cama tam yapışık olması zorunludur — arada en küçük bir hava boşluğu bile ışık yolunu bozar. İkincisi sensör yalnız kendi baktığı küçük alanı bilir; camın başka bir yerine düşen yağmuru göremez, bu yüzden ilk damlalarda gecikme normal olabilir. Üçüncüsü cam üzerindeki her şey ölçümü etkiler: kuş pisliği, cila artığı, çizik ya da yapıştırılmış bir etiket sensörü yanıltır ve sileceği durup dururken çalıştırır." },
+          { "label": "Camdaki suyun elektriksel iletkenliğini ölçer", "verdict": "iletkenlik", "explain": "Cam yalıtkandır; ölçüm optiktir." },
+          { "label": "Havanın nemini ölçer", "verdict": "nem", "explain": "Nem sensörü ayrı bir parçadır ve iç buğu için kullanılır." },
+          { "label": "Yağmurun cama çarpma sesini dinler", "verdict": "ses", "explain": "Bazı deneysel sistemler dışında yaygın yöntem optiktir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Sensör suyu görmüyor, ışığın kaçtığını görüyor. Bu cümle bu dersteki bütün şikâyetlerin cevabını taşıyor."
+    },
+    {
+      "id": 2,
+      "instruction": "Sensörü kaidesinden çıkardın. Camla arasında jel kıvamında saydam bir katman var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-cam",
+        "question": "Bu katman ne işe yarar?",
+        "options": [
+          { "label": "Sensör ile cam arasındaki havayı ortadan kaldırır: hava boşluğu ışığı kırar ve ölçümü bozar, bu yüzden aradaki boşluk optik bir jel ya da bantla doldurulur", "verdict": "optik-baglayici", "correct": true, "explain": "Bu katman bir yapıştırıcı değil, optik bir bağlayıcıdır ve görevi tek şeydir: sensörün merceği ile cam arasında hiç hava kalmasın. Sebebi fiziktir — ışık farklı yoğunluktaki iki ortam arasında geçerken kırılır ve bir kısmı yansır; arada hava varsa sensörün gönderdiği ışığın bir bölümü daha cama girmeden geri döner ve alıcı hep 'ıslak' benzeri bir okuma alır. Katman havayı ortadan kaldırınca ışık camın içine kayıpsız girer. Bu yüzden sensör her söküldüğünde katman kontrol edilir; içine hava kabarcığı girmişse, tozlanmışsa ya da yaşlanıp sertleşmişse yenisiyle değiştirilir — eski katman temizlenip yeniden kullanılmaz. Katman tipi araca ve sensöre özgüdür (jel yastık ya da çift taraflı optik bant) ve bu ders bir ürün belirtmiyor. Montajda tek kural vardır: kabarcık bırakmadan, ortadan kenarlara doğru bastırarak oturtmak. Tek bir hava kabarcığı, sensörün tam ortasına denk geldiğinde sistemi tamamen yanıltır ve bu, cam değişimi sonrası şikâyetlerin bir numaralı sebebidir." },
+          { "label": "Sensörü cama yapıştıran normal bir yapıştırıcıdır", "verdict": "yapistirici", "explain": "Tutma işini kaide yapar; bu katmanın işi optiktir." },
+          { "label": "Titreşim yalıtımı sağlar", "verdict": "titresim", "explain": "Katkısı olabilir ama varlık sebebi hava boşluğunu kaldırmaktır." },
+          { "label": "Isı yalıtımı içindir", "verdict": "isi", "explain": "Optik geçiş içindir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Tek bir hava kabarcığı sistemi yanıltır. Cam değişimi sonrası şikâyetlerin bir numaralı sebebi tam olarak bu."
+    },
+    {
+      "id": 3,
+      "instruction": "Cam değişmiş bir araç geldi. Silecekler yağmur yokken kendi kendine çalışıyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.yagmur-sensoru",
+        "question": "İlk şüphe nedir?",
+        "options": [
+          { "label": "Sensörün cama oturuşu: hava kabarcığı, kirli yüzey, yanlış ya da eski optik katman, ya da sensörün camdaki doğru bölgeye denk gelmemesi", "verdict": "oturus", "correct": true, "explain": "Cam değişiminden sonra gelen yağmur sensörü şikâyetlerinin neredeyse tamamı sensörün kendisiyle değil, oturuşuyla ilgilidir — çünkü sensör sökülüp yeni cama takılmıştır ve bu işlem sırasında dört şey yanlış gidebilir. Birincisi hava kabarcığıdır: katman kabarcıklı oturmuşsa sensör sürekli 'ıslak' okur ve silecek kuru camda çalışır. İkincisi yüzey temizliğidir: yeni camın üzerinde üretim ya da montaj artığı, parmak izi ya da silikon kalıntısı varsa optik yol bozulur. Üçüncüsü katmanın kendisidir — eski katman yeniden kullanılmışsa sertleşmiş ve tam temas etmiyordur. Dördüncüsü camın kendisidir: bazı camlarda sensör bölgesi özel olarak hazırlanmıştır (o bölgede baskı ve kaplama farklıdır); yağmur sensörü olmayan bir cam takıldıysa sensör yanlış bir yüzeye bakıyordur ve hiçbir ayar bunu düzeltmez. Bu son ihtimal önemlidir çünkü çözümü sensör değiştirmek değil, doğru camı takmaktır ve bunu erken söylemek müşteriyi boş masraftan kurtarır. Sıralama şudur: önce sensör sökülüp katman ve yüzey görsel olarak kontrol edilir, sonra yeni katmanla düzgün oturtulur; şikâyet sürerse cam tipi sorgulanır. Sensörün kendisi en son şüphelidir." },
+          { "label": "Sensör bozulmuştur, değiştirilir", "verdict": "sensor-degistir", "explain": "Cam değişimi sırasında bozulması olası değildir; önce oturuş kontrol edilir." },
+          { "label": "Silecek motoru arızalıdır", "verdict": "motor", "explain": "Motor komutu uyguluyor; yanlış olan komutun kendisidir." },
+          { "label": "Modül yenilenmelidir", "verdict": "modul", "explain": "En pahalı halkayla başlamak teşhis değildir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Yağmur sensörsüz cam takılmış olabilir — bunu erken söylemek müşteriyi boş sensör masrafından kurtarır."
+    },
+    {
+      "id": 4,
+      "instruction": "Sensörün besleme ucunda gerilim ölçtün: kontak açıkken 12,4 V, kontak kapalıyken 0,1 V. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.multimetre-aksesuar",
+        "unit": "V",
+        "acceptRange": [12.1, 12.5]
+      },
+      "camera": "aksesuar",
+      "hint": "12,4 eksi 0,1.",
+      "teachingNote": "12,3 voltluk bu fark iki şeyi birden söylüyor: sensör kontak beslemelidir (araç uykudayken çekmiyor) ve beslemesi sağlamdır. Bu ölçüm teşhisin yönünü keskinleştirir — besleme varsa arıza sensörün girdisinde ya da çıkışındadır. Ama burada bir sınır vardır ve bilinmesi gerekir: sensörün çıkışı çoğu araçta bir gerilim değeri değil, modüle giden bir veri mesajıdır. Yani multimetreyle 'sensör ne söylüyor' sorusu okunamaz; okunabilen tek şey beslemesi ve şasesidir. Sensörün ne bildirdiğini görmek teşhis cihazı ister ve o bu uygulamanın kapsamı dışındadır. Bu yüzden sahada kullanılan yöntem dolaylıdır: cam ıslatılır ve sistemin tepki verip vermediğine bakılır — tepki varsa zincir çalışıyordur, yoksa oturuş ve besleme kontrol edilir. Besleme gerilimi ve sensör tipi araca özgüdür; bu ders bir sınır vermiyor."
+    },
+    {
+      "id": 5,
+      "instruction": "Müşteri 'yağmur başlayınca geç çalışıyor' diyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-cam",
+        "question": "Bu bir arıza mı?",
+        "options": [
+          { "label": "Her zaman değil: sensör yalnız kendi baktığı küçük alanı görür ve ilk damlalar oraya düşmemiş olabilir; ayrıca hassasiyet kademesi sürücü tarafından ayarlanabilir", "verdict": "her-zaman-degil", "correct": true, "explain": "Bu şikâyet çok gelir ve çoğu zaman arıza değildir; ama 'normaldir' deyip geçmek de doğru değildir, çünkü içinde gerçek bir sorun saklı olabilir. Üç ihtimal sırayla elenir. Birincisi kapsama alanıdır: sensör camın tamamını değil, kendi merceğinin baktığı küçük bir alanı ölçer. İlk damlalar camın başka bir yerine düştüyse sistem henüz bir şey görmemiştir ve bu tasarımın doğal sonucudur. İkincisi hassasiyet ayarıdır — neredeyse bütün araçlarda silecek kolu üzerinde bir hassasiyet kademesi vardır ve düşük kademede sistem bilinçli olarak geç davranır; müşteri bunu bilmiyor olabilir ve bu bilgiyi vermek çoğu zaman tek gereken şeydir. Üçüncüsü gerçek bir sebeptir: camın sensör bölgesi kirliyse, üzerinde cila ya da yağ filmi varsa su damlacık hâlinde tutunmaz, ince bir tabaka hâlinde yayılır ve optik değişim küçük kalır — sistem geç tepki verir. Aynı şekilde eskimiş ya da tozlanmış optik katman da tepkiyi geciktirir. Bu yüzden doğru sıra şudur: önce hassasiyet kademesi sorulur, sonra cam ve sensör bölgesi temizlenir, sonra katman kontrol edilir. Parça en sona kalır." },
+          { "label": "Evet, sensör mutlaka değişmelidir", "verdict": "degistir", "explain": "Kapsama alanı ve hassasiyet kademesi elenmeden parça değişmez." },
+          { "label": "Evet, modül yazılımı eskidir", "verdict": "yazilim", "explain": "Bu kapsam dışıdır ve belirtinin sıradan açıklamaları önce elenir." },
+          { "label": "Hayır, yağmur sensörleri hep geç çalışır", "verdict": "hep-gec", "explain": "Gecikmenin gerçek bir sebebi de olabilir; körü körüne normal denmez." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Hassasiyet kademesini sormak bedava ve çoğu zaman tek gereken şey. Parça en sona kalır."
+    },
+    {
+      "id": 6,
+      "instruction": "Sensörü geri takıyorsun.",
+      "interaction": {
+        "type": "press-and-pull",
+        "target": "part.yagmur-sensoru",
+        "requiresGesture": true
+      },
+      "camera": "aksesuar",
+      "hint": "Yeni katmanı ortadan kenara doğru bastırarak oturt, sonra sensörü kaidesine kilitle.",
+      "teachingNote": "Montaj sırası şudur: cam yüzeyi uygun bir temizleyiciyle yağdan ve artıktan arındırılır ve kurutulur; yeni optik katman sensörün merceğine ya da cama, ürünün istediği biçimde yerleştirilir; sensör kaideye oturtulup kilitlenir ve katman ortadan kenarlara doğru yayılacak şekilde bastırılır — kenardan başlamak kabarcığı ortada hapseder. Ardından soket takılır ve kapak kapatılır. İki not: parmakla merceğe ya da katmana dokunulmaz, cilt yağı optik yolu bozar; ve kapak kapatılırken içeri toz kaçmaması için ortam temiz olmalıdır. Katmanın tipi, temizleyici ve varsa bekleme süresi ürüne özgüdür, bu ders bir değer vermiyor."
+    },
+    {
+      "id": 7,
+      "instruction": "Teslim öncesi doğrulama.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.silecek-kolu",
+        "question": "Yağmur sensörü nasıl denenir?",
+        "options": [
+          { "label": "Kol otomatik konuma alınır, cam sensör bölgesine su püskürtülerek ıslatılır ve sistemin tepkisi ile suyun artışına göre sıklığın değişmesi izlenir; kuru camda kendi kendine çalışmadığı da doğrulanır", "verdict": "sula-ve-izle", "correct": true, "explain": "Doğrulama iki yönlüdür ve ikisi de yapılmadan iş bitmez. Birinci yön tepki vermesidir: silecek kolu otomatik konuma alınır, sensörün baktığı bölgeye — iç dikiz aynasının hemen üstündeki alan — dışarıdan su püskürtülür ve sileceğin çalışması beklenir. Su artırıldığında silme sıklığının artması, sistemin yalnız açık-kapalı değil kademeli çalıştığını gösterir. İkinci yön ise tepki VERMEMESİDİR: cam kurulanır ve bir süre beklenir; sistem kuru camda kendiliğinden çalışmamalıdır. Bu ikinci deneme çoğu zaman atlanır ama asıl şikâyet buradan gelir — kabarcıklı bir katman camı sürekli ıslak sandırır ve müşteri 'durup dururken çalışıyor' diye döner. Üçüncü kontrol hassasiyet kademesidir: kademe değiştirildiğinde davranışın değişmesi, kolun ve sinyal yolunun sağlam olduğunu gösterir. Son olarak müşteriye iki şey söylenir: hassasiyet kademesinin nerede olduğu ve camın sensör bölgesinin temiz tutulmasının önemi — o bölgeye etiket, telefon tutucusu ya da güneşlik yapıştırılmaz." },
+          { "label": "Kuru camda çalışması yeterlidir", "verdict": "kuru", "explain": "Kuru camda çalışması tam olarak istenmeyen şeydir." },
+          { "label": "Yağmuru beklemek gerekir", "verdict": "bekle", "explain": "Su püskürterek denemek yeterlidir ve teslim geciktirilmez." },
+          { "label": "Ölçüm yapıldıysa deneme gereksizdir", "verdict": "olcum", "explain": "Sensörün çıkışı multimetreyle okunamaz; işlevsel deneme şarttır." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Aşama 3 bitti. Aşama 4 kabine giriyor: elektrikli koltuk ve sunroof — ikisi de airbag sınırının en yakın komşuları."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Yağmur sensörü neyi ölçer?",
+        "a": "isik-olcer",
+        "options": [
+          { "verdict": "isik-olcer", "label": "Işığı: cama gönderdiği ışığın ne kadarının geri döndüğünü ölçer; cam ıslanınca geri dönen azalır", "explain": "İçinde bir ışık kaynağı ve bir alıcı vardır; cam kuruyken ışık dış yüzeyden yansıyıp döner, ıslakken damlalar ışığın bir kısmının kaçmasına yol açar. Bunun üç sonucu vardır: sensör cama tam yapışık olmalıdır (hava boşluğu ölçümü bozar), yalnız kendi baktığı küçük alanı görür, ve cam üzerindeki kir, cila ya da etiket ölçümü yanıltır." },
+          { "verdict": "iletkenlik", "label": "Suyun iletkenliğini ölçer", "explain": "Ölçüm optiktir." },
+          { "verdict": "nem", "label": "Havanın nemini ölçer", "explain": "Nem sensörü ayrı bir parçadır." },
+          { "verdict": "ses", "label": "Damlaların sesini dinler", "explain": "Yaygın yöntem optiktir." }
+        ]
+      },
+      {
+        "q": "Cam değişiminden sonra silecekler kuru camda kendi kendine çalışıyor. İlk şüphe nedir?",
+        "a": "oturus",
+        "options": [
+          { "verdict": "oturus", "label": "Sensörün oturuşu: hava kabarcığı, kirli yüzey, eski/yanlış optik katman ya da yağmur sensörsüz cam takılmış olması", "explain": "Sensör cam değişimi sırasında sökülüp yeni cama takılmıştır; şikâyetlerin neredeyse tamamı bu işlemden doğar. Kabarcıklı katman sensöre sürekli 'ıslak' okutur. Bazı camlarda sensör bölgesi özel hazırlanmıştır; yağmur sensörsüz bir cam takıldıysa hiçbir ayar bunu düzeltmez ve çözüm doğru camdır. Sensörün kendisi en son şüphelidir." },
+          { "verdict": "sensor-degistir", "label": "Sensör bozulmuştur", "explain": "Önce oturuş kontrol edilir." },
+          { "verdict": "motor", "label": "Silecek motoru arızalıdır", "explain": "Motor komutu uyguluyor." },
+          { "verdict": "modul", "label": "Modül yenilenir", "explain": "En pahalı halkayla başlanmaz." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 4'teki 12,4 V ve 0,1 V SENARYO okumalarıdır; istenen FARKTIR (12,3 V) ve ders bir besleme gerilimi sınırı vermiyor.",
+    "sourceRequired": "Optik katman ürünü ve tipi, yüzey temizleyici cinsi, bekleme süresi, sensör besleme gerilimi ve hassasiyet kademelerinin karşılıkları bilinçle VERİLMEDİ; hepsi araca ve ürüne özgüdür.",
+    "kapsam": "Sensörün veri çıkışının okunması teşhis cihazı ister ve KAPSAM DIŞIDIR; ders işlevsel denemeyi öğretiyor. Cam değişiminin kendisi ayrı bir uzmanlıktır ve bu projede yok — ders yalnız cam değişimi SONRASI çıkan sensör şikâyetlerini ele alıyor. Aynı kaide üzerinde bulunabilen kamera ve ışık sensörü birimleri bu derste işlenmiyor.",
+    "reviewedByMechanic": false
+  }
+}

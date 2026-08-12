@@ -1,0 +1,176 @@
+{
+  "id": "aksesuar.kamera-secimi",
+  "area": "aksesuar-ses",
+  "stage": 6,
+  "title": "Kamera Seçimi: Çözünürlük, Gece Görüşü, Park Modu ve Depolama",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 30,
+  "prerequisites": ["aksesuar.kamera-neden"],
+  "learningGoals": [
+    "Cihaz seçiminde hangi özelliğin işe yaradığını, hangisinin yalnız kutuda yazdığını ayırt etmek",
+    "Depolama süresinin çözünürlükle nasıl değiştiğini görmek",
+    "Park modu olan ve olmayan sistemin montajını baştan farklı planlamak"
+  ],
+
+  "safety": [
+    { "rule": "Seçilen cihazın park modu varsa besleme planı montajdan ÖNCE yapılır", "why": "Park modu aracın kapalıyken de akü çekmesi demektir; besleme noktası ve akü koruması sonradan eklenen bir ayrıntı değil, seçimin bir parçasıdır", "blocksStart": true },
+    { "rule": "Cihazın ve kablonun yerleşimi hava yastığı bölgelerinin dışında planlanır", "why": "Ön cam üstü, direkler ve tavan hava yastığı bulunabilen bölgelerdir; oraya konan bir cihaz ya da kablo, yastık şiştiğinde kabin içine fırlar", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true },
+    { "id": "tool.multimetre", "label": "Multimetre", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Müşteri iki cihaz arasında kalmış ve sana soruyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-kamera",
+        "question": "Cihaz seçiminde ilk sorulacak soru nedir?",
+        "options": [
+          { "label": "Araç nerede ve nasıl kullanılıyor: şehir içi mi, uzun yol mu, gece mi, çoğunlukla sokakta mı park ediliyor — özellik listesi bu cevaba göre daralır", "verdict": "kullanim", "correct": true, "explain": "Cihaz seçimi kutunun üstündeki listeyle değil, aracın hayatıyla başlar. Dört soru işi bitirir. Birincisi: araç nerede park ediliyor? Kapalı otoparkta duran bir araçla sokakta duran bir araç aynı şeye ihtiyaç duymaz — sokakta duran araç park modunu neredeyse zorunlu kılar, çünkü çizilme ve çarpıp kaçma park hâlinde oluyor. İkincisi: ne kadar yol yapılıyor? Günde birkaç saat yol yapan biri kartı hızlı doldurur ve depolama planı buna göre kurulur. Üçüncüsü: sürüşün ne kadarı gece? Gece ağırlıklı kullanımda cihazın az ışık performansı, çözünürlük rakamından daha önemlidir. Dördüncüsü: aracın kendi donanımı nedir? Kalın renkli cam, ısıtmalı ön cam, cam üstünde geniş bir sensör kutusu ya da mevcut bir sürüş destek kamerası varsa yerleşim daralır. Bu dört cevap alınmadan verilen her öneri tahmindir. Usta olmanın bu işteki ilk farkı budur: satıcı özellik sayar, usta kullanım sorar." },
+          { "label": "Hangi cihazın çözünürlüğü yüksekse o alınır", "verdict": "cozunurluk", "explain": "Çözünürlük tek başına doğru cihazı seçtirmez." },
+          { "label": "Hangisi ucuzsa o alınır", "verdict": "ucuz", "explain": "Fiyat kullanım ihtiyacından sonra gelir." },
+          { "label": "Marka tanınırlığı belirler", "verdict": "marka", "explain": "Kullanım koşulu belirler; marka sonra gelir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Satıcı özellik sayar, usta kullanım sorar. Dört soru: nerede park ediyor, ne kadar yol, gece ne kadar, aracın donanımı ne."
+    },
+    {
+      "id": 2,
+      "instruction": "Aynı cihazda iki kart denedin: 32 GB kartla 160 dakika, 128 GB kartla 640 dakika kayıt tutuyor. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.on-kamera",
+        "unit": "dakika",
+        "acceptRange": [479, 481]
+      },
+      "camera": "aksesuar",
+      "hint": "640 eksi 160.",
+      "teachingNote": "480 dakikalık bu fark, kayıt süresinin kart boyutuyla doğru orantılı olduğunu gösteriyor — ama asıl öğretilecek şey bu değil. Kayıt süresini üç şey birlikte belirler: kartın kapasitesi, cihazın saniyede ürettiği veri miktarı ve kaç kameranın aynı anda yazdığı. Çözünürlük yükseldikçe saniyede yazılan veri artar, yani aynı kart daha kısa süre tutar; ön ve arka kamera birlikte yazıyorsa süre yine düşer. Bu yüzden 'en yüksek çözünürlüğü seç' tavsiyesi tek başına yanlıştır: yüksek çözünürlükle küçük kart, bir olay yaşandığında kaydın çoktan üzerine yazılmış olması demektir. Doğru düşünme sırası şudur: müşterinin günde kaç saat yol yaptığını sor, kaydın kaç gün geriye gitmesini istediğini sor, sonra çözünürlük ile kart boyutunu birlikte seç. Bir kartın kaç saat tuttuğu cihaza, çözünürlüğe ve kamera sayısına göre değişir; bu ders bir tablo vermiyor, cihazın kendi belgesindeki değer kullanılır. Kart tipi konusunda tek kural vardır ve atlanmaz: araç kamerası sürekli üzerine yazılan bir cihazdır, bu yükü kaldıracak dayanıklılıkta bir kart kullanılır ve telefondan çıkma rastgele bir kart takılmaz."
+    },
+    {
+      "id": 3,
+      "instruction": "Müşteri 'en yüksek çözünürlüğü alalım, ne olur ne olmaz' diyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.arka-kamera",
+        "question": "Ne cevap verilir?",
+        "options": [
+          { "label": "Yüksek çözünürlük ayrıntı verir ama aynı kartta daha kısa süre kayıt tutar ve gece görüntüsünü tek başına düzeltmez; çözünürlük kart boyutuyla ve gece performansıyla birlikte seçilir", "verdict": "dengeli", "correct": true, "explain": "Çözünürlük, kamera işinde en çok satılan ve en yanlış anlaşılan rakamdır. Ne işe yarar: gündüz, iyi ışıkta, uzaktaki bir plakanın okunmasına yarar — ve bu gerçek bir faydadır, çünkü çarpıp kaçan aracın plakası çoğu olayın tek işe yarar bilgisidir. Neye yaramaz: gece görüntüsünü kurtarmaya yaramaz, çünkü orada sorun ayrıntı değil ışıktır; kadrajın dışındaki olayı görmeye yaramaz, onu kapsama açısı belirler; ve kaydın saklanmasına hiç yaramaz — tam tersine zorlaştırır, çünkü daha çok veri yazar ve kart daha çabuk dolar. Doğru yaklaşım bir denge kurmaktır: plaka okunacak kadar çözünürlük, olayı kapsayacak kadar açı, gece iş görecek kadar ışık performansı ve kaydın geriye gitmesini sağlayacak kadar kart. Müşteriye söylenecek cümle şudur: en yüksek rakam en iyi kayıt demek değil; işe yarayan kayıt, olay olduğunda hâlâ kartta duran ve içindeki plakanın okunduğu kayıttır. Hangi cihazın hangi koşulda ne verdiği ürüne özgüdür; bu ders bir cihaz önermiyor." },
+          { "label": "Evet, en yüksek çözünürlük her zaman en iyisidir", "verdict": "en-yuksek", "explain": "Kart süresi kısalır ve gece sorunu çözülmez." },
+          { "label": "Çözünürlük hiç önemli değildir", "verdict": "onemsiz", "explain": "Plaka okunurluğu için önemlidir." },
+          { "label": "Çözünürlük kayıt süresini etkilemez", "verdict": "etkilemez", "explain": "Saniyede yazılan veri arttıkça kart daha çabuk dolar." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "İşe yarayan kayıt: olay olduğunda hâlâ kartta duran ve plakası okunan kayıt."
+    },
+    {
+      "id": 4,
+      "instruction": "Müşteri park hâlinde de kayıt istiyor. Cihazın park modu var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sigorta-kutusu-aksesuar",
+        "question": "Park modu seçimi montajı nasıl değiştirir?",
+        "options": [
+          { "label": "Cihazın araç kapalıyken de beslenmesi gerekir; bu yüzden sürekli beslemeli bir kaynak ve akü koruması gerekir — besleme planı seçimle birlikte yapılır, sonradan eklenmez", "verdict": "surekli-besleme", "correct": true, "explain": "Park modu, cihaz seçiminin montajı değiştirdiği tek özelliktir ve bu yüzden ayrı düşünülür. Park modu olmayan bir sistemde besleme basittir: kontakla birlikte gelip giden bir kaynak yeter, araç kapanınca cihaz kapanır ve akü hiç etkilenmez. Park modu olan bir sistemde ise cihazın araç kapalıyken de bir şeyler yapması gerekir — ya kayıt, ya hareket veya sarsıntı beklemek, ya da düşük tüketimli bir bekleme durumu. Bunun için sürekli beslemeli bir kaynak lazımdır ve tehlike buradadır: sürekli besleme, araç dururken akünün boşalması demektir. Bu yüzden park modlu her montaj bir koruma ister — akü gerilimi belli bir seviyenin altına indiğinde ya da belli bir süre dolduğunda cihazın beslemesini kesen bir düzenek. Bu koruma cihazın kendi ayarında olabilir, ayrı bir kesici parçada olabilir ya da cihazla birlikte gelen özel bir besleme kablosunda olabilir. Sırası önemlidir: önce park modu isteniyor mu diye sorulur, sonra besleme kaynağı ve koruma seçilir, sonra montaja başlanır. Tersi sırayla çalışan usta, kabloyu çekip bitirdikten sonra sürekli besleme aramak için her şeyi yeniden söker. Kesme eşiği ve süre değerleri cihaz ve araç bağımlıdır; bu aşamanın beşinci dersi bunu ayrıntısıyla işliyor." },
+          { "label": "Hiçbir şey değişmez, aynı montaj yapılır", "verdict": "degismez", "explain": "Sürekli besleme ve akü koruması gerekir." },
+          { "label": "Yalnız daha kalın kablo çekilir", "verdict": "kablo", "explain": "Sorun kablo kalınlığı değil, besleme kaynağı ve koruma." },
+          { "label": "İkinci bir akü takılır", "verdict": "ikinci-aku", "explain": "Standart bir kamera montajı için gerekmez." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Park modu, seçimin montajı değiştirdiği tek özellik. Önce sor, sonra kablo çek."
+    },
+    {
+      "id": 5,
+      "instruction": "İki sistem karşılaştırıyorsun: biri tek sistem (arka kamera ön üniteye bağlı), diğeri iki ayrı bağımsız cihaz.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kamera-kablosu",
+        "question": "Tek sistem ile iki ayrı cihazın farkı nedir?",
+        "options": [
+          { "label": "Tek sistemde arka kamera ön üniteye bağlıdır: tek kart, tek saat, tek besleme ve olaylar birbiriyle eşleşir; iki ayrı cihazda iki besleme, iki kart ve iki ayrı saat olur", "verdict": "tek-sistem", "correct": true, "explain": "Bu, montajın hem süresini hem kalitesini belirleyen bir tercihtir. Tek sistemde arka kamera bir kablo ile ön üniteye bağlanır; kayıt tek kartta toplanır, saat tektir ve bir olay yaşandığında ön ile arka görüntü aynı zaman etiketiyle eşleşir. Bu eşleşme kanıt açısından önemlidir: arkadan çarpılan bir araçta ön kameranın o anki görüntüsü aracın nerede ve nasıl gittiğini gösterir ve iki kayıt birbirini destekler. Besleme de tektir, yani araca tek bir noktadan bağlanılır. Bedeli, aracın boyunca bir kablo çekmektir ve işin uzun süren kısmı budur. İki ayrı cihaz seçeneğinde ise arkaya ikinci bir bağımsız kamera konur; kablo çekme kısalır ama iki ayrı besleme noktası, iki kart, iki ayrı saat ve iki ayrı ayar çıkar. En büyük sorun saatlerdir — iki cihazın saati kayarsa iki kaydın hangi anda çakıştığını kimse söyleyemez. Sanayide standart tercih tek sistemdir; iki ayrı cihaz genelde arkaya kablo çekmenin mümkün olmadığı ya da müşterinin bütçesinin ayrı olduğu durumlarda kullanılır. Not: her iki durumda da kablo güzergâhı aynı kurallara tabidir ve bir sonraki iki ders bu güzergâhı öğretiyor." },
+          { "label": "Fark yoktur", "verdict": "fark-yok", "explain": "Kart, saat ve besleme sayısı değişir." },
+          { "label": "İki ayrı cihaz her zaman daha iyidir", "verdict": "iki-cihaz", "explain": "Kayıtların zaman eşleşmesi kaybolur." },
+          { "label": "Tek sistemde arka kamera kaydetmez", "verdict": "kaydetmez", "explain": "Kaydeder; kayıt ön ünitenin kartına yazılır." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "İki ayrı cihazın en sinsi sorunu iki ayrı saat: kayıtlar birbirini desteklemez."
+    },
+    {
+      "id": 6,
+      "instruction": "Müşteri 'ekranlı mı alalım, ekransız mı' diye soruyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.dis-dikiz-aynasi",
+        "question": "Ekranlı ve ekransız cihazın farkı nedir?",
+        "options": [
+          { "label": "Ekranlı cihaz kontrol kolaylığı verir ama daha büyüktür ve gece camda yansıma yapabilir; ekransız cihaz küçüktür, aynanın arkasına gizlenir ve telefondan yönetilir", "verdict": "ekran-tercihi", "correct": true, "explain": "İkisi de doğru seçim olabilir; hangi koşulda hangisinin doğru olduğunu bilmek ustanın işidir. Ekranlı cihazın avantajı ortadadır: kayıt yerinde izlenir, ayarlar cihaz üzerinden yapılır, kart takılı mı ve kayıt dönüyor mu bir bakışta görülür — telefonla arası iyi olmayan bir müşteri için bu belirleyicidir. Dezavantajları da bellidir: cihaz daha büyüktür, dikiz aynasının yanında daha çok yer kaplar ve gece ekranın kendi ışığı ön camda yansıyıp sürücüyü rahatsız edebilir; iyi cihazlarda ekran belli süre sonra kendiliğinden söner ve bu ayar teslimde mutlaka yapılır. Ekransız cihaz ise küçüktür, çoğu zaman aynanın arkasına tamamen gizlenir, ayarları ve kayıt izleme telefon üzerinden yapılır. Bunun da bir bedeli vardır: müşteri telefon bağlantısını kurmayı bilmiyorsa cihazı hiç kontrol etmez ve kartın bozulduğunu aylarca fark etmez. Bu yüzden ekransız cihaz satan usta, teslimde telefon bağlantısını müşteriyle birlikte kurar ve bir kere kayıt izletir. Bu, montajın parçasıdır ve bu aşamanın son dersi bunu ayrıntısıyla işliyor." },
+          { "label": "Ekranlı cihaz her zaman daha iyidir", "verdict": "ekranli", "explain": "Yansıma ve boyut dezavantajı vardır." },
+          { "label": "Ekransız cihaz kaydı göstermez", "verdict": "gostermez", "explain": "Telefon üzerinden gösterir." },
+          { "label": "Fark yalnız fiyattır", "verdict": "fiyat", "explain": "Kullanım, boyut ve gece yansıması da değişir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Ekransız cihaz satan usta, teslimde telefon bağlantısını müşteriyle birlikte kurar. Kurmazsa müşteri cihazı hiç kontrol etmez."
+    },
+    {
+      "id": 7,
+      "instruction": "Cihaz seçildi. Montaja başlamadan önce son kontrol.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-cam",
+        "question": "Montaj öncesi hangi üç şey netleşmiş olmalı?",
+        "options": [
+          { "label": "Cihazın ön camdaki yeri (görüşü kapatmayan, silecek alanının içinde), besleme kaynağı ve park modu kararı, kartın takılı ve biçimlendirilmiş olması", "verdict": "yer-besleme-kart", "correct": true, "explain": "Bu üç madde, montajın sonradan sökülmesini engelleyen kontrol listesidir. Birincisi yerdir: cihaz ön camda sürücünün görüşünü kapatmayan bir bölgeye, silecek süpürme alanının içine ve mümkünse dikiz aynasının arkasına konumlanır; ayrıca camın üst kenarındaki sensör kutusu, ısıtmalı cam bölgeleri ve varsa fabrika sürüş destek kamerası bu alanı daraltır, bu yüzden yer camda önceden belirlenir. İkincisi beslemedir: park modu olacak mı, olacaksa sürekli besleme nereden alınacak ve koruma nasıl kurulacak — bu karar kablo çekilmeden önce verilir. Üçüncüsü karttır: kart cihaza takılır, cihazın kendi menüsünden biçimlendirilir ve bir deneme kaydı alınıp izlenir; kartın bozuk olduğu, montaj bittikten sonra değil, başlamadan önce anlaşılır. Dördüncü ve yazılı olmayan madde: cihazın kutusundan çıkan bütün parçalar sayılır — yapıştırıcı taban, arka kamera kablosu, besleme kablosu, kablo gizleme aparatları. Eksik bir parça montajın ortasında ortaya çıkarsa araç yarım sökülmüş hâlde bekler. Usta işini bir kere söker; acemi iki kere." },
+          { "label": "Yalnız cihazın çalıştığı", "verdict": "calisiyor", "explain": "Yer ve besleme kararı da önceden verilir." },
+          { "label": "Yalnız fiyatın onaylandığı", "verdict": "fiyat", "explain": "Teknik üç madde ayrıca netleşir." },
+          { "label": "Hiçbiri; montaj sırasında karar verilir", "verdict": "sirasinda", "explain": "Sonradan verilen karar aracı ikinci kez söktürür." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Usta işini bir kere söker. Sırada ön cam montajı: konum, kablo gizleme ve besleme."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Müşteri en yüksek çözünürlüklü cihazı istiyor. Ne söylenir?",
+        "a": "dengeli",
+        "options": [
+          { "verdict": "dengeli", "label": "Yüksek çözünürlük gündüz plaka okunurluğunu artırır ama aynı kartta daha kısa süre kayıt tutar ve geceyi tek başına düzeltmez", "explain": "Gece sorunu ayrıntı değil ışıktır; kadrajın dışındaki olayı da açı belirler. Yüksek çözünürlük saniyede daha çok veri yazar, kart daha çabuk dolar ve olay yaşandığında kayıt çoktan silinmiş olabilir. Çözünürlük, kart boyutu ve gece performansı birlikte seçilir." },
+          { "verdict": "en-yuksek", "label": "En yüksek çözünürlük her zaman en iyisidir", "explain": "Kart süresi kısalır." },
+          { "verdict": "onemsiz", "label": "Çözünürlük önemsizdir", "explain": "Plaka okunurluğu için önemlidir." },
+          { "verdict": "etkilemez", "label": "Kayıt süresini etkilemez", "explain": "Daha çok veri, daha çabuk dolan kart." }
+        ]
+      },
+      {
+        "q": "Park modu isteniyor. Bu montajı nasıl değiştirir?",
+        "a": "surekli-besleme",
+        "options": [
+          { "verdict": "surekli-besleme", "label": "Sürekli beslemeli bir kaynak ve akü koruması gerekir; besleme planı kablo çekilmeden önce yapılır", "explain": "Park modu araç kapalıyken de tüketim demektir ve korumasız bırakılırsa araç birkaç gün durunca akü biter. Koruma cihazın ayarında, ayrı bir kesicide ya da özel besleme kablosunda olabilir. Bu karar montajın başında verilir; sonradan verilirse araç ikinci kez sökülür." },
+          { "verdict": "degismez", "label": "Hiçbir şey değişmez", "explain": "Besleme kaynağı ve koruma değişir." },
+          { "verdict": "kablo", "label": "Yalnız daha kalın kablo çekilir", "explain": "Sorun kablo kalınlığı değil." },
+          { "verdict": "ikinci-aku", "label": "İkinci akü takılır", "explain": "Standart montajda gerekmez." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2'deki 160 ve 640 dakika SENARYO okumalarıdır; istenen FARKTIR (480 dakika) ve ders hiçbir cihaz için kart-süre tablosu vermiyor.",
+    "sourceRequired": "Cihaz modelleri, saniyede yazılan veri miktarı, kart dayanıklılık sınıfı, park modu kesme eşiği ve süresi ve gece performans değerleri bilinçle VERİLMEDİ; hepsi ürüne ve araca özgüdür, cihazın kendi belgesinden okunur.",
+    "kapsam": "Marka karşılaştırması ve ürün önerisi KAPSAM DIŞIDIR. Hava yastığı bölgelerine müdahale ve fabrika sürüş destek kameralarının kalibrasyonu kapsam dışı — ders yalnız bu bölgelerin sınır olduğunu öğretiyor.",
+    "kaynak": "Bu aşama MEB çerçeve programında YOKTUR; proje kararıyla eklendi.",
+    "reviewedByMechanic": false
+  }
+}

@@ -1,0 +1,176 @@
+{
+  "id": "direksiyon.kilit-ve-kontak",
+  "area": "direksiyon",
+  "stage": 5,
+  "title": "Direksiyon Kilidi ve Elektronik Kilit",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 30,
+  "prerequisites": ["direksiyon.hiz-duyarli"],
+  "learningGoals": [
+    "Direksiyon kilidinin ne olduğunu ve neden var olduğunu bilmek",
+    "Mekanik kilit ile elektronik kilidin farkını ve arıza belirtilerini ayırmak",
+    "Kilit şikâyetlerinde neyin gerçek arıza, neyin normal davranış olduğunu ayırt etmek"
+  ],
+
+  "safety": [
+    { "rule": "Direksiyon kilidi araç hareket hâlindeyken denenmez", "why": "Kilidin devreye girmesi yönetimi tamamen kaybettirir; deneme yalnız duran araçta yapılır", "blocksStart": true },
+    { "rule": "Kilit mekanizması zorlanarak açılmaya çalışılmaz", "why": "Zorlama hem mili hem kilit pimini kalıcı olarak hasara uğratır ve araç kilitli kalabilir", "blocksStart": true },
+    { "rule": "Elektronik kilit birimi üzerinde çalışılırken üreticinin prosedürüne uyulur ve enerji kesilir", "why": "Bu birim immobilizer ile ilişkilidir; yanlış müdahale aracı çalışmaz hâle getirebilir", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.teshis-cihazi", "label": "Teşhis cihazı", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Direksiyon kilidini tanı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.direksiyon-mili",
+        "question": "Bu düzenek ne yapar ve neden vardır?",
+        "options": [
+          { "label": "Araç kapatıldığında bir pim direksiyon miline girip milin dönmesini engeller; amacı aracın yönlendirilerek çalınmasını zorlaştırmaktır", "verdict": "pim-mili-kilitler", "correct": true, "explain": "Direksiyon kilidi basit ama etkili bir hırsızlık caydırıcısıdır. Kontak kapatılıp anahtar çekildiğinde ya da elektronik sistemlerde araç kapatıldığında, kolonun içindeki bir pim yaylı olarak direksiyon miline doğru iter; mil üzerindeki yuvalardan birine oturduğunda mil artık dönemez. Sonuç, direksiyonun küçük bir açı içinde oynayıp sonra sert biçimde durmasıdır. Bu tasarımın amacı, aracın kontak sistemi aşılsa bile yönlendirilememesini sağlamaktır. İki önemli ayrıntı vardır. Birincisi kilit her zaman aynı noktada devreye girmez: pim bir yuva bulana kadar oturmaz, bu yüzden direksiyon bazen biraz sağa ya da sola çevrildikten sonra kilitlenir — bu normaldir. İkincisi kilit yalnız direksiyon MİLİNİ tutar, tekerlekleri değil; yani araç çekiliyorsa ya da itiliyorsa tekerlekler kilit konumundaki açıda sabit kalır ve araç o yöne gider. Bu, kilitli bir aracı hareket ettirmenin neden tehlikeli olduğunu açıklar ve çekici çağırırken söylenmesi gereken bir bilgidir." },
+          { "label": "Tekerlekleri doğrudan kilitler", "verdict": "tekerlek", "explain": "Kilit mili tutar; tekerlekler o açıda sabit kalır." },
+          { "label": "Frenleri kilitler", "verdict": "fren", "explain": "Fren ayrı bir sistem." },
+          { "label": "Yalnız eski araçlarda vardır", "verdict": "eski", "explain": "Yeni araçlarda elektronik biçimiyle sürüyor." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Kilit mili tutar, tekerlekleri değil. Kilitli araç çekilirken tekerlekler o açıda kalır — çekiciye söylenmesi gereken bilgi."
+    },
+    {
+      "id": 2,
+      "instruction": "Müşteri 'anahtar dönmüyor, direksiyon da kilitli' diyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.direksiyon-simidi",
+        "question": "İlk denenecek şey ne?",
+        "options": [
+          { "label": "Direksiyon iki yöne hafifçe oynatılırken anahtar çevrilir; pim mile yaslanmış olabilir ve baskı kalkınca serbest kalır", "verdict": "oynat-ve-cevir", "correct": true, "explain": "Bu, en sık karşılaşılan ve en kolay çözülen 'arıza'dır ve çoğu zaman arıza bile değildir. Araç park edilirken direksiyona bir kuvvet kalmışsa — örneğin tekerlekler kaldırıma dayanmış ya da araç eğimli yerde bırakılmışsa — kilit pimi mile yandan baskı yapar. Bu baskı altında pim yuvasından çıkamaz ve anahtar da dönmez, çünkü anahtar dönerken aynı pimi geri çekmesi gerekir. Çözüm zorlamak değil, baskıyı kaldırmaktır: direksiyon iki yöne HAFİFÇE oynatılırken anahtar çevrilir; pim bir an rahatladığında serbest kalır ve kontak döner. Zorlamak ise en pahalı hatadır — anahtar kırılabilir, kilit silindiri hasar görebilir ya da pim mile sıkışıp araç tamamen kilitli kalabilir. Bu bilgi müşteriye telefonda da anlatılabilir ve çoğu zaman aracın servise gelmesine bile gerek kalmaz. Aynı durum tekrarlıyorsa, sürücüye park ederken direksiyonu uçtan biraz geri alması ve tekerleği kaldırıma dayamamak önerilir; ayrıca kilit mekanizmasının kendisi de aşınmış olabilir ve bu ayrıca değerlendirilir." },
+          { "label": "Anahtar zorlanarak çevrilir", "verdict": "zorla", "explain": "Anahtar kırılabilir, silindir ve pim hasar görür." },
+          { "label": "Kolon komple sökülür", "verdict": "sok", "explain": "En basit ve ücretsiz deneme önce yapılır." },
+          { "label": "Akü sökülür", "verdict": "aku", "explain": "Mekanik kilitte aküyle ilgisi yok." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Zorlamak değil, baskıyı kaldırmak. Bu bilgi çoğu zaman aracın servise gelmesini bile gereksiz kılıyor."
+    },
+    {
+      "id": 3,
+      "instruction": "Kilit pimi ile mildeki yuvanın oturma derinliğini iki araçta ölçtün: sağlam olanda 6,2 mm, şikâyetli olanda 4,1 mm. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.direksiyon-mili",
+        "unit": "mm",
+        "acceptRange": [2.0, 2.2]
+      },
+      "camera": "direksiyon",
+      "hint": "6,2 eksi 4,1.",
+      "teachingNote": "2,1 mm'lik bu eksik oturma, kilidin tam kavramadığını gösteriyor ve iki yönde de sorun üretiyor. Az oturan bir pim, kilit görevini tam yapamaz — direksiyon zorlandığında atlayabilir. Aynı zamanda yuvadan çıkarken de sıkışır ve 'anahtar dönmüyor' şikâyetini üretir. Eksik oturmanın sebebi genellikle aşınmadır: pim ya da yuva kenarları yıllar içinde yuvarlanır. Bu, güvenlikle ilgili bir bulgudur ve kozmetik sayılmaz; aşınmış bir kilit hem işlevini yitirir hem de bir gün tamamen sıkışır. Oturma derinliği değerleri araca özgüdür ve bu ders bir sınır vermiyor; ölçülen şey iki durumun karşılaştırılması."
+    },
+    {
+      "id": 4,
+      "instruction": "Yeni bir araçta anahtar yok, düğmeyle çalışıyor. Direksiyon yine de kilitleniyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.eps-kontrol-unitesi",
+        "question": "Elektronik kilit nasıl çalışır?",
+        "options": [
+          { "label": "Kilidi bir elektrik aktüatörü hareket ettirir; sistem, anahtarın doğrulanması ve araç durumu uygun olduğunda kilidi açar", "verdict": "aktuator-ve-dogrulama", "correct": true, "explain": "Anahtarsız sistemlerde mekanik silindir yoktur ama kilit fikri korunmuştur; yalnız pimi çeviren şey artık anahtar değil, bir elektrik aktüatörüdür. Sıra şöyle işler: araca girildiğinde sistem anahtarı ya da telefonu doğrular, sürücü çalıştırma düğmesine bastığında ilgili modül kilidin açılması için komut verir, aktüatör pimi geri çeker ve sistem pimin gerçekten çekildiğini bir konum sinyaliyle DOĞRULAR. Bu doğrulama kritiktir: sistem pimin çekildiğinden emin olmadan motoru çalıştırmaz, çünkü kilitli bir direksiyonla yola çıkmak kabul edilemez. Araç kapatıldığında ise tersi olur; birçok araçta kilit yalnız kapı açıldığında ya da belirli koşullar sağlandığında devreye girer. Bu yapının teşhisteki sonucu şudur: 'araç çalışmıyor' şikâyetinin sebebi motor ya da yakıt tarafında değil, açılmayan bir direksiyon kilidi olabilir ve bu, teşhis cihazında kendi koduyla görünür. Ayrıca birim immobilizer sistemiyle ilişkilidir; bu yüzden değişimi çoğu zaman kodlama gerektirir ve rastgele bir parça takılamaz." },
+          { "label": "Kilit tamamen kaldırılmıştır", "verdict": "kaldirildi", "explain": "Kilit korunur; yalnız hareket ettiren eleman değişmiştir." },
+          { "label": "Yazılımla direksiyon dondurulur", "verdict": "yazilim", "explain": "Fiziksel bir pim vardır; yazılım yalnız komut verir." },
+          { "label": "EPS motoru direksiyonu tutar", "verdict": "eps", "explain": "Kilit ayrı bir mekanik pimdir." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "'Araç çalışmıyor' şikâyetinin sebebi açılmayan bir direksiyon kilidi olabilir ve kendi koduyla görünür."
+    },
+    {
+      "id": 5,
+      "instruction": "Araç çalışmıyor ve panelde direksiyon kilidiyle ilgili bir uyarı var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.eps-kontrol-unitesi",
+        "question": "Nasıl yaklaşılır?",
+        "options": [
+          { "label": "Kodlar okunur, kilit biriminin beslemesi ve konum sinyali kontrol edilir, mekanik sıkışma ihtimali için direksiyona baskı olup olmadığına bakılır", "verdict": "kod-besleme-mekanik", "correct": true, "explain": "Elektronik kilit arızası üç katmanda olabilir ve üçü de sırayla elenir. Birinci katman mekaniktir: pim mile baskı altında sıkışmış olabilir — tıpkı anahtarlı sistemlerdeki gibi. Direksiyon hafifçe oynatılırken çalıştırma denenir; çoğu araç bunu zaten sürücüye mesajla söyler. İkinci katman elektriktir: aktüatörün beslemesi, sigortası ve şase bağlantısı kontrol edilir; ayrıca akü zayıfsa birçok sistem bu işlemi yapmaz, çünkü aktüatör anlık akım çeker. Bu, düşük akülü araçlarda 'birden çalışmadı ve direksiyon kilitli kaldı' şikâyetinin sık görülen sebebidir ve önce akü ölçülür. Üçüncü katman sinyaldir: aktüatör hareket etse bile sistem pimin çekildiğini doğrulayan konum sinyalini almazsa çalıştırmaya izin vermez; bu durumda arıza aktüatörde değil o sinyal yolunda olabilir. Kodlar hangi katmanda olduğunu genellikle söyler. Bu birimin immobilizer ile ilişkili olması nedeniyle değişim ve kodlama üreticinin prosedürüne bağlıdır; yetki ve ekipman gerektiren bir iştir ve sınırı bilmek burada da geçerlidir." },
+          { "label": "Doğrudan kilit birimi değiştirilir", "verdict": "degistir", "explain": "Akü, besleme ve mekanik sıkışma elenmeden parça değiştirilmez." },
+          { "label": "Kilit sökülüp devre dışı bırakılır", "verdict": "devre-disi", "explain": "Güvenlik ve mevzuat açısından kabul edilemez; ayrıca sistem çalıştırmaya izin vermez." },
+          { "label": "Kod silinir, geçer", "verdict": "sil", "explain": "Sebep giderilmeden silinen kod sorunu çözmez." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Zayıf akü, 'birden çalışmadı ve direksiyon kilitli kaldı' şikâyetinin sık sebebi. Önce akü ölçülür."
+    },
+    {
+      "id": 6,
+      "instruction": "Bir usta 'kilit hep sorun çıkarıyor, iptal edelim' diyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.mil-mafsali",
+        "question": "Bu yapılabilir mi?",
+        "options": [
+          { "label": "Hayır; kilit bir güvenlik ve hırsızlık önleme donanımıdır, iptali mevzuata ve sigortaya aykırı olabilir ve elektronik sistemlerde araç zaten çalışmaz", "verdict": "iptal-edilmez", "correct": true, "explain": "Bu talep kısa vadeli bir kolaylık gibi görünür ama üç ayrı duvara çarpar. Birincisi güvenliktir: kilit düzeneği kolonun bir parçasıdır ve üzerinde yapılan kaba müdahaleler kolonun çarpışma davranışını bozabilir — bu bölge kazada kontrollü biçimde davranacak şekilde tasarlanmıştır. İkincisi mevzuat ve sigortadır: hırsızlık önleme donanımının devre dışı bırakılması birçok yerde araç muayenesinde ve sigorta kapsamında sorun yaratır; bir hırsızlık olayında sorumluluk doğurabilir. Üçüncüsü teknik imkânsızlıktır: elektronik kilitli araçlarda sistem pimin çekildiğini doğrulamadan çalıştırmaya izin vermez, yani birimi çıkarmak aracı tamamen durdurur. Doğru yaklaşım arızayı gidermektir — çoğu 'kilit sorunu' aslında park alışkanlığı, zayıf akü ya da aşınmış bir pimden ibarettir ve hepsinin kendi çözümü vardır. Bu, alanın ilk dersinde konan ilkenin bir başka örneğidir: bazı işleri yapmamak da mesleğin parçasıdır ve müşteriye 'bunu yapmam, sebebi şu' demek dürüstlüktür." },
+          { "label": "Evet, en pratik çözüm budur", "verdict": "evet", "explain": "Güvenlik, mevzuat ve teknik açıdan uygun değil." },
+          { "label": "Yalnız eski araçlarda yapılabilir", "verdict": "eski", "explain": "Yaş fark etmez; hırsızlık önleme donanımı iptal edilmez." },
+          { "label": "Müşteri isterse yapılır", "verdict": "musteri-isterse", "explain": "Talep, güvenlik ve mevzuat sınırını kaldırmaz." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Bazı işleri yapmamak da mesleğin parçası. 'Bunu yapmam, sebebi şu' demek dürüstlüktür."
+    },
+    {
+      "id": 7,
+      "instruction": "Kilitle ilgili bir iş tamamlandı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.direksiyon-simidi",
+        "question": "Nasıl doğrulanır?",
+        "options": [
+          { "label": "Araç birkaç kez kapatılıp açılarak kilidin girip çıktığı denenir, farklı direksiyon konumlarında tekrarlanır, kodlar temiz okunur ve varsa öğrenme yapılır", "verdict": "tekrarli-deneme", "correct": true, "explain": "Kilit arızaları aralıklı olma eğilimindedir; tek bir başarılı deneme yeterli değildir. Doğrulama tekrarla yapılır: araç birkaç kez kapatılıp açılır ve her seferinde kilidin devreye girdiği, sonra sorunsuz açıldığı görülür. Bu deneme farklı direksiyon konumlarında tekrarlanır — çünkü pim yalnız belirli yuvalara oturur ve arıza bazı konumlarda kendini gösterip bazılarında göstermeyebilir; özellikle direksiyon bir miktar çevrilmiş hâlde denenmelidir. Elektronik kilitte ayrıca kodlar okunur ve yeni bir kayıt olmadığı görülür; birim değiştiyse üreticinin öngördüğü kodlama ve öğrenme yapılır ve tamamlandığı doğrulanır. Son olarak sürücüyle konuşulur: park ederken tekerleği kaldırıma dayamamak ve direksiyonu uç konumdan biraz geri almak, aynı şikâyetin tekrarını büyük ölçüde önler. Yapılan iş ve verilen tavsiye kaydedilir. Araç, kilidi bir kez bile takıldığı hâlde teslim edilmez — çünkü bir sonraki takılma yol kenarında olur." },
+          { "label": "Bir kez çalıştıysa yeterlidir", "verdict": "bir-kez", "explain": "Kilit arızaları aralıklıdır; farklı konumlarda tekrarlanır." },
+          { "label": "Yalnız düz konumda denenir", "verdict": "duz", "explain": "Pim farklı yuvalara oturur; çevrilmiş konumlarda da denenir." },
+          { "label": "Sürücüye bilgi vermeye gerek yok", "verdict": "bilgi-yok", "explain": "Park alışkanlığı tekrarı büyük ölçüde önler." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Bir kez bile takılan kilitle araç teslim edilmez — bir sonraki takılma yol kenarında olur."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "'Anahtar dönmüyor, direksiyon kilitli' şikâyetinde ilk ne denenir?",
+        "a": "oynat-ve-cevir",
+        "options": [
+          { "verdict": "oynat-ve-cevir", "label": "Direksiyon iki yöne hafifçe oynatılırken anahtar çevrilir", "explain": "Araç park edilirken direksiyona kuvvet kalmışsa — tekerlek kaldırıma dayanmış ya da araç eğimdeyse — kilit pimi mile yandan baskı yapar ve yuvasından çıkamaz; anahtar da dönmez çünkü aynı pimi geri çekmesi gerekir. Çözüm zorlamak değil baskıyı kaldırmaktır. Zorlamak anahtarı kırar, silindiri ve pimi hasara uğratır. Tekrarlıyorsa park alışkanlığı önerilir ve pim aşınması ayrıca değerlendirilir." },
+          { "verdict": "zorla", "label": "Anahtar zorlanır", "explain": "Kırılma ve hasar riski." },
+          { "verdict": "sok", "label": "Kolon sökülür", "explain": "En basit deneme önce yapılır." },
+          { "verdict": "aku", "label": "Akü sökülür", "explain": "Mekanik kilitte ilgisi yok." }
+        ]
+      },
+      {
+        "q": "Direksiyon kilidi iptal edilebilir mi?",
+        "a": "iptal-edilmez",
+        "options": [
+          { "verdict": "iptal-edilmez", "label": "Hayır; güvenlik ve hırsızlık önleme donanımıdır, mevzuat ve sigorta açısından sorun doğurur, elektronik sistemlerde araç zaten çalışmaz", "explain": "Kolon üzerindeki kaba müdahale çarpışma davranışını bozabilir; hırsızlık önleme donanımının devre dışı bırakılması muayenede ve sigortada sorun yaratır; elektronik kilitte sistem pimin çekildiğini doğrulamadan çalıştırmaya izin vermez. Çoğu 'kilit sorunu' park alışkanlığı, zayıf akü ya da aşınmış bir pimden ibarettir ve kendi çözümü vardır." },
+          { "verdict": "evet", "label": "Evet, pratik çözümdür", "explain": "Güvenlik, mevzuat ve teknik açıdan uygun değil." },
+          { "verdict": "eski", "label": "Yalnız eski araçlarda", "explain": "Yaş fark etmez." },
+          { "verdict": "musteri-isterse", "label": "Müşteri isterse yapılır", "explain": "Talep sınırı kaldırmaz." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 6,2 mm ve 4,1 mm SENARYO okumalarıdır; istenen FARKTIR (2,1 mm) ve gösterilen şey eksik oturmanın hem kilit işlevini hem de açılmayı bozduğudur. Oturma derinliği değerleri araca özgüdür ve sınır verilmiyor.",
+    "sourceRequired": "Kilit pimi ölçüleri, aktüatör besleme değerleri, asgari akü gerilimi ve kodlama prosedürleri bilinçle VERİLMEDİ; araca ve üreticiye özgüdür. Elektronik kilit birimi immobilizer ile ilişkili olduğu için değişimi yetki ve ekipman gerektirir ve ders bunu açıkça söylüyor.",
+    "kapsam": "İmmobilizer, anahtar kodlama ve kontak silindiri onarımı kapsam dışı; ders yalnız direksiyon kilidinin işleyişini ve teşhis sırasını öğretiyor. Kilidin sökülüp yenilenmesi de kapsam dışı — birim güvenlik donanımıdır ve üretici prosedürüne bağlıdır.",
+    "reviewedByMechanic": false
+  }
+}

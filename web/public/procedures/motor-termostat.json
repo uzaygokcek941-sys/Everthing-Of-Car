@@ -1,0 +1,167 @@
+{
+  "id": "motor.termostat",
+  "area": "motor-mekanik",
+  "stage": 5,
+  "title": "Termostat Değişimi ve İki Arıza Yönünün Ayrımı",
+  "vehicleClass": "binek-arac",
+  "estimatedMinutes": 22,
+  "prerequisites": ["motor.sogutma-bakim", "temel.civata-sokme-takma"],
+  "learningGoals": [
+    "Açık kalan termostat ile kapalı kalan termostatı belirtilerden ayırmak",
+    "Termostatı doğru yönde ve hava deliği üstte olacak şekilde takmak",
+    "Değişimi tahminle değil, hortumu elleyerek doğrulamak"
+  ],
+
+  "safety": [
+    { "rule": "Sistem soğukken boşaltılır", "why": "Sıcak sistemde tapayı açmak, basınçlı ve kaynar sıvıyı doğrudan elin üzerine boşaltmaktır", "blocksStart": true },
+    { "rule": "Boşaltılan soğutucu yere ve gidere dökülmez", "why": "Etilen glikol zehirlidir ve tatlı olduğu için hayvanlar içer. Kaba alınır, lisanslı toplayıcıya verilir", "blocksStart": false },
+    { "rule": "Alüminyum gövdede cıvata zorlanmaz", "why": "Termostat gövdeleri genelde alüminyumdur ve dişleri döküm bloğa göre çok daha zayıftır; fazla tork dişi sıyırır ve iş bir cıvata işinden helicoil işine döner", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.lokma-10", "label": "10 mm lokma", "required": true },
+    { "id": "tool.circir", "label": "1/4\" cırcır kolu", "required": true },
+    { "id": "tool.kap", "label": "Soğutucu toplama kabı", "required": true },
+    { "id": "tool.raspa", "label": "Conta yüzeyi raspası", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Şikâyet: motor bir türlü ısınmıyor, gösterge hep soğuk tarafta, kalorifer ılık üflüyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.ust-hortum",
+        "question": "Bu tablo hangi arızayı gösterir?",
+        "options": [
+          { "label": "Termostat açık kalmış", "verdict": "acik-kalmis", "correct": true, "explain": "Termostat kapalıyken soğutucu radyatöre gitmez ve motor hızla çalışma sıcaklığına çıkar. Açık takılı kalırsa büyük çevrim hiç kapanmaz: soğutucu sürekli radyatörden dolaşır, motor ısınamaz. Bu arıza motoru kaynatmadığı için 'zararsız' sanılır — değildir. Soğuk çalışan motorda yakıt tam yanmaz, yanmamış yakıt karteri sulandırır, yağlama zayıflar ve aşınma artar. Ayrıca kalorifer de ısıtmaz." },
+          { "label": "Termostat kapalı kalmış", "verdict": "kapali-kalmis", "explain": "Kapalı kalan termostatta tablo tam tersidir: motor hızla kaynar, üst hortum kaynar sıcak olur, alt hortum soğuk kalır. Burada motor ısınamıyor deniyor." },
+          { "label": "Su pompası kayışı kopmuş", "verdict": "kayis", "explain": "Dolaşım tamamen durursa motor kaynar, ısınamaz hâle gelmez. Belirti ters yönde." },
+          { "label": "Soğutucu seviyesi düşük", "verdict": "seviye", "explain": "Düşük seviye ısınma ve gösterge oynaklığı yapar; motorun hiç ısınmamasını açıklamaz." }
+        ]
+      },
+      "camera": "motor-ust",
+      "teachingNote": "Termostatın iki arızası vardır ve ikisinin belirtileri birbirinin tam tersidir. Kapalı kalırsa kaynatır, açık kalırsa üşütür. 'Termostat bozuk' cümlesi tek başına bir teşhis değildir; hangi yöne bozuk olduğu söylenmelidir."
+    },
+    {
+      "id": 2,
+      "instruction": "Sistem soğuk. Radyatör alt tapasını açıp soğutucuyu kaba boşalt.",
+      "interaction": {
+        "type": "rotate",
+        "target": "part.radyator-tapasi",
+        "direction": "ccw",
+        "turns": 3,
+        "requiresGesture": true
+      },
+      "camera": "arac-alti",
+      "commonMistake": {
+        "if": "ters-yon",
+        "feedback": "Ters yöne çeviriyorsun. Sökmek için saat yönünün tersi."
+      },
+      "hint": "Genleşme deposunun kapağını da aç; üstten hava girmezse alttan akış yavaşlar.",
+      "teachingNote": "Kabı tapanın tam altına değil, biraz ileriye koy: basınç boşalırken sıvı ilk anda ileri fışkırır, dikey inmez. Küçük ayrıntı ama zemini temiz tutan şey budur."
+    },
+    {
+      "id": 3,
+      "instruction": "Termostat kapağının üç cıvatasını sök.",
+      "interaction": {
+        "type": "unscrew",
+        "target": "part.termostat-kapagi",
+        "count": 3,
+        "turns": 5,
+        "tool": "tool.lokma-10"
+      },
+      "camera": "motor-on",
+      "commonMistake": {
+        "if": "yanlis-alet",
+        "feedback": "Bu cıvatalar 10 mm. Yakın ölçüde bir lokma başı yuvarlatır ve iş sökülemeyen cıvataya döner."
+      },
+      "hint": "Cıvataları tamamen çıkarmadan önce hepsini birer tur gevşet; kapak tek noktadan zorlanmasın.",
+      "teachingNote": "Kapak çıkmıyorsa tornavidayla kaldırmaya çalışma. Alüminyum conta yüzeyine tornavida girerse orada kalıcı bir çentik açılır ve o yüzey bir daha sızdırmaz. Yapıştıysa plastik takozla yandan hafifçe vurulur."
+    },
+    {
+      "id": 4,
+      "instruction": "Yeni termostatı yuvasına yerleştiriyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.termostat",
+        "question": "Termostat hangi konumda takılır?",
+        "options": [
+          { "label": "Yaylı tarafı motora bakacak, üzerindeki küçük hava deliği en üste gelecek şekilde", "verdict": "yay-motora-delik-uste", "correct": true, "explain": "Termostatın ısıya duyarlı balmumu kapsülü yaylı taraftadır ve motordan gelen sıcak soğutucuyu okuması gerekir; ters takılırsa radyatörden dönen soğuk sıvıyı okur ve doğru zamanda açmaz. Üzerindeki iğne deliği ise hava içindir: doldurma sırasında biriken hava oradan sızarak geçer, en üste gelmezse termostatın önünde hava cebi kalır ve termostat sıvı yerine havayı ölçer." },
+          { "label": "Ters çevrilse de olur, ikisi de akışa izin verir", "verdict": "ters-olur", "explain": "Akışa izin vermesi yetmez; sorun akış değil ölçümdür. Ters termostat yanlış sıvının sıcaklığını okur ve gecikmeli açar." },
+          { "label": "Hava deliği aşağı gelmeli ki tortu birikmesin", "verdict": "delik-asagi", "explain": "Delik tortu için değil hava içindir ve hava yukarı çıkar. Aşağı bakan delik hiçbir işe yaramaz." },
+          { "label": "Contayı sıvı conta ile de destekleyerek takarım", "verdict": "silikon", "explain": "Fazla sıvı conta içeri taşar ve kopan parçalar soğutma kanallarını ya da radyatörü tıkar. Üretici sıvı conta istemiyorsa kullanılmaz." }
+        ]
+      },
+      "camera": "motor-on",
+      "teachingNote": "O küçük delik bir üretim kusuru değil, tasarımın parçasıdır. Bilmeyen usta onu 'delik açılmış' sanıp aşağı bakar takar; sonuç, yeni takılan termostatın eskisi gibi davranmasıdır."
+    },
+    {
+      "id": 5,
+      "instruction": "Kapağı takmadan önce ne yaparsın?",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.termostat-kapagi",
+        "question": "Kapağı takma hazırlığı ve sıkma şekli?",
+        "options": [
+          { "label": "Eski conta kalıntısını yüzeye zarar vermeden temizler, yeni conta takar, cıvataları elle başlatıp çapraz ve kademeli sıkarım", "verdict": "temizle-capraz", "correct": true, "explain": "Conta yüzeyinde kalan eski conta parçası, yeni contanın tam oturmasını engeller ve kaçak oradan başlar. Cıvatalar tek tek sonuna kadar sıkılırsa kapak eğri oturur ve alüminyum kapak çarpılır. Çapraz ve kademeli sıkmak yükü eşit dağıtır. Tork değeri araca özgüdür ve kılavuzdan okunur." },
+          { "label": "Contayı doğrudan takıp cıvataları sırayla sonuna kadar sıkarım", "verdict": "sirayla-sonuna", "explain": "Sırayla ve tek seferde sıkmak kapağı bir kenarından bastırır; karşı kenar açık kalır ve kapak eğilir." },
+          { "label": "İyi sızdırmasın diye cıvataları elimden geldiğince sıkarım", "verdict": "guclu-sik", "explain": "Sızdırmazlığı sağlayan conta ve düzgün yüzeydir, sıkma gücü değil. Alüminyumda fazla tork dişi sıyırır." },
+          { "label": "Eski contayı tekrar kullanırım, sağlam görünüyor", "verdict": "eski-conta", "explain": "Conta bir kez sıkıldığında ezilerek yüzeyin şeklini alır ve o şekilde kalır. İkinci kez aynı yerde aynı sızdırmazlığı vermez." }
+        ]
+      },
+      "camera": "motor-on",
+      "teachingNote": "Bu işin kaçakları neredeyse hep contadan değil, conta yüzeyinden çıkar. Temiz yüzey, temiz iş."
+    },
+    {
+      "id": 6,
+      "instruction": "Sistemi doldurdun, havasını aldın, motoru çalıştırdın. Termostatın açtığını nasıl doğrularsın?",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.ust-hortum",
+        "question": "Doğrulama nasıl yapılır?",
+        "options": [
+          { "label": "Üst hortumu elimle takip ederim: bir süre ılık kalır, sonra kısa sürede birden kızışır — açılma anı budur", "verdict": "hortum-elle", "correct": true, "explain": "Termostat kapalıyken radyatöre giden üst hortum soğuk kalır, çünkü sıvı oraya gitmiyordur. Açtığı anda motorun içindeki sıcak sıvı bir anda radyatöre akar ve hortum saniyeler içinde ısınır. Bu ani geçiş, termostatın çalıştığının doğrudan kanıtıdır. Yavaş yavaş ısınıyorsa termostat tam kapanmıyor demektir." },
+          { "label": "Gösterge orta seviyeye geldiyse tamamdır", "verdict": "gostergeye-bak", "explain": "Gösterge motorun ısındığını söyler, termostatın açtığını değil. Açmayan termostatta da gösterge ortaya gelir — sonra geçip kırmızıya gider." },
+          { "label": "Kalorifer sıcak üflüyorsa tamamdır", "verdict": "kalorifer", "explain": "Kalorifer küçük çevrimden beslenir ve termostat kapalıyken de sıcak üfler. Bu test büyük çevrimi hiç sınamaz." },
+          { "label": "Kaçak yoksa iş bitmiştir", "verdict": "kacak-yok", "explain": "Kaçak kontrolü gereklidir ama işlevi kanıtlamaz. Sızdırmayan ama açmayan bir sistem de kaçaksızdır." }
+        ]
+      },
+      "camera": "motor-ust",
+      "hint": "Hortumu avuçla kavrama; parmak ucuyla kısa kısa dokun. Açılma anında sıcaklık hızla yükselir.",
+      "teachingNote": "Parça değiştirdikten sonra 'değiştirdim, oldu' demek çıraklıktır. Usta değiştirdiği parçanın işini yaptığını kanıtlar — burada kanıt aleti değil, elidir."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Açık kalan bir termostat motoru kaynatmıyorsa neden yine de arızadır?",
+        "a": "soguk-calisma-zarari",
+        "options": [
+          { "verdict": "soguk-calisma-zarari", "label": "Motor çalışma sıcaklığına çıkamaz; yakıt tam yanmaz, yağ sulanır, aşınma ve tüketim artar", "explain": "Motorlar belli bir sıcaklıkta çalışmak üzere tasarlanır; o sıcaklık bir üst sınır değil, bir hedeftir. Soğuk çalışan motorda yanma tamamlanmaz, yanmamış yakıt silindir çeperinden kartere sızar ve yağı inceltir. Yağlama zayıflar, aşınma artar, yakıt tüketimi yükselir ve egzoz emisyonu bozulur. Kaynamamak, sağlıklı olmak demek değildir." },
+          { "verdict": "arizadir-ama-onemsiz", "label": "Arızadır ama önemsizdir", "explain": "Görünürde bir şey olmaması, zarar olmaması anlamına gelmez. Zarar yavaş ve birikimlidir." },
+          { "verdict": "sadece-kalorifer", "label": "Sadece kalorifer ısıtmaz, başka etkisi yok", "explain": "Kalorifer en görünen etkidir, en önemlisi değil." },
+          { "verdict": "arizadir-degil", "label": "Arıza sayılmaz, yazın hatta faydalıdır", "explain": "Yazın da motorun hedef sıcaklığa çıkması gerekir. Termostat mevsime göre iyi ya da kötü olmaz." }
+        ]
+      },
+      {
+        "q": "Termostatın üzerindeki küçük iğne deliği ne işe yarar?",
+        "a": "hava-tahliyesi",
+        "options": [
+          { "verdict": "hava-tahliyesi", "label": "Doldurma sırasında biriken havanın geçmesini sağlar", "explain": "Termostat kapalıyken sistemin iki yarısını birbirinden ayırır; doldurma sırasında bir tarafta kalan hava dışarı çıkamaz. O delik havaya küçük bir geçiş yolu bırakır. Bu yüzden delik en üste bakacak şekilde takılır — hava yukarı çıkar. Aşağı bakan delik işlevsizdir ve termostatın önünde hava cebi kalır." },
+          { "verdict": "basinc-tahliyesi", "label": "Fazla basıncı boşaltır", "explain": "Basınç tahliyesi radyatör kapağının işidir; termostatın deliği o iş için çok küçüktür." },
+          { "verdict": "tortu-cikisi", "label": "Tortunun geçmesi için", "explain": "Sisteme tortu geçmesi istenen bir şey değildir; delik tortu için açılmaz." },
+          { "verdict": "uretim-hatasi", "label": "Üretimden kalan bir delik, işlevi yok", "explain": "Tasarımın parçasıdır. İşlevsiz sanıp önemsemeyen usta, termostatı ters yönde takar." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "sourceRequired": "Bu derste araca özgü sayısal değer bilerek verilmedi. Termostat açılma sıcaklığı (gövdesine damgalıdır), kapak cıvatası torku ve soğutucu tipi araca özgüdür; üretici kılavuzundan okunur ve kaynaksız yayınlanmaz.",
+    "kapsam": "Termostat, termostat kapağı ve radyatör alt tapası modeli bekliyor. Model gelene kadar adımlar metinle oynanır; cıvata sökme ve tapa dönüşü animasyonlu değildir.",
+    "reviewedByMechanic": false
+  }
+}

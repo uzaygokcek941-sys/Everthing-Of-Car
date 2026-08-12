@@ -1,0 +1,144 @@
+{
+  "id": "temel.tork-anahtari",
+  "area": "motor-mekanik",
+  "stage": 1,
+  "title": "Tork Anahtarı: Ayar, Kullanım, Saklama",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 14,
+  "prerequisites": ["temel.el-aletleri"],
+  "learningGoals": [
+    "Tork değerinin ne olduğunu ve neden kılavuzdan okunduğunu bilmek",
+    "İşe uygun aralıkta tork anahtarı seçip değeri ayarlamak",
+    "Klik sesinde durmak ve anahtarı doğru saklamak"
+  ],
+
+  "safety": [
+    { "rule": "Tork anahtarını sökmede kullanma", "why": "Sökme momenti sıkma momentinden yüksektir ve belirsizdir; anahtarın ayarı bozulur. Tork anahtarı yalnız sıkma aletidir", "blocksStart": true },
+    { "rule": "Klik sesinden sonra çekmeye devam etme", "why": "Klik 'değere ulaşıldı' demektir. Sonrasında çekmeye devam edersen anahtar tekrar yüklenir ve cıvatayı hedefin üstünde sıkarsın", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.tork-anahtari", "label": "3/8\" tork anahtarı (5-60 Nm)", "required": true },
+    { "id": "tool.tork-anahtari-buyuk", "label": "1/2\" tork anahtarı (60-300 Nm)", "required": false },
+    { "id": "tool.circir", "label": "1/2\" cırcır kolu", "required": false },
+    { "id": "tool.lokma-13", "label": "13 mm lokma", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "İş 45 Nm istiyor. Hangi tork anahtarını alırsın?",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.egzersiz-civata.1",
+        "question": "45 Nm'lik bir sıkma için hangi anahtar doğru?",
+        "options": [
+          { "label": "3/8\" anahtar (5-60 Nm)", "verdict": "kucuk-anahtar", "correct": true, "explain": "45 Nm bu anahtarın orta üstü bölgesinde kalıyor. Tork anahtarı ölçek aralığının orta bölgesinde en doğru okur; uçlarda sapma artar." },
+          { "label": "1/2\" anahtar (60-300 Nm)", "verdict": "buyuk-anahtar", "explain": "45 Nm bu anahtarın alt sınırının bile altında. Ayarlanamaz, ayarlansa bile ölçüm güvenilmez olur. Büyük anahtar küçük torku bilmez." },
+          { "label": "Fark etmez, ikisi de tork anahtarı", "verdict": "farketmez", "explain": "Tork anahtarı bir ölçü aletidir. Ölçü aleti aralığına göre seçilir; 'tork anahtarıdır' demek yetmez." },
+          { "label": "Cırcırla sıkar, sonra tork anahtarıyla kontrol ederim", "verdict": "sonra-kontrol", "explain": "Kontrol için çekmek yeni bir sıkma yapar. Hedefi zaten geçmişsen tork anahtarı bunu sana söylemez, üstüne biraz daha ekler." }
+        ]
+      },
+      "camera": "bench-close",
+      "teachingNote": "Tork anahtarını aralığının ilk %20'sinde kullanmak yaygın hatadır. İşin değeri iki anahtarın ortak alanına düşüyorsa küçük olanı seç."
+    },
+    {
+      "id": 2,
+      "instruction": "Anahtarı 45 Nm'ye ayarla.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.egzersiz-civata.1",
+        "unit": "Nm",
+        "bookValue": 45,
+        "acceptRange": [44.5, 45.5]
+      },
+      "camera": "bench-close",
+      "hint": "Kilidi aç, kolu çevir, değeri okuduktan sonra kilidi tekrar kapat. Kilitlenmemiş anahtar çalışırken kendi kendine ayar değiştirir.",
+      "teachingNote": "Bu değer uydurulmaz. Gerçek işte her cıvatanın torku üreticinin servis kılavuzunda yazar; burada egzersiz değeri kullanılıyor."
+    },
+    {
+      "id": 3,
+      "instruction": "Cıvatayı elinle çevirerek yerine oturt.",
+      "interaction": {
+        "type": "rotate",
+        "target": "part.egzersiz-civata.1",
+        "direction": "cw",
+        "turns": 4,
+        "requiresGesture": true
+      },
+      "camera": "bench-close",
+      "commonMistake": {
+        "if": "ters-yon",
+        "feedback": "Sıkma saat yönündedir."
+      },
+      "hint": "Elle dönmüyorsa dur. Elle dönmeyen cıvata düz gitmiyordur; anahtarla zorlarsan dişi sıyırırsın.",
+      "teachingNote": "Elle başlatma diş sıyırmayı önleyen tek adımdır ve atlanması en kolay adımdır."
+    },
+    {
+      "id": 4,
+      "instruction": "Tork anahtarıyla klik sesine kadar sık.",
+      "interaction": {
+        "type": "rotate-to-torque",
+        "target": "part.egzersiz-civata.1",
+        "direction": "cw",
+        "targetTorqueNm": 45,
+        "toleranceNm": 3,
+        "tool": "tool.tork-anahtari",
+        "requiresGesture": true
+      },
+      "camera": "bench-close",
+      "commonMistake": {
+        "if": "asiri-tork",
+        "feedback": "Klik sesini geçtin. Cıvata artık esneme sınırının üstünde gerildi; gözle bakınca sağlam görünür ama ilk titreşimde kopar. Bu hata sökülene kadar görünmez."
+      },
+      "hint": "Kolun ucundan tut ve yavaş çek. Ani çekişte anahtar klik vermeden hedefi geçebilir."
+    },
+    {
+      "id": 5,
+      "instruction": "İş bitti. Anahtarı dolaba kaldırmadan önce ne yaparsın?",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.egzersiz-civata.1",
+        "question": "Tork anahtarı nasıl saklanır?",
+        "options": [
+          { "label": "Ayarı en düşük değere çekip kutusuna koyarım", "verdict": "bosalt", "correct": true, "explain": "İçindeki yay gergin bırakılırsa zamanla yorulur ve anahtar hedefin altında klik vermeye başlar. En düşük değere çekmek yayı boşaltır. Kutu, düşme ve darbeye karşıdır." },
+          { "label": "Ayarı bozulmasın diye 45 Nm'de bırakırım", "verdict": "gergin-birak", "explain": "Tam tersi olur. Gergin bırakılan yay ayarı korumaz, ayarı kaydırır." },
+          { "label": "Tezgâhın üstünde bırakırım, yarın yine lazım", "verdict": "tezgahta", "explain": "Tork anahtarı düşerse kalibrasyonu gider ve bunu size söylemez. Düşen tork anahtarı kontrol edilene kadar kullanılmaz." },
+          { "label": "Yağlayıp kaldırırım", "verdict": "yagla", "explain": "Mekanizmasına yağ basmak sürtünmeyi değiştirir ve klik noktasını kaydırır. Bakımı üretici yapar." }
+        ]
+      },
+      "camera": "bench-close"
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru", "torkToleransIcinde"],
+    "questions": [
+      {
+        "q": "Dişine yağ ya da anti-seize sürülmüş bir cıvatayı kılavuzdaki kuru tork değeriyle sıkarsan ne olur?",
+        "a": "fazla-gerilir",
+        "options": [
+          { "verdict": "fazla-gerilir", "label": "Cıvata olması gerekenden fazla gerilir", "explain": "Kılavuzdaki değer kuru diş içindir ve momentin büyük kısmı sürtünmeyi yenmeye gider. Yağ sürtünmeyi düşürünce aynı moment cıvatayı daha çok gerer. Yağlı dişte değer düşürülür — ne kadar düşeceğini kılavuz söyler." },
+          { "verdict": "hicbir-sey", "label": "Bir şey olmaz, tork torktur", "explain": "Tork anahtarı gerilmeyi değil momenti ölçer. Sürtünme değişince aynı moment farklı gerilme üretir." },
+          { "verdict": "az-gerilir", "label": "Cıvata gevşek kalır", "explain": "Tersi olur; yağ sürtünmeyi azalttığı için gerilme artar." },
+          { "verdict": "dis-siyrilir", "label": "Diş kesin sıyrılır", "explain": "Sıyrılabilir ama kesin değil. Asıl ve her seferinde olan şey, cıvatanın hedeflenenden fazla gerilmesidir." }
+        ]
+      },
+      {
+        "q": "Tork anahtarı neden sökmede kullanılmaz?",
+        "a": "sokme-momenti-belirsiz",
+        "options": [
+          { "verdict": "sokme-momenti-belirsiz", "label": "Sökme momenti belirsizdir ve anahtarın ayarını bozar", "explain": "Paslanmış bir cıvatanın sökme momenti sıkma momentinin katı olabilir. Anahtar bu yükü ölçmek için değil, belirli bir değerde durmak için yapılmıştır." },
+          { "verdict": "ters-donmez", "label": "Ters yöne dönmez", "explain": "Çoğu tork anahtarı ters yöne döner. Sorun dönmesi değil, ölçüsünün bozulması." },
+          { "verdict": "yavas", "label": "Sökmede çok yavaş kalır", "explain": "Hızla ilgisi yok." },
+          { "verdict": "kullanilir", "label": "Kullanılır, sakıncası yoktur", "explain": "Kullanılmaz. Sökme için cırcır vardır; tork anahtarı yalnız sıkma aletidir." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "sourceRequired": "45 Nm egzersiz değeridir, gerçek bir araç parçasına ait değildir; bu yüzden kaynak künyesi istenmiyor. Gerçek araç prosedürlerinde tork değeri üretici kılavuzundan alınır ve kaynaksız yayınlanmaz.",
+    "reviewedByMechanic": false
+  }
+}

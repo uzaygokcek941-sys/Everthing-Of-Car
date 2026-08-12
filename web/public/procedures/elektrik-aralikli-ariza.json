@@ -1,0 +1,179 @@
+{
+  "id": "elektrik.aralikli-ariza",
+  "area": "arac-elektrik",
+  "stage": 9,
+  "title": "Ara Ara Ortaya Çıkan Arıza",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 30,
+  "prerequisites": ["elektrik.soket-temizligi", "elektrik.gerilim-dusumu", "elektrik.parazit-akim"],
+  "learningGoals": [
+    "Aralıklı arızanın ancak kendi koşulunda ölçülebileceğini kavramak",
+    "Müşterinin tarifinden koşulu çıkarmak ve o koşulu atölyede üretmek",
+    "Arızayı üretilmiş koşul altında ölçerek kanıtlamak ve onarımı aynı koşulda doğrulamak"
+  ],
+
+  "safety": [
+    { "rule": "Titreşim ve ısı denemelerinde araç sabitlenir, el freni çekilir", "why": "Koşul üretmek için motor çalıştırılır, direksiyon çevrilir, gövdeye vurulur. Araç hareket edebilecek durumdaysa bu denemelerin hepsi tehlikelidir", "blocksStart": true },
+    { "rule": "Isıtma denemesinde açık alev kullanılmaz", "why": "Yakıt buharı, plastik ve kablo yalıtımı alevle çalışmaya uygun değildir; ısı gerekiyorsa sıcak hava tabancası düşük kademede ve kısa süre kullanılır", "blocksStart": true },
+    { "rule": "Nem denemesi elektrik kutularının içine doğrudan su vererek yapılmaz", "why": "Nem etkisini denemek için ince püskürtme yeterlidir; kutunun içine su vermek var olmayan bir arıza üretir ve modüle kalıcı zarar verir", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.multimetre", "label": "Dijital multimetre", "required": true },
+    { "id": "tool.uzatma-prob", "label": "Uzatma prob kablosu", "required": true },
+    { "id": "tool.sicak-hava", "label": "Sıcak hava tabancası", "required": false },
+    { "id": "tool.sema", "label": "Araç devre şeması", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Müşteri: gösterge paneli ara sıra sönüp yanıyor. Araç atölyeye geldi, her şey normal çalışıyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kablo-demeti",
+        "question": "Arıza şu anda yokken ne yapılır?",
+        "options": [
+          { "label": "Arızanın hangi koşulda ortaya çıktığı çıkarılır ve o koşul atölyede üretilir", "verdict": "kosul-uret", "correct": true, "explain": "Aralıklı arıza, olmadığı anda ölçülemez. Sağlam görünen bir devrede yapılan hiçbir ölçüm bir şey söylemez; alet doğru okur, devre gerçekten o an sağlamdır. Bu yüzden işin sırası değişir: önce arızayı geri getirmek, sonra ölçmek gerekir. Geri getirmenin yolu koşulu bulmaktır. Her aralıklı arızanın bir tetikleyicisi vardır — titreşim, ısı, soğuk, nem, yük, direksiyon açısı, fren basma, kapı çarpma. Müşterinin tarifi bu tetikleyiciyi içerir, çoğu zaman farkında olmadan. Koşul üretildiğinde arıza atölyede ortaya çıkar ve o an artık her zamanki ölçümler geçerlidir. Koşul üretilemiyorsa arıza teşhis edilemez; tahminle parça değiştirmek teşhis değildir." },
+          { "label": "Şüpheli parça değiştirilip müşteriye gönderilir", "verdict": "parca-degistir", "explain": "Arıza geri gelirse hem para hem güven kaybedilir. Aralıklı arızada tahminle parça değiştirmek en pahalı yoldur." },
+          { "label": "Bütün soketler sökülüp temizlenir", "verdict": "hepsini-temizle", "explain": "Arıza geçici olarak kaybolabilir, ki bu daha da kötüdür: sebep bilinmediği için geri geleceği zaman da bilinmez." },
+          { "label": "Arıza yok denir, araç teslim edilir", "verdict": "ariza-yok", "explain": "Müşteri gördüğü şeyi anlatıyor. \"Bulamadım\" dürüst bir cümledir, \"yok\" değil." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Aralıklı arızada teşhisin ilk işi ölçmek değil, arızayı geri getirmektir. Ölçüm ikinci sıradadır."
+    },
+    {
+      "id": 2,
+      "instruction": "Müşteriden koşulu çıkarmaya çalışıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.far-soketi",
+        "question": "Hangi soru en çok işe yarar?",
+        "options": [
+          { "label": "\"Son olduğunda ne yapıyordunuz?\" — yol, hava, hız, süre, hangi düğmeye basıldığı sorulur", "verdict": "ne-yapiyordunuz", "correct": true, "explain": "Müşteri arızayı teknik terimlerle anlatamaz ama ne yaptığını anlatabilir. \"Bozuk yolda\" titreşim demektir. \"Uzun yoldan sonra\" ısı demektir. \"Sabah ilk çalıştırınca\" soğuk ve nem demektir. \"Yağmurda\" su demektir. \"Virajda\" ya da \"kaldırıma çıkarken\" gövdenin burulması demektir. \"Cam açarken\" yük demektir. Bu cümlelerin her biri atölyede üretilebilir bir koşula çevrilir. Bu yüzden soru \"ne oldu\" değil \"ne yapıyordunuz\" biçiminde sorulur; birincisi belirtiyi verir, ikincisi koşulu verir. Koşul bulunamazsa arıza tesadüfe bırakılmış olur." },
+          { "label": "\"Arıza ne kadar sürüyor?\"", "verdict": "sure", "explain": "Faydalı bir ayrıntı ama tek başına koşulu vermez; öncelik tetikleyicidedir." },
+          { "label": "\"Aracınıza daha önce kim baktı?\"", "verdict": "kim-bakti", "explain": "Geçmiş müdahaleleri öğrenmek işe yarar ama koşulu bulmaz." },
+          { "label": "\"Sizce sebebi ne?\"", "verdict": "sizce-sebep", "explain": "Müşterinin tahmini teşhisi saptırır. Ondan alınacak şey gözlemdir, yorum değil." }
+        ]
+      },
+      "camera": "tezgah",
+      "hint": "Belirtiyi değil, koşulu sor.",
+      "teachingNote": "Müşteri arızayı bilmez ama koşulu bilir. Doğru soru, onun bildiğini teknik bilgiye çevirir."
+    },
+    {
+      "id": 3,
+      "instruction": "Müşteri \"bozuk yolda ve kapıyı çarpınca oluyor\" dedi. Koşul: titreşim.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sase-noktasi",
+        "question": "Bu koşul atölyede nasıl üretilir?",
+        "options": [
+          { "label": "Devre çalışırken demet, soketler ve şase noktası tek tek elle oynatılır; ölçü aleti bağlıyken yapılır", "verdict": "oynatma", "correct": true, "explain": "Titreşimi taklit etmenin yolu, şüpheli bölgeyi elle oynatmaktır. Devre çalışır durumdayken kablo demeti kıpırdatılır, soketler yerinde hafifçe bastırılıp çekilir, şase cıvatası ve pabucu oynatılır, gövdeye avuçla vurulur. Bunlar yapılırken gözle lambaya bakmak yetmez — ölçü aleti bağlı olmalı ve okuma izlenmelidir, çünkü kaybın büyümesi lamba tamamen sönmeden önce alette görünür. Arıza hangi hareket sırasında ortaya çıkıyorsa, sorunlu bölge o harekete tepki veren yerdedir. Bu yöntem arızayı istendiği anda üretebilir hâle getirir; teşhisin en zor kısmı olan \"bekleyip yakalamak\" böylece ortadan kalkar." },
+          { "label": "Araçla bozuk yolda uzun süre gezilir", "verdict": "yol-testi", "explain": "İşe yarar ama yavaştır ve sırasında ölçüm yapmak zordur. Yol testi son doğrulama için tutulur." },
+          { "label": "Motor rölantide bırakılıp beklenir", "verdict": "bekle", "explain": "Motor titreşimi bazen yeterlidir ama hedefli değildir; hangi bölgenin tepki verdiğini göstermez." },
+          { "label": "Bütün cıvatalar sıkılır", "verdict": "civata-sik", "explain": "Arıza kaybolabilir ama nerede olduğu bilinmez; geri geldiğinde baştan başlanır." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Oynatma testi, arızayı beklemekten çıkarıp istendiğinde üretilebilir hâle getirir. Aralıklı arızayla mücadelede en güçlü araç budur."
+    },
+    {
+      "id": 4,
+      "instruction": "Alet bağlıyken şase pabucu oynatıldığında panel söndü. O anda şase üzerindeki gerilim düşümü 1,15 V okundu; el çekilince 0,05 V. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.multimetre-ekran",
+        "unit": "V",
+        "acceptRange": [1.05, 1.15]
+      },
+      "camera": "tezgah",
+      "hint": "1,15 eksi 0,05.",
+      "teachingNote": "İşte aralıklı arızanın kanıtı: aynı devre, aynı alet, iki farklı koşul, iki farklı sayı. Arıza artık \"ara sıra oluyor\" değil, \"pabuç oynatılınca oluyor\" hâline geldi. Bu cümle onarılabilir bir cümledir."
+    },
+    {
+      "id": 5,
+      "instruction": "Arıza üretilebilir hâle geldi. Onarımdan önce karar veriyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sase-noktasi",
+        "question": "Bu noktada ne yapılır?",
+        "options": [
+          { "label": "Bağlantı sökülüp incelenir; gevşemeye yol açan mekanik sebep bulunur ve o giderilir", "verdict": "sebebi-bul", "correct": true, "explain": "Arızanın yeri bulundu ama sebebi henüz bulunmadı. Bir şase pabucu kendiliğinden gevşemez: cıvata eksik sıkılmıştır, altında boya ya da pas kalmıştır, pabuç kablo çekişiyle sürekli zorlanmaktadır, ya da nem alıp yeşermiştir. Söküldüğünde bunlardan hangisi olduğu görülür. Yalnızca cıvatayı sıkmak arızayı bir süre yok eder ama sebep dururken geri gelir. Doğru onarım: pabuç ve gövde çıplak metale kadar temizlenir, doğru tork ile sıkılır, demet bir noktadan sabitlenerek pabuca binen çekme kuvveti kaldırılır ve bağlantı neme karşı korunur. Aralıklı arızada sebep giderilmezse arıza geri döner, ve ikinci gelişte müşteri işi yapan ustaya değil, başkasına gider." },
+          { "label": "Cıvata sıkılıp iş kapatılır", "verdict": "civatayi-sik", "explain": "Belirti geçer, sebep durur. Aynı arıza aylar içinde geri gelir." },
+          { "label": "Gösterge paneli değiştirilir", "verdict": "panel-degistir", "explain": "Ölçüm arızanın şasede olduğunu gösterdi; panel sağlam. Bu, ölçümü yok saymak olur." },
+          { "label": "Şase noktası iptal edilip başka yere alınır", "verdict": "baska-nokta", "explain": "Bazı durumlarda gerekli olabilir ama önce mevcut noktanın neden bozulduğu anlaşılmalıdır." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Aralıklı arızalarda \"yerini buldum\" ile \"sebebini buldum\" arasındaki mesafe, işin geri gelip gelmeyeceğini belirler."
+    },
+    {
+      "id": 6,
+      "instruction": "Onarım yapıldı. Doğrulama sırası.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.multimetre-ekran",
+        "question": "Doğrulama nasıl yapılır?",
+        "options": [
+          { "label": "Arızayı üreten koşul tekrar uygulanır; bu kez arıza ortaya çıkmamalı ve ölçüm sağlam değerde kalmalı", "verdict": "kosulu-tekrarla", "correct": true, "explain": "Aralıklı arızanın doğrulaması, teşhiste kullanılan koşulun tekrarıdır. Pabuç yine oynatılır, demet yine kıpırdatılır, gövdeye yine vurulur — ve bu kez ne panel söner ne de ölçüm bozulur. Bu, onarımın tek geçerli kanıtıdır; \"şu an çalışıyor\" cümlesi aralıklı arızada hiçbir şey ifade etmez, çünkü arıza zaten çoğu zaman çalışıyordu. Koşul üretilebiliyorsa doğrulama kesindir. Ardından yol testi yapılır ve müşterinin tarif ettiği şartlar mümkün olduğunca tekrarlanır. Ölçüm değerleri, koşulun ne olduğu ve onarımın ne olduğu yazılır; arıza geri gelirse bir sonraki bakan kişi sıfırdan başlamaz." },
+          { "label": "Araç birkaç gün müşteride denenir", "verdict": "musteride-dene", "explain": "Koşul üretilebiliyorken müşteriyi denek yapmak gereksiz. Doğrulama atölyede biter." },
+          { "label": "Panelin yanması yeterli", "verdict": "panel-yaniyor", "explain": "Panel arıza sırasında da çoğu zaman yanıyordu. Koşul uygulanmadan yapılan gözlem kanıt değildir." },
+          { "label": "Devre kapalıyken direnç ölçülür", "verdict": "direnc", "explain": "Kapalı devrede zayıf bağlantı gizlenir; doğrulama yük altında ve koşul altında yapılır." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Bir arızayı üretmeyi öğrendiysen, onu gidermeyi de kanıtlayabilirsin. Üretilemeyen arıza doğrulanamaz."
+    },
+    {
+      "id": 7,
+      "instruction": "İş kapanıyor. Kayda ne geçireceksin?",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kablo-demeti",
+        "question": "Kayıtta ne bulunmalı?",
+        "options": [
+          { "label": "Arızayı üreten koşul, onarım öncesi ve sonrası ölçüm değerleri, bulunan sebep ve yapılan işlem", "verdict": "kosul-ve-sayilar", "correct": true, "explain": "Aralıklı arızada kayıt, diğer işlerden daha önemlidir. Yazılacak dört şey var: arızayı hangi koşulun ürettiği, o koşulda ölçülen değer, onarımdan sonra aynı koşulda ölçülen değer ve mekanik sebebin ne olduğu. Bu kayıt üç işe yarar. Birincisi, arıza geri gelirse bir sonraki kişi koşulu bulmak için baştan uğraşmaz. İkincisi, iki sayı müşteriye gösterilebilecek somut kanıttır — aralıklı arızada müşteri en çok \"gerçekten bir şey yapıldı mı\" diye kuşkulanır. Üçüncüsü, aynı araçta benzer bir arıza çıkarsa aynı sebebin başka noktalarda da olabileceğini hatırlatır; bir şase noktası nemden bozulduysa komşuları da adaydır." },
+          { "label": "Yalnızca değiştirilen parça yazılır", "verdict": "parca", "explain": "Bu işte parça değişmedi bile; asıl bilgi koşul ve sayılardır." },
+          { "label": "\"Arıza giderildi\" yazmak yeterli", "verdict": "giderildi", "explain": "Geri geldiğinde hiçbir işe yaramayan bir cümle. Kayıt, bir sonraki kişiye bilgi bırakmak içindir." },
+          { "label": "Müşterinin tarifi olduğu gibi yazılır", "verdict": "musteri-tarifi", "explain": "Tarif kaydın başlangıcıdır ama sonucunu ve sayıları içermez." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Bu ders alanın kapanışı: müşterinin cümlesinden koşula, koşuldan ölçüme, ölçümden sebebe, sebepten kayda. Sıra bu, ve her adım bir öncekine dayanıyor."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Aralıklı arızada teşhisin ilk işi nedir?",
+        "a": "kosulu-uret",
+        "options": [
+          { "verdict": "kosulu-uret", "label": "Arızayı üreten koşulu bulup atölyede tekrarlamak", "explain": "Aralıklı arıza olmadığı anda ölçülemez; sağlam görünen bir devrede yapılan ölçüm hiçbir şey söylemez, çünkü devre o an gerçekten sağlamdır. Bu yüzden önce arızayı geri getirmek gerekir. Her aralıklı arızanın bir tetikleyicisi vardır — titreşim, ısı, soğuk, nem, yük, direksiyon açısı — ve müşterinin tarifi bu tetikleyiciyi içerir. Koşul üretildiğinde arıza ortaya çıkar ve o an her zamanki ölçümler geçerli olur." },
+          { "verdict": "parca-degistir", "label": "En şüpheli parçayı değiştirmek", "explain": "Tahminle parça değiştirmek teşhis değildir; arıza geri gelir." },
+          { "verdict": "kod-oku", "label": "Hata kodu okumak", "explain": "Faydalı bir başlangıç olabilir ama kod da arıza anında kaydedilir; koşul üretmeden doğrulanamaz." },
+          { "verdict": "hepsini-temizle", "label": "Bütün soketleri temizlemek", "explain": "Arızayı geçici olarak yok edebilir, ki bu daha kötüdür: sebep bilinmediği için geri geleceği zaman da bilinmez." }
+        ]
+      },
+      {
+        "q": "Onarım aralıklı arızada nasıl doğrulanır?",
+        "a": "ayni-kosul",
+        "options": [
+          { "verdict": "ayni-kosul", "label": "Arızayı üreten koşul tekrar uygulanır ve bu kez arıza çıkmaz", "explain": "Doğrulama, teşhiste kullanılan koşulun tekrarıdır: pabuç yine oynatılır, demet yine kıpırdatılır, gövdeye yine vurulur — ve bu kez ne belirti görünür ne de ölçüm bozulur. \"Şu an çalışıyor\" cümlesi aralıklı arızada hiçbir şey ifade etmez, çünkü arıza zaten çoğu zaman çalışıyordu. Koşul üretilebiliyorsa doğrulama kesindir; ardından yol testiyle müşterinin şartları tekrarlanır." },
+          { "verdict": "calisiyor", "label": "Araç çalışıyorsa yeterli", "explain": "Arıza zaten çoğu zaman yoktu; bu cümle kanıt değildir." },
+          { "verdict": "musteri", "label": "Müşteri birkaç gün kullanır", "explain": "Koşul atölyede üretilebiliyorken müşteriyi denek yapmak gereksiz." },
+          { "verdict": "kod-silme", "label": "Hata kodu silinip bakılır", "explain": "Kodun geri gelmemesi zaman ister ve koşul üretmek kadar kesin değildir." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 4'teki 1,15 V ve 0,05 V SENARYO okumalarıdır. Öğrenciden istenen bir üretici sınırı değil, arıza üretilmiş koşul ile normal koşul arasındaki FARKTIR (1,10 V). sourceRequired bu yüzden gerekmedi.",
+    "sourceRequired": "Kabul edilebilir azami gerilim düşümü eşikleri ve modüle özgü arıza kaydı davranışı araca özgüdür; bu derste bilinçle VERİLMEDİ.",
+    "kapsam": "Isı, nem ve soğuk koşullarını üretmenin sahnede karşılığı yok; ders titreşim koşulu üzerinden kuruldu, diğerleri metinde anlatıldı. Oynatma testi için de bir hareket tipi yok, seçim olarak öğretiliyor — soket temizliği dersindeki aynı eksik. Yeni etkileşim tipi eklenirse iki ders birlikte güncellenir.",
+    "reviewedByMechanic": false
+  }
+}

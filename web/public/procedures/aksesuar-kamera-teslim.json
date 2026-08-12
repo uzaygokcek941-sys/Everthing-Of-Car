@@ -1,0 +1,171 @@
+{
+  "id": "aksesuar.kamera-teslim",
+  "area": "aksesuar-ses",
+  "stage": 6,
+  "title": "Kayıt Doğrulama, Kart Bakımı ve Müşteriye Teslim",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 30,
+  "prerequisites": ["aksesuar.kamera-park-modu"],
+  "learningGoals": [
+    "Kaydın gerçekten yapıldığını izleyerek doğrulamak",
+    "Zaman ayarının kaydın değerini nasıl belirlediğini anlamak",
+    "Müşteriye olay kilidini ve kart bakımını öğreterek teslim etmek"
+  ],
+
+  "safety": [
+    { "rule": "Cihazın kullanımı sürüş sırasında denenmez", "why": "Ekrana bakmak ve ayar yapmak sürüş sırasında dikkat dağıtır; deneme araç dururken yapılır", "blocksStart": true },
+    { "rule": "Müşteriye kaydın hukuki kullanımı konusunda tavsiye verilmez", "why": "Kaydın delil olarak kullanılması, paylaşılması ve kabin içi kayıt kişisel verilerin korunması mevzuatının konusudur; usta yalnız cihazın nasıl çalıştığını anlatır", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true },
+    { "id": "tool.multimetre", "label": "Multimetre", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Montaj bitti. Kaydı doğrulayacaksın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-kamera",
+        "question": "Kayıt nasıl doğrulanır?",
+        "options": [
+          { "label": "Araç birkaç dakika sürülür, kayıt durdurulur ve dosya açılıp gerçekten izlenir; ön ve arka görüntünün yazıldığı, tarih-saatin doğru olduğu gözle görülür", "verdict": "izleyerek", "correct": true, "explain": "Bu adım bütün montajın anlamıdır ve atlanması en pahalı hatadır. Cihazın ekranında kayıt simgesinin yanıyor olması hiçbir şey kanıtlamaz — kart bozuksa, kart hiç takılmadıysa, cihaz karta yazamıyorsa ya da dosya düzeni uyumsuzsa simge yine yanar. Tek geçerli kanıt, yazılmış bir dosyanın açılıp izlenmesidir. Doğrulama şu sırayla yapılır: araç birkaç dakika sürülür ki gerçek bir dosya oluşsun; kayıt durdurulur; dosya listesi açılır ve en son dosya seçilip izlenir. İzlerken beş şeye bakılır — ön görüntü var mı ve kadraj doğru mu, arka görüntü var mı ve ters değil mi, görüntünün üzerindeki tarih ve saat doğru mu, ses isteniyorsa kaydediliyor mu, görüntü akıcı mı yoksa takılıyor mu. Takılan bir görüntü çoğu zaman kartın yorulduğunu ya da uygun olmadığını söyler ve bu, montaj bitmeden çözülür. Aynı doğrulama park modu için de yapılır: araç kapatılır, birkaç dakika beklenir, park modu dosyası açılıp izlenir. 'Çalışıyor' demek, izlenmiş bir dosya olmadan söylenmez." },
+          { "label": "Ekranda kayıt simgesinin yandığına bakılır", "verdict": "simge", "explain": "Simge, karta yazıldığını kanıtlamaz." },
+          { "label": "Cihaz açılıyorsa yeterlidir", "verdict": "acilis", "explain": "Açılan cihaz kaydettiğini göstermez." },
+          { "label": "Müşteri ilk olayda öğrenir", "verdict": "musteri", "explain": "Doğrulamanın ilk olayda yapılması, en kötü zamanda öğrenmek demektir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Simge yanıyor olması kanıt değil. Tek kanıt: yazılmış bir dosyayı açıp izlemek."
+    },
+    {
+      "id": 2,
+      "instruction": "Kaydı izledin. Cihazın saati 14:06 gösteriyor, gerçek saat 14:23. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.on-kamera",
+        "unit": "dakika",
+        "acceptRange": [16.5, 17.5]
+      },
+      "camera": "aksesuar",
+      "hint": "14:23 eksi 14:06.",
+      "teachingNote": "17 dakikalık bu fark küçük görünür ve tam bu yüzden tehlikelidir. Kaydın üzerindeki tarih ve saat, o kaydın hangi olaya ait olduğunu söyleyen tek bilgidir. Saat kaymışsa kayıt hâlâ vardır ama hangi ana ait olduğu tartışmalı hâle gelir — ve bir uyuşmazlıkta tartışmalı olan her şey değerini kaybeder. Üstelik 17 dakika, bir kavşakta olan iki ayrı olayın karışmasına yetecek kadar büyük bir süredir. Saat üç sebeple kayar. Birincisi hiç ayarlanmamıştır: cihaz kutudan çıktığı ayarla çalışır ve usta bunu kontrol etmemiştir. İkincisi, cihazın iç saatini besleyen küçük kaynak zayıflamıştır; besleme kesildiğinde saat sıfırlanır ve bu davranış yorulmuş cihazlarda sık görülür. Üçüncüsü, cihaz saatini uydudan ya da telefondan alıyordur ama bu bağlantı hiç kurulmamıştır. Ustanın işi nettir: teslimden önce saat gerçek saate ayarlanır, mümkünse otomatik saat kaynağı devreye alınır ve tarih biçimi de kontrol edilir. Ayrıca müşteriye şu söylenir: cihazın beslemesi uzun süre kesilirse saat kayabilir, ara sıra kaydı açıp tarihi kontrol et. Bu, iki ayrı cihaz kullanılan sistemlerde bir kat daha önemlidir — iki saat de aynı gerçek saate ayarlanır, yoksa ön ve arka kayıt birbirini desteklemez."
+    },
+    {
+      "id": 3,
+      "instruction": "Kartı çıkarıp müşteriye gösteriyorsun.",
+      "interaction": {
+        "type": "press-and-pull",
+        "target": "part.on-kamera",
+        "requiresGesture": true
+      },
+      "camera": "aksesuar",
+      "hint": "Kartı yuvasından bastırıp çıkar, sonra yerine tak.",
+      "teachingNote": "Kart, bu sistemin en çok yorulan ve en sessiz bozulan parçasıdır — müşteriye anlatılması gereken bakım tam olarak budur. Araç kamerası kartı sürekli siler ve yeniden yazar; hiçbir hafıza kartı bunu sonsuza kadar yapamaz. Bozulma genelde ansızın olmaz: önce tek tük dosya kaydedilemez, sonra görüntü takılmaya başlar, en sonunda cihaz kartı hiç tanımaz. İlk iki aşamada cihaz çalışıyor görünür ve tehlike buradadır. Müşteriye üç şey öğretilir. Birincisi, kartın cihazın kendi menüsünden düzenli aralıklarla biçimlendirilmesi — bilgisayarda değil, cihazın kendisinde, çünkü cihaz kendi düzenini kurar; biçimlendirmeden önce saklanmak istenen kayıtların kopyalanması gerektiği de söylenir. İkincisi, kartın bir gün bitecek bir sarf malzemesi olduğu ve zamanla değiştirileceği. Üçüncüsü, cihazın uyarılarına bakılması — birçok cihaz kart sorununu bir uyarı ya da sesle bildirir ve bu uyarı yok sayılmaz. Kart takıp çıkarmanın bir de fiziksel kuralı var: kart yalnız cihaz kapalıyken çıkarılır; yazma sırasında çıkarılan kart hem o dosyayı hem kartın düzenini bozar. Biçimlendirme sıklığı ve kart ömrü ürüne ve kullanıma özgüdür; bu ders bir süre vermiyor."
+    },
+    {
+      "id": 4,
+      "instruction": "Müşteriye cihazı öğretiyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-kamera",
+        "question": "Müşteriye öğretilmesi gereken en önemli işlev nedir?",
+        "options": [
+          { "label": "Olay kilidi: kaydın üzerine yazılmasını engelleyen tuş ya da işlev; yanına da olaydan sonra aracı kullanmaya devam etmenin kaydı silebileceği uyarısı", "verdict": "olay-kilidi", "correct": true, "explain": "Bir müşteri cihazın bütün menüsünü öğrenmez ve öğrenmesi de gerekmez; ama bu tek işlevi bilmezse cihaz bir olayda işe yaramaz. Olay kilidi, o anki kaydı korumalı bir yere alır ve döngüsel kaydın üzerine yazmasını engeller. İki yolla çalışır: cihaz sarsıntı algıladığında kendiliğinden kilitler ve kullanıcı bir tuşla elle kilitleyebilir. Kendiliğinden kilitleme her zaman yeterli olmaz — hafif bir sıyırma, park hâlinde uzaktan görülen bir olay ya da bir tartışma cihazı tetikleyecek kadar sarsıntı üretmeyebilir; bu yüzden elle kilitleme tuşunun nerede olduğu müşteriye gösterilir ve bir kere denetilir. Yanına eklenen cümle daha da önemlidir: bir olay yaşandıktan sonra araç kullanılmaya devam ederse kayıt döngüde silinebilir, o yüzden ya kayıt kilitlenir ya da mümkünse kart çıkarılıp saklanır. Bu iki cümle bu işin bütün değerini korur. İkinci sırada öğretilecek şeyler: kaydın nasıl izleneceği — ekranlı cihazda cihazın kendinden, ekransızda telefon bağlantısıyla — ve telefon bağlantısının teslimde birlikte kurulması. Üçüncü sırada kart bakımı ve saat kontrolü gelir." },
+          { "label": "Menüdeki bütün ayarlar tek tek anlatılır", "verdict": "menu", "explain": "Müşteri hepsini unutur; bir işlev öğretilir, o da olay kilidi." },
+          { "label": "Hiçbir şey; cihaz kendi halleder", "verdict": "kendi", "explain": "Kendiliğinden kilitleme her olayda tetiklenmez." },
+          { "label": "Çözünürlük ayarı", "verdict": "cozunurluk", "explain": "Bir kere ustaca ayarlanır; müşterinin bilmesi gereken kayıttır." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Tek bir işlev öğretilecekse o olay kilidi. Yanına tek cümle: olaydan sonra aracı kullanmaya devam etme."
+    },
+    {
+      "id": 5,
+      "instruction": "Aracı teslim etmeden önce kaplamaları ve iç kısmı kontrol ediyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.tavan-kaplamasi",
+        "question": "Teslim öncesi fiziksel kontrol listesi nedir?",
+        "options": [
+          { "label": "Bütün kaplamalar tam oturmuş, hiçbir klips kırık ya da açık kalmamış, kablo hiçbir yerden görünmüyor ve sıkışmamış, sökülen bölgedeki her işlev yeniden denenmiş, araç geldiği temizlikte", "verdict": "fiziksel-liste", "correct": true, "explain": "Müşteri kaydın kalitesini bir olay yaşamadan anlayamaz ama kaplamayı ilk gün görür — işin görünen yüzü buradadır. Liste beş maddeliktir. Birincisi kaplamalardır: sökülen her kaplama tam oturmalı, kenarlar boşluk vermemeli ve araçta 'buraya dokunulmuş' hissi bırakmamalıdır; kırılan bir klips varsa gizlenmez, yenisi takılır ya da müşteriye söylenir. İkincisi kablodur: kablo hiçbir noktadan görünmemeli, sarkmamalı ve hiçbir kaplamanın altından uç vermemelidir. Üçüncüsü sıkışmadır ve önceki derste ayrıntısıyla anlatıldı — kablo bir klipsin, vidanın ya da metal kenarın altında olmamalıdır. Dördüncüsü işlev kontrolüdür: sökülen bölgelerdeki her şey yeniden denenir — tavan lambası, güneşlik, ayna, kapı düğmeleri, arka cam ısıtması; söküm sırasında bir soketin yarım kalması çok görülür ve müşteri bunu ertesi gün fark eder. Beşincisi temizliktir: araçta parmak izi, plastik parçacığı ya da ambalaj bırakılmaz. Bir de teslim edilmeyen bir şey vardır ve unutulur: sökülen ve kullanılmayan parçalar, cihazın kutusu, belgesi ve varsa yedek parçaları müşteriye verilir. Bu ayrıntı işi 'tamir' olmaktan çıkarıp 'hizmet' yapan şeydir." },
+          { "label": "Yalnız cihazın çalıştığına bakılır", "verdict": "cihaz", "explain": "Müşterinin ilk gördüğü şey kaplamalardır." },
+          { "label": "Kaplamalar müşteri fark etmezse bırakılır", "verdict": "birak", "explain": "Fark eder ve bir daha gelmez." },
+          { "label": "Temizlik müşterinin işidir", "verdict": "temizlik", "explain": "Araç geldiği temizlikte teslim edilir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Söküm bölgesindeki her işlev yeniden denenir. Yarım kalan bir soket ertesi gün geri gelir."
+    },
+    {
+      "id": 6,
+      "instruction": "Müşteri 'kaydı olayda nasıl kullanacağım' diye soruyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.arka-kamera",
+        "question": "Ne cevap verilir?",
+        "options": [
+          { "label": "Kaydın nasıl kilitleneceği, kartın nasıl çıkarılıp saklanacağı ve dosyanın nasıl kopyalanacağı teknik olarak anlatılır; kaydın hukuki kullanımı konusunda tavsiye verilmez", "verdict": "teknik-anlat", "correct": true, "explain": "Bu sorunun cevabı ikiye ayrılır ve ayrım net tutulur. Teknik taraf ustanın işidir ve eksiksiz anlatılır: olay olduğunda kayıt nasıl kilitlenir, cihaz kapatılıp kart nasıl güvenle çıkarılır, kart bilgisayara takılıp ilgili dosya nasıl bulunur ve kopyalanır, dosyanın adındaki tarih ve saat nasıl okunur. Ayrıca bir uyarı verilir: kart üzerinde kalan tek kopyaya güvenilmez, dosya en kısa sürede başka bir yere kopyalanır — çünkü kart cihaza geri takılırsa döngü devam eder ve o kayıt silinebilir. Hukuki taraf ustanın işi değildir. Kaydın bir uyuşmazlıkta nasıl kullanılacağı, kime verileceği, sosyal medyada paylaşılıp paylaşılamayacağı ve içinde başka kişilerin görüntüsü ya da sesi varsa ne olacağı kişisel verilerin korunması mevzuatının ve hukukçunun alanıdır. Usta burada tek bir şey söyler: cihazı ve kaydı teslim ediyorum, bunun hukuki kullanımı için hukukçuya danış. Bu sınır bu aşamanın ilk dersinde çizildi ve teslimde tekrar edilir. Yanlış bir hukuki yönlendirme, doğru yapılmış bir montajın bütün değerini götürür." },
+          { "label": "Kaydın delil olarak nasıl kullanılacağı anlatılır", "verdict": "hukuki", "explain": "Hukuki tavsiye ustanın alanı değildir." },
+          { "label": "Hiçbir şey söylenmez", "verdict": "sessiz", "explain": "Teknik taraf ustanın işidir ve anlatılır." },
+          { "label": "Kaydın serbestçe paylaşılabileceği söylenir", "verdict": "paylas", "explain": "Paylaşım kişisel veri mevzuatının konusu; usta yönlendirme yapmaz." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Teknik tarafı eksiksiz anlat, hukuki tarafı hiç yorumlama. Bu ayrım bu aşamanın ilk dersinde çizildi."
+    },
+    {
+      "id": 7,
+      "instruction": "Araç teslim edildi.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kamera-kablosu",
+        "question": "Bu aşamada asıl öğrenilen şey neydi?",
+        "options": [
+          { "label": "Kamera montajı yeni bir bilgi alanı değil: besleme seçimi, şase, kablo güzergâhı, söküm tekniği ve uykudaki akım — hepsi bu alanın önceki derslerinden geliyor ve burada para kazandıran bir işte birleşti", "verdict": "birlesim", "correct": true, "explain": "Bu altı dersin hiçbirinde aslında yeni bir teknik öğretilmedi ve fark edilmesi gereken şey budur. Sürekli ile kontakla kesilen beslemeyi ayırmayı gövde elektriği dersinde öğrendin. Şaseyi temizleyerek bağlamayı ve gerilim düşümünü elektrik alanından biliyordun. Kabloyu körüğün içinden geçirmeyi kapı kablo geçişi dersinde öğrendin. Klipsi kırmadan kaplama sökmeyi söküm tekniği dersinde. Uykudaki akımı ayırarak ölçmeyi bu alanın ilk dersinde. Yapıştırmada yüzey hazırlığının tek belirleyici olduğunu dış aksesuar dersinde. Kamera montajı bütün bunların bir araya geldiği bir uygulamadır — ve tam da bu yüzden sanayide iyi kazandırır: takması kolay görünen ama doğru takılması bir alanın tamamını bilmeyi gerektiren bir iş. Kötü montajla iyi montaj arasındaki fark ilk gün görünmez, bir olay yaşandığında görünür. Ve müşteri o gün, kaydın olup olmadığına göre ya bir usta bulmuş olur ya da bir kablo. Bu aşama burada bitiyor; sırada ses sisteminin temelleri var ve orada da aynı zincir devam edecek: besleme, şase, kablo güzergâhı." },
+          { "label": "Tamamen yeni bir uzmanlık alanı", "verdict": "yeni", "explain": "Teknik temelin tamamı önceki derslerden geliyor." },
+          { "label": "Yalnız cihaz takmayı", "verdict": "takma", "explain": "Cihazı takmak işin en kolay kısmı." },
+          { "label": "Kabloyu gizlemeyi", "verdict": "kablo", "explain": "Kablo gizleme işin bir parçası, tamamı değil." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Kamera aşaması bitti. Sırada ses sisteminin temelleri — zincir aynı: besleme, şase, kablo güzergâhı."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Kaydın yapıldığı nasıl doğrulanır?",
+        "a": "izleyerek",
+        "options": [
+          { "verdict": "izleyerek", "label": "Araç birkaç dakika sürülür, dosya açılıp izlenir; ön ve arka görüntü, tarih-saat ve akıcılık gözle kontrol edilir", "explain": "Ekrandaki kayıt simgesi hiçbir şey kanıtlamaz — kart bozuksa, hiç takılmadıysa ya da cihaz yazamıyorsa simge yine yanar. Tek geçerli kanıt yazılmış bir dosyanın izlenmesidir. Takılan görüntü kartın yorulduğunu söyler ve montaj bitmeden çözülür. Aynı doğrulama park modu için de tekrarlanır." },
+          { "verdict": "simge", "label": "Kayıt simgesinin yandığına bakılır", "explain": "Simge yazıldığını göstermez." },
+          { "verdict": "acilis", "label": "Cihaz açılıyorsa yeterli", "explain": "Açılış kayıt demek değil." },
+          { "verdict": "musteri", "label": "Müşteri ilk olayda öğrenir", "explain": "En kötü zamanda öğrenmek demektir." }
+        ]
+      },
+      {
+        "q": "Müşteriye tek bir işlev öğretilecekse hangisidir?",
+        "a": "olay-kilidi",
+        "options": [
+          { "verdict": "olay-kilidi", "label": "Olay kilidi ve yanındaki uyarı: olaydan sonra araç kullanılmaya devam ederse kayıt döngüde silinebilir", "explain": "Kendiliğinden kilitleme her olayda tetiklenmez — hafif bir sıyırma ya da bir tartışma yeterli sarsıntı üretmeyebilir. Bu yüzden elle kilitleme tuşu gösterilir ve bir kere denetilir. Mümkünse kart çıkarılıp saklanır. Bu iki cümle montajın bütün değerini korur." },
+          { "verdict": "menu", "label": "Bütün menü ayarları", "explain": "Müşteri hepsini unutur." },
+          { "verdict": "kendi", "label": "Hiçbiri; cihaz kendi halleder", "explain": "Her olayda tetiklenmez." },
+          { "verdict": "cozunurluk", "label": "Çözünürlük ayarı", "explain": "Bir kere ustaca ayarlanır." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2'deki 14:06 ve 14:23 SENARYO okumalarıdır; istenen FARKTIR (17 dakika) ve ders bir cihaz için saat sapma sınırı vermiyor.",
+    "sourceRequired": "Kart biçimlendirme sıklığı, kart ömrü, cihazın olay kilidi davranışı, dosya biçimi, saat kaynağı ve telefon bağlantısı adımları bilinçle VERİLMEDİ; hepsi ürüne özgüdür ve cihazın kendi belgesinden okunur.",
+    "kapsam": "Kaydın hukuki kullanımı, delil olarak sunulması, paylaşılması ve kabin içi kayıt KAPSAM DIŞIDIR — kişisel verilerin korunması mevzuatının konusudur ve ders yalnız sınırı bildirir. Bozuk karttan veri kurtarma da kapsam dışı.",
+    "kaynak": "Bu aşama MEB çerçeve programında YOKTUR; proje kararıyla eklendi. Aşamanın tamamı, bu alanın önceki derslerinde öğrenilen besleme, şase, kablo güzergâhı, söküm tekniği ve uykudaki akım bilgilerinin bir uygulamasıdır.",
+    "reviewedByMechanic": false
+  }
+}

@@ -1,0 +1,142 @@
+{
+  "id": "temel.el-aletleri",
+  "area": "motor-mekanik",
+  "stage": 1,
+  "title": "Anahtar, Lokma, Cırcır",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 12,
+  "prerequisites": [],
+  "learningGoals": [
+    "Cıvata başını ölçüp doğru ölçüde alet seçmek",
+    "Açık ağız, yıldız ve lokmanın hangi durumda kullanıldığını ayırmak",
+    "Dar alanda uzatma ve mafsalla erişim çözmek"
+  ],
+
+  "safety": [
+    { "rule": "Anahtarı iterek değil çekerek kullan", "why": "Anahtar boşa kaçtığında yumruğun parçaya çarpar; çekerek çalışırsan geriye düşersin, ele zarar gelmez", "blocksStart": true },
+    { "rule": "Anahtara uzatma borusu takma", "why": "Anahtarın kaldırabileceğinden fazla moment cıvatayı koparır ya da anahtarı kırar", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.acik-agiz-13", "label": "13 mm açık ağız anahtar", "required": false },
+    { "id": "tool.yildiz-anahtar-13", "label": "13 mm yıldız (halkalı) anahtar", "required": false },
+    { "id": "tool.lokma-13", "label": "13 mm lokma", "required": true },
+    { "id": "tool.circir", "label": "1/2\" cırcır kolu", "required": true },
+    { "id": "tool.uzatma-150", "label": "150 mm uzatma", "required": true },
+    { "id": "tool.mafsal", "label": "Mafsal (kardan) başlık", "required": false },
+    { "id": "tool.pense", "label": "Pense", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Cıvata başını ölç. Ölçüyü bilmeden alet seçilmez.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.egzersiz-civata.1",
+        "unit": "mm",
+        "bookValue": 13,
+        "acceptRange": [12.9, 13.1]
+      },
+      "camera": "bench-close",
+      "hint": "Anahtar ölçüsü cıvatanın karşılıklı iki yüzü arasındaki mesafedir, köşeden köşeye değil.",
+      "teachingNote": "Göz kararı alet seçmek atölyede en sık görülen çırak hatasıdır. Bir numara bol anahtar, ilk zorlamada başı yalar."
+    },
+    {
+      "id": 2,
+      "instruction": "Bu cıvata açıkta ve sıkı. Hangi aleti seçersin?",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.egzersiz-civata.1",
+        "question": "Sıkı bir cıvatayı sökmeye hangisiyle başlarsın?",
+        "options": [
+          { "label": "Lokma + cırcır", "verdict": "lokma", "correct": true, "explain": "Lokma başın altı yüzüne birden tutunur, kuvveti köşelere değil yüzeylere dağıtır. Sıkı cıvatada ilk tercih budur." },
+          { "label": "Açık ağız anahtar", "verdict": "acik-agiz", "explain": "Açık ağız yalnız iki yüze tutunur ve yük altında açılma eğilimindedir. Sıkı cıvatada köşeleri yalar. Erişimin başka yolu yoksa kullanılır." },
+          { "label": "Yıldız (halkalı) anahtar", "verdict": "yildiz", "explain": "Lokmadan sonraki en iyi seçim, altı yüze tutunur. Ama cıvatanın ucundan geçirilmesi gerekir, her yerde geçmez." },
+          { "label": "Pense", "verdict": "pense", "explain": "Pense cıvata anahtarı değildir. Başı yuvarlatır ve işi ekstraktör işine çevirir. Atölyede pense ile cıvata sökmek en pahalı kısayoldur." }
+        ]
+      },
+      "camera": "bench-close",
+      "teachingNote": "Alet seçimi işe göre değil, parçanın malzemesine ve erişimine göre yapılır."
+    },
+    {
+      "id": 3,
+      "instruction": "Seçtiğin lokma ve cırcırla cıvatayı sök.",
+      "interaction": {
+        "type": "rotate",
+        "target": "part.egzersiz-civata.1",
+        "direction": "ccw",
+        "turns": 5,
+        "tool": "tool.lokma-13",
+        "requiresGesture": true
+      },
+      "camera": "bench-close",
+      "commonMistake": {
+        "if": "yanlis-alet",
+        "feedback": "Seçtiğin alet bu cıvatanın başına tam oturmuyor. Zorlarsan köşeler yalanır ve cıvata bir daha normal aletle sökülmez."
+      },
+      "hint": "Cırcırı çekerek çevir. Kolun ucundan tut, ortasından değil — moment kol boyuyla artar."
+    },
+    {
+      "id": 4,
+      "instruction": "Cıvatanın yeri derin ve cırcır kolu parçaya çarpıyor. Ne eklersin?",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.egzersiz-civata.1",
+        "question": "Dar ve derin yuvada erişimi nasıl çözersin?",
+        "options": [
+          { "label": "Uzatma takarım, gerekirse mafsalla açı veririm", "verdict": "uzatma", "correct": true, "explain": "Uzatma derinliği, mafsal açıyı çözer. Mafsalda kuvvet açılı gider; bu yüzden mafsalla son sıkma yapılmaz, yalnız erişim için kullanılır." },
+          { "label": "Daha uzun kollu anahtar kullanırım", "verdict": "uzun-kol", "explain": "Uzun kol momenti artırır, erişimi çözmez. Sorun kuvvet değil, kolun parçaya çarpması." },
+          { "label": "Parçayı çekiçle biraz açarım", "verdict": "cekic", "explain": "Erişim için parça zorlanmaz. Bir sorunu çözerken ikinci bir arıza üretmiş olursun." },
+          { "label": "Cıvatayı elimle sökmeye çalışırım", "verdict": "elle", "explain": "Sıkı cıvata elle dönmez. Elle çevirme takma başlangıcı içindir, sökme için değil." }
+        ]
+      },
+      "camera": "bench-close"
+    },
+    {
+      "id": 5,
+      "instruction": "Uzatmayı takıp cıvatayı yerine geri çevir.",
+      "interaction": {
+        "type": "rotate",
+        "target": "part.egzersiz-civata.1",
+        "direction": "cw",
+        "turns": 5,
+        "tool": "tool.lokma-13",
+        "requiresGesture": true
+      },
+      "camera": "bench-close",
+      "teachingNote": "Bu derste tork anahtarı kullanılmadı çünkü o dersi henüz görmedin. Gerçek işte son sıkma her zaman tork anahtarıyla yapılır."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Sıkı bir cıvatada neden lokma açık ağız anahtardan üstündür?",
+        "a": "alti-yuze-tutunur",
+        "options": [
+          { "verdict": "alti-yuze-tutunur", "label": "Altı yüze birden tutunur, kuvveti köşelere yığmaz", "explain": "Açık ağız iki yüze tutunur ve yük altında açılır; köşeler önce ezilir." },
+          { "verdict": "daha-ucuz", "label": "Daha ucuz olduğu için", "explain": "Fiyatın alet seçimiyle ilgisi yok. Ölçüt tutunma yüzeyi ve erişim." },
+          { "verdict": "daha-hizli", "label": "Daha hızlı çevirdiği için", "explain": "Cırcır hızlıdır ama asıl sebep hız değil, başı korumaktır." },
+          { "verdict": "her-olcuye-uyar", "label": "Her ölçüye uyduğu için", "explain": "Lokma da ölçülüdür. Bol lokma da tıpkı bol anahtar gibi başı yalar." }
+        ]
+      },
+      {
+        "q": "Mafsal (kardan) başlık neden son sıkmada kullanılmaz?",
+        "a": "aci-momenti-bozar",
+        "options": [
+          { "verdict": "aci-momenti-bozar", "label": "Kuvvet açılı iletildiği için gerçek tork bilinemez", "explain": "Mafsal erişim aletidir. Açılı iletimde sürtünme ve kayıp değişir; tork anahtarının okuduğu değer cıvataya tam gitmez." },
+          { "verdict": "kirilir", "label": "Mafsal kırılır", "explain": "Kaliteli mafsal kırılmaz. Sorun dayanıklılık değil, ölçümün güvenilirliği." },
+          { "verdict": "yavas", "label": "Çok yavaş çalışır", "explain": "Hızla ilgisi yok." },
+          { "verdict": "kullanilir", "label": "Kullanılır, sakıncası yoktur", "explain": "Erişim için kullanılır ama son sıkmada değil. Tork değeri şüpheli hâle gelir." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "sourceRequired": "Bu derste kaynak gerektiren teknik değer yoktur. 13 mm cıvata başı egzersiz verisidir.",
+    "reviewedByMechanic": false
+  }
+}

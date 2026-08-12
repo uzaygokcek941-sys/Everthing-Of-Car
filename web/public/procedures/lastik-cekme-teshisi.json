@@ -1,0 +1,177 @@
+{
+  "id": "lastik.cekme-teshisi",
+  "area": "lastik-tekerlek",
+  "stage": 9,
+  "title": "Araç Bir Tarafa Çekiyor",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 35,
+  "prerequisites": ["lastik.basinc-etkileri", "lastik.on-duzen-ayari"],
+  "learningGoals": [
+    "Çekme şikâyetinde en ucuz ve en olası adaydan başlamak",
+    "Yolun eğimini şikâyetten ayırmak",
+    "Lastik kaynaklı çekmeyi yer değiştirme testiyle kanıtlamak"
+  ],
+
+  "safety": [
+    { "rule": "Çekme testi boş, düz ve güvenli bir yolda yapılır", "why": "Direksiyonun serbest bırakıldığı bir test trafikte yapılmaz", "blocksStart": true },
+    { "rule": "Fren sıkışması şüphesinde tekerlek sıcaklığı elle değil temassız ölçülür", "why": "Sıkışan frenin diski ciddi biçimde yakar", "blocksStart": true },
+    { "rule": "Ön takımda boşluk bulunursa çekme teşhisi orada durur ve parça değişimine gider", "why": "Boşluklu sistemde tekerlek sabit durmaz; ölçüm de ayar da geçersizdir", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.manometre", "label": "Basınç manometresi", "required": true },
+    { "id": "tool.on-duzen-cihazi", "label": "Ön düzen cihazı", "required": true },
+    { "id": "tool.termometre", "label": "Temassız termometre", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Müşteri: direksiyonu bıraksam araç sağa gidiyor diyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.manometre",
+        "question": "İlk ölçüm ne?",
+        "options": [
+          { "label": "Dört lastiğin basıncı: en sık sebep ve en ucuz kontrol", "verdict": "basinc", "correct": true, "explain": "Çekme şikâyetinin en yaygın sebebi lastik basıncı farkıdır ve bunu ölçmek dakikalar sürer, hiçbir maliyeti yoktur. Mekanizma basittir: basıncı düşük lastik daha çok ezilir, yuvarlanma direnci artar ve araç o tarafa doğru döner. Bu yüzden ön düzen cihazına araç bağlanmadan, hatta yol testi yapılmadan önce dört basınç ölçülür ve etiket değerine getirilir. Ölçüm soğuk lastikte yapılır; araç sıcak geldiyse bu bilinerek değerlendirilir. Basınçlar eşitlendikten sonra yol testi tekrarlanır — çekme geçtiyse teşhis bitmiştir ve müşteriye basıncın neden düştüğü de araştırılarak söylenir (valf, topuk, delik ya da ihmal). Geçmediyse eleme devam eder ama artık sağlam bir zemin vardır: bundan sonraki bütün ölçümler doğru basınçta alınacaktır. Sırayı bozup önce ön düzen ayarı yapmak, basınç farkı giderildiğinde ayarı geçersiz kılar." },
+          { "label": "Ön düzen cihazına bağlamak", "verdict": "on-duzen", "explain": "Basınç farkı varken yapılan ayar, basınç düzeltilince geçersiz olur." },
+          { "label": "Ön lastikleri değiştirmek", "verdict": "lastik-degistir", "explain": "Sebep bulunmadan değişim pahalı bir tahmindir." },
+          { "label": "Direksiyon kutusunu kontrol etmek", "verdict": "kutu", "explain": "Sıranın çok ilerisinde; önce basit ve olası adaylar elenir." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Eleme her zaman en olası, en ucuz ve en hızlı bakılandan başlar. Çekme şikâyetinde bu, tartışmasız basınçtır."
+    },
+    {
+      "id": 2,
+      "instruction": "Basınçlar eşitlendi, çekme sürüyor. Yol testine çıkıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik",
+        "question": "Test nasıl yapılır?",
+        "options": [
+          { "label": "Aynı yolda iki yönde de sürülür: yol eğimli olabilir ve eğim, gerçek bir çekme gibi hissedilir", "verdict": "iki-yon", "correct": true, "explain": "Yollar suyun akması için genellikle ortadan kenarlara doğru hafifçe eğimli yapılır. Bu eğim aracı sürekli kenara doğru iter ve sürücü bunu aracın çekmesi olarak hisseder — oysa araç kusursuz olabilir. Bu yüzden çekme testi tek yönde yapılmaz: aynı yol parçası iki yönde de sürülür. Araç iki yönde de aynı tarafa çekiyorsa — yani bir gidişte sağa, dönüşte yine sağa — sorun araçtadır. Gidişte sağa, dönüşte sola çekiyorsa çektiği şey yolun eğimidir ve araçta bir arıza yoktur. Bu tek test, hiçbir maliyeti olmayan ve çok sık atlanan bir ayrımdır; atlandığında sağlam bir araca ön düzen ayarı yapılır, çekme geçmez ve müşteri ikinci kez gelir. Test sırasında direksiyon kısa bir an serbest bırakılır ve aracın kendiliğinden ne yaptığına bakılır; bu, boş ve güvenli bir yolda yapılır." },
+          { "label": "Tek yönde bir kez sürülür", "verdict": "tek-yon", "explain": "Yolun eğimi çekme gibi hissedilir; iki yön karşılaştırılmadan ayrılamaz." },
+          { "label": "Yalnız yüksek hızda test edilir", "verdict": "yuksek-hiz", "explain": "Hız değil, iki yönlü karşılaştırma belirleyici." },
+          { "label": "Test gerekmez, ölçüm yeterli", "verdict": "olcum", "explain": "Ölçüm sebebi gösterir ama şikâyetin gerçekliğini yol testi doğrular." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bir şikâyetin gerçekten araçtan gelip gelmediğini anlamak, sebebi aramadan önceki adımdır. İki yönlü test tam bunu yapıyor."
+    },
+    {
+      "id": 3,
+      "instruction": "Araç iki yönde de sağa çekiyor. Ön düzen raporu geldi: sol kaster 3,2°, sağ kaster 2,6°. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.rot-kolu",
+        "unit": "derece",
+        "acceptRange": [0.58, 0.62]
+      },
+      "camera": "tekerlek",
+      "hint": "3,2 eksi 2,6.",
+      "teachingNote": "0,6°'lik bu sol–sağ kaster farkı, iki değer de kendi hedef aralığının içindeyken bile araç çekmesine yol açabilir — çünkü çekmeyi belirleyen mutlak değer değil farktır. Raporun renkleri bu yüzden yanıltıcı olabilir: iki taraf da yeşil görünürken biri aralığın üst, diğeri alt ucundadır. Aynı mantık kamber için de geçerlidir. Araç genellikle kasteri daha AZ olan tarafa doğru çeker; burada sağ taraf daha az, şikâyet de sağa."
+    },
+    {
+      "id": 4,
+      "instruction": "Kaster farkı bulundu ama bu araçta kaster ayarı yok.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.gobek",
+        "question": "Ne düşünülür?",
+        "options": [
+          { "label": "Geometriyi belirleyen bir parça yerinde değildir: eğilmiş salıncak, yorulmuş burç ya da onarılmamış kaza hasarı", "verdict": "parca", "correct": true, "explain": "Kaster birçok araçta fabrika değeri olarak sabittir; bozulacak bir ayar yoksa sapma başka bir şeyi anlatır. Bu araçta sağ tarafın kasteri düşük çıkmışsa, o köşedeki parçalardan biri fabrikadaki konumunda değildir. En sık sebepler bellidir: çukur ya da kaldırım darbesiyle eğilmiş bir salıncak kolu, yorulup açılmış bir burç, hasar görmüş bir amortisör gövdesi ya da onarılmış ama tam düzeltilmemiş bir gövde. Doğru davranış, farkı toe ayarıyla örtmeye çalışmak değil — bu, aracı düz gösterir ama lastiği aşındırmaya devam eder — o köşedeki parçaları tek tek kontrol etmektir. Kontrol elle boşluk testiyle başlar, gözle eğrilik aramasıyla sürer ve gerekiyorsa gövde ölçümüne gider. Parça değiştikten sonra ölçüm tekrarlanır; kaster hedefe döndüyse sebep bulunmuş demektir. Bu, ön düzen dersinde öğrenilen kuralın uygulamasıdır: ayarı olmayan bir açının sapması ayar değil parça sorunudur." },
+          { "label": "Toe ile telafi edilir", "verdict": "toe", "explain": "Telafi aracı düz gösterir ama sebep durur ve lastik aşınmaya devam eder." },
+          { "label": "Normaldir, kaster çekme yapmaz", "verdict": "normal", "explain": "Sol–sağ kaster farkı doğrudan çekme üretir." },
+          { "label": "Cihaz yanlış ölçmüştür", "verdict": "cihaz", "explain": "Cihaz doğrulanır ama ilk açıklama parçanın konumudur." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bu alanda üçüncü kez aynı kural: ayarı olmayan bir açının sapması, orada bir şeyin yerinde olmadığını söyler."
+    },
+    {
+      "id": 5,
+      "instruction": "Başka bir araçta basınçlar doğru, ön düzen raporu kusursuz, iki yönde de çekme sürüyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.lastik",
+        "question": "Sıradaki test ne?",
+        "options": [
+          { "label": "İki ön lastik sağ–sol yer değiştirilir: çekme yön değiştiriyorsa sebep lastiğin kendisidir", "verdict": "lastik-takas", "correct": true, "explain": "Bir lastik, kusursuz üretilmiş olsa bile iç yapısındaki küçük bir asimetri yüzünden dönerken hafif bir yana itme kuvveti üretebilir. Bu kuvvet ölçüm cihazlarında görünmez — basınç doğru, balans doğru, geometri doğrudur — ama araç sürekli bir tarafa gider. Kanıtlaması basittir: iki ön lastik sağ ile sol arasında yer değiştirilir ve yol testi tekrarlanır. Çekme yön değiştirdiyse suçlu lastiktir ve kanıt kesindir; çünkü araçta hiçbir şey değişmedi, yalnız lastiklerin yeri değişti. Çekme aynı tarafta kaldıysa lastikler temize çıkmıştır ve arama araca döner. Yön değiştiren durumda çözüm, o lastiği arka aksa almak ya da değiştirmektir; yeni lastikse üreticiye bildirilir. Yönlü desenli lastiklerde bu test doğrudan yapılamaz — lastiğin janttan sökülüp çevrilmesi gerekir, bu yüzden test öncesi yanaktaki işaretler kontrol edilir." },
+          { "label": "Ön düzen ayarı tekrar yapılır", "verdict": "ayar-tekrar", "explain": "Rapor kusursuz; tekrar aynı sonucu verir." },
+          { "label": "Direksiyon kutusu değiştirilir", "verdict": "kutu", "explain": "Kutu boşluğu ölü boşluk yapar; sürekli çekme lastik ya da geometriden gelir." },
+          { "label": "Müşteriye normal denir", "verdict": "normal", "explain": "İki yönde de süren çekmenin bir sebebi vardır." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Ölçülemeyen bir kusur, yer değiştirme testiyle kanıtlanabilir. Aynı yöntem titreşim dersinde de kullanıldı."
+    },
+    {
+      "id": 6,
+      "instruction": "Çekme yalnız frenlemede ortaya çıkıyor ve o taraftaki jant belirgin biçimde sıcak.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.jant",
+        "question": "Bu ne anlama gelir?",
+        "options": [
+          { "label": "Fren sıkışması ya da dengesiz fren kuvveti: teşhis fren sistemine geçer, lastik alanının dışındadır", "verdict": "fren", "correct": true, "explain": "Çekme şikâyeti her zaman lastik ve ön düzen konusu değildir. İki ayırt edici bulgu doğrudan fren sistemini gösterir. Birincisi zamanlamadır: çekme yalnız frenlemede ortaya çıkıyorsa fren kuvveti iki taraf arasında eşit dağılmıyor demektir ve sebep kaliperde, hortumda ya da balatadadır. İkincisi sıcaklıktır: sürüş sonrası bir tekerlek diğerlerinden belirgin biçimde sıcaksa o tarafta fren tam açılmıyor, yani sürekli sürtüyor olabilir — bu durumda çekme sürekli hissedilir, yakıt tüketimi artar ve balata ile disk hızla biter. Ölçüm temassız termometreyle yapılır; elle dokunmak ciddi yanık riskidir. Bu bulgu alındığında teşhis lastik ve tekerlek alanının dışına çıkar ve fren sistemine yönlendirilir. Bu, bu alanın sınırını bilmek demektir: iyi bir usta yalnız kendi alanında neyi bulabileceğini değil, hangi bulgunun başka bir alana ait olduğunu da bilir." },
+          { "label": "Lastik basıncı düşüktür", "verdict": "basinc", "explain": "Basınç ölçüldü; ayrıca sıcaklık farkı fren sürtmesini gösterir." },
+          { "label": "Ön düzen bozuktur", "verdict": "on-duzen", "explain": "Ön düzen kaynaklı çekme frenlemeden bağımsızdır." },
+          { "label": "Balans bozuktur", "verdict": "balans", "explain": "Balans titreşim yapar, çekme değil." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Alanın sınırını bilmek de ustalığın parçası. Bu bulguyla iş fren sistemine devredilir ve doğru yerde çözülür."
+    },
+    {
+      "id": 7,
+      "instruction": "Teşhis tamamlandı, kayıt yazılıyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.manometre",
+        "question": "Çekme şikâyetinin eleme sırası neydi?",
+        "options": [
+          { "label": "Basınç, iki yönlü yol testi, ön takım boşluğu, ön düzen ölçümü (sol–sağ farkları), lastik yer değiştirme, fren kontrolü", "verdict": "sira", "correct": true, "explain": "Bu sıra rastgele değil, iki ölçüte göre kurulmuştur: hangi aday daha olası ve hangisini kontrol etmek daha ucuz. Basınç ilk sıradadır çünkü hem en sık sebeptir hem de ölçmesi dakikalar sürer. İki yönlü yol testi ikinci sıradadır çünkü şikâyetin gerçekten araçtan gelip gelmediğini hiçbir maliyet olmadan söyler — yolun eğimi elenir. Ön takım boşluğu üçüncüdür, çünkü boşluk varsa sonraki bütün ölçümler geçersizdir; sıra bozulursa boş yere ayar yapılır. Ön düzen ölçümü dördüncüdür ve burada mutlak değerler kadar sol–sağ farkları okunur. Lastik yer değiştirme testi beşincidir çünkü ölçülemeyen bir kusuru kanıtlayabilen tek yöntemdir. Fren kontrolü ise belirti onu işaret ettiğinde devreye girer — yalnız frenlemede çekme ya da sıcak tekerlek. Kayıtta bu sıranın her adımı ve sonucu yer alır; böylece arıza geri gelirse elenmiş dallar tekrar elenmez." },
+          { "label": "Doğrudan ön düzen ayarıyla başlanır", "verdict": "ayar-once", "explain": "Basınç ve boşluk düzeltilmeden yapılan ayar geçersizdir." },
+          { "label": "Önce lastikler değiştirilir", "verdict": "lastik-once", "explain": "En pahalı adımla başlamak elemenin tersidir." },
+          { "label": "Sıra önemli değildir", "verdict": "sirasiz", "explain": "Yanlış sırayla yapılan doğru işlemler yanlış sonuç verir." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bu sıra ezberlenecek bir liste değil, iki ölçütün sonucu: olasılık ve maliyet. Aynı iki ölçüt her teşhiste aynı sırayı üretir."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Çekme testi neden aynı yolda iki yönde yapılır?",
+        "a": "yol-egimi",
+        "options": [
+          { "verdict": "yol-egimi", "label": "Yollar suyun akması için eğimlidir ve bu eğim gerçek bir çekme gibi hissedilir; iki yön karşılaştırılmadan araç ile yol ayrılamaz", "explain": "Araç iki yönde de aynı tarafa çekiyorsa sorun araçtadır. Gidişte sağa, dönüşte sola çekiyorsa çektiği şey yolun eğimidir ve araçta arıza yoktur. Bu ayrım hiçbir maliyeti olmayan ama çok sık atlanan bir adımdır; atlandığında sağlam bir araca ayar yapılır, çekme geçmez ve müşteri ikinci kez gelir." },
+          { "verdict": "lastik-isinsin", "label": "Lastikler ısınsın diye", "explain": "Isınma ayrı bir konu; test yolun eğimini eler." },
+          { "verdict": "hiz", "label": "Farklı hızlarda denemek için", "explain": "Hız değil, yön karşılaştırması belirleyici." },
+          { "verdict": "gereksiz", "label": "Gerekmez, tek yön yeterlidir", "explain": "Tek yönde yol eğimi ile araç arızası ayrılamaz." }
+        ]
+      },
+      {
+        "q": "Basınç, geometri ve balans doğruyken çekme sürüyorsa hangi test yapılır?",
+        "a": "lastik-takas",
+        "options": [
+          { "verdict": "lastik-takas", "label": "İki ön lastik sağ–sol yer değiştirilir: çekme yön değiştiriyorsa sebep lastiğin kendisidir", "explain": "Bir lastik iç yapısındaki küçük bir asimetri yüzünden dönerken yana itme kuvveti üretebilir; bu kuvvet ölçüm cihazlarında görünmez. Yer değiştirme testi kesin kanıt verir: araçta hiçbir şey değişmedi, yalnız lastiklerin yeri değişti. Çekme yön değiştirdiyse suçlu lastiktir. Yönlü desenli lastiklerde test doğrudan yapılamaz; lastiğin janttan sökülüp çevrilmesi gerekir." },
+          { "verdict": "ayar", "label": "Ön düzen ayarı tekrarlanır", "explain": "Rapor kusursuz; tekrar aynı sonucu verir." },
+          { "verdict": "kutu", "label": "Direksiyon kutusu değiştirilir", "explain": "Kutu boşluğu ölü boşluk yapar, sürekli çekme değil." },
+          { "verdict": "kabul", "label": "Normal kabul edilir", "explain": "İki yönde de süren çekmenin bir sebebi vardır." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 3,2° ve 2,6° SENARYO okumalarıdır; belirli bir araca ait hedef kaster DEĞİLDİR. İstenen sol–sağ FARKIDIR (0,6°) ve dersin gösterdiği şey iki değer de aralık içindeyken bile farkın çekme üretebileceğidir.",
+    "sourceRequired": "Kaster ve kamber hedef değerleri, kabul aralıkları ve çekmeye yol açan asgari fark bilinçle VERİLMEDİ: araca özgüdür ve cihazın araç veritabanından okunur.",
+    "kapsam": "Fren sıkışması bu derste yalnız TANINIR ve fren sistemine yönlendirilir; onarımı kapsam dışıdır (ayrı MEB öğrenme birimi). Direksiyon kutusu ve hidrolik sistem arızaları da kapsam dışı.",
+    "reviewedByMechanic": false
+  }
+}

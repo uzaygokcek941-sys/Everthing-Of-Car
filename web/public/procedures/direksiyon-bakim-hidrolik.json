@@ -1,0 +1,178 @@
+{
+  "id": "direksiyon.bakim-hidrolik",
+  "area": "direksiyon",
+  "stage": 6,
+  "title": "Hidrolik Sistemin Periyodik Bakımı",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 30,
+  "prerequisites": ["direksiyon.bakim-mekanik"],
+  "learningGoals": [
+    "Hidrolik tarafın bakım maddelerini ve sırasını bilmek",
+    "Sıvı ve kayış bulgularını erken uyarı olarak okumak",
+    "Bakımın hangi noktada arıza teşhisine dönüştüğünü fark etmek"
+  ],
+
+  "safety": [
+    { "rule": "Motor çalışırken kayış ve kasnak bölgesine el uzatılmaz", "why": "Kayış kontrolü motor durmuşken yapılır", "blocksStart": true },
+    { "rule": "Sıcak sistemde depo kapağı dikkatle açılır", "why": "Isınmış sıvı genleşmiştir ve taşabilir; sıcak sıvı yanık yapar", "blocksStart": true },
+    { "rule": "Basınçlı hatta kaçak elle aranmaz, karton gezdirilir", "why": "İnce jet hâlindeki sıvı deriyi delip dokuya girebilir", "blocksStart": true },
+    { "rule": "Kullanılmış sıvı atık olarak toplanır", "why": "Çevreye zararlıdır ve mevzuata göre yönetilir", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true },
+    { "id": "tool.temizlik-bezi", "label": "Temizlik bezi ve karton", "required": true },
+    { "id": "tool.kriko-sehpa", "label": "Kriko ve sehpa", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Hidrolik tarafın bakımına başlıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.hidrolik-deposu",
+        "question": "İlk bakılacak şey ne ve nasıl bakılır?",
+        "options": [
+          { "label": "Depoda üç şey birden: seviye doğru işarete göre, sıvının rengi ve köpük olup olmadığı", "verdict": "seviye-renk-kopuk", "correct": true, "explain": "Depo, hidrolik sistemin panelidir: tek bir bakışta üç ayrı bilgi verir ve hiçbiri alet gerektirmez. Birincisi seviyedir ve sistemin o anki sıcaklığına uyan işarete göre okunur — soğuk sistemde sıcak işaretine bakmak eksik, tersi fazla gösterir. Seviyenin düşük olması kapalı bir devrede tek bir şey anlatır: sıvı bir yerden çıkıyor. İkincisi renktir; koyulaşmış ve yanık kokan sıvı aşırı ısınmayı gösterir ve sebebi aranır, çünkü sıvıyı değiştirip sebebi bırakmak birkaç ay sonra aynı manzarayı üretir. Üçüncüsü köpüktür ve doğrudan bir teşhistir: sistemde hava var demektir; emişten hava geliyor olabilir ya da bir işlem sonrası havası tam alınmamıştır. Bu üç bakış birlikte yapılır çünkü birlikte anlam kazanırlar — düşük seviye ve köpük birlikte görülüyorsa emiş tarafında hava çeken bir noktanın olma ihtimali yükselir. Bakımda bulunan bir köpük, henüz şikâyet üretmemiş olsa bile kaydedilir; ıslık sesi ve düzensiz destek genellikle bunun ardından gelir." },
+          { "label": "Yalnız seviyeye bakılır", "verdict": "sadece-seviye", "explain": "Renk ve köpük de sistemin durumunu anlatır." },
+          { "label": "Depo bakımda açılmaz", "verdict": "acilmaz", "explain": "Depo bu sistemin en bilgi veren noktası." },
+          { "label": "Seviye düşükse eklenip geçilir", "verdict": "ekle-gec", "explain": "Kapalı devrede düşüş sızıntı demektir; sebebi aranır." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Depo bu sistemin paneli: seviye, renk ve köpük tek bakışta üç ayrı bilgi veriyor."
+    },
+    {
+      "id": 2,
+      "instruction": "Kayışa geldin.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.pompa-kasnagi",
+        "question": "Kayışta neye bakılır?",
+        "options": [
+          { "label": "Gerginlik, yüzeydeki parlama, çatlak ve kopmuş kanat, üzerine bulaşmış yağ ve kasnak yüzeyinin durumu", "verdict": "gerginlik-yuzey-yag", "correct": true, "explain": "Kayış, hidrolik desteğin tek güç kaynağıdır ve kontrolü ucuzdur; bu yüzden bakımın en yüksek getirili maddelerinden biridir. Bakılacak beş şey vardır. Gerginlik: gevşek kayış yük altında kayar ve destek anlık olarak kaybolur; birçok araçta otomatik gergi vardır ve onun da çalıştığı, hareket aralığının sonuna gelmediği kontrol edilir. Yüzey parlaması: kayışın çalışma yüzeyi ayna gibi parlamışsa bir süredir kayıyor demektir, bu tek başına bir bulgudur. Çatlak ve kopuk kanat: kauçuk yaşlanmıştır ve kopma riski vardır. Yağ bulaşığı: bu iki yönde de okunur — kayış kayar hâle gelir, ama daha önemlisi, üzerine yağ nereden geliyor sorusu bir sızıntıyı işaret eder; pompa mili keçesi ilk şüphelidir. Kasnak yüzeyi: paslı ya da hasarlı bir kasnak kayışı hızla yer. Kayış kopması yalnız direksiyonu değil, aynı kayışın döndürdüğü şarj ve soğutma sistemlerini de durdurabileceği için bu kontrol tek bir sistemin meselesi değildir." },
+          { "label": "Yalnız kopuk olup olmadığına bakılır", "verdict": "kopuk", "explain": "Parlama, çatlak, gerginlik ve yağ bulaşığı da bulgudur." },
+          { "label": "Kayış bakımda kontrol edilmez", "verdict": "yok", "explain": "Desteğin tek güç kaynağı; en yüksek getirili maddelerden biri." },
+          { "label": "Gevşekse sıvı eklenir", "verdict": "sivi", "explain": "Kayış gerginliği ile sıvı seviyesi ayrı konular." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Kayışa bulaşmış yağ iki şey söyler: kayış kayacak, ve bir yerde sızıntı var. Pompa mili keçesi ilk şüpheli."
+    },
+    {
+      "id": 3,
+      "instruction": "Bakım kayıtlarına baktın: bir önceki bakımda sıvı seviyesi 45 mm, bugün 41 mm (ikisi de soğuk sistemde). Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.hidrolik-deposu",
+        "unit": "mm",
+        "acceptRange": [3.8, 4.2]
+      },
+      "camera": "direksiyon",
+      "hint": "45 eksi 41.",
+      "teachingNote": "4 mm'lik bu düşüş tek başına küçük ama kapalı bir devrede sıfır olması beklenirdi. Buradaki asıl ders, bakımın bir noktada teşhise dönüşmesidir: seviye hâlâ normal aralıkta olabilir ve bugün araç sorunsuz çalışıyor olabilir, ama kayıt bir yön gösteriyor — sıvı çıkıyor. Bu noktada iki seçenek vardır ve ikisi de meşrudur: sızıntı görsel olarak aranır ve bulunursa giderilir, ya da bulgu kaydedilip bir sonraki bakımda tekrar ölçülür. Yanlış olan tek şey, seviyeyi tamamlayıp hiçbir şey yazmamaktır — o zaman bir sonraki usta hiçbir şey bilmez ve düşüşün hızı hiç öğrenilemez. Doğru seviye aralığı araca özgüdür ve bu ders bir değer vermiyor."
+    },
+    {
+      "id": 4,
+      "instruction": "Hortumlara ve bağlantılara geldin.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.basinc-hortumu",
+        "question": "Neye bakılır?",
+        "options": [
+          { "label": "Yüzeyde çatlak ve kabarma, uçlarda nem ve kabuklaşmış iz, hortumun sertleşmesi ya da aşırı yumuşaması, sürtünen bir yere temas edip etmediği", "verdict": "catlak-nem-surtme", "correct": true, "explain": "Hortum kontrolü elle ve gözle birlikte yapılır. Gözle aranan ilk şey rakor ve kelepçe çevresindeki nemdir; sızıntı buralarda çoğu zaman damlamadan önce toz tutmuş kabuklu bir iz bırakır ve bu iz, sızıntının süredir devam ettiğini söyler. İkincisi yüzeydir: basınç hortumunda kabarma ciddi bir bulgudur — iç takviye ayrılmış demektir ve o hortum patlamaya adaydır. Çatlaklar özellikle kıvrım bölgelerinde aranır. Elle bakılan şey kıvamdır: sertleşmiş bir hortum yaşlanmıştır, aşırı yumuşamış ya da süngerimsi hissedilen bir dönüş hortumu ise içten çökmeye başlamıştır ve akışı kısıtlar — basınç dersinde görülen yüksek basınç ve hızlı ısınma tablosunun sebebi budur. Dördüncüsü konumdur: hortumun sürtündüğü bir nokta varsa orada zamanla delinir; motor hareket ettikçe yaşanan bu sürtünme bakımda gözle yakalanabilir ve klipsle ya da koruyucuyla önlenir. Bulgular yine üç kategoriye ayrılır: kabarma 'şimdi', sertleşme 'takip', temiz ve esnek hortum 'iyi'." },
+          { "label": "Yalnız damlama olup olmadığına bakılır", "verdict": "damlama", "explain": "Kabuklaşmış iz, kabarma ve kıvam da bulgudur." },
+          { "label": "Hortumlar belirli sürede değiştirilir, kontrol gerekmez", "verdict": "sure", "explain": "Süre bir ölçüt olabilir ama durum kontrolü yerine geçmez." },
+          { "label": "Sertleşmiş hortum daha iyidir", "verdict": "sert-iyi", "explain": "Sertleşme yaşlanmadır; esneklik beklenir." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Basınç hortumunda kabarma iç takviyenin ayrıldığını gösterir; o hortum patlamaya aday, 'şimdi' kategorisi."
+    },
+    {
+      "id": 5,
+      "instruction": "Motor çalıştırıldı ve direksiyon uçtan uca çevrildi.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.hidrolik-pompa",
+        "question": "Bu denemede ne aranıyor?",
+        "options": [
+          { "label": "Ses, desteğin iki yönde eşit ve kesintisiz olması, direksiyonun akıcı dönmesi ve deneme sonrası depoda köpük oluşup oluşmadığı", "verdict": "ses-esitlik-kopuk", "correct": true, "explain": "Bu kısa deneme, bakımın en bilgi verici tek adımıdır çünkü sistemi çalışırken dinler. Dört şeye birden bakılır. Ses: ıslık ya da gurultu hava, kayış kayması ya da aşınmış pompa demektir ve hangisi olduğu sesin ne zaman değiştiğine bakılarak ayrılır. Eşitlik: destek sağa ve sola aynı olmalıdır; bir yönde belirgin zayıflık kutunun içindeki valfi ya da piston keçesini işaret eder ve bu, bakımda yakalanabilecek erken bir bulgudur. Akıcılık: direksiyonun bir noktada takılması ya da sertleşmesi mekanik tarafı ya da baskı ayarını düşündürür. Dördüncüsü denemeden sonra depoya bakmaktır — çevirme sonrası oluşan köpük, sistemde hava olduğunun taze kanıtıdır. Bu deneme sırasında direksiyon uç konumda BEKLETİLMEZ; birkaç saniye yeterlidir, çünkü uçta beklemek sınırlayıcı valfi açar ve sıvıyı boşuna ısıtır. Deneme sonuçları yazılır: 'ses yok, destek iki yönde eşit, köpük yok' cümlesi bir sonraki bakımda karşılaştırılacak bir çizgidir." },
+          { "label": "Yalnız sese bakılır", "verdict": "sadece-ses", "explain": "Eşitlik, akıcılık ve köpük de değerlendirilir." },
+          { "label": "Direksiyon uçta bir süre tutulur", "verdict": "ucta-tut", "explain": "Sınırlayıcı valfi açar ve sıvıyı ısıtır; bekletilmez." },
+          { "label": "Bu deneme bakımda yapılmaz", "verdict": "yapilmaz", "explain": "Sistemi çalışırken dinleyen tek adım." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Destek iki yönde eşit mi? Bir yöndeki zayıflık, bakımda yakalanabilecek erken bir kutu bulgusu."
+    },
+    {
+      "id": 6,
+      "instruction": "Müşteri 'hidrolik sıvı değişmeli mi' diye soruyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.donus-hortumu",
+        "question": "Karar nasıl verilir?",
+        "options": [
+          { "label": "Üreticinin öngördüğü aralık varsa ona göre; yoksa sıvının durumu belirler — koyulaşma, yanık koku ya da parçacık varsa değişir ve sebebi ayrıca aranır", "verdict": "ureticinin-araligi-ve-durum", "correct": true, "explain": "Bu soruda iki uç da yanlıştır. Bir uçta 'hidrolik sıvı ömür boyu kullanılır' vardır; bu bazı araçlar için üreticinin dediği şey olabilir ama sıvı bozulmuşsa geçerliliğini yitirir. Diğer uçta 'her bakımda değişsin' vardır; bu gereksiz maliyet ve gereksiz atıktır. Doğru yol önce üreticinin belgesine bakmaktır — bir değişim aralığı öngörülmüşse ona uyulur. Öngörülmemişse karar sıvının durumuna göre verilir ve durum bu dersin ilk adımında zaten okunmuştur: koyulaşma ve yanık koku, süt gibi görünüm ya da bezde görülen metalik parçacık. Bunlardan biri varsa sıvı değişir. Ama burada kritik bir ek vardır: bozulmuş sıvı bir sonuçtur, sebep değil. Koyulaşmışsa sistemi ısıtan bir şey vardır — dönüşte kısıtlama, verimi düşmüş pompa, uç konumda tutma alışkanlığı; parçacık varsa devrede aşınan bir parça vardır. Yalnız sıvıyı değiştirmek arızayı yenilenmiş bir sıvının altına saklamaktır ve birkaç ay sonra aynı manzara döner. Sıvı değişirken de kural aynıdır: yalnız üreticinin belirttiği sıvı kullanılır." },
+          { "label": "Hidrolik sıvı asla değişmez", "verdict": "degismez", "explain": "Bozulmuş sıvı değişir; üretici aralığı varsa ona uyulur." },
+          { "label": "Her bakımda değişir", "verdict": "her-bakim", "explain": "Gereksiz maliyet ve atık." },
+          { "label": "Rengine bakmadan, ucuz olduğu için değişir", "verdict": "ucuz", "explain": "Karar duruma ve belgeye göre verilir." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Bozulmuş sıvı bir sonuçtur, sebep değil. Yalnız sıvıyı değiştirmek arızayı yeni sıvının altına saklar."
+    },
+    {
+      "id": 7,
+      "instruction": "Hidrolik bakım tamamlanıyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.hidrolik-deposu",
+        "question": "Kapanışta ne yapılır?",
+        "options": [
+          { "label": "Seviye çalışma sıcaklığında doğrulanır, bölge temizlenip kurulanır, bulgular üç kategoriyle ve ölçülen değerlerle yazılır, kullanılan sıvı ve yapılan işlem kaydedilir", "verdict": "isit-temizle-yaz", "correct": true, "explain": "Kapanış mekanik bakımdaki mantığın hidrolik karşılığıdır. Seviye çalışma sıcaklığında doğrulanır çünkü geçerli okuma odur; soğuk okuma yalnız bir başlangıç değeridir. Bölgenin temizlenip kurulanması bir titizlik gösterisi değil, bir sonraki kontrolün ön koşuludur — kirli bir yüzeyde yeni sızıntı görülemez ve bir sonraki bakımda 'akıyor mu' sorusu yanıtsız kalır. Bulgular üç kategoriye ayrılır: kabarmış hortum ve belirgin sızıntı 'şimdi', sertleşmiş hortum ile hafif seviye düşüşü 'takip', temiz ve sessiz sistem 'iyi'. Ölçülen seviye, koşuluyla birlikte yazılır; bu, düşüş hızının öğrenilmesini sağlayan tek şeydir. Sıvı değiştirildiyse hangi sıvının kullanıldığı kaydedilir — bu bilgi ileride bir keçe sorunu çıktığında doğrudan işe yarar. Son olarak, denemede duyulan ses ve desteğin eşitliği gibi öznel gözlemler de kısa cümlelerle yazılır. Bakımın çıktısı yapılan iş değil, bir sonraki ustaya bırakılan bilgidir." },
+          { "label": "Soğuk okuma yeterlidir", "verdict": "soguk", "explain": "Geçerli okuma çalışma sıcaklığındakidir." },
+          { "label": "Bölge temizlenmez, iz kalsın", "verdict": "temizleme", "explain": "Kirli yüzeyde yeni sızıntı görülemez." },
+          { "label": "Yalnız değişen parçalar yazılır", "verdict": "sadece-degisen", "explain": "İyi bulunanlar da yazılır; karşılaştırma çizgisi böyle oluşur." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Bakımın çıktısı yapılan iş değil, bir sonraki ustaya bırakılan bilgi."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Depoda bakımda neye bakılır?",
+        "a": "seviye-renk-kopuk",
+        "options": [
+          { "verdict": "seviye-renk-kopuk", "label": "Seviye (doğru işarete göre), sıvının rengi ve köpük olup olmadığı", "explain": "Depo hidrolik sistemin panelidir. Kapalı bir devrede seviye düşüyorsa sıvı bir yerden çıkıyordur. Koyulaşma ve yanık koku aşırı ısınmayı gösterir ve sebebi aranır. Köpük doğrudan bir teşhistir: sistemde hava var. Üçü birlikte anlam kazanır — düşük seviye ve köpük birlikteyse emiş tarafında hava çeken bir nokta olma ihtimali yükselir." },
+          { "verdict": "sadece-seviye", "label": "Yalnız seviyeye", "explain": "Renk ve köpük de bilgi verir." },
+          { "verdict": "acilmaz", "label": "Depo bakımda açılmaz", "explain": "En bilgi veren nokta." },
+          { "verdict": "ekle-gec", "label": "Düşükse eklenip geçilir", "explain": "Kapalı devrede düşüş sızıntı demektir." }
+        ]
+      },
+      {
+        "q": "Sıvı koyulaşmışsa ne yapılır?",
+        "a": "ureticinin-araligi-ve-durum",
+        "options": [
+          { "verdict": "ureticinin-araligi-ve-durum", "label": "Sıvı değişir ama bozulmanın sebebi ayrıca aranır", "explain": "Bozulmuş sıvı bir sonuçtur, sebep değil: koyulaşma sistemi ısıtan bir şeyi (dönüşte kısıtlama, verimi düşmüş pompa, uç konumda tutma alışkanlığı), parçacık ise devrede aşınan bir parçayı işaret eder. Yalnız sıvıyı değiştirmek arızayı yeni sıvının altına saklar. Değişimde yalnız üreticinin belirttiği sıvı kullanılır." },
+          { "verdict": "degismez", "label": "Hidrolik sıvı asla değişmez", "explain": "Bozulmuş sıvı değişir." },
+          { "verdict": "her-bakim", "label": "Her bakımda değişir", "explain": "Gereksiz maliyet ve atık." },
+          { "verdict": "ucuz", "label": "Rengine bakmadan değişir", "explain": "Karar duruma ve belgeye göre." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 45 mm ve 41 mm SENARYO okumalarıdır ve ikisi de soğuk sistemde alınmıştır; istenen FARKTIR (4 mm) ve gösterilen şey bakımın bir noktada teşhise dönüştüğüdür. Doğru seviye aralığı verilmiyor.",
+    "sourceRequired": "Sıvı tipi, doğru seviye aralığı, sıvı değişim aralığı, kayış gerginliği değerleri ve hortum değişim süreleri bilinçle VERİLMEDİ; araca ve üreticiye özgüdür.",
+    "kapsam": "Basınç testi aşama 3'te işlendi; bakımda yapılmaz, bulgu çıkarsa teşhise geçilir. Hava alma ayrı ders. EPS'li araçlarda bu bakım maddeleri yoktur; ders yalnız hidrolik yardımlı sistemler içindir ve mekanik bakım bir önceki derste ele alındı.",
+    "reviewedByMechanic": false
+  }
+}

@@ -1,0 +1,176 @@
+{
+  "id": "direksiyon.yol-testi",
+  "area": "direksiyon",
+  "stage": 7,
+  "title": "Yol Testi: Neye Bakılır, Ne Kaydedilir",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 35,
+  "prerequisites": ["direksiyon.bakim-hidrolik"],
+  "learningGoals": [
+    "Yol testini rastgele bir sürüş değil, planlı bir ölçüm olarak yapmak",
+    "Her belirtiyi hangi koşulda aranacağını bilmek",
+    "Gözlemleri sonradan karşılaştırılabilir biçimde kaydetmek"
+  ],
+
+  "safety": [
+    { "rule": "Yol testi trafiğe uygun, boş ve düz bir yolda yapılır; test için trafik akışı zorlanmaz", "why": "Sürücünün dikkati araç davranışına yönelir ve tepki süresi uzar", "blocksStart": true },
+    { "rule": "Direksiyonu bırakarak yapılan gözlem yalnız güvenli koşulda ve çok kısa süre yapılır", "why": "Araç bir yöne kayabilir; eller direksiyona yakın tutulur", "blocksStart": true },
+    { "rule": "Boşluk, ses ya da destek kaybı şüphesi olan araç önce durağan kontrolden geçmeden yola çıkarılmaz", "why": "Zincirde ayrılma riski varsa yol testi tehlikelidir", "blocksStart": true },
+    { "rule": "Test sırasında not almak için araç durdurulur", "why": "Sürerken yazmak dikkat dağıtır", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.kayit-formu", "label": "Yol testi kayıt formu", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Yola çıkmadan önce planını yap.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.direksiyon-simidi",
+        "question": "Yol testi nasıl kurulur?",
+        "options": [
+          { "label": "Önce neye bakılacağı ve hangi koşulda bakılacağı belirlenir; her belirti kendi koşulunda aranır ve gözlemler yazılır", "verdict": "planli-test", "correct": true, "explain": "Yol testi 'bir tur atıp bakalım' değildir; planlanmadığında hem çok şey kaçar hem de görülen şeyler karşılaştırılamaz. Plan üç sorudan oluşur. Birincisi: bu araçta neyi arıyorum? Şikâyet varsa onun tarifinden yola çıkılır, bakım testinde ise standart bir liste izlenir — düz gitme, merkeze dönme, ses, ağırlık, titreşim. İkincisi: her belirti hangi koşulda ortaya çıkar? Çünkü bu belirtilerin çoğu her koşulda görünmez: merkeze dönme viraj çıkışında, destek farkı düşük ve yüksek hızda ayrı ayrı, ses direksiyon çevrilirken ve genellikle düşük hızda, çekme ise düz ve boş bir yolda değerlendirilir. Üçüncüsü: bunu nasıl kaydedeceğim? Testin çıktısı bir his değil, bir cümledir — 'düz gidiyor, 80 km/s'te sağa çok hafif kayma var, merkeze dönme normal, çevirirken ses yok' gibi. Bu cümle onarım sonrası tekrarlanan testle karşılaştırılır ve iyileşme kanıtlanır. Plansız bir test, sürücünün şikâyetini doğrulamaya da yaramaz çünkü aynı koşullar oluşturulmamıştır." },
+          { "label": "Rastgele sürülür, bir şey hissedilirse bakılır", "verdict": "rastgele", "explain": "Belirtilerin çoğu yalnız belirli koşullarda çıkar." },
+          { "label": "Yalnız yüksek hızda test edilir", "verdict": "yuksek-hiz", "explain": "Ses ve destek farkı düşük hızda da aranır." },
+          { "label": "Yol testi gereksizdir, atölye kontrolü yeter", "verdict": "gereksiz", "explain": "Bazı belirtiler yalnız yolda ortaya çıkar." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Testin çıktısı bir his değil bir cümle. O cümle, onarım sonrası karşılaştırılacak tek şey."
+    },
+    {
+      "id": 2,
+      "instruction": "İlk madde: düz gitme.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.rot-basi-sol",
+        "question": "Düz gitme nasıl değerlendirilir?",
+        "options": [
+          { "label": "Aynı düz yol iki yönde de sürülür; çekme yön değiştiriyorsa suçlu yolun eğimidir, aynı tarafta kalıyorsa araçtadır", "verdict": "iki-yonde-sur", "correct": true, "explain": "Yollar suyun akması için genellikle kenara doğru eğimlidir ve bu eğim aracı kenara doğru çeker; bu, çekme şikâyetlerinin en sık ve en kolay elenen sebebidir. Ayırma yöntemi basittir: aynı yol parçası iki yönde de sürülür. Çekme her iki yönde de aynı TARAFA oluyorsa — örneğin gidişte de dönüşte de sağa — suçlu araçtır, çünkü aracın kendi tarafı değişmemiştir. Çekme yön değiştiriyorsa, yani gidişte sağa dönüşte sola oluyorsa, suçlu yoldur ve araçta bir sorun yoktur. Bu test hiçbir alet gerektirmez ve dakikalar sürer ama atlandığında sağlam bir araç ön düzen ayarına alınır ve gerçekte olmayan bir sorun 'düzeltilmeye' çalışılır. Aynı testte ikinci bir gözlem daha yapılır: araç düz giderken simit ortada mı? Çünkü düz gitme ile simidin konumu ayrı şeylerdir ve bu ayrım aşama 1'de öğrenilmişti. Test güvenli koşulda ve elleri direksiyona yakın tutarak yapılır; direksiyon uzun süre bırakılmaz." },
+          { "label": "Tek yönde sürülür, yeterlidir", "verdict": "tek-yon", "explain": "Yol eğimi elenemez; iki yönde sürülür." },
+          { "label": "Doğrudan ön düzen ayarına alınır", "verdict": "ayar", "explain": "Basınç ve yol eğimi elenmeden ayar yapılmaz." },
+          { "label": "Yalnız simide bakılır", "verdict": "simit", "explain": "Düz gitme ile simit konumu ayrı şeylerdir." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Çekme yön değiştiriyorsa suçlu yol, aynı tarafta kalıyorsa araç. Dakikalar süren, aletsiz bir eleme."
+    },
+    {
+      "id": 3,
+      "instruction": "Merkeze dönmeyi ölçtün: sağa virajdan çıkışta simit kendiliğinden 78° geri döndü, sola virajda 62°. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.direksiyon-simidi",
+        "unit": "derece",
+        "acceptRange": [15.5, 16.5]
+      },
+      "camera": "direksiyon",
+      "hint": "78 eksi 62.",
+      "teachingNote": "16°'lik bu asimetri, iki yönün eşit davranmadığını gösteriyor ve bu, tek yöndeki mutlak değerden çok daha güçlü bir bulgudur. Merkeze dönme, tekerlek geometrisi ve sistemdeki sürtünmenin ortak sonucudur; iki yön arasındaki belirgin fark ya geometrinin iki tarafta eşit olmadığını ya da bir yönde fazladan bir direnç bulunduğunu söyler — sıkışmış bir mafsal, düzensiz ayarlanmış bir kutu ya da hidrolikte tek yöne kaçıran bir valf. Simetri kontrolü bu alanda tekrar eden bir yöntem: sağ-sol karşılaştırması, üretici değeri bilinmese bile yorumlanabilir bir bulgu üretir. Kabul edilebilir merkeze dönme değerleri araca özgüdür ve bu ders bir sınır vermiyor."
+    },
+    {
+      "id": 4,
+      "instruction": "Ses maddesine geldin.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.hidrolik-pompa",
+        "question": "Ses hangi koşullarda aranır?",
+        "options": [
+          { "label": "Düşük hızda ve dururken direksiyon yavaşça çevrilerek, cam açık ve radyo kapalı; sesin çevirme hızıyla mı motor devriyle mi değiştiğine bakılır", "verdict": "yavas-cevir-dinle", "correct": true, "explain": "Ses avında koşullar sonucu belirler. Düşük hız ve durağan hâl seçilir çünkü yol gürültüsü ve rüzgâr sesi diğer sesleri örter. Cam açılır, radyo ve fan kapatılır. Direksiyon yavaşça çevrilir — hızlı çevirmek sesi kısa ve belirsiz kılar. Sonra iki ayırt edici soru sorulur. Birincisi: ses direksiyonun çevrilmesiyle mi ortaya çıkıyor, yoksa direksiyon dururken de var mı? Çevirmeyle gelen ses hidrolik tarafı, mafsalları ya da kutuyu; sabit ses ise pompa ya da kayışı düşündürür. İkincisi: ses motor devri yükseldiğinde değişiyor mu? Kayış ve pompa sesleri devirle değişir, mekanik boşluk sesleri değişmez. Üçüncü bir gözlem daha eklenir: ses tek bir noktada mı çıkıyor yoksa hareket boyunca sürüyor mu — tek noktada çıkan tık sesi genellikle bir boşluğu ya da gevşek bir bağlantıyı, sürekli ses ise sürtünme ya da hidrolik kaynaklı bir durumu işaret eder. Duyulan ses tarif edilerek yazılır: nerede, ne zaman, nasıl bir ses." },
+          { "label": "Yüksek hızda ve radyo açıkken", "verdict": "yuksek-radyo", "explain": "Yol gürültüsü ve müzik sesi örter." },
+          { "label": "Direksiyon hızlıca çevrilerek", "verdict": "hizli", "explain": "Hızlı çevirmek sesi kısaltır ve belirsizleştirir." },
+          { "label": "Ses yol testinde değerlendirilmez", "verdict": "degerlendirilmez", "explain": "Sesin çoğu yalnız çalışırken duyulur." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "İki soru sesi ayırıyor: çevirmeyle mi geliyor, devirle mi değişiyor."
+    },
+    {
+      "id": 5,
+      "instruction": "Destek davranışını değerlendireceksin.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.eps-kontrol-unitesi",
+        "question": "Nasıl test edilir?",
+        "options": [
+          { "label": "Düşük ve yüksek hızda ayrı ayrı denenir; desteğin hıza göre değişip değişmediği, iki yönde eşit olup olmadığı ve kesinti olup olmadığı gözlenir", "verdict": "iki-hiz-iki-yon", "correct": true, "explain": "Destek testi üç ayrı soruyu yanıtlar ve her biri farklı bir arızayı işaret eder. Birincisi hıza duyarlılıktır: park hâlinde ya da düşük hızda hafif, otoyol hızında ağır olmalıdır. Her hızda aynıysa modüle hız bilgisi ulaşmıyor olabilir ve bu, EPS dersinde işlenen tipik tablodur. İkincisi simetridir: sağa ve sola destek eşit hissedilmelidir. Bir yönde belirgin zayıflık, hidrolikte kutu içindeki kumanda valfini, elektrikte ise sensör ya da yazılım tarafını düşündürür. Üçüncüsü sürekliliktir: destek kesintili geliyor, gidip geliyorsa hidrolikte hava ya da kayış kayması, elektrikte besleme sorunu ya da ısıl koruma akla gelir. Üçü de öznel gözlemlerdir ama karşılaştırmalı sorulduğunda güvenilir hâle gelirler; 'ağır mı' sorusu belirsizdir, 'düşük hızda mı yüksek hızda mı daha ağır' sorusu ise bir bulgudur. Gözlem yazılırken de bu biçimde yazılır." },
+          { "label": "Yalnız park hâlinde denenir", "verdict": "sadece-park", "explain": "Hıza duyarlılık ancak iki hızda karşılaştırılarak görülür." },
+          { "label": "Yalnız bir yöne çevrilerek denenir", "verdict": "tek-yon", "explain": "Simetri farkı önemli bir bulgu." },
+          { "label": "Destek yol testinde değerlendirilmez", "verdict": "degerlendirilmez", "explain": "Yalnız yolda ortaya çıkan davranışlar var." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "'Ağır mı' belirsiz bir soru. 'Düşük hızda mı yüksek hızda mı daha ağır' bir bulgu."
+    },
+    {
+      "id": 6,
+      "instruction": "Test sırasında titreşim hissediliyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kremayer-kutusu",
+        "question": "Titreşim bu alana mı ait?",
+        "options": [
+          { "label": "Belirli bir hız aralığında gelip geçen titreşim genellikle tekerlek/balans kaynaklıdır; direksiyon kaynaklı olan genellikle boşlukla ya da yolun geri bildirimiyle birlikte gelir", "verdict": "hiz-araligina-bak", "correct": true, "explain": "Titreşim, alanların kesiştiği belirtilerden biridir ve doğru alana yönlendirmek ustanın işidir. Ayırt edici soru şudur: titreşim belirli bir hız aralığında ortaya çıkıp o aralık geçildiğinde kayboluyor mu? Öyleyse kaynak büyük olasılıkla dönen kütlededir — balans, jant salgısı ya da lastik kaynaklı bir düzensizlik — ve bu, Lastik ve Tekerlek alanının konusudur; orada öğrenilen ön/arka tekerlek yer değiştirme yöntemiyle doğrulanır. Direksiyon sisteminden gelen titreşim ise genellikle farklı davranır: zincirde boşluk varsa titreşim yolun bozukluğuyla birlikte gelir ve düz yolda kaybolur; hidrolikte hava varsa titreşim direksiyon çevrilirken hissedilir ve depoda köpükle birlikte görünür; fren kaynaklı olan ise yalnız fren yapılırken ortaya çıkar. Bu yüzden 'titreşim var' cümlesi tek başına yetmez; ne zaman, hangi hızda ve hangi işlem sırasında olduğu sorulur. Yanlış alana yönlendirilen bir titreşim şikâyeti, gereksiz balans ve gereksiz parça değişimiyle sonuçlanır." },
+          { "label": "Her titreşim direksiyon kaynaklıdır", "verdict": "hep-direksiyon", "explain": "Balans, lastik ve fren de titreşim üretir." },
+          { "label": "Titreşim değerlendirilmez", "verdict": "degerlendirilmez", "explain": "Alanı ayırmak için ne zaman olduğu sorulur." },
+          { "label": "Doğrudan balans yapılır", "verdict": "balans", "explain": "Koşul sorulmadan işlem yapılmaz." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "'Titreşim var' yetmez. Ne zaman, hangi hızda, hangi işlem sırasında — alanı bu üç soru belirliyor."
+    },
+    {
+      "id": 7,
+      "instruction": "Test bitti, araca dönüldü.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.direksiyon-simidi",
+        "question": "Kayıt nasıl tutulur?",
+        "options": [
+          { "label": "Her madde koşuluyla birlikte yazılır; olumlu bulgular da yazılır ve onarım sonrası aynı test aynı koşullarda tekrarlanıp karşılaştırılır", "verdict": "kosullu-kayit", "correct": true, "explain": "Yol testinin değeri, sonradan karşılaştırılabilmesindedir; bu yüzden kayıt koşullu olur. 'Sağa çekiyor' cümlesi eksiktir; 'aynı yolda iki yönde de sağa çekiyor, 60-80 km/s aralığında belirgin' cümlesi bir bulgudur. Aynı biçimde 'ses var' değil 'düşük hızda sola çevirirken, motor devrinden bağımsız, tek noktada tık sesi'. Olumlu bulguların yazılması da önemlidir: 'merkeze dönme iki yönde eşit ve normal' cümlesi, bir sonraki testte bir şeyin değişip değişmediğini gösterecek tek referanstır ve bakım derslerindeki 'iyi' kategorisiyle aynı mantığı taşır. En önemlisi, onarım sonrası test AYNI koşullarda tekrarlanır — aynı yol, aynı hız aralığı, mümkünse aynı kişi. Koşul değişirse iki gözlem karşılaştırılamaz ve iyileşme kanıtlanamaz. Son olarak müşteriye anlatırken de bu cümleler kullanılır; somut ve koşullu bir tarif, 'düzeldi' demekten çok daha güven verir ve tartışmayı bitirir." },
+          { "label": "Yalnız sorunlu bulgular yazılır", "verdict": "sadece-sorun", "explain": "Olumlu bulgular bir sonraki testin referansı." },
+          { "label": "Koşul yazmaya gerek yok", "verdict": "kosulsuz", "explain": "Koşulsuz gözlem karşılaştırılamaz." },
+          { "label": "Onarım sonrası test gerekmez", "verdict": "test-yok", "explain": "İyileşme ancak aynı koşullarda tekrarla kanıtlanır." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "'Sağa çekiyor' eksik. 'Aynı yolda iki yönde de sağa, 60-80 aralığında belirgin' bir bulgu."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Düz gitme yol testinde nasıl değerlendirilir?",
+        "a": "iki-yonde-sur",
+        "options": [
+          { "verdict": "iki-yonde-sur", "label": "Aynı düz yol iki yönde de sürülür; çekme yön değiştiriyorsa suçlu yolun eğimidir", "explain": "Yollar suyun akması için kenara doğru eğimlidir ve bu eğim aracı çeker. Çekme her iki yönde de aynı tarafa oluyorsa suçlu araçtır; yön değiştiriyorsa suçlu yoldur ve araçta sorun yoktur. Aletsiz, dakikalar süren bir eleme; atlandığında sağlam araç ön düzen ayarına alınır. Aynı testte ikinci gözlem: araç düz giderken simit ortada mı — düz gitme ile simit konumu ayrı şeylerdir." },
+          { "verdict": "tek-yon", "label": "Tek yönde sürülür", "explain": "Yol eğimi elenemez." },
+          { "verdict": "ayar", "label": "Doğrudan ayara alınır", "explain": "Basınç ve eğim elenmeden ayar yapılmaz." },
+          { "verdict": "simit", "label": "Yalnız simide bakılır", "explain": "İkisi ayrı şeydir." }
+        ]
+      },
+      {
+        "q": "Yol testinde duyulan sesi ayırt eden sorular nelerdir?",
+        "a": "yavas-cevir-dinle",
+        "options": [
+          { "verdict": "yavas-cevir-dinle", "label": "Ses çevirmeyle mi geliyor, ve motor devriyle mi değişiyor", "explain": "Düşük hızda, cam açık ve radyo kapalı, direksiyon yavaşça çevrilerek dinlenir. Çevirmeyle gelen ses hidroliği, mafsalları ya da kutuyu; sabit ses pompa ya da kayışı düşündürür. Devirle değişen sesler kayış ve pompa kaynaklıdır, mekanik boşluk sesleri değişmez. Ayrıca tek noktada çıkan tık sesi boşluk ya da gevşek bağlantı, sürekli ses sürtünme ya da hidrolik kaynağı işaret eder." },
+          { "verdict": "yuksek-radyo", "label": "Yüksek hızda ve radyo açıkken", "explain": "Diğer sesler örter." },
+          { "verdict": "hizli", "label": "Direksiyon hızlıca çevrilerek", "explain": "Ses kısalır ve belirsizleşir." },
+          { "verdict": "degerlendirilmez", "label": "Ses yol testinde değerlendirilmez", "explain": "Çoğu ses yalnız çalışırken duyulur." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 78° ve 62° SENARYO okumalarıdır; istenen FARKTIR (16°) ve gösterilen şey iki yön arasındaki asimetrinin tek yöndeki mutlak değerden daha güçlü bir bulgu olduğudur. Kabul edilebilir merkeze dönme değeri verilmiyor.",
+    "sourceRequired": "Merkeze dönme değerleri, hız eşikleri, kabul edilebilir çekme miktarı ve test protokolleri bilinçle VERİLMEDİ; araca, üreticiye ve ülkeye özgüdür.",
+    "kapsam": "Yanal kayma testi bir sonraki ders. Titreşim ve çekme teşhisinin tamamı Lastik ve Tekerlek alanında işlendi; burada yalnız alan ayrımı için anıldı. Fren kaynaklı belirtiler fren sisteminin konusu ve bu projede kapsam dışı.",
+    "reviewedByMechanic": false
+  }
+}

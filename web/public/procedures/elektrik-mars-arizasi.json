@@ -1,0 +1,175 @@
+{
+  "id": "elektrik.mars-arizasi",
+  "area": "arac-elektrik",
+  "stage": 7,
+  "title": "Marş Basmıyor Teşhisi",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 35,
+  "prerequisites": ["elektrik.mars-devresi", "elektrik.gerilim-dusumu", "elektrik.sarj-arizasi"],
+  "learningGoals": [
+    "Dört farklı marş belirtisini dört ayrı arama yönüne bağlamak",
+    "Marş anında besleme ve dönüş taraflarındaki gerilim düşümünü ölçmek",
+    "Kayıp temizken suçun marş motorunun kendisinde olduğunu göstermek"
+  ],
+
+  "safety": [
+    { "rule": "Vites boşta, el freni çekili, tekerlekler takozlu", "why": "Bütün ölçümler marş basılırken yapılır; araç hareket edebilecek durumdaysa ölçüm yapan kişi tehlikededir", "blocksStart": true },
+    { "rule": "Marş basan kişi ile ölçüm yapan kişi birbirini görmelidir", "why": "Ölçüm eli motor bölmesindeyken habersiz basılan marş, elin dönen parçalara kapılmasına yol açar", "blocksStart": true },
+    { "rule": "Kalın kablolara prob dayanırken metal takı ve gevşek giysi bulunmaz", "why": "Bu hat sigortasızdır; kısa devre hâlinde takı anında kızarır", "blocksStart": true },
+    { "rule": "Marş denemeleri kısa tutulur ve aralarında beklenir", "why": "Uzun süreli marş hem marş motorunu aşırı ısıtır hem aküyü boşaltır; boşalan akü sonraki ölçümleri de bozar", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.multimetre", "label": "Dijital multimetre", "required": true },
+    { "id": "tool.uzatma-prob", "label": "Uzatma prob kablosu", "required": true },
+    { "id": "tool.tel-firca", "label": "Tel fırça", "required": false },
+    { "id": "tool.tork-anahtari", "label": "Tork anahtarı", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Şikâyet: marş ağır ve yavaş dönüyor, motor zor çalışıyor. Farlar yanıyor, tık sesi var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.mars-motoru",
+        "question": "Bu belirti hangi yönü işaret eder?",
+        "options": [
+          { "label": "Her iki devre de çalışıyor ama güç tarafında akım kısıtlanıyor; kayıp aranacak", "verdict": "akim-kisitli", "correct": true, "explain": "Dört marş belirtisi dört ayrı yön gösterir. Hiç ses yoksa kumanda devresi hiç ulaşmamıştır. Tek tık varsa kumanda tamamdır, güç tarafına bakılır. Motor dönmeden vınlama duyuluyorsa elektriksel taraf çalışıyor ama dişli volana kavraşmıyordur, yani mekanik. Ve buradaki tablo — dönüyor ama ağır dönüyor — dördüncüsüdür: iki devre de görevini yapıyor, motor da dönüyor, ama akım olması gerektiği kadar akmıyor. Akımı kısıtlayan üç şey olabilir: akü yeterli akımı veremiyordur, kalın kablolarda ya da bağlantılarda direnç vardır, ya da marş motorunun kendisi zorlanıp fazla akım çekmektedir. Üçü de ölçülebilir ve sıra bellidir." },
+          { "label": "Kumanda devresi arızalı", "verdict": "kumanda", "explain": "Kumanda arızalı olsaydı selenoid hiç hareket etmez, motor hiç dönmezdi." },
+          { "label": "Dişli volana kavraşmıyor", "verdict": "disli", "explain": "O durumda motor boşa döner ve vınlama duyulur; burada motor gerçekten çeviriyor." },
+          { "label": "Motorun kendisi sıkışmış", "verdict": "motor-sikismis", "explain": "Mümkün bir ihtimal ama elektriksel kayıp elenmeden buna karar verilmez." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Marş şikâyetinde ilk iş sesi ve davranışı doğru okumaktır. Dört belirti dört ayrı yön demektir; yanlış yöne sapmak saatler kaybettirir."
+    },
+    {
+      "id": 2,
+      "instruction": "Ölçüme başlamadan önce bir şeyi garanti etmen gerek.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.aku",
+        "question": "Neden önce akünün durumu doğrulanır?",
+        "options": [
+          { "label": "Marş anındaki bütün ölçümler akünün verdiği akıma dayanır; zayıf akü sağlam bir devrede de ağır dönme üretir", "verdict": "aku-referans", "correct": true, "explain": "Marş devresinin bütün ölçümleri, akünün o an gerçekten yüksek akım verebildiği varsayımına dayanır. Yarı boş ya da kapasitesini kaybetmiş bir akü, kabloları ve marş motoru kusursuzken de ağır dönme üretir; üstelik marş anında gerilimi çok düşeceği için yapılan bütün ölçümler de anlamsızlaşır. Bu yüzden sıra bozulmaz: akü şarj edilir, dinlendirilir, gerilimi ölçülür ve mümkünse yük altındaki davranışına bakılır. Sağlam bir akü elde edildikten sonra ağır dönme sürüyorsa, artık suç gerçekten devrede ya da marş motorundadır. Bu adım atlanırsa sağlam kablolar sökülür, sağlam marş motoru değiştirilir ve arıza yerinde kalır." },
+          { "label": "Gerekmez, farlar yanıyorsa akü sağlamdır", "verdict": "farlar", "explain": "Farlar çok küçük bir akım çeker; marş akımını veremeyen bir akü de farları rahat yakar." },
+          { "label": "Akü yeniyse atlanır", "verdict": "yeni-aku", "explain": "Yeni akü de boş olabilir ya da zayıf çıkabilir; ölçüm yine yapılır." },
+          { "label": "Aküye en son bakılır", "verdict": "en-son", "explain": "En sona bırakılırsa aradaki bütün ölçümler güvenilmez zeminde yapılmış olur." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Farların yanması akünün sağlam olduğunu göstermez. Far birkaç amper, marş yüzlerce amper ister; ikisi aynı soruya cevap vermez."
+    },
+    {
+      "id": 3,
+      "instruction": "Akü sağlam. Marş basılırken akünün artı kutbu ile marşın B+ ucu arasını ölçtün: 0,85 V. Sağlam bir devrede aynı ölçüm 0,05 V. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.multimetre-ekran",
+        "unit": "V",
+        "acceptRange": [0.75, 0.85]
+      },
+      "camera": "tezgah",
+      "hint": "0,85 eksi 0,05.",
+      "teachingNote": "Bu, gerilim düşümü testinin marş devresindeki hâli: iki prob, tek bir yolun iki ucu, ölçüm marş basılırken. Arada yalnız kalın kablo, kutup kelepçesi ve B+ somunu var; hepsinin üzerinde kayıp neredeyse sıfır olmalı. Ölçülen değer, bu yolun bir yerinde direnç olduğunu söylüyor. Marş akımı çok yüksek olduğu için buradaki küçük bir direnç — farlarda hiç fark edilmeyecek bir bağlantı bile — ağır dönmeye yeter."
+    },
+    {
+      "id": 4,
+      "instruction": "Aynı ölçümü dönüş tarafında yaptın: marş gövdesi ile akünün eksi kutbu arasında 0,55 V. Sağlam devrede 0,05 V. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.multimetre-ekran",
+        "unit": "V",
+        "acceptRange": [0.45, 0.55]
+      },
+      "camera": "tezgah",
+      "hint": "0,55 eksi 0,05.",
+      "teachingNote": "Dönüş tarafı da ölçüldü ve orada da kayıp var. Marş devresinde dönüş yolu genellikle akü eksi kablosu, motor bloğuna bağlanan şase kayışı ve gövde bağlantısından oluşur; bunlar motorun titreşimine, ısısına ve neme en çok maruz kalan bağlantılardır. İki taraftaki kayıplar toplanır ve marş motoruna kalan gerilimi birlikte düşürür. Bu yüzden test her zaman iki bacaklıdır; tek taraf ölçülüp temiz bulunursa arızanın yarısı hiç görülmemiş olur."
+    },
+    {
+      "id": 5,
+      "instruction": "Kaybın büyük kısmı dönüş tarafındaki şase bağlantısında bulundu: uçları yeşermiş ve gevşek.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sase-noktasi",
+        "question": "Onarım nasıl yapılır?",
+        "options": [
+          { "label": "Bağlantı sökülür, uçlar ve temas yüzeyleri çıplak metale kadar temizlenir, doğru tork ile sıkılır ve neme karşı korunur", "verdict": "temizle-sik-koru", "correct": true, "explain": "Şase bağlantısının işi, motor bloğu ile gövde arasında düşük dirençli bir yol kurmaktır ve bu yol marşın bütün dönüş akımını taşır. Onarımda üç şey birlikte yapılır. Temizlik: pabuç ve temas ettiği yüzey çıplak metale kadar açılır, boya ve pas kaldırılır — yeşermiş bakır kesilip yeni pabuç takılır, çünkü oksitlenme örgünün içine işlemiştir. Sıkma: doğru tork uygulanır; gevşek bağlantı zamanla yeniden bozulur, aşırı sıkma ise pabucu ezip kesitini daraltır. Koruma: bağlantı neme karşı uygun bir ürünle kapatılır ki aynı arıza yeniden başlamasın. Yalnız sıkmak ya da yalnız temizlemek arızayı bir süreliğine giderir, sonra geri getirir." },
+          { "label": "Bağlantı sıkılır, temizlik gerekmez", "verdict": "sik-yeter", "explain": "Yeşermiş yüzey sıkıldığında da iletmez; direnç kalır." },
+          { "label": "Üzerine ikinci bir kablo çekilir", "verdict": "ikinci-kablo", "explain": "Arızalı bağlantı yerinde kalır ve ısınmaya devam eder; sebep giderilmemiş olur." },
+          { "label": "Marş motoru değiştirilir", "verdict": "mars-degistir", "explain": "Ölçüm kaybın bağlantıda olduğunu gösterdi; marş motorunun suçu yok." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Marş devresinde en sık suçlanan parça marş motoru, en sık suçlu olan şey ise bir bağlantıdır. Ölçüm bu ikisini birbirine karıştırmayı engeller."
+    },
+    {
+      "id": 6,
+      "instruction": "Onarım yapıldı, iki taraftaki kayıplar sağlam değerlere indi. Ama başka bir araçta aynı ölçümler baştan temiz çıkıyor ve marş yine ağır dönüyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.mars-b-ucu",
+        "question": "Kayıplar temizken ağır dönmenin anlamı nedir?",
+        "options": [
+          { "label": "Devre suçsuz; marş motorunun kendisi fazla akım çekiyor ya da motor mekanik olarak zorluyor", "verdict": "mars-suclu", "correct": true, "explain": "Besleme ve dönüş taraflarında kayıp yoksa akü, kablolar ve bağlantılar üzerine düşeni yapıyor demektir. Geriye iki ihtimal kalır. Birincisi marş motorunun kendisi: yatakları aşınmış, sargıları kısmen kısa devre yapmış ya da fırçaları bitmiş bir marş normalden çok daha fazla akım çeker ve yavaş döner. Bunun kanıtı pens ampermetreyle ölçülen çekiş akımıdır; yüksek akım ve düşük hız birlikte marş motorunu gösterir. İkinci ihtimal motorun kendisidir: sıkışmış, yağı çok soğumuş ya da mekanik olarak zorlanan bir motor sağlam marşa da ağır döndürtür — bu durumda krank elle çevrilerek kontrol edilir. Kayıpları ölçmüş olmak, bu son iki adayı ayırt etmeyi mümkün kılar." },
+          { "label": "Ölçümler yanlış yapılmıştır", "verdict": "olcum-yanlis", "explain": "Yük altında ve iki bacaklı yapılmış ölçüm güvenilirdir; sonucu reddetmek yerine bir sonraki adaya geçilir." },
+          { "label": "Akü yine de değiştirilir", "verdict": "aku-degistir", "explain": "Akü ilk adımda doğrulanmıştı; ölçüm sonucunu yok saymak olur." },
+          { "label": "Kablolar yine de yenilenir", "verdict": "kablo-yenile", "explain": "Kabloların temiz olduğu ölçüldü; yenilemek masraf ve zaman kaybı." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Ölçümün temiz çıkması da bir sonuçtur. Bir dalı elediğinde geriye kalanlar kesinleşir; boş ölçüm diye bir şey yoktur."
+    },
+    {
+      "id": 7,
+      "instruction": "İlk araçta onarım tamamlandı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.multimetre-ekran",
+        "question": "Doğrulama nasıl yapılır?",
+        "options": [
+          { "label": "Marş basılırken iki bacaklı ölçüm tekrarlanır ve motorun normal hızda döndüğü görülür", "verdict": "iki-bacak-tekrar", "correct": true, "explain": "Doğrulama teşhisin aynısıdır: marş basılırken besleme tarafı ve dönüş tarafı ayrı ayrı ölçülür, iki değer de sağlam devrenin küçük değerlerine inmiş olmalıdır. Motorun dönme hızı kulakla da belli olur ama asıl kanıt sayılardır — gözle ayırt edilemeyen bir kayıp sürüyorsa arıza birkaç ay içinde geri gelir. İlk teşhiste ölçülen değerlerle karşılaştırma yapılır ve ikisi de kayda geçirilir. Son olarak akü tekrar değerlendirilir: aylarca ağır marşla zorlanmış bir akü yorulmuş olabilir. Marş arızalarının geri dönme sebebi çoğunlukla ikinci bir zayıf bağlantının hiç ölçülmemiş olmasıdır; iki bacaklı doğrulama bunu yakalar." },
+          { "label": "Araç çalışıyorsa yeterli", "verdict": "calisiyor", "explain": "Araç kayıp varken de çalışıyordu; ölçüm olmadan doğrulama yok." },
+          { "label": "Bağlantı gözle kontrol edilir", "verdict": "gozle", "explain": "Temizlenmiş bir bağlantı gözle sağlam görünür; kanıt yük altındaki ölçümdür." },
+          { "label": "Devre kapalıyken direnç ölçülür", "verdict": "direnc", "explain": "Küçük ölçüm akımı bu kayıpları gizler; marş devresinde direnç ölçümü hiçbir zaman yeterli değildir." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Marş devresi, gerilim düşümü testinin en çok işe yaradığı yerdir: akım en yüksek, kayıplar en görünür, yanlış teşhisin bedeli en pahalı."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Marş ağır dönüyor. Ölçüm nasıl yapılır?",
+        "a": "marsta-iki-bacak",
+        "options": [
+          { "verdict": "marsta-iki-bacak", "label": "Marş basılırken besleme ve dönüş tarafları ayrı ayrı, gerilim düşümü olarak ölçülür", "explain": "Ölçüm marş anında yapılır, çünkü kayıp ancak akım aktığında ortaya çıkar ve marş akımı aracın en yükseğidir. İki bacak ayrı ölçülür: akü artı kutbu ile marş B+ ucu arasında bir ölçüm, marş gövdesi ile akü eksi kutbu arasında ikinci ölçüm. İki kayıp toplanır ve marşa kalan gerilimi birlikte düşürür; tek taraf ölçülürse arızanın yarısı görülmez. Devre kapalıyken yapılan direnç ölçümü bu kayıpları gizler." },
+          { "verdict": "direnc", "label": "Devre kapalıyken kabloların direnci ölçülür", "explain": "Ohmmetrenin küçük ölçüm akımı zayıf bağlantıyı gizler." },
+          { "verdict": "aku-gerilimi", "label": "Yalnız akü gerilimine bakılır", "explain": "Akü gerilimi tek başına kablo ve bağlantı kayıplarını göstermez." },
+          { "verdict": "mars-sok", "label": "Marş sökülüp tezgâhta denenir", "explain": "Sökmeden önce devre ölçülür; kayıp çoğu zaman bağlantıdadır." }
+        ]
+      },
+      {
+        "q": "Besleme ve dönüş ölçümleri temiz çıktı ama marş hâlâ ağır dönüyor. Ne anlama gelir?",
+        "a": "mars-veya-motor",
+        "options": [
+          { "verdict": "mars-veya-motor", "label": "Devre suçsuz; ya marş motoru fazla akım çekiyor ya da motorun kendisi mekanik olarak zorluyor", "explain": "Kayıp yoksa akü, kablolar ve bağlantılar görevini yapıyordur. Geriye iki aday kalır. Marş motoru: yatakları aşınmış, sargısı kısmen kısa devre yapmış ya da fırçaları bitmiş bir marş normalden çok fazla akım çeker ve yavaş döner — pens ampermetreyle ölçülen yüksek çekiş akımı bunu gösterir. Motorun kendisi: sıkışmış ya da mekanik olarak zorlanan bir motor sağlam marşa da ağır döndürtür; krank elle çevrilerek kontrol edilir." },
+          { "verdict": "olcum-hatali", "label": "Ölçüm hatalıdır, tekrarlanır", "explain": "Yük altında ve iki bacaklı yapılmış ölçüm güvenilirdir; sonucu reddetmek yerine bir sonraki adaya geçilir." },
+          { "verdict": "aku", "label": "Akü değiştirilir", "explain": "Akü ilk adımda doğrulandı; ölçümü yok saymak olur." },
+          { "verdict": "kablolar", "label": "Kablolar yenilenir", "explain": "Kabloların temiz olduğu ölçüldü." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 0,85 V / 0,05 V ve adım 4'teki 0,55 V / 0,05 V SENARYO okumalarıdır. Öğrenciden istenen üretici sınırı değil, arızalı devre ile sağlam devre arasındaki FARKTIR. sourceRequired bu yüzden gerekmedi.",
+    "sourceRequired": "Marş devresinde kabul edilebilir azami gerilim düşümü, normal marş çekiş akımı ve şase bağlantısı torku araca özgüdür; bu derste bilinçle VERİLMEDİ. Ders sağlam bir devreyle karşılaştırma üzerine kuruldu.",
+    "kapsam": "Pens ampermetre sahnede yok; çekiş akımı ölçümü metinde anlatılıyor. Şase kayışı yerine sahnedeki şase noktası kullanıldı. Krankın elle çevrilmesi motor sahnesinin konusu.",
+    "reviewedByMechanic": false
+  }
+}

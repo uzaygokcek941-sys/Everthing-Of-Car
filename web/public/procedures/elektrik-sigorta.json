@@ -1,0 +1,175 @@
+{
+  "id": "elektrik.sigorta",
+  "area": "arac-elektrik",
+  "stage": 4,
+  "title": "Sigorta: Neden Attığını Bulmadan Yenisi Takılmaz",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 25,
+  "prerequisites": ["elektrik.devre-elemanlari", "elektrik.multimetre-akim"],
+  "learningGoals": [
+    "Sigortanın tüketiciyi değil kabloyu koruduğunu bilmek ve değerini buna göre okumak",
+    "Atan sigortanın sebebini kısa devre ile aşırı yük arasında ayırmak",
+    "Devrenin çektiği akımı ölçüp bilinen normal değerle karşılaştırmak"
+  ],
+
+  "safety": [
+    { "rule": "Atan sigortanın yerine daha yüksek amperli takılmaz", "why": "Sigorta, kendisinden sonraki kabloyu korur. Daha yüksek amperli sigorta, kablo ısınıp yalıtımı erirken bile devreyi kesmez. Araç yangınlarının bilinen sebeplerinden biri budur", "blocksStart": true },
+    { "rule": "Sigorta yuvası tel, folyo ya da cıvatayla köprülenmez", "why": "Köprülenen yuvada koruma tamamen ortadan kalkar ve kısa devre akımı sınırsız akar. Geçici diye yapılan bu iş çoğu zaman kalıcı olur ve unutulur", "blocksStart": true },
+    { "rule": "Sigorta değişimi kontak kapalıyken yapılır", "why": "Akım akarken çekilen sigortanın uçlarında ark oluşur; yuva pinleri yanar ve sonradan temas direnci verir. Ayrıca bazı kontrol üniteleri ani kesintide hata kaydeder", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.sigorta-cektirme", "label": "Sigorta çektirme pensesi", "required": true },
+    { "id": "tool.multimetre", "label": "Dijital multimetre", "required": true },
+    { "id": "tool.pens-ampermetre", "label": "Pens ampermetre", "required": false },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Müşteri: 'Sigorta atıyor, iki tane taktım yine attı.' Sigorta kutusundasın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sigorta-kutusu",
+        "question": "Sigorta ne işe yarar?",
+        "options": [
+          { "label": "Kendisinden sonraki kabloyu korur; akım kablonun taşıyabileceğini aşarsa kablo ısınmadan devreyi keser", "verdict": "kabloyu-korur", "correct": true, "explain": "Bu cümle bütün sigorta bilgisinin özüdür ve hatalı işlerin çoğu onun bilinmemesinden çıkar. Sigortanın değeri tüketiciye göre değil, ona giden kablonun kesitine göre seçilmiştir. Amaç, bir sorun çıktığında akımı kablo ısınıp yalıtımı erimeden kesmektir. Bu yüzden atan bir sigortaya daha yüksek amperli takmak korumayı kaldırmak demektir: yeni sigorta artık atmaz, onun yerine kablo kızarır. Ayrıca sigorta bir arıza değildir, arızanın haberidir — attıysa devrede fazla akım geçmiştir ve o akımın sebebi bulunmadan yenisi takılmaz." },
+          { "label": "Tüketiciyi korur, tüketici bozulunca atar", "verdict": "tuketici", "explain": "Bazen öyle olur ama görevi ve değer seçimi kabloya göredir; bu ayrım yangını önleyen ayrımdır." },
+          { "label": "Akımı sabit tutar", "verdict": "akim-sabit", "explain": "Sigorta akımı sınırlamaz; eşiği aşınca devreyi tamamen keser." },
+          { "label": "Gerilimi düşürür", "verdict": "gerilim", "explain": "Sigortanın gerilimle işi yoktur; sağlam bir sigortanın üzerinde kayda değer gerilim düşmez." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Sigorta kabloyu korur. Bu tek cümle, atölyedeki en tehlikeli alışkanlığın neden tehlikeli olduğunu da açıklar."
+    },
+    {
+      "id": 2,
+      "instruction": "Atan sigortayı yuvasından çek.",
+      "interaction": {
+        "type": "pull",
+        "target": "part.sigorta.1",
+        "axis": "y",
+        "distance": 0.2
+      },
+      "camera": "tezgah",
+      "hint": "Çektirme pensesi kullan; tornavidayla zorlamak yuvayı genişletir.",
+      "teachingNote": "Yuvayı zorlayarak genişletmek, sonraki sigortanın gevşek oturmasına yol açar. Gevşek sigorta ısınır, yuva kararır ve bir süre sonra o devrede açıklanamayan gerilim kayıpları başlar."
+    },
+    {
+      "id": 3,
+      "instruction": "Sigortayı inceliyorsun: telin ortası erimiş, gövdenin içi kararmış.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sigorta.1",
+        "question": "Bu görüntü ne anlatır?",
+        "options": [
+          { "label": "Ani ve büyük bir akım geçtiğini; kararma kısa devreyi işaret eder, uzun süreli aşırı yükte sigorta temiz kopar", "verdict": "kisa-devre-izi", "correct": true, "explain": "Sigortanın nasıl attığı, sebebi hakkında ilk bilgiyi verir. Kısa devrede akım çok büyük ve çok kısa sürelidir: tel buharlaşır, gövdenin içi kararır ve bazen metal zerreleri cama sıçrar. Aşırı yükte ise akım sınırın biraz üstündedir ve uzun sürer: tel ısınıp incelir, en zayıf yerinden temiz biçimde kopar, gövde genellikle temiz kalır. Bu ayrım aramanın yönünü belirler. Kararmış bir sigorta gördüğünde yalıtımı sıyrılmış, gövdeye değen bir kablo ararsın; temiz kopmuş bir sigortada ise devrenin çektiği akıma bakarsın — sıkışmış bir motor, eklenmiş bir tüketici ya da sürekli çalışan bir yük olabilir. Görsel muayene karar vermez ama ilk yönü ücretsiz verir." },
+          { "label": "Sigortanın ömrü dolmuştur", "verdict": "omur", "explain": "Sigortanın kendiliğinden dolan bir ömrü yoktur; attıysa fazla akım geçmiştir." },
+          { "label": "Kalitesizdir, marka değiştirmek yeter", "verdict": "kalite", "explain": "Marka bahanesi arızayı gizler; sebep devrededir." },
+          { "label": "Titreşimden kırılmıştır", "verdict": "titresim", "explain": "Titreşim kırılması nadirdir ve o zaman gövde kararmaz; buradaki iz elektrikseldir." }
+        ]
+      },
+      "camera": "tezgah",
+      "hint": "Kararmış gövde: ani ve büyük akım. Temiz kopmuş tel: uzun süreli aşırı yük.",
+      "teachingNote": "Atmış sigortayı çöpe atmadan önce ışığa tut. O küçük cam, arızanın türü hakkında iki saniyede bilgi verir."
+    },
+    {
+      "id": 4,
+      "instruction": "Devrenin çektiği akımı ölçtün: 18,2 A. Aynı devrenin sağlam çalıştığı bilinen normal akımı 11,2 A. Aradaki fazlalığı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.multimetre-ekran",
+        "unit": "A",
+        "acceptRange": [6.9, 7.1]
+      },
+      "camera": "tezgah",
+      "hint": "18,2 eksi 11,2.",
+      "teachingNote": "Bu fark, devrede fazladan bir yük ya da kaçak bir yol olduğunun ölçülmüş kanıtıdır. Fazlalık kesintisiz ve kararlıysa genelde bir tüketici zorlanıyordur — sıkışmış bir motor, kilitlenmiş bir mekanizma ya da sonradan eklenmiş bir cihaz. Fazlalık anlık ve çok büyükse kısa devre aranır. Yine bir üretici değeri kullanmadın: aynı devrenin bilinen normal akımıyla şimdiki akımını karşılaştırdın."
+    },
+    {
+      "id": 5,
+      "instruction": "Sebebi bulmak için devreyi bölmen gerekiyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kablo-demeti",
+        "question": "Kısa devrenin yeri nasıl daraltılır?",
+        "options": [
+          { "label": "Devre parçalara ayrılır: soketler tek tek ayrılıp hangi bölüm çıkarıldığında aşırı akımın kaybolduğuna bakılır", "verdict": "yariya-bolme", "correct": true, "explain": "Aramanın en verimli yolu her adımda alanı yarıya indirmektir. Devrenin ortasındaki bir soketi ayırırsın: aşırı akım hâlâ varsa arıza kaynağa yakın yarıdadır, kayboluyorsa uzak yarıdadır. Sonra kalan yarıyı tekrar ikiye bölersin. Birkaç adımda arıza birkaç santimetrelik bir bölgeye iner ve orada gözle bakmak yeterli olur. Bu yöntem kabloları uçtan uca izlemekten çok daha hızlıdır ve demete zarar vermez. Ayrıca kısa devre ararken sigortayı arka arkaya yakmamak için sigorta yerine akımı sınırlayan bir düzenek kullanılan yöntemler vardır; temel mantık her zaman aynıdır: böl, ölç, yönü seç." },
+          { "label": "Yeni sigorta takılıp bekleniyor, atarsa tekrar takılıyor", "verdict": "tekrar-tak", "explain": "Her deneme yeni bir sigorta yakar ve arızayı büyütebilir; ayrıca hiçbir bilgi üretmez." },
+          { "label": "Bütün demet değiştiriliyor", "verdict": "demeti-degistir", "explain": "En pahalı ve en gereksiz yol; arıza birkaç ölçümle daraltılabilir." },
+          { "label": "Daha yüksek amperli sigorta takılıp devrenin çalışması izleniyor", "verdict": "yuksek-amper", "explain": "Bu, koruma kaldırılarak yapılan bir denemedir ve kablonun yanmasına yol açabilir." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Böl ve ölç. Bu yöntem elektrikte de mekanikte de aynı işi görür: her adımda ihtimallerin yarısını eler."
+    },
+    {
+      "id": 6,
+      "instruction": "Arıza bulundu: bir kablo sac kenarına sürtünüp yalıtımını kaybetmiş ve gövdeye değiyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kablo-demeti",
+        "question": "Onarım nasıl yapılır?",
+        "options": [
+          { "label": "Hasarlı bölüm kesilip uygun kesitte eklenir, üstü kapatılır ve kabloyu sürten koşul ortadan kaldırılır", "verdict": "onar-ve-koru", "correct": true, "explain": "Onarımın iki yarısı vardır. Birincisi kablonun kendisi: hasarlı bölüm kesilir, orijinal kesitte kabloyla eklenir, üzeri yapışkanlı makaronla kapatılır. İkincisi ve daha çok atlananı, kabloyu oraya sürten koşulu ortadan kaldırmaktır. Sac kenarı keskinse yumuşatılır ya da koruyucu profil geçirilir, demet klipsleriyle yeniden yönlendirilir ve gerginlik alınır. Sebep giderilmezse yeni kablo da birkaç ay içinde aynı yerden aşınır ve bu sefer müşteri senin işini suçlar. Sigortayı attıran şey kablo değildi, kablonun oraya sürtünmesiydi." },
+          { "label": "Sıyrılan yere bant sarılır", "verdict": "bant", "explain": "Bant sürtünmeyi durdurmaz ve nemi tutmaz; arıza kısa sürede geri gelir." },
+          { "label": "Kablo biraz kenara çekilip bırakılır", "verdict": "kenara-cek", "explain": "Titreşimle geri gelir; kalıcı yönlendirme ve koruma gerekir." },
+          { "label": "Yalnız sigorta değiştirilir", "verdict": "sigorta-degistir", "explain": "Sebep duruyorken yeni sigorta da atar." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Sigortayı attıran şeyi ortadan kaldırmadan yapılan onarım, bir sonraki sigortayı beklemektir."
+    },
+    {
+      "id": 7,
+      "instruction": "Yeni sigorta takılacak. Kutuda farklı değerler var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sigorta.2",
+        "question": "Hangi sigorta takılır?",
+        "options": [
+          { "label": "Orijinal değerde ve tipte olanı; kutu kapağındaki ya da kılavuzdaki değere bakılır", "verdict": "orijinal-deger", "correct": true, "explain": "Değer, o devrenin kablosuna göre üretici tarafından belirlenmiştir ve kutu kapağının içinde ya da kılavuzda yazar. Yüksek amperli takmak korumayı kaldırır; düşük amperli takmak ise devre normal çalışırken bile sigortayı attırır ve müşteri bunu arıza sanır. Tip de önemlidir: bazı devrelerde ani akım çekişini tolere eden gecikmeli sigortalar kullanılır ve yerine hızlı tip takıldığında her çalıştırmada atar. Onarımdan sonra doğru sigorta takılır, araç çalıştırılır ve devrenin akımı bir kez daha ölçülür — normal değere döndüyse iş kapanmıştır. Elinde uygun değer yoksa doğru sigorta gelene kadar beklenir; 'şimdilik bir üstü' diye yapılan iş kalıcı olur." },
+          { "label": "Bir üst amper takılır, tekrar atmasın", "verdict": "bir-ust", "explain": "Bu, kablonun korumasını kaldırmaktır; sigorta atmaz ama kablo ısınır." },
+          { "label": "Elde ne varsa takılır, sonra değiştirilir", "verdict": "eldekini-tak", "explain": "Geçici çözümler unutulur. Yanlış değer takılı bir araç, korumasız bir araçtır." },
+          { "label": "Bir alt amper takılır, daha güvenli olur", "verdict": "bir-alt", "explain": "Normal çalışmada atar ve gereksiz arıza üretir; koruma seviyesi de tasarımdan sapar." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Doğru sigorta değeri bir tercih değil, tasarımın parçasıdır. Değiştirdiğin anda aracın koruma planını değiştirmiş olursun."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Sigortanın asıl görevi nedir?",
+        "a": "kabloyu-korur",
+        "options": [
+          { "verdict": "kabloyu-korur", "label": "Kendisinden sonraki kabloyu korumak; akım kablonun taşıyabileceğini aşarsa kablo ısınmadan devreyi kesmek", "explain": "Sigortanın değeri tüketiciye göre değil, ona giden kablonun kesitine göre seçilmiştir. Amaç bir sorun çıktığında akımı, kablo ısınıp yalıtımı erimeden kesmektir. Bu yüzden yüksek amperli sigorta takmak korumayı kaldırmaktır: sigorta artık atmaz, onun yerine kablo kızarır. Sigorta ayrıca bir arıza değil, arızanın haberidir; attıysa devrede fazla akım geçmiştir ve sebebi bulunmadan yenisi takılmaz." },
+          { "verdict": "tuketici", "label": "Tüketiciyi korumak", "explain": "Bazen tüketiciyi de korur ama görevi ve değer seçimi kabloya göredir." },
+          { "verdict": "akim-sinirla", "label": "Akımı sınırlamak", "explain": "Sınırlamaz; eşiği aşınca tamamen keser." },
+          { "verdict": "gerilim", "label": "Gerilimi düşürmek", "explain": "Sağlam sigortanın üzerinde kayda değer gerilim düşmez." }
+        ]
+      },
+      {
+        "q": "Kararmış gövdeli bir sigorta ile temiz kopmuş bir sigorta neyi ayırt ettirir?",
+        "a": "kisa-devre-mi-asiri-yuk-mu",
+        "options": [
+          { "verdict": "kisa-devre-mi-asiri-yuk-mu", "label": "Kararma ani ve büyük akımı, yani kısa devreyi; temiz kopma uzun süreli aşırı yükü işaret eder", "explain": "Kısa devrede akım çok büyük ve çok kısa sürelidir: tel buharlaşır, gövdenin içi kararır. Aşırı yükte akım sınırın biraz üstündedir ve uzun sürer: tel ısınıp incelir ve en zayıf yerinden temiz kopar, gövde temiz kalır. Bu ayrım aramanın yönünü belirler — kararmış sigortada yalıtımı sıyrılmış ve gövdeye değen bir kablo, temiz kopmuşta ise devrenin çektiği akımı artıran bir sebep aranır. Görsel muayene karar vermez ama ilk yönü ücretsiz verir." },
+          { "verdict": "kalite", "label": "Sigortanın kalitesini", "explain": "Kalite değil, atma biçimi ve dolayısıyla sebebi ayırt edilir." },
+          { "verdict": "yas", "label": "Sigortanın yaşını", "explain": "Sigortanın kendiliğinden dolan bir ömrü yoktur." },
+          { "verdict": "hicbir", "label": "Hiçbir şey, ikisi de aynıdır", "explain": "İkisi farklı sebeplerin izidir ve aramayı farklı yöne çevirir." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 4'teki 18,2 A ve 11,2 A SENARYO okumalarıdır. Öğrenciden istenen bir üretici sınırı değil, aynı devrenin bilinen normal akımı ile ölçülen akımın FARKIDIR (7,0 A). sourceRequired bu yüzden gerekmedi.",
+    "sourceRequired": "Sigorta değerleri, kablo kesitine göre amper tabloları ve gecikmeli/hızlı tip seçimi bu derste sayı olarak VERİLMEDİ; bunlar araca özgüdür ve kutu kapağı ya da kılavuzdan okunur.",
+    "kapsam": "Sigorta kutusu iki sigortayla temsil ediliyor; erimiş tel ve kararma dokusu modelde yok, görsel muayene seçimle öğretiliyor. Böl-ve-ölç adımının sahnede jesti yok.",
+    "reviewedByMechanic": false
+  }
+}

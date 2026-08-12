@@ -1,0 +1,176 @@
+{
+  "id": "lastik.on-duzen-terimleri",
+  "area": "lastik-tekerlek",
+  "stage": 8,
+  "title": "Kamber, Kaster ve Toe: Her Biri Neyi Yapar",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 35,
+  "prerequisites": ["lastik.asinma-deseni"],
+  "learningGoals": [
+    "Üç açının tanımını ve her birinin ne işe yaradığını bilmek",
+    "Kasterin neden tek başına aşınma yapmadığını açıklamak",
+    "Sol–sağ farkının mutlak değerden daha çok şey söylediğini kavramak"
+  ],
+
+  "safety": [
+    { "rule": "Ön takımda boşluk varken ön düzen ayarı yapılmaz", "why": "Boşluklu bir sistemde ölçülen açı sabit değildir; ayar yola çıkıldığında kaybolur ve araç ayarlı sanılır", "blocksStart": true },
+    { "rule": "Ayar öncesi dört lastiğin basıncı etiket değerine getirilir", "why": "Basınç farkı hem ölçülen açıları hem aracın duruşunu değiştirir; yanlış zeminde yapılan ayar geçersizdir", "blocksStart": true },
+    { "rule": "Ayarlanamayan bir açı zorlanarak tutturulmaz", "why": "Fabrikada ayarı olmayan bir açının sapması hasar demektir; zorlamak hasarı gizler", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.on-duzen-cihazi", "label": "Ön düzen cihazı", "required": true },
+    { "id": "tool.manometre", "label": "Basınç manometresi", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Araca önden bakıyorsun. Tekerleğin üstü hafifçe içe yatık.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.jant",
+        "question": "Bu hangi açı ve ne işe yarar?",
+        "options": [
+          { "label": "Kamber: tekerleğin düşeyle yaptığı açı. Virajda dış tekerleğin yola düz basmasını sağlar", "verdict": "kamber", "correct": true, "explain": "Kamber, araca önden bakıldığında tekerleğin düşey eksenle yaptığı açıdır. Tekerleğin üstü içe yatıksa negatif, dışa yatıksa pozitif kamberden söz edilir. Amacı ilk bakışta ters görünür: tekerleği neden eğik takasın ki? Sebebi virajdır. Araç bir virajda gövdesiyle dışa yaslanır ve dış tekerleğin üstü dışa doğru yatar; tekerlek düz takılmış olsaydı virajın tam ihtiyaç duyulduğu anında yola yalnız dış omzuyla basardı. Hafif negatif kamber bu yatmayı önceden karşılar, böylece virajda dış tekerlek yola düz ve geniş yüzeyle basar. Bedeli ise düz yolda küçük bir eşitsizliktir — yük hafifçe iç kenara kayar. Bu yüzden kamber bir denge kararıdır ve üretici belirli bir aralık verir. Aralığın dışına çıkması, önceki derste gördüğün düzgün ve eğimli tek kenar aşınmasını üretir; sebep ayar olabileceği gibi çukurda eğilmiş bir parça ya da yorulmuş bir burç da olabilir." },
+          { "label": "Kaster: direksiyon ekseninin eğimi", "verdict": "kaster", "explain": "Kaster yandan bakıldığında görülür; bu açı önden bakışta görünür." },
+          { "label": "Toe: tekerleklerin içe ya da dışa bakması", "verdict": "toe", "explain": "Toe üstten bakışta görülür." },
+          { "label": "Ofset: tekerleğin dışa doğru konumu", "verdict": "ofset", "explain": "Ofset jantın ölçüsüdür, açı değildir." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Her açının bakış yönü farklı: kamber önden, kaster yandan, toe üstten görülür. Bu üçlü, açıları karıştırmamanın en kolay yolu."
+    },
+    {
+      "id": 2,
+      "instruction": "İkinci açı yandan bakışta görülüyor: direksiyon ekseninin öne ya da arkaya eğimi.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.rot-basi",
+        "question": "Kaster ne yapar?",
+        "options": [
+          { "label": "Düz gitme kararlılığını ve direksiyonun kendiliğinden merkeze dönmesini sağlar; tek başına lastik aşındırmaz", "verdict": "kaster", "correct": true, "explain": "Kaster, tekerleğin döndüğü eksenin yandan bakıldığında düşeyle yaptığı açıdır. Etkisini anlamak için bir alışveriş arabasının ön tekerleği düşünülebilir: tekerlek, çekildiği noktanın gerisinde kaldığı için kendiliğinden düz hizaya gelir. Araçta da kaster tam bunu yapar — aracı düz yolda kararlı tutar ve virajdan çıkarken direksiyonun kendiliğinden merkeze dönmesini sağlar. Bu yüzden kasteri az bir araç sürekli düzeltme isteyen, çok olan bir araç ise direksiyonu ağır bir araç gibi hissettirir. Buradaki en önemli ayrım şudur: kaster tek başına lastik aşındırmaz. Aşınma deseni okurken bu bilgi eleme yapar — testere dişi görüyorsan toe, düzgün tek kenar görüyorsan kamber düşünürsün, ama kaster için lastikte bir iz aramazsın. Kaster kendini sürüş davranışıyla belli eder: araç düz gitmiyorsa, direksiyon merkeze dönmüyorsa ya da iki taraf arasında fark varsa araç o tarafa çeker." },
+          { "label": "Lastiğin iç kenarını aşındırır", "verdict": "asindirir", "explain": "Kaster tek başına aşınma deseni bırakmaz; kendini sürüş davranışıyla gösterir." },
+          { "label": "Tekerleklerin içe bakmasını sağlar", "verdict": "toe", "explain": "O toe'nun işi." },
+          { "label": "Fren dengesini belirler", "verdict": "fren", "explain": "Fren dengesi ayrı bir sistem; kaster direksiyon davranışıyla ilgili." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Aşınma okurken kasteri aramamak zaman kazandırır. Her açının kendi belirtisi var: kaster lastikte değil, direksiyonda konuşur."
+    },
+    {
+      "id": 3,
+      "instruction": "Ölçüm raporu geldi: sol ön kamber -0,3°, sağ ön kamber -1,1°. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.jant",
+        "unit": "derece",
+        "acceptRange": [0.78, 0.82]
+      },
+      "camera": "tekerlek",
+      "hint": "1,1 eksi 0,3.",
+      "teachingNote": "0,8°'lik bu SOL–SAĞ farkı, çoğu zaman tek bir tekerleğin mutlak değerinden daha çok şey söyler. İki sebeple: birincisi araç, kamberi daha negatif olan tarafa doğru çeker — yani şikâyet doğrudan buradan çıkar. İkincisi, iki taraf simetrik kurulmuş bir sistemde bu kadar fark tesadüf değildir; o köşede bir şey olmuştur — çukur darbesi, eğilmiş salıncak, yorulmuş burç ya da kaza onarımı. Bu yüzden ön düzen raporu okunurken her değer hem kendi hedef aralığıyla hem de karşı tarafla karşılaştırılır."
+    },
+    {
+      "id": 4,
+      "instruction": "Üçüncü açı üstten bakışta görülüyor: iki tekerleğin birbirine göre içe ya da dışa bakması.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.rot-kolu",
+        "question": "Toe neden en çok aşınma yapan ayardır?",
+        "options": [
+          { "label": "Tekerlek ileri giderken aynı anda yana da sürüklendiği için: her metrede sırtı tıraşlar", "verdict": "surukleme", "correct": true, "explain": "Toe, üstten bakıldığında tekerleklerin birbirine göre içe ya da dışa bakmasıdır. Sapması olan bir tekerlek, aracın gittiği yöne tam paralel dönmez; ileri giderken aynı zamanda hafifçe yana sürüklenir. Bu sürükleme her tur değil, kat edilen her metre boyunca sürer — işte bu yüzden toe, üç açı içinde lastiği en hızlı bitirenidir. Küçük bir sapma bile binlerce kilometrede belirgin bir aşınmaya dönüşür ve karakteristik izini bırakır: bloklar bir kenarından tıraşlanır, elle enine tarandığında bir yönde pürüzsüz ters yönde tırtıklı hissedilir. Toe'nun ikinci özelliği, neredeyse bütün araçlarda ayarlanabilir olmasıdır — rot kollarının boyu değiştirilerek ayarlanır. Bu yüzden ön düzen ayarı denince pratikte çoğu zaman toe ayarı anlaşılır. Üçüncüsü ise sürüş hissidir: toe dengesizliği aracı çekmenin yanında direksiyonun merkezde durmamasına da yol açar." },
+          { "label": "Tekerleği düşeyden eğdiği için", "verdict": "egme", "explain": "O kamberin işi; toe yatay düzlemde açı yapar." },
+          { "label": "Direksiyonu ağırlaştırdığı için", "verdict": "agir", "explain": "Ağırlık hissi çoğunlukla kasterle ilgili." },
+          { "label": "Fren mesafesini uzattığı için", "verdict": "fren", "explain": "Dolaylı etkisi olabilir ama aşınmanın sebebi sürüklenme." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Üç açının aşınma gücü aynı değil. Toe her metrede çalışır, kamber yükü kaydırır, kaster lastiğe hiç dokunmaz."
+    },
+    {
+      "id": 5,
+      "instruction": "Rapor kamberde sapma gösteriyor ama bu araçta kamber ayarı yok.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.rotil",
+        "question": "Bu ne anlama gelir?",
+        "options": [
+          { "label": "Fabrikada ayarı olmayan bir açının sapması hasar ya da aşınmış parça demektir; ayar aranmaz, sebep aranır", "verdict": "hasar", "correct": true, "explain": "Bütün araçlarda bütün açılar ayarlanabilir değildir. Toe neredeyse her araçta ayarlanır; kamber ve kaster ise birçok araçta fabrika değeri olarak sabittir, yani üretimde doğru geometriyle kurulmuş ve sonradan değiştirilmesi öngörülmemiştir. Böyle bir araçta kamber sapması ölçüldüğünde bu, ayarın bozulduğu anlamına gelmez — çünkü ortada bozulacak bir ayar yoktur. Anlamı şudur: geometriyi oluşturan parçalardan biri artık fabrikadaki yerinde değildir. Sebep çukur darbesiyle eğilmiş bir salıncak kolu, yorulup boşluk yapmış bir burç, hasarlı bir amortisör gövdesi ya da onarılmış bir kaza olabilir. Bu yüzden doğru davranış sapmayı zorla tutturmaya çalışmak değil, sebebi bulmaktır: ön takım parçaları tek tek kontrol edilir ve gerekiyorsa değiştirilir; ardından ölçüm tekrarlanır. Sonradan takılan ayar parçalarıyla açıyı çekmek bazı durumlarda mümkündür ama bu, hasarı gidermeden üstünü örtmek olabilir ve kararı üreticinin öngörüsü belirler." },
+          { "label": "Cihaz yanlış ölçmüştür", "verdict": "cihaz", "explain": "Cihaz doğrulanır ama ilk açıklama bu değil; ayarsız açıda sapma sebep ister." },
+          { "label": "Normaldir, ayarı yoksa önemi yoktur", "verdict": "onemsiz", "explain": "Tersine: ayarı olmayan bir açının sapması daha anlamlıdır." },
+          { "label": "Toe ile telafi edilir", "verdict": "toe-telafi", "explain": "Bir açının sapması başka bir açıyla telafi edilmez." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Ayarı olmayan bir açının sapması, ayarı olan bir açının sapmasından daha çok şey söyler: orada bir şey kırılmış ya da yorulmuştur."
+    },
+    {
+      "id": 6,
+      "instruction": "Üç şikâyet var: araç sağa çekiyor, direksiyon merkezde durmuyor, lastiklerde testere dişi var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.rot-kolu",
+        "question": "Hangi belirti hangi açıya işaret eder?",
+        "options": [
+          { "label": "Çekme genellikle sol–sağ kamber veya kaster farkına, direksiyonun merkezde durmaması toe dengesizliğine, testere dişi toe sapmasına işaret eder", "verdict": "eslesme", "correct": true, "explain": "Belirtileri açılara eşlemek teşhisi baştan daraltır. Çekme, iki taraf arasındaki farktan doğar: bir tarafın kamberi daha negatifse araç o yana, kasteri daha azsa yine o yana meyleder. Bu yüzden çekme şikâyetinde raporun sol–sağ farkları okunur, mutlak değerler değil. Direksiyonun merkezde durmaması ise toplam toe doğru olsa bile iki tekerleğe eşit dağıtılmadığında ortaya çıkar — araç düz gider ama direksiyon eğri durur. Testere dişi aşınma doğrudan toe sapmasının izidir ve elle tarandığında hemen bulunur. Bu eşleme kesin bir tablo değildir; çekme şikâyetinin en sık sebebi aslında lastik basıncı farkıdır ve ön düzen cihazına gitmeden önce ölçülür. Ayrıca fren sıkışması, aracın yükü ve yolun eğimi de aynı şikâyeti üretebilir. Doğru sıra şudur: önce basınç, sonra ön takım boşluğu, sonra ölçüm." },
+          { "label": "Üçü de yalnız kamberden kaynaklanır", "verdict": "kamber", "explain": "Testere dişi toe'nun izidir; direksiyon merkezi toe dağılımıyla ilgili." },
+          { "label": "Üçü de yalnız toe'dan kaynaklanır", "verdict": "toe", "explain": "Çekme çoğunlukla sol–sağ kamber/kaster farkından gelir." },
+          { "label": "Belirtilerden açı çıkarılamaz", "verdict": "cikarilamaz", "explain": "Çıkarılabilir ve teşhisi daraltır; kesinlik için ölçüm gerekir." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Şikâyeti açıya eşlemek ölçümün yerini tutmaz ama nereye bakılacağını söyler. Ölçüm bu tahmini ya doğrular ya da çürütür."
+    },
+    {
+      "id": 7,
+      "instruction": "Araç ayara girecek.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.manometre",
+        "question": "Ayardan önce ne yapılır?",
+        "options": [
+          { "label": "Dört basınç etiket değerine getirilir, ön takım boşluğu kontrol edilir, tekerlek salgısı ve araç yükü değerlendirilir", "verdict": "hazirlik", "correct": true, "explain": "Ön düzen ölçümü, aracın o andaki duruşunu ölçer; duruşu değiştiren her şey ölçümü de değiştirir. Bu yüzden ayardan önce dört hazırlık yapılır. Birincisi basınçtır: farklı basınçtaki lastikler aracı farklı yükseklikte tutar ve açıları kaydırır — basınç eşitlenmeden yapılan ayar, basınç düzeltilince geçersiz olur. İkincisi ön takım boşluğudur: rotil, rot başı ya da burçta boşluk varsa tekerlek yük altında yer değiştirir ve ölçülen açı sabit bir değer değildir; böyle bir araçta yapılan ayar yola çıkıldığında kaybolur, üstelik araç ayarlandı diye teslim edilmiştir. Üçüncüsü salgıdır: cihazın sensörleri jantın kenarına bağlanır, eğri bir jant ölçüme sahte bir açı ekler — cihazların çoğu bunun için tekerleği döndürerek salgı telafisi yapar. Dördüncüsü yüktür: bagajdaki ağır yük ya da eksik yakıt aracın duruşunu değiştirir ve üreticinin ölçüm için öngördüğü yükleme şartı varsa ona uyulur. Bu dört adım atlanırsa cihaz doğru çalışsa bile sonuç yanlış olur." },
+          { "label": "Doğrudan ölçüme başlanır", "verdict": "dogrudan", "explain": "Basınç ve boşluk ölçümü doğrudan etkiler; hazırlık atlanmaz." },
+          { "label": "Yalnız lastikler yenilenir", "verdict": "lastik", "explain": "Yeni lastik ayarı düzeltmez; ayar öncesi hazırlık ayrı." },
+          { "label": "Yalnız direksiyon düz tutulur", "verdict": "direksiyon", "explain": "Gerekli ama tek başına yeterli değil." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bu alanda tekrar eden ilke bir kez daha: ölçümün şartları sağlanmadan alınan sayı, doğru cihazdan gelse bile yanlıştır."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Kaster neden tek başına lastik aşındırmaz?",
+        "a": "davranis",
+        "options": [
+          { "verdict": "davranis", "label": "Tekerleği yana sürüklemez ya da yükü tek kenara kaydırmaz; etkisi düz gitme kararlılığı ve direksiyonun merkeze dönmesi olarak sürüşte görünür", "explain": "Kaster, tekerleğin döndüğü eksenin yandan bakıldığında düşeyle yaptığı açıdır ve aracı düz yolda kararlı tutar, virajdan çıkarken direksiyonu kendiliğinden merkeze döndürür. Lastiğin yola basma biçimini toe gibi sürükleyerek ya da kamber gibi eğerek değiştirmediği için sırtta bir iz bırakmaz. Aşınma deseni okurken bu bilgi eleme yapar: testere dişi görüyorsan toe, düzgün tek kenar görüyorsan kamber; kaster için lastikte iz aranmaz." },
+          { "verdict": "kucuk", "label": "Değeri çok küçük olduğu için", "explain": "Değerin büyüklüğü değil, etkisinin biçimi belirleyici." },
+          { "verdict": "ayarsiz", "label": "Çoğu araçta ayarlanamadığı için", "explain": "Ayarlanabilirlik ayrı bir konu; aşındırmama sebebi etkisinin biçimi." },
+          { "verdict": "asindirir", "label": "Aşındırır, tek kenardan", "explain": "Tek kenar aşınması kamberin izidir." }
+        ]
+      },
+      {
+        "q": "Kamber ayarı olmayan bir araçta kamber sapması ölçülürse ne düşünülür?",
+        "a": "parca",
+        "options": [
+          { "verdict": "parca", "label": "Geometriyi oluşturan bir parça fabrikadaki yerinde değildir: eğilmiş salıncak, yorulmuş burç ya da hasar", "explain": "Ayarı olmayan bir açıda bozulacak bir ayar yoktur; sapma, parçaların konumunun değiştiğini söyler. Sebep çukur darbesi, yorulmuş burç, hasarlı amortisör gövdesi ya da onarılmış bir kaza olabilir. Doğru davranış açıyı zorla tutturmak değil sebebi bulmaktır: parçalar kontrol edilir, gerekiyorsa değiştirilir ve ölçüm tekrarlanır." },
+          { "verdict": "onemsiz", "label": "Önemsizdir, ayarı yoksa boş verilir", "explain": "Tersine, daha anlamlı bir bulgudur." },
+          { "verdict": "toe", "label": "Toe ile telafi edilir", "explain": "Bir açı başka bir açıyla telafi edilmez." },
+          { "verdict": "cihaz", "label": "Cihaz kesin olarak yanlış ölçmüştür", "explain": "Cihaz doğrulanır ama ilk açıklama parça konumudur." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki -0,3° ve -1,1° SENARYO okumalarıdır; belirli bir araca ait hedef kamber değeri DEĞİLDİR. İstenen sol–sağ FARKIDIR (0,8°) ve dersin gösterdiği şey farkın mutlak değerden çok şey söylediğidir.",
+    "sourceRequired": "Kamber, kaster ve toe için hedef değerler ve kabul aralıkları bilinçle VERİLMEDİ: araca özgüdür ve ön düzen cihazının araç veritabanından okunur.",
+    "kapsam": "Arka aks açıları, itiş açısı ve dönüş açısı farkı bu derste yok. Ayar işleminin kendisi ve rapor okuma 8. aşamanın üçüncü dersinde. Sahnede ön düzen cihazı MODELLENMEDİ; bu yüzden adımların hedefleri mevcut parçalara (jant, rot başı, rot kolu, rotil, manometre) bağlandı ve cihaz metinde anlatıldı.",
+    "reviewedByMechanic": false
+  }
+}

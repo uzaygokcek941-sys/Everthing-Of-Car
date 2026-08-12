@@ -1,0 +1,177 @@
+{
+  "id": "direksiyon.yanal-kayma",
+  "area": "direksiyon",
+  "stage": 7,
+  "title": "Yanal Kayma Testi ve Yorumlanması",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 35,
+  "prerequisites": ["direksiyon.yol-testi"],
+  "learningGoals": [
+    "Yanal kayma testinin ne ölçtüğünü ve neyi ölçmediğini bilmek",
+    "Testi doğru koşullarda uygulamak ve tekrarlanabilirliğini sağlamak",
+    "Sonucu bir tanı değil, bir ön eleme olarak yorumlamak"
+  ],
+
+  "safety": [
+    { "rule": "Araç test platformuna çok düşük hızda ve düz olarak sokulur", "why": "Hızlı ya da açılı giriş hem yanlış sonuç verir hem de platforma zarar verir", "blocksStart": true },
+    { "rule": "Test sırasında direksiyon tutulur ama yönlendirilmez", "why": "Test, aracın kendi doğal yönelimini ölçer; sürücü düzeltirse sonuç anlamsızlaşır", "blocksStart": true },
+    { "rule": "Platform çevresinde kimse durmaz", "why": "Araç düşük hızda da olsa hareket hâlindedir", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.yanal-kayma-platformu", "label": "Yanal kayma test platformu", "required": true },
+    { "id": "tool.manometre", "label": "Lastik basınç manometresi", "required": true },
+    { "id": "tool.kayit-formu", "label": "Kayıt formu", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Yanal kayma platformu üzerinden geçilecek.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.rot-cubugu-sol",
+        "question": "Bu test ne ölçüyor?",
+        "options": [
+          { "label": "Araç düz ilerlerken tekerleklerin yana doğru ne kadar sürüklendiğini; sonuç genellikle kilometre başına metre cinsinden verilir", "verdict": "yana-suruklenme", "correct": true, "explain": "Yanal kayma testi, aracı bir yerinden ölçmez; sonucunu ölçer. Platform, üzerinden geçen tekerleğin yana doğru kayabildiği hareketli bir plakadır. Araç düz ilerlerken tekerlekler tam olarak ileri bakmıyorsa — yani bir toe hatası ya da başka bir geometri sapması varsa — tekerlek yuvarlanırken aynı zamanda yana doğru sürüklenir ve plakayı iter. Cihaz bu itmeyi ölçer ve genellikle 'kilometre başına kaç metre yana kayar' biçiminde bir sayıya çevirir; bu birim sezgiseldir, çünkü aynı zamanda lastiğin ne kadar sürtünerek aşındığını da anlatır. Testin en güçlü yanı hızlı ve ucuz olmasıdır: birkaç saniyede, araç kaldırılmadan, hiçbir sensör bağlanmadan bir sonuç verir. En zayıf yanı da buradan gelir — bir SONUÇ ölçer, sebebi söylemez. Ölçülen kayma toe hatasından da, camber sapmasından da, aks eğriliğinden de, hatta lastik farkından da doğabilir. Bu yüzden bu test bir tanı değil, bir kapıdır: sonucu iyiyse geometri büyük ihtimalle yolundadır ve başka şüpheliye geçilir; kötüyse asıl ölçüm, yani ön düzen cihazıyla açı ölçümü gerekir." },
+          { "label": "Direksiyon boşluğunu", "verdict": "bosluk", "explain": "Boşluk ayrı bir ölçüm; bu test yana sürüklenmeyi ölçer." },
+          { "label": "Fren dengesini", "verdict": "fren", "explain": "Fren testi ayrı bir düzenekle yapılır." },
+          { "label": "Süspansiyon sertliğini", "verdict": "suspansiyon", "explain": "O da ayrı bir test." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Bu test bir sonucu ölçer, sebebi söylemez. Bir tanı değil, bir kapı."
+    },
+    {
+      "id": 2,
+      "instruction": "Teste hazırlanıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.rot-basi-sol",
+        "question": "Ölçümden önce ne doğrulanır?",
+        "options": [
+          { "label": "Lastik basınçları ve durumu, ön takımda boşluk olmadığı, aracın yükü ve platformun temiz ve düz olduğu", "verdict": "on-kosullar", "correct": true, "explain": "Bu testin sonucu, ölçümden önce yapılmayan kontroller yüzünden kolayca yanıltıcı hâle gelir. Birincisi lastik basıncıdır: düşük basınçlı bir lastik temas alanını ve yanağın davranışını değiştirir, bu da kayma değerini kaydırır. Basınçlar eşitlenmeden yapılan ölçüm karşılaştırılamaz. İkincisi lastiğin kendisidir — farklı marka, farklı desen ya da bir taraftaki düzensiz aşınma sonucu etkiler. Üçüncüsü boşluktur ve en kritiğidir: ön takımda ya da direksiyon zincirinde boşluk varsa tekerlek ölçüm anında serbestçe oynar ve cihaz aslında geometriyi değil boşluğu ölçer; bu yüzden boşluk kontrolü bu testten ÖNCE yapılır ve boşluk varken ölçüm yapılmaz. Dördüncüsü yüktür: araçtaki fazladan yük süspansiyonu çökertir ve geometriyi değiştirir; ölçüm üreticinin öngördüğü yük durumunda yapılır. Beşincisi platformdur — üzerinde çakıl, yağ ya da su varsa plaka serbest hareket edemez. Bu beş madde bir dakika sürer ve testin güvenilirliğini tamamen belirler." },
+          { "label": "Hiçbir şey; araç doğrudan geçirilir", "verdict": "dogrudan", "explain": "Basınç, boşluk ve yük sonucu doğrudan kaydırır." },
+          { "label": "Yalnız motor sıcaklığı", "verdict": "sicaklik", "explain": "Bu testle ilgisi yok." },
+          { "label": "Yalnız aracın temiz olması", "verdict": "temizlik", "explain": "Temizlik değil, teknik ön koşullar belirleyici." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Boşluk varken ölçüm yapılmaz — cihaz geometriyi değil boşluğu ölçer."
+    },
+    {
+      "id": 3,
+      "instruction": "Aracı iki kez geçirdin: ilk geçişte 4,8 m/km, ikinci geçişte 2,1 m/km okundu.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.kremayer-kutusu",
+        "unit": "m/km",
+        "acceptRange": [2.6, 2.8]
+      },
+      "camera": "direksiyon",
+      "hint": "4,8 eksi 2,1.",
+      "teachingNote": "2,7 m/km'lik bu fark, iki ölçümün birbirini tutmadığını gösteriyor ve bu, sonucun kendisinden daha önemli bir bulgudur: TEKRARLANMAYAN ÖLÇÜM SONUÇ DEĞİLDİR. Aynı araç, aynı platform, aynı geçişte bu kadar farklı iki değer veriyorsa sebep genellikle üç yerdedir — araç platforma düz ve aynı hızda girmemiştir, ön takımda ya da zincirde boşluk vardır ve tekerlek her geçişte farklı yerde oturmuştur, ya da sürücü direksiyonu farkında olmadan düzeltmiştir. Bu yüzden test en az iki, tercihen üç kez tekrarlanır ve değerler birbirine yakın çıkana kadar sonuç yazılmaz. Bu kural bu projede balans ve boşluk derslerinde de geçmişti; ölçüm aletinin verdiği sayı, tekrarlanabilirliği gösterilmeden bir bulgu sayılmaz. Kabul edilebilir yanal kayma sınırı araca ve mevzuata özgüdür ve bu ders bir değer vermiyor."
+    },
+    {
+      "id": 4,
+      "instruction": "Ölçüm tekrarlandı ve tutarlı bir sonuç alındı: değer sınırın üstünde.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.rot-cubugu-sag",
+        "question": "Bu sonuç ne söyler?",
+        "options": [
+          { "label": "Geometride bir sapma var ama hangi açının sapdığını söylemez; asıl ölçüm ön düzen cihazıyla yapılır", "verdict": "sapma-var-hangisi-belirsiz", "correct": true, "explain": "Yanal kayma değeri birden çok geometri hatasının ortak sonucudur ve bu yüzden tek başına hangi ayarın yapılacağını söyleyemez. En bilinen sebebi toe hatasıdır — tekerlekler birbirine göre içe ya da dışa bakıyorsa araç ilerlerken sürüklenirler. Ama camber sapması da benzer bir etki üretir, çünkü eğik duran bir tekerlek yuvarlanırken yana doğru bir kuvvet oluşturur. Buna aks eğriliği, kaza sonrası kaymış bir bağlantı noktası ve arka aksın düz gitmemesi de eklenebilir; arka aks sapmışsa ön tekerlekler aracı düz tutmak için sürekli açılı çalışır ve kayma ön tarafta ölçülür. Dahası, bu sayı iki tekerleğin BİRLEŞİK sonucudur; birinde artı, diğerinde eksi bir sapma varsa kısmen birbirini götürebilir ve değer olduğundan iyi görünebilir. Bu yüzden sınır üstü bir değer 'ön düzen bozuk' demek değil, 'ön düzen cihazıyla bakılmalı' demektir. Test bir eleme aracıdır ve gücü de buradadır: birkaç saniyede, araç kaldırılmadan, hangi araçların asıl ölçüme gitmesi gerektiğini söyler." },
+          { "label": "Toe hatası vardır, ayar yapılır", "verdict": "toe", "explain": "Toe en bilinen sebep ama tek sebep değil; camber, aks ve arka aks da etkiler." },
+          { "label": "Lastikler değiştirilmelidir", "verdict": "lastik", "explain": "Lastik sonucu etkileyebilir ama sonuç lastik kararı vermez." },
+          { "label": "Kremayer arızalıdır", "verdict": "kremayer", "explain": "Kutu içi arıza bu değerin doğrudan sebebi değildir." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Sınır üstü değer 'ön düzen bozuk' demek değil, 'ön düzen cihazıyla bakılmalı' demek."
+    },
+    {
+      "id": 5,
+      "instruction": "Başka bir araçta değer sınırın içinde ama müşteri lastiklerin çabuk yendiğinden şikâyetçi.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.direksiyon-simidi",
+        "question": "Nasıl yorumlanır?",
+        "options": [
+          { "label": "Test iki tekerleğin birleşik sonucunu verdiği için karşılıklı sapmalar birbirini gizleyebilir; aşınma deseni varsa asıl ölçüme gidilir", "verdict": "birlesik-sonuc-gizler", "correct": true, "explain": "Bu, testin en önemli sınırıdır ve bilinmediğinde gerçek bir arıza 'temiz' diye geçiştirilir. Platform, ön aksın toplam davranışını ölçer. Sol tekerlek içe, sağ tekerlek aynı miktarda dışa bakıyorsa, ikisinin yana ittiği kuvvetler birbirini büyük ölçüde götürür ve cihaz düşük bir değer okur — hâlbuki her iki lastik de sürtünerek aşınmaktadır. Bu yüzden lastikte gerçek bir kanıt varsa, yani Lastik ve Tekerlek alanında öğrenilen aşınma desenlerinden biri görülüyorsa — bir kenarın tüylenmesi, tek taraflı yenme, testere dişi görünüm — yanal kayma değeri normal olsa bile asıl ölçüme gidilir. Genel kural şudur: bir testin 'temiz' sonucu, doğrudan kanıtı geçersiz kılmaz. Aşınma deseni doğrudan kanıttır; yanal kayma ise dolaylı bir göstergedir. Aynı mantık tersine de işler — değer kötü ama lastikler temizse, sorun yeni başlamış olabilir ve bu da bir bilgidir. İki kaynağı birlikte okumak, tek birine bakmaktan her zaman daha güvenilirdir." },
+          { "label": "Değer normalse şikâyet reddedilir", "verdict": "reddet", "explain": "Aşınma deseni doğrudan kanıt; dolaylı ölçüm onu geçersiz kılmaz." },
+          { "label": "Lastikler kalitesizdir", "verdict": "kalitesiz", "explain": "Önce geometri ve desen değerlendirilir." },
+          { "label": "Test yanlıştır, cihaz bozuktur", "verdict": "cihaz", "explain": "Testin bilinen bir sınırı; cihaz arızası değil." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Bir testin 'temiz' sonucu, doğrudan kanıtı geçersiz kılmaz. Aşınma deseni doğrudan kanıttır."
+    },
+    {
+      "id": 6,
+      "instruction": "Ön düzen ayarı yapıldıktan sonra test tekrarlanacak.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.rot-cubugu-sol",
+        "question": "Bu tekrar neden yapılır?",
+        "options": [
+          { "label": "Yapılan ayarın sonuca yansıdığını bağımsız bir yöntemle doğrulamak için; ayar cihazı ile kayma testi farklı şeyleri ölçer", "verdict": "bagimsiz-dogrulama", "correct": true, "explain": "Ön düzen cihazı açıları ölçer; yanal kayma testi ise o açıların birlikte ürettiği sonucu ölçer. İkisi farklı yöntemler olduğu için biri diğerini bağımsız olarak doğrular ve bu, ölçüm güvenilirliğinin temel ilkesidir. Ayar sonrası kayma değerinin sınırın içine inmesi, yapılan işin gerçekten işe yaradığının ikinci bir kanıtıdır. Ayar yapıldığı hâlde değer düzelmediyse iki ihtimal vardır ve ikisi de önemlidir: ya ayar tutmamıştır — kilit somunu gevşek kalmış ya da ölçüm koşulları farklıydı — ya da sorunun kaynağı ayarla düzelmeyen bir yerdedir, örneğin eğrilmiş bir parça, kaymış bir bağlantı noktası ya da arka aks. Bu, ayar alanının bittiği durum kadar önemli bir bulgudur ve müşteriye açıkça söylenir. Tekrar testin ayrıca pratik bir değeri vardır: ölçüm öncesi ve sonrası iki sayı, yapılan işin somut kanıtı olarak kayda geçer ve tartışmayı bitirir. Bu, bu alanda tekrarlanan ilkedir — iyileşme tahmin edilmez, ölçülür." },
+          { "label": "Gereksizdir, ayar cihazı yeterlidir", "verdict": "gereksiz", "explain": "Bağımsız yöntemle doğrulama ölçüm güvenilirliğinin temeli." },
+          { "label": "Yalnız müşteri isterse yapılır", "verdict": "musteri", "explain": "Doğrulama işin parçası." },
+          { "label": "Aynı sonucu vereceği için anlamsızdır", "verdict": "ayni", "explain": "Farklı şeyleri ölçtükleri için bağımsız doğrulama sağlar." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "İki farklı yöntem birbirini doğruluyor. Ayar yapıldığı hâlde değer düzelmiyorsa bu da bir bulgu."
+    },
+    {
+      "id": 7,
+      "instruction": "Test sonuçlanıyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kremayer-kutusu",
+        "question": "Sonuç nasıl raporlanır?",
+        "options": [
+          { "label": "Ölçülen değerler, tekrar sayısı, lastik basınçları ve yük durumu birlikte yazılır; sonuç 'geometri iyi/bakılmalı' biçiminde yorumlanır, tek başına bir tanı olarak sunulmaz", "verdict": "kosullu-rapor", "correct": true, "explain": "Rapor, sonraki kişinin bu ölçüme güvenip güvenemeyeceğini anlayabileceği kadar bilgi taşımalıdır. Yazılacaklar: ölçülen değerler ve birimi, kaç kez tekrarlandığı ve değerlerin birbirine yakınlığı, ölçüm sırasındaki lastik basınçları, aracın yük durumu ve varsa ön takımda bulunan bulgular. Bu bilgiler olmadan bir sayı, altı ay sonra hiçbir işe yaramaz çünkü karşılaştırılamaz. Yorum kısmı da dikkatli yazılır: yanal kayma bir eleme testidir, bu yüzden sonuç 'toe bozuk' gibi bir tanı olarak değil, 'değer sınırın üstünde, ön düzen ölçümü önerilir' ya da 'değer sınırın içinde, geometri bu yöntemle temiz göründü' biçiminde yazılır. İkinci cümledeki 'bu yöntemle' ifadesi önemlidir çünkü testin karşılıklı sapmaları gizleyebildiğini hatırlatır. Müşteriye anlatırken de aynı dil kullanılır: bir ön kontrol yapıldığı, sonucun ne dediği ve bir sonraki adımın ne olduğu söylenir. Böylece hem beklenti doğru kurulur hem de ileride bir sorun çıkarsa rapor arkada durur." },
+          { "label": "Yalnız tek bir sayı yazılır", "verdict": "tek-sayi", "explain": "Koşulsuz sayı karşılaştırılamaz." },
+          { "label": "Sonuç doğrudan tanı olarak yazılır", "verdict": "tani", "explain": "Bu bir eleme testi; tanı ön düzen ölçümüyle konur." },
+          { "label": "Rapor tutulmaz, sözlü söylenir", "verdict": "sozlu", "explain": "Karşılaştırma ve sonraki adım için kayıt şart." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "'Bu yöntemle temiz göründü' cümlesi, testin sınırını da rapora yazmanın yolu."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Yanal kayma değeri sınırın üstünde. Bu ne demektir?",
+        "a": "sapma-var-hangisi-belirsiz",
+        "options": [
+          { "verdict": "sapma-var-hangisi-belirsiz", "label": "Geometride bir sapma var ama hangi açının saptığını söylemez; ön düzen cihazıyla ölçüm gerekir", "explain": "Yanal kayma birden çok hatanın ortak sonucudur: toe, camber, aks eğriliği, kaymış bağlantı noktası ve arka aksın düz gitmemesi aynı değeri üretebilir. Test bir eleme aracıdır ve gücü buradadır — birkaç saniyede, araç kaldırılmadan, hangi araçların asıl ölçüme gitmesi gerektiğini söyler." },
+          { "verdict": "toe", "label": "Toe hatası vardır, ayar yapılır", "explain": "Tek sebep değil." },
+          { "verdict": "lastik", "label": "Lastikler değiştirilir", "explain": "Sonuç lastik kararı vermez." },
+          { "verdict": "kremayer", "label": "Kremayer arızalıdır", "explain": "Doğrudan sebebi değil." }
+        ]
+      },
+      {
+        "q": "Değer sınırın içinde ama lastiklerde belirgin aşınma deseni var. Ne yapılır?",
+        "a": "birlesik-sonuc-gizler",
+        "options": [
+          { "verdict": "birlesik-sonuc-gizler", "label": "Test iki tekerleğin birleşik sonucunu verir; karşılıklı sapmalar birbirini gizleyebilir, asıl ölçüme gidilir", "explain": "Sol tekerlek içe, sağ aynı miktarda dışa bakıyorsa yana iten kuvvetler birbirini götürür ve cihaz düşük değer okur — hâlbuki iki lastik de sürtünerek aşınmaktadır. Aşınma deseni doğrudan kanıttır, yanal kayma dolaylı bir göstergedir; bir testin 'temiz' sonucu doğrudan kanıtı geçersiz kılmaz." },
+          { "verdict": "reddet", "label": "Şikâyet reddedilir", "explain": "Doğrudan kanıt geçerli." },
+          { "verdict": "kalitesiz", "label": "Lastikler kalitesizdir", "explain": "Önce geometri değerlendirilir." },
+          { "verdict": "cihaz", "label": "Cihaz bozuktur", "explain": "Testin bilinen sınırı." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 4,8 m/km ve 2,1 m/km SENARYO okumalarıdır; istenen FARKTIR (2,7 m/km) ve gösterilen şey tekrarlanmayan ölçümün sonuç sayılmayacağıdır. Kabul edilebilir yanal kayma sınırı verilmiyor.",
+    "sourceRequired": "Kabul edilebilir yanal kayma sınırı, toe/camber değerleri, lastik basınçları ve yük koşulları bilinçle VERİLMEDİ; araca, üreticiye ve ülkenin muayene mevzuatına özgüdür. Bu değer birçok ülkede muayene kriteri olduğu için künyesiz yazılmaz.",
+    "kapsam": "Ön düzen ölçümünün kendisi ve açı ayarları Lastik ve Tekerlek alanında işlendi; bu ders yalnız eleme testini ve yorumunu öğretiyor. Fren ve süspansiyon test platformları kapsam dışı. Arka aks ölçümü anıldı ama ayrı ders değil.",
+    "reviewedByMechanic": false
+  }
+}

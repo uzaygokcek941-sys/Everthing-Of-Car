@@ -1,0 +1,178 @@
+{
+  "id": "aksesuar.elektrikli-koltuk",
+  "area": "aksesuar-ses",
+  "stage": 4,
+  "title": "Elektrik Kumandalı Koltuk ve Hafıza",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 35,
+  "prerequisites": ["aksesuar.yagmur-sensoru"],
+  "learningGoals": [
+    "Koltuğun birden çok bağımsız motorla çalıştığını ve her eksenin ayrı arıza verdiğini görmek",
+    "Koltuk altındaki güvenlik bileşenlerinin sınırını tanımak",
+    "Hafıza işlevinin bir konum bilgisine dayandığını ve neden öğrenme istediğini bilmek"
+  ],
+
+  "safety": [
+    { "rule": "Koltuk soketleri ayrılmadan önce enerji kesilir, süre beklenir ve doğrulanır", "why": "Koltuğun altında ve yanında hava yastığı, gergili emniyet kemeri ve yolcu ağırlık algılama bileşenleri bulunabilir; bunlar sarı konektörle işaretlidir ve enerji kesilmeden ayrılmaz", "blocksStart": true },
+    { "rule": "Sarı konektörlü hiçbir birim sökülmez, taşınmaz, ölçülmez", "why": "Hava yastığı ve gergili kemer bileşenlerine müdahale bu uygulamanın kırmızı çizgisidir; ölçüm bile tetikleyebilir", "blocksStart": true },
+    { "rule": "Koltuk araçtan çıkarılırken iki kişi çalışır ve raylar emniyete alınır", "why": "Elektrikli koltuk motorları ve mekanizmasıyla birlikte ağırdır; devrilen koltuk hem kabini hem çalışanı yaralar", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.multimetre", "label": "Multimetre", "required": true },
+    { "id": "tool.pens-ampermetre", "label": "Pens ampermetre", "required": false },
+    { "id": "tool.tornavida-seti", "label": "Tornavida seti", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Koltuğun altına bakıyorsun. Birden fazla küçük motor var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.koltuk-motoru",
+        "question": "Elektrikli koltuk nasıl bir sistemdir?",
+        "options": [
+          { "label": "Her eksen için ayrı bir motor: ileri-geri, yukarı-aşağı (çoğu zaman ön ve arka ayrı), sırtlık açısı ve varsa bel desteği; motorlar bağımsız olduğu için arızalar da bağımsızdır", "verdict": "eksen-basina-motor", "correct": true, "explain": "Elektrikli koltuk tek bir mekanizma değil, aynı gövde üzerine yerleştirilmiş birkaç bağımsız düzenektir. Her eksenin kendi motoru, kendi dişli kutusu ve çoğu zaman kendi sonsuz vidalı mili vardır: koltuğu ray üzerinde ileri geri götüren bir motor, oturağı yükselten bir ya da iki motor (ön ve arka ayrı olduğunda oturak açısı da değişebilir), sırtlığı yatıran bir motor ve konfor donanımına göre bel desteği, baş desteği ya da yan destek motorları. Bu bağımsızlık teşhiste doğrudan bir yol haritası verir. Tek bir eksen çalışmıyorsa besleme, şase ve kumanda paneli sağlamdır — arıza o eksenin motorunda, kendi kablosunda ya da panelin o yöne ait kontağındadır. Hiçbir eksen çalışmıyorsa arıza ortak halkalardadır: sigorta, koltuğa giden ana besleme, şase ya da panelin kendisi. Bir de üçüncü tablo vardır: bazı eksenler çalışıp bazıları çalışmıyorsa ve çalışmayanlar aynı grupta toplanıyorsa (örneğin yükseklik eksenlerinin ikisi birden), o grubu ortak besleyen bir bağlantı ya da modül çıkışı aranır. Sonsuz vidalı mil ayrıca bir güvenlik özelliğidir: enerji kesilse bile koltuk kendiliğinden kaymaz." },
+          { "label": "Tek motor bütün hareketleri bir dişli kutusuyla dağıtır", "verdict": "tek-motor", "explain": "Eksenler bağımsız çalışabildiği için her birinin kendi motoru vardır." },
+          { "label": "Hidrolik bir düzenek koltuğu hareket ettirir", "verdict": "hidrolik", "explain": "Binek araçlarda düzenek elektrikli ve mekaniktir." },
+          { "label": "Koltuk hareketi tamamen mekaniktir, motorlar yalnız kilit açar", "verdict": "mekanik", "explain": "Motorlar doğrudan hareketi üretir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Bağımsız motorlar, bağımsız arızalar. 'Hepsi mi, biri mi' sorusu bu sistemde de teşhisin yarısı."
+    },
+    {
+      "id": 2,
+      "instruction": "Koltuğun altında sarı bir konektör görüyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.koltuk-oturagi",
+        "question": "Ne yapılır?",
+        "options": [
+          { "label": "Durulur: sarı konektör hava yastığı, gergili kemer ya da ağırlık algılama sistemine aittir; enerji kesilip süre beklenmiş olsa bile bu birimler sökülmez, ölçülmez ve yerleri değiştirilmez", "verdict": "sari-dur", "correct": true, "explain": "Koltuk, kabindeki en yoğun güvenlik bölgelerinden biridir ve bu yüzden aksesuar işinde en dikkatli çalışılan yerdir. Koltuğun içinde ya da altında üç ayrı güvenlik bileşeni bulunabilir. Birincisi yan hava yastığıdır ve genellikle sırtlığın dış kenarına yerleştirilmiştir. İkincisi gergili emniyet kemeridir: kaza anında kemeri ani biçimde geren, kendi patlayıcı ya da yaylı mekanizmasına sahip bir birimdir. Üçüncüsü yolcu ağırlık algılama düzeneğidir — koltukta oturan kişinin ağırlığını ölçer ve hava yastığının nasıl açılacağına karar veren bilgiyi üretir; bu düzenek koltuk altındaki bir mat ya da yük hücresi olabilir. Bu bileşenlerin ortak işareti sarı renktir: sarı konektörler ve sarı bantlı kablo demetleri. Kural nettir ve aşama 0'daki kırmızı çizgiyle aynıdır: sarı gördüğün yerde durursun. Enerjiyi kesip süreyi beklemek koltuğu SÖKME iznidir, bu birimlere müdahale izni değildir. Multimetreyle ölçmek bile yasaktır — bazı ateşleyicilerde ölçüm akımı tetikleme eşiğine yaklaşabilir. Bir de sık yapılan bir hata vardır: ağırlık algılama düzeneği bulunan bir koltuğa sonradan minder, kılıf ya da ısıtıcı eklemek ölçümü bozabilir ve sistem yanlış karar verebilir; bu yüzden koltuğa aksesuar eklerken üreticinin izin verdiği ürünler kullanılır." },
+          { "label": "Enerji kesildiği için serbestçe sökülebilir", "verdict": "serbest", "explain": "Enerji kesmek söküm iznidir, güvenlik birimine müdahale izni değildir." },
+          { "label": "Multimetreyle direnci ölçülüp durumu anlaşılır", "verdict": "olc", "explain": "Ölçüm akımı bazı ateşleyicilerde tehlikelidir; ölçülmez." },
+          { "label": "Sarı yalnız üretici renk tercihidir", "verdict": "renk", "explain": "Sarı bu sistemlerin uluslararası işaretidir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Koltuk kabinin en yoğun güvenlik bölgesi. Sarı gördüğün yerde durursun — kural aşama 0'la birebir aynı."
+    },
+    {
+      "id": 3,
+      "instruction": "İleri-geri hareket çalışmıyor, diğer bütün eksenler normal. Motorun akımını ölçtün: bu eksende 14,2 A, sağlam eksende 5,3 A. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.pens-ampermetre",
+        "unit": "A",
+        "acceptRange": [8.7, 9.1]
+      },
+      "camera": "aksesuar",
+      "hint": "14,2 eksi 5,3.",
+      "teachingNote": "8,9 amperlik bu fark motorun yükü kaldıramadığını gösteriyor ve bu eksende sebep neredeyse her zaman aynıdır: rayların içi. Koltuk rayları kabinin en çok kirlenen yerlerinden biridir — toz, kum, kırıntı, bozuk para ve zamanla kuruyan gres bir arada birikir. Kirli ray hem sürtünmeyi büyütür hem sonsuz vidalı mili zorlar; motor sürekli fazla akım çeker ve bir gün mekanizma tamamen sıkışır. Doğru işlem parça değil bakımdır: koltuk ileri alınıp arka bölge, geri alınıp ön bölge temizlenir (koltuk hiç hareket etmiyorsa ray temizliği koltuk çıkarıldıktan sonra yapılır), eski gres tamamen alınır ve uygun bir gresle yeniden yağlanır. İkinci sık sebep rayın içine düşmüş bir cisimdir — kalem, madenî para ya da oyuncak parçası; bu durumda akım aniden yükselir ve genellikle belli bir noktada takılma olur. Üçüncüsü mekanizmanın kendi dişli kutusundaki aşınmadır ve bu gerçek bir parça arızasıdır. Kabul edilebilir akım araca ve eksene özgüdür; bu ders bir sınır vermiyor, karşılaştırma aynı koltuğun sağlam ekseniyle yapılıyor."
+    },
+    {
+      "id": 4,
+      "instruction": "Hiçbir eksen çalışmıyor. Ortak halkalara bakıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sigorta-kutusu-aksesuar",
+        "question": "Koltuk devresinde ortak halkaların özelliği nedir?",
+        "options": [
+          { "label": "Koltuk yüksek akım çeker: kendi kalın beslemesi ve çoğu zaman kendi sigortası vardır; ayrıca koltuğun altındaki soket, koltuk her hareket ettiğinde gerildiği için yorulan bir noktadır", "verdict": "yuksek-akim-ve-soket", "correct": true, "explain": "Koltuk motorları kabindeki en yüksek akımlı tüketicilerden bazılarıdır — bir insanı hareket ettiriyorlar. Bunun iki sonucu vardır. Birincisi besleme kalındır ve genellikle koltuğa ayrı bir sigortayla gelir; bu sigorta çoğu zaman diğer konfor sigortalarından farklı ve daha yüksek amperlidir, bu yüzden 'diğer şeyler çalışıyor' bilgisi koltuk sigortasının sağlam olduğunu göstermez. Ölçüm sırası şudur: koltuk soketinde besleme ve şase ölçülür; besleme yoksa sigortaya ve oradan geriye gidilir. İkinci ve daha sinsi nokta koltuk altındaki kablo demetidir. Koltuk her ileri geri hareket ettiğinde bu demet gerilir ve toplanır; kapı körüğü gibi burası da hareketli bir geçiştir ve aynı biçimde yorulur. Belirtisi de aynıdır: koltuk belli bir konumdayken çalışıp başka konumda çalışmaması. Bu yüzden ölçüm tek konumda değil, koltuk ileri ve geriyken ayrı ayrı yapılır. Üçüncüsü soketin kendisidir — koltuk sökülüp takılan bir parçadır ve soket tam oturmamış olabilir; bir de zeminden gelen su bu soketleri oksitler, özellikle halının altında biriken nem varsa. Şase noktası da aynı sebeple kontrol edilir." },
+          { "label": "Koltuk düşük akımlı bir tüketicidir", "verdict": "dusuk-akim", "explain": "Bir insanı hareket ettiren motorlardır; akım yüksektir." },
+          { "label": "Koltuğun ayrı sigortası olmaz", "verdict": "sigorta-yok", "explain": "Çoğu araçta ayrı ve yüksek amperli sigortası vardır." },
+          { "label": "Koltuk altındaki demet sabittir, yorulmaz", "verdict": "sabit", "explain": "Koltuk her hareket ettiğinde gerilir; hareketli bir geçiştir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Koltuk altındaki demet ikinci bir körük: hareketli geçiş, aynı yorulma, aynı konuma bağlı belirti."
+    },
+    {
+      "id": 5,
+      "instruction": "Bu araçta hafıza işlevi var: bir tuşa basılınca koltuk kayıtlı konuma gidiyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.koltuk-motoru",
+        "question": "Sistem koltuğun nerede olduğunu nasıl biliyor?",
+        "options": [
+          { "label": "Her eksende bir konum bilgisi üretilir — genellikle motorun dönüşünü sayan bir sensörle; modül bu sayımı kaydeder ve geri çağırırken aynı sayıya kadar motoru sürer", "verdict": "konum-sayimi", "correct": true, "explain": "Hafıza işlevinin mantığı basittir ama sonuçları çok yönlüdür. Sistemin koltuğun konumunu mutlak olarak ölçen bir cetveli yoktur; onun yerine her eksende motorun ne kadar döndüğü sayılır. Motorun içindeki ya da yanındaki bir sensör dönüşü darbe olarak üretir, modül bu darbeleri sayar ve sayıyı o eksenin konumu olarak kabul eder. Sürücü bir hafıza tuşuna kaydettiğinde modül o anki bütün sayıları kaydeder; geri çağırdığında motorları aynı sayıya ulaşana kadar sürer. Bu yapının üç pratik sonucu vardır. Birincisi sayım referansı kaybolursa hafıza yanlış çalışır: akü uzun süre sökük kaldıysa, modül ya da motor değiştiyse sistem koltuğun nerede olduğunu bilmez ve öğrenme gerekir. İkincisi mekanik kayma sayımı bozar — koltuk elle zorlanmışsa ya da mekanizma kaydıysa sayı ile gerçek konum uyuşmaz; sistem kendi içinde tutarlıdır ama gerçekle uyumsuzdur. Bu, Direksiyon alanındaki açı sensörü dersinde öğrenilen durumun aynısıdır. Üçüncüsü bir eksenin sensörü bozulduğunda o eksen hafızaya katılmaz ve çoğu araçta hafıza işlevi tamamen devre dışı kalır — çünkü eksik konumla geri çağırma yapmak koltuğu yanlış yere götürür." },
+          { "label": "Koltukta bir cetvel vardır ve mesafeyi doğrudan ölçer", "verdict": "cetvel", "explain": "Ölçüm mutlak değil, motorun dönüşünün sayılmasıyla yapılır." },
+          { "label": "Sürücü her seferinde elle ayarlar, kayıt yoktur", "verdict": "elle", "explain": "Hafıza işlevi konum bilgisini kaydeder." },
+          { "label": "Süreyle ölçülür: motor belli süre çalıştırılır", "verdict": "sure", "explain": "Süre yüke göre değişir; güvenilir bir konum bilgisi vermez." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Sistem kendi içinde tutarlı, yalnız gerçekle uyumsuz olabilir — Direksiyon alanındaki açı sensörü dersinin aynısı."
+    },
+    {
+      "id": 6,
+      "instruction": "Motor değişti, hafıza artık yanlış konuma gidiyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.haberlesme-hatti",
+        "question": "Ne yapılır?",
+        "options": [
+          { "label": "Önce mekanik doğrulanır, sonra eksenler uç konumlara götürülerek sistemin referansı yeniden kurulur; kayıtlı hafızalar silinip yeniden kaydedilir", "verdict": "once-mekanik-sonra-ogrenme", "correct": true, "explain": "Sıra bu uygulamanın her alanında aynıdır: önce mekanik, sonra elektronik. Mekanik doğrulama şu demektir — raylar temiz ve serbest mi, mekanizma bir yerde takılıyor mu, koltuk bütün eksenlerde sonuna kadar gidip gelebiliyor mu? Bunlar sağlanmadan yapılan bir öğrenme, hatalı durumu 'normal' diye kaydeder ve şikâyet sürer. Ardından referans kurulur: birçok araçta yöntem her ekseni tek tek her iki uç konuma kadar götürmektir, çünkü uç konumlar sistemin sayacı sıfırlayabileceği tek güvenilir noktalardır — motor mekanik sınıra dayandığında akım yükselir ve modül orayı uç olarak işaretler. Bu yüzden öğrenme sırasında koltuk sonuna kadar gider ve o ana kadar 'takılıyor' sanılan hareketler normale döner. Referans kurulduktan sonra eski hafıza kayıtları geçersizdir; silinir ve sürücü kendi konumunu yeniden kaydeder. İşlemin tam adımları araçtan araca değişir ve bu ders bir yöntem vermiyor; öğretilen şey ne zaman gerektiğini bilmek ve sırayı bozmamaktır. Son not: bazı araçlarda bu işlem teşhis cihazı ister ve o kapsam dışıdır — o durumda müşteri doğru biçimde yönlendirilir." },
+          { "label": "Doğrudan yeni hafıza kaydedilir, sorun çözülür", "verdict": "direkt-kaydet", "explain": "Referans yanlışsa yeni kayıt da yanlış konuma gider." },
+          { "label": "Modül değiştirilir", "verdict": "modul", "explain": "Motor değişimi sonrası beklenen bir durumdur; parça değişmez." },
+          { "label": "Hafıza işlevi kapatılır", "verdict": "kapat", "explain": "İşlevi kapatmak çözüm değil, şikâyeti gizlemektir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Uç konumlar sistemin tek güvenilir referansı: motor mekanik sınıra dayanınca akım yükselir ve orası işaretlenir."
+    },
+    {
+      "id": 7,
+      "instruction": "İş bitti, koltuk yerine takıldı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.koltuk-oturagi",
+        "question": "Teslim öncesi ne doğrulanır?",
+        "options": [
+          { "label": "Bütün eksenler iki yönde uç konumlara kadar denenir, koltuk ray cıvataları belirtilen torkla sıkılır, kemer tokası ve güvenlik uyarı lambası kontrol edilir", "verdict": "tam-kontrol", "correct": true, "explain": "Koltuk işi konfor işi gibi görünür ama bittiğinde bir güvenlik parçası araca geri takılmış olur; bu yüzden doğrulama listesi farklıdır. Birincisi işlevdir: bütün eksenler iki yönde ve uç konumlara kadar denenir, hafıza varsa kaydedilip geri çağrılır. İkincisi ve en kritiği bağlantıdır — koltuğu şaseye bağlayan cıvatalar üreticinin belirttiği torkla sıkılır; bu cıvatalar kaza anında koltuğu yerinde tutan parçalardır ve 'elle iyice sıktım' kabul edilebilir bir yöntem değildir. Tork değeri araca özgüdür ve bu ders bir değer vermiyor. Üçüncüsü güvenlik sistemlerinin durumudur: gösterge panelindeki hava yastığı uyarı lambası kontak açıldığında yanıp sönmelidir; sürekli yanık kalıyorsa bir soket eksik ya da yarım takılmıştır ve araç bu hâlde teslim edilmez — bu ışık kaza anında sistemin çalışmayabileceğini söyler. Dördüncüsü kemer tokasıdır: koltuğa bağlı toka soketi takılı mı, toka kilitleniyor ve açılıyor mu. Beşincisi sesler: koltuk hareket ederken ya da araç yolda giderken tıkırtı olmamalı, bu genellikle yarım sıkılmış bir cıvatanın ya da yerine oturmamış bir kaplamanın işaretidir. Uyarı lambası konusunda kırmızı çizgi geçerlidir: lamba sönmüyorsa ve sebep bulunamıyorsa iş yetkili servise yönlendirilir." },
+          { "label": "Koltuk hareket ediyorsa iş tamamdır", "verdict": "hareket", "explain": "Cıvata torku ve güvenlik uyarı lambası ayrıca doğrulanmalıdır." },
+          { "label": "Cıvatalar elle iyice sıkılır", "verdict": "elle-sik", "explain": "Bu cıvatalar kazada koltuğu tutar; torkla sıkılır." },
+          { "label": "Uyarı lambası zamanla söner", "verdict": "lamba-soner", "explain": "Yanık kalan lamba sistemin devre dışı olabileceğini söyler; araç öyle teslim edilmez." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Bu iş bittiğinde araca bir güvenlik parçası geri takılmış oluyor: tork ve uyarı lambası pazarlık konusu değil."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Koltuk altında sarı konektör görüldüğünde ne yapılır?",
+        "a": "sari-dur",
+        "options": [
+          { "verdict": "sari-dur", "label": "Durulur — hava yastığı, gergili kemer ya da ağırlık algılama birimidir; sökülmez, taşınmaz, ölçülmez", "explain": "Koltukta yan hava yastığı, gergili emniyet kemeri ve yolcu ağırlık algılama düzeneği bulunabilir; ortak işaretleri sarı konektör ve sarı bantlı demettir. Enerjiyi kesip süre beklemek koltuğu sökme iznidir, bu birimlere müdahale izni değildir; multimetreyle ölçmek bile yasaktır çünkü ölçüm akımı bazı ateşleyicilerde tehlikelidir. Ağırlık algılama bulunan koltuğa sonradan minder ya da ısıtıcı eklemek de ölçümü bozabilir." },
+          { "verdict": "serbest", "label": "Enerji kesildiyse serbestçe sökülür", "explain": "Enerji kesmek müdahale izni değildir." },
+          { "verdict": "olc", "label": "Direnci ölçülür", "explain": "Ölçüm tetikleyebilir." },
+          { "verdict": "renk", "label": "Sarı yalnız renk tercihidir", "explain": "Uluslararası işarettir." }
+        ]
+      },
+      {
+        "q": "Motor değişiminden sonra hafıza yanlış konuma gidiyor. Doğru sıra nedir?",
+        "a": "once-mekanik-sonra-ogrenme",
+        "options": [
+          { "verdict": "once-mekanik-sonra-ogrenme", "label": "Önce mekanik doğrulanır (raylar temiz ve serbest), sonra eksenler uç konumlara götürülerek referans kurulur, sonra hafızalar yeniden kaydedilir", "explain": "Hafıza mutlak bir ölçüme değil, motorun dönüşünün sayılmasına dayanır; referans kaybolduğunda sistem kendi içinde tutarlı ama gerçekle uyumsuz olur. Uç konumlar sayacın sıfırlanabileceği tek güvenilir noktadır — motor mekanik sınıra dayanınca akım yükselir ve modül orayı işaretler. Kirli rayla yapılan öğrenme hatalı durumu normal kaydeder, bu yüzden mekanik önce gelir." },
+          { "verdict": "direkt-kaydet", "label": "Doğrudan yeni hafıza kaydedilir", "explain": "Referans yanlışsa kayıt da yanlıştır." },
+          { "verdict": "modul", "label": "Modül değiştirilir", "explain": "Beklenen bir durumdur." },
+          { "verdict": "kapat", "label": "Hafıza kapatılır", "explain": "Şikâyeti gizlemek çözüm değildir." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 14,2 A ve 5,3 A SENARYO okumalarıdır; istenen FARKTIR (8,9 A) ve ders bir azami akım sınırı vermiyor — karşılaştırma aynı koltuğun sağlam ekseniyle yapılıyor.",
+    "sourceRequired": "Koltuk ray cıvatası sıkma torku, koltuk sigortasının amperi, motor azami akımı, gres tipi ve hafıza öğrenme adımları bilinçle VERİLMEDİ; hepsi araca ve üretici belgesine aittir. Hava yastığı bekleme süresi de verilmedi.",
+    "kapsam": "Hava yastığı, gergili emniyet kemeri ve yolcu ağırlık algılama bileşenlerine müdahale KAPSAM DIŞIDIR ve öyle kalacaktır; ders yalnız sınırı ve güvenli durum ilkesini öğretiyor. Sahnede airbag bileşeni modellenmedi. Koltuk ısıtma ve havalandırma ayrı bir konudur ve bu derste işlenmiyor. Teşhis cihazıyla yapılan öğrenme işlemleri kapsam dışı; gerekiyorsa müşteri yönlendirilir.",
+    "reviewedByMechanic": false
+  }
+}

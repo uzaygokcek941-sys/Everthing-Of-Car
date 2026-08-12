@@ -1,0 +1,140 @@
+{
+  "id": "temel.olcu-aletleri",
+  "area": "motor-mekanik",
+  "stage": 1,
+  "title": "Kumpas, Mikrometre, Sentil",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 16,
+  "prerequisites": ["temel.el-aletleri"],
+  "learningGoals": [
+    "Ölçü aletini işin istediği hassasiyete göre seçmek",
+    "Verniyer okumasını ana skala ve verniyer çizgisinden hesaplamak",
+    "Aletin kendi hatasını (sıfır hatası, ölçme kuvveti) ölçüden ayırmak"
+  ],
+
+  "safety": [
+    { "rule": "Ölçü aleti tezgâhta anahtarların arasında bırakılmaz", "why": "Kumpas ve mikrometre birer ölçü aletidir, el aleti değil. Üstüne düşen bir lokma çeneyi eğer ve alet bunu sana söylemez; yanlış ölçmeye devam eder", "blocksStart": false },
+    { "rule": "Sıcak parça ölçülmez", "why": "Metal ısınınca genleşir. Sıcakken toleransta görünen parça soğuyunca ölçü dışına düşer; bu farkın büyüklüğü mikrometrenin çözünürlüğünün kat kat üstündedir", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.kumpas", "label": "Kumpas (verniyer 1/20, 0.05 mm)", "required": true },
+    { "id": "tool.mikrometre", "label": "Dış çap mikrometresi (0-25 mm, 0.01 mm)", "required": true },
+    { "id": "tool.sentil", "label": "Sentil (yaprak mastar) takımı", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "İş bir mili 0.01 mm hassasiyetle ölçmeni istiyor. Hangi aleti alırsın?",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.olcu-aletleri",
+        "question": "0.01 mm hassasiyet isteyen ölçüm için doğru alet hangisi?",
+        "options": [
+          { "label": "Mikrometre", "verdict": "mikrometre", "correct": true, "explain": "Aleti iş değil, işin istediği hassasiyet seçer. Mikrometrenin bölüntüsü 0.01 mm'dir; 0.01 mm karar verilecek bir ölçüyü ancak o okuyabilir." },
+          { "label": "Kumpas", "verdict": "kumpas", "explain": "Yaygın kumpasın verniyeri 0.05 mm okur. 0.01 mm'lik bir farkı göremez; gösterdiği rakam güven verir ama o çözünürlük orada yoktur." },
+          { "label": "Cetvel, gözle ara değeri kestiririm", "verdict": "cetvel", "explain": "Cetvel 0.5 mm mertebesindedir. Göz kararı ara değer ölçüm değil tahmindir ve tahminle tolerans kararı verilmez." },
+          { "label": "Sentil takımı", "verdict": "sentil", "explain": "Sentil çap ölçmez, iki yüzey arasındaki boşluğu ölçer. Doğru alet ama yanlış iş." }
+        ]
+      },
+      "camera": "bench-close",
+      "teachingNote": "Ustayı çıraktan ayıran ilk soru şudur: bu iş kaç ondalık istiyor? Cevabı bilmeden alet seçilmez."
+    },
+    {
+      "id": 2,
+      "instruction": "Kumpasın skalasına bak. Ana skalada çene 24 mm'yi geçmiş, verniyerin 7. çizgisi ana skalayla tam hizalı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kumpas",
+        "question": "Kumpas kaç mm gösteriyor? (verniyer 1/20, yani bir çizgi 0.05 mm)",
+        "options": [
+          { "label": "24.35 mm", "verdict": "24-35", "correct": true, "explain": "Okuma iki parçadır: ana skaladan geçilen tam değer (24) artı hizalanan verniyer çizgisi çarpı aletin bölüntüsü (7 × 0.05 = 0.35). Toplam 24.35 mm. Verniyerin işi, ana skalanın gösteremediği ara değeri hizalanma yoluyla söylemektir." },
+          { "label": "24.07 mm", "verdict": "24-07", "explain": "Verniyer çizgisinin numarası doğrudan ondalık değil. 7 bir çizgi sayısıdır; mm'ye çevirmek için aletin bölüntüsüyle çarpılır." },
+          { "label": "24.70 mm", "verdict": "24-70", "explain": "Bu 1/10'luk (0.1 mm) bir kumpasın okuması olurdu. Aletin bölüntüsünü bilmeden verniyer okunmaz; her kumpas aynı değildir." },
+          { "label": "31 mm", "verdict": "31", "explain": "Ana skala ile verniyer çizgisi toplanmaz. Farklı birimlerdeki iki sayıyı toplamış olursun." }
+        ]
+      },
+      "camera": "bench-close",
+      "hint": "Önce ana skalada geçilen tam değeri oku. Sonra hangi verniyer çizgisinin ana skalayla tam hizalandığını bul.",
+      "teachingNote": "Aynı çizgi görüntüsü 1/20 kumpasta 0.35, 1/50 kumpasta başka bir değer okunur. Verniyerde ilk öğrenilecek şey rakam değil, aletin bölüntüsüdür."
+    },
+    {
+      "id": 3,
+      "instruction": "Kumpasla egzersiz cıvatasının gövde çapını ölç ve değeri gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.egzersiz-civata.1",
+        "unit": "mm",
+        "bookValue": 9.8,
+        "acceptRange": [9.7, 9.9]
+      },
+      "camera": "bench-close",
+      "hint": "Çeneleri dişin üstüne değil, cıvatanın düz gövdesine otur. Diş üstünden ölçersen tepeyi mi kökü mü tuttuğun belli olmaz.",
+      "teachingNote": "Cıvata M10 ama kumpas 10.00 göstermez. Anma ölçüsü bir isimdir, ölçülen değer değil: metrik dişin dış çapı anma ölçüsünün biraz altında kalacak şekilde imal edilir. Buradaki 9.8 egzersiz değeridir."
+    },
+    {
+      "id": 4,
+      "instruction": "Kumpası tamamen kapattın ama skala 0.10 mm gösteriyor. Ne yaparsın?",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kumpas",
+        "question": "Sıfır hatası olan kumpasla nasıl çalışılır?",
+        "options": [
+          { "label": "Sıfırlarım; sıfırlanamıyorsa her okumadan 0.10 çıkarırım", "verdict": "sifirla-veya-cikar", "correct": true, "explain": "Sıfır hatası aletin kendi hatasıdır ve her ölçüme aynen eklenir. Ya alet sıfırlanır ya da hata bilinip her okumadan düşülür. Bilinen bir hata sorun değildir; bilinmeyen hata sorundur." },
+          { "label": "Önemsemem, 0.10 mm küçük bir değer", "verdict": "onemseme", "explain": "0.10 mm, kumpasın kendi bölüntüsünün iki katı. Ölçtüğün her parçayı sistematik olarak büyük gösterirsin ve hepsi aynı yönde yanlış çıkar." },
+          { "label": "Çeneleri sıkıştırarak kapanmasını zorlarım", "verdict": "zorla-kapat", "explain": "Zorlanan çene eğilir. Sıfır hatasını gidermiş görünürsün ama artık alet her ölçüde farklı yanlış verir; bu ilkinden kötüdür." },
+          { "label": "Mikrometreye geçer, kumpası hiç kullanmam", "verdict": "mikrometreye-gec", "explain": "Bozuk aleti bırakmak doğru refleks ama her iş mikrometre istemez ve mikrometrenin de sıfır hatası olur. Öğrenilecek şey alet değiştirmek değil, sıfır kontrolünü her ölçümden önce yapmak." }
+        ]
+      },
+      "camera": "bench-close",
+      "teachingNote": "Sıfır kontrolü ölçmenin ilk adımıdır, son adımı değil. Ölçtükten sonra fark edilen sıfır hatası bütün ölçümleri geçersiz kılar."
+    },
+    {
+      "id": 5,
+      "instruction": "Aynı cıvatayı bir de mikrometreyle ölç. Tamburu cırcırdan çevir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.egzersiz-civata.1",
+        "unit": "mm",
+        "bookValue": 9.78,
+        "acceptRange": [9.76, 9.8]
+      },
+      "camera": "bench-close",
+      "hint": "Cırcır 'tık tık' sesi verince dur. Sesi geçip tamburu doğrudan sıkarsan ölçü değil, ne kadar kuvvet uyguladığın okunur.",
+      "teachingNote": "Aynı parça, iki alet, iki farklı sayı. Kumpas 9.8 dedi, mikrometre 9.78 diyor — ikisi de doğru, çünkü her alet kendi çözünürlüğü kadar konuşur. Aletin verdiği son hane, o aletin gerçekten bildiği hanedir."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Mikrometrede neden cırcır kullanılır?",
+        "a": "ayni-olcme-kuvveti",
+        "options": [
+          { "verdict": "ayni-olcme-kuvveti", "label": "Her ölçümde aynı ölçme kuvvetini uygulamak için", "explain": "Ölçüyü belirleyen sadece parça değil, çeneye uyguladığın kuvvettir. Tamburu doğrudan sıkarsan çerçeve esner ve ölçü küçük çıkar; üstelik her seferinde farklı sıkarsın. Cırcır kuvveti sabitler, tekrarlanabilirlik oradan gelir." },
+          { "verdict": "daha-hizli", "label": "Daha hızlı kapatmak için", "explain": "Hız için değil. Kaba yaklaşma zaten tamburla yapılır; cırcır yalnız son teması kurar." },
+          { "verdict": "disli-korur", "label": "Sadece aletin dişlisini korumak için", "explain": "Aleti de korur ama asıl amaç ölçünün tekrarlanabilirliği." },
+          { "verdict": "gerek-yok", "label": "Gerek yok, elle sıkmak yeterli", "explain": "Elle sıkma her defasında farklı kuvvet demektir; 0.01 mm okuyan bir alette bu farkın kendisi ölçüden büyük olur." }
+        ]
+      },
+      {
+        "q": "Yeni sökülmüş, hâlâ sıcak bir parça neden ölçülmez?",
+        "a": "genlesme-olcuyu-buyutur",
+        "options": [
+          { "verdict": "genlesme-olcuyu-buyutur", "label": "Metal genleştiği için ölçü büyük çıkar, soğuyunca küçülür", "explain": "Toleransların yazıldığı sıcaklık oda sıcaklığıdır. Sıcak ölçülen parça toleransta görünüp soğuduğunda ölçü dışına düşebilir ya da tersi olur; bu fark mikrometrenin çözünürlüğünün kat kat üstündedir. Parça oda sıcaklığına gelene kadar beklenir." },
+          { "verdict": "alet-bozulur", "label": "Sadece ölçü aleti zarar gördüğü için", "explain": "Alet de ısıdan etkilenir ama asıl sorun parçanın ölçüsünün o an gerçek ölçüsü olmaması." },
+          { "verdict": "el-yanar", "label": "Sadece el yanacağı için", "explain": "Güvenlik ayrı bir konu. Ölçüm burada güvenlik yüzünden değil, geçersiz olduğu için ertelenir." },
+          { "verdict": "sorun-yok", "label": "Sorun yok, metal ölçüsünü korur", "explain": "Korumaz. Isınan her metal genleşir; ölçme işi bu yüzden sıcaklığa bağlıdır." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "sourceRequired": "9.8 ve 9.78 mm egzersiz değerleridir, belirli bir araç parçasına ait değildir. Gerçek işte tolerans üreticinin servis kılavuzundan okunur ve kaynaksız yayınlanmaz.",
+    "kapsam": "Verniyer aritmetiği şıklarla öğretiliyor. Skalayı ekranda çizip okutmak için read-scale etkileşimi gerekir; 3B ölçü aleti modeli gelene kadar öğretilecek yeni bir şey katmaz.",
+    "reviewedByMechanic": false
+  }
+}

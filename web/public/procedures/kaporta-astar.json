@@ -1,0 +1,177 @@
+{
+  "id": "kaporta.astar",
+  "area": "kaporta",
+  "stage": 5,
+  "title": "Astar: Yapışma, Dolgu ve Çıplak Metal Bırakmama",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 40,
+  "prerequisites": ["kaporta.macun"],
+  "learningGoals": [
+    "Astarın tek bir ürün değil, farklı işler yapan bir katman ailesi olduğunu görmek",
+    "Çıplak metalin ve macunun neden doğrudan boyanmadığını bilmek",
+    "Kılavuz katın neden zaman kazandıran bir adım olduğunu anlamak"
+  ],
+
+  "safety": [
+    { "rule": "Astar püskürtme işlemi uygun solunum koruması ve havalandırma olmadan yapılmaz", "why": "Astar ve sertleştiricilerin solunması ciddi ve kalıcı sağlık zararı verir; bu bir tercih değil şarttır", "blocksStart": true },
+    { "rule": "Çıplak metal astarlanmadan bekletilmez", "why": "Korumasız metal nemle temas ettiği andan itibaren yüzeyde görünmez bir oksit tabakası kurar; bu tabaka yapışmayı bozar ve korozyonu başlatır", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.boya-tabancasi", "label": "Boya tabancası", "required": true },
+    { "id": "tool.kilavuz-kat", "label": "Kılavuz kat", "required": true },
+    { "id": "tool.kalinlik-olcer", "label": "Kalınlık ölçer", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Yüzeyde üç farklı bölge var: çıplak metal, macunlanmış alan ve zımparalanmış eski boya.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.zimpara-bolgesi",
+        "question": "Astar neden tek bir ürün değil?",
+        "options": [
+          { "label": "Çünkü farklı işler yapar: bir kısmı metale tutunmayı ve korumayı sağlar, bir kısmı yüzeydeki küçük izleri doldurur, bir kısmı alttaki farklı katmanları yalıtır — hangisinin nerede kullanılacağı yüzeye göre değişir", "verdict": "katman-ailesi", "correct": true, "explain": "Atölyede 'astar' denince tek bir kutu anlaşılır ama aslında birbirinden farklı işler yapan bir katman ailesi vardır ve hangisinin nerede kullanılacağı yüzeyin durumuna bağlıdır. Birinci grup, çıplak metale tutunmak ve onu korumak için tasarlanmıştır: metalin üzerine doğrudan uygulanır, yapışmayı kurar ve korozyona karşı bir bariyer oluşturur. Bu grup ince uygulanır, çünkü işi doldurmak değil tutunmak ve korumaktır. İkinci grup dolgu amaçlıdır: yüzeyde kalan çok küçük zımpara izlerini ve mikro çukurları kapatır, zımparalanarak düzeltilir ve boyanın oturacağı düz zemini kurar. Bu grup daha kalın uygulanır ve zımparalanmak üzere yapılmıştır. Üçüncü grup yalıtıcıdır: altta uyumsuz ya da hassas bir katman varsa üstteki sistemin çözücülerinin ona ulaşmasını engeller. Dördüncü grup, plastik dersinde geçen yapışma astarıdır: düşük yüzey enerjili plastiklerde boyanın tutunmasını sağlar. Bunları birbirinin yerine kullanmak tipik bir hatadır — dolgu astarı çıplak metalin korumasını sağlamaz, koruyucu astar zımpara izlerini doldurmaz. Doğru uygulamada çoğu zaman ikisi de kullanılır: önce metale uygun olan, üstüne dolgu görevi olan. Hangi ürünün hangi yüzeye ve hangi sırayla uygulanacağı ürünün teknik belgesinde yazar; bu ders ürün adı ya da sistem şeması vermiyor." },
+          { "label": "Aynı üründür, farklı adlarla satılır", "verdict": "ayni-urun", "explain": "İşlevleri farklıdır: tutunma, dolgu, yalıtım." },
+          { "label": "Yalnız renk farkı vardır", "verdict": "renk", "explain": "Renk bir yardımcı özellik; işlev farklıdır." },
+          { "label": "Astar aslında gerekli değildir", "verdict": "gereksiz", "explain": "Yapışma, koruma ve düz zemin astarla kurulur." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Dolgu astarı metali korumaz, koruyucu astar zımpara izini doldurmaz. Çoğu işte ikisi de gerekir."
+    },
+    {
+      "id": 2,
+      "instruction": "Boya kalınlığını iki aşamada ölçtün: astardan önce 118 mikron, astardan sonra 162 mikron. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.kalinlik-olcer",
+        "unit": "mikron",
+        "acceptRange": [42, 46]
+      },
+      "camera": "kaporta",
+      "hint": "162 eksi 118.",
+      "teachingNote": "44 mikron eklendi — ve bu katmanın büyük kısmı zımparalanarak geri alınacak. Bu, astarın en yanlış anlaşılan tarafıdır: dolgu astarı kalınlık kazanmak için değil, zımparalanarak düzeltilmek için atılır. Uygulanan katman yüzeyin bütün küçük izlerini ve dalgalarını örter; zımpara sonra yüksek noktalardan alır ve çukurlarda kalan malzeme yüzeyi düzler. Yani astar bir dolgu havuzu gibi davranır ve işinin çoğunu zımparalanırken yapar. Buradan iki pratik sonuç çıkar. Birincisi, yeterince atılmayan astar zımparalanırken 'delinir' — altındaki macun ya da metal açığa çıkar ve o bölge yeniden astarlanmak zorunda kalır; bu, süreyi ikiye katlar. İkincisi, gereğinden fazla atılan astar kuruma süresini uzatır, çözücü hapseder ve zımparalarken gereksiz iş çıkarır. Üçüncü bir konu daha var: toplam sistem kalınlığı. Onarım bölgesindeki katmanların toplamı çevredeki fabrika kalınlığından çok fazla olursa hem geçiş belli olur hem sistem daha kırılgan davranır. Bu yüzden ölçüm yalnız hasar tespitinde değil, işin ortasında da kullanılır. Kaç kat uygulanacağı, kuru film kalınlığı ve kürlenme koşulları ürünün teknik belgesinde yazar; buradaki iki sayı senaryo okumasıdır."
+    },
+    {
+      "id": 3,
+      "instruction": "Macunlu bölgeyi doğrudan boyamayı düşünüyorsun; macun zaten düzgün zımparalandı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.gocuk-bolgesi",
+        "question": "Macun doğrudan boyanabilir mi?",
+        "options": [
+          { "label": "Boyanmaz: macun gözeneklidir ve çevresindeki boyalı yüzeyden farklı emiş yapar — üstüne doğrudan atılan boya o bölgede mat, farklı dokulu ya da iz bırakan bir yüzey verir; ayrıca gözenekler nem alır", "verdict": "macun-astarlanir", "correct": true, "explain": "Macun, sertleştikten sonra bile mikroskobik ölçekte gözenekli bir malzemedir ve bu iki sorun üretir. Birincisi emiş farkıdır: boyanın çözücüsü macun tarafından emilir, komşu boyalı yüzey tarafından emilmez. Sonuç, aynı katın iki bölgede farklı davranmasıdır — macunun üstünde boya daha mat kalır, dokusu değişir ve sınırları ışıkta belli olur. Buna atölye dilinde 'macun yüzeyi içti' denir. İkincisi nemdir: gözenekli bir katman havadaki nemi alır ve o nem boyanın altında hapsolur; zamanla kabarma ve yapışma kaybı olarak ortaya çıkar. Astar bu iki sorunu birden çözer: gözenekleri kapatır, yüzeyi eşit emişli hâle getirir ve boyanın oturacağı tekdüze bir zemin kurar. Aynı mantık çıplak metal için de geçerlidir ama orada bir üçüncü gerekçe daha vardır — koruma. Bu yüzden kural şudur: ne macun ne çıplak metal doğrudan boyanır. Uygulamada bir ayrıntı daha önemlidir: astar, macunun sınırlarını aşacak biçimde geniş uygulanır, çünkü hem geçişin yumuşatılması hem farklı yüzeylerin tek bir zemin altında birleştirilmesi gerekir. Hangi astarın hangi yüzeye uygulanacağı ve zımparalanabilir olup olmadığı ürünün teknik belgesinde yazar." },
+          { "label": "Boyanabilir, macun düzgünse yeterlidir", "verdict": "boyanir", "explain": "Emiş farkı ve gözeneklilik yüzeyde iz ve mat bölge üretir." },
+          { "label": "Yalnız kalın macun astarlanır", "verdict": "kalin-macun", "explain": "Gözeneklilik kalınlıktan bağımsızdır." },
+          { "label": "Vernik zaten kapatır", "verdict": "vernik", "explain": "Vernik altındaki emiş farkını gidermez." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Ne macun ne çıplak metal doğrudan boyanır. Macun boyanın çözücüsünü içer, komşu yüzey içmez — sınır ışıkta belli olur."
+    },
+    {
+      "id": 4,
+      "instruction": "Astar kuruduktan sonra zımparalayacaksın. Üzerine ince ve koyu bir toz katman püskürtüyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.boya-tabancasi",
+        "question": "Kılavuz kat ne işe yarar?",
+        "options": [
+          { "label": "Yüzeyin nerede düz olmadığını gösterir: zımparalandığında yüksek noktalardan silinir, çukurlarda kalır — kalan izler gözle görülemeyecek çukurların adresidir", "verdict": "kilavuz-kat", "correct": true, "explain": "Kılavuz kat, bu aşamanın en çok zaman kazandıran ve en çok atlanan adımıdır. Mantığı basittir: astarın üzerine, kontrast oluşturacak renkte çok ince bir toz ya da sprey katman uygulanır. Ardından yüzey düz bir tabanla zımparalandığında bu ince katman yüksek noktalardan hemen silinir ama çukurların içinde kalır. Sonuç bir haritadır — hâlâ dolu olmayan her yer, kalan renkli izle kendini gösterir. Bunun değeri, gözün ve elin sınırını aşmasıdır: bir yüzeyde birkaç yüz mikronluk bir çukur gözle görünmez, elle bazen hissedilir ama kılavuz kat onu tartışmasız biçimde işaretler. Kullanmayan usta ne yapar? Yüzeyi düzgün sanıp boyar, boyanın parlaklığı çukuru büyütür ve kusur ancak vernikten sonra ortaya çıkar — yani düzeltmek için bütün katmanları geri almak gerekir. Kılavuz katın ikinci faydası zımpara kontrolüdür: kat tamamen silindiğinde o bölgede yeterince malzeme alındığı anlaşılır; ısrarla zımparalamak astarı delip altındaki macunu ya da metali açığa çıkarır. Üçüncü faydası eğitimdir — yeni başlayan biri için yüzeyin gerçekte ne kadar düz olmadığını gösteren en dürüst araçtır. Kılavuz kat kullanıldıktan sonra yüzeyin son temizliği tekrar yapılır." },
+          { "label": "Yüzeyi korur", "verdict": "korur", "explain": "Koruma işlevi yok; kontrol için kullanılır." },
+          { "label": "Rengi belirlemeye yarar", "verdict": "renk", "explain": "Renk ayrı bir konu; kılavuz kat düzlük kontrolü içindir." },
+          { "label": "Astarın kurumasını hızlandırır", "verdict": "kuruma", "explain": "Kürlenmeyle ilgisi yoktur." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Kılavuz kat, yüzeyin gerçekte ne kadar düz olmadığını gösteren en dürüst araç. Gözün ve elin sınırını aşar."
+    },
+    {
+      "id": 5,
+      "instruction": "Astarı zımparalarken bazı noktalarda altındaki macun ve metal açığa çıktı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-camurluk",
+        "question": "Ne yapılır?",
+        "options": [
+          { "label": "Açığa çıkan bölgeler yeniden astarlanır: çıplak metal ve macun boyanın altında bırakılmaz — üstelik açığa çıkmış olması o noktanın yüksek olduğunu da söyler, yani hazırlık henüz bitmemiştir", "verdict": "yeniden-astarla", "correct": true, "explain": "Astarı zımparalarken altının açığa çıkmasına atölyede 'astarı deldim' denir ve iki ayrı bilgi taşır. Birincisi teknik bir eksikliktir ve mutlaka giderilir: o noktada artık koruma ve eşit emiş sağlayan katman yoktur; üzerine doğrudan boya atılırsa hem yapışma hem görünüm sorunu çıkar, çıplak metalse ayrıca korozyon başlar. Çözüm, o bölgenin temizlenip yeniden astarlanmasıdır — ve tek bir noktaya lokal dokunmak yerine, o bölge yeterince geniş bir alanda yeniden ele alınır ki geçiş yumuşak kalsın. İkincisi bir teşhistir ve çoğu zaman atlanır: astarın delindiği yer, yüzeyin en yüksek noktasıdır. Yani orada hâlâ bir tümsek vardır ve zımpara diğer yerlerden önce oraya bindiği için katman oradan tükenmiştir. Bunu yalnız astarlayarak geçmek, tümseği yerinde bırakmak demektir; boya sonrası ışıkta o bölge kendini gösterir. Doğru yaklaşım, yüksek noktanın kendisiyle ilgilenmek ve gerekiyorsa sac ya da macun düzeyine geri dönmektir. Üçüncü bir ihtimal de vardır: astar yeterince kalın uygulanmamıştır. Bu, uygulama tekniğiyle ilgilidir ve bir sonraki işte kat sayısı gözden geçirilir. Kaç kat uygulanacağı ve kuru film kalınlığı ürünün teknik belgesinde yazar." },
+          { "label": "Üstünden boya atılır, kapanır", "verdict": "boya-kapatir", "explain": "Yapışma, koruma ve emiş sorunu devam eder." },
+          { "label": "Yalnız çıplak metal astarlanır", "verdict": "yalniz-metal", "explain": "Macun da doğrudan boyanmaz." },
+          { "label": "Normaldir, önemsizdir", "verdict": "normal", "explain": "Delinen nokta aynı zamanda yüzeyin yüksek yeridir; teşhis taşır." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Astarın delindiği yer yüzeyin en yüksek noktası. Yalnız astarlayıp geçmek tümseği yerinde bırakır."
+    },
+    {
+      "id": 6,
+      "instruction": "Astar tamam. Boyaya geçmeden önce kenarlara bakıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.arka-kapi-paneli",
+        "question": "Kenarlar ve gizli yüzeyler ne durumda olmalı?",
+        "options": [
+          { "label": "Astarlanmış ve korunmuş: panel kenarları, kıvrımların içi ve montaj sonrası ulaşılamayacak yüzeyler bu aşamada halledilir — kenarlar korumanın en ince olduğu ve pasın en çok başladığı yerlerdir", "verdict": "kenarlar", "correct": true, "explain": "Panel kenarları, boya işinde iki sebeple ayrı bir başlıktır. Birincisi fiziksel: püskürtülen bir katman keskin bir kenarda tutunmakta zorlanır ve orada doğal olarak incelir; yani kenar, sistemin en zayıf olduğu yerdir. İkincisi konum: kenarlar aynı zamanda suyun aktığı, çamurun biriktiği ve taş darbelerinin geldiği yerlerdir. İkisi birleşince sonuç bellidir — pas hemen her zaman kenardan başlar. Bu yüzden kenarlar özellikle kontrol edilir, gerekiyorsa ayrıca ele alınır ve korumasız bırakılmaz. İkinci konu gizli yüzeylerdir: bir panel takıldıktan sonra iç tarafına, kıvrımların arkasına ve bindirme yerlerine bir daha ulaşamazsın. Cıvatalı parça dersinde geçen ilke burada tekrar eder — takıldıktan sonra ulaşılamayacak her yüzey, takılmadan önce halledilir. Üçüncü konu maskeleme sınırıdır: astar ve boya nerede bitecek, hangi hattan kesilecek. Kenar hattının bir kıvrımda ya da doğal bir sınırda bitirilmesi, düz bir yüzeyin ortasında bitirilmesinden çok daha iyi sonuç verir — düz yüzeyde bırakılan bir sınır, ne kadar iyi yumuşatılırsa yumuşatılsın ışıkta bir hat olarak kendini gösterme riski taşır. Bu karar boya aşamasının konusudur ve orada ayrıntısıyla göreceksin." },
+          { "label": "Kenarlar boyada zaten kapanır", "verdict": "boyada", "explain": "Püskürtülen katman kenarda doğal olarak incelir." },
+          { "label": "Gizli yüzeyler montajdan sonra yapılır", "verdict": "sonra", "explain": "Takıldıktan sonra o yüzeylere ulaşılamaz." },
+          { "label": "Yalnız görünen yüzey önemlidir", "verdict": "gorunen", "explain": "Pas hemen her zaman kenardan başlar." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Katman keskin kenarda incelir, su ve taş da oradan gelir. Pas hemen her zaman kenardan başlar."
+    },
+    {
+      "id": 7,
+      "instruction": "Boya öncesi hazırlığın tamamı bitti.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kaput-kaporta",
+        "question": "Bu üç dersin ortak sonucu nedir?",
+        "options": [
+          { "label": "Boyanın kalitesi boyadan önce belirlenir: temizlik, zımpara kademeleri, geçiş, ince macun ve doğru astar — boya bunların üzerine yalnız renk ve parlaklık ekler", "verdict": "boyadan-once", "correct": true, "explain": "Bu aşamanın üç dersi tek bir şeyi anlattı: gördüğün boya, aslında altındaki hazırlığın görüntüsüdür. Yüzey hazırlığı tutunmayı ve düzlüğü kurdu; macun kalan çok küçük farkları aldı ve kalın kullanıldığında nasıl bir borç yazdığını gösterdi; astar bütün farklı yüzeyleri tek bir zeminde birleştirdi, koruma sağladı ve boyanın oturacağı düzlüğü tamamladı. Boya bunların üzerine renk ve parlaklık ekler — daha fazlasını değil. Bu yüzden bir işte 'boya kötü çıktı' denildiğinde bakılacak ilk yer boya değildir. Zımpara izi görünüyorsa kademe atlanmıştır; belirli bir açıdan halka görünüyorsa geçiş dar açılmıştır; birkaç ay sonra çukur belirdiyse macun kalın ya da erken zımparalanmıştır; mat bir bölge varsa macun doğrudan boyanmıştır; krater varsa silikon kalmıştır; kabarma varsa çıplak metal bekletilmiş ya da korunmamıştır. Listenin tamamı hazırlık aşamasına ait. Bir de bu aşamanın kendi dürüstlük sınavı var: bu adımların hiçbiri teslim gününde görünmez ve atlandığında kısa vadede kimse anlamaz. Yapan usta ile yapmayan usta aynı süreyi değil ama aynı görünen aracı teslim eder. Fark, aracın kaç yıl o hâlde kalacağıdır. Sırada boya var: renk kodu, tabanca ayarı ve kurutma." },
+          { "label": "Boya ürünü sonucu belirler", "verdict": "urun", "explain": "İyi ürün gerekli ama hazırlık belirleyicidir." },
+          { "label": "Sonuç boyacının yeteneğine bağlıdır", "verdict": "yetenek", "explain": "Yetenek uygulamada; zemin hazırlıkta kurulur." },
+          { "label": "Kat sayısı belirler", "verdict": "kat", "explain": "Kalın kat kusuru gizlemez, büyütür." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Gördüğün boya, altındaki hazırlığın görüntüsü. 'Boya kötü çıktı' denince bakılacak ilk yer boya değil."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Zımparalanmış macun doğrudan boyanabilir mi?",
+        "a": "macun-astarlanir",
+        "options": [
+          { "verdict": "macun-astarlanir", "label": "Boyanmaz: macun gözeneklidir ve boyanın çözücüsünü emer, komşu boyalı yüzey emmez — o bölge mat kalır, dokusu değişir ve sınırları ışıkta belli olur; ayrıca gözenekler nem alır", "explain": "Astar gözenekleri kapatır ve yüzeyi eşit emişli hâle getirir. Aynı kural çıplak metal için de geçerlidir ve orada bir de koruma gerekçesi vardır. Astar macunun sınırlarını aşacak biçimde geniş uygulanır." },
+          { "verdict": "boyanir", "label": "Macun düzgünse boyanabilir", "explain": "Emiş farkı iz ve mat bölge üretir." },
+          { "verdict": "kalin-macun", "label": "Yalnız kalın macun astarlanır", "explain": "Gözeneklilik kalınlıktan bağımsızdır." },
+          { "verdict": "vernik", "label": "Vernik kapatır", "explain": "Vernik alttaki emiş farkını gidermez." }
+        ]
+      },
+      {
+        "q": "Astarı zımparalarken altındaki macun açığa çıktı. Bu ne söyler?",
+        "a": "yeniden-astarla",
+        "options": [
+          { "verdict": "yeniden-astarla", "label": "İki şey: o bölge yeniden astarlanmalıdır ve o nokta yüzeyin en yüksek yeridir — zımpara oraya önce bindiği için katman orada tükenmiştir, yani hazırlık henüz bitmemiştir", "explain": "Yalnız astarlayıp geçmek tümseği yerinde bırakır ve boya sonrası ışıkta kendini gösterir. Doğru yaklaşım yüksek noktayla ilgilenmek, gerekiyorsa macun ya da sac düzeyine geri dönmektir. Üçüncü ihtimal astarın yeterince kalın uygulanmamış olmasıdır." },
+          { "verdict": "boya-kapatir", "label": "Boya kapatır", "explain": "Yapışma, koruma ve emiş sorunu devam eder." },
+          { "verdict": "yalniz-metal", "label": "Yalnız çıplak metal astarlanır", "explain": "Macun da doğrudan boyanmaz." },
+          { "verdict": "normal", "label": "Normaldir, önemsizdir", "explain": "Teşhis taşır: orası yüksek noktadır." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2'deki 118 mikron ve 162 mikron SENARYO okumalarıdır; istenen FARKTIR (44 mikron). Ders hiçbir ürün için kuru film kalınlığı ya da toplam sistem kalınlığı iddia etmiyor.",
+    "sourceRequired": "Astar tipleri ve ürün adları, hangi yüzeye hangi astarın uygulanacağı, kat sayısı, kuru film kalınlığı, katlar arası bekleme ve kürlenme süreleri ve sıcaklıkları, zımpara kademeleri ve kılavuz kat ürünü bilinçle VERİLMEDİ; hepsi ürüne özgüdür ve ürünün teknik belgesinden okunur.",
+    "kapsam": "Boya kabini kurulumu, havalandırma ve atık yönetimi mevzuatı KAPSAM DIŞIDIR; ders astarın işlevini, sırasını ve kontrolünü öğretiyor.",
+    "kaynak": "Bu alan kullanıcının açık talebiyle eklendi (talep birebir: 'birde alanlara kaportayı ekleyelim'); konu başlıkları MEB Otomotiv Gövde ve Boya dalının çerçevesini takip ediyor, kazanım numarası iddiası yok.",
+    "reviewedByMechanic": false
+  }
+}

@@ -1,0 +1,177 @@
+{
+  "id": "direksiyon.merkeze-donmeme",
+  "area": "direksiyon",
+  "stage": 8,
+  "title": "Direksiyon Merkeze Dönmüyor",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 40,
+  "prerequisites": ["direksiyon.ses-teshisi"],
+  "learningGoals": [
+    "Merkeze dönüşün hangi kuvvetlerden doğduğunu bilmek",
+    "Fazla direnç ile eksik geri döndürme kuvvetini ayırmak",
+    "Şikâyeti geometri, sürtünme ve elektronik olarak üç kola bölmek"
+  ],
+
+  "safety": [
+    { "rule": "Direksiyonu bırakarak yapılan gözlem yalnız güvenli koşulda ve çok kısa süre yapılır", "why": "Araç bir yöne kayabilir; eller direksiyona yakın tutulur", "blocksStart": true },
+    { "rule": "Araç sehpaya alınmadan altında çalışılmaz", "why": "Sürtünme kontrolleri aracın altında yapılır", "blocksStart": true },
+    { "rule": "Boşluk ya da bağlantı şüphesi olan araç yol testine çıkarılmaz", "why": "Zincirde ayrılma riski varsa yolda denemek tehlikelidir", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.teshis-cihazi", "label": "Teşhis cihazı", "required": true },
+    { "id": "tool.manometre", "label": "Lastik basınç manometresi", "required": true },
+    { "id": "tool.kriko-sehpa", "label": "Kriko ve sehpa", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Şikâyet: virajdan çıkarken direksiyon kendiliğinden düzelmiyor, elle geri getirmek gerekiyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.direksiyon-simidi",
+        "question": "Direksiyon normalde neden kendiliğinden merkeze döner?",
+        "options": [
+          { "label": "Tekerlek geometrisi, özellikle caster açısı, yuvarlanan tekerleği düz konuma iten bir kuvvet üretir; sistemdeki sürtünme bu kuvvete karşı çalışır", "verdict": "caster-ve-surtunme", "correct": true, "explain": "Merkeze dönüş sihir değil, iki kuvvetin yarışıdır. Geri döndüren taraf geometridir: tekerleğin döndüğü eksen yandan bakıldığında dikey değil, hafifçe arkaya yatıktır — bu açıya caster denir ve bir bisikletin ön çatalındaki eğimle aynı işi yapar. Eğik eksen sayesinde yuvarlanan tekerlek kendini doğal olarak düz konuma çekmek ister; hız arttıkça bu etki güçlenir, bu yüzden merkeze dönüş yolda park hâlinden çok daha belirgindir. Karşı taraf ise sürtünmedir: zincirdeki her mafsal, yatak, keçe ve dişli teması bu geri dönüşe direnç gösterir. Sağlıklı bir araçta geometri kazanır ve direksiyon kendiliğinden düzelir. Şikâyet ortaya çıktığında bu yarışın iki tarafından biri değişmiştir — ya geri döndüren kuvvet azalmıştır (geometri sapmıştır) ya da direnç artmıştır (bir yer sıkışmıştır). Üçüncü bir ihtimal elektrikli sistemlerde vardır: birçok EPS, geometrinin işini destekleyen bir merkeze dönüş yardımı uygular ve o yardım kaybolduğunda araç mekanik olarak sağlam olduğu hâlde şikâyet üretir. Teşhis bu üç kola bölünerek yapılır." },
+          { "label": "Direksiyon içinde bir yay vardır", "verdict": "yay", "explain": "Geri döndüren kuvvet geometriden doğar, bir yaydan değil." },
+          { "label": "Hidrolik basınç geri iter", "verdict": "hidrolik", "explain": "Yardım katmanı kuvveti çoğaltır; geri dönüş geometriden gelir." },
+          { "label": "Sürücü her zaman elle döndürür", "verdict": "elle", "explain": "Sağlıklı araçta direksiyon kendiliğinden düzelir." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "İki kuvvetin yarışı: geometri geri döndürür, sürtünme direnir. Şikâyet, taraflardan biri değiştiğinde çıkıyor."
+    },
+    {
+      "id": 2,
+      "instruction": "İlk elemeyi yapıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.rot-basi-sol",
+        "question": "Kaputu açmadan önce ne kontrol edilir?",
+        "options": [
+          { "label": "Lastik basınçları ve durumu, sonra ön takım ve zincirdeki mafsalların serbest dönüp dönmediği", "verdict": "lastik-ve-mafsal", "correct": true, "explain": "Merkeze dönmeme şikâyetinin en ucuz iki sebebi buradadır ve ikisi de dakikalar sürer. Düşük basınçlı lastik, zeminle temas alanını büyütür ve geri dönüşe karşı direnci artırır; geometri aynı kalsa bile yarışı sürtünme kazanır. Aynı etkiyi çok geniş ya da yumuşak yanaklı bir lastik de üretir ve bu, lastik değişimi sonrası başlayan şikâyetlerin açıklamasıdır — birinci adımda sorulan 'ne zaman başladı' sorusu burada işe yarar. İkinci kontrol mafsallardır: rotil, rot başı ve tekerlek göbeği yatağı, tekerleğin kendi ekseni etrafında serbestçe dönmesine izin vermelidir. Araç kaldırılıp tekerlek elle sağa sola çevrildiğinde takılma, sertlik ya da bir noktada artan direnç hissediliyorsa suçlu bulunmuştur. Kurumuş ya da paslanmış bir rotil bu şikâyetin klasik sebebidir ve çoğu zaman ses de verir — ses dersindeki gıcırtı ailesiyle aynı bulgu. Bu iki kontrol yapılmadan hidrolik ya da elektronik tarafa geçmek, en sık yapılan zaman kaybıdır." },
+          { "label": "Doğrudan ön düzen ayarına alınır", "verdict": "ayar", "explain": "Basınç ve mafsal serbestliği elenmeden ayar yapılmaz." },
+          { "label": "Kutu değiştirilir", "verdict": "kutu", "explain": "Ucuz ve hızlı adımlar önce." },
+          { "label": "Modül değiştirilip denenir", "verdict": "modul", "explain": "Ölçmeden parça değişmez." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Tekerleği elle çevir: takılma, sertlik ya da bir noktada artan direnç varsa suçlu bulunmuştur."
+    },
+    {
+      "id": 3,
+      "instruction": "Yol testinde merkeze dönüşü ölçtün: sağa virajdan çıkışta simit 74° geri döndü, aynı hızda sola virajda 46°.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.direksiyon-simidi",
+        "unit": "derece",
+        "acceptRange": [27.5, 28.5]
+      },
+      "camera": "direksiyon",
+      "hint": "74 eksi 46.",
+      "teachingNote": "28°'lik bu asimetri, şikâyeti tek bir kola indiriyor. İki yön arasında bu kadar büyük bir fark, geri döndüren kuvvetin genel olarak zayıflamasıyla açıklanamaz — çünkü geometri iki yöne de aynı anda etki eder. Asimetri ya geometrinin iki tarafta eşit olmadığını (caster farkı) ya da tek yönde fazladan bir direnç bulunduğunu söyler: sıkışmış tek bir mafsal, kutu içinde belirli bir bölgede aşınma ya da tek yöne yeterince destek göndermeyen bir valf. Buna karşılık iki yönde de zayıf ama eşit bir dönüş, genel bir direnç artışını ya da caster'ın toplamda azalmasını düşündürür ve bu farklı bir kola gider. Yani bu tek ölçüm, iki farklı teşhis yoluna ayıran kavşaktır. Kabul edilebilir merkeze dönme değerleri araca özgüdür ve bu ders bir sınır vermiyor; kullanılan şey sağ-sol karşılaştırması."
+    },
+    {
+      "id": 4,
+      "instruction": "Araca daha önce bir iş yapılmış: kremayer baskı ayarı ayarlanmış.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kremayer-baski-civatasi",
+        "question": "Bu bilgi neyi düşündürür?",
+        "options": [
+          { "label": "Baskı fazla sıkılmış olabilir; boşluk azalırken sürtünme artar ve merkeze dönüş bozulur", "verdict": "fazla-sikilmis", "correct": true, "explain": "Bu, aşama 2'de öğrenilen tuzağın en tipik sonucudur ve sahada sık görülür: usta boşluğu gidermek için baskıyı sıkar, boşluk gerçekten azalır ve iş bitmiş sanılır; ama sürtünme artmıştır ve birkaç gün sonra müşteri farklı bir şikâyetle döner — 'direksiyon merkeze dönmüyor' ya da 'ağırlaştı'. İki şikâyet aynı kökten gelir. Bu yüzden merkeze dönmeme şikâyetinde ilk sorulacak sorulardan biri, araca yakın zamanda ne yapıldığıdır. Baskı ayarı yapılmışsa doğrulanması kolaydır: ayar gevşetilerek sertliğin kaybolduğu noktaya inilir ve direksiyonun uçtan uca akıcı döndüğü hissedilir; merkeze dönüş düzeliyorsa sebep bulunmuştur. Aynı mantık başka işler için de geçerlidir — yeni takılmış bir rot başı ya da mafsal fazla sıkılmışsa, körük burulmuş kalmışsa ya da bir parça yanlış toplanmışsa aynı tablo çıkar. Bu yüzden şikâyetin başlangıç zamanı ile yapılan işin tarihi karşılaştırılır; ikisi çakışıyorsa şüphe doğrudan o işe yönelir." },
+          { "label": "Baskı ayarının merkeze dönüşle ilgisi yoktur", "verdict": "ilgisiz", "explain": "Fazla sıkılan baskı sürtünmeyi artırır ve dönüşü bozar." },
+          { "label": "Daha da sıkılmalıdır", "verdict": "daha-sik", "explain": "Sıkmak sorunu büyütür." },
+          { "label": "Kutu komple değiştirilmelidir", "verdict": "degistir", "explain": "Önce ayar gevşetilip denenir." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "'Araca yakın zamanda ne yapıldı' sorusu, bu şikâyette en kısa yol. Boşluk giderilirken sürtünme eklenmiş olabilir."
+    },
+    {
+      "id": 5,
+      "instruction": "Mekanik tarafta bulgu yok; araç elektrik yardımlı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.eps-kontrol-unitesi",
+        "question": "EPS tarafında ne aranır?",
+        "options": [
+          { "label": "Merkeze dönüş yardımı işlevi ve girdileri: açı sensörü verisi, araç hızı ve varsa ilgili kodlar", "verdict": "eps-donus-yardimi", "correct": true, "explain": "Birçok elektrik yardımlı sistem, geometrinin işini destekleyen bir merkeze dönüş yardımı uygular: sürücü direksiyonu bıraktığında ya da gevşettiğinde modül, simidi düz konuma doğru iten küçük bir tork üretir. Bu işlev iki girdiye dayanır — direksiyonun nerede olduğu (açı sensörü) ve aracın hızı. Girdilerden biri bozuksa işlev doğru çalışmaz ve araç mekanik olarak tamamen sağlam olduğu hâlde şikâyet üretir. Açı sensörünün sıfır noktası yanlışsa sistem 'düz' konumu yanlış yerde sanır ve simidi oraya götürmeye çalışır; bu, aşama 4'te öğrenilen öğrenme atlanmışsa doğrudan bu şikâyeti verir. Hız bilgisi ulaşmıyorsa yardım güvenli bir sabit değere geçebilir ve merkeze dönüş beklendiği gibi olmaz. Bu yüzden EPS tarafında yapılacak şey canlı veriye bakmaktır: araç düz giderken açı sıfıra yakın mı, modülün gördüğü hız gerçek mi, ilgili kodlar temiz mi. Ayrıca yakın zamanda kolon, sensör ya da ön düzen işi yapıldıysa öğrenmenin yapılıp yapılmadığı sorulur — bu, uyarı lambası yakmayan ama şikâyet üreten en sessiz sebeptir." },
+          { "label": "EPS merkeze dönüşle ilgilenmez", "verdict": "ilgilenmez", "explain": "Birçok sistem merkeze dönüş yardımı uygular." },
+          { "label": "Doğrudan modül değiştirilir", "verdict": "modul", "explain": "Girdiler ve öğrenme önce kontrol edilir." },
+          { "label": "Yalnız kod okunur, yeterlidir", "verdict": "kod", "explain": "Bu şikâyet çoğu zaman kod üretmez; canlı veri gerekir." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Öğrenmenin atlanması, uyarı lambası yakmayan ama şikâyet üreten en sessiz sebep."
+    },
+    {
+      "id": 6,
+      "instruction": "Mekanik ve elektronik tarafta bulgu yok, ama iki yönde de dönüş zayıf.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kremayer-kutusu",
+        "question": "Sıradaki şüpheli ne?",
+        "options": [
+          { "label": "Geometri: caster açısı ve iki taraf arasındaki farkı; caster ayarlanamayan bir açıysa bir parça deforme olmuş olabilir", "verdict": "caster", "correct": true, "explain": "İki yönde de eşit biçimde zayıf bir merkeze dönüş, tek taraflı bir sıkışmayla açıklanamaz; geri döndüren kuvvetin kendisi azalmıştır ve o kuvveti üreten şey caster açısıdır. Caster azaldığında tekerleğin kendini düz konuma çekme eğilimi zayıflar; araç düz gitmeye devam eder ama direksiyon 'ölü' hissedilir ve virajdan çıkışta kendiliğinden düzelmez. Burada bilinmesi gereken kritik nokta, birçok araçta caster'ın AYARLANABİLİR bir açı olmamasıdır. Ayarlanamayan bir açıda ölçülen sapma bir ayar sorunu değil, bir parça sorunudur: kaza sonrası kaymış bir bağlantı noktası, eğrilmiş bir salıncak ya da çökmüş bir takoz. Bu, Lastik ve Tekerlek alanındaki ön düzen dersinde konan kuralın aynısıdır — ayarlanamayan bir açıdaki sapma parça değişimini işaret eder. Ölçüm ön düzen cihazıyla yapılır ve iki taraf karşılaştırılır; asimetri varsa hangi tarafın saptığı da görülür. Bu noktada iş direksiyon alanından çıkıp süspansiyon ve gövde tarafına geçer ve doğru davranış bunu açıkça söylemektir." },
+          { "label": "Kutu içi arıza", "verdict": "kutu", "explain": "Kutu kaynaklı olsaydı genellikle sürtünme ya da asimetri bulgusu verirdi." },
+          { "label": "Lastik markası", "verdict": "lastik", "explain": "Lastik etkiler ama basınç ve durum zaten elenmişti." },
+          { "label": "Sürücü alışkanlığı", "verdict": "surucu", "explain": "Ölçülebilir bir bulgu varken alışkanlığa bağlanmaz." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Ayarlanamayan bir açıdaki sapma, ayar sorunu değil parça sorunudur. Aynı kural ön düzen dersinde de vardı."
+    },
+    {
+      "id": 7,
+      "instruction": "Sebep bulundu ve giderildi.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.aci-sensoru",
+        "question": "İş nasıl kapanır?",
+        "options": [
+          { "label": "Merkeze dönüş iki yönde ve aynı hızda yeniden ölçülüp asimetrinin kalktığı gösterilir; geometriye dokunulduysa öğrenme yapılır ve kodlar temiz okunur", "verdict": "olc-ogren-dogrula", "correct": true, "explain": "Kapanışın üç adımı var. Birincisi ölçümün tekrarıdır: merkeze dönüş, onarım öncesiyle aynı koşullarda — aynı yol, aynı hız, iki yönde — yeniden ölçülür ve asimetrinin kalktığı ya da azaldığı sayıyla gösterilir. Bu, öznel bir hissi nesnel bir sonuca çeviren tek adımdır. İkincisi öğrenmedir ve atlanması bu alandaki en sessiz hatadır: rot çubuklarına, kutuya ya da geometriye dokunulduysa tekerleklerin düz olduğu konum değişmiştir ve açı sensörünün sıfır noktası artık yanlıştır. Öğrenme yapılmazsa merkeze dönüş yardımı yanlış bir hedefe çalışır ve şikâyet kısmen sürer — üstelik panelde hiçbir uyarı yanmaz. Üçüncüsü kod kontrolüdür; işlem sırasında oluşan kayıtlar temizlenir ve geri gelmedikleri doğrulanır. Buna ek olarak, iş süspansiyon ya da gövde tarafına geçtiyse bunun müşteriye açıkça söylenmesi gerekir; direksiyon alanında yapılabilecek her şey yapılmış ama sebep başka bir alandaysa, orayı gizlemek yerine yönlendirmek doğru davranıştır ve bu, alanın ilk dersinden beri tekrarlanan ilkedir." },
+          { "label": "His düzeldiyse yeterlidir", "verdict": "his", "explain": "Ölçüm iki yönde tekrarlanarak gösterilir." },
+          { "label": "Geometriye dokunulsa da öğrenme gerekmez", "verdict": "ogrenme-yok", "explain": "Sıfır noktası değişmiştir; öğrenme atlanırsa şikâyet kısmen sürer." },
+          { "label": "Sebep başka alandaysa söylenmez", "verdict": "gizle", "explain": "Yönlendirmek doğru davranış." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Geometriye dokunulduysa öğrenme şart. Atlanırsa yardım yanlış hedefe çalışır ve panelde hiçbir uyarı yanmaz."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Direksiyon normalde neden kendiliğinden merkeze döner?",
+        "a": "caster-ve-surtunme",
+        "options": [
+          { "verdict": "caster-ve-surtunme", "label": "Caster açısı yuvarlanan tekerleği düz konuma iter; sistemdeki sürtünme bu kuvvete karşı çalışır", "explain": "Tekerleğin döndüğü eksen yandan bakıldığında hafifçe arkaya yatıktır ve bisiklet ön çatalıyla aynı işi yapar; hız arttıkça etki güçlenir. Karşı tarafta zincirdeki mafsal, yatak, keçe ve dişli sürtünmesi vardır. Şikâyet, bu yarışın taraflarından biri değiştiğinde çıkar: geri döndüren kuvvet azalmış ya da direnç artmıştır. Üçüncü ihtimal EPS'in merkeze dönüş yardımının kaybolmasıdır." },
+          { "verdict": "yay", "label": "Direksiyon içindeki bir yay", "explain": "Kuvvet geometriden doğar." },
+          { "verdict": "hidrolik", "label": "Hidrolik basınç geri iter", "explain": "Yardım kuvveti çoğaltır, geri dönüşü üretmez." },
+          { "verdict": "elle", "label": "Sürücü elle döndürür", "explain": "Sağlıklı araçta kendiliğinden düzelir." }
+        ]
+      },
+      {
+        "q": "İki yönde de eşit biçimde zayıf merkeze dönüş neyi düşündürür?",
+        "a": "caster",
+        "options": [
+          { "verdict": "caster", "label": "Geri döndüren kuvvetin azalmasını, yani caster açısını; ayarlanamayan bir açıysa parça sorunudur", "explain": "Tek taraflı sıkışma asimetri üretir; iki yönde eşit zayıflık ise geri döndüren kuvvetin kendisinin azaldığını gösterir. Caster azalınca araç düz gitmeye devam eder ama direksiyon 'ölü' hissedilir. Birçok araçta caster ayarlanamaz — ayarlanamayan bir açıdaki sapma kaza sonrası kaymış bir bağlantı noktasını, eğrilmiş bir salıncağı ya da çökmüş bir takozu işaret eder ve iş süspansiyon/gövde tarafına geçer." },
+          { "verdict": "kutu", "label": "Kutu içi arıza", "explain": "Genellikle asimetri ya da sürtünme bulgusu verirdi." },
+          { "verdict": "lastik", "label": "Lastik markası", "explain": "Basınç ve durum zaten elenmişti." },
+          { "verdict": "surucu", "label": "Sürücü alışkanlığı", "explain": "Ölçülebilir bulgu varken alışkanlığa bağlanmaz." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 74° ve 46° SENARYO okumalarıdır ve aynı hızda alınmıştır; istenen FARKTIR (28°) ve gösterilen şey asimetrinin teşhisi tek bir kola indirdiğidir. Kabul edilebilir merkeze dönme değeri verilmiyor.",
+    "sourceRequired": "Caster ve toe değerleri, merkeze dönme sınırları, baskı ayarı torku ve lastik basınçları bilinçle VERİLMEDİ; araca ve üreticiye özgüdür. Ön düzen açı değerleri Lastik ve Tekerlek alanında da künyesiz verilmemişti.",
+    "kapsam": "Caster ölçümü ve ön düzen ayarı Lastik ve Tekerlek alanında işlendi; burada yalnız yorumu için anıldı. Süspansiyon ve gövde deformasyonu bu projenin kapsamı dışında ve ders bunu açıkça yönlendirme olarak söylüyor. EPS öğrenme işlemi aşama 4'te.",
+    "reviewedByMechanic": false
+  }
+}

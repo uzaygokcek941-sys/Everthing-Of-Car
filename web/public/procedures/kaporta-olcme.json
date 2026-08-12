@@ -1,0 +1,178 @@
+{
+  "id": "kaporta.olcme",
+  "area": "kaporta",
+  "stage": 2,
+  "title": "Ölçmek: Çapraz Ölçü, Fuga ve Boya Kalınlığı",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 40,
+  "prerequisites": ["kaporta.el-aletleri"],
+  "learningGoals": [
+    "Simetriyi kendi içinde karşılaştırarak hasarı sayıya çevirmek",
+    "Fuga ve çapraz ölçünün hangi soruyu cevapladığını ayırmak",
+    "Ölçümün bir kanıt olduğunu ve işin başında ve sonunda alındığını bilmek"
+  ],
+
+  "safety": [
+    { "rule": "Ölçüm sonucu taşıyıcı yapıda sapma gösteriyorsa iş kılavuza ve gövde ölçüm sistemine devredilir", "why": "Şerit metre ve mastarla yapılan karşılaştırma bir ön bilgidir; taşıyıcı yapının doğrulanması ölçüm sistemi ve üretici verisi gerektirir", "blocksStart": true },
+    { "rule": "Araç ölçüm sırasında düz ve yükü dengeli bir zeminde durmalıdır", "why": "Eğimli zemin ve tek taraflı yük, gövdeyi çok az da olsa burar ve ölçümü yanıltır", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.olcum-mastari", "label": "Ölçüm mastarı", "required": true },
+    { "id": "tool.serit-metre", "label": "Şerit metre", "required": true },
+    { "id": "tool.kalinlik-olcer", "label": "Boya kalınlık ölçer", "required": true },
+    { "id": "tool.fuga-mastari", "label": "Fuga mastarı", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Aracın kapı boşluğunda hasar şüphesi var ama üretici ölçü tablosu elinde yok.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.olcum-mastari",
+        "question": "Tablo olmadan nasıl ölçersin?",
+        "options": [
+          { "label": "Aracı kendi kendisiyle karşılaştırarak: sol ve sağ aynı noktalar arasındaki ölçüler eşit olmalıdır — simetri, üretici verisi olmadan da güvenilir bir referanstır", "verdict": "simetri", "correct": true, "explain": "Bir araç tasarımı gereği kendi orta ekseni etrafında simetriktir: solundaki bir nokta ile sağındaki karşılığı, aynı referanslara aynı uzaklıktadır. Bu, hasar tespitinde elindeki en güçlü ve en ucuz araçtır — çünkü üreticinin ölçü tablosuna ulaşamadığında bile araç kendi referansını taşır. Yöntem şudur: iki taraftan aynı iki nokta seçilir, aynı yerlerden ölçülür ve sonuçlar karşılaştırılır. Fark yoksa o bölge büyük olasılıkla yerindedir; fark varsa bir şey oynamıştır. Çapraz ölçü de aynı mantığın bir başka uygulamasıdır: bir açıklığın iki köşegeni ölçülür — örneğin kapı boşluğunun sol üstünden sağ alta, sağ üstünden sol alta — ve eşitlikleri kontrol edilir. Dikdörtgen bir açıklık ezildiğinde köşegenlerden biri uzar diğeri kısalır; iki sayı bunu hemen ele verir. Simetri yönteminin iki sınırı vardır ve bilinmesi gerekir. Birincisi, her iki taraf da aynı biçimde hasar görmüşse simetri korunur ve yöntem sessiz kalır — bu yüzden simetri tek başına değil, fuga ve gözle muayeneyle birlikte kullanılır. İkincisi, bazı araçlarda tasarımdan gelen küçük asimetriler bulunabilir; bu yüzden simetri farkı bir kanıt değil, bir işarettir. Kesin karar üreticinin ölçü verisiyle ve gövde ölçüm sistemiyle verilir — özellikle taşıyıcı yapı söz konusuysa." },
+          { "label": "Gözle bakılır", "verdict": "goz", "explain": "Göz milimetreleri görmez; sayı gerekir." },
+          { "label": "Başka bir araçla karşılaştırılır", "verdict": "baska-arac", "explain": "Öbür aracın geçmişi bilinmez; kendi simetrisi daha güvenilirdir." },
+          { "label": "Ölçmeden onarıma başlanır", "verdict": "olcmeden", "explain": "Ölçüm işin kapsamını ve sonunda kanıtı üretir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Üretici tablosu yoksa bile araç kendi referansını taşır: solu sağıyla, köşegeni köşegeniyle karşılaştır."
+    },
+    {
+      "id": 2,
+      "instruction": "Kapı boşluğunun iki köşegenini ölçtün: biri 1482 mm, diğeri 1476 mm. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.olcum-mastari",
+        "unit": "mm",
+        "acceptRange": [5.5, 6.5]
+      },
+      "camera": "kaporta",
+      "hint": "1482 eksi 1476.",
+      "teachingNote": "6 milimetrelik bir köşegen farkı, gözle bakınca fark edilmeyecek kadar küçük ama anlamı büyüktür: o açıklık artık dikdörtgen değil, hafifçe eğik bir dörtgendir. Yani kapı boşluğu ezilmiş ya da çekilmiştir. Bunun günlük hayattaki karşılığı zaten müşterinin şikâyetinde saklıdır — kapı zor kapanıyor, bir köşesi sürtüyor, rüzgâr sesi geliyor ya da yağmurda su alıyor. Kapı sağlam olabilir; sorun kapıda değil, kapının oturduğu boşluktadır. Bu ölçümün üç pratik sonucu var. Birincisi, işin kapsamı büyür: yalnız panel onarımıyla bitmez, boşluğun geometrisi gündeme gelir. İkincisi, sınır sorusu doğar — kapı boşluğunu çevreleyen parçalar direk ve eşiktir, yani taşıyıcı yapıdır; orada düzeltme kılavuza ve çoğu zaman gövde ölçüm sistemine tabidir. Üçüncüsü, bu sayı bir kanıttır: müşteriye 'kapınız zor kapanıyor çünkü boşluk 6 milimetre bozulmuş' demek, 'bir şeyler olmuş' demekten hem daha ikna edici hem daha dürüsttür. Kabul edilebilir köşegen farkı araca özgüdür ve üretici verisinden okunur; bu ders bir sınır iddia etmiyor, buradaki iki sayı senaryo okumasıdır."
+    },
+    {
+      "id": 3,
+      "instruction": "Kapı ile çamurluk arasındaki aralığı bir uçta ve diğer uçta ölçtün: 3,8 mm ve 5,1 mm.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-kapi-paneli",
+        "question": "Fuga aralığının iki uçta farklı olması ne söyler?",
+        "options": [
+          { "label": "Parçalar birbirine göre eğik duruyor: ya kapı yerinde değil ya da boşluğun geometrisi bozuk — fuga, altta bir şeylerin oynadığını gösteren en hızlı yüzey işaretidir", "verdict": "fuga-egik", "correct": true, "explain": "Fuga, iki panel arasındaki aralıktır ve fabrikada baştan sona eşit olacak biçimde ayarlanır — hem görünüm hem sızdırmazlık için. Bu yüzden fuganın bir ucunda dar, diğer ucunda geniş olması tek bir anlama gelir: iki parça birbirine göre eğik duruyor. Sebebi iki yerden biri olabilir. Ya parçanın kendi bağlantısı oynamıştır — menteşe gevşemiş, cıvatalar kaymış, parça yanlış takılmıştır — ya da parçanın oturduğu boşluk deforme olmuştur. Ayrımı yapmanın yolu, fuga ile çapraz ölçüyü birlikte okumaktır: çapraz ölçü eşitse sorun büyük olasılıkla bağlantıdadır ve ayarla çözülür; çapraz ölçü de bozuksa sorun yapıdadır ve ayar yalnız belirtiyi gizler. Bu ayrım bu dersin kalbidir, çünkü acemi hata tam burada yapılır: fugayı düzeltmek için kapı zorlanır, menteşe kaydırılır, kapı 'oturur' görünür. Ama boşluk hâlâ bozuktur; kapı kilidi tam kavramaz, fitil eşit basmaz, su ve rüzgâr sesi devam eder ve zorlanmış menteşe zamanla yeniden kayar. Bir de yön bilgisi vardır: fuganın nerede daraldığı, kuvvetin nereden geldiğini gösterir. Kabul edilebilir fuga aralığı ve iki uç arasındaki izin verilen fark araca özgüdür; bu ders bir sınır vermiyor, buradaki iki sayı senaryo okumasıdır." },
+          { "label": "Normaldir, her araçta olur", "verdict": "normal", "explain": "Fabrikada eşit ayarlanır; belirgin fark bir işarettir." },
+          { "label": "Yalnız görünüm sorunudur", "verdict": "gorunum", "explain": "Sızdırmazlık ve kilit kavraması da etkilenir." },
+          { "label": "Menteşe kaydırılarak hemen düzeltilir", "verdict": "mentesse", "explain": "Önce çapraz ölçüye bakılır; yapı bozuksa ayar belirtiyi gizler." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Fuga ile çapraz ölçü birlikte okunur: çapraz eşitse ayar, çapraz bozuksa yapı. Ayar yapıyı düzeltmez, gizler."
+    },
+    {
+      "id": 4,
+      "instruction": "Elinde boya kalınlık ölçer var. Aracın çevresini dolaşıyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kalinlik-olcer",
+        "question": "Boya kalınlığı nasıl okunur?",
+        "options": [
+          { "label": "Tek bir sayı olarak değil, aracın kendi içindeki dağılım olarak: her panelden birkaç nokta alınır ve paneller birbiriyle karşılaştırılır — belirgin biçimde yüksek okuyan bölge geçmiş onarımı işaret eder", "verdict": "dagilim", "correct": true, "explain": "Boya kalınlık ölçerin tek bir okuması hemen hiçbir şey ifade etmez, çünkü fabrika kalınlığı araca, renge, üretim yılına ve hatta aynı araçta panelden panele değişir. Anlamlı olan dağılımdır. Yöntem şudur: her panelden birkaç nokta — genelde üst, orta ve alt — okunur ve panelin kendi içindeki tutarlılığına bakılır; sonra paneller birbiriyle karşılaştırılır. Fabrika çıkışlı bir araçta okumalar birbirine yakın seyreder. Bir panelin belirgin biçimde yüksek okuması, orada ek katman olduğunu söyler: yeniden boyanmış ya da altında macun var. Çok yüksek ve düzensiz okumalar kalın macun anlamına gelir ve bu, altında düzeltilmiş bir hasar olduğunu düşündürür. Tersi de bilgidir: beklenenden düşük okuma, o bölgenin fazla zımparalanmış olabileceğini gösterir. Ölçerin iki sınırı var ve bilinmesi gerekir. Birincisi, cihazların çoğu manyetik ya da girdap akımı prensibiyle çalışır ve ölçtüğü şey metal ile prob arasındaki toplam mesafedir; yani boya, astar ve macun ayrı ayrı değil toplam olarak okunur. İkincisi, plastik ve kompozit panellerde bu prensipler çalışmaz — bu yüzden tamponu ölçmeye çalışmak sonuç vermez. Ölçüm mutlaka not edilir: hasar okuma dersinde gördüğün gibi, işe başlamadan alınan kayıt sonradan çıkacak her tartışmayı bitirir. Bu ders hiçbir araç için fabrika boya kalınlığı ya da şüphe eşiği vermiyor." },
+          { "label": "Tek noktadan okunur, yeterlidir", "verdict": "tek-nokta", "explain": "Tek okuma anlamsız; dağılım gerekir." },
+          { "label": "Fabrika değeriyle karşılaştırılır", "verdict": "fabrika", "explain": "Fabrika değeri araca ve renge göre değişir; karşılaştırma aracın kendi içinde yapılır." },
+          { "label": "Tamponda da aynı şekilde ölçülür", "verdict": "tampon", "explain": "Plastik panelde bu prensipler çalışmaz." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Tek okuma anlamsız. Ölçer bir sayı değil, aracın kendi içindeki dağılımı verir."
+    },
+    {
+      "id": 5,
+      "instruction": "Ölçümlerin bazıları tutarsız çıkıyor; araç atölyenin eğimli girişinde duruyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.esik-saci",
+        "question": "Ölçüm öncesi hangi koşullar sağlanır?",
+        "options": [
+          { "label": "Araç düz zeminde ve dengeli yükle durur, lastik basınçları normaldir, ölçüm noktaları temizdir ve her ölçüm aynı noktadan aynı biçimde alınır — koşullar sabit değilse sayılar karşılaştırılamaz", "verdict": "sabit-kosul", "correct": true, "explain": "Bu alanda ölçümün değeri karşılaştırılabilirliğinden gelir; karşılaştırma ise ancak koşullar aynıysa anlamlıdır. Eğimli bir zeminde duran araç, kendi ağırlığı altında çok az da olsa burulur ve bu, özellikle kapı boşluğu gibi büyük açıklıklarda ölçülebilir bir fark üretir. Tek taraftaki ağır bir yük, inik bir lastik ya da bagajdaki yük de aynı şeyi yapar. İkinci koşul temizliktir: ölçüm noktasındaki çamur, pas kabuğu ya da eski bir yapıştırıcı kalıntısı, şerit metrenin ucunu birkaç milimetre kaydırır ve aradığın fark zaten o mertebededir. Üçüncüsü tekrarlanabilirliktir — ölçüm hep aynı referans noktasından, aynı biçimde alınır. Kapı boşluğunun köşesi diye baktığın yer solda kaynak dikişinin ortası, sağda kenarı ise iki tarafı karşılaştırmıyorsun demektir. Dördüncüsü kayıttır: alınan her ölçüm yazılır. Kafada tutulan sayı, işin ortasında değişir ve iş bittiğinde 'başta neydi' sorusuna cevap kalmaz. Son olarak bir uyarı: bütün bu koşullar sağlansa bile şerit metreyle yapılan çapraz ölçüm bir ön bilgidir. Taşıyıcı yapıda sapma varsa gerçek doğrulama, üreticinin ölçü verisiyle ve gövde ölçüm sistemiyle yapılır; bu iş bu alanın kapsamı dışındadır ve doğru davranış yönlendirmektir." },
+          { "label": "Koşullar önemsizdir, ölçü ölçüdür", "verdict": "onemsiz", "explain": "Eğim, yük ve kirlilik aranan farkın mertebesinde sapma üretir." },
+          { "label": "Yalnız aracın temiz olması yeterlidir", "verdict": "temiz", "explain": "Zemin, yük ve lastik basıncı da belirleyici." },
+          { "label": "Ölçüm tekrarlanmaz, ilk sonuç geçerlidir", "verdict": "tekrar-yok", "explain": "Şüphe varsa ölçüm aynı koşulda tekrarlanır." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Kafada tutulan sayı işin ortasında değişir. Her ölçüm yazılır — sonunda kanıt olacak olan odur."
+    },
+    {
+      "id": 6,
+      "instruction": "Onarım bitti. Araç teslim edilmeden önce.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.arka-kapi-paneli",
+        "question": "Ölçüm neden bir de sonda alınır?",
+        "options": [
+          { "label": "Yapılan işin sonucunu sayıyla göstermek ve teslim ettiğin durumu kayda geçirmek için: baştaki ve sondaki iki ölçüm birlikte, işin ne yaptığını gösteren tek belgedir", "verdict": "son-olcum", "correct": true, "explain": "Bu alanda yapılan işin kalitesi görsel olarak değerlendirilir ve görsel değerlendirme kavgaya açıktır — 'bence düzgün değil' ile 'bence düzgün' arasında hakem yoktur. Ölçüm bu hakemi getirir. İşe başlarken alınan ölçüm hasarı sayıya çevirir; iş bitince alınan ölçüm ise yapılanı sayıya çevirir. İkisi birlikte üç iş yapar. Birincisi, kendi kontrolündür: gözle bitmiş gibi görünen bir işte fuga hâlâ eşit değilse ya da köşegen farkı kapanmamışsa bunu ancak ölçerek görürsün, ve teslimden önce görmek teslimden sonra duymaktan iyidir. İkincisi, müşteriye anlatımdır: 'kapı boşluğunuz 6 milimetre bozuktu, şimdi 1 milimetre' cümlesi, 'düzelttik' cümlesinden hem daha somut hem daha dürüsttür — ve gerçekten düzelmediyse bu cümleyi kuramazsın, bu da bir denetimdir. Üçüncüsü, kayıttır: ölçüm formu, fotoğraflarla birlikte, işin teslim edildiği hâlin belgesidir. Sonradan başka bir yerde oluşan bir hasar sana fatura edilmek istendiğinde elindeki tek şey budur. Ve bir sınır: sondaki ölçüm hâlâ sapma gösteriyorsa iş bitmemiştir. Bunu 'olmuş sayalım' diye kapatmak, bu alanda en pahalı hatadır çünkü şikâyet mutlaka geri gelir — ya kapıdan, ya sudan, ya lastik aşınmasından." },
+          { "label": "Gerek yok, göz yeterli", "verdict": "goz", "explain": "Göz milimetreleri görmez ve tartışmada hakem olmaz." },
+          { "label": "Yalnız müşteri isterse", "verdict": "istek", "explain": "Kendi kontrolün için de gerekir." },
+          { "label": "Yalnız sigortalı işlerde", "verdict": "sigorta", "explain": "Her işte kendi kalite kontrolündür." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Teslimden önce görmek, teslimden sonra duymaktan iyidir. Sonda sapma varsa iş bitmemiştir."
+    },
+    {
+      "id": 7,
+      "instruction": "Üç ölçme aracını ve ne söylediklerini kurdun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.direk-b",
+        "question": "Üç ölçüm hangi üç ayrı soruyu cevaplar?",
+        "options": [
+          { "label": "Çapraz ölçü 'yapı yerinde mi', fuga 'parçalar birbirine göre doğru mu', boya kalınlığı 'bu panel daha önce onarılmış mı' — üçü ayrı sorudur ve birlikte okunur", "verdict": "uc-soru", "correct": true, "explain": "Bu üç aracın karıştırılması, bu alanda yanlış teşhisin en sık kaynağıdır; oysa her biri farklı bir katmana bakar. Çapraz ölçü yapıya bakar: gövdenin geometrisi yerinde mi, bir açıklık ezilmiş mi. En derindeki katmandır ve bozuksa üstteki her şey yanıltıcıdır. Fuga montaja bakar: parçalar birbirine göre doğru duruyor mu. Yapı sağlamken de bozulabilir — gevşemiş bir menteşe, yanlış takılmış bir çamurluk. Boya kalınlığı geçmişe bakar: bu yüzeyde ek katman var mı, daha önce onarım görmüş mü. Üçünü birlikte okumak bir tablo üretir ve o tablo işi tarif eder. Çapraz eşit + fuga bozuk = montaj işi, ayarla çözülür. Çapraz bozuk + fuga bozuk = yapısal iş, kılavuz ve çoğu zaman başka bir atölye. Çapraz eşit + fuga eşit + boya kalınlığı bir panelde yüksek = geçmişte onarım görmüş ama şu an geometrisi yerinde bir araç; bu bilgi hasar değerlendirmesinde ve ikinci el alımında değerlidir. Bu üçlünün ötesine geçen bir dördüncü katman daha var ve sınırı orada çiziyoruz: gövdenin taşıyıcı noktalarının üretici verisine göre doğrulanması, gövde ölçüm sistemiyle yapılır ve bu alanın kapsamı dışındadır. Şerit metre bir işaret verir, karar vermez." },
+          { "label": "Üçü de aynı şeyi ölçer", "verdict": "ayni", "explain": "Farklı katmanlara bakarlar: yapı, montaj, geçmiş." },
+          { "label": "Yalnız boya kalınlığı yeterlidir", "verdict": "yalniz-boya", "explain": "Boya kalınlığı geometriyi söylemez." },
+          { "label": "Yalnız fuga yeterlidir", "verdict": "yalniz-fuga", "explain": "Fuga yapının bozukluğunu tek başına ayırt etmez." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Çapraz yapıyı, fuga montajı, kalınlık geçmişi söyler. Sırada söküm sırası."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Fuga bir uçta dar, diğer uçta geniş. Menteşeyi kaydırıp düzeltmek doğru mu?",
+        "a": "fuga-egik",
+        "options": [
+          { "verdict": "fuga-egik", "label": "Önce çapraz ölçüye bakılır: çapraz eşitse sorun bağlantıdadır ve ayarla çözülür, çapraz da bozuksa sorun yapıdadır ve ayar yalnız belirtiyi gizler", "explain": "Yapı bozukken zorlanan menteşe kapıyı 'oturmuş' gösterir ama kilit tam kavramaz, fitil eşit basmaz, su ve rüzgâr sesi devam eder ve menteşe zamanla yeniden kayar. Kabul edilebilir fuga farkı araca özgüdür." },
+          { "verdict": "normal", "label": "Normaldir, her araçta olur", "explain": "Fabrikada eşit ayarlanır." },
+          { "verdict": "gorunum", "label": "Yalnız görünüm sorunudur", "explain": "Sızdırmazlık ve kilit kavraması da etkilenir." },
+          { "verdict": "mentesse", "label": "Hemen menteşe kaydırılır", "explain": "Önce çapraz ölçü." }
+        ]
+      },
+      {
+        "q": "Boya kalınlık ölçerden tek bir yüksek okuma aldın. Bu ne gösterir?",
+        "a": "dagilim",
+        "options": [
+          { "verdict": "dagilim", "label": "Tek başına bir şey göstermez: anlamlı olan aracın kendi içindeki dağılımdır — her panelden birkaç nokta alınıp paneller birbiriyle karşılaştırılır", "explain": "Fabrika kalınlığı araca, renge ve panele göre değişir. Cihaz boya, astar ve macunu ayrı değil toplam olarak okur; plastik ve kompozit panellerde ise çalışmaz. Ölçümler not edilir." },
+          { "verdict": "tek-nokta", "label": "Tek nokta yeterlidir", "explain": "Karşılaştırma olmadan anlamsız." },
+          { "verdict": "fabrika", "label": "Fabrika değeriyle karşılaştırılır", "explain": "Fabrika değeri sabit değildir." },
+          { "verdict": "tampon", "label": "Tamponda da aynı şekilde okunur", "explain": "Plastik panelde prensip çalışmaz." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2'deki 1482 mm ve 1476 mm SENARYO okumalarıdır; istenen FARKTIR (6 mm). Adım 3'teki 3,8 mm ve 5,1 mm de senaryo okumasıdır ve sayısal giriş istenmiyor. Ders hiçbir araç için kabul edilebilir çapraz ölçü ya da fuga farkı iddia etmiyor.",
+    "sourceRequired": "Üretici gövde ölçü tabloları, kabul edilebilir çapraz ölçü sapması, fuga aralığı ve iki uç arasındaki izin verilen fark, fabrika boya kalınlıkları ve şüphe eşikleri bilinçle VERİLMEDİ; hepsi araca özgüdür ve üreticinin onarım kılavuzundan okunur.",
+    "kapsam": "Gövde ölçüm sistemiyle taşıyıcı noktaların doğrulanması, şasi çekme ve bankoda doğrultma KAPSAM DIŞIDIR — şerit metre ve mastarla yapılan karşılaştırma bir ön bilgidir, karar değildir.",
+    "kaynak": "Bu alan kullanıcının açık talebiyle eklendi (talep birebir: 'birde alanlara kaportayı ekleyelim'); konu başlıkları MEB Otomotiv Gövde ve Boya dalının çerçevesini takip ediyor, kazanım numarası iddiası yok.",
+    "reviewedByMechanic": false
+  }
+}

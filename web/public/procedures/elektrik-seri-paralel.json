@@ -1,0 +1,177 @@
+{
+  "id": "elektrik.seri-paralel",
+  "area": "arac-elektrik",
+  "stage": 2,
+  "title": "Seri ve Paralel: Gerilim Bölünür, Akım Toplanır",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 25,
+  "prerequisites": ["elektrik.devre-elemanlari", "elektrik.multimetre-akim"],
+  "learningGoals": [
+    "Seri devrede gerilimin bölündüğünü, paralel devrede akımın toplandığını ölçümle görmek",
+    "Araçtaki tüketicilerin neden paralel bağlandığını açıklamak",
+    "Kötü bir bağlantının devreye istenmeyen bir seri direnç eklediğini kavramak"
+  ],
+
+  "safety": [
+    { "rule": "Devre değiştirilirken enerji kesilir", "why": "Canlı devrede bağlantı sökmek kıvılcım çıkarır ve soket pinlerini yakar. Ayrıca yanlışlıkla kurulan bir paralel yol, o anda kısa devre demektir", "blocksStart": true },
+    { "rule": "Tüketiciler kendi gerilimlerinin üstünde beslenmez", "why": "Seri bağlanması gereken bir elemanı doğrudan besleyen bir bağlantı, üzerine düşmesi gereken gerilimin katını uygular. Ampul anında yanar, elektronik parça geri dönüşsüz bozulur", "blocksStart": true },
+    { "rule": "Deneme amaçlı köprü kabloları ölçüm bitince sökülür", "why": "Unutulan bir köprü, korumayı ya da anahtarı devre dışı bırakır. Devre çalışıyor görünür ama artık korumasızdır", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.multimetre", "label": "Dijital multimetre", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Tezgâhta iki ampul art arda, tek bir yol üzerinde bağlı. Akü 12,0 V veriyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.far-ampulu",
+        "question": "Seri bağlı bir devrede akım ve gerilim nasıl davranır?",
+        "options": [
+          { "label": "Akım her noktada aynıdır; kaynağın gerilimi elemanlar arasında bölünür", "verdict": "seri-kurali", "correct": true, "explain": "Seri devrede tek bir yol vardır, dolayısıyla akımın gidecek başka yeri yoktur: devrenin her noktasından aynı akım geçer. Kaynağın verdiği gerilim ise elemanlar arasında paylaşılır ve her elemanın payı kendi direnciyle orantılıdır — büyük direnç büyük pay alır. Bu iki cümle bütün seri devre hesaplarının temelidir. Pratik sonucu şudur: seri devrede bir eleman kopunca yol tamamen kesilir ve devrenin tamamı durur. Araçtaki asıl kullanımı kumanda ve koruma elemanlarıdır: sigorta, anahtar ve röle kontağı tüketiciyle seri bağlanır." },
+          { "label": "Gerilim her noktada aynıdır, akım bölünür", "verdict": "paralel-kurali", "explain": "Bu paralel devrenin kuralıdır. Seride tek yol vardır; bölünen şey gerilimdir." },
+          { "label": "İkisi de bölünür", "verdict": "ikisi-de", "explain": "Akım bölünmez; tek yolda gidecek başka bir yer yoktur." },
+          { "label": "İkisi de aynı kalır", "verdict": "ayni-kalir", "explain": "Gerilim elemanlar arasında paylaşılır; hepsinin üzerinde kaynak gerilimi bulunmaz." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Seri: tek yol, aynı akım, bölünen gerilim. Bu üç kelimeyi aklında tut; ölçtüğün her sayının anlamı buradan çıkacak."
+    },
+    {
+      "id": 2,
+      "instruction": "Birinci ampulün uçlarında 8,0 V ölçtün. Kaynak 12,0 V. İkinci ampulün üzerindeki gerilimi gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.multimetre-ekran",
+        "unit": "V",
+        "acceptRange": [3.9, 4.1]
+      },
+      "camera": "tezgah",
+      "hint": "12,0 eksi 8,0.",
+      "teachingNote": "Kaynağın gerilimi yolda birer birer harcanır ve toplamı kaynağa eşit olmak zorundadır; harcanmayan gerilim diye bir şey yoktur. Bu yüzden birinci elemanın payını bildiğinde ikinciyi ölçmene gerek kalmaz. Aynı mantığın tersten okunuşu teşhisin kendisidir: devrede olmaması gereken bir yerde gerilim düşüyorsa, orada olmaması gereken bir direnç vardır. Kötü bir soket, devreye gizlice eklenmiş bir seri elemandır."
+    },
+    {
+      "id": 3,
+      "instruction": "Şimdi aynı iki ampul, her biri doğrudan aküye bağlanacak biçimde yeniden kuruldu.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.aku",
+        "question": "Paralel bağlandıklarında ne değişir?",
+        "options": [
+          { "label": "Her ikisinin üzerinde de kaynağın tam gerilimi bulunur; kaynaktan çekilen akım ikisinin akımlarının toplamı olur", "verdict": "paralel-kurali", "correct": true, "explain": "Paralelde her elemanın kaynağa kendi yolu vardır. Bu yüzden gerilim paylaşılmaz: her birinin uçlarında kaynağın tam gerilimi bulunur ve her biri tasarlandığı gerilimde çalışır. Akım ise paylaşılmaz, toplanır: kaynak, her elemanın çektiği akımın toplamını verir. Akım ölçme dersinde iki farı yaktığında gördüğün 4,60'tan 9,15 ampere çıkış tam olarak buydu. Bir başka önemli sonuç: paralel kollardan biri koparsa diğerleri çalışmaya devam eder, çünkü her birinin kendi yolu vardır. Araçtaki tüketicilerin neredeyse tamamının böyle bağlanmasının sebebi bu iki özelliktir." },
+          { "label": "Gerilim ikiye bölünür, her ampule yarısı düşer", "verdict": "bolunur", "explain": "Bu seri bağlamanın davranışıdır. Paralelde her kolun üzerinde tam gerilim vardır." },
+          { "label": "Akım aynı kalır, ampuller sönük yanar", "verdict": "akim-ayni", "explain": "Akım artar; her ampul kendi akımını çeker ve ikisi de normal parlaklıkta yanar." },
+          { "label": "Biri yanınca diğeri söner", "verdict": "biri-sonunce", "explain": "O seri devrenin davranışıdır. Paralelde her kolun kendi yolu vardır." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Paralel: ayrı yollar, aynı gerilim, toplanan akım. Seriyle tam simetriktir; ikisini ezberlemek yerine bu simetriyi anla."
+    },
+    {
+      "id": 4,
+      "instruction": "Araçtaki devrelere bakıyorsun: farlar, radyo, cam silecekleri, ısıtıcı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kablo-demeti",
+        "question": "Araçtaki tüketiciler neden paralel bağlanır?",
+        "options": [
+          { "label": "Her biri tam gerilimde çalışsın ve biri arızalandığında diğerleri sönmesin diye", "verdict": "bagimsizlik", "correct": true, "explain": "İki gerekçe var ve ikisi de paralelin doğrudan sonucudur. Birincisi gerilim: araçtaki her tüketici sistem gerilimine göre üretilmiştir ve tam gerilimde çalışmak zorundadır. Seri bağlansalardı gerilim aralarında bölünür, hiçbiri düzgün çalışmazdı. İkincisi bağımsızlık: paralel kollardan biri koptuğunda ya da o kolun ampulü yandığında diğerleri etkilenmez; seri bir sistemde tek bir arıza bütün aracı karanlığa boğardı. Bunun bedeli, kaynağın bütün akımları toplayarak vermek zorunda olmasıdır; bu yüzden her kolun kendi sigortası bulunur ve ana besleme kabloları kalın seçilir." },
+          { "label": "Kablo tasarrufu için", "verdict": "kablo-tasarrufu", "explain": "Paralel bağlantı daha çok kablo ister, daha az değil. Gerekçe elektrikseldir." },
+          { "label": "Akım azalsın diye", "verdict": "akim-azalsin", "explain": "Paralelde toplam akım artar; azalmaz." },
+          { "label": "Rastgele, üreticinin tercihi", "verdict": "rastgele", "explain": "Tercih değil zorunluluk: gerilim ve bağımsızlık başka türlü sağlanamaz." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Bir devrenin neden öyle kurulduğunu bilmek, arıza aradığında nereye bakacağını da söyler. Paralel bir sistemde tek bir tüketici çalışmıyorsa arıza ortak yolda değil, o kolun kendisindedir."
+    },
+    {
+      "id": 5,
+      "instruction": "Bir araçta bütün arka lambalar aynı anda sönük yanıyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sase-noktasi",
+        "question": "Birden çok tüketicinin aynı anda zayıflaması neyi işaret eder?",
+        "options": [
+          { "label": "Ortak yoldaki bir arızayı: hepsinin paylaştığı besleme ya da şase noktasında direnç oluşmuştur", "verdict": "ortak-yol", "correct": true, "explain": "Paralel kollar birbirinden bağımsızdır; bir kolun arızası diğerlerini etkilemez. O hâlde birkaç tüketici aynı anda zayıfladıysa arıza onların paylaştığı kısımdadır: ortak besleme kablosu, ortak sigorta bağlantısı ya da ortak şase noktası. Oradaki direncin üzerinden hepsinin akımı geçtiği için büyük bir gerilim düşümü oluşur ve kollara azalmış bir gerilim kalır; belirti 'hepsi biraz sönük' hâlinde ortaya çıkar. Teşhis kısayolu şudur: arızanın kapsamı sana yerini söyler. Tek tüketici bozuksa kendi kolunda ara, birden çoğu bozuksa ortak noktalarını ara. Bu, ölçüme başlamadan önce aramayı yarıya indirir." },
+          { "label": "Bütün ampuller aynı anda eskimiştir", "verdict": "ampuller", "explain": "Ampullerin aynı anda ve aynı ölçüde zayıflaması beklenmez; ortak bir sebep aranır." },
+          { "label": "Akü zayıftır", "verdict": "aku", "explain": "Mümkün ama o zaman aracın bütün devreleri etkilenirdi; belirti daha dar bir ortak noktayı gösteriyor." },
+          { "label": "Her lamba ayrı ayrı arızalanmıştır", "verdict": "ayri-ayri", "explain": "Aynı anda aynı belirtiyi veren birden çok arıza, tek bir ortak sebepten çok daha az olasıdır." }
+        ]
+      },
+      "camera": "tezgah",
+      "hint": "Kaç tüketici etkileniyor? Cevap, arızanın devredeki yerini daraltır.",
+      "teachingNote": "Arızanın kapsamı yerini söyler. Bir tüketici: kendi kolu. Birkaç tüketici: ortak nokta. Bütün araç: kaynak ya da ana şase."
+    },
+    {
+      "id": 6,
+      "instruction": "Ortak şase noktasında gerilim düşümü bulundu.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sigorta.1",
+        "question": "Kötü bağlantı devrede nasıl davranır?",
+        "options": [
+          { "label": "İstenmeyen bir seri direnç gibi davranır: üzerinde gerilim düşürür, ısınır ve tüketiciye kalan payı azaltır", "verdict": "istenmeyen-seri-direnc", "correct": true, "explain": "Gevşemiş bir soket, korozyonlu bir kutup ya da boyanın üstüne sıkılmış bir şase pabucu devreye kimsenin koymadığı bir direnç ekler ve bu direnç tüketiciyle seri bağlıdır. Seri devrenin kuralı burada aleyhine çalışır: gerilim direnciyle orantılı biçimde paylaşılır, dolayısıyla o kötü bağlantı kendi payını alır ve tüketiciye kalan azalır. Üstelik üzerinde harcanan bu enerji ısıya dönüşür; bağlantı ısınır, ısınma korozyonu artırır ve direnç zamanla büyür. Bu yüzden kötü bağlantılar kendi kendini kötüleştirir ve arıza giderek belirginleşir. Yanmış, kararmış bir soket gördüğünde sebebi de sonucu da budur." },
+          { "label": "Paralel bir yol açar, akımı artırır", "verdict": "paralel-yol", "explain": "Paralel yol açan şey kısa devredir. Kötü bağlantı yolu daraltır, akımı azaltır." },
+          { "label": "Hiçbir etkisi yoktur, temas ya vardır ya yoktur", "verdict": "ya-var-ya-yok", "explain": "Elektrikte temas bir derece meselesidir; arada her değer bulunabilir ve asıl arızalar orada gizlenir." },
+          { "label": "Yalnız sigortayı attırır", "verdict": "sigorta-atar", "explain": "Tersine: akımı azalttığı için sigorta atmaz. Bu yüzden fark edilmesi zordur." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Kötü bağlantı, devreye gizlice eklenmiş bir dirençtir. Sigortayı attırmadığı için kendini haber vermez; onu ancak gerilim düşümü ölçümü görünür kılar."
+    },
+    {
+      "id": 7,
+      "instruction": "Öğrendiklerini tek bir cümlede toplayacaksın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.multimetre-ekran",
+        "question": "Ölçtüğün bir gerilim değerini nasıl yorumlarsın?",
+        "options": [
+          { "label": "Devrenin o noktasında hangi elemanların seri, hangilerinin paralel olduğuna bakarak; sayının anlamı bağlantı biçiminden gelir", "verdict": "baglanti-belirler", "correct": true, "explain": "Aynı sayı farklı yerlerde farklı şeyler söyler. Bir tüketicinin uçlarında ölçtüğün gerilim ona düşen paydır ve tam gerilime yakın olması beklenir — çünkü paralel bağlıdır ve kaynağa kendi yolu vardır. Bir kablonun ya da bir bağlantının iki ucu arasında ölçtüğün gerilim ise kayıptır ve sıfıra yakın olması beklenir, çünkü o kablo tüketiciyle seri bir eleman gibi davranır. İkisini karıştıran usta, sağlıklı bir okumaya bakıp arıza arar ya da tersine, gerçek bir kaybı normal sanar. Bu yüzden ölçmeye başlamadan önce sorulacak soru şudur: burada ne okumayı bekliyorum ve neden?" },
+          { "label": "Sayı ne kadar yüksekse o kadar iyidir", "verdict": "yuksek-iyi", "explain": "Bir kablonun üzerinde yüksek gerilim kötüdür; anlam yere göre değişir." },
+          { "label": "Sayı ne kadar düşükse o kadar iyidir", "verdict": "dusuk-iyi", "explain": "Bir tüketicinin üzerinde düşük gerilim kötüdür; yine yere bağlıdır." },
+          { "label": "Sayının yorumu gerekmez, karşılaştırma yeterlidir", "verdict": "karsilastirma-yeter", "explain": "Karşılaştırma güçlü bir araçtır ama ne ile karşılaştıracağını da bağlantı biçimi söyler." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Tüketicinin üzerinde gerilim beklersin, kablonun üzerinde beklemezsin. Bu tek cümle, sonraki bütün elektrik teşhislerinin okuma kılavuzudur."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Seri ve paralel devrenin iki temel kuralı nedir?",
+        "a": "seri-paralel-kurali",
+        "options": [
+          { "verdict": "seri-paralel-kurali", "label": "Seride akım her yerde aynıdır ve gerilim bölünür; paralelde gerilim her kolda aynıdır ve akımlar toplanır", "explain": "Seri devrede tek bir yol vardır, akımın gidecek başka yeri yoktur ve her noktadan aynı akım geçer; kaynağın gerilimi ise elemanlar arasında dirençleriyle orantılı biçimde paylaşılır. Paralel devrede her kolun kaynağa kendi yolu vardır, bu yüzden her kolun üzerinde tam gerilim bulunur ve kaynağın verdiği akım kolların akımlarının toplamıdır. İki kural birbirinin simetriğidir ve araçtaki her ölçümün yorumu bunlardan çıkar." },
+          { "verdict": "ters", "label": "Seride gerilim aynıdır, paralelde akım aynıdır", "explain": "Tam tersi. Seride akım aynı, paralelde gerilim aynıdır." },
+          { "verdict": "hepsi-bolunur", "label": "Her iki bağlantıda da hem akım hem gerilim bölünür", "explain": "Seride akım bölünmez, paralelde gerilim bölünmez." },
+          { "verdict": "farketmez", "label": "Bağlantı biçiminin ölçüme etkisi yoktur", "explain": "Ölçtüğün sayının anlamı doğrudan bağlantı biçiminden gelir." }
+        ]
+      },
+      {
+        "q": "Birkaç tüketicinin aynı anda zayıflaması neden ortak yolu işaret eder?",
+        "a": "ortak-nokta",
+        "options": [
+          { "verdict": "ortak-nokta", "label": "Paralel kollar bağımsızdır; hepsini birden etkileyen bir arıza ancak paylaştıkları noktada olabilir", "explain": "Paralel bağlı tüketicilerin her birinin kendi yolu vardır ve bir kolun arızası diğerlerini etkilemez. Bu yüzden birden çok tüketici aynı anda zayıfladıysa arıza onların ortak kısmındadır: ortak besleme, ortak sigorta bağlantısı ya da ortak şase. Oradaki direncin üzerinden hepsinin akımı geçtiği için büyük bir gerilim düşümü oluşur ve kollara azalmış bir gerilim kalır. Teşhis kısayolu nettir: arızanın kapsamı yerini söyler." },
+          { "verdict": "tesaduf", "label": "Tesadüftür, her biri ayrı arızalanmıştır", "explain": "Aynı anda aynı belirtiyi veren birden çok bağımsız arıza çok daha az olasıdır." },
+          { "verdict": "aku-hep", "label": "Her zaman akü sebebidir", "explain": "Akü olabilir ama o zaman bütün araç etkilenirdi; kapsam daha dar bir ortak noktayı gösteriyor." },
+          { "verdict": "ampul", "label": "Ampullerin ömrü aynı anda dolmuştur", "explain": "Zayıf yanma ampul ömrüyle değil, ulaşan gerilimle ilgilidir." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2'deki 12,0 V ve 8,0 V SENARYO okumalarıdır. Öğrenciden istenen bir üretici değeri değil, kaynak geriliminden birinci elemanın payının ÇIKARILMASIDIR (4,0 V). sourceRequired bu yüzden gerekmedi.",
+    "sourceRequired": "Sistem gerilimi, ampul güçleri ve kabul edilebilir gerilim düşümü eşikleri bu derste sayı olarak VERİLMEDİ; ders kuralların kendisi üzerine kuruldu.",
+    "kapsam": "Tezgâhta ikinci bir ampul ve anahtar modelde yok; seri ve paralel kurulumlar metinle tarif ediliyor, sahnede tek far gövdesi hedef olarak kullanılıyor. İki kurulumun sahnede ayrı ayrı gösterilmesi ileride model işidir.",
+    "reviewedByMechanic": false
+  }
+}

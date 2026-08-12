@@ -1,0 +1,177 @@
+{
+  "id": "lastik.tpms-degisim",
+  "area": "lastik-tekerlek",
+  "stage": 6,
+  "title": "Sensör Değişimi ve Araca Tanıtma",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 30,
+  "prerequisites": ["lastik.tpms-turleri", "lastik.janttan-sokme"],
+  "learningGoals": [
+    "Sensörün ne zaman değiştiğini ve pilinin neden ayrı değişmediğini bilmek",
+    "Servis takımının her montajda neden yenilendiğini açıklamak",
+    "Sensörün de bir ölçü aleti olduğunu ve doğrulanması gerektiğini kavramak"
+  ],
+
+  "safety": [
+    { "rule": "Sensör somunu üreticinin verdiği düşük torkla sıkılır", "why": "Fazla sıkma sensörün gövdesini çatlatır ya da valfi koparır; az sıkma hava kaçırır. Bu bağlantı elle güçle değil, tork anahtarıyla yapılır", "blocksStart": true },
+    { "rule": "Sensörün servis takımı her lastik montajında yenilenir", "why": "Eski conta havayı yavaşça kaçırır ve müşteri sürekli inen lastikle geri döner", "blocksStart": true },
+    { "rule": "Uyarı lambası, arıza giderilmeden söndürülmeye çalışılmaz", "why": "Söndürülen uyarı arızayı gidermez; sistem bir sonraki gerçek basınç kaybında sessiz kalır", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.tpms-cihazi", "label": "TPMS teşhis cihazı", "required": true },
+    { "id": "tool.tork-anahtari", "label": "Tork anahtarı", "required": true },
+    { "id": "tool.manometre", "label": "Basınç manometresi", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Bir sensör sinyal vermiyor. Cihazla okunduğunda cevap alınamıyor, gövdesi de sağlam görünüyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.tpms-sensoru",
+        "question": "Ne yapılır?",
+        "options": [
+          { "label": "Sensör komple değiştirilir: pil gövdenin içine kapatılmıştır, ayrı değiştirilemez", "verdict": "komple-degistir", "correct": true, "explain": "Doğrudan sistem sensörleri kendi pilleriyle çalışır ve pil, sensörün gövdesine kapatılmış hâlde üretilir; sökülüp değiştirilemez, şarj da edilemez. Pil ömrü tasarımla sınırlıdır ve bittiğinde sensör sessizce susar — gövde sapasağlam görünse bile cihaz cevap alamaz. Bu yüzden pil bitiminde yapılacak tek şey sensörün komple değiştirilmesidir. Aynı sonucu veren üç durum daha vardır: lastik montajında kırılmış bir gövde, alüminyum jantla temasta oluşup valfi kemiren korozyon, ve darbe. Değişim kararından önce iki şey doğrulanır — cihazın kendisi başka bir sensörde okuma yapabiliyor mu, ve sensör gerçekten o tekerlekte mi (rotasyondan sonra tanıtma yapılmamışsa sistem sensörü kayıp sanabilir). Bir aracın sensörlerinden biri pil ömrünü doldurduysa diğerlerinin de aynı yaşta olduğu unutulmaz; müşteriye bu bilgi verilir." },
+          { "label": "Pili değiştirilir", "verdict": "pil-degistir", "explain": "Pil gövdeye kapatılmıştır; ayrı değiştirilemez." },
+          { "label": "Sensör sökülüp temizlenir, tekrar takılır", "verdict": "temizle", "explain": "Temizlik sinyal vermeyen bir sensörü çalıştırmaz." },
+          { "label": "Sistem kapatılır", "verdict": "kapat", "explain": "Güvenlik sistemini kapatmak arızayı gidermez." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bir parçanın nasıl üretildiğini bilmek, onarılıp onarılamayacağını da söyler. Kapatılmış pil, tasarım gereği değiştirilemez."
+    },
+    {
+      "id": 2,
+      "instruction": "Yeni sensör takılacak. Kutudan sensörle birlikte küçük bir takım da çıktı: conta, somun, valf iğnesi ve kapak.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.valf",
+        "question": "Bu takım ne zaman kullanılır?",
+        "options": [
+          { "label": "Sensör değişmese bile lastiğin söküldüğü her montajda yenilenir: conta ve somun tek kullanımlıktır", "verdict": "her-montajda", "correct": true, "explain": "Sensörün jant üzerindeki sızdırmazlığını sağlayan şey gövdesi değil, altındaki contadır. Conta bir kez sıkıldığında ezilerek yüzeye uyar; sökülüp tekrar sıkıldığında aynı sızdırmazlığı vermez, çünkü ezilmiş yüzey artık yeni yüzeye uymaz. Somun da benzer biçimde belirli bir torkta bir kez sıkılmak üzere tasarlanmıştır ve tekrar kullanıldığında aynı germeyi üretmez. Bu yüzden birçok üretici, sensör sağlam olsa bile lastik her söküldüğünde bu küçük takımın yenilenmesini ister. Takımın atlanması TPMS'li araçlarda en sık görülen şikâyeti üretir: lastik yavaşça iner, delik bulunamaz, valf sağlam görünür ve sızıntı aslında sensörün altındadır. Takımın maliyeti işin toplamı yanında çok küçüktür; atlanması ise aracın geri gelmesi demektir. Uygulamada sensörün temas yüzeyi de temizlenir ve alüminyum jantta korozyon olup olmadığına bakılır." },
+          { "label": "Yalnız sensör değişirken", "verdict": "yalniz-degisimde", "explain": "Sensör sağlam olsa da conta ve somun tek kullanımlıktır." },
+          { "label": "Yalnız kaçak varsa", "verdict": "kacak-varsa", "explain": "Kaçak ortaya çıkmadan önce yenilenir; koruyucu bir işlemdir." },
+          { "label": "Gerekmez, eskisi kullanılır", "verdict": "eski", "explain": "Ezilmiş conta yeni yüzeye uymaz ve yavaş kaçak yapar." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "TPMS'li araçlarda 'sürekli iniyor ama delik yok' şikâyetinin en sık cevabı burada: sızıntı sensörün altındaki contadan."
+    },
+    {
+      "id": 3,
+      "instruction": "Montaj bitti. Sensörün bildirdiği basınç 2,30 bar, aynı lastikte manometreyle ölçtüğün değer 2,55 bar. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.manometre",
+        "unit": "bar",
+        "acceptRange": [0.23, 0.27]
+      },
+      "camera": "tekerlek",
+      "hint": "2,55 eksi 2,30.",
+      "teachingNote": "0,25 barlık bu fark, sensörün de bir ölçü aleti olduğunu ve sapabildiğini gösteriyor. Ama fark tek başına sensörü suçlamaz: manometre de sapmış olabilir. Doğru yol iki aleti bilinen bir referansla karşılaştırmaktır — bu, bu alandaki BEŞİNCİ alet doğrulaması. Panelde okunan bir sayı, ölçülmüş bir sayı kadar güvenilir değildir; basınç ayarı her zaman doğrulanmış bir manometreyle yapılır, panele bakılarak değil."
+    },
+    {
+      "id": 4,
+      "instruction": "Sensör takıldı, basınç doğru ama panelde hâlâ uyarı var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.tpms-sensoru",
+        "question": "Ne eksik?",
+        "options": [
+          { "label": "Tanıtma: aracın yeni sensörün kimliğini ve hangi köşede olduğunu öğrenmesi gerekir", "verdict": "tanitma", "correct": true, "explain": "Doğrudan sistemde her sensörün kendine ait bir kimliği vardır ve araç, hangi kimliğin hangi köşede bulunduğunu bir listede tutar. Yeni takılan sensörün kimliği bu listede yoktur; araç onu tanımadığı için sinyalini yok sayar ve beklediği sensörü duyamadığı için uyarı vermeye devam eder. Tanıtma işlemi araca göre değişir ve üç yaygın yolu vardır. Bazı araçlar kimlikleri kendi kendine öğrenir: belirli bir süre ve hızda sürüldükten sonra sistem yeni sensörleri tanır. Bazılarında teşhis cihazıyla kimlikler okunup araca yazılır. Bazılarında ise araca özgü bir elle yordam vardır — belirli sırayla lastiklerden hava boşaltmak ya da menüden bir adım izlemek gibi. Hangisinin geçerli olduğu tahmin edilmez, aracın belgesinden bakılır. Aynı işlem rotasyondan sonra da gerekir; orada sensörler yeni değildir ama konumları değişmiştir." },
+          { "label": "Sensör bozuktur, değiştirilmeli", "verdict": "bozuk", "explain": "Tanıtma yapılmadan sensörün çalışıp çalışmadığına karar verilemez." },
+          { "label": "Akü kutbu sökülüp takılır", "verdict": "aku", "explain": "Bu bir tanıtma yordamı değildir ve başka arızalara yol açar." },
+          { "label": "Bir süre beklenir, kendiliğinden geçer", "verdict": "bekle", "explain": "Bazı araçlar sürerek öğrenir ama bu araca bağlıdır; yordam bilinmelidir." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Elektronik bir sistemin parçasını değiştirmek işin yarısı; sistemin değişikliği bilmesini sağlamak diğer yarısı."
+    },
+    {
+      "id": 5,
+      "instruction": "Elde marka sensörü yok, satıcı programlanabilir bir sensör öneriyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.tpms-sensoru",
+        "question": "Bu sensör nasıl kullanılır?",
+        "options": [
+          { "label": "Takılmadan önce cihazla o araca uygun biçimde programlanır; kimliği ve haberleşme biçimi yazılmadan araç onu tanımaz", "verdict": "programla", "correct": true, "explain": "Programlanabilir sensörler, tek bir donanımın birçok araç için kullanılabilmesi amacıyla üretilir; içindeki yazılım araca göre ayarlanır. Bu ayar teşhis cihazıyla yapılır ve iki yoldan biri seçilir: ya eski sensörün kimliği okunup yenisine kopyalanır — bu durumda araç değişikliği fark etmez ve tanıtma gerekmeyebilir — ya da yeni bir kimlikle programlanır ve ardından araca tanıtılır. Programlanmamış bir sensör takıldığında araç onu duymaz; usta sensörü suçlar, oysa sensör yalnız o araçla konuşmayı henüz bilmiyordur. Bu yüzden programlama tekerlek takılmadan önce, sensör hâlâ elde ve okunabilir durumdayken yapılır. Ayrıca her programlanabilir sensör her aracı desteklemez; cihazın araç listesi kontrol edilir. Kış takımı için ikinci set sensör alınacaksa aynı işlem o set için de yapılır." },
+          { "label": "Doğrudan takılır, araç kendi tanır", "verdict": "dogrudan", "explain": "Programlanmamış sensör o araçla konuşamaz; araç onu duymaz." },
+          { "label": "Takıldıktan sonra programlanır", "verdict": "sonra", "explain": "Sensör lastiğin içindedir; programlama takmadan önce yapılır." },
+          { "label": "Programlanamaz, yalnız orijinal sensör kullanılır", "verdict": "orijinal", "explain": "Programlanabilir sensörler bu iş için üretilmiştir; şart olan doğru programlanmaları." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Sıra önemli: programla, tak, tanıt, doğrula. Sıra bozulunca iş tekerleği yeniden sökmeye kadar gider."
+    },
+    {
+      "id": 6,
+      "instruction": "Her şey yapıldı ama uyarı sönmüyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.tpms-sensoru",
+        "question": "Sırayla ne kontrol edilir?",
+        "options": [
+          { "label": "Dört sensörün de okunup okunmadığı, tanıtmanın tamamlanıp tamamlanmadığı, basınçların eşiğin üstünde olduğu ve yedek tekerlekte sensör bulunup bulunmadığı", "verdict": "sirali-kontrol", "correct": true, "explain": "Kontrol en hızlı elenenden başlar. Birincisi okuma: cihazla dört tekerleğe tek tek gidilir ve hepsinin cevap verdiği görülür; cevap vermeyen varsa sorun orada, tanıtmada değil. İkincisi tanıtma: yordam tamamlandı mı, araç öğrenmeyi sürerek yapıyorsa gereken şart sağlandı mı. Üçüncüsü basınç: dördü de gerçekten eşiğin üstünde mi — uyarı bazen tam da haklı olduğu için yanıyordur ve usta arıza ararken lastiğin gerçekten düşük olduğunu atlar. Dördüncüsü çoğu zaman atlanan yerdir: bazı araçlarda yedek tekerlekte de sensör bulunur ve onun pili bittiğinde ya da yedek çıkarıldığında sistem uyarı verir. Bu dört adım da temizse arıza sensörlerde değil, alıcı modülde ya da tesisattadır ve iş elektrik teşhisine döner. Sıra bu şekilde kurulduğunda hiçbir adımda tahmin gerekmez; her adımın kendi ölçümü ya da gözlemi vardır." },
+          { "label": "Doğrudan modül değiştirilir", "verdict": "modul", "explain": "Modül en pahalı ve en son bakılacak yer; önce basit adımlar elenir." },
+          { "label": "Dört sensör birden yenilenir", "verdict": "dort-sensor", "explain": "Hangisinin cevap vermediği ölçülmeden dördü birden değişmez." },
+          { "label": "Lamba ampulü sökülür", "verdict": "ampul", "explain": "Uyarıyı görünmez kılmak arızayı gidermez ve güvenlik sistemini devre dışı bırakır." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bu, elektrik alanında öğrenilen eleme yönteminin lastik alanındaki karşılığı: adayları say, en hızlı elenenden başla, hiçbir dalı ölçmeden kapatma."
+    },
+    {
+      "id": 7,
+      "instruction": "Müşteri diyor ki: bu lambayı tamamen iptal edin, uğraşmayayım.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.tpms-sensoru",
+        "question": "Ne cevap verilir?",
+        "options": [
+          { "label": "İptal edilmez: bir güvenlik uyarı sistemidir, kapatmak arızayı gidermez ve muayenede de sorun çıkarır — maliyet endişesi varsa seçenekler anlatılır", "verdict": "iptal-edilmez", "correct": true, "explain": "Uyarı sistemini devre dışı bırakmak üç ayrı sebeple yapılmaz. Birincisi teknik: sistem kapatıldığında arıza olduğu yerde durur, ama bu kez gerçek bir basınç kaybı olduğunda da hiçbir uyarı gelmez — yani müşteri en çok ihtiyaç duyacağı anda korumasız kalır. İkincisi hukuki: birçok ülkede bu sistem zorunlu donanımdır ve muayenede aranır; devre dışı bırakılmış bir sistem hem aracı muayeneden geçirmez hem de bir kazada sorumluluk doğurur. Üçüncüsü mesleki: müşteri lambayı sorun sanıyordur, oysa lamba sorunun kendisi değil habercisidir. Doğru davranış sebebi ve maliyeti açıkça anlatmaktır — hangi sensör arızalı, tek mi hepsi mi, programlanabilir sensörle maliyet ne kadar düşer, kış takımına ikinci set gerekiyor mu. Bütçe endişesi gerçekse çözüm sistemi kapatmak değil, işi önceliklendirmektir. Ve kararın gerekçesi iş emrine yazılır." },
+          { "label": "İptal edilir, müşterinin aracı", "verdict": "iptal-et", "explain": "Güvenlik donanımı ve çoğu yerde zorunlu; müşteri isteği bu kuralı değiştirmez." },
+          { "label": "Ampul sökülür, sistem çalışmaya devam eder", "verdict": "ampul-sok", "explain": "Sistem çalışsa da uyarı görünmez olur; sonuç aynı." },
+          { "label": "Hiçbir açıklama yapılmadan reddedilir", "verdict": "reddet", "explain": "Reddetmek doğru ama gerekçesiz değil; müşteri sebebi ve seçenekleri bilerek karar verir." }
+        ]
+      },
+      "camera": "tekerlek",
+      "teachingNote": "Bu alanda tekrar eden bir sınır: müşteri işi seçer, güvenlik donanımının çalışıp çalışmayacağını seçmez. Ustanın işi seçenekleri ve sonuçlarını açıkça koymak."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "TPMS sensörünün pili bittiğinde ne yapılır?",
+        "a": "komple",
+        "options": [
+          { "verdict": "komple", "label": "Sensör komple değiştirilir: pil gövdeye kapatılmıştır, ayrı değiştirilemez", "explain": "Pil, sensörün gövdesine kapatılmış hâlde üretilir; sökülemez ve şarj edilemez. Bittiğinde sensör sessizce susar, gövde sağlam görünse bile cihaz cevap alamaz. Aynı sonucu kırık gövde, korozyon ve darbe de verir. Karar öncesi cihazın başka bir sensörde okuma yapabildiği doğrulanır. Bir sensör pil ömrünü doldurduysa diğerlerinin de aynı yaşta olduğu müşteriye söylenir." },
+          { "verdict": "pil", "label": "Pili değiştirilir", "explain": "Pil gövdeye kapatılmıştır." },
+          { "verdict": "sarj", "label": "Şarj edilir", "explain": "Şarj edilebilir bir pil değil." },
+          { "verdict": "temizlik", "label": "Temizlenip tekrar takılır", "explain": "Temizlik sinyal vermeyen sensörü çalıştırmaz." }
+        ]
+      },
+      {
+        "q": "Yeni sensör takıldı, basınç doğru, ama uyarı sönmüyor. İlk şüphe ne?",
+        "a": "tanitma",
+        "options": [
+          { "verdict": "tanitma", "label": "Tanıtma yapılmamıştır: araç yeni sensörün kimliğini ve hangi köşede olduğunu bilmiyordur", "explain": "Her sensörün kendine ait bir kimliği vardır ve araç hangi kimliğin nerede olduğunu listede tutar. Yeni sensörün kimliği listede olmadığı için araç sinyalini yok sayar ve beklediği sensörü duyamadığından uyarı sürer. Tanıtma araca göre değişir: sürerek otomatik öğrenme, teşhis cihazıyla yazma ya da araca özgü elle yordam. Hangisi olduğu tahmin edilmez, belgeden bakılır. Aynı işlem rotasyondan sonra da gerekir." },
+          { "verdict": "bozuk-sensor", "label": "Yeni sensör de bozuktur", "explain": "Tanıtma yapılmadan sensörün çalışıp çalışmadığına karar verilemez." },
+          { "verdict": "modul", "label": "Alıcı modül arızalıdır", "explain": "Modül en son bakılacak yer; önce tanıtma ve okuma kontrol edilir." },
+          { "verdict": "basinc", "label": "Basınç yine düşüktür", "explain": "Soruda basıncın doğru olduğu veriliyor." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 2,30 bar ve 2,55 bar SENARYO okumalarıdır. İstenen FARKTIR (0,25 bar) ve dersin gösterdiği şey sensörün de sapabilen bir ölçü aleti olduğudur — kabul edilebilir sapma sınırı olarak öğretilmiyor.",
+    "sourceRequired": "Sensör somununun sıkma torku bilinçle VERİLMEDİ: sensör üreticisine özgüdür ve kutusundan okunur. Pil ömrü, uyarı eşiği ve tanıtma yordamı da aynı sebeple verilmedi.",
+    "kapsam": "Alıcı modül ve tesisat arızaları kapsam dışı — orası elektrik alanının konusu. Sahnede teşhis cihazı modellenmedi; metinde anlatılıyor.",
+    "reviewedByMechanic": false
+  }
+}

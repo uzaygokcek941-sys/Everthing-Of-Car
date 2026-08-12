@@ -1,0 +1,177 @@
+{
+  "id": "direksiyon.kutu-bosluk-ayari",
+  "area": "direksiyon",
+  "stage": 2,
+  "title": "Kremayer Baskı Ayarı ve Sınırları",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 40,
+  "prerequisites": ["direksiyon.kutu-yapisi", "direksiyon.kutu-kacak"],
+  "learningGoals": [
+    "Baskı ayarının neyi düzelttiğini ve neyi düzeltmediğini bilmek",
+    "Ayarın iki yönde de tehlikeli olduğunu ve dar bir aralıkta çalıştığını kavramak",
+    "Ayarın bir onarım değil, bir telafi olduğunu ve sınırı olduğunu görmek"
+  ],
+
+  "safety": [
+    { "rule": "Ayar sırasında araç sehpada ve tekerlekler serbest olmalı, kimse tekerlek yakınında durmamalı", "why": "Ayar denenirken direksiyon sürekli çevrilir; tekerlekler haber vermeden döner", "blocksStart": true },
+    { "rule": "Ayar sonrası araç yola çıkmadan önce direksiyonun serbestçe döndüğü ve merkeze döndüğü doğrulanır", "why": "Fazla sıkılmış bir ayar direksiyonun bağlanmasına ve aracın manevrada yönetilememesine yol açar", "blocksStart": true },
+    { "rule": "Ayar cıvatası zorlanarak sıkılmaz", "why": "Aşırı sıkma pabucu ve dişleri kalıcı olarak hasara uğratır", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.tork-anahtari", "label": "Tork anahtarı", "required": true },
+    { "id": "tool.anahtar-takimi", "label": "Anahtar takımı", "required": true },
+    { "id": "tool.cetvel", "label": "Cetvel", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Boşluk ölçüldü, yeri arandı ve kutunun içinde olduğu bulundu. Kutuda ayar cıvatası var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kremayer-baski-civatasi",
+        "question": "Bu ayar tam olarak neyi düzeltir?",
+        "options": [
+          { "label": "Kremayer ile pinyon arasındaki diş boşluğunu; pabucun yay ön yükünü artırarak çubuğu pinyona daha çok bastırır", "verdict": "dis-bosluğu", "correct": true, "explain": "Baskı ayarının etki alanı çok dardır ve bunu bilmek yanlış beklentiyi baştan keser. Ayar yalnız tek bir şeyi değiştirir: pabucun yayına verilen ön yükü, yani kremayer çubuğunun pinyona ne kadar kuvvetle bastırıldığını. Bunun sonucu diş boşluğunun azalmasıdır. Ayarın DÜZELTMEDİĞİ şeyler ise şunlardır: pinyon yataklarındaki aşınma, çubuk yataklarındaki boşluk, kremayer dişlerinin kendisindeki yıpranma, mafsaldaki ya da rot başındaki boşluk ve zincirin geri kalanında olan her şey. Bu yüzden ayar, boşluğun yeri kutunun içinde olduğu KANITLANDIKTAN sonra yapılır — önceki iki dersin sırası bu yüzden vardır. Yeri belirlenmeden yapılan bir baskı ayarı, sağlam bir kutuyu sıkıştırıp yeni bir arıza üretmekten başka bir işe yaramaz, üstelik asıl boşluk yerinde kaldığı için şikâyet de geçmez. Kısacası bu ayar bir tanı sonrası işlemidir, bir deneme aracı değil." },
+          { "label": "Direksiyonun ağırlığını ayarlar", "verdict": "agirlik", "explain": "Ağırlık yardım katmanının konusu; bu ayar diş boşluğu içindir." },
+          { "label": "Ön düzeni ayarlar", "verdict": "on-duzen", "explain": "Ön düzen rot çubuklarından ayarlanır." },
+          { "label": "Hidrolik basıncı ayarlar", "verdict": "basinc", "explain": "Basınç pompa ve valfin işi." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Ayarın etki alanı dar: yalnız diş boşluğu. Yataklar, çubuk ve zincirin geri kalanı bu ayarla düzelmez."
+    },
+    {
+      "id": 2,
+      "instruction": "Ayarı yapmadan önce nasıl yaklaşacağına karar ver.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kremayer-kutusu",
+        "question": "Doğru yöntem hangisi?",
+        "options": [
+          { "label": "Üreticinin prosedürüne göre; genel yaklaşım cıvatayı belirtilen torka kadar sıkıp ardından belirtilen kadar geri açmak ve sonucu denemektir", "verdict": "prosedure-gore", "correct": true, "explain": "Baskı ayarı 'boşluk bitene kadar sık' mantığıyla yapılmaz; her kutunun kendi prosedürü ve kendi sayıları vardır. Genel yaklaşım şudur: cıvata önce belirtilen bir değere kadar sıkılır — bu, pabucu çubuğa tam oturtur ve bir başlangıç noktası kurar — sonra belirtilen miktar kadar geri açılır, çünkü çalışma konumu tam temas değil, yayın belirli bir ön yükte olduğu noktadır. Bazı kutularda ayar tork ile, bazılarında açı ile, bazılarında ise cıvata ile pabuç arasındaki belirli bir mesafe ya da şim ile yapılır. Değerlerin araca özgü olması bu dersin bir sayı vermemesinin sebebidir; üreticinin belgesi olmadan bu ayara girilmez. Prosedürün ikinci yarısı da en az ilki kadar önemlidir: ayar yapıldıktan sonra sonuç denenir. Direksiyon uçtan uca çevrilir, hiçbir konumda sıkışma ya da sertlik olmadığı hissedilir ve boşluk yeniden ölçülür. Ayar tek hamlede tutmayabilir; küçük adımlarla yaklaşılır, her adımdan sonra denenir." },
+          { "label": "Boşluk tamamen bitene kadar sıkılır", "verdict": "bitene-kadar", "explain": "Sıfır boşluk hedeflenmez; sıkışma, ısınma ve hızlı aşınma üretir." },
+          { "label": "Cıvata tamamen sökülüp yeniden takılır", "verdict": "sok-tak", "explain": "Ayarın kendisi bir konum meselesi; sökmek başlangıç noktasını kaybettirir." },
+          { "label": "Gözle karar verilir, ölçüm gerekmez", "verdict": "gozle", "explain": "Ayarın sonucu ölçülerek doğrulanır." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Ayar tek hamlede yapılmaz. Küçük adım, dene, ölç; sonra bir adım daha."
+    },
+    {
+      "id": 3,
+      "instruction": "Ayar öncesi boşluğu 44 mm, ayar sonrası 31 mm ölçtün (ikisi de aynı koşulda). Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.direksiyon-simidi",
+        "unit": "mm",
+        "acceptRange": [12.8, 13.2]
+      },
+      "camera": "direksiyon",
+      "hint": "44 eksi 31.",
+      "teachingNote": "13 mm'lik bu kazanım, ayarın gerçekten iş gördüğünün kanıtıdır — ama aynı zamanda ayarın sınırını da gösterir. Ayarın kapattığı boşluk kutunun içindeki diş boşluğuydu; geri kalan 31 mm hâlâ orada ve o, zincirin diğer halkalarından ve kutunun ayarla düzelmeyen kısımlarından geliyor. Bu yüzden ayar sonrası ölçüm iki soruyu birden yanıtlar: ayar işe yaradı mı, ve yeterli oldu mu? Sonuç hâlâ sınırın üstündeyse ayarı zorlamak yerine kalan boşluğun yeri yeniden aranır. Ayar öncesi ve sonrası ölçümlerin aynı koşulda olması şart; koşul değişirse aradaki fark ayarın değil koşulun eseri olur."
+    },
+    {
+      "id": 4,
+      "instruction": "Ayarı biraz daha sıktın ve boşluk iyice azaldı. Ama direksiyonu çevirirken bir sertlik hissediyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kremayer-pinyonu",
+        "question": "Ne oldu ve ne yaparsın?",
+        "options": [
+          { "label": "Ayar fazla sıkıldı; direksiyon ağırlaşır, merkeze dönmez ve pabuçla dişler hızla aşınır. Ayar gevşetilip sertliğin kaybolduğu noktaya geri dönülür", "verdict": "fazla-sikildi", "correct": true, "explain": "Bu ayarın en tehlikeli yanı, yanlış yönde bir başarı hissi vermesidir: sıktıkça boşluk azalır ve iş iyi gidiyor sanılır. Oysa belirli bir noktadan sonra dişler birbirine gereğinden fazla bastırılır ve üç sonuç birden ortaya çıkar. Birincisi direksiyon ağırlaşır — bu, yardımlı sistemlerde hemen fark edilmeyebilir çünkü yardım ağırlığı gizler; hidrolik pompa daha çok çalışır, EPS motoru daha çok akım çeker ve arıza başka bir yerden haber verir. İkincisi direksiyon merkeze dönmez: tekerlekler viraj çıkışında kendiliğinden düzelmez, sürücü simidi eliyle geri getirmek zorunda kalır ve bu ayrı bir şikâyet olarak geri gelir. Üçüncüsü ve en pahalısı aşınmadır — fazla bastırılan pabuç ve dişler ısınır ve hızla yenir; birkaç bin kilometre sonra boşluk eskisinden büyük olur, çünkü bu kez gerçek bir aşınma vardır. Doğru davranış geri dönmektir: ayar gevşetilir ve sertliğin tamamen kaybolduğu, direksiyonun uçtan uca akıcı döndüğü noktaya inilir. Sıfır boşluk hedef değildir; bunu bu alanda üçüncü kez tekrar ediyoruz çünkü en sık yapılan hata budur." },
+          { "label": "Sertlik iyidir, boşluk azalmış demektir", "verdict": "sertlik-iyi", "explain": "Sertlik aşınma ve merkeze dönmeme üretir; ayar geri alınır." },
+          { "label": "Yardım sistemi telafi eder, sorun olmaz", "verdict": "yardim-telafi", "explain": "Yardım ağırlığı gizler ama aşınma ve pompa yükü sürer." },
+          { "label": "Kutu değiştirilir", "verdict": "degistir", "explain": "Önce ayar geri alınır; sertliğin sebebi ayarın kendisi." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Sıktıkça boşluk azalır ve iş iyi gidiyor sanılır. Bu ayarın tuzağı tam olarak bu."
+    },
+    {
+      "id": 5,
+      "instruction": "Başka bir kutuda ayar yaptın ama boşluk yalnız bir bölgede kapanıyor, direksiyonun başka konumlarında sürüyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kremayer-kutusu",
+        "question": "Bu ne anlama gelir?",
+        "options": [
+          { "label": "Dişler düzensiz aşınmış; ayar tek bir ön yük verir ama aşınma konuma göre değiştiği için her konumda karşılığı farklı olur. Ayarla çözülmez", "verdict": "duzensiz-asinma", "correct": true, "explain": "Baskı ayarı çubuk boyunca tek bir ön yük uygular; boşluğu konuma göre ayrı ayrı ayarlayamaz. Kutu yeniyken bu sorun değildir çünkü diş formu tasarım gereği bellidir ve boşluk ortada en azdır. Ama araç ömrünün büyük bölümünü direksiyon ortadayken geçirdiği için aşınma da orta bölgede yoğunlaşır. Zamanla ortada gerçek bir oyuk oluşur: orası aşınmış, uçlar nispeten sağlamdır. Şimdi ayar sıkıldığında ortadaki boşluk kapanır ama uçlarda dişler sıkışır; ayar gevşetildiğinde uçlar rahatlar ama ortada boşluk kalır. İkisini aynı anda sağlayacak bir konum yoktur. Bu tablo, ayarın sınırına gelindiğinin en net işaretidir ve kararı da o belirler: bu bir ayar sorunu değil, bir aşınma sorunudur ve çözümü kutunun onarımı ya da değişimidir. Bunu erken görmek önemlidir, çünkü zorlanan ayar aşınmayı hızlandırır ve araç kısa sürede daha kötü bir durumda geri gelir. Aynı belirti, bir sonraki adımda ele alınan 'ayar alanı bitti' durumuyla birlikte değerlendirilir." },
+          { "label": "Ayar yanlış yapılmıştır, tekrar denenir", "verdict": "tekrar-dene", "explain": "Tekrar aynı sonucu verir; sorun tek ön yükün düzensiz aşınmayı karşılayamaması." },
+          { "label": "Normaldir, her kutuda böyledir", "verdict": "normal", "explain": "Yeni kutuda boşluk konum boyunca öngörülebilir; bu tablo aşınmayı gösterir." },
+          { "label": "Rot başları değiştirilir", "verdict": "rot", "explain": "Belirti kutu içinden geliyor; rot başı ayrı bir halka." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Ortada aşınmış, uçlarda sağlam bir kutu ayarla düzelmez. Tek ön yük, konuma göre değişen aşınmayı karşılayamaz."
+    },
+    {
+      "id": 6,
+      "instruction": "Üçüncü bir kutuda ayar cıvatası neredeyse sonuna gelmiş, gidecek yer kalmamış.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kremayer-baski-civatasi",
+        "question": "Bu bulgu ne söyler?",
+        "options": [
+          { "label": "Ayar alanı tükenmiş demektir; bu bir sınır değil bir bulgudur ve kutunun ömrünü doldurduğunu gösterir", "verdict": "ayar-alani-bitti", "correct": true, "explain": "Ayar cıvatasının hareket payı sonsuz değildir ve bilinçle sınırlıdır: üretici, pabucun ve yayın makul aşınmayı telafi edeceği bir aralık tanımlar. Cıvata bu aralığın sonuna geldiyse, o kutu tasarım ömrünün sonuna gelmiş demektir. Bu tespit iki açıdan değerlidir. Birincisi teşhis açısından: daha fazla zorlamanın anlamı yoktur, çünkü telafi edilecek pay kalmamıştır ve zorlama yalnız dişleri sıkıştırır. İkincisi dürüstlük açısından: müşteriye 'ayarladım, bir süre idare eder' demek yerine, ayar alanının bittiği ve kutunun onarım ya da değişim gerektirdiği açıkça söylenir. Aynı ilke bu projede daha önce ön düzen dersinde de geçmişti — ayar alanının tükenmesi bir sınır değil, bir bulgudur ve teşhisin parçasıdır. Ayrıca cıvatanın sonuna gelmiş olması tek başına yeterli bilgi değildir; pabuç sökülüp bakıldığında ne kadar aşındığı, yayın hâlâ diri olup olmadığı ve çubuk yüzeyinin durumu görülür. Karar bu bilgilerle verilir." },
+          { "label": "Cıvata daha da zorlanarak sıkılır", "verdict": "zorla", "explain": "Zorlama pabucu ve dişleri hasara uğratır." },
+          { "label": "Cıvatanın altına bir şey konularak devam edilir", "verdict": "sim-koy", "explain": "Üretici prosedürü dışında bir şim, ön yükü öngörülemez hâle getirir." },
+          { "label": "Bu normaldir, aldırılmaz", "verdict": "normal", "explain": "Ayar alanının bitmesi kutunun ömrüyle ilgili bir bulgudur." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Ayar alanının bitmesi bir sınır değil bir bulgu. Ön düzen dersinde de aynı cümle geçmişti."
+    },
+    {
+      "id": 7,
+      "instruction": "Ayar tamamlandı ve sonuç kabul edilebilir.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.direksiyon-simidi",
+        "question": "İş nasıl kapanır?",
+        "options": [
+          { "label": "Kilit somunu prosedüre göre sıkılır, direksiyon uçtan uca çevrilerek hiçbir konumda sıkışma olmadığı ve merkeze döndüğü doğrulanır, boşluk yeniden ölçülüp kaydedilir ve yol testi yapılır", "verdict": "kilitle-dene-olc-test", "correct": true, "explain": "Kapanışın dört adımı var ve her biri ayrı bir arızayı önlüyor. Kilit somunu, ayarın yolda kendiliğinden değişmesini engeller; gevşek kalırsa titreşimle ayar kayar ve birkaç hafta sonra ya boşluk geri gelir ya da beklenmedik bir sıkışma oluşur. Somun sıkılırken cıvatanın dönmemesi gerekir, yoksa ayar sıkma sırasında bozulur. İkinci adım uçtan uca deneme: direksiyon iki yönde de sonuna kadar çevrilir ve hiçbir konumda sertlik, takılma ya da ses olmadığı hissedilir — özellikle uç bölgeler kontrol edilir çünkü ayar orta konumda yapılır ve uçlarda ne olduğu ancak denenerek görülür. Üçüncüsü merkeze dönme kontrolüdür; ayar fazla sıkıysa tekerlekler kendiliğinden düzelmez ve bu ancak yolda ya da tekerlekler serbestken fark edilir. Dördüncüsü ölçüm ve kayıttır: ayar öncesi ve sonrası değerler, koşulla birlikte yazılır. Son olarak yol testinde düz gitme, merkeze dönme, çevirirken ses ve direksiyon ağırlığı birlikte değerlendirilir. Kutuya dokunulduysa ön düzen ayarı da gerekir." },
+          { "label": "Ayar cıvatası olduğu gibi bırakılır, kilit somunu gerekmez", "verdict": "kilitsiz", "explain": "Titreşimle ayar kayar; kilit somunu şart." },
+          { "label": "Yalnız orta konum denenir, uçlara bakılmaz", "verdict": "sadece-orta", "explain": "Ayar ortada yapılır ama sonucu uçlarda görülür; uçtan uca denenir." },
+          { "label": "Ölçüm gerekmez, his yeterlidir", "verdict": "his", "explain": "Ayar öncesi ve sonrası aynı koşulda ölçülüp kaydedilir." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Ayar ortada yapılır ama sonucu uçlarda görülür. Uçtan uca denenmeyen bir ayar, doğrulanmamış demektir."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Baskı ayarı fazla sıkılırsa ne olur?",
+        "a": "fazla-sikildi",
+        "options": [
+          { "verdict": "fazla-sikildi", "label": "Direksiyon ağırlaşır, merkeze dönmez ve pabuçla dişler hızla aşınır", "explain": "Sıktıkça boşluk azaldığı için yanlış bir başarı hissi verir. Yardımlı sistemlerde ağırlık gizlenir ama pompa daha çok çalışır ya da EPS daha çok akım çeker; tekerlekler viraj çıkışında kendiliğinden düzelmez; fazla bastırılan pabuç ve dişler ısınıp hızla yenir ve birkaç bin kilometre sonra boşluk eskisinden büyük olur. Ayar gevşetilip sertliğin kaybolduğu noktaya dönülür." },
+          { "verdict": "sertlik-iyi", "label": "Sertlik iyidir, boşluk azalmıştır", "explain": "Aşınma ve merkeze dönmeme üretir." },
+          { "verdict": "yardim-telafi", "label": "Yardım sistemi telafi eder", "explain": "Ağırlığı gizler, aşınmayı önlemez." },
+          { "verdict": "degistir", "label": "Kutu değiştirilir", "explain": "Önce ayar geri alınır." }
+        ]
+      },
+      {
+        "q": "Ayar cıvatası sonuna gelmişse bu ne anlama gelir?",
+        "a": "ayar-alani-bitti",
+        "options": [
+          { "verdict": "ayar-alani-bitti", "label": "Ayar alanı tükenmiştir; kutu tasarım ömrünün sonuna gelmiştir", "explain": "Üretici, pabucun makul aşınmayı telafi edeceği sınırlı bir aralık tanımlar. Aralık bittiyse zorlamanın anlamı yoktur, yalnız dişleri sıkıştırır. Bu bir sınır değil bir bulgudur ve müşteriye açıkça söylenir; karar, pabuç sökülüp aşınma, yay diriliği ve çubuk yüzeyi görüldükten sonra verilir." },
+          { "verdict": "zorla", "label": "Daha da zorlanarak sıkılır", "explain": "Pabucu ve dişleri hasara uğratır." },
+          { "verdict": "sim-koy", "label": "Altına şim konur", "explain": "Ön yükü öngörülemez hâle getirir." },
+          { "verdict": "normal", "label": "Normaldir", "explain": "Kutunun ömrüyle ilgili bir bulgudur." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 44 mm ve 31 mm SENARYO okumalarıdır ve ikisi de aynı koşulda alınmıştır; istenen FARKTIR (13 mm) ve gösterilen şey ayarın kazanımı ile kalan boşluğun başka kaynaklardan geldiğidir.",
+    "sourceRequired": "Baskı cıvatası sıkma torku, geri açma miktarı, şim ölçüsü ve kabul edilebilir boşluk sınırı bilinçle VERİLMEDİ; her kutunun kendi prosedürü ve sayıları vardır, künyesiz yazılamaz. Ders yöntemi, tuzakları ve sınırları öğretiyor.",
+    "kapsam": "Kutunun sökülüp içindeki parçaların yenilenmesi bu ders değil; onarım/değişim kararı kutu-yapisi dersinde ele alındı. Sonsuz dişli tipi kutuların ayar düzeneği farklıdır ve kapsam dışı. Ön düzen ayarı gerekliliği belirtildi, uygulaması Lastik ve Tekerlek alanında.",
+    "reviewedByMechanic": false
+  }
+}

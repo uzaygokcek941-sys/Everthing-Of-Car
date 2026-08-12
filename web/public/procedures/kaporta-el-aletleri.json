@@ -1,0 +1,178 @@
+{
+  "id": "kaporta.el-aletleri",
+  "area": "kaporta",
+  "stage": 2,
+  "title": "Kaporta Aletleri: Çekiç, Altlık, Kaldıraç ve Çektirme",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 35,
+  "prerequisites": ["kaporta.korozyon"],
+  "learningGoals": [
+    "Sacı düzelten şeyin çekiç değil çekiç ile altlığın birlikte çalışması olduğunu görmek",
+    "Kuvvetin nereden uygulanacağının nasıl uygulanacağından önemli olduğunu bilmek",
+    "Aletin izini bırakmamanın bir hüner değil bir yöntem meselesi olduğunu anlamak"
+  ],
+
+  "safety": [
+    { "rule": "Panel arkasında ne olduğu görülmeden alet sokulmaz", "why": "Kapı içinde yan darbe kirişi, cam mekanizması, kablo demeti ve hava yastığı bileşenleri bulunabilir; körlemesine sokulan bir kaldıraç bunlara zarar verir", "blocksStart": true },
+    { "rule": "Yüksek mukavemetli çelikte ve alüminyumda ısıtarak düzeltme kılavuzsuz yapılmaz", "why": "Isı bu malzemelerde mukavemeti kalıcı olarak düşürür ve düşüş dışarıdan görünmez", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.kaporta-cekici", "label": "Kaporta çekici", "required": true },
+    { "id": "tool.altlik", "label": "Altlık (dolly)", "required": true },
+    { "id": "tool.kaldirac", "label": "Kaldıraç çubuğu", "required": false },
+    { "id": "tool.gocuk-cektirme", "label": "Göçük çektirme", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Çamurlukta bir göçük var. Elinde çekiç ve altlık.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.gocuk-bolgesi",
+        "question": "Sacı asıl düzelten şey nedir?",
+        "options": [
+          { "label": "Çekiç ile altlığın birlikte çalışması: altlık sacın arkasından karşı kuvveti verir, çekiç önden vurur ve metal ikisinin arasında yeniden şekillenir — tek başına çekiç sacı düzeltmez, gerer", "verdict": "cekic-altlik", "correct": true, "explain": "Bu, kaporta işinin en temel ve en çok yanlış anlaşılan ilkesidir. Sacı düzelten şey darbenin kendisi değil, darbenin karşısında bir dayanağın olmasıdır. Altlık — atölyede çoğu zaman 'dolly' diye anılır — sacın arka yüzüne tutulur ve çekicin verdiği kuvveti karşılar. Metal bu iki yüzey arasında sıkışır ve kontrollü biçimde yeniden şekillenir. Altlık olmadan vurulduğunda ise kuvvetin gidecek yeri yoktur: sac o noktada esner, incelir ve çevresine doğru gerilir. Ortaya çıkan sonuç göçüğün kaybolması değil, göçüğün etrafında dalgalı ve gergin bir bölge oluşmasıdır — usta diline 'sac gerildi' diye geçer ve düzeltmesi ilk hâlinden çok daha zordur. İkisinin birlikte kullanımının iki temel biçimi vardır. Altlığın doğrudan çekicin karşısına tutulması, o noktadaki yüksekliği hızla düşürür ama sacı inceltme riski taşır; altlığın çekicin biraz yanına tutulması ise metali daha yumuşak biçimde yönlendirir ve genelde daha güvenlidir. Hangisinin ne zaman kullanılacağı sacın kalınlığına, malzemesine ve göçüğün karakterine bağlıdır ve öğrenilmesi zaman ister — ama başlangıç kuralı sabittir: arkada bir dayanak yoksa çekice davranma." },
+          { "label": "Çekicin gücü", "verdict": "guc", "explain": "Güç değil, karşı kuvvet belirleyici; dayanaksız darbe sacı gerer." },
+          { "label": "Vuruş sayısı", "verdict": "sayi", "explain": "Çok vuruş metali sertleştirir ve çatlağa yaklaştırır." },
+          { "label": "Çekicin ağırlığı", "verdict": "agirlik", "explain": "Ağırlık bir etken ama altlık olmadan işe yaramaz." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Arkada dayanak yoksa çekice davranma. Dayanaksız darbe göçüğü kaldırmaz, etrafını gerer."
+    },
+    {
+      "id": 2,
+      "instruction": "Göçüğün derinliğini iki kez ölçtün: işe başlarken 4,2 mm, ilk turdan sonra 1,3 mm. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.olcum-mastari",
+        "unit": "mm",
+        "acceptRange": [2.8, 3.0]
+      },
+      "camera": "kaporta",
+      "hint": "4,2 eksi 1,3.",
+      "teachingNote": "2,9 milimetre kazandın — ama asıl ders kalan 1,3 milimetrede. Bu alanda ilerleme hep böyle gider: ilk tur büyük yol alır, sonrakiler giderek küçülür. Sebebi malzemenin kendisidir; her hamlede metal biraz daha sertleşir ve geri kalan derinliği kapatmak için gereken kuvvet artarken malzemenin dayanabileceği kuvvet azalır. Bu yüzden usta 'kaç milimetre kaldı' diye değil, 'kaç hamlem kaldı' diye düşünür. İkinci ders ölçmenin kendisinde: göçük derinliği gözle değil ölçerek takip edilir, çünkü göz yanılır. Aynı göçük farklı ışıkta farklı derinlikte görünür; bir bölge parlak bir yansımada kusursuz dururken yan taraftan bakınca hâlâ çukurdur. Üçüncü ve pratik ders şu: son milimetreleri çekiçle kovalamak yerine belli bir noktada durup kalan farkı ince bir dolgu ile kapatmak çoğu zaman doğru karardır. Yanlış olan, dolgunun kalınlaşacağı kadar erken durmaktır — bunu macun dersinde ayrıntısıyla göreceksin. Kabul edilebilir kalan derinlik ve dolgu kalınlığı ürün ve iş tanımına bağlıdır; bu ders bir sınır iddia etmiyor, buradaki iki sayı senaryo okumasıdır."
+    },
+    {
+      "id": 3,
+      "instruction": "Aynı bölgeye çok sayıda vuruş yaptın; sac sertleşmeye başladı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-camurluk",
+        "question": "Ne yapılır?",
+        "options": [
+          { "label": "Durulur ve yöntem değiştirilir: aynı noktayı daha fazla dövmek metali sertleştirip çatlağa yaklaştırır — kuvvet göçüğün merkezine değil çevresindeki kilitlenmiş bölgeye kaydırılır", "verdict": "yontem-degistir", "correct": true, "explain": "Bir göçük yalnız çukurun kendisinden ibaret değildir. Metal çöktüğünde çevresinde gerilmiş, sıkışmış bir kuşak oluşur ve bu kuşak çukuru yerinde tutar — usta diline 'kilitlenme' diye geçer. Doğrudan çukurun ortasına vurmak, kilitlenmiş çevreyi olduğu gibi bırakıp yalnız merkezi zorlamak demektir; o yüzden merkez bir türlü tam kalkmaz ve her vuruşta metal biraz daha sertleşir. Doğru yaklaşım tersidir: kuvvet önce çevredeki gerilime uygulanır, kilitlenme çözülünce merkez zaten büyük ölçüde kendiliğinden geri gelir. Bunun sırasını bir sonraki aşamada, göçük analizi dersinde ayrıntısıyla çalışacaksın. Şimdilik alet açısından çıkarılacak sonuç şudur: bir bölge 'inat ediyorsa' cevap daha sert vurmak değildir. Daha sert vurmak üç şeyi birden getirir — sertleşme, incelme ve alet izi. Cevap ya kuvvetin uygulandığı yeri değiştirmek, ya altlığın konumunu değiştirmek, ya da yöntemi tamamen değiştirmektir; bazı hasarlar çekiçle değil çektirmeyle ya da arkadan kaldıraçla çözülür. Bir uyarı: bu noktada akla gelen 'biraz ısıtayım yumuşasın' fikri, malzeme sınıfı bilinmeden uygulanmaz — yüksek mukavemetli çelikte ve alüminyumda ısı çözüm değil kalıcı hasardır." },
+          { "label": "Daha sert vurulur", "verdict": "sert", "explain": "Sertleşme, incelme ve çatlak riskini artırır." },
+          { "label": "Isıtılır", "verdict": "isit", "explain": "Malzeme sınıfı bilinmeden ısı uygulanmaz." },
+          { "label": "Üstü macunla kapatılır", "verdict": "macun", "explain": "Kalın macun boya kusuru ve dayanıksızlık üretir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Bir bölge inat ediyorsa cevap sert vurmak değil: kilitlenmiş çevre çözülünce merkez kendiliğinden gelir."
+    },
+    {
+      "id": 4,
+      "instruction": "Kapı panelinde göçük var. Boyası sağlam, arkasına ulaşmak için kapı içini açman gerekiyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-kapi-paneli",
+        "question": "Kaldıraç çubuğunu kapı içine sokmadan önce ne yapılır?",
+        "options": [
+          { "label": "İç döşeme açılıp arkada ne olduğu fiilen görülür: yan darbe kirişi, cam mekanizması, kablo demeti ve hava yastığı bileşenleri orada olabilir ve körlemesine sokulan çubuk bunlara zarar verir", "verdict": "once-bak", "correct": true, "explain": "Kapı, dışarıdan bakınca içi boş bir kutu gibi görünür ama değildir. İçinde enine uzanan bir yan darbe kirişi, cam mekanizmasının rayları ve motoru, kilit mekanizması, hoparlör, kablo demeti ve bazı araçlarda yan hava yastığı ya da yan perde sistemine ait bileşenler bulunur. Körlemesine sokulan bir kaldıraç çubuğunun yapabileceklerinin listesi uzundur ve hepsi pahalıdır: cam mekanizmasının rayını eğmek, kablo yalıtımını sıyırmak, kirişe dayanıp panele yanlış noktadan kuvvet uygulamak, en kötüsü bir hava yastığı bileşenine temas etmek. Bunların hiçbiri o an anlaşılmaz; kapı kapanır, panel düzelmiş görünür ve sorun günler sonra 'camım takılıyor' ya da 'gösterge yanıyor' diye geri gelir. Doğru sıra basittir ve zaman kaybı gibi görünse de zaman kazandırır: iç döşeme sökülür, su bariyeri dikkatle açılır, el feneriyle arkaya bakılır ve çubuğun dayanacağı nokta gözle seçilir. Dayanma noktası da rastgele olmaz — çubuk sacın arkasındaki bir kirişe ya da sert bir yapıya dayanır, ince bir yüzeye dayandırılırsa oraya ikinci bir göçük açar. İşi bitirince su bariyeri düzgün biçimde geri kapatılır; yarım yapıştırılmış bir bariyer, kapı içine su almasına ve korozyon dersinde gördüğün çürümeye yol açar." },
+          { "label": "Doğrudan sokulur, dikkatli olmak yeterli", "verdict": "dogrudan", "explain": "Dikkat görmeyi sağlamaz; arkada kiriş, mekanizma ve kablo vardır." },
+          { "label": "Alt taraftaki delikten sokulur", "verdict": "delik", "explain": "O delikler tahliye içindir; alet için kullanılmaz ve yine kör çalışmadır." },
+          { "label": "Kapı sökülüp ters çevrilir", "verdict": "sok", "explain": "Gereksiz ve fuga ayarını bozar; iç döşemeyi açmak yeterlidir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Kapı içi boş değil. Körlemesine sokulan çubuğun bedeli günler sonra 'camım takılıyor' diye geri gelir."
+    },
+    {
+      "id": 5,
+      "instruction": "Arkasına ulaşılamayan bir bölgede göçük var. Elinde göçük çektirme var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.gocuk-cektirme",
+        "question": "Çektirme ne zaman ve nasıl kullanılır?",
+        "options": [
+          { "label": "Arkaya ulaşılamayan bölgelerde, göçüğü tek hamlede değil çok sayıda küçük çekişle ve dışarıdan içeriye doğru sırayla kaldırmak için — tek noktadan sert çekiş sacı tepe yapar", "verdict": "cok-kucuk-cekis", "correct": true, "explain": "Çektirme, sacın arkasına ulaşılamayan yerlerde çalışmanın yoludur: yüzeye geçici bir tutunma noktası kurulur ve göçük dışarıya doğru çekilir. Bu tutunma noktası ya yapıştırılan bir pim ya da sacın üzerine noktasal kaynatılan bir bağlantı elemanıdır; ikincisi metale ısı verdiği için malzeme sınıfına ve kılavuza tabidir. En yaygın hata, tek bir noktadan sert çekmektir. Göçük tek bir çekişte kalkmaz; bunun yerine çekilen nokta yukarı fırlar ve bu sefer içeri değil dışarı doğru bir kabarma — 'tepe' — oluşur. Tepeyi düzeltmek göçüğü düzeltmekten zordur, çünkü artık hem gergin hem sertleşmiş bir bölgeyle uğraşırsın. Doğru yöntem, çok sayıda küçük çekiştir: tutunma noktaları göçüğün çevresine dağıtılır ve çalışma dıştan içe, yani en az çökmüş yerden en derin noktaya doğru ilerler. Çünkü göçüğü yerinde tutan şey merkez değil, çevresindeki kilitlenmedir. Aralarda yüzey elle kontrol edilir — göz kandırır, el kandırmaz; avuç içi ince bir bezle yüzeyde gezdirildiğinde gözün göremediği dalgayı hisseder. İş bitince tutunma noktaları temizlenir ve o bölge korunur: kaynatılmış bir pimin izi, korumasız bırakılırsa korozyonun başlangıç noktası olur." },
+          { "label": "Tek noktadan sert çekilir", "verdict": "sert-cekis", "explain": "Tek sert çekiş göçüğü tepeye çevirir; düzeltmesi daha zordur." },
+          { "label": "Yalnız boyası bozuk panellerde", "verdict": "boya", "explain": "Yöntem arkaya ulaşamama sorununu çözer; boya durumu ayrı bir konudur." },
+          { "label": "Her göçükte ilk tercih olarak", "verdict": "ilk-tercih", "explain": "Arkaya ulaşılabiliyorsa çekiç ve altlık daha kontrollüdür." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Göz kandırır, el kandırmaz. Avuç içi ince bir bezle yüzeyde gezdirilir; dalgayı el bulur."
+    },
+    {
+      "id": 6,
+      "instruction": "Düzeltilen bölgede küçük ay şeklinde izler kalmış.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.zimpara-bolgesi",
+        "question": "Bu izler ne ve nasıl önlenir?",
+        "options": [
+          { "label": "Çekicin kenarının bıraktığı izlerdir: çekiç yüzeye tam düz oturmadığında kenarı gömülür — önlemi doğru açı, uygun yüzlü çekiç ve daha az kuvvettir; sonradan zımparayla silmek sacı inceltir", "verdict": "alet-izi", "correct": true, "explain": "Alet izi, kaporta işinde ustayı acemiden ayıran en görünür işaretlerden biridir ve tamamen yöntemle ilgilidir. Çekiç yüzeye tam düz inmediğinde bütün kuvvet çekicin bir kenarında toplanır ve o kenar sacın içine gömülür; geriye ay biçiminde bir iz kalır. Sebepleri sayılıdır: yanlış açı, iş yüzeyine uygun olmayan bir çekiç yüzü, gereğinden sert vuruş ve yorgunluk. Önlemi de aynı sayıdadır — bileği sabit tutmak, çekicin kendi ağırlığıyla çalışmasına izin vermek, yüzeye uygun çekiç seçmek ve hızlanmamak. Bu izlerin asıl bedeli sonradan ortaya çıkar. Bir izi zımparayla silmek demek, izin en derin noktasına kadar bütün çevreyi aşındırmak demektir; yani sacı incelttin. İnceltilmiş bir bölge hem daha zayıftır hem sonraki katmanlarda dalga olarak görünür. Alternatif olan macunla doldurmak da bedava değildir: her ek macun katmanı, ilerideki bir kusurun adresi olur. Bu yüzden kural şudur — iz bırakmamak, izi düzeltmekten kolaydır. Bir de dürüstlük tarafı var: alet izlerini kalın macunla kapatıp boyayan bir iş teslim anında kusursuz görünür ve fark ancak yıllar sonra, macunun kenarında beliren çatlakla ortaya çıkar. O gün kimse sebebini bilmez." },
+          { "label": "Malzeme hatasıdır", "verdict": "malzeme", "explain": "Aletin bıraktığı izdir; yöntemle önlenir." },
+          { "label": "Zımparayla silinir, sorun kalmaz", "verdict": "zimpara", "explain": "Zımpara izi silerken sacı inceltir." },
+          { "label": "Macunla doldurulur, normaldir", "verdict": "macunla", "explain": "Her ek macun katmanı ilerideki bir kusurun adresidir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "İz bırakmamak, izi düzeltmekten kolay. Silmek sacı inceltir, doldurmak ileriye borç yazar."
+    },
+    {
+      "id": 7,
+      "instruction": "Alet setini ve kullanım mantığını kurdun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kalinlik-olcer",
+        "question": "Bu alanda alet seçimi neye göre yapılır?",
+        "options": [
+          { "label": "Panelin arkasına ulaşılıp ulaşılamadığına, malzemeye ve hasarın karakterine göre — alet ustayı değil, iş aleti seçer; elde ne varsa onunla çalışmak iz ve incelme üretir", "verdict": "is-secer", "correct": true, "explain": "Bu alanda alet çokluğu bir gösteriş değil, bir gereklilik olarak vardır — çünkü her göçük farklı bir erişim, farklı bir yüzey eğrisi ve farklı bir malzeme demektir. Seçimi belirleyen üç soru vardır. Birincisi erişim: arkaya ulaşılabiliyorsa çekiç ve altlık en kontrollü yöntemdir, çünkü kuvveti iki taraftan yönetirsin. Ulaşılamıyorsa çektirme ya da arkadan kaldıraç devreye girer ve bunlar daha az kontrol, daha çok sabır ister. İkincisi malzeme: yumuşak çelikte geniş tolerans vardır, yüksek mukavemetli çelikte ve alüminyumda hamle sayısı azdır ve ısı çoğu zaman yasaktır. Üçüncüsü hasarın karakteri: keskin kenarlı ve derin bir çökme ile geniş ve yayvan bir çukur aynı yöntemle çalışılmaz. Bu üçünü sormadan 'elimde ne varsa onunla' başlamak, bu alanda en sık görülen ve sonucu en görünür olan hatadır; ortaya çıkan iş alet izli, incelmiş ve kalın macunlu olur. Son bir not: aletin durumu da yöntemin parçasıdır. Yüzü çentilmiş bir çekiç her vuruşta kendi çentiğini sacın üzerine kopyalar; altlığı ve çekici düzgün tutmak, o yüzden ayrı bir alışkanlık değil işin kendisidir." },
+          { "label": "Ustanın alışkanlığına göre", "verdict": "aliskanlik", "explain": "Alışkanlık faydalı ama erişim, malzeme ve hasar karakteri belirleyicidir." },
+          { "label": "Aletin fiyatına göre", "verdict": "fiyat", "explain": "Fiyat bir ölçüt değil; uygunluk belirleyici." },
+          { "label": "Hepsi aynı işi görür", "verdict": "ayni", "explain": "Yüzey eğrisi ve erişim farkı yöntemi değiştirir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Alet ustayı değil, iş aleti seçer. Sırada ölçmek: çapraz ölçü, fuga ve boya kalınlığı."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Altlık kullanmadan çekiçle vurulursa ne olur?",
+        "a": "cekic-altlik",
+        "options": [
+          { "verdict": "cekic-altlik", "label": "Kuvvetin gidecek yeri olmaz: sac o noktada esner, incelir ve çevresine doğru gerilir — göçük kalkmaz, etrafında dalgalı bir bölge oluşur", "explain": "Sacı düzelten şey darbe değil, darbenin karşısındaki dayanaktır. Altlık doğrudan çekicin karşısına tutulabilir ya da biraz yanına; ikincisi metali daha yumuşak yönlendirir. Başlangıç kuralı sabit: arkada dayanak yoksa çekice davranma." },
+          { "verdict": "guc", "label": "Yeterli güçle vurulursa düzelir", "explain": "Dayanaksız darbe gerdirir." },
+          { "verdict": "sayi", "label": "Çok vuruşla düzelir", "explain": "Çok vuruş metali sertleştirir." },
+          { "verdict": "agirlik", "label": "Ağır çekiç yeterlidir", "explain": "Altlık olmadan ağırlık işe yaramaz." }
+        ]
+      },
+      {
+        "q": "Kapı içine kaldıraç çubuğu sokulacak. İlk adım nedir?",
+        "a": "once-bak",
+        "options": [
+          { "verdict": "once-bak", "label": "İç döşeme açılıp arkada ne olduğu fiilen görülür: yan darbe kirişi, cam mekanizması, kablo demeti ve hava yastığı bileşenleri orada olabilir", "explain": "Zarar o an anlaşılmaz; günler sonra 'camım takılıyor' ya da 'gösterge yanıyor' diye geri gelir. Çubuk ince bir yüzeye değil sert bir yapıya dayandırılır, iş bitince su bariyeri düzgün kapatılır — yarım yapıştırılmış bariyer kapı içine su alır." },
+          { "verdict": "dogrudan", "label": "Dikkatli olmak yeterli", "explain": "Dikkat görmeyi sağlamaz." },
+          { "verdict": "delik", "label": "Alttaki tahliye deliğinden sokulur", "explain": "O delikler tahliye içindir." },
+          { "verdict": "sok", "label": "Kapı sökülüp ters çevrilir", "explain": "Gereksiz; fuga ayarını bozar." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2'deki 4,2 mm ve 1,3 mm SENARYO okumalarıdır; istenen FARKTIR (2,9 mm). Ders kabul edilebilir kalan göçük derinliği ya da dolgu kalınlığı sınırı iddia etmiyor.",
+    "sourceRequired": "Kabul edilebilir kalan derinlik ve azami dolgu kalınlığı, hangi panelde hangi düzeltme yönteminin onaylandığı, ısıtma izni ve sıcaklık sınırları, çektirme için kaynatılan bağlantı elemanlarının malzemeye uygunluğu bilinçle VERİLMEDİ; araca, malzemeye ve ürüne özgüdür ve üreticinin onarım kılavuzundan okunur.",
+    "kapsam": "Boyasız göçük düzeltme tekniğinin uygulanışı bir sonraki aşamada; şasi çekme, çekme sehpası ve gövde ölçüm sistemiyle doğrulama KAPSAM DIŞIDIR.",
+    "kaynak": "Bu alan kullanıcının açık talebiyle eklendi (talep birebir: 'birde alanlara kaportayı ekleyelim'); konu başlıkları MEB Otomotiv Gövde ve Boya dalının çerçevesini takip ediyor, kazanım numarası iddiası yok.",
+    "reviewedByMechanic": false
+  }
+}

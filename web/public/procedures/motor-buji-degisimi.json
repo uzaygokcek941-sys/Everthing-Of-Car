@@ -1,0 +1,170 @@
+{
+  "id": "motor.buji-degisimi",
+  "area": "motor-mekanik",
+  "stage": 4,
+  "title": "Buji Değişimi",
+  "vehicleClass": "inline-4-dohc-benzinli",
+  "plug": { "thread": "M14", "seat": "conta (düz)", "headMaterial": "alüminyum", "hex": "16 mm" },
+  "estimatedMinutes": 25,
+  "prerequisites": ["temel.el-aletleri", "temel.tork-anahtari"],
+  "learningGoals": [
+    "Buji sökme-takma sırasını ve tork kuralını uygulamak",
+    "Sökülen bujinin rengini okuyarak karışım durumunu teşhis etmek",
+    "Tırnak boşluğunu ölçmek ve değerlendirmek"
+  ],
+
+  "safety": [
+    { "rule": "Motor soğuk olmalı", "why": "Sıcak alüminyum silindir kapağında buji dişi sıyrılır", "blocksStart": true },
+    { "rule": "Akü eksi kutbu sökülü", "why": "Ateşleme bobininde yüksek gerilim riski", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.lokma-16", "label": "16 mm buji lokması", "required": true },
+    { "id": "tool.circir", "label": "1/2\" cırcır kolu", "required": true },
+    { "id": "tool.uzatma-150", "label": "150 mm uzatma", "required": true },
+    { "id": "tool.tork-anahtari", "label": "Tork anahtarı (5-60 Nm)", "required": true },
+    { "id": "tool.sentil", "label": "Sentil / tırnak ölçer", "required": true },
+    { "id": "tool.tornavida-yildiz", "label": "Yıldız tornavida", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Kaputu aç ve destek çubuğuna oturt.",
+      "interaction": { "type": "pull", "target": "part.kaput", "axis": "y", "distance": 0.4 },
+      "camera": "engine-bay-wide",
+      "hint": "Kaput kilidini kabin içindeki koldan açtıktan sonra ön ızgaranın altındaki emniyet mandalını yana it."
+    },
+    {
+      "id": 2,
+      "instruction": "Motor üst kapağını sök.",
+      "interaction": { "type": "unscrew", "target": "part.motor-kapagi-civata", "count": 4, "turns": 6, "tool": "tool.tornavida-yildiz" },
+      "camera": "engine-top",
+      "commonMistake": { "if": "civata-kaybi", "feedback": "Sökülen cıvataları manyetik tabağa koy. Motor bölmesine düşen cıvata alternatör kayışına girebilir." }
+    },
+    {
+      "id": 3,
+      "instruction": "1 numaralı silindirin ateşleme bobini soketini çıkar.",
+      "interaction": { "type": "press-and-pull", "target": "part.bobin-soket.1" },
+      "camera": "cylinder-1-close",
+      "hint": "Soketin üstündeki plastik tırnağa bastırmadan çekme; tırnak kırılır."
+    },
+    {
+      "id": 4,
+      "instruction": "Bobini yukarı doğru çekerek çıkar.",
+      "interaction": { "type": "pull", "target": "part.bobin.1", "axis": "y", "distance": 0.12 },
+      "camera": "cylinder-1-close"
+    },
+    {
+      "id": 5,
+      "instruction": "Lokma + uzatma + cırcır ile bujiyi saat yönünün tersine çevirerek sök.",
+      "interaction": {
+        "type": "rotate",
+        "target": "part.buji.1",
+        "direction": "ccw",
+        "turns": 8,
+        "tool": "tool.lokma-16",
+        "requiresGesture": true
+      },
+      "camera": "cylinder-1-close",
+      "commonMistake": {
+        "if": "yanlis-lokma",
+        "feedback": "Normal lokma kullanırsan bujinin porselen gövdesini kırarsın. Buji lokmasının içinde kauçuk tutucu vardır."
+      }
+    },
+    {
+      "id": 6,
+      "instruction": "Sökülen bujinin elektrot rengini incele ve teşhis et.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.buji.1",
+        "question": "Elektrot rengi ne söylüyor?",
+        "options": [
+          { "label": "Açık kahve / kiremit rengi", "verdict": "normal", "correct": true, "explain": "Karışım ve ateşleme doğru. Buji ısı değeri motora uygun." },
+          { "label": "Kuru siyah kurum", "verdict": "zengin-karisim", "explain": "Fazla yakıt yanıyor. Hava filtresi tıkalı veya enjektör sızdırıyor olabilir." },
+          { "label": "Yağlı siyah, ıslak", "verdict": "yag-kacagi", "explain": "Segman veya supap lastiği yağ geçiriyor. Bujiyi değiştirmek sorunu çözmez." },
+          { "label": "Beyaz / kabarcıklı, erimiş elektrot", "verdict": "fakir-karisim-vurma", "explain": "Aşırı ısınma ve vuruntu. Devam edilirse piston delinir." }
+        ]
+      },
+      "camera": "inspect-hand",
+      "teachingNote": "Bu adım uygulamanın kalbi. Sökme herkesin yapabileceği iştir; parçaya bakıp motorun ne dediğini anlamak ustayı ayıran şeydir."
+    },
+    {
+      "id": 7,
+      "instruction": "Servis kitabı bu motor için 1,00 mm veriyor. Yeni bujinin tırnak boşluğunu sentille ölç.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.buji-yeni.1",
+        "unit": "mm",
+        "bookValue": 1.0,
+        "acceptRange": [0.9, 1.1]
+      },
+      "camera": "inspect-hand",
+      "hint": "Tırnak boşluğunun evrensel bir değeri yoktur, aracın üreticisi belirler. Buradaki 1,00 mm bu alıştırmanın servis kitabı verisidir — ezberlenecek bir sayı değil, bakılacak bir sayı.",
+      "teachingNote": "Ayar gerekiyorsa yalnız tırnak (kenar elektrot) bükülür. İridyum/platin bujinin ince merkez elektroduna kuvvet uygulama; kırılır ve garanti dışı kalır.",
+      "reference": {
+        "publisher": "NGK Spark Plugs",
+        "ref": "Gapping and Indexing — doğru boşluk aracın üreticisinin verdiği değerdir; ince telli/değerli metal bujide merkez elektroda kuvvet uygulanmaz",
+        "url": "https://ngksparkplugs.com/en/resources/gapping-and-indexing"
+      }
+    },
+    {
+      "id": 8,
+      "instruction": "Yeni bujiyi önce elle çevirerek yerine otur, sonra tork anahtarıyla belirtilen değerde sık.",
+      "interaction": {
+        "type": "rotate-to-torque",
+        "target": "part.buji-yeni.1",
+        "direction": "cw",
+        "targetTorqueNm": 27,
+        "toleranceNm": 2,
+        "tool": "tool.tork-anahtari",
+        "requiresGesture": true,
+        "sourceRequired": true,
+        "source": {
+          "publisher": "NGK Spark Plugs",
+          "ref": "Spark Plug Installation — M14 düz (contalı) oturma, alüminyum silindir kapağı: 18,0-21,6 lb-ft = 24,4-29,3 Nm. Kabul aralığımız 25-29 Nm bu aralığın içindedir.",
+          "url": "https://ngksparkplugs.com/en/resources/spark-plug-installation"
+        }
+      },
+      "camera": "cylinder-1-close",
+      "commonMistake": {
+        "if": "asiri-sikma",
+        "feedback": "Fazla sıktın. Alüminyum silindir kapağında diş sıyrıldı — bu artık helicoil işi, motor sökülecek. Tork anahtarı süs değil."
+      },
+      "teachingNote": "Önce elle çevirme kuralı çapraz diş atmayı önler. Elle dönmüyorsa zorlama, çıkar ve yeniden başla. NGK: conta kapağa değdikten sonra yaklaşık ½-⅔ tur sıkılır; yayınlanan tork yeni conta içindir, anti-seize kullanılırsa tork %30 azaltılır."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru", "torkToleransIcinde"],
+    "questions": [
+      {
+        "q": "Bujiyi neden motor sıcakken sökmemeliyiz?",
+        "a": "sicak-aluminyum-dis-siyirir",
+        "options": [
+          { "verdict": "sicak-aluminyum-dis-siyirir", "label": "Sıcak alüminyum silindir kapağında diş sıyrılır", "explain": "Alüminyum sıcakken genleşir ve yumuşar; çelik buji sökülürken dişi de beraberinde söker. Motor elle tutulacak kadar soğuk olmalı." },
+          { "verdict": "buji-catlar", "label": "Bujinin porseleni ısı farkından çatlar", "explain": "Sökülen buji zaten atılıyor. Asıl risk bujide değil, bir daha kolay tamir edilemeyen silindir kapağı dişinde." },
+          { "verdict": "yanik-riski", "label": "Elimiz yanar", "explain": "Doğru ama asıl sebep bu değil. Yanık eldivenle çözülür; sıyrılan diş çözülmez." },
+          { "verdict": "yag-akar", "label": "Motor yağı buji yuvasından akar", "explain": "Buji yuvası yağ devresine açılmaz. Yağ oradan gelmez." }
+        ]
+      },
+      {
+        "q": "Elektrotu yağlı ve ıslak çıkan bujide asıl sorun nedir?",
+        "a": "yag-kacagi-buji-degil",
+        "options": [
+          { "verdict": "yag-kacagi-buji-degil", "label": "Yanma odasına yağ kaçıyor; sorun bujinin kendisi değil", "explain": "Segman veya supap lastiği yağ geçiriyor. Yeni buji taksan da kısa sürede aynı hâle gelir; asıl arıza aşağıda." },
+          { "verdict": "buji-eskimis", "label": "Buji ömrünü doldurmuş", "explain": "Eskimiş buji aşınır ve elektrotu incelir, yağlanmaz. Yağ başka bir yerden geliyor." },
+          { "verdict": "zengin-karisim", "label": "Karışım zengin", "explain": "Zengin karışım kuru siyah kurum bırakır. Islak yağ tabakası farklı bir şey söyler." },
+          { "verdict": "bobin-ariza", "label": "Ateşleme bobini arızalı", "explain": "Bobin arızası ateşleme yokluğu yapar; elektrotu yağ filmiyle kaplamaz." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "sourceRequired": "true olan her değer künyesini (source.publisher + source.url) taşımak zorundadır; scripts/validate-parts.mjs kaynaksız değerde yayını kapatır.",
+    "tork": "Kaynaklı. Değer motora değil, bujinin diş/oturma tipine ve kapak malzemesine bağlıdır — bu yüzden kök seviyedeki plug bloğu künyenin geçerlilik şartıdır.",
+    "tirnakBoslugu": "KAYNAKLANAMAZ. Üretici genel bir değer yayınlamaz, aracın kendi servis kitabı belirler. Bu yüzden 1,00 mm alıştırmanın verisi olarak sunulur (bookValue) ve sourceRequired taşımaz; öğretilen şey sayı değil, bakma ve ölçme alışkanlığıdır.",
+    "reviewedByMechanic": false
+  }
+}

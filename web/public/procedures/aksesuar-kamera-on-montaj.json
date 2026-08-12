@@ -1,0 +1,169 @@
+{
+  "id": "aksesuar.kamera-on-montaj",
+  "area": "aksesuar-ses",
+  "stage": 6,
+  "title": "Ön Cam Montajı: Konum, Kablo Gizleme ve Besleme",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 40,
+  "prerequisites": ["aksesuar.kamera-secimi"],
+  "learningGoals": [
+    "Kamerayı ön camda doğru yere oturtmak ve neden orası olduğunu bilmek",
+    "Kabloyu hiç görünmeyecek biçimde ve hava yastığı yolundan uzakta gizlemek",
+    "Beslemeyi doğru devreden almak; sürekli ile kontakla kesilen kaynağı ölçerek ayırmak"
+  ],
+
+  "safety": [
+    { "rule": "Ön cam üstü, direkler ve tavan kaplamasında sarı konektörlü ya da hava yastığı işaretli hiçbir bileşene dokunulmaz; kablo yastığın şişme yolundan geçirilmez", "why": "Direk kaplamasının altında perde tipi hava yastığı bulunabilir; oraya sıkıştırılan bir kablo yastık şiştiğinde kabin içine bir kırbaç gibi savrulur", "blocksStart": true },
+    { "rule": "Besleme bağlantısı yapılmadan önce enerji kesilir ve kesildiği ölçülerek doğrulanır", "why": "Kes–bekle–doğrula bu alanın ilk dersinden beri geçerli: kesmek bir niyettir, doğrulamak bir ölçümdür", "blocksStart": true },
+    { "rule": "Kamera sürücünün görüş alanına yerleştirilmez", "why": "Camda yanlış yere konan bir cihaz görüşü engeller; bu bir montaj tercihi değil, güvenlik sorunudur", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.multimetre", "label": "Multimetre", "required": true },
+    { "id": "tool.plastik-sokme-spatulasi", "label": "Plastik söküm spatulası", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true },
+    { "id": "tool.tornavida-seti", "label": "Tornavida seti", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Araç geldi. Kamerayı ön camda nereye koyacağına karar veriyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-cam",
+        "question": "Kamera ön camda nereye konur?",
+        "options": [
+          { "label": "Dikiz aynasının arkasına, camın üst orta bölgesine ve silecek süpürme alanının içine; sürücünün görüşünü kapatmayan, yağmurda temizlenen kısma bakacak biçimde", "verdict": "ayna-arkasi", "correct": true, "explain": "Bu konumun dört ayrı gerekçesi var ve dördü birden sağlandığı için standart hâline gelmiştir. Birincisi görüştür: dikiz aynasının arkası zaten sürücünün göremediği bir bölgedir, oraya konan cihaz görüş alanından hiçbir şey çalmaz — camın ortasına ya da sürücünün önüne konan bir cihaz ise doğrudan güvenlik sorunudur. İkincisi silecek alanıdır: kameranın baktığı cam bölgesi yağmurda ve çamurda temizlenmelidir, aksi hâlde ilk kötü havada kayıt bulanıklaşır; süpürme alanının dışına konan bir kamera yılın yarısında işe yaramaz. Üçüncüsü yükseklik ve kadrajdır: cihaz camın üst bölgesine konduğunda yolu ve öndeki aracı doğru orantıda görür, aşağıya konduğunda kadrajın yarısını motor kaputu kaplar. Dördüncüsü kablo yoludur: aynanın yanındaki bu nokta tavan kaplamasının kenarına ve oradan direğe en kısa mesafededir, yani kablo en az görünen yerden gider. İki sınır bu alanı daraltır: camın üst kenarındaki koyu bant ile fabrika sensör kutusu kameranın önünü kapatmamalı, ısıtmalı ön camı olan araçlarda ısıtma telleri görüntüye çizgi bırakabilir. Bu yüzden yer, yapıştırmadan önce cihaz elde tutularak denenir." },
+          { "label": "Gösterge panelinin üstüne", "verdict": "panel", "explain": "Camda yansıma yapar ve sarsıntıda yerinden oynar." },
+          { "label": "Camın tam ortasına, sürücünün önüne", "verdict": "orta", "explain": "Görüşü kapatır; bu bir güvenlik hatasıdır." },
+          { "label": "Camın alt köşesine", "verdict": "alt", "explain": "Kadrajın büyük kısmını kaput kaplar." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Dört gerekçe birden: görüşü kapatmaz, silecek temizler, kadraj doğru, kablo en kısa yoldan gider."
+    },
+    {
+      "id": 2,
+      "instruction": "Yeri belirledin. Camı hazırlayıp kamera tabanını yapıştırıyorsun.",
+      "interaction": {
+        "type": "press-and-pull",
+        "target": "part.on-kamera",
+        "requiresGesture": true
+      },
+      "camera": "aksesuar",
+      "hint": "Tabanı belirlenen noktaya bastır ve birkaç saniye basılı tut.",
+      "teachingNote": "Yapıştırma, dış aksesuar dersinde öğrenilen kuralın aynısıdır ve tek belirleyici yüzey hazırlığıdır. Sıra şudur: cam içeriden önce kir ve yağdan temizlenir — cam içi, sanılanın aksine, ellerden ve plastiklerin buharlaşmasından gelen ince bir film taşır ve bu film bandın tutmasını engeller; sonra yüzey uygun bir temizleyiciyle silinir ve tamamen kuruması beklenir. İkinci nokta sıcaklıktır: yapışkan bantlar soğukta tutmaz, bu yüzden soğuk havada araç bir süre ısıtılır. Üçüncü nokta bastırma süresidir — taban yerine konduktan sonra birkaç saniye kuvvetlice bastırılır ve hemen kablo gerdirilmez; bandın tam gücüne ulaşması zaman alır, bu yüzden montajın hemen ardından cihaz asılıp çekilmez. Dördüncüsü ve en çok atlananı: taban yapıştırılmadan ÖNCE cihaz o tabana takılıp kadraj denenir. Yapıştırdıktan sonra 'biraz sola alalım' demek, bandı sökmek ve yeni bant bulmak demektir. Bir de yön uyarısı var: birçok cihazda taban ile cihaz kayarak geçer ve bir yönü vardır; ters yapıştırılan taban cihazı takmayı imkânsız kılar. Yapıştırıcı bandın gerektirdiği sıcaklık aralığı ve bekleme süresi ürüne özgüdür; bu ders bir değer vermiyor."
+    },
+    {
+      "id": 3,
+      "instruction": "Sigorta kutusunda iki yuvayı ölçtün. Kontak kapalıyken A yuvasında 12,3 V, B yuvasında 0,2 V okudun. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.multimetre-aksesuar",
+        "unit": "volt",
+        "acceptRange": [12.0, 12.2]
+      },
+      "camera": "aksesuar",
+      "hint": "12,3 eksi 0,2.",
+      "teachingNote": "12,1 voltluk bu fark, kamera montajının en önemli tek ölçümüdür ve iki yuvanın karakterini ayırır. A yuvası kontak kapalıyken bile gerilim taşıyor: bu SÜREKLİ beslemedir, araç kapalıyken de canlıdır. B yuvası kontak kapalıyken ölü: bu KONTAKLA KESİLEN beslemedir, yalnız araç açıkken gerilim gelir. Hangi kaynak hangi işe: park modu YOKSA kontakla kesilen kaynak kullanılır, çünkü araç kapandığında cihaz da kapanır ve akü hiç etkilenmez. Park modu VARSA cihazın iki ucu birden bağlanır — biri sürekli beslemeye, biri kontakla kesilene; cihaz ikisini karşılaştırarak aracın açık mı kapalı mı olduğunu anlar ve moduna karar verir. Bu yüzden ölçüm iki adımdır ve sırası vardır: önce kontak kapalıyken yuvalar ölçülür ve gerilim taşıyanlar işaretlenir, sonra kontak açılıp tekrar ölçülür; iki durumda da gerilim varsa yuva süreklidir, yalnız kontak açıkken varsa kesilendir. Tek bir ölçümle karar verilmez, çünkü kontak açıkken bütün yuvalar canlı görünür. Bir kural daha: alınacak devre seçilirken o devrenin ne beslediği bilinmelidir — kritik bir sistemin devresine yük eklenmez ve sigorta değeri asla büyütülmez. Sigorta değerleri ve devre şeması araca özgüdür; bu ders bir değer vermiyor, aracın kendi şemasından okunur."
+    },
+    {
+      "id": 4,
+      "instruction": "Beslemeyi nereden alacağına karar veriyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sigorta-kutusu-aksesuar",
+        "question": "Doğru besleme yöntemi hangisidir?",
+        "options": [
+          { "label": "Sigorta kutusunda uygun bir yuvadan, o devrenin kendi sigortasını koruyan ve ekleneni ayrıca sigortalayan bir bağlantı elemanıyla alınır; kabloya sarılan, delinen ya da sıkıştırılan bir bağlantı yapılmaz", "verdict": "sigorta-yuvasi", "correct": true, "explain": "Besleme, bu montajın kalitesini belirleyen ikinci şeydir ve kötü yapıldığında en geç fark edilendir. Doğru yöntemin üç şartı vardır. Birincisi, ekleneni ayrıca sigortalamaktır: kameranın kendi hattında bir sigorta olmalı ki bir kısa devre durumunda yalnız kamera devresi kesilsin, aracın kendi devresi etkilenmesin. İkincisi, aracın mevcut devresini bozmamaktır — sigorta yuvasına takılan ve hem asıl sigortayı hem yeni sigortayı taşıyan bağlantı elemanları tam bu iş için vardır ve kullanılması gereken budur. Üçüncüsü yön ve kutuptur: yuvanın hangi ucunun besleme tarafı olduğu ölçülerek bulunur; ters takılan bir eleman aracın kendi devresini yeni sigortanın arkasına düşürür ve o devre bir sorun yaşadığında yanlış sigorta atar. Yapılmayacak olanlar da nettir ve sanayide çok görülür: mevcut bir kabloya sıkıştırma soketiyle geçmek kablonun tellerini keser ve gerilim düşümü üretir, kabloyu delerek almak yalıtımı bozar ve o noktada zamanla korozyon başlar, doğrudan aküye çekmek ise korumasız bir hat demektir. Şase ucu da aynı özenle bağlanır ve bir sonraki adımlarda ele alınıyor. Aracın hangi yuvasının kullanılabileceği, sigorta değerleri ve kablo kesiti araca özgüdür ve şemadan okunur." },
+          { "label": "Doğrudan aküden çekilir", "verdict": "aku", "explain": "Korumasız hat olur; eklenen devre ayrıca sigortalanmalıdır." },
+          { "label": "En yakın kablo delinip içine geçilir", "verdict": "delme", "explain": "Yalıtımı bozar, o noktada korozyon başlar." },
+          { "label": "Çakmak soketine takılıp bırakılır", "verdict": "cakmak", "explain": "Kablo görünür kalır ve soket sürekli meşgul olur; kalıcı montaj değildir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Ekleneni ayrıca sigortala, aracın devresini bozma, yönü ölçerek bul. Üçü de atlanabilir ve üçü de sonradan pahalıya patlar."
+    },
+    {
+      "id": 5,
+      "instruction": "Kabloyu gizleyeceksin. Tavan kaplamasının kenarını açıyorsun.",
+      "interaction": {
+        "type": "pull",
+        "target": "part.tavan-kaplamasi",
+        "requiresGesture": true
+      },
+      "camera": "aksesuar",
+      "hint": "Kaplamanın kenarını yavaşça aç; zorlama, klipsleri hisset.",
+      "teachingNote": "Kablo gizleme, müşterinin kaliteyi gördüğü tek yerdir — görünen bir kablo, cihaz ne kadar iyi çalışırsa çalışsın işi ucuz gösterir. Güzergâh şudur: kameradan çıkan kablo tavan kaplamasının kenarına sokulur, kaplama boyunca yolcu tarafına doğru gider, oradan ön direğe iner ve torpido kenarından sigorta kutusuna ulaşır. Dört kural bu yolu güvenli kılar. Birincisi ve en önemlisi hava yastığıdır: ön direğin kaplaması altında birçok araçta perde tipi hava yastığı bulunur ve kablo asla yastığın şişme yolundan ya da üzerinden geçirilmez; kablo kaplamanın kenarından, yastığın olmadığı taraftan indirilir ve mümkünse aracın kendi kablo demetinin izlediği yol takip edilir. Aracın kendi demeti nereden gidiyorsa orası güvenli yoldur — bu, bütün kablo çekme işlerinin altın kuralıdır. İkincisi sabitlemedir: kablo boşta bırakılmaz, aralıklarla mevcut demete bağlanır; boşta sallanan kablo zamanla bir yere takılır ve titreşimle aşınır. Üçüncüsü hareketli parçalardır — kablo kapı fitilinin altına sıkıştırılmaz, çünkü kapı her kapandığında ezilir; direksiyon kolonuna, pedal bölgesine ve koltuk raylarına da yaklaşmaz. Dördüncüsü gerginliktir: kablo gergin çekilmez, hafif payla bırakılır, fazlası düzgünce toplanıp sabitlenir ve gelişigüzel bir boşluğa tıkılmaz. Kaplamayı açarken klipsin tam üstünden ve dik kuvvet uygulanır; söküm tekniği dersindeki kural burada da geçerli."
+    },
+    {
+      "id": 6,
+      "instruction": "Şase ucunu bağlayacaksın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sase-noktasi-aksesuar",
+        "question": "Şase bağlantısı nasıl yapılır?",
+        "options": [
+          { "label": "Gövdedeki mevcut bir şase cıvatasına, temas yüzeyi boyadan ve pastan arındırılarak, uygun bir pabuçla bağlanır", "verdict": "temiz-sase", "correct": true, "explain": "Şase, bu alanın her dersinde karşına çıkan ve en çok atlanan bağlantıdır. Elektrik bir döngüdür: kameraya giden akım geri dönmek zorundadır ve dönüş yolu gövdedir. Bu dönüş yolu zayıfsa cihazın beslemesi düşer ve belirti son derece kafa karıştırıcı olur — cihaz çalışır ama arada kendini kapatıp açar, kayıt dosyaları yarım kalır, gece ekranda titreme olur. Aynı belirtiyi cihaz arızası sanıp cihaz değiştiren usta çok görülür. Doğru bağlantı şudur: gövdede zaten kullanılan bir şase noktası seçilir — üreticiler bu noktaları belirlemiştir ve genelde birden fazla kablonun toplandığı yerdir; cıvata sökülür, temas yüzeyindeki boya ve pas metale kadar temizlenir, kablo ucuna uygun bir pabuç sıkılır ve cıvata yerine takılır. Yapılmayacaklar: kabloyu bir plastiğin altına sıkıştırmak, boyalı bir yüzeye vidalamak ya da 'nasılsa metal' diyerek gövdenin rastgele bir yerine delik açmak — açılan her delik pas başlangıcıdır. Bağlantı bittikten sonra kontrol basittir ve elektrik derslerinden bilinir: cihaz çalışırken şase ucu ile gövde arasındaki gerilim düşümü ölçülür, buradaki gerilim sıfıra ne kadar yakınsa şase o kadar iyidir. Kabul edilebilir sınır araca ve devreye özgüdür; bu ders bir değer vermiyor." },
+          { "label": "Şase gerekmez, tek kablo yeter", "verdict": "gereksiz", "explain": "Akımın dönüş yolu olmadan devre tamamlanmaz." },
+          { "label": "Boyalı yüzeye vidalanır", "verdict": "boyali", "explain": "Boya yalıtkandır; temas yüzeyi metale kadar açılır." },
+          { "label": "Kablo bir plastiğin altına sıkıştırılır", "verdict": "plastik", "explain": "Plastik iletken değildir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Kötü şasenin belirtisi cihaz arızasına benzer: arada kapanıp açılma, yarım kalan dosyalar. Cihaz değiştirmeden önce şaseyi ölç."
+    },
+    {
+      "id": 7,
+      "instruction": "Ön montaj bitti. Kaplamaları kapatmadan önce.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-kamera",
+        "question": "Kaplamalar kapatılmadan önce ne yapılır?",
+        "options": [
+          { "label": "Enerji verilip cihaz çalıştırılır, kadraj ekrandan kontrol edilip kamera açısı ayarlanır ve bir deneme kaydı alınıp izlenir; kaplamalar ancak bundan sonra kapatılır", "verdict": "once-dene", "correct": true, "explain": "Bu kural bu alanın tamamında geçerli ve kapı döşemesi dersinde ilk kez öğrenildi: panel takılmadan önce dene. Kamerada bunun üç ayrı sebebi var. Birincisi kadrajdır — cihaz açılır, görüntü ekranda ya da telefonda izlenir ve kameranın açısı ayarlanır; doğru kadrajda ufuk çizgisi görüntünün üst yarısında durur, yani kadrajın çoğu yol olur, gökyüzü değil. Kaputun görüntünün alt kenarında ince bir şerit hâlinde görünmesi de bir işarettir: cihazın aracın neresine baktığı belli olur ve bu, bir olayda mesafe yorumlamayı kolaylaştırır. İkincisi beslemedir: kontak açıkken ve kapalıyken cihazın davranışı denenir — kontakla kesilen kaynağa bağlandıysa araç kapanınca cihaz kapanmalı, park modu kurulduysa beklendiği gibi mod değiştirmelidir. Üçüncüsü kayıttır: bir deneme kaydı alınır, dosya açılıp izlenir ve gerçekten yazıldığı görülür; kart bozuksa ya da hiç takılmadıysa bu adım söyler. Kaplamalar kapatıldıktan sonra çıkan her sorun işin baştan sökülmesi demektir. Son bir kontrol: kaplamalar kapatılırken kablonun hiçbir klipsin ya da vidanın altında sıkışmadığı gözle doğrulanır." },
+          { "label": "Kaplamalar kapatılır, sonra denenir", "verdict": "sonra", "explain": "Sorun çıkarsa her şey yeniden sökülür." },
+          { "label": "Yalnız cihazın yandığına bakılır", "verdict": "yaniyor", "explain": "Yanan cihaz kayıt yaptığını göstermez." },
+          { "label": "Deneme müşteriye bırakılır", "verdict": "musteri", "explain": "Doğrulama teslimden önce ustanın işidir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Ufuk çizgisi görüntünün üst yarısında: kadrajın çoğu yol olsun. Sırada arka kamera ve aracın boyunca kablo çekme."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Kontak kapalıyken bir sigorta yuvasında gerilim var, diğerinde yok. Bu ne anlama gelir?",
+        "a": "surekli-ve-kesilen",
+        "options": [
+          { "verdict": "surekli-ve-kesilen", "label": "Gerilim taşıyan yuva sürekli beslemedir, ölü olan kontakla kesilendir; park modu yoksa kesilen, varsa ikisi birden kullanılır", "explain": "Park modu olmayan montajda kontakla kesilen kaynak kullanılır ve araç kapanınca cihaz da kapanır; akü etkilenmez. Park modlu montajda cihazın iki ucu birden bağlanır, cihaz ikisini karşılaştırarak aracın açık mı kapalı mı olduğunu anlar. Karar tek ölçümle verilmez: kontak açıkken bütün yuvalar canlı görünür, bu yüzden hem kapalı hem açık durumda ölçülür." },
+          { "verdict": "bozuk", "label": "Ölü yuvanın sigortası atmıştır", "explain": "Kontakla kesilen yuva kapalıyken zaten ölüdür." },
+          { "verdict": "farketmez", "label": "Fark etmez, ikisi de kullanılabilir", "explain": "Park modu kararına göre değişir." },
+          { "verdict": "aku", "label": "İkisi de aküye bağlıdır", "explain": "Biri kontak üzerinden gelir." }
+        ]
+      },
+      {
+        "q": "Kablo ön direkten indirilecek. Hangi kural her şeyin önünde gelir?",
+        "a": "airbag-yolu",
+        "options": [
+          { "verdict": "airbag-yolu", "label": "Kablo hava yastığının şişme yolundan geçirilmez; aracın kendi kablo demetinin izlediği yol takip edilir", "explain": "Ön direk kaplaması altında perde tipi hava yastığı bulunabilir; oraya sıkıştırılan kablo yastık şiştiğinde kabin içine savrulur. Aracın kendi demeti nereden gidiyorsa orası güvenli yoldur. Kablo ayrıca boşta bırakılmaz, aralıklarla demete sabitlenir ve kapı fitilinin altına sıkıştırılmaz." },
+          { "verdict": "kisa-yol", "label": "En kısa yol seçilir", "explain": "En kısa yol en güvenli yol değildir." },
+          { "verdict": "fitil", "label": "Kapı fitilinin altından geçirilir", "explain": "Kapı her kapandığında ezilir." },
+          { "verdict": "gergin", "label": "Kablo gergin çekilir", "explain": "Gergin kablo titreşimle kopar; hafif pay bırakılır." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 12,3 V ve 0,2 V SENARYO okumalarıdır; istenen FARKTIR (12,1 V) ve ders bir gerilim sınırı vermiyor.",
+    "sourceRequired": "Hangi sigorta yuvasının kullanılabileceği, sigorta değerleri, kablo kesiti, şase noktası konumu, kabul edilebilir gerilim düşümü, yapıştırıcı bandın sıcaklık aralığı ve bekleme süresi bilinçle VERİLMEDİ; hepsi araca ve ürüne özgüdür, aracın şemasından ya da cihazın belgesinden okunur.",
+    "kapsam": "Hava yastığı bileşenlerine her türlü müdahale KAPSAM DIŞIDIR — ders yalnız sınırı ve kablonun nereden geçmeyeceğini öğretiyor. Araç haberleşme hattına bağlantı, sigorta değeri büyütme ve gövdeye yeni delik açma kapsam dışı.",
+    "kaynak": "Bu aşama MEB çerçeve programında YOKTUR; proje kararıyla eklendi. Besleme, şase ve söküm tekniği bu alanın aşama 0 derslerine dayanıyor.",
+    "reviewedByMechanic": false
+  }
+}

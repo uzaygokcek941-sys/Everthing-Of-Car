@@ -1,0 +1,177 @@
+{
+  "id": "elektrik.kablo-onarimi",
+  "area": "arac-elektrik",
+  "stage": 3,
+  "title": "Kablo Onarımı: Ek Yerinin Kendisi Arıza Olmasın",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 25,
+  "prerequisites": ["elektrik.devre-elemanlari", "elektrik.multimetre-gerilim"],
+  "learningGoals": [
+    "Onarımda kablo kesitini koruyup ek yerine gizli direnç eklememek",
+    "Ek yöntemini yerin titreşim, nem ve ısı koşuluna göre seçmek",
+    "Onarımı ölçümle doğrulamak: ek öncesi ve sonrası gerilim kaybını karşılaştırmak"
+  ],
+
+  "safety": [
+    { "rule": "Onarım öncesi devrenin enerjisi kesilir, gerekiyorsa akü eksi kutbu ayrılır", "why": "Kesilen kablonun iki ucu canlıyken birbirine ya da gövdeye değerse kısa devre olur. Pense o anda iki ucu birden tutuyor olabilir ve akım aletin üzerinden geçer", "blocksStart": true },
+    { "rule": "Yakıt ve fren hatlarının yakınında açık alevli ısıtma yapılmaz", "why": "Havya ve özellikle alevli ısıtıcı, buharlaşmış yakıtın bulunduğu bir bölmede tutuşma kaynağıdır. Onarım mümkünse parça sökülüp tezgâhta yapılır", "blocksStart": true },
+    { "rule": "Hava yastığı devrelerinin kabloları onarılmaz", "why": "Bu devrelerin kablo ve konektörleri üretici tarafından tanımlanmış dirençte olmak zorundadır; ek yeri bu değeri değiştirir ve sistem ya hata verir ya beklenmedik davranır. Bu devrelerde parça komple değişir", "blocksStart": true },
+    { "rule": "Ek yeri, demetin gergin olduğu ve hareket eden noktalara denk getirilmez", "why": "Kapı menteşesi, direksiyon kolonu ve motor takozu bölgesindeki kablolar sürekli hareket eder. Ek yerinin sert noktası bu hareketi karşılayamaz ve tel, ekin hemen yanından kırılır", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.kablo-siyirici", "label": "Kablo sıyırıcı", "required": true },
+    { "id": "tool.sikma-pensesi", "label": "Sıkma pensesi", "required": true },
+    { "id": "tool.havya", "label": "Lehim havyası", "required": false },
+    { "id": "tool.isi-buzusen-makaron", "label": "Isı ile büzüşen makaron", "required": true },
+    { "id": "tool.multimetre", "label": "Dijital multimetre", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Far devresinin kablosu bir noktadan ezilip içten kopmuş. Onaracaksın. Zarar gören bölümü demetten ayır.",
+      "interaction": {
+        "type": "pull",
+        "target": "part.kablo-demeti",
+        "axis": "y",
+        "distance": 0.3
+      },
+      "camera": "tezgah",
+      "hint": "Sargıyı açarken bıçağı tellere paralel tut.",
+      "teachingNote": "Sargının altında birbirine benzeyen onlarca tel vardır. Yanlışlıkla çizilen ikinci bir telin yalıtımı, aylar sonra ortaya çıkacak yeni bir arızadır; bu yüzden bıçak tellere paralel tutulur ve mümkünse makas kullanılır."
+    },
+    {
+      "id": 2,
+      "instruction": "Onarım için kablo seçeceksin. Kutuda daha ince ve daha kalın kablolar var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kablo-demeti",
+        "question": "Hangi kesitte kablo kullanılır?",
+        "options": [
+          { "label": "En az orijinal kesitte; daha ince kesinlikle kullanılmaz, daha kalın kullanmak elektriksel olarak sakıncalı değildir", "verdict": "en-az-orijinal", "correct": true, "explain": "Kablonun kesiti taşıyabileceği akımı belirler. Daha ince bir kabloyla yapılan ek, devreye gizli bir direnç ekler: normal akımda bile üzerinde gerilim düşer, tüketiciye ulaşan pay azalır ve o bölüm ısınır. Isınma yalıtımı yumuşatır, direnci artırır ve arıza zamanla büyür. Daha kalın kablo elektriksel olarak sorun çıkarmaz — yalnız demete zor sığar ve konektöre girmeyebilir. Kritik nokta şudur: devrenin sigortası orijinal kesite göre seçilmiştir. İnce bir ek yapıldığında sigorta o inceyi değil, orijinal kabloyu korumaya devam eder; yani devrenin en zayıf halkası artık korumasızdır. 'Sigorta kabloyu korur' kuralının en pahalı ihlali budur." },
+          { "label": "İnce olsun, demete daha kolay girer", "verdict": "ince", "explain": "İnce kesit hem direnç ekler hem de sigortanın koruduğu kesitten daha zayıf bir halka yaratır." },
+          { "label": "Kesit önemli değil, önemli olan bakır olması", "verdict": "kesit-onemsiz", "explain": "Malzeme kadar kesit de belirleyicidir; akım kapasitesi kesitle gelir." },
+          { "label": "Her zaman en kalını kullanılır", "verdict": "en-kalin", "explain": "Elektriksel zararı yoktur ama demete sığmaz ve konektöre girmez; ölçü orijinal kesittir." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Sigorta, kendisinden sonraki kabloyu korur. Ek yerinde kesiti düşürmek, korumanın altına korumasız bir bölüm yerleştirmektir."
+    },
+    {
+      "id": 3,
+      "instruction": "Ek yöntemini seçeceksin.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kablo-demeti",
+        "question": "Araç üzerinde hangi ek yöntemi tercih edilir?",
+        "options": [
+          { "label": "Doğru ölçüde ek kovanıyla sıkma ya da düzgün lehim; ikisinin de üzeri, iç yüzeyi yapışkanlı ısı büzüşen makaronla kapatılır", "verdict": "sikma-veya-lehim", "correct": true, "explain": "İki yöntem de kabul edilir, seçim yere göre yapılır. Doğru pense ve doğru ölçü kovanla yapılan sıkma teli soğuk olarak birleştirir: bağlantı nem geçirmez hâle gelir, esnekliğini korur ve titreşime dayanır. Lehim elektriksel olarak çok iyi bir bağlantı verir ama lehimin bittiği noktada tel sertleşir ve titreşimli bir bölgede tam oradan kırılır; bu yüzden lehimli ek desteklenir ve hareketli bölgeye konmaz. Her iki durumda da üzeri, iç yüzeyi yapışkanlı ısı büzüşen makaronla kapatılır — bu, nemin bakıra ulaşmasını engeller. Nem bir kez içeri girdiğinde bakır kararır, direnç büyür ve arıza aylar sonra 'kendiliğinden' ortaya çıkar." },
+          { "label": "Uçlar birbirine dolanır ve bantlanır", "verdict": "dola-bantla", "explain": "Bant nemi tutmaz ve zamanla açılır; dolama bağlantısı titreşimle gevşer. En sık görülen ve en çok geri gelen onarımdır." },
+          { "label": "Kablo ucuna vida sıkılır", "verdict": "vida", "explain": "Araç titreşiminde vidalı bağlantı gevşer; ayrıca nem koruması yoktur." },
+          { "label": "Uçlar bükülüp üzerine hortum geçirilir", "verdict": "hortum", "explain": "Mekanik bağlantı yok, nem koruması güvenilmez. Ek yeri kısa sürede direnç kaynağı olur." }
+        ]
+      },
+      "camera": "tezgah",
+      "hint": "Titreşimli bölgede sıkma, sabit bölgede lehim daha rahattır.",
+      "teachingNote": "Bantla yapılan ek atölyeden çıkarken çalışır; altı ay sonra geri gelen arızanın adı da odur. Bir onarımın kalitesi teslim anında değil, ikinci kışta belli olur."
+    },
+    {
+      "id": 4,
+      "instruction": "Onarımdan önce ölçmüştün: far yanarken kaynak ile ampul arasındaki kayıp 0,45 V idi. Ek yapıldıktan sonra aynı ölçüm 0,05 V veriyor. Kazanılan farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.multimetre-ekran",
+        "unit": "V",
+        "acceptRange": [0.35, 0.45]
+      },
+      "camera": "tezgah",
+      "hint": "0,45 eksi 0,05.",
+      "teachingNote": "Bu fark, yaptığın işin kanıtıdır ve müşteriye gösterilebilir. Aynı zamanda kendi işini denetlemenin yoludur: kayıp beklediğin kadar düşmediyse ya ek yerin zayıftır ya da devrede ikinci bir kötü bağlantı vardır. Kalan küçük değer ise kablonun ve konektörlerin kendi payıdır; tam sıfır beklenmez, ölçülebilir bir kayıp da beklenmez."
+    },
+    {
+      "id": 5,
+      "instruction": "Onarılan bölümü demete geri yerleştireceksin.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kablo-demeti",
+        "question": "Ek yeri nasıl konumlandırılır?",
+        "options": [
+          { "label": "Hareketli ve gergin noktalardan uzağa, kabloya bolluk bırakarak; demet aslına uygun sarılıp klipslerine oturtulur", "verdict": "hareketsiz-ve-bollukla", "correct": true, "explain": "Ek yeri kablonun en sert noktasıdır ve sert noktalar hareketi karşılayamaz. Kapı menteşesi, direksiyon kolonu, motor takozu ve bagaj kapağı bölgeleri sürekli hareket eder; ek buralara denk gelirse tel, ekin hemen yanından yorulup kırılır. Kabloya bolluk bırakmak da aynı sebeptendir: gergin bir kablo her titreşimde kendi bağlantı noktalarını çeker. Demetin aslına uygun sarılması ve klipslerine oturtulması sürtünmeyi engeller — serbest kalan bir demet keskin bir sac kenarına sürtündüğünde yalıtımını birkaç ay içinde kaybeder ve ortaya kısa devre çıkar. Onarımın ömrünü, ek yerinin kalitesi kadar nereye konduğu belirler." },
+          { "label": "En kolay ulaşılan yere, gergin biçimde", "verdict": "kolay-ve-gergin", "explain": "Gerginlik bağlantıyı çeker ve ek yerini yorar; kolaylık ömrü kısaltır." },
+          { "label": "Demetin dışında serbest bırakılır", "verdict": "serbest", "explain": "Serbest kablo sac kenarına sürtünür ve yalıtımını kaybeder." },
+          { "label": "Fark etmez, ek yeri sağlamsa yeter", "verdict": "farketmez", "explain": "Sağlam bir ek bile yanlış yerde kırılır; konum ekin parçasıdır." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Ek yerinin nereye geldiği, nasıl yapıldığı kadar önemlidir. Titreşim, elektriğin en sabırlı düşmanıdır."
+    },
+    {
+      "id": 6,
+      "instruction": "Yanındaki çırak, ezilmiş bölümü kesip atmak yerine üstüne bant sarmayı öneriyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.far-ampulu",
+        "question": "Ezilmiş bölüm neden kesilip çıkarılır?",
+        "options": [
+          { "label": "Ezilen yerde teller kısmen kopmuştur; kalan kesit akımı taşıyamaz, ısınır ve arıza aralıklı hâle gelir", "verdict": "kesiti-azalmis", "correct": true, "explain": "Ezilme yalıtımı bozmasa bile içerideki tellerin bir kısmını koparır. Geriye kalan teller devreyi tamamlar, süreklilik testi öter ve her şey normal görünür; ama o daralmış kesit gerçek yükü taşıyamaz. Yük bindiğinde orada gerilim düşer, bölge ısınır, ısınma bakırı daha da bozar ve arıza büyür. Üstelik bu tür arızalar aralıklıdır: araç soğukken çalışır, ısındığında ya da titreşimle temas değiştiğinde kaybolur — sahada en çok zaman yiyen arıza tipi budur. Bu yüzden hasarlı bölüm bantlanmaz, kesilip çıkarılır ve yerine sağlam kablo eklenir. Bant yalnız görüntüyü kapatır, kesiti geri getirmez." },
+          { "label": "Yalıtımı yenilemek için", "verdict": "yalitim", "explain": "Yalıtım da yenilenir ama asıl sebep kaybolan bakır kesitidir." },
+          { "label": "Görüntü düzgün olsun diye", "verdict": "gorunum", "explain": "Görüntü değil, akım taşıma kapasitesi meselesi." },
+          { "label": "Gerekmez, bant yeterli olur", "verdict": "bant-yeter", "explain": "Bant kesiti geri getirmez; arıza yük altında sürer." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Görünen hasar, gerçek hasarın haberidir. Ezilmiş bir kabloda gözle gördüğün şey yalıtımdır; asıl kayıp içerideki tellerdedir."
+    },
+    {
+      "id": 7,
+      "instruction": "İş bitti, kaydı yazacaksın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sigorta.1",
+        "question": "Kablo onarımından sonra ne kaydedilir?",
+        "options": [
+          { "label": "Ekin yeri, kullanılan kesit ve yöntem; onarım öncesi ve sonrası ölçüm değerleri", "verdict": "kayit", "correct": true, "explain": "Bir kablo eki, aracın ömrü boyunca orada kalacak bir değişikliktir ve yıllar sonra başka bir usta o demeti açtığında karşısına çıkacaktır. Yerinin, kesitinin ve yönteminin kayıtlı olması, o ustanın eki bir arıza sanıp saatlerce uğraşmasını önler. Ölçüm değerleri ise yapılan işin kanıtıdır: onarım öncesi kayıp, sonrası kayıp. Bu iki sayı hem müşteriye anlatılabilir hem de arıza tekrarlarsa kıyas noktası olur. Kayıt tutmak fazladan iş gibi görünür ama teşhis sürelerini kısaltan en ucuz alışkanlıktır." },
+          { "label": "Hiçbir şey, onarım çalışıyorsa yeter", "verdict": "kayit-yok", "explain": "Kayıtsız bir ek, yıllar sonra başka bir ustanın karşısına açıklanamayan bir tuhaflık olarak çıkar." },
+          { "label": "Yalnız işin ücreti", "verdict": "ucret", "explain": "Ücret ayrı bir kayıttır; teknik kayıt sonraki teşhisi kısaltır." },
+          { "label": "Yalnız kullanılan malzeme listesi", "verdict": "malzeme", "explain": "Malzeme tek başına yeri ve ölçümü anlatmaz." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "İyi kayıt, gelecekteki teşhisin yarısıdır. Bir sonraki usta sen olabilirsin ve o gün bugünü hatırlamayacaksın."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Onarımda neden orijinalinden ince kablo kullanılmaz?",
+        "a": "korumasiz-halka",
+        "options": [
+          { "verdict": "korumasiz-halka", "label": "İnce kesit direnç ekler, ısınır ve sigortanın korumadığı bir zayıf halka yaratır", "explain": "Kesit, kablonun taşıyabileceği akımı belirler. İnce bir ek normal akımda bile üzerinde gerilim düşürür, tüketiciye ulaşan payı azaltır ve ısınır; ısınma yalıtımı bozar, direnci artırır ve arıza büyür. Daha önemlisi devrenin sigortası orijinal kesite göre seçilmiştir: ince ek yapıldığında sigorta o bölümü değil, orijinal kabloyu korumaya devam eder — devrenin en zayıf yeri artık korumasızdır. 'Sigorta kabloyu korur' kuralının doğrudan ihlalidir." },
+          { "verdict": "gorunum", "label": "Görüntü kötü olduğu için", "explain": "Sebep elektrikseldir, görsel değil." },
+          { "verdict": "maliyet", "label": "Maliyet farkı olmadığı için", "explain": "Maliyet gerekçe değildir." },
+          { "verdict": "sorun-yok", "label": "Sorun yoktur, ince kablo da olur", "explain": "İnce kesit hem direnç hem korumasız halka üretir." }
+        ]
+      },
+      {
+        "q": "Ezilmiş bir kablo bölümü neden bantlanmaz da kesilip değiştirilir?",
+        "a": "kesit-kaybi",
+        "options": [
+          { "verdict": "kesit-kaybi", "label": "Ezilen yerde tellerin bir kısmı kopmuştur; kalan kesit yükü taşıyamaz ve arıza aralıklı hâle gelir", "explain": "Ezilme yalıtımı bozmasa bile içerideki tellerin bir kısmını koparır. Kalan teller devreyi tamamladığı için süreklilik testi öter ve her şey normal görünür; ama daralmış kesit gerçek yükü taşıyamaz. Yük bindiğinde orada gerilim düşer, bölge ısınır, bakır daha da bozulur. Bu arızalar aralıklıdır — soğukken çalışır, ısınınca ya da titreşimle kaybolur — ve sahada en çok zaman yiyen tip budur. Bant yalnız görüntüyü kapatır, kaybolan bakırı geri getirmez." },
+          { "verdict": "yalitim", "label": "Yalnız yalıtım zarar gördüğü için", "explain": "Yalıtım da zarar görür ama asıl kayıp iletken kesitidir." },
+          { "verdict": "estetik", "label": "Estetik sebeplerle", "explain": "Görüntü değil, akım taşıma kapasitesi meselesidir." },
+          { "verdict": "bant-yeter", "label": "Aslında bant yeterlidir", "explain": "Bant kesiti geri getirmez; arıza yük altında sürer." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 4'teki 0,45 V ve 0,05 V SENARYO okumalarıdır. Öğrenciden istenen bir üretici sınırı değil, onarım öncesi ve sonrası kaybın FARKIDIR (0,40 V). sourceRequired bu yüzden gerekmedi.",
+    "sourceRequired": "Kablo kesiti tabloları (akım-kesit karşılıkları), kabul edilebilir gerilim düşümü eşikleri ve sıkma pensesi değerleri bu derste VERİLMEDİ; bunlar standarda ve araca özgüdür. Kesit kararı 'en az orijinali' kuralıyla, sayı iddia edilmeden öğretildi.",
+    "kapsam": "Kablo demeti tek bir silindir olarak modellendi; tel, ek kovanı ve makaron geometrisi yok. Sıyırma, sıkma ve lehim adımları seçim olarak öğretiliyor — bu jestler sahnede yok.",
+    "reviewedByMechanic": false
+  }
+}

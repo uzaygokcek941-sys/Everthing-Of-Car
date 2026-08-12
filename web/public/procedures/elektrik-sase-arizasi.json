@@ -1,0 +1,176 @@
+{
+  "id": "elektrik.sase-arizasi",
+  "area": "arac-elektrik",
+  "stage": 3,
+  "title": "Şase Arızası: Dönüş Yolunun Ölçümü",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 25,
+  "prerequisites": ["elektrik.devre-elemanlari", "elektrik.soket-temizligi"],
+  "learningGoals": [
+    "Şase noktasını gözle değil, yük altında ölçerek doğrulamak",
+    "İki şase noktasını karşılaştırarak kılavuzsuz bir referans üretmek",
+    "Geçici köprü kablosunun bir teşhis aracı olduğunu, onarım olmadığını bilmek"
+  ],
+
+  "safety": [
+    { "rule": "Şase cıvatası sökülmeden önce devrenin enerjisi kesilir", "why": "Şase sökülünce dönüş yolu kapanır ve akım kendine başka bir yol arar. Bu yol komşu bir kablo, bir boru ya da bir tel olabilir; o parça ısınır ve yanabilir", "blocksStart": true },
+    { "rule": "Köprü kablosu geçici testten sonra mutlaka sökülür", "why": "Unutulan bir köprü kablosu devreyi tasarlanmamış bir yoldan besler ve sigortanın koruduğu bölümü atlar. Araç çalışıyor görünür ama artık korumasızdır", "blocksStart": true },
+    { "rule": "Şase temizliğinde kıvılcım ve ısı yakıt hattından uzak tutulur", "why": "Şase noktaları çoğu zaman şasi ve alt gövdededir; oralarda yakıt hattı, fren borusu ve yalıtım malzemesi bulunur", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.multimetre", "label": "Dijital multimetre", "required": true },
+    { "id": "tool.anahtar-10", "label": "10 mm anahtar", "required": true },
+    { "id": "tool.tel-firca", "label": "Tel fırça", "required": true },
+    { "id": "tool.kopru-kablosu", "label": "Geçici köprü kablosu", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Arka lambalar sönük yanıyor ve sinyal verilince davranışları değişiyor. Besleme tarafında kayıp bulamadın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sase-noktasi",
+        "question": "Sıradaki şüpheli neresi?",
+        "options": [
+          { "label": "Ortak şase noktası; besleme sağlamsa kayıp dönüş tarafındadır ve birden çok lambayı birlikte etkiliyorsa ortak noktadadır", "verdict": "ortak-sase", "correct": true, "explain": "Bir devrenin iki yolu vardır: gidiş ve dönüş. Kayıp gidişte değilse dönüştedir. Belirtinin birden çok lambayı birlikte etkilemesi ve bir devre çalıştığında diğerinin davranışının değişmesi ise klasik bir ortak şase belirtisidir. Şase direnci büyüdüğünde akım kendine alternatif yollar arar ve bu yollar başka devrelerin şase kablolarıdır; bu yüzden sinyal verilince fren lambası yanar, silecek çalışınca gösterge oynar gibi tuhaflıklar ortaya çıkar. Elektrikte 'birbiriyle alakasız iki şey birlikte davranıyorsa ortak şase ara' kuralı buradan gelir." },
+          { "label": "Bütün ampuller eskimiştir", "verdict": "ampuller", "explain": "Aynı anda ve aynı ölçüde eskime beklenmez; ayrıca sinyal verilince davranış değişmesini açıklamaz." },
+          { "label": "Akü zayıftır", "verdict": "aku", "explain": "Zayıf akü bütün aracı etkiler; burada belirti belirli bir gruba özgü." },
+          { "label": "Sigorta yarım atmıştır", "verdict": "yarim-sigorta", "explain": "Sigorta ya bağlar ya keser; ara durum davranışı bu değildir. Sigorta yuvasındaki gevşeklik ise ayrı bir şüphelidir." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Alakasız iki devre birlikte davranıyorsa aralarındaki bağ neredeyse her zaman ortak bir şase noktasıdır."
+    },
+    {
+      "id": 2,
+      "instruction": "Lambalar yanarken şase ucu ile temiz bir gövde noktası arasında 0,64 V okudun. Aynı ölçümü ikinci bir devrenin sağlam şasesinde yaptın: 0,04 V. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.multimetre-ekran",
+        "unit": "V",
+        "acceptRange": [0.55, 0.65]
+      },
+      "camera": "tezgah",
+      "hint": "0,64 eksi 0,04.",
+      "teachingNote": "Bu iki nokta elektriksel olarak aynı olmalıydı; ikisi de gövdeye bağlı dönüş yolu. Aralarındaki fark, şüpheli noktada olmaması gereken bir direnç bulunduğunun kanıtıdır. Burada da kılavuza bakmadın: aynı işi gören iki noktayı karşılaştırdın. Motor alanındaki kardeş lob ve kardeş muylu ölçümleriyle aynı yöntem, aynı gerekçe."
+    },
+    {
+      "id": 3,
+      "instruction": "Kesinleştirmek için geçici bir test yapacaksın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kablo-demeti",
+        "question": "Köprü kablosu nasıl kullanılır?",
+        "options": [
+          { "label": "Şüpheli şase ucundan sağlam bir gövde noktasına geçici köprü çekilir; belirti düzeliyorsa arıza o şasededir ve köprü test sonrası sökülür", "verdict": "gecici-kopru", "correct": true, "explain": "Köprü kablosu bir teşhis aracıdır: şüpheli dönüş yolunu geçici olarak devre dışı bırakır. Lambalar köprü takılınca normal parlaklıkta yanıyorsa kaybın kaynağı köprülediğin bölümdür ve başka kanıta gerek kalmaz. Ama bu bir onarım değildir: köprü kablosu genelde uygun kesitte değildir, bağlantısı geçicidir ve unutulduğunda devre tasarlanmamış bir yoldan dönmeye devam eder. Ayrıca köprü gerçek arızayı gizler — birkaç ay sonra o kablo da gevşediğinde arıza çok daha kafa karıştırıcı biçimde geri gelir. Doğru sıra şudur: köprüyle doğrula, köprüyü sök, asıl şase noktasını onar." },
+          { "label": "Köprü kalıcı olarak bırakılır, sorun çözülmüş olur", "verdict": "kalici-kopru", "explain": "Kesiti ve bağlantısı geçicidir; kalıcı bırakılan köprü yeni bir arıza kaynağıdır." },
+          { "label": "Köprü artı tarafa çekilir", "verdict": "arti-kopru", "explain": "Şüphe dönüş yolunda; artıya çekilen köprü sigortayı atlatır ve tehlikelidir." },
+          { "label": "Köprü kullanılmaz, doğrudan parça değiştirilir", "verdict": "parca-degistir", "explain": "Ücretsiz ve kesin bir doğrulama varken parça değiştirmek tahmin sırasıdır." }
+        ]
+      },
+      "camera": "tezgah",
+      "hint": "Köprü kanıt üretir, onarım yerine geçmez.",
+      "teachingNote": "Geçici testler teşhisin en güçlü araçlarıdır ama en tehlikeli alışkanlıkları da doğururlar: unutulan köprü, sökülmeyen atlatma, takılı bırakılan yedek sigorta. Test biter bitmez eski hâline döndür."
+    },
+    {
+      "id": 4,
+      "instruction": "Şase cıvatasını sök.",
+      "interaction": {
+        "type": "unscrew",
+        "target": "part.sase-noktasi",
+        "count": 1,
+        "turns": 5,
+        "tool": "tool.anahtar-10"
+      },
+      "camera": "tezgah",
+      "hint": "Sökme yönü saat yönünün tersidir.",
+      "teachingNote": "Şase cıvatası çoğu zaman alt gövdededir ve paslıdır. Zorlanan bir cıvata kırılırsa iş, basit bir temizlikten sac üzerinde diş açmaya döner; pas sökücü verip beklemek burada zaman kaybı değil kazançtır."
+    },
+    {
+      "id": 5,
+      "instruction": "Pabuç çıktı. Altında boya, pas ve yeşilimsi bir tabaka var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sase-noktasi",
+        "question": "Yüzey nasıl hazırlanır?",
+        "options": [
+          { "label": "Sac ve pabuç çıplak metale kadar temizlenir, pabuç doğrudan metale sıkılır, sonra çevresi neme karşı kapatılır", "verdict": "ciplak-metal-sonra-koru", "correct": true, "explain": "Boya ve pas yalıtkandır; üzerine sıkılan pabuç ilk gün bir miktar temas verir ama zamanla gevşer ve direnç büyür. Bu yüzden hem sac hem pabuç çıplak metale kadar temizlenir ve pabuç doğrudan metale oturtulur. Temizlikten sonra bağlantının üstü kapatılır: açıkta kalan çıplak metal ilk yağmurda yeniden paslanmaya başlar ve birkaç ay içinde aynı arıza geri gelir. Temizlik ve koruma tek bir iştir. Üçüncü unsur sıkmadır: gevşek pabuç temiz yüzeyle bile kötü temas verir, aşırı sıkılan pabuç sacı ezip pabucu çatlatır. Temiz yüzey, doğru sıkma, nem koruması — üçü birden." },
+          { "label": "Boyanın üstü hafifçe kazınıp pabuç sıkılır", "verdict": "hafif-kazi", "explain": "Kalan boya yine yalıtkandır; temizlik çıplak metale kadar yapılır." },
+          { "label": "Pabuç temizlenir, sac olduğu gibi bırakılır", "verdict": "sadece-pabuc", "explain": "Temas iki yüzeyle olur; biri kirliyse bağlantı yine dirençlidir." },
+          { "label": "Temizlik yerine üzerine gres basılır", "verdict": "gres", "explain": "Gres nemi uzak tutar ama kirin üstüne basıldığında oksidi hapseder; önce temizlik." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Şase onarımı üç adımdır ve üçü de zorunludur: çıplak metale temizlik, doğru sıkma, neme karşı koruma. Biri atlanırsa arıza mevsim değişince geri gelir."
+    },
+    {
+      "id": 6,
+      "instruction": "Aynı cıvataya birden çok kablo bindiğini görüyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.sase-noktasi",
+        "question": "Ortak şase noktasında pabuçlar nasıl dizilir?",
+        "options": [
+          { "label": "Aslına uygun sırayla, her pabuç metalle ya da birbiriyle temiz temas edecek biçimde; araya boya, pas ya da yalıtkan bir pul girmez", "verdict": "aslina-uygun", "correct": true, "explain": "Ortak şase noktasında birden çok pabuç aynı cıvatayı paylaşır ve her birinin akımı aynı yüzeyden geçer. Bu yüzden dizilim rastgele olamaz: her pabuç ya doğrudan sac metaline ya da temiz bir başka pabuca oturmalıdır. Sıra bozulduğunda çoğu zaman en alttaki iyi temas eder, üsttekiler zayıf kalır ve o devrelerde açıklanamayan kayıplar başlar. Ayrıca bu yüzeyler kirlendiğinde tek bir nokta birden çok devreyi birden bozar — dersin başındaki 'sinyal verince davranış değişiyor' tuhaflığı buradan doğar. Söküp takarken sırayı fotoğraflamak sonradan saatler kazandırır." },
+          { "label": "Sıra önemli değil, cıvata sıkıldıktan sonra hepsi temas eder", "verdict": "sira-onemsiz", "explain": "Araya giren boyalı bir pul ya da kirli yüzey temasın kalitesini bozar; sıkılık bunu telafi etmez." },
+          { "label": "Her kabloya ayrı cıvata açılır", "verdict": "ayri-civata", "explain": "Gövdeye izinsiz delik açmak korozyon ve yapısal risk üretir; ortak nokta doğru yapılırsa yeterlidir." },
+          { "label": "Kabloların hepsi birbirine lehimlenip tek pabuç yapılır", "verdict": "tek-pabuc", "explain": "Servis edilebilirliği yok eder ve lehim noktası titreşimde kırılır; aslına uygun dizilim tercih edilir." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Ortak şase, birden çok devrenin kaderini tek bir cıvataya bağlar. Orada yapılan özensiz bir iş, birbiriyle ilgisiz görünen birkaç arıza olarak geri döner."
+    },
+    {
+      "id": 7,
+      "instruction": "Şase temizlendi, pabuçlar aslına uygun dizildi, cıvata sıkıldı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.far-ampulu",
+        "question": "Doğrulama nasıl yapılır?",
+        "options": [
+          { "label": "Aynı ölçüm yük altında tekrarlanır ve sağlam bir şase noktasıyla karşılaştırılır; iki değer birbirine yakın olmalı", "verdict": "yuk-altinda-karsilastir", "correct": true, "explain": "Onarımdan önce elinde iki sayı vardı: şüpheli noktada 0,64 V, sağlam noktada 0,04 V. Onarımdan sonra aynı ölçümü aynı yükte tekrarlarsın ve şüpheli noktanın artık sağlam noktaya benzemesini beklersin. Bu karşılaştırma tek başına bir sayıya bakmaktan güçlüdür, çünkü referansı araçtan alır: aynı araç, aynı koşul, aynı alet. Yük altında ölçmek de şarttır — akım akmıyorsa en kötü bağlantı bile sıfır okur ve onarımı doğrulamış sayılmazsın. Son kontrol mekaniktir: kabloyu elle çekip pabucun oynamadığını görmek." },
+          { "label": "Lambaların parlaklığına bakılır", "verdict": "parlaklik", "explain": "Parlaklık farkı gözle güvenilir biçimde ayırt edilmez; kaybın bir kısmı sürüyor olabilir." },
+          { "label": "Devre kapalıyken direnç ölçülür", "verdict": "kapali-direnc", "explain": "Küçük ölçüm akımıyla zayıf bir bağlantı bile iyi okur; doğrulama yük altındadır." },
+          { "label": "Köprü kablosu takılı bırakılıp izlenir", "verdict": "kopru-birak", "explain": "Köprü test aracıdır; takılı bırakmak yeni bir arıza kaynağı yaratır." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Aynı araçta aynı işi gören ikinci bir nokta, elindeki en iyi referanstır. Kılavuz olmadığında ölçümü anlamlı kılan şey odur."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Şase noktasının iyi olduğu nasıl kanıtlanır?",
+        "a": "yuk-altinda-fark",
+        "options": [
+          { "verdict": "yuk-altinda-fark", "label": "Yük altında şase ucu ile temiz gövde arasındaki gerilim ölçülür ve sağlam bir şase noktasıyla karşılaştırılır", "explain": "Şase ucu ile gövde elektriksel olarak aynı noktadır; aralarında kayda değer bir gerilim olmamalıdır. Ama bu ancak akım akarken ortaya çıkar: devre kapalıyken en kötü şase bile sıfır okur. Ölçümü anlamlı kılan ikinci şey referanstır — aynı araçtaki sağlam bir şase noktasında aynı ölçümü yapar ve iki değeri karşılaştırırsın. Fark, şüpheli noktada olmaması gereken bir direncin kanıtıdır ve bu sonuç için hiçbir kılavuza ihtiyacın yoktur." },
+          { "verdict": "gozle", "label": "Gözle bakılır, pas yoksa iyidir", "explain": "Boyanın altındaki temassızlık gözle görünmez; karar ölçümle verilir." },
+          { "verdict": "civata-sikiligi", "label": "Cıvata sıkıysa iyidir", "explain": "Sıkı bir cıvata boyalı yüzeyde bile sıkı durur; sıkılık temas kalitesi değildir." },
+          { "verdict": "kapali-direnc", "label": "Devre kapalıyken direnç ölçülür", "explain": "Küçük ölçüm akımı zayıf bağlantıdan rahatça geçer; karar yük altında verilir." }
+        ]
+      },
+      {
+        "q": "Köprü kablosu neden kalıcı bırakılmaz?",
+        "a": "test-araci",
+        "options": [
+          { "verdict": "test-araci", "label": "Bir teşhis aracıdır: kesiti ve bağlantısı geçicidir, kalıcı bırakılırsa yeni bir arıza ve korumasız bir yol yaratır", "explain": "Köprü kablosu, şüpheli dönüş yolunu geçici olarak devre dışı bırakarak arızanın yerini kanıtlar. Ama kesiti devrenin akımına göre seçilmemiştir, bağlantısı geçicidir ve zamanla gevşer. Unutulduğunda devre tasarlanmamış bir yoldan döner, sigortanın koruduğu bölüm atlanmış olabilir ve asıl arıza gizlenir; birkaç ay sonra köprü de bozulduğunda çok daha karışık bir tablo çıkar. Doğru sıra nettir: köprüyle doğrula, köprüyü sök, asıl noktayı onar." },
+          { "verdict": "gorunum", "label": "Görüntü kötü olduğu için", "explain": "Sebep teknik ve güvenlikle ilgilidir." },
+          { "verdict": "maliyet", "label": "Kablo maliyeti yüzünden", "explain": "Maliyet gerekçe değildir." },
+          { "verdict": "birakilir", "label": "Aslında kalıcı bırakılabilir", "explain": "Bırakılmaz: geçici bağlantı, korumasız yol ve gizlenmiş arıza üretir." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2'deki 0,64 V ve 0,04 V SENARYO okumalarıdır. Öğrenciden istenen bir üretici sınırı değil, şüpheli ve sağlam iki şase noktasındaki okumaların FARKIDIR (0,60 V). sourceRequired bu yüzden gerekmedi; ders kardeş nokta karşılaştırması üzerine kuruldu.",
+    "sourceRequired": "Kabul edilebilir azami şase gerilim düşümü ve şase cıvatası sıkma torku bu derste VERİLMEDİ; araca ve bağlantı tipine özgüdür. Değer kullanılacaksa servis kılavuzundan alınır.",
+    "kapsam": "Şase noktası tek bir plaka olarak modellendi; pabuç, pul ve çoklu dizilim geometrisi yok. Temizlik ve köprü testi seçim olarak öğretiliyor; cıvata sökme jesti unscrew ile veriliyor.",
+    "reviewedByMechanic": false
+  }
+}

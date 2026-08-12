@@ -1,0 +1,177 @@
+{
+  "id": "direksiyon.bakim-mekanik",
+  "area": "direksiyon",
+  "stage": 6,
+  "title": "Mekanik Sistemin Periyodik Bakımı",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 35,
+  "prerequisites": ["direksiyon.kilit-ve-kontak"],
+  "learningGoals": [
+    "Periyodik bakımı bir kontrol listesi olarak değil, bir erken uyarı sistemi olarak görmek",
+    "Mekanik tarafta hangi maddelerin hangi sırayla bakıldığını bilmek",
+    "Bulguları 'şimdi', 'takip' ve 'iyi' diye ayırıp kaydetmek"
+  ],
+
+  "safety": [
+    { "rule": "Araç sehpaya alınmadan altında çalışılmaz", "why": "Bakımın büyük bölümü aracın altında yapılır", "blocksStart": true },
+    { "rule": "Kontrol sırasında direksiyonu oynatan kişi ile altta çalışan kişi haberleşir", "why": "Habersiz çevrilen direksiyon elin sıkışmasına yol açar", "blocksStart": true },
+    { "rule": "Bulunan boşluk ya da hasar giderilmeden araç ön düzen ayarına alınmaz", "why": "Boşluklu bir sistemde yapılan ayar tutmaz ve ölçüm yanıltır", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true },
+    { "id": "tool.kriko-sehpa", "label": "Kriko ve sehpa", "required": true },
+    { "id": "tool.tork-anahtari", "label": "Tork anahtarı", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Periyodik bakımda direksiyon sistemine geldin.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.direksiyon-simidi",
+        "question": "Bu bakımın amacı ne?",
+        "options": [
+          { "label": "Henüz şikâyet üretmemiş bulguları erken yakalamak; arıza çıkmadan önce yıpranmayı görmek ve kaydetmek", "verdict": "erken-yakalama", "correct": true, "explain": "Periyodik bakım, arıza gidermekten farklı bir iştir ve karıştırıldığında değersizleşir. Arıza gidermede bir şikâyet vardır ve kaynağı aranır; periyodik bakımda ise şikâyet yoktur ve amaç, gelecekteki şikâyeti şimdiden görmektir. Direksiyon sisteminde bu özellikle anlamlıdır çünkü buradaki yıpranmalar yavaş ilerler: yırtılan bir körük aylarca fark edilmez, aşınan bir mafsal önce hafif bir tıkırtı verir, gevşeyen bir cıvata bir süre iş görmeye devam eder. Bunların hepsi ucuzken yakalanabilir, geciktirildiğinde pahalı hâle gelir. Bakımın ikinci ve az anlaşılan değeri kayıttır: her bakımda ölçülen boşluk ve görülen durum yazıldığında, aracın kendi geçmişiyle karşılaştırılabilir bir çizgi oluşur. Bir sonraki bakımda boşluğun artıp artmadığı, tek bir ölçümün mutlak değerinden çok daha fazlasını anlatır. Bu yüzden bakım 'baktım, iyiydi' diye kapatılmaz; bulgular sayı ve durumla yazılır." },
+          { "label": "Var olan şikâyeti gidermek", "verdict": "sikayet", "explain": "O arıza giderme işidir; bakım şikâyet öncesine bakar." },
+          { "label": "Parça satmak", "verdict": "satis", "explain": "Bakımın amacı bulgu tespiti; gereksiz parça önerilmez." },
+          { "label": "Yalnız form doldurmak", "verdict": "form", "explain": "Kayıt önemli ama amaç gerçek kontrol." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Bakım 'baktım, iyiydi' diye kapatılmaz. Yazılan sayı, bir sonraki bakımda karşılaştırma çizgisi oluyor."
+    },
+    {
+      "id": 2,
+      "instruction": "Kontrol listesinin ilk maddesi.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.koruk-sol",
+        "question": "Körükler nasıl kontrol edilir?",
+        "options": [
+          { "label": "Elle yoklanarak: yırtık, çatlak, sertleşme ve içinde sıvı birikmesi aranır; kelepçelerin yerinde ve sıkı olduğu görülür", "verdict": "elle-yokla", "correct": true, "explain": "Körük kontrolü hem kolay hem de bu sistemdeki en yüksek getirili kontroldür, çünkü bir körük birkaç kuruşluk bir parça olduğu hâlde arkasındaki mafsalın ya da kutunun ömrünü belirler. Kontrol gözle başlar ama elle biter: körüğün kıvrımları parmakla açılıp bakılır, çünkü yırtıklar çoğu zaman kıvrımın içinde ve alt tarafta oluşur — yani yukarıdan bakınca görünmez. Aranan dört şey vardır. Yırtık ve çatlak: koruma bitmiştir, içeri toz ve su girer. Sertleşme: kauçuk yaşlanmıştır ve ilk ciddi harekette yırtılacaktır. Şişkinlik ve içinde sıvı: kutunun ya da mafsalın keçesi sızdırıyordur — bu, sızıntı dersinde öğrenilen erken teşhis. Kelepçe: gevşemiş ya da kaymış bir kelepçe körük sağlam olsa bile korumayı bitirir. Aynı kontrol iki tarafta ayrı ayrı yapılır; iki körük aynı yaşta olduğu için biri kötüyse diğeri de değerlendirilir. Yırtık körük birçok ülkede muayenede kusur sayılır ve bu, müşteriye söylenmesi gereken bir bilgidir." },
+          { "label": "Yalnız uzaktan gözle bakılır", "verdict": "uzaktan", "explain": "Yırtıklar çoğu zaman kıvrımın içinde ve alt tarafta olur." },
+          { "label": "Yırtıksa bantlanır", "verdict": "bant", "explain": "Bant toz ve suyu tutmaz; koruma geri gelmez." },
+          { "label": "Körük bakımda kontrol edilmez", "verdict": "kontrol-yok", "explain": "En yüksek getirili kontrollerden biridir." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Yırtıklar kıvrımın içinde ve alttadır. Yukarıdan bakan usta göremez; kıvrım parmakla açılır."
+    },
+    {
+      "id": 3,
+      "instruction": "Aracın bakım geçmişine baktın: geçen bakımda boşluk 26 mm ölçülmüş, bugün 34 mm (ikisi de aynı koşulda). Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.direksiyon-simidi",
+        "unit": "mm",
+        "acceptRange": [7.8, 8.2]
+      },
+      "camera": "direksiyon",
+      "hint": "34 eksi 26.",
+      "teachingNote": "8 mm'lik bu artış, tek bir ölçümün asla veremeyeceği bir bilgi veriyor: sistem YÖNLÜ olarak kötüleşiyor. İki değer de sınırın altında olabilir ve bugün hiçbir şey yapılmayabilir, ama artış hızı biliniyorsa bir sonraki bakıma kadar sınırın aşılıp aşılmayacağı öngörülebilir. Bu, periyodik bakımı bir kontrol listesinden erken uyarı sistemine çeviren şeydir ve kaydın neden tutulduğunu açıklar. Artışın kendisi de bir teşhis ipucudur: yavaş ve düzenli artış normal aşınmayı, iki bakım arasında ani sıçrama ise bir olayı — çukur darbesi, gevşemiş bir bağlantı ya da yeni başlamış bir mafsal boşluğunu — düşündürür. Kabul edilebilir boşluk sınırı araca özgüdür ve bu ders bir değer vermiyor."
+    },
+    {
+      "id": 4,
+      "instruction": "Bağlantı elemanlarına geldin.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.mil-mafsali",
+        "question": "Cıvata ve somunlar nasıl kontrol edilir?",
+        "options": [
+          { "label": "Gözle çatlak, pas ve kayma izi aranır; şüpheli olanlar tork anahtarıyla üreticinin değerine göre kontrol edilir, gevşek bulunan bir bağlantının neden gevşediği sorulur", "verdict": "goz-tork-sebep", "correct": true, "explain": "Bağlantı kontrolü üç katmanlıdır. Birincisi gözle bakmaktır ve aranan şey yalnız gevşeklik değildir: cıvata ile parça arasında kayma izi, boya çatlağı, pas akıntısı ya da parlamış bir temas yüzeyi, bağlantının hareket ettiğini gösterir — gevşemiş bir bağlantı çoğu zaman kendi izini bırakır. İkincisi tork kontrolüdür; şüpheli görülen bağlantılar üreticinin verdiği değere göre kontrol edilir. Burada sık yapılan bir hata vardır: her cıvatayı 'bir tur daha sıkmak' bakım değildir ve bazı bağlantılarda zararlıdır, çünkü tek kullanımlık elemanlar ve belirli bir uzama ile çalışan bağlantılar vardır. Üçüncüsü ve en önemlisi soru sormaktır: bir bağlantı gevşemişse neden gevşemiş? Kendiliğinden gevşeyen bir cıvatanın yuvası aşınmış, parçası çatlamış ya da altındaki eleman ezilmiş olabilir; yalnız sıkmak, aynı gevşemenin tekrarını satın almaktır. Rot başı, mafsal ve kutu bağlantıları bu sistemde en kritik olanlardır çünkü biri ayrıldığında yön kontrolü doğrudan kaybolur." },
+          { "label": "Hepsi bir tur daha sıkılır", "verdict": "bir-tur", "explain": "Bazı bağlantılarda zararlıdır; tork değerine göre kontrol edilir." },
+          { "label": "Yalnız gözle bakılır, yeterlidir", "verdict": "sadece-goz", "explain": "Şüpheli olanlar tork anahtarıyla doğrulanır." },
+          { "label": "Gevşekse sıkılır, sebebi sorulmaz", "verdict": "sadece-sik", "explain": "Sebep sorulmazsa aynı gevşeme tekrarlar." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Gevşemiş bağlantı kendi izini bırakır: kayma izi, boya çatlağı, pas akıntısı. Gözle arayacağın şey bu."
+    },
+    {
+      "id": 5,
+      "instruction": "Rot başları ve mafsallar kontrol ediliyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.rot-basi-sol",
+        "question": "Bakımdaki kontrol, arıza teşhisindekinden farklı mı?",
+        "options": [
+          { "label": "Yöntem aynı ama beklenti farklı: burada henüz şikâyet üretmemiş küçük boşluk ve körük bulguları aranır ve kaydedilir", "verdict": "ayni-yontem-farkli-beklenti", "correct": true, "explain": "Kontrolün tekniği değişmez — parmak mafsal sınırının üstüne konur, parça oynatılır ve kopuk bir hareket olup olmadığı hissedilir; bu, boşluk yeri dersinde öğrenilen yöntemin aynısıdır. Değişen şey beklentidir. Arıza teşhisinde bir şikâyeti açıklayacak kadar büyük bir boşluk aranır; periyodik bakımda ise henüz hiçbir şikâyet üretmeyen, ucundan başlamış boşluklar aranır ve bulunduklarında hemen parça değiştirilmez, kaydedilir. Bu ayrım hem dürüstlük hem de doğru mühendisliktir: her küçük boşlukta parça değiştirmek gereksiz maliyettir, ama görmezden gelmek de bakımı anlamsız kılar. Doğru davranış bulguyu üç kategoriye ayırmaktır — 'şimdi giderilmeli', 'takip edilmeli', 'iyi'. Takip kategorisi bu işin kalbidir: müşteriye 'sol rot başında başlangıç düzeyinde bir boşluk var, bugün araç güvenli ama bir sonraki bakımda tekrar bakacağız' demek, hem güven kurar hem de o gün geldiğinde sürpriz olmaz. Körük durumu da aynı biçimde kaydedilir; yırtık körük 'şimdi' kategorisidir çünkü bekleyen her gün mafsalı yer." },
+          { "label": "Bakımda bu kontroller yapılmaz", "verdict": "yapilmaz", "explain": "Bakımın temel maddelerinden biri." },
+          { "label": "Bulunan her boşlukta parça değiştirilir", "verdict": "hep-degistir", "explain": "Gereksiz maliyet; bulgu üç kategoriye ayrılır." },
+          { "label": "Yalnız müşteri şikâyet ederse bakılır", "verdict": "sikayet-varsa", "explain": "Bakımın amacı şikâyet öncesini yakalamak." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Üç kategori: şimdi giderilmeli, takip edilmeli, iyi. 'Takip' kategorisi bu işin kalbi."
+    },
+    {
+      "id": 6,
+      "instruction": "Kutu ve bağlantı bölgesine bakıldı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kremayer-kutusu",
+        "question": "Mekanik bakımda kutuda neye bakılır?",
+        "options": [
+          { "label": "Gövde bağlantılarının sağlamlığı, takoz ve yatakların durumu, sızıntı izi ve kutunun gövdeye göre oynayıp oynamadığı", "verdict": "baglanti-takoz-sizinti", "correct": true, "explain": "Kutu bakımda sökülmez; dışarıdan değerlendirilir ve dört şeye bakılır. Birincisi gövde bağlantılarıdır: kutu araca cıvatalarla bağlanır ve bu bağlantılar gevşediğinde ortaya çok tanıdık bir belirti çıkar — direksiyon çevrildiğinde bir tık sesi ve boşluk hissi; üstelik bu belirti kutu içi arızayla karıştırılır. Bu yüzden direksiyon oynatılırken kutunun gövdeye göre kımıldayıp kımıldamadığına elle bakılır. İkincisi takozlar ve yataklardır: birçok araçta kutu doğrudan sac gövdeye değil, kauçuk takozlar üzerine oturur; yaşlanmış ve ezilmiş bir takoz kutunun oynamasına izin verir ve aynı belirtiyi üretir. Üçüncüsü sızıntıdır — kuru bir yüzey iyi haberdir, ıslaklık varsa sızıntı dersindeki yöntemle kaynak aranır. Dördüncüsü çevredir: kutuya ve rot çubuklarına sürtünen bir kablo, hortum ya da ısı kalkanı zamanla o parçayı keser ve bu, bakımda gözle yakalanabilecek bir bulgudur. Bunların hiçbiri kutuyu açmayı gerektirmez ve hepsi birkaç dakika sürer." },
+          { "label": "Kutu sökülüp içi kontrol edilir", "verdict": "sok", "explain": "Bakımda kutu sökülmez; dışarıdan değerlendirilir." },
+          { "label": "Yalnız sızıntıya bakılır", "verdict": "sadece-sizinti", "explain": "Bağlantı, takoz ve çevre de kontrol edilir." },
+          { "label": "Kutu bakımda değerlendirilmez", "verdict": "yok", "explain": "Gevşek kutu bağlantısı sık ve karıştırılan bir bulgu." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Gevşek kutu bağlantısı, kutu içi arızayla aynı belirtiyi verir. Elle kutunun gövdeye göre oynayıp oynamadığına bak."
+    },
+    {
+      "id": 7,
+      "instruction": "Bakım tamamlanıyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.koruk-sag",
+        "question": "Kapanışta ne yapılır?",
+        "options": [
+          { "label": "Bulgular üç kategoriye ayrılıp ölçülen değerlerle birlikte yazılır, müşteriye önceliklendirilerek anlatılır ve bir sonraki bakımda bakılacaklar not edilir", "verdict": "kategorize-yaz-anlat", "correct": true, "explain": "Bakımın çıktısı yapılan iş değil, üretilen bilgidir; bu yüzden kapanış kayıtla olur. Bulgular üç kategoriye ayrılır: 'şimdi giderilmeli' — güvenliği doğrudan etkileyen ya da bekledikçe pahalılaşan şeyler, yırtık körük ve belirgin boşluk gibi; 'takip edilmeli' — başlamış ama henüz sorun üretmemiş bulgular; 'iyi' — kontrol edildi ve normal bulundu. Üçüncü kategorinin yazılması gereksiz görünür ama değildir: bir sonraki bakımda karşılaştırma yapılabilmesi için o gün iyi olduğunun kayıtlı olması gerekir. Ölçülen boşluk değeri koşuluyla birlikte yazılır. Müşteriye anlatırken sıra önemlidir — önce güvenliği ilgilendirenler, sonra maliyet, sonra takip edilecekler; hepsi aynı aciliyetle anlatılırsa hiçbiri ciddiye alınmaz. Son olarak bir sonraki bakımda özellikle bakılacaklar not edilir, böylece o gün gelen usta nereye bakacağını bilir. Bu kayıt aynı zamanda aracın ikinci el değerini de destekleyen bir belgedir ve müşteriye bunun söylenmesi, bakımın değerini somutlaştırır." },
+          { "label": "Sözlü söylenir, yazılmaz", "verdict": "sozlu", "explain": "Karşılaştırma için kayıt şart." },
+          { "label": "Yalnız değişen parçalar yazılır", "verdict": "sadece-degisen", "explain": "İyi bulunanlar da yazılır; karşılaştırma çizgisi böyle oluşur." },
+          { "label": "Her bulgu aynı aciliyetle anlatılır", "verdict": "ayni-aciliyet", "explain": "Hepsi acil sunulursa hiçbiri ciddiye alınmaz." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "'İyi' bulgusunu da yaz. Bir sonraki bakımda karşılaştıracağın çizgi ondan oluşuyor."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Periyodik bakımda bulunan küçük bir rot başı boşluğunda ne yapılır?",
+        "a": "ayni-yontem-farkli-beklenti",
+        "options": [
+          { "verdict": "ayni-yontem-farkli-beklenti", "label": "Hemen parça değiştirilmez; bulgu 'takip edilmeli' olarak kaydedilir ve müşteriye anlatılır", "explain": "Kontrolün tekniği arıza teşhisiyle aynıdır ama beklenti farklıdır: burada henüz şikâyet üretmemiş bulgular aranır. Her küçük boşlukta parça değiştirmek gereksiz maliyet, görmezden gelmek ise bakımı anlamsız kılar. Doğru davranış üç kategoriye ayırmaktır — şimdi giderilmeli, takip edilmeli, iyi. Yırtık körük 'şimdi' kategorisidir çünkü bekleyen her gün mafsalı yer." },
+          { "verdict": "yapilmaz", "label": "Bakımda bu kontrol yapılmaz", "explain": "Temel maddelerden biri." },
+          { "verdict": "hep-degistir", "label": "Her boşlukta parça değiştirilir", "explain": "Gereksiz maliyet." },
+          { "verdict": "sikayet-varsa", "label": "Yalnız şikâyet varsa bakılır", "explain": "Bakımın amacı şikâyet öncesi." }
+        ]
+      },
+      {
+        "q": "Kutu bağlantısı gevşediğinde ne olur?",
+        "a": "baglanti-takoz-sizinti",
+        "options": [
+          { "verdict": "baglanti-takoz-sizinti", "label": "Direksiyon çevrildiğinde tık sesi ve boşluk hissi verir; kutu içi arızayla karıştırılır", "explain": "Kutu araca cıvatalarla ve çoğu araçta kauçuk takozlar üzerinden bağlanır. Bağlantı gevşediğinde ya da takoz ezildiğinde kutu gövdeye göre oynar ve tam olarak kutu içi boşluk gibi bir belirti üretir. Bu yüzden direksiyon oynatılırken kutunun gövdeye göre kımıldayıp kımıldamadığına elle bakılır — bakımda birkaç dakika süren, kutu açmayı gerektirmeyen bir kontrol." },
+          { "verdict": "sok", "label": "Kutu sökülüp içi kontrol edilir", "explain": "Bakımda kutu sökülmez." },
+          { "verdict": "sadece-sizinti", "label": "Yalnız sızıntıya bakılır", "explain": "Bağlantı ve takoz da kontrol edilir." },
+          { "verdict": "yok", "label": "Kutu bakımda değerlendirilmez", "explain": "Sık ve karıştırılan bir bulgu." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 26 mm ve 34 mm SENARYO okumalarıdır ve ikisi de aynı koşulda alınmıştır; istenen FARKTIR (8 mm) ve gösterilen şey kaydın yönlü kötüleşmeyi görünür kıldığıdır. Kabul edilebilir boşluk sınırı verilmiyor.",
+    "sourceRequired": "Boşluk sınırı, bağlantı sıkma torkları, bakım aralıkları ve muayene kriterleri bilinçle VERİLMEDİ; araca, üreticiye ve ülkeye özgüdür. Yırtık körüğün muayenede kusur sayılması genel bir eğilim olarak anıldı, mevzuat maddesi verilmedi.",
+    "kapsam": "Hidrolik sistemin periyodik bakımı bir sonraki ders. Ön düzen ölçümü Lastik ve Tekerlek alanında; burada yalnız boşluk giderilmeden ayara gidilmeyeceği belirtildi. EPS bakımı ayrı bir madde olarak işlenmiyor; elektronik kontroller teşhis derslerinde ele alındı.",
+    "reviewedByMechanic": false
+  }
+}

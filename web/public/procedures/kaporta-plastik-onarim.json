@@ -1,0 +1,177 @@
+{
+  "id": "kaporta.plastik-onarim",
+  "area": "kaporta",
+  "stage": 4,
+  "title": "Tampon ve Plastik Parça Onarımı",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 35,
+  "prerequisites": ["kaporta.kaynakli-parca"],
+  "learningGoals": [
+    "Plastik onarımın malzeme koduna bağlı olduğunu ve tahminle yapılamayacağını görmek",
+    "Çatlağın görünen ucunun gerçek ucu olmadığını bilmek",
+    "Esneyen bir parçada boya sisteminin de esnemesi gerektiğini anlamak"
+  ],
+
+  "safety": [
+    { "rule": "Plastik ısıtılırken ve zımparalanırken uygun solunum koruması ve havalandırma kullanılır", "why": "Isınan plastik ve zımpara tozu solunum yoluyla zarar verir; bazı plastikler ısındığında zararlı duman çıkarır", "blocksStart": true },
+    { "rule": "Tampon sökülmeden önce arkasındaki sensör, kamera, radar ve aydınlatma bağlantıları ayrılır", "why": "Bağlı kalan bir soket sökme sırasında kopar; ayrıca bazı sürücü destek birimleri sökülüp takıldıktan sonra ayar gerektirir ve bu iş yetkili birime aittir", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.sicak-hava-tabancasi", "label": "Sıcak hava tabancası", "required": true },
+    { "id": "tool.plastik-dolgu", "label": "Plastik dolgu ve yapıştırıcı", "required": true },
+    { "id": "tool.olcum-mastari", "label": "Ölçüm mastarı", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Tamponda çatlak var. Onarıma başlamadan önce arkasını çeviriyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.tampon-kaporta",
+        "question": "İlk bakılacak şey nedir?",
+        "options": [
+          { "label": "Malzeme kodu: plastiğin türü onarım yöntemini, kullanılacak dolguyu ve astarı belirler — kod okunmadan seçilen ürün ya tutmaz ya bir süre sonra kalkar", "verdict": "kod-once", "correct": true, "explain": "Malzeme dersinde gördüğün gibi 'plastik' tek bir malzeme değildir; farklı plastik aileleri farklı yüzey enerjisine, farklı ısı davranışına ve farklı kaynaklanabilirliğe sahiptir. Üretici bu yüzden çoğu tamponun iç yüzüne malzeme kodunu yazar ve o kod üç kararı birden belirler. Birincisi yöntem: bazı plastikler sıcak hava ve uygun dolgu çubuğuyla kaynaklanabilir; bazılarında iki bileşenli yapıştırıcıyla onarım tercih edilir. Yanlış yöntem seçildiğinde ya malzeme birleşmez ya birleşir gibi görünüp ilk zorlamada ayrılır. İkincisi ürün: dolgunun ve yapıştırıcının o plastik ailesine uygun olması gerekir; uyum tabloları ürünün kendi teknik belgesinde bulunur. Üçüncüsü hazırlık: bazı plastik aileleri boyanın doğal olarak tutunmadığı düşük yüzey enerjili malzemelerdir ve önce özel bir yapışma astarı ister — bu adım atlanınca boya günlerce değil aylarca sonra pul pul kalkar ve o zaman kimse sebebini bilmez. Kod okunamıyorsa ya da parça işaretsizse tahmin edilmez: üretici verisine bakılır. Bu ders hangi kodun hangi ürünle eşleştiğini vermiyor; o eşleşme markadan markaya değişir ve ürünün teknik belgesinde yazar." },
+          { "label": "Çatlağın uzunluğu", "verdict": "uzunluk", "explain": "Önemli ama yöntemi belirleyen malzeme kodudur." },
+          { "label": "Boyanın rengi", "verdict": "renk", "explain": "Renk sonraki aşamanın konusu." },
+          { "label": "Parçanın yaşı", "verdict": "yas", "explain": "Yaş bir etken ama yöntemi kod belirler." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Yanlış astarla boyanan tampon ilk yıkamada değil, aylar sonra pul pul kalkar. O gün kimse sebebini bilmez."
+    },
+    {
+      "id": 2,
+      "instruction": "Çatlağı iki taraftan ölçtün: dış yüzeyde 40 mm görünüyor, arka yüzeyde 65 mm devam ediyor. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.olcum-mastari",
+        "unit": "mm",
+        "acceptRange": [24, 26]
+      },
+      "camera": "kaporta",
+      "hint": "65 eksi 40.",
+      "teachingNote": "25 milimetre — yani çatlağın üçte birinden fazlası dışarıdan görünmüyor. Bu, plastik onarımda en pahalı hatanın kaynağıdır: görünen uca göre yapılan bir onarım, çatlağın gerçek ucunu açıkta bırakır ve parça esnedikçe çatlak oradan büyümeye devam eder. Birkaç ay sonra müşteri 'yaptığınız yerden yine çatladı' diye gelir; oysa çatlak onarılan yerden değil, hiç onarılmayan devamından ilerlemiştir. Bu yüzden plastik onarımın ilk adımı her zaman aynıdır: parça sökülür ve iki yüzü de incelenir. Arka yüzey genelde boyasız ve mat olduğu için çatlak orada daha net görünür; ışığı yandan tutmak ve parçayı hafifçe esnetmek gizli devamı ortaya çıkarır. İkinci ders, çatlağın ucunu durdurmaktır: pek çok uygulamada çatlağın ilerlemesini durdurmak için ucundan itibaren belirli bir hazırlık yapılır ve onarım o noktanın ötesine taşırılır. Üçüncü ders, onarımın iki yüzden birden yapılmasıdır — parça esnerken yük her iki yüzeye de biner; yalnız görünen yüzden yapılan bir onarım arka yüzü desteklemez. Bu ders hiçbir ürün için onarım genişliği, hazırlık ölçüsü ya da uygulanabilir çatlak boyu vermiyor; buradaki iki sayı senaryo okumasıdır."
+    },
+    {
+      "id": 3,
+      "instruction": "Onarım bölgesini hazırlayacaksın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.zimpara-bolgesi",
+        "question": "Plastik yüzey nasıl hazırlanır?",
+        "options": [
+          { "label": "Yüzey önce temizlenir, sonra zımparalanır ve tekrar temizlenir: plastikte kalıp ayırıcı ve silikon kalıntıları bulunur, zımparadan önce alınmazsa zımpara onları yüzeye yedirir ve hiçbir ürün tutmaz", "verdict": "temizle-zimpara-temizle", "correct": true, "explain": "Plastik yüzey hazırlığının en kritik ayrıntısı sıradadır ve çoğu zaman yanlış yapılır. Plastik parçalar kalıptan çıkarken kalıp ayırıcı madde kullanılır ve bu maddenin kalıntısı yüzeyde kalır; ayrıca kullanım sırasında yüzeye silikon içeren temizlik ve parlatma ürünleri sürülmüş olabilir. Bunların ortak özelliği, yapışmayı öldürmeleridir. Eğer yüzey önce zımparalanırsa, zımpara bu kalıntıları temizlemez — tam tersine açtığı çiziklerin içine yedirir ve artık hiçbir temizleyici oraya ulaşamaz. Sonuç, kusursuz görünen ama birkaç ay içinde kalkan bir onarımdır. Doğru sıra bu yüzden şudur: önce uygun bir temizleyiciyle yüzeydeki kalıntılar alınır, sonra zımparalanır, sonra tekrar temizlenerek zımpara tozu ve yeni açığa çıkan kalıntılar uzaklaştırılır. İkinci ayrıntı zımparanın kendisidir: plastik metalden yumuşaktır ve fazla agresif bir zımpara derin çizikler bırakır; o çizikler dolgu ve astarın altında iz olarak kalır. Üçüncü ayrıntı, onarım bölgesinin kenarının yumuşak bir geçişle açılmasıdır — dik bir kenar, dolgunun sınırında bir hat üretir ve o hat boyadan sonra görünür. Hangi temizleyicinin kullanılacağı ve hangi zımpara kademesinin uygun olduğu ürünün teknik belgesinde yazar." },
+          { "label": "Doğrudan zımparalanır", "verdict": "dogrudan-zimpara", "explain": "Zımpara kalıntıyı temizlemez, yüzeye yedirir." },
+          { "label": "Yalnız silinir, zımpara gerekmez", "verdict": "sil", "explain": "Dolgunun tutunması için yüzey açılmalıdır." },
+          { "label": "Su ile yıkanır, yeterlidir", "verdict": "su", "explain": "Su kalıp ayırıcı ve silikon kalıntısını almaz." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Önce temizle, sonra zımparala, sonra tekrar temizle. Ters sıra kalıntıyı çiziğin içine yedirir."
+    },
+    {
+      "id": 4,
+      "instruction": "Onarım yapıldı. Sıra boyaya geliyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.boya-tabancasi",
+        "question": "Tampon boyası sac panelden nasıl ayrılır?",
+        "options": [
+          { "label": "Sistem esnek olmalıdır: tampon çarpmada esneyerek işini yapan bir parçadır, bu yüzden astar, macun ve boya katmanının da esnemesi gerekir — sert bir sistem ilk esnemede çatlar", "verdict": "esnek-sistem", "correct": true, "explain": "Bir sac panel çarpmada ezilir ve o hâlde kalır; bir tampon ise esner, darbeyi yumuşatır ve çoğu zaman eski hâline döner. Bu, tampona bir parça olarak avantaj sağlar ama üzerindeki boya sistemine bir şart koyar: sistem de esnemek zorundadır. Sert bir sistem — sac için tasarlanmış bir macun, esneklik katkısı olmayan bir astar ya da vernik — parça ilk kez esnediğinde çatlar ve o çatlaklar ince ağ biçiminde yüzeye yayılır. Genelde önce fark edilmez; birkaç ay sonra araç yıkanırken ya da güneşte durduğunda görünür hâle gelir. Bu yüzden plastik parçalarda üç ayrı ürün konusu vardır ve üçü de o parça için uygun seçilmelidir: yapışma astarı — düşük yüzey enerjili plastiklerde boyanın tutunmasını sağlar; esneklik katkısı — sistemin parça ile birlikte esnemesini sağlar; ve uygun dolgu — sac macunu plastikte kullanılmaz, çünkü ne yapışması ne esnekliği uygundur. Bir dördüncü konu renktir ve tampon burada da sac panelden ayrılır: aynı renk kodu bile olsa plastik bir yüzey ile metal bir yüzeyin ışığı yansıtması farklıdır, bu yüzden tampon ile çamurluğun yan yana geldiği yerde renk uyumu ayrıca kontrol edilir. Bunu renk ve kod dersinde ayrıntısıyla göreceksin. Hangi ürünün hangi oranla ve hangi koşulda kullanılacağı ürünün kendi teknik belgesinde yazar." },
+          { "label": "Fark yoktur, aynı sistem kullanılır", "verdict": "ayni", "explain": "Sert sistem ilk esnemede çatlar." },
+          { "label": "Tampon daha kalın boyanır", "verdict": "kalin", "explain": "Kalınlık esnekliği vermez; katkı ve ürün seçimi belirler." },
+          { "label": "Tampon hiç astarlanmaz", "verdict": "astarsiz", "explain": "Düşük yüzey enerjili plastikte yapışma astarı şarttır." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Tampon esneyerek işini yapıyor; üstündeki sistem de esnemek zorunda. Sert sistem ağ biçiminde çatlar."
+    },
+    {
+      "id": 5,
+      "instruction": "Tampon sökülecek. Arkasında park sensörleri ve bir radar birimi var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.tampon-kaporta",
+        "question": "Bu bileşenler için ne yapılır?",
+        "options": [
+          { "label": "Soketleri ayrılır ve parça üzerinden dikkatle sökülür; bazı sürücü destek birimleri yeniden takıldıktan sonra ayar gerektirir ve bu iş yetkili birime aittir — kapsamı baştan söylemek gerekir", "verdict": "ayar-gerekir", "correct": true, "explain": "Modern tamponlar artık yalnız bir kapak değil, üzerinde ölçüm yapan bileşenlerin taşıyıcısıdır: park sensörleri, radar birimleri, kameralar, bazı araçlarda ısı ve mesafe algılayıcıları. Bunların ortak özelliği, konumlarının hassas olmasıdır — bir radar biriminin bakış açısı birkaç derece kaydığında sistem yanlış mesafe okur ve bu, sürücü destek işlevlerinin yanlış çalışması demektir. Bu yüzden tampon işinde üç kural vardır. Birincisi söküm: soketler ayrılmadan tampon çekilmez, aksi hâlde kablo gerilir ve soket ya da yuvası kırılır. İkincisi konum: bileşenler yerlerine aynı biçimde ve aynı sıkılıkta takılır; ara pullar, süngerler ve konum ayarlayıcılar atılmaz. Üçüncüsü ve en önemlisi ayar: bazı sürücü destek birimleri sökülüp takıldıktan sonra kalibrasyon ister ve bu işlem özel cihaz ve ortam gerektirir; bu alanın kapsamı dışındadır ve yetkili birime bırakılır. Bunun ticari sonucu şudur ve işin başında söylenmelidir: 'tamponunuzu onarabilirim ama arkasındaki radarın ayarı için şu yere gitmeniz gerekecek' cümlesi baştan kurulur. Sonradan söylendiğinde müşteri hem beklemediği bir masrafla hem beklemediği bir gecikmeyle karşılaşır. Bir de boya konusu var: bazı bileşenlerin önüne denk gelen bölgelere boya uygulaması sınırlıdır, çünkü kalın ya da metalik katman sinyali etkileyebilir; bu şart ürün ve araca özgüdür ve kılavuzdan okunur." },
+          { "label": "Sökülüp takılır, ayar gerekmez", "verdict": "ayar-yok", "explain": "Bazı birimler kalibrasyon ister ve bu özel cihaz gerektirir." },
+          { "label": "Tampon sensörlerle birlikte çekilir", "verdict": "birlikte", "explain": "Soketler gerilir ve kırılır." },
+          { "label": "Sensörler önemsizdir, boyayla kapatılabilir", "verdict": "boyayla", "explain": "Boya bazı birimlerin sinyalini etkiler; bölge şartlıdır." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Radarın ayarı gerekiyorsa bu işin başında söylenir. Sonradan söylenen her şart, müşteri için sürpriz masraftır."
+    },
+    {
+      "id": 6,
+      "instruction": "Tampon parçalanmış; birden fazla kırık ve eksik parça var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.gocuk-bolgesi",
+        "question": "Onarım mı, değişim mi?",
+        "options": [
+          { "label": "Karar üç şeye bakar: onarımın süresi ve maliyeti değişimden düşük mü, parça montaj noktalarından ve bağlantı kulakçıklarından zarar görmüş mü, ve üzerinde sürücü destek bileşeni taşıyor mu", "verdict": "uc-girdi", "correct": true, "explain": "Plastik onarım, doğru işte çok ekonomik bir çözümdür ve yeni parçanın maliyetiyle kıyaslandığında müşteriye ciddi tasarruf sağlar; ama sınırsız değildir. Karar üç girdiye bakar. Birincisi ekonomi: geniş bir alanda çok sayıda kırığı olan bir tamponun onarımı saatler alır ve harcanan işçilik yeni parçanın fiyatını geçebilir; üstelik sonuç da tek kırıklı bir onarım kadar iyi olmaz. İkincisi yapı: tamponun asıl işlevi darbeyi karşılamak ve gövdeye bağlı kalmaktır. Kırık yüzeydeyse onarılabilir; ama montaj kulakçıkları, kılavuz pimleri ve bağlantı noktaları kırılmışsa parça artık yerine sağlam oturmaz — onarılsa bile fuga tutmaz, titreşimde ses yapar ve zamanla yeniden ayrılır. Bu bölgeler onarımın en zorlandığı yerlerdir çünkü sürekli yük altındadırlar. Üçüncüsü teknoloji: üzerinde radar, kamera ya da sensör taşıyan bir tamponda deforme olmuş bir yuva, bileşenin konumunu değiştirir — bu ölçülemez ve düzeltildiği varsayılamaz. Bu üçü değerlendirilip müşteriye açık bir tablo sunulur: onarımın ne kadar süreceği, ne kadar tutacağı ve sonucun neye benzeyeceği; değişimin ise ne kadar tutacağı. Karar müşterinindir ama bilgi ustanındır. Ve burada da aynı cümle kurulmaz: 'hiç belli olmaz'. Onarılmış bir tampon, iyi yapılmış olsa bile yeni bir parça değildir." },
+          { "label": "Her zaman onarılır, plastik onarılabilir", "verdict": "her-zaman", "explain": "Montaj noktaları kırıksa parça yerine sağlam oturmaz." },
+          { "label": "Her zaman değişir, onarım tutmaz", "verdict": "her-zaman-degis", "explain": "Doğru işte onarım ekonomik ve dayanıklıdır." },
+          { "label": "Müşteri ne isterse", "verdict": "musteri", "explain": "Karar müşterinin ama bilgi ustanın; tablo açıkça sunulur." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Karar müşterinin, bilgi ustanın. Onarılmış bir tampon iyi yapılmış olsa bile yeni parça değildir."
+    },
+    {
+      "id": 7,
+      "instruction": "Üç malzeme grubunu da tamamladın: cıvatalı sac, kaynaklı sac, plastik.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.kaput-kaporta",
+        "question": "Üçünün ortak kuralı nedir?",
+        "options": [
+          { "label": "Yöntem malzemeye ve bağlantı türüne göre seçilir, ürün o malzemeye uygun olmalıdır ve iş bittiğinde koruma geri kurulur — üçünde de sonuç teslimde değil aylar sonra ortaya çıkar", "verdict": "ortak-kural", "correct": true, "explain": "Bu aşamanın üç dersi farklı malzemeleri anlattı ama aynı üç ilkeyi tekrarladı. Birincisi, yöntemi sen değil iş seçer: cıvatalıysa ayar, kaynaklıysa kılavuz, plastikse malzeme kodu. 'Elimde ne varsa onunla' başlamak üçünde de aynı sonucu verir — bugün duran, yarın durmayan bir iş. İkincisi, ürün malzemeye uygun olmalıdır: sac macunu plastikte, sert sistem esneyen bir parçada, yanlış yapıştırıcı yanlış plastik ailesinde tutmaz; uyum ürünün teknik belgesinde yazar ve tahmin edilmez. Üçüncüsü, koruma işin son adımıdır ve en çok atlanan adımdır: sacda astar ve sızdırmazlık, plastikte yapışma astarı ve esnek sistem. Ve üçünün ortak acı gerçeği şudur — bu adımların yapılıp yapılmadığı teslim anında hiçbir biçimde anlaşılmaz. Araç yıkanmış, parlatılmış, fugası düzgün ve rengi tutmuş hâlde çıkar. Fark aylar ya da yıllar sonra ortaya çıkar: kalkan bir boya, çatlayan bir tampon, kabaran bir kenar, gevşeyen bir bağlantı. O gün kimse geriye dönüp o onarımı hatırlamaz — ama müşteri hatırlar ve bir daha gelmez. Sonraki aşamada yüzey hazırlığına geçiyoruz; orada da aynı ilke geçerli olacak: görünen katman değil, altındaki hazırlık sonucu belirliyor." },
+          { "label": "Üçünde de en hızlı yöntem seçilir", "verdict": "hizli", "explain": "Hız bir ölçüt değil; yöntemi malzeme ve bağlantı belirler." },
+          { "label": "Üçünde de sonuç teslimde belli olur", "verdict": "teslimde", "explain": "Aksine, üçünde de fark aylar sonra ortaya çıkar." },
+          { "label": "Üçü de aynı ürünlerle çalışılır", "verdict": "ayni-urun", "explain": "Ürün malzemeye uygun seçilir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Üç malzeme, üç yöntem, tek kural: yöntemi iş seçer, ürün malzemeye uyar, koruma en sonda geri kurulur. Sırada yüzey hazırlığı."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Plastik yüzey önce zımparalanıp sonra temizlenirse ne olur?",
+        "a": "temizle-zimpara-temizle",
+        "options": [
+          { "verdict": "temizle-zimpara-temizle", "label": "Zımpara, kalıp ayırıcı ve silikon kalıntılarını temizlemez — açtığı çiziklerin içine yedirir ve artık hiçbir temizleyici oraya ulaşamaz; sonuç birkaç ay içinde kalkan bir onarımdır", "explain": "Doğru sıra: önce temizle, sonra zımparala, sonra tekrar temizle. Plastik metalden yumuşaktır, agresif zımpara derin çizik bırakır ve o çizikler dolgunun altında iz olarak kalır. Onarım bölgesinin kenarı yumuşak geçişle açılır; dik kenar boyadan sonra hat olarak görünür." },
+          { "verdict": "dogrudan-zimpara", "label": "Sorun olmaz", "explain": "Kalıntı çiziğe yedirilir." },
+          { "verdict": "sil", "label": "Zımpara zaten gerekmez", "explain": "Dolgunun tutunması için yüzey açılmalıdır." },
+          { "verdict": "su", "label": "Su ile yıkamak yeterlidir", "explain": "Su silikon kalıntısını almaz." }
+        ]
+      },
+      {
+        "q": "Tampon üzerinde radar ve park sensörü var. Sökümde ne söylenir?",
+        "a": "ayar-gerekir",
+        "options": [
+          { "verdict": "ayar-gerekir", "label": "Bazı sürücü destek birimlerinin sökülüp takıldıktan sonra kalibrasyon istediği ve bunun özel cihaz gerektirdiği işin BAŞINDA söylenir; iş yetkili birime aittir", "explain": "Bir radar biriminin bakış açısı birkaç derece kayarsa sistem yanlış mesafe okur. Soketler ayrılmadan tampon çekilmez, ara pullar ve konum ayarlayıcılar atılmaz. Bazı bileşenlerin önüne denk gelen bölgelerde boya uygulaması da sınırlıdır ve şart kılavuzdan okunur." },
+          { "verdict": "ayar-yok", "label": "Ayar gerekmez", "explain": "Bazı birimler kalibrasyon ister." },
+          { "verdict": "birlikte", "label": "Tampon sensörlerle birlikte çekilir", "explain": "Soketler gerilir ve kırılır." },
+          { "verdict": "boyayla", "label": "Boyayla kapatılabilir", "explain": "Boya sinyali etkileyebilir." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2'deki 40 mm ve 65 mm SENARYO okumalarıdır; istenen FARKTIR (25 mm). Ders hiçbir parça için onarılabilir çatlak boyu ya da hazırlık ölçüsü iddia etmiyor.",
+    "sourceRequired": "Plastik malzeme kodu ile ürün eşleşme tabloları, yapışma astarı ve esneklik katkısı ürün adları ve oranları, zımpara kademeleri, temizleyici tipleri, onarım genişliği ve çatlak ucu hazırlığı ölçüleri, sürücü destek birimlerinin kalibrasyon şartları ve sensör önü boya sınırlamaları bilinçle VERİLMEDİ; hepsi araca ve ürüne özgüdür ve üreticinin kılavuzundan ile ürünün teknik belgesinden okunur.",
+    "kapsam": "Sürücü destek birimlerinin kalibrasyonu KAPSAM DIŞIDIR ve yetkili birime bırakılır; ders sökümü, onarımı ve sınırı öğretiyor.",
+    "kaynak": "Bu alan kullanıcının açık talebiyle eklendi (talep birebir: 'birde alanlara kaportayı ekleyelim'); konu başlıkları MEB Otomotiv Gövde ve Boya dalının çerçevesini takip ediyor, kazanım numarası iddiası yok.",
+    "reviewedByMechanic": false
+  }
+}

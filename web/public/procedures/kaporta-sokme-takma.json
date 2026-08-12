@@ -1,0 +1,178 @@
+{
+  "id": "kaporta.sokme-takma",
+  "area": "kaporta",
+  "stage": 2,
+  "title": "Söküm Sırası: Hangi Parça Önce, Hangi Bağlantı Sonra",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 35,
+  "prerequisites": ["kaporta.olcme"],
+  "learningGoals": [
+    "Söküm sırasının montaj sırasını ve fuga ayarını belirlediğini görmek",
+    "Sökmeden önce mevcut konumun işaretlenmesinin neden zaman kazandırdığını bilmek",
+    "Tek kullanımlık bağlantı elemanlarının ve kablo/hortum ayrımının sınırını tanımak"
+  ],
+
+  "safety": [
+    { "rule": "Söküm öncesi enerji kesilir; hava yastığı ve gergi birimi bulunan bölgelerde çalışılmaz", "why": "Bu birimlerin sökümü, taşınması ve depolanması bu alanın kapsamı dışındadır ve yetkili birime bırakılır", "blocksStart": true },
+    { "rule": "Ağır paneller — kaput, kapı, bagaj kapağı — tek başına sökülüp taşınmaz", "why": "Denge kaybında hem panel hem çevresindeki paneller hasar görür, ayrıca sıkışma ve düşme riski vardır", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.tork-anahtari", "label": "Tork anahtarı", "required": true },
+    { "id": "tool.plastik-sokme-spatulasi", "label": "Plastik sökme spatulası", "required": true },
+    { "id": "tool.isaret-kalemi", "label": "İşaret kalemi", "required": true },
+    { "id": "tool.parca-kabi", "label": "Parça kabı ve etiket", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Çamurluğu sökeceksin. Cıvataları görüyorsun, henüz dokunmadın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-camurluk",
+        "question": "Cıvataları gevşetmeden önce ne yapılır?",
+        "options": [
+          { "label": "Parçanın mevcut konumu işaretlenir: cıvata başının etrafı ya da parçanın kenar hizası kalemle çizilir — geri takarken aynı yere oturtmak fuga ayarını baştan büyük ölçüde çözer", "verdict": "isaretle", "correct": true, "explain": "Cıvatalı dış paneller çoğu zaman deliklerinden biraz oynayabilecek biçimde tasarlanır; üretici bu boşluğu fugayı ayarlayabilmek için bırakır. Bu, montajda bir kolaylık ama sökümde bir tuzaktır: parçayı hiç işaretlemeden sökersen, geri taktığında o boşluk içinde sonsuz sayıda 'olabilecek' konum vardır ve doğru olanı bulmak saatler alır. İşaretlemek ise otuz saniyedir. Yöntem basittir: cıvata başının etrafından ince bir kalemle daire çizilir ya da parçanın kenarının komşusuyla hizası işaretlenir. Geri takarken parça o işaretlere oturtulur ve fuga büyük ölçüde eski hâline döner; kalan ince ayar kolaydır. Bu adımın ikinci faydası teşhistir: fuga zaten bozuksa ve sen sökmeden önce işaretlemişsen, geri taktığında aynı bozukluğu görürsün — bu, bozukluğun panelde değil boşlukta olduğunu kanıtlar. Ölçme dersinde öğrendiğin çapraz ölçü bilgisiyle birleşince tablo tamamlanır. Bir uyarı: hasarlı parçanın işareti, hasarın kendisini de içerir; darbe almış bir çamurluğun eski konumu zaten yanlış olabilir. Bu yüzden işaret tek başına yeterli değildir, ölçümle birlikte okunur. Ve işaret kalıcı bir iz bırakmamalıdır — boyanın üzerine kalıcı bir çizik atmak, sonradan görünen bir kusurdur." },
+          { "label": "Doğrudan sökülür, montajda ayarlanır", "verdict": "dogrudan", "explain": "Ayar arayışı saatler alır; işaretlemek otuz saniyedir." },
+          { "label": "Fotoğraf çekmek yeterlidir", "verdict": "fotograf", "explain": "Fotoğraf faydalı ama milimetrik konumu vermez." },
+          { "label": "Cıvatalar tamamen sökülüp sonra bakılır", "verdict": "sok-bak", "explain": "Sökülünce referans kaybolur." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "İşaretlemek otuz saniye, işaretlememek saatler. Sökmeden önceki konum en ucuz referanstır."
+    },
+    {
+      "id": 2,
+      "instruction": "Çamurluğu geri taktın. Fuga aralığını iki uçta ölçtün: 4,4 mm ve 3,1 mm. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.olcum-mastari",
+        "unit": "mm",
+        "acceptRange": [1.2, 1.4]
+      },
+      "camera": "kaporta",
+      "hint": "4,4 eksi 3,1.",
+      "teachingNote": "1,3 milimetrelik bir fuga eğikliği, iyi bir montajda kabul edilmez ve düzeltilmesi genelde kolaydır — çünkü henüz cıvatalar tam sıkılmamıştır. Bu ölçümün asıl dersi sıradadır: fuga ayarı, cıvatalar sıkılmadan önce yapılır. Doğru akış şudur — parça yerine oturtulur, cıvatalar elle takılır ama sıkılmaz, parça işaretlere ve komşu panellere göre hizalanır, fuga iki uçtan ölçülür, gerekiyorsa kaydırılır ve ancak her şey yerine oturduğunda cıvatalar sırayla ve uygun torkla sıkılır. Tersini yapmak — önce sıkıp sonra 'bir tarafından zorlayarak' düzeltmeye çalışmak — iki şeyi birden bozar: parçanın oturduğu yüzeyde boya zedelenir ve cıvata deliği ovalleşir; ovalleşmiş bir delik bir daha güvenilir biçimde sabit durmaz. İkinci ders sıra: cıvatalar rastgele değil, parçayı yerinde tutan referans noktadan başlayarak sıkılır ki parça sıkma sırasında kaymasın. Üçüncü ders kontrol: fuga ölçüldükten sonra kapı ya da kaput birkaç kez açılıp kapatılır — statik olarak doğru duran bir parça, hareket ettiğinde sürtebilir. Kabul edilebilir fuga aralığı ve sıkma torkları araca özgüdür; bu ders bir değer iddia etmiyor, buradaki iki sayı senaryo okumasıdır."
+    },
+    {
+      "id": 3,
+      "instruction": "Kapıyı sökeceksin. Kapıda kablo demeti, kilit ve cam mekanizması var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.on-kapi-paneli",
+        "question": "Söküm hangi sırayla ilerler?",
+        "options": [
+          { "label": "Dıştan içe ve bağlantılardan gövdeye doğru: önce iç döşeme, sonra elektrik soketleri ve kablo geçişi ayrılır, sonra kapı desteklenerek menteşe cıvataları sökülür — kablo bağlıyken kapı asla serbest bırakılmaz", "verdict": "distan-ice", "correct": true, "explain": "Söküm sırası bir alışkanlık değil, hasarı önleyen bir mantıktır ve iki ilkeye dayanır. Birincisi, önce erişimi açan parçalar sökülür: iç döşeme açılmadan kablo soketine ve mekanizmaya ulaşamazsın. İkincisi, ağırlığı taşıyan bağlantı en sona bırakılır — çünkü o söküldüğü anda parça serbest kalır ve o anda üzerinde başka bir bağlantı kalmamalıdır. En sık yapılan hata tam burada olur: menteşe cıvataları sökülür, kapı biraz açılır ve içerideki kablo demeti gerilir. Sonuç ya kopmuş bir kablo, ya sıyrılmış yalıtım, ya da soketin gövde tarafındaki yuvasının kırılmasıdır. Üçü de o an fark edilmez; kapı takılır, her şey normal görünür ve birkaç gün sonra cam çalışmaz ya da ayna ölür. Aynı mantık ters yönde montaj için de geçerlidir: kapı önce menteşeye alınır ve desteklenir, sonra kablo geçirilir ve soket takılır, en son iç döşeme kapatılır. Bir de ağırlık meselesi vardır: kapı, kaput ve bagaj kapağı tek kişinin rahatça yöneteceği parçalar değildir; iki kişi ya da uygun bir destekle çalışılır. Tek başına sökülen bir kapı, düşerken hem kendini hem yanındaki çamurluğu ve eşiği hasarlar — yani bir panellik iş üç panellik işe dönüşür." },
+          { "label": "Önce menteşe cıvataları, sonra kablolar", "verdict": "once-mentese", "explain": "Menteşe söküldüğü an kapı serbest kalır ve kablo gerilir." },
+          { "label": "Sıra önemli değildir", "verdict": "sirasiz", "explain": "Sıra kablo kopması ve panel hasarını önler." },
+          { "label": "Kapı camla birlikte tek parça sökülür", "verdict": "camla", "explain": "Cam ve mekanizmanın durumu ayrıca değerlendirilir; asıl mesele bağlantı sırası." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Ağırlığı taşıyan bağlantı en sona bırakılır. Menteşe söküldüğünde üzerinde başka bağlantı kalmamalıdır."
+    },
+    {
+      "id": 4,
+      "instruction": "Bir plastik kaplamayı sökeceksin; kenarında gizli klipsler var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.tampon-kaporta",
+        "question": "Klipsli parça nasıl sökülür?",
+        "options": [
+          { "label": "Klipsin yeri ve yönü bilinerek, plastik spatulayla ve klipse en yakın noktadan kaldırarak — parçanın ortasından çekmek klipsi değil parçayı kırar", "verdict": "klips-noktasi", "correct": true, "explain": "Klips, iki parçayı birbirine tutturan yaylı bir bağlantıdır ve belirli bir yönde ayrılmak üzere tasarlanmıştır. Doğru sökümün iki şartı vardır: klipsin nerede olduğunu bilmek ve kuvveti tam o noktaya uygulamak. Kuvvet klipse yakın uygulandığında bağlantı temiz biçimde açılır; parçanın ortasından ya da klipsten uzak bir yerden çekildiğinde ise plastik önce eğilir, sonra klipsin dibinden kırılır. Kırılan yer genelde parçanın kendisidir — klips değil, klipsin oturduğu kulakçık — ve o kulakçık kırıldığında parça bir daha oraya tam oturmaz; sonuç, aylar boyunca sürecek bir tıkırtı sesi olur. Aletin cinsi de önemlidir: metal tornavidayla klips açmak boyayı çizer ve plastiği ezer; bu iş için ince, esnek plastik spatula kullanılır. Soğuk hava işi zorlaştırır — plastik soğukta kırılganlaşır, bu yüzden çok soğuk bir ortamda klipsli parça sökmek risklidir. Son olarak klipsin kendisi de bir sarf malzemesidir: sökümde deforme olmuş, ağzı açılmış ya da çatlamış bir klips geri takılmaz, yenisiyle değişir. Bir avuç klipsin maliyeti, geri gelen bir tıkırtı şikâyetinin maliyetinin yanında hiçbir şeydir. Hangi parçada kaç klips olduğu ve nereden ayrıldığı araca özgüdür; iş öncesi bakılır." },
+          { "label": "Ortasından kuvvetle çekilir", "verdict": "orta", "explain": "Klipsten uzak kuvvet parçanın kulakçığını kırar." },
+          { "label": "Tornavidayla kaldırılır", "verdict": "tornavida", "explain": "Metal alet boyayı çizer ve plastiği ezer." },
+          { "label": "Klipsler sökülüp geri takılır, değişmeye gerek yok", "verdict": "tekrar-kullan", "explain": "Deforme olmuş klips tam tutmaz ve tıkırtı üretir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Kırılan klips değil, klipsin oturduğu kulakçıktır. Ve o kulakçık aylarca sürecek bir tıkırtıya dönüşür."
+    },
+    {
+      "id": 5,
+      "instruction": "Söktüğün cıvataların bazıları üzerinde kuruyup katılaşmış bir kaplama var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.tasiyici-ayak",
+        "question": "Bu cıvatalar geri kullanılır mı?",
+        "options": [
+          { "label": "Bazıları kullanılmaz: kaplamalı, gerdirilerek sıkılan ya da üretici tarafından tek kullanımlık tanımlanan bağlantı elemanları sökülünce değişir — hangisinin tek kullanımlık olduğu kılavuzda yazar", "verdict": "tek-kullanimlik", "correct": true, "explain": "Bütün cıvatalar aynı değildir. Bir kısmı sıradan bağlantı elemanıdır ve sökülüp takılabilir. Bir kısmı ise belirli bir davranış göstermek üzere üretilmiştir ve bu davranış bir kez kullanılır. Üzerinde kuruyup katılaşmış kaplama bulunanlar bunlardandır: o kaplama, cıvatanın kendiliğinden gevşemesini önleyen bir kilitleme maddesidir ve bir kez sıkılıp söküldüğünde işlevini kaybeder; aynı cıvata geri takıldığında aynı tutma gücünü vermez. Bir başka grup, sıkılırken kalıcı biçimde uzayacak şekilde tasarlanmış olanlardır; bunlarda hedef belirli bir tork değil belirli bir gerilmedir ve cıvata bir kez uzadıktan sonra ikinci kez aynı gerilmeyi vermez. Böyle bir cıvatayı geri kullanmak, bağlantının hesaplanan kuvvetle sıkılmadığı anlamına gelir — ve bu, taşıyıcı bölgelerde doğrudan bir güvenlik konusudur. Pratik kural şudur: hangi bağlantı elemanının tek kullanımlık olduğu tahmin edilmez, kılavuzdan okunur; şüphe varsa yenisi takılır, çünkü bir cıvatanın bedeli her zaman riskin bedelinden azdır. Bununla birlikte sıkma torkları ve varsa açı değerleri de kılavuzdan alınır — 'elle sıkarım, tutar' bu alanda kabul edilmez. Bu ders hiçbir araç için tork, açı ya da tek kullanımlık eleman listesi vermiyor." },
+          { "label": "Hepsi geri kullanılır", "verdict": "hepsi", "explain": "Kaplamalı ve gerdirilerek sıkılan elemanlar işlevini kaybeder." },
+          { "label": "Kaplama temizlenip kullanılır", "verdict": "temizle", "explain": "Kilitleme işlevi geri gelmez." },
+          { "label": "Hiçbiri kullanılmaz, hepsi değişir", "verdict": "hicbiri", "explain": "Sıradan bağlantı elemanları kullanılabilir; ayrım kılavuzdan okunur." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Bir cıvatanın bedeli her zaman riskin bedelinden az. Şüphe varsa yenisi takılır."
+    },
+    {
+      "id": 6,
+      "instruction": "Sökülen parçalar ve bağlantı elemanları tezgâhta duruyor; iş üç güne yayılacak.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.zimpara-bolgesi",
+        "question": "Söküm sırasında düzen neden işin bir parçası?",
+        "options": [
+          { "label": "Parçalar hangi bölgeden çıktıysa ayrı ayrı ve etiketli saklanır: karışan cıvatalar yanlış yere takılır, kaybolan bir klips işi bekletir ve üst üste yığılan paneller birbirini çizer", "verdict": "duzen", "correct": true, "explain": "Bu, teknik görünmeyen ama işin süresini ve kalitesini en çok belirleyen alışkanlıklardan biridir. Üç ayrı sorunu birden önler. Birincisi karışma: bir araçta farklı uzunlukta ve farklı özellikte çok sayıda cıvata vardır ve dışarıdan bakınca birbirine benzerler. Yanlış yere takılan uzun bir cıvata arkadaki bir parçayı deler ya da bir kablo demetine dayanır; kısa olan ise yeterince diş tutmaz ve zamanla gevşer. Bu yüzden bağlantı elemanları söküldükleri bölgeye göre ayrı kaplarda ve etiketli tutulur. İkincisi kayıp: küçük bir klips ya da bir somun kaybolduğunda iş, o parça temin edilene kadar bekler — üç günlük iş bir haftaya çıkar ve araç atölyede yer kaplar. Üçüncüsü hasar: sökülen paneller üst üste konduğunda birbirlerini çizer ve o çizikler onarım listesine sonradan eklenir; oysa panel geldiğinde sağlamdı. Paneller yumuşak bir yüzeyde, dik ve ayrı ayrı durur. Bir dördüncü fayda daha var ve ustalıkla ilgilidir: düzenli bir söküm, montajın haritasıdır. Parçaları çıkış sırasına göre dizmek, geri takarken sırayı hatırlamayı gereksiz kılar — sıra zaten tezgâhta durur. Bu, uzun süren ve arada başka işe geçilen işlerde kritik hâle gelir, çünkü üç gün sonra hiçbir usta neyi nereden söktüğünü tam hatırlamaz." },
+          { "label": "Düzen kişisel bir tercihtir", "verdict": "tercih", "explain": "Karışan bağlantı elemanı yanlış yere takılır; sonuç teknik bir hatadır." },
+          { "label": "Hepsi tek kapta toplanabilir", "verdict": "tek-kap", "explain": "Benzer görünen elemanlar karışır ve yanlış yere gider." },
+          { "label": "Paneller üst üste konulabilir", "verdict": "ust-uste", "explain": "Birbirlerini çizerler ve iş listesi büyür." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Düzenli söküm montajın haritasıdır. Üç gün sonra hiçbir usta neyi nereden söktüğünü tam hatırlamaz."
+    },
+    {
+      "id": 7,
+      "instruction": "Söküm ve montaj mantığını kurdun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.bagaj-kapagi",
+        "question": "Montaj sırası neden sökümün tersi olmak zorunda değil?",
+        "options": [
+          { "label": "Çünkü montajda ek bir şart var: parçalar sıkılmadan önce birlikte hizalanır — bazı bağlantılar diğerleri ayarlanana kadar gevşek bırakılır ve sıkma en sona kalır", "verdict": "hizalama-once", "correct": true, "explain": "Söküm tek yönlü bir iştir: bağlantıyı çözersin ve parça gelir. Montaj ise iki işi birden yapar — parçayı yerine koymak ve doğru konuma oturtmak. Bu ikincisi, sırayı sökümün basit tersi olmaktan çıkarır. Uygulamada akış şöyledir: parça yerine alınır, bütün bağlantıları elle takılır ama hiçbiri sıkılmaz, komşu panellerle birlikte hizalanır, fuga iki uçtan ölçülür, gerekiyorsa kaydırılır ve ancak bütün geometri oturduğunda sıkma yapılır. Yani bir panel bazen kendisinden sonra takılacak komşusunun hizasını beklemek zorundadır — çünkü fuga tek bir parçanın değil, iki parçanın ortak işidir. Bunun bir sonucu da şudur: bir bölgede birden çok panel değişiyorsa hepsi gevşek takılıp topluca hizalanır; teker teker sıkarak ilerlemek, sonuncusunun yerine hiç oturmamasıyla biter. Sıkma aşamasının kendi kuralları da vardır — sıra, tork ve gerekiyorsa açı kılavuzdan okunur ve tek kullanımlık elemanlar yenilenir. En sonda ise kontrol gelir ve iki adımdır: hareketli parçalar birkaç kez açılıp kapatılır, sonra fuga yeniden ölçülür. Bir de görünmeyen adım: söküm sırasında zedelenen ya da çıplak kalan her yüzey korunur — korozyon dersinin kuralı burada da geçerlidir ve montajın son adımı çoğu zaman budur." },
+          { "label": "Aynıdır, sadece tersten yapılır", "verdict": "ters", "explain": "Montajda hizalama şartı vardır; sıkma en sona kalır." },
+          { "label": "Montajda sıra önemsizdir", "verdict": "onemsiz", "explain": "Sıra hem fugayı hem bağlantı güvenliğini belirler." },
+          { "label": "Her parça takılır takılmaz sıkılır", "verdict": "hemen-sik", "explain": "Erken sıkma hizalamayı imkânsız kılar ve delikleri ovalleştirir." }
+        ]
+      },
+      "camera": "kaporta",
+      "teachingNote": "Fuga tek bir parçanın değil, iki parçanın ortak işi. Hepsi gevşek takılır, topluca hizalanır, sonra sıkılır. Sırada göçük onarımı."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Kapı sökülürken menteşe cıvataları önce sökülürse ne olur?",
+        "a": "distan-ice",
+        "options": [
+          { "verdict": "distan-ice", "label": "Kapı serbest kalır ve içindeki kablo demeti gerilir: kopan kablo, sıyrılan yalıtım ya da kırılan soket yuvası o an fark edilmez, birkaç gün sonra cam ya da ayna arızası olarak çıkar", "explain": "Ağırlığı taşıyan bağlantı en sona bırakılır; söküldüğü anda parçanın üzerinde başka bağlantı kalmamalıdır. Montajda ters yönde: önce menteşe ve destek, sonra kablo ve soket, en son iç döşeme. Ağır paneller tek başına sökülmez." },
+          { "verdict": "once-mentese", "label": "Sorun olmaz, kablolar sonra ayrılır", "explain": "Kapı serbest kaldığında kablo gerilir." },
+          { "verdict": "sirasiz", "label": "Sıra önemsizdir", "explain": "Sıra kablo kopması ve panel hasarını önler." },
+          { "verdict": "camla", "label": "Kapı camla birlikte sökülür", "explain": "Asıl mesele bağlantı sırasıdır." }
+        ]
+      },
+      {
+        "q": "Sökülen bir cıvatanın üzerinde kuruyup katılaşmış bir kaplama var. Geri takılır mı?",
+        "a": "tek-kullanimlik",
+        "options": [
+          { "verdict": "tek-kullanimlik", "label": "Hayır: o kaplama kendiliğinden gevşemeyi önleyen kilitleme maddesidir ve bir kez kullanılınca işlevini kaybeder — hangi elemanın tek kullanımlık olduğu kılavuzda yazar", "explain": "Bir başka grup, sıkılırken kalıcı olarak uzayacak biçimde tasarlanmıştır; hedef belirli bir gerilmedir ve ikinci kullanımda aynı gerilme oluşmaz. Taşıyıcı bölgede bu doğrudan güvenlik konusudur. Şüphe varsa yenisi takılır; tork ve açı değerleri de kılavuzdan alınır." },
+          { "verdict": "hepsi", "label": "Bütün cıvatalar geri kullanılır", "explain": "Kaplamalı ve gerdirilen elemanlar işlevini kaybeder." },
+          { "verdict": "temizle", "label": "Kaplama temizlenip kullanılır", "explain": "Kilitleme işlevi geri gelmez." },
+          { "verdict": "hicbiri", "label": "Hiçbir cıvata geri kullanılmaz", "explain": "Sıradan elemanlar kullanılabilir; ayrım kılavuzdan." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2'deki 4,4 mm ve 3,1 mm SENARYO okumalarıdır; istenen FARKTIR (1,3 mm). Ders hiçbir araç için kabul edilebilir fuga aralığı iddia etmiyor.",
+    "sourceRequired": "Sıkma torkları ve açı değerleri, hangi bağlantı elemanının tek kullanımlık olduğu, sıkma sırası, klips sayısı ve ayrılma yönü, kabul edilebilir fuga aralığı bilinçle VERİLMEDİ; hepsi araca özgüdür ve üreticinin onarım kılavuzundan okunur.",
+    "kapsam": "Hava yastığı ve gergi birimlerinin sökümü, taşınması ve depolanması KAPSAM DIŞIDIR ve yetkili birime bırakılır; taşıyıcı parça sökümü kılavuza tabidir.",
+    "kaynak": "Bu alan kullanıcının açık talebiyle eklendi (talep birebir: 'birde alanlara kaportayı ekleyelim'); konu başlıkları MEB Otomotiv Gövde ve Boya dalının çerçevesini takip ediyor, kazanım numarası iddiası yok.",
+    "reviewedByMechanic": false
+  }
+}

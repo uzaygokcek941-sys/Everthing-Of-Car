@@ -1,0 +1,182 @@
+{
+  "id": "elektrik.mars-devresi",
+  "area": "arac-elektrik",
+  "stage": 7,
+  "title": "Marş Devresinin Okunması",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 30,
+  "prerequisites": ["elektrik.role-testi", "elektrik.devre-elemanlari"],
+  "learningGoals": [
+    "Marş devresini kumanda ve güç devresi olarak ikiye ayırmak",
+    "Selenoidin aynı anda iki iş yaptığını açıklamak",
+    "Sesin hangi devrenin çalıştığını söylediğini okumak"
+  ],
+
+  "safety": [
+    { "rule": "Vites boşta, el freni çekili ve tekerlekler takozlanmış olmadan marş devresine dokunulmaz", "why": "Marş devresi denenirken motor döner; araç viteste kalmışsa ya da güvenlik müşiri köprülenmişse araç ileri fırlar", "blocksStart": true },
+    { "rule": "Marş B+ ucu ile gövde arasına köprü kurulmaz", "why": "Bu uç doğrudan aküye bağlıdır ve sigortasızdır; yüzlerce amper akar, temas eden anahtar erir ve yangın çıkarır", "blocksStart": true },
+    { "rule": "Selenoid uçları köprülenerek marş denemesi yapılmaz", "why": "Bu yöntem güvenlik müşirlerini devre dışı bırakır ve aracı viteste çalıştırabilir. Teşhis köprüyle değil ölçümle yapılır", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.multimetre", "label": "Dijital multimetre", "required": true },
+    { "id": "tool.uzatma-prob", "label": "Uzatma prob kablosu", "required": true },
+    { "id": "tool.sema", "label": "Araç devre şeması", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Marş motoru ve selenoidi tezgâhta önünde. Devrenin yapısını okuyacaksın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.mars-motoru",
+        "question": "Marş devresi kaç ayrı devreden oluşur?",
+        "options": [
+          { "label": "İki: ince kabloyla giden kumanda devresi ve kalın kabloyla giden güç devresi", "verdict": "iki-devre", "correct": true, "explain": "Marş devresi tek bir devre gibi görünür ama iki ayrı devredir ve ikisinin işi bambaşkadır. Kumanda devresi kontak anahtarından çıkar, güvenlik müşirlerinden geçer ve selenoidin bobinine gider; taşıdığı akım küçüktür, bu yüzden kablosu incedir. Güç devresi doğrudan akünün artı kutbundan çıkar, selenoidin kontağından geçer ve marş motoruna gider; taşıdığı akım aracın en yüksek akımıdır, bu yüzden kablosu parmak kalınlığındadır. Aradaki fark yalnız kalınlık değil, mantıktır: kumanda devresi bir emirdir, güç devresi işi yapan taraftır. Teşhisin tamamı bu ayrıma dayanır, çünkü ikisi tamamen farklı arızalar üretir ve tamamen farklı ölçümlerle bulunur." },
+          { "label": "Tek devre; akü doğrudan marşa bağlıdır", "verdict": "tek-devre", "explain": "Öyle olsaydı marş sürekli dönerdi. Arada anahtarlayan bir devre var." },
+          { "label": "Üç devre: kontak, sigorta, motor", "verdict": "uc-devre", "explain": "Sigorta bir devre değil, bir koruma elemanıdır. Ayrım kumanda ve güç üzerinedir." },
+          { "label": "Devre sayısı araca göre değişir", "verdict": "degisir", "explain": "Ayrıntılar değişir ama kumanda-güç ayrımı bütün marş sistemlerinde aynıdır." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Marş devresini anlamanın anahtarı bu ayrımdır: ince kablo emri taşır, kalın kablo işi yapar."
+    },
+    {
+      "id": 2,
+      "instruction": "Kalın kablo neden bu kadar kalın, ince kablo neden ince?",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.mars-b-ucu",
+        "question": "Kalınlık farkının sebebi nedir?",
+        "options": [
+          { "label": "Taşınan akım farkı; marş motoru aracın en yüksek akımını çeker, selenoid bobini ise çok küçük bir akım", "verdict": "akim-farki", "correct": true, "explain": "Bir kablonun kalınlığını üzerinden geçecek akım belirler. Marş motoru, duran bir motoru döndürmek zorunda olduğu için aracın hiçbir tüketicisiyle kıyaslanmayacak kadar yüksek bir akım çeker; bu akımı ince bir kablo taşıyamaz, taşımaya kalkarsa ısınır, yalıtımı erir ve yangın çıkarır. Selenoidin bobini ise yalnız bir mıknatıs alanı üretir ve çok küçük bir akım yeter. Sistemin zekâsı buradadır: küçük akımla çalışan bir anahtar, çok büyük bir akımı yönetir. Kontak anahtarına giden kabloların ince olabilmesinin, direksiyon altındaki anahtarın küçük olabilmesinin sebebi budur. Aynı mantık röle dersinde de vardı; marş selenoidi bu mantığın en büyük ölçekli örneğidir." },
+          { "label": "Kalın kablo daha uzun mesafe gittiği için", "verdict": "mesafe", "explain": "Mesafe kayıp hesabına girer ama asıl belirleyici taşınan akımdır." },
+          { "label": "Kalın kablo daha dayanıklı olsun diye", "verdict": "dayaniklilik", "explain": "Mekanik dayanım ayrı bir konu; kesit akıma göre seçilir." },
+          { "label": "Fark önemli değil, ikisi de aynı işi yapar", "verdict": "farksiz", "explain": "İnce kabloyla marş akımı geçirmeye kalkmak yangın demektir." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Kablo kalınlığı bir tercih değil, akımın dayattığı bir zorunluluktur. Kesit konusu burada gözle görünür hâle geliyor."
+    },
+    {
+      "id": 3,
+      "instruction": "Selenoidi inceliyorsun.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.mars-selenoidi",
+        "question": "Selenoid kaç iş yapar?",
+        "options": [
+          { "label": "İki: güç devresinin kontağını kapatır ve aynı anda dişliyi volana doğru iter", "verdict": "iki-is", "correct": true, "explain": "Selenoid bir röleden fazlasıdır. Bobini enerjilendiğinde içindeki demir çekirdek çekilir ve bu tek hareket iki iş birden yapar. Birincisi, çekirdeğin ucundaki kontak kapanır ve akünün yüzlerce amperlik akımı marş motoruna ulaşır. İkincisi, aynı çekirdek bir çatal aracılığıyla marş dişlisini ileri iter ve dişli volanın dişlerine geçer. Sıralama önemlidir: dişli önce kavraşır, kontak sonra kapanır — aksi hâlde motor dönerken dişli volana çarpar ve ikisi de zarar görür. Bu yüzden marşta duyulan tek bir tık sesi, çekirdeğin hareket ettiğini söyler ve teşhiste büyük bir bilgidir: kumanda devresi selenoide ulaşmış demektir." },
+          { "label": "Tek iş: akımı anahtarlar", "verdict": "tek-is", "explain": "Anahtarlar, ama dişliyi de iter; ikinci iş olmadan motor volana bağlanamaz." },
+          { "label": "Tek iş: dişliyi iter", "verdict": "disli", "explain": "İter, ama güç kontağını da kapatır; yoksa motora akım gitmez." },
+          { "label": "Marş motorunun devrini ayarlar", "verdict": "devir", "explain": "Selenoid bir hız düzenleyici değildir; anahtar ve iticidir." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Selenoidin iki işi olması, marş arızalarının neden bu kadar farklı seslerle ortaya çıktığını açıklar."
+    },
+    {
+      "id": 4,
+      "instruction": "Kumanda devresinde kontak anahtarından sonra başka elemanlar da var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.mars-tetik-ucu",
+        "question": "Güvenlik müşirleri neden kumanda devresindedir?",
+        "options": [
+          { "label": "Aracın viteste ya da debriyaja basılmadan çalışmasını engellemek için; küçük akımlı devrede kesmek yeterlidir", "verdict": "guvenlik-kumanda", "correct": true, "explain": "Vitesli araçta debriyaj müşiri, otomatikte park-boş müşiri kumanda devresinin içindedir. Amaç basittir: araç hareket edebilecek durumdayken marşın çalışmasını engellemek. Bunun kumanda devresinde yapılmasının sebebi de akımdır — küçük akımlı bir devreyi kesmek için küçük bir anahtar yeter, oysa güç devresini kesecek bir anahtar kocaman ve pahalı olurdu. Teşhis açısından bu şunu getirir: marş hiç dönmüyorsa suçlu her zaman marş motoru değildir; ayarı kaçmış bir debriyaj müşiri ya da bozulmuş bir park-boş müşiri de aynı belirtiyi verir. Bu elemanları köprüleyerek deneme yapmak tehlikelidir, çünkü köprü aracı viteste çalıştırabilir hâle getirir." },
+          { "label": "Güç devresini kesmek daha güvenli olurdu", "verdict": "guc-devresi", "explain": "Teknik olarak mümkün ama o akımı kesecek anahtar çok büyük ve pahalı olurdu." },
+          { "label": "Müşirler yalnız uyarı verir, devreyi kesmez", "verdict": "uyari", "explain": "Kumanda devresini fiilen keserler; marş basmaz." },
+          { "label": "Müşirlerin marşla ilgisi yoktur", "verdict": "ilgisiz", "explain": "Doğrudan kumanda devresinin içindedirler ve marşı engelleyebilirler." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Marş basmıyor şikâyetinin sebebi bazen marş motorunun metrelerce uzağındadır. Devreyi okumak bu ihtimali görünür kılar."
+    },
+    {
+      "id": 5,
+      "instruction": "Kontak marşa çevrildi: tek bir tık sesi geldi, motor dönmedi.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.mars-selenoidi",
+        "question": "Bu ses hangi devre hakkında bilgi verir?",
+        "options": [
+          { "label": "Kumanda devresi çalışıyor, selenoid hareket etti; sorun güç devresi tarafında", "verdict": "kumanda-tamam", "correct": true, "explain": "Tık sesi, selenoidin bobinine akım gittiğinin ve çekirdeğin hareket ettiğinin kanıtıdır. Yani kontak anahtarı, güvenlik müşirleri, ince kablo ve bobin — hepsi işini yapmış demektir. Kumanda devresi bu tek sesle temize çıkar. Geriye güç tarafı kalır: akü yeterince akım verebiliyor mu, kalın kablolar bu akımı taşıyor mu, selenoidin kontağı gerçekten kapanıyor mu, marş motorunun kendisi sağlam mı. Teşhis artık bu dört adayla sınırlıdır ve hepsi ölçülebilir. Bir sesin bu kadar çok şeyi elemesi, devreyi kumanda ve güç diye ayırmış olmanın karşılığıdır." },
+          { "label": "Hiçbir şey söylemez, ses rastgeledir", "verdict": "rastgele", "explain": "Ses selenoidin hareketidir; kumanda devresinin çalıştığını kanıtlar." },
+          { "label": "Marş motorunun bozuk olduğunu kanıtlar", "verdict": "mars-bozuk", "explain": "Marş motoru adaylardan yalnız biri; akü ve kablolar da aynı belirtiyi verir." },
+          { "label": "Akünün boş olduğunu kesinleştirir", "verdict": "aku-bos", "explain": "Boş akü de bu sesi verir ama tek aday değildir; ölçüm gerekir." }
+        ]
+      },
+      "camera": "tezgah",
+      "hint": "Ses geldiyse emir ulaşmış demektir.",
+      "teachingNote": "Marş devresinde kulak bir ölçü aletidir. Tık var mı yok mu sorusu, devreyi ikiye bölen ilk elemedir."
+    },
+    {
+      "id": 6,
+      "instruction": "Başka bir araçta kontak marşa çevrildiğinde hiç ses gelmiyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.mars-tetik-ucu",
+        "question": "Bu kez arama nereden başlar?",
+        "options": [
+          { "label": "Kumanda devresinden: selenoidin tetik ucuna marş anında gerilim geliyor mu diye ölçülür", "verdict": "kumanda-olc", "correct": true, "explain": "Ses yoksa selenoid hiç hareket etmemiş demektir; yani emir ona ulaşmamış ya da bobin arızalıdır. Ölçüm doğrudan bunu sorar: bir yardımcı kontağı marşa çevirirken selenoidin ince tetik ucuna prob konur ve gerilim gelip gelmediğine bakılır. Gerilim geliyorsa emir ulaşmıştır ve suç selenoidin kendisindedir. Gerilim gelmiyorsa arama kumanda devresinde geriye doğru yürür: ince kablo, güvenlik müşirleri, varsa marş rölesi, sigorta ve kontak anahtarı. Her adımda aynı soru sorulur — gerilim buraya geliyor mu. Kalın kablolara ve marş motoruna bu aşamada hiç dokunulmaz, çünkü onlar başka bir devrenin parçasıdır." },
+          { "label": "Kalın kablolar ölçülür", "verdict": "kalin-kablo", "explain": "Güç devresi henüz hiç devreye girmedi; ses yoksa sorun kumanda tarafında." },
+          { "label": "Marş motoru sökülür", "verdict": "sok", "explain": "Sökmeden önce emir ulaşıyor mu diye bakılır; çoğu zaman sorun oradadır." },
+          { "label": "Akü değiştirilir", "verdict": "aku", "explain": "Tamamen boş akü sessizliğe sebep olabilir ama önce ölçülür, değiştirilmez." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "İki belirti, iki farklı devre, iki farklı ölçüm yolu. Ayrımı bilmeyen usta her iki durumda da marş motoruna bakar."
+    },
+    {
+      "id": 7,
+      "instruction": "Devrenin haritası çıktı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.mars-motoru",
+        "question": "Bu ayrım teşhise ne kazandırır?",
+        "options": [
+          { "label": "Belirtiyi doğrudan bir devreye bağlar; aday sayısı yarıya iner ve ölçüm yeri belli olur", "verdict": "aday-azaltir", "correct": true, "explain": "Kumanda-güç ayrımı, marş şikâyetinde ilk büyük elemeyi bedava yapar. Tık sesi varsa kumanda devresi çalışıyordur ve ölçüm güç tarafında yapılır. Ses yoksa güç devresi hiç devreye girmemiştir ve ölçüm kumanda tarafında yapılır. Ağır ve yavaş dönme üçüncü bir tablodur: her iki devre de çalışıyor ama güç tarafında bir yerde akım kısıtlanıyor — bu, gerilim düşümü ölçümünün konusudur. Motor dönmeden duyulan sürekli bir vınlama ise dördüncü tablodur: elektriksel taraf tamam, dişli volana kavraşmıyor, yani mekanik. Dört belirti, dört ayrı yön. Marş motoru değiştirmek bunlardan yalnız birinde doğru cevaptır." },
+          { "label": "Hiçbir şey; her durumda marş motoru değişir", "verdict": "hepsi-mars", "explain": "Dört belirtiden yalnız birinde marş motoru suçludur; diğerlerinde boşuna değişir." },
+          { "label": "Yalnız kablo seçiminde işe yarar", "verdict": "kablo-secimi", "explain": "Kesit hesabı bir sonuç; asıl kazanç teşhisin daralmasıdır." },
+          { "label": "Yalnız yeni araçlarda geçerlidir", "verdict": "yeni-arac", "explain": "Ayrım marş sisteminin temel yapısıdır ve her araçta aynıdır." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Bu ders ölçüm yapmadan iş görüyor: devreyi doğru okumak, henüz alete dokunmadan adayların yarısını eliyor."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Marş devresindeki kumanda ve güç devresi arasındaki fark nedir?",
+        "a": "emir-ve-is",
+        "options": [
+          { "verdict": "emir-ve-is", "label": "Kumanda devresi küçük akımla emri taşır; güç devresi çok yüksek akımla işi yapar", "explain": "Kumanda devresi kontak anahtarından çıkar, güvenlik müşirlerinden geçer ve selenoid bobinine gider; akımı küçük olduğu için kablosu incedir. Güç devresi doğrudan akünün artı kutbundan çıkar, selenoid kontağından geçer ve marş motoruna gider; aracın en yüksek akımını taşıdığı için kablosu parmak kalınlığındadır. Küçük akımla çalışan bir anahtarın çok büyük bir akımı yönetmesi, kontak anahtarının küçük olabilmesinin sebebidir." },
+          { "verdict": "uzunluk", "label": "Biri kısa, diğeri uzun", "explain": "Uzunluk kayıp hesabına girer ama ayrımın tanımı değildir." },
+          { "verdict": "gerilim", "label": "Farklı gerilimlerde çalışırlar", "explain": "İkisi de aynı akü geriliminde çalışır; fark akımdadır." },
+          { "verdict": "yok", "label": "Aralarında fark yoktur", "explain": "İnce kabloyla marş akımı geçirmeye kalkmak yangın demektir." }
+        ]
+      },
+      {
+        "q": "Marşa basınca tek bir tık duyuluyor, motor dönmüyor. Bu ne söyler?",
+        "a": "kumanda-tamam",
+        "options": [
+          { "verdict": "kumanda-tamam", "label": "Kumanda devresi çalışıyor; arama güç devresinde yapılır", "explain": "Tık sesi selenoidin bobinine akım gittiğinin ve çekirdeğin hareket ettiğinin kanıtıdır; kontak anahtarı, güvenlik müşirleri, ince kablo ve bobin işini yapmıştır. Geriye dört aday kalır: akü yeterli akımı verebiliyor mu, kalın kablolar taşıyor mu, selenoid kontağı kapanıyor mu, marş motoru sağlam mı. Tek bir ses, adayların yarısını eler." },
+          { "verdict": "mars-bozuk", "label": "Marş motoru kesin bozuktur", "explain": "Marş motoru dört adaydan yalnız biri." },
+          { "verdict": "kumanda-bozuk", "label": "Kumanda devresi bozuktur", "explain": "Tersine: ses kumanda devresinin çalıştığının kanıtı." },
+          { "verdict": "bilgi-yok", "label": "Hiçbir bilgi vermez", "explain": "Devreyi ikiye bölen en ucuz elemedir; alet bile gerekmez." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Bu derste sayısal ölçüm yok; devrenin yapısı ve belirti okuması öğretiliyor. Ölçümler bir sonraki derste (marş arızası) yapılıyor.",
+    "sourceRequired": "Marş devresi kablo kesitleri, selenoid bobin direnci ve marş çekiş akımı araca özgüdür; bu derste bilinçle VERİLMEDİ.",
+    "kapsam": "Sahnede marş gövdesi, selenoidi, B+ ucu ve tetik ucu var; dişli, çatal, volan ve güvenlik müşirleri modelde yok, metinde anlatılıyor. Volan motor sahnesinde bulunuyor.",
+    "reviewedByMechanic": false
+  }
+}

@@ -1,0 +1,174 @@
+{
+  "id": "elektrik.multimetre-gerilim",
+  "area": "arac-elektrik",
+  "stage": 1,
+  "title": "Gerilim Ölçme: Aleti Doğru Kurmak ve Sayıyı Okumak",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 25,
+  "prerequisites": ["elektrik.aku-guvenlik", "temel.olcu-aletleri"],
+  "learningGoals": [
+    "Multimetreyi doğru kademede ve doğru prob yuvasında kurmak",
+    "Voltmetreyi devreye paralel bağlamak ve neden paralel olduğunu bilmek",
+    "Akünün durumunu tek bir sayıdan değil, yük altındaki değişimden okumak"
+  ],
+
+  "safety": [
+    { "rule": "Ölçüme başlamadan önce probların hangi yuvada olduğu kontrol edilir", "why": "Kırmızı prob akım yuvasında unutulmuşken gerilim ölçmeye kalkmak, aletin içinden akü kutupları arasına neredeyse dirençsiz bir yol açar. Bu, aletin sigortasını atar; sigortası olmayan ucuz aletlerde yangınla biter", "blocksStart": true },
+    { "rule": "Marş anında eller dönen parçalardan uzak tutulur", "why": "Yük altında ölçüm yapılırken motor dönmeye başlar. Probu tutan el kayış, fan ya da kasnak bölgesindeyse ölçüm sırasında yaralanma olur", "blocksStart": true },
+    { "rule": "Islak elle ve ıslak zeminde ölçüm yapılmaz", "why": "Araç aküsünün gerilimi düşük olsa da ölçüm yapılan bazı devrelerde (ateşleme, hibrit sistemler) çok yüksek gerilim bulunur. Alışkanlık baştan doğru kurulur", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.multimetre", "label": "Dijital multimetre", "required": true },
+    { "id": "tool.eldiven", "label": "Eldiven", "required": false },
+    { "id": "tool.gozluk", "label": "Koruyucu gözlük", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Multimetre tezgâhta. Akünün gerilimini ölçeceksin.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.prob-kirmizi",
+        "question": "Problar hangi yuvalara takılır?",
+        "options": [
+          { "label": "Siyah prob ortak yuvaya, kırmızı prob gerilim ve direnç yuvasına; akım yuvasına değil", "verdict": "com-ve-volt", "correct": true, "explain": "Multimetrenin yuvaları farklı işler için tasarlanmıştır. Ortak yuva her ölçümde kullanılır ve siyah prob oradadır. Kırmızı prob gerilim ölçerken gerilim yuvasına, akım ölçerken akım yuvasına takılır. Bu ayrım hayatidir çünkü akım yuvasından aletin içine neredeyse dirençsiz bir yol geçer — akım ölçmek için öyle olmak zorundadır. Kırmızı prob orada unutulmuşken iki kutbun arasına dokunursan aküyü kendi aletin üzerinden kısa devre yaparsın. En sık yapılan ve en pahalı biten multimetre hatası budur; alışkanlık, her ölçümden önce yuvaya bakmaktır." },
+          { "label": "Kırmızı prob akım yuvasına takılır, o daha hassastır", "verdict": "akim-yuvasi", "explain": "Akım yuvası hassas değil, dirençsizdir. Gerilim ölçümünde oraya takmak aleti ve aküyü kısa devreye sokar." },
+          { "label": "Renkler önemli değil, ikisi de aynı", "verdict": "renk-onemsiz", "explain": "Yuva seçimi önemlidir. Renk yalnız kutup takibini kolaylaştırır; dijital alette ters bağlarsan sonuç eksi işaretli çıkar, alet bozulmaz." },
+          { "label": "Tek prob yeterlidir, diğeri gövdeye değdirilir", "verdict": "tek-prob", "explain": "Gerilim iki nokta arasındaki farktır; iki prob da gerekir. Şase ölçümünde siyah prob gövdeye değdirilir ama yine iki prob kullanılır." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Gerilim tek bir noktanın özelliği değil, iki nokta arasındaki farktır. 'Şurada kaç volt var?' eksik bir sorudur; 'neye göre?' diye tamamlanır."
+    },
+    {
+      "id": 2,
+      "instruction": "Seçici düğmeyi doğru kademeye çevir: doğru akım gerilimi.",
+      "interaction": {
+        "type": "rotate",
+        "target": "part.multimetre-secici",
+        "direction": "cw",
+        "turns": 0.25,
+        "requiresGesture": true
+      },
+      "camera": "tezgah",
+      "hint": "Araç aküsü doğru akım verir; alternatif akım kademesi burada yanlış okur.",
+      "teachingNote": "Araçtaki elektrik doğru akımdır. Alternatif akım kademesinde ölçersen ekranda anlamsız, çoğu zaman sıfıra yakın bir sayı görürsün ve aküyü bitmiş sanırsın. Aletin sayı vermesi, doğru ölçtüğün anlamına gelmez."
+    },
+    {
+      "id": 3,
+      "instruction": "Araç iki dakika önce durdu. Hemen ölçmek üzeresin.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.aku",
+        "question": "Akü gerilimini ölçmek için doğru an hangisi?",
+        "options": [
+          { "label": "Motor durduktan sonra bir süre beklenir; yüzey şarjı geçene kadar akü olduğundan iyi okur", "verdict": "yuzey-sarji", "correct": true, "explain": "Alternatör aküyü şarj ederken plakaların yüzeyinde geçici bir yük birikir. Buna yüzey şarjı denir ve akünün gerçek doluluğunu göstermez; motor yeni durmuşken ölçersen akü olduğundan daha iyi görünür. Bu yüzden ölçüm ya bir süre bekledikten sonra ya da kısa süre far yakıp yüzey şarjı atıldıktan sonra yapılır. Aynı sebeple sonuç şüpheliyse ikinci ölçüm farklı koşulda tekrarlanır. Ölçüm aletinin doğruluğu, ölçüm anının doğruluğundan bağımsız değildir — bu cümle motor alanındaki kompresyon testinde de aynıydı." },
+          { "label": "Motor dururken hemen ölçülür, en taze sonuç odur", "verdict": "hemen", "explain": "En taze sonuç en doğru sonuç değildir; yüzey şarjı yüzünden akü olduğundan iyi okur." },
+          { "label": "Motor çalışırken ölçülür", "verdict": "calisirken", "explain": "Motor çalışırken ölçtüğün şey akü değil, alternatörün çıkışıdır. O da ayrı ve gerekli bir ölçümdür ama sorunun cevabı değildir." },
+          { "label": "Fark etmez, akü her zaman aynı okur", "verdict": "fark-etmez", "explain": "Akü koşula göre farklı okur: sıcaklık, yüzey şarjı ve yük hepsi sonucu değiştirir." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Bu alandaki ilk büyük alışkanlık: ölçmeden önce ne okumayı beklediğini söyle. Beklentin yoksa, çıkan sayının doğru mu yanlış mı olduğunu anlayamazsın."
+    },
+    {
+      "id": 4,
+      "instruction": "Probları kutuplara değdirdin, ekran 12,62 V gösteriyor. Sonra biri marş verdi ve ekran marş boyunca 9,90 V'a düştü. Düşüş miktarını gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.multimetre-ekran",
+        "unit": "V",
+        "acceptRange": [2.6, 2.85]
+      },
+      "camera": "tezgah",
+      "hint": "12,62 eksi 9,90.",
+      "teachingNote": "Bu sayı bir üretici sınırı değil, senin ürettiğin bir kanıttır: aynı akü, aynı prob, iki farklı koşul. Yük altındaki düşüş akünün içinde ne kadar direnç biriktiğini anlatır. Dinlenmiş hâlde iyi okuyup yük altında çöken akü, tam da müşterinin 'sabahları çalışmıyor ama ölçtüler iyi dediler' dediği aküdür. Tek ölçüm yalancıdır; iki koşuldaki fark gerçeği söyler."
+    },
+    {
+      "id": 5,
+      "instruction": "Ölçümü yaparken voltmetreyi nasıl bağladığını düşün.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.multimetre",
+        "question": "Voltmetre devreye nasıl bağlanır?",
+        "options": [
+          { "label": "Paralel: ölçülecek iki noktanın üzerine, devreyi kesmeden", "verdict": "paralel", "correct": true, "explain": "Gerilim iki nokta arasındaki farktır, bu yüzden voltmetre o iki noktanın üzerine köprü gibi bağlanır; devreyi açmana gerek yoktur. Voltmetrenin iç direnci çok yüksektir, böylece ölçtüğü devreden kayda değer akım çekmez ve devreyi bozmaz. Ampermetre tam tersidir: akım aletin içinden geçmek zorunda olduğu için devre kesilir, alet araya seri girer ve iç direnci neredeyse sıfırdır. İki alet aynı kutunun içindedir ama bağlanma biçimleri birbirinin zıddıdır — kademe ve yuva seçimi bu yüzden bu kadar kritiktir." },
+          { "label": "Seri: devre kesilir, alet araya girer", "verdict": "seri", "explain": "Bu akım ölçmenin yöntemidir. Voltmetreyi seri bağlarsan devre çalışmaz, çünkü aletin iç direnci çok yüksektir." },
+          { "label": "Tek uç devreye, diğer uç boşta kalır", "verdict": "tek-uc", "explain": "Boşta kalan uçla fark ölçülemez; okunan sayı anlamsız olur." },
+          { "label": "Aletin bağlanma biçimi önemsizdir", "verdict": "onemsiz", "explain": "Bağlanma biçimi ölçümün kendisidir; yanlış bağlanan alet ya yanlış okur ya bozulur." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Voltmetre paralel, ampermetre seri. Bu iki kelime elektrik ölçümünün bütün kurallarını taşır: biri devreyi izler, diğeri devrenin içinden geçer."
+    },
+    {
+      "id": 6,
+      "instruction": "Ölçüm bitti. Aleti bırakırken bir alışkanlık daha var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.multimetre-secici",
+        "question": "Alet nasıl bırakılır?",
+        "options": [
+          { "label": "Kırmızı prob gerilim yuvasında ve seçici gerilim kademesinde bırakılır; akım yuvasında unutulmaz", "verdict": "guvenli-birak", "correct": true, "explain": "Multimetre kazalarının çoğu, bir önceki ölçümden kalan ayarla başlar. Akım yuvasında unutulan kırmızı prob, sonraki gerilim ölçümünde aküyü aletin içinden kısa devre yapar. Aynı şekilde direnç kademesinde bırakılan alet, canlı devreye dokunulduğunda zarar görebilir. Bu yüzden alet her zaman en zararsız duruma getirilerek bırakılır: prob gerilim yuvasında, seçici gerilim kademesinde. Bu, tork anahtarını en düşük kademede bırakma alışkanlığının elektrikteki karşılığıdır — aleti bir sonraki kullanan için güvenli hâle getirmek." },
+          { "label": "Kapatmak yeterli, ayarların önemi yok", "verdict": "kapat-yeter", "explain": "Kapalı alet açıldığında son ayarıyla açılır; tehlike orada bekler." },
+          { "label": "Akım kademesinde bırakılır, en sık o kullanılır", "verdict": "akim-kademesi", "explain": "En sık kullanılan kademe gerilimdir; ayrıca akım kademesi bırakılacak en tehlikeli durumdur." },
+          { "label": "Problar çıkarılıp kutuya atılır, ayar önemsizdir", "verdict": "problari-cikar", "explain": "Probları çıkarmak iyidir ama seçici kademesi de doğru durumda bırakılır." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Aleti bir sonraki kullanan için güvenli bırakmak, bu mesleğin sessiz nezaket kurallarından biridir. Tork anahtarında da aynısını yapmıştın."
+    },
+    {
+      "id": 7,
+      "instruction": "Müşteriye akünün durumunu anlatacaksın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.aku",
+        "question": "Elindeki iki ölçüm ne söylüyor?",
+        "options": [
+          { "label": "Dinlenmiş hâlde iyi okuyan akü yük altında ciddi düştü; karar tek sayıya değil, iki koşuldaki farka dayanır", "verdict": "yuk-altinda-dusus", "correct": true, "explain": "Akü bir depo gibi düşünülür ama depo dolu olsa bile ağzı darsa hızlı su vermez. Dinlenmiş gerilim deponun ne kadar dolu olduğunu, yük altındaki gerilim ne kadar hızlı verebildiğini anlatır. İkisi ayrı bilgilerdir ve arıza çoğu zaman ikincisindedir: içinde direnç birikmiş bir akü boşta iyi okur, marşta çöker. Bu yüzden karar tek ölçümle verilmez. Ayrıca bu düşüşün sebebi her zaman akü de değildir — gevşek ya da korozyonlu bir kutup da aynı belirtiyi üretir, ki bir önceki derste onu görmüştün. Kesin ayrım, ileride öğreneceğin gerilim düşümü testiyle yapılır: ölçüm kutuptan değil, kablonun iki ucundan alınır." },
+          { "label": "Dinlenmiş gerilim iyi olduğuna göre akü sağlamdır", "verdict": "aku-saglam", "explain": "Dinlenmiş gerilim yalnız doluluğu gösterir; yük altında çöken akü bu ölçümde iyi görünebilir." },
+          { "label": "Marşta düştüğüne göre marş motoru arızalıdır", "verdict": "mars-motoru", "explain": "Marş anında gerilimin bir miktar düşmesi normaldir; düşüşün büyüklüğü akü ve bağlantı tarafını işaret eder. Marş motoru kararı ayrı ölçüm ister." },
+          { "label": "Ölçüm hatalıdır, tekrar yapılmalı", "verdict": "hatali", "explain": "Tekrar ölçmek her zaman iyidir ama bu iki okuma birbiriyle tutarlı ve anlamlıdır." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Elektrikte tek ölçüm neredeyse hiçbir zaman yetmez. Bir ölçüm bir sayı verir; iki ölçüm arasındaki fark bir teşhis verir."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Voltmetre devreye neden paralel bağlanır?",
+        "a": "iki-nokta-farki",
+        "options": [
+          { "verdict": "iki-nokta-farki", "label": "Gerilim iki nokta arasındaki farktır; alet o iki noktanın üzerine köprü gibi bağlanır ve yüksek iç direnciyle devreyi bozmaz", "explain": "Voltmetre iki nokta arasındaki farkı ölçer, bu yüzden devreyi kesmeye gerek yoktur. İç direnci çok yüksektir ve bu kasıtlıdır: devreden kayda değer akım çekmemesi, ölçtüğü şeyi değiştirmemesi gerekir. Ampermetre tam tersidir — akım aletin içinden geçmek zorunda olduğu için devre kesilir, alet seri girer ve iç direnci neredeyse sıfırdır. Bu zıtlık, yanlış yuvada bırakılan probun neden kısa devre yaptığını da açıklar." },
+          { "verdict": "kolaylik", "label": "Kolay olduğu için", "explain": "Kolaylık bir sonuçtur, sebep değil; sebep gerilimin iki nokta arasındaki fark olmasıdır." },
+          { "verdict": "guvenlik", "label": "Yalnız güvenlik gereği", "explain": "Güvenlik yan faydadır; asıl sebep ölçülen büyüklüğün doğasıdır." },
+          { "verdict": "seri-olur", "label": "Aslında seri bağlanır", "explain": "Seri bağlanan voltmetre devreyi durdurur; seri bağlanan alet ampermetredir." }
+        ]
+      },
+      {
+        "q": "Dinlenmiş hâlde iyi okuyan bir akü neden yine de arızalı olabilir?",
+        "a": "yuk-altinda",
+        "options": [
+          { "verdict": "yuk-altinda", "label": "Dinlenmiş gerilim doluluğu gösterir; yüksek akımı verip veremediğini yalnız yük altındaki ölçüm gösterir", "explain": "Akü dolu olabilir ama içinde biriken direnç yüzünden yüksek akımı hızlı veremiyor olabilir. Boşta ölçtüğünde iyi görünür, marş anında çöker. Müşterinin 'sabahları çalışmıyor ama ölçtüler iyi dediler' cümlesi çoğu zaman budur. Bu yüzden akü kararı iki koşullu ölçümle verilir: dinlenmiş ve yük altında. Aynı belirtiyi gevşek veya korozyonlu bir kutup da üretir; ayrım gerilim düşümü testiyle netleştirilir." },
+          { "verdict": "olcum-hatasi", "label": "Ölçüm hatalıdır", "explain": "Hata değildir; iki ölçüm iki farklı şeyi anlatır." },
+          { "verdict": "sicaklik", "label": "Yalnız sıcaklık yüzünden", "explain": "Sıcaklık sonucu etkiler ama asıl ayrım yük altındaki davranıştır." },
+          { "verdict": "olamaz", "label": "İyi okuyan akü arızalı olamaz", "explain": "Olabilir; bu, atölyede en sık karşılaşılan yanılgılardan biridir." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 4'teki 12,62 V ve 9,90 V SENARYO okumalarıdır. Öğrenciden istenen bir üretici sınırı değil, verilen iki okuma arasındaki FARKTIR (2,72 V). Bu yüzden sourceRequired gerekmedi: ortaya çıkan sayı bizim ürettiğimiz bir iddia değil, verilen okumaların çıkarmasıdır. Aynı desen motor alanındaki kam mili, piston-biyel, krank yatak ve kompresyon derslerinde kullanıldı.",
+    "sourceRequired": "Dinlenmiş akünün sağlıklı sayılan gerilim aralığı, marş anında kabul edilebilir asgari gerilim ve şarj gerilimi aralığı bu derste bilinçli olarak VERİLMEDİ. Bunlar akü tipine ve sıcaklığa bağlıdır; kaynaklı olarak eklenene kadar derste sayı olarak geçmeyecek. Ders, kılavuzdan bağımsız çalışan iki koşullu karşılaştırma üzerine kuruldu.",
+    "kapsam": "Multimetre şematik: seçici düğme tek bir dönme hareketiyle temsil ediliyor, kademe halkası ve yuva geometrisi yok. Prob uçlarının kutuplara değme animasyonu da yok; ölçüm sayısal giriş ile yapılıyor.",
+    "reviewedByMechanic": false
+  }
+}

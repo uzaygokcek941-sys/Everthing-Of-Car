@@ -1,0 +1,178 @@
+{
+  "id": "aksesuar.ses-gelmiyor",
+  "area": "aksesuar-ses",
+  "stage": 9,
+  "title": "Şikâyet: Ses Gelmiyor",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 40,
+  "prerequisites": ["aksesuar.cam-calismiyor"],
+  "learningGoals": [
+    "Sessizliğin hangi halkada başladığını bölerek bulmak",
+    "Yükselticinin açılmama sebebini ölçerek kanıtlamak",
+    "Tek hoparlör ile bütün sistem arasındaki ayrımı doğru kurmak"
+  ],
+
+  "safety": [
+    { "rule": "Ölçüm ve bağlantı işleri sistem kapalıyken yapılır", "why": "Çalışır bir yükselticinin çıkışını gövdeye ya da birbirine değdirmek cihazı bozar", "blocksStart": true },
+    { "rule": "Ses kademeli açılır", "why": "Bozuk bir bağlantı yüksek seviyede hoparlörü anında bitirir; kapalı kabinde yüksek ses işitmeye zarar verir", "blocksStart": true },
+    { "rule": "Araç haberleşme hattına müdahale edilmez", "why": "Fabrika ses sistemi ağa bağlı olabilir; bu alanın kırmızı çizgisi değişmez", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.multimetre", "label": "Multimetre", "required": true },
+    { "id": "tool.el-feneri", "label": "El feneri", "required": true },
+    { "id": "tool.plastik-sokme-spatulasi", "label": "Plastik söküm spatulası", "required": true }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Müşteri 'ses gelmiyor' diyor. Söküme başlamadan.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.bas-unite",
+        "question": "İlk soru nedir?",
+        "options": [
+          { "label": "Hiç mi gelmiyor, bazılarından mı: bütün hoparlörler sessiz mi yoksa bir ikisi mi — ayrıca cihaz açılıyor mu ve farklı bir kaynak denendi mi", "verdict": "hepsi-mi-biri-mi", "correct": true, "explain": "Cam dersindeki tablonun ses hâli budur ve aynı kural işler: hepsini etkileyen sorun ortak halkadadır, birini etkileyen sorun o birinin kendi halkasındadır. Üç soru sorulur. Birincisi kapsamdır: ses dengesi tek tek her yöne kaydırılarak hangi hoparlörlerin ses verdiği belirlenir — bir tanesi sessizse sorun o hoparlörde, kablosunda ya da yükselticinin o kanalındadır; hepsi sessizse sorun ortak halkadadır, yani kaynakta, yükselticide ya da beslemededir. İkincisi cihazın kendisidir: baş ünite açılıyor mu, ekranı yanıyor mu — açılmayan bir ünitede sorun ses değil beslemedir ve bu tamamen başka bir arama demektir. Üçüncüsü kaynaktır ve şaşırtıcı sıklıkla sorunu bitirir: farklı bir kaynak denenir, telefonun kendi sesi kontrol edilir, ünite doğru kaynağa ayarlı mı bakılır. Bu üç sorunun ardından dördüncü ve en önemli soru gelir: bu şikâyet ne zaman başladı? Bir montajdan hemen sonra başladıysa şüphe önce o montajdadır — anten dersinden beri tekrarlanan kural. Kendiliğinden ve zamanla başladıysa şüphe eskiyen bir bağlantıda ya da hoparlörde toplanır." },
+          { "label": "Baş ünite sökülür", "verdict": "sok", "explain": "Kapsam belirlenmeden sökmek en pahalı yol." },
+          { "label": "Yükseltici değiştirilir", "verdict": "anfi", "explain": "Şüpheli listesi daraltılmadan parça değiştirilmez." },
+          { "label": "Hoparlörler değiştirilir", "verdict": "hoparlor", "explain": "Hepsi birden sessizse sorun ortak halkada." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Aynı kural, başka sistem: hepsi mi, biri mi. Ve dördüncü soru — bu ne zaman başladı?"
+    },
+    {
+      "id": 2,
+      "instruction": "Hepsi sessiz. Yükselticinin uçlarını ölçtün: sürekli besleme ucunda 12,5 V, 'açıl' ucunda 0,3 V. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.multimetre-aksesuar",
+        "unit": "volt",
+        "acceptRange": [12.1, 12.3]
+      },
+      "camera": "aksesuar",
+      "hint": "12,5 eksi 0,3.",
+      "teachingNote": "12,2 voltluk bu fark, sessizliğin sebebini tek başına söylüyor: yükselticinin beslemesi var ama açılma komutu yok. Yükseltici üç uçla çalışır — sürekli besleme, şase ve 'açıl' ucu; üçüncüsü olmadan cihaz gücü olsa bile hiç uyanmaz. Bu ucun beklenen davranışı şudur: kaynak cihaz açıldığında üzerinde gerilim belirir, kapandığında sıfırlanır. Ölçüm bu yüzden iki durumda yapılır — kaynak açıkken ve kapalıyken; tek durumda ölçüp karar vermek yanıltır. Gerilim hiç gelmiyorsa dört sebep sırayla elenir. Birincisi bağlantıdır: uç hiç bağlanmamış ya da yanlış bir uca bağlanmış olabilir — montaj sonrası şikâyetlerde en yaygın sebep budur ve ses zinciri dersinde önceden uyarılmıştı. İkincisi kaynak cihazdır: bazı üniteler bu ucu ancak belirli bir ayarla sürer, bazılarında ayrı bir uç vardır ve karıştırılmıştır. Üçüncüsü kablodur: uzun bir hat boyunca ezilmiş ya da kopmuş olabilir. Dördüncüsü yükselticinin kendisidir ve en son sıradadır. Bir de tersi durum vardır: 'açıl' ucunda gerilim VAR ama yükseltici yine açılmıyorsa şüphe şaseye ve cihazın kendisine kayar — şase önce kontrol edilir, çünkü ucuzdur. Bu ucun beklenen gerilimi ve akımı cihaza özgüdür; bu ders bir değer vermiyor."
+    },
+    {
+      "id": 3,
+      "instruction": "Başka bir araçta yükseltici açılıyor ama yine ses yok.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.rca-kablosu",
+        "question": "Nasıl bölünür?",
+        "options": [
+          { "label": "Sinyalin yükselticiye gerçekten geldiği ve çıkışının hoparlöre ulaştığı ayrı ayrı sınanır: girişe bilinen bir kaynak verilir, çıkışa bilinen sağlam bir hoparlör bağlanır", "verdict": "giris-cikis", "correct": true, "explain": "Yükseltici açılıyorsa sessizliğin sebebi üç yerden birindedir: girişe sinyal gelmiyordur, cihaz içeride bir koruma nedeniyle sesi kesmiştir ya da çıkış hoparlöre ulaşmıyordur. Bunlar bölme testiyle ayrılır. Birinci bölme giriştedir: yükselticinin girişine çalıştığından emin olunan bir kaynak verilir; ses geliyorsa sorun kaynak cihazda ya da sinyal kablosundadır, gelmiyorsa arama cihazın kendisinde ve çıkışında sürer. İkinci bölme çıkıştadır: yükselticinin çıkışına bilinen sağlam bir hoparlör kısa bir kabloyla bağlanıp dinlenir; ses geliyorsa sorun aracın hoparlör hattında ya da hoparlörlerdedir, gelmiyorsa yükselticidedir. Üçüncü ihtimal korumadır ve atlanmamalıdır: birçok yükseltici, çıkışında bir kısa devre gördüğünde ya da aşırı ısındığında kendini korumaya alır ve sesi keser; çoğunda bunu bildiren bir ışık vardır. Bu durumda cihaz bozuk değildir — hoparlör hattında bir uç gövdeye değiyor, iki uç birbirine temas ediyor ya da bir hoparlör kendi içinde kısa devre olmuştur; hoparlör dirençleri tek tek ölçülerek bulunur ve ses zinciri dersinde bu ölçümün ne söylediğini gördün. Her bölmede tek değişken kuralı burada da geçerlidir: aynı anda hem kaynağı hem hoparlörü değiştiren usta sonucun hangisinden geldiğini bilemez." },
+          { "label": "Yükseltici hemen değiştirilir", "verdict": "degistir", "explain": "Koruma devrede olabilir; cihaz bozuk olmayabilir." },
+          { "label": "Bütün kablolar yenilenir", "verdict": "kablo", "explain": "Hangi kablonun suçlu olduğu bölmeyle bulunur." },
+          { "label": "Ses seviyesi artırılır", "verdict": "seviye", "explain": "Sessiz bir sistemde seviye artırmak teşhis değildir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Yükseltici koruma nedeniyle susmuş olabilir: hoparlör hattında kısa devre. Cihaz bozuk değil, hat suçlu."
+    },
+    {
+      "id": 4,
+      "instruction": "Üçüncü araçta yalnız sol ön hoparlör sessiz.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.hoparlor-kapi",
+        "question": "Arama nereden başlar?",
+        "options": [
+          { "label": "O hoparlörün kendi halkasından: ayar, soketi, direnci, kablosu ve körükteki geçişi — ayrıca aynı kanalın bilinen sağlam bir hoparlörle denenmesi", "verdict": "kendi-halkasi", "correct": true, "explain": "Bir hoparlör sessizse ortak halkalar zaten sağlamdır — kaynak çalışıyor, yükseltici açılıyor, diğer kanallar ses veriyor. O yüzden arama o hoparlörün kendi halkasında yapılır ve sıra ucuzdan pahalıya kurulur. Sıfırıncı adım ayardır: bazı sistemlerde ses dengesi ya da bir kanal ayarı yanlış kalmış olabilir; bu hiçbir şey sökmeden elenir. Birincisi sokettir: yarım oturmuş bir soket ya da yerinden çıkmış bir uç en yaygın sebeptir ve bakmak bedavadır. İkincisi hoparlörün direncidir: multimetreyle ölçülür — sonsuz okunuyorsa bobin kopuktur ve hoparlör değişir, sıfıra yakın okunuyorsa bobin kendi içinde kısa devre olmuştur ve bu, yükselticiyi de korumaya sokabilecek tehlikeli bir durumdur. Üçüncüsü kablodur ve kapı hoparlörlerinde özel bir yeri vardır: kablo körükten geçer, yani aracın tek hareketli geçişinden — cam arızasında olduğu gibi burada da kapı açıkken ve kapalıyken ölçüm farklıysa kopuk körüktedir. Dördüncüsü kanalın kendisidir: bilinen sağlam bir hoparlör o kanala kısa bir kabloyla bağlanıp denenir; ses geliyorsa suçlu hoparlördür, gelmiyorsa suçlu hat ya da yükselticinin o kanalıdır." },
+          { "label": "Yükseltici değiştirilir", "verdict": "anfi", "explain": "Diğer kanallar çalışıyorsa cihaz büyük ölçüde sağlamdır." },
+          { "label": "Baş ünite değiştirilir", "verdict": "unite", "explain": "Ortak halka sağlam; tek kanal etkilenmiş." },
+          { "label": "Bütün hoparlörler değiştirilir", "verdict": "hepsi", "explain": "Yalnız biri sessiz; hepsini değiştirmek gereksiz masraf." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Kapı hoparlöründe kablo körükten geçer. Kapı açık/kapalı ölçüm farkı burada da suçluyu gösteriyor."
+    },
+    {
+      "id": 5,
+      "instruction": "Dördüncü araçta ses var ama çok kısık ve bozuk.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.ses-guc-kablosu",
+        "question": "İlk şüphe nedir?",
+        "options": [
+          { "label": "Besleme ve şase: yük altında gerilim düşüyorsa yükseltici gücünü veremez ve sesi bozar — kesit, bağlantı sıkılığı ve şase kalitesi ölçülerek elenir", "verdict": "besleme-sase", "correct": true, "explain": "Kısık ve bozuk ses, sistemin yeterli gücü alamadığının en tipik belirtisidir ve ses kablolaması dersinde bunun ölçümünü öğrendin: sessizken normal görünen gerilim, ses yükseldiğinde belirgin biçimde düşüyorsa hat yükü taşıyamıyordur. Sebepler sırayla elenir: kablo kesiti yetersiz olabilir, akü ya da şase bağlantısı gevşemiş ve oksitlenmiş olabilir, sigorta tutucusunda kötü bir temas olabilir, şase boyalı bir yüzeye bağlanmış olabilir. Kaybın gidiş yolunda mı dönüş yolunda mı olduğu iki ayrı ölçümle ayrılır ve sahada çoğu zaman suçlu şasedir. İkinci şüpheli ayar zinciridir: kaynağın çıkış seviyesi ile yükselticinin giriş ayarı birbirine uygun değilse ses ya çok kısık kalır ya erken bozulur; bu ayarlar cihazların belgelerine göre kurulur. Üçüncü şüpheli hoparlörün kendisidir: uzun süre bozuk sinyalle sürülmüş bir hoparlör kalıcı olarak boğuk ve çatlak ses verir — bu, hoparlör montaj dersinde müşteriye söylenen uyarının karşılığıdır: ses bozulmaya başladığında kısılır. Dördüncü şüpheli kaynağın kendisidir: düşük kaliteli bir kayıt ya da telefonun kendi ses ayarı; bu bedava elenir ve en başta denenir." },
+          { "label": "Hoparlörler hemen değiştirilir", "verdict": "hoparlor", "explain": "Önce besleme, şase ve ayar elenir." },
+          { "label": "Ses daha çok açılır", "verdict": "ac", "explain": "Bozuk sinyali yükseltmek hoparlörü yakar." },
+          { "label": "Yükseltici değiştirilir", "verdict": "anfi", "explain": "Cihaz doğru beslenmiyorsa yenisi de aynı olur." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Kısık ve bozuk ses genelde cihazın değil hattın sorunu. Yeni cihaz aynı hatta aynı sesi verir."
+    },
+    {
+      "id": 6,
+      "instruction": "Beşinci araçta şikâyet 'ses, ünite değişiminden sonra kesildi' diye geliyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.anfi",
+        "question": "Nereden bakılır?",
+        "options": [
+          { "label": "Montajın kendisinden: 'açıl' ucu bağlandı mı, adaptör şeması doğru okundu mu, araçta fabrika yükselticisi var mı, soketler tam oturdu mu", "verdict": "montajdan", "correct": true, "explain": "Şikâyet bir montajdan sonra başlıyorsa şüphe önce o montajdadır — bu cümle anten dersinde konuldu ve burada karşılığını buluyor. Ünite değişiminden sonra ses kesilmesinin dört klasik sebebi var. Birincisi 'açıl' ucudur: araçta fabrika yükselticisi varsa ve yeni ünite o ucu sürmüyorsa yükseltici hiç açılmaz; sistem tamamen sessiz kalır ve cihaz sağlam görünür. İkincisi adaptör şemasının yanlış okunmasıdır: hoparlör uçları çaprazlanmış ya da bir kanal hiç bağlanmamış olabilir; belirti, bazı hoparlörlerin sessiz kalması ya da sesin garip dağılmasıdır. Üçüncüsü fabrika yükselticisinin varlığıdır ve en çok atlananıdır: bazı araçlarda baş ünite doğrudan hoparlörleri sürmez, ayrı bir yükselticiye sinyal verir; yeni ünite bu düzeni bilmiyorsa ya hiç ses çıkmaz ya çok kısık çıkar ve çözüm, o araca uygun bir arayüz ya da bağlantı düzenidir. Dördüncüsü kutup ve soket kalitesidir: yarım takılmış çok pinli bir soket, bazı kanalların çalışıp bazılarının çalışmamasına yol açar — ayna dersinde aynı deseni görmüştün. Bu dört maddenin hepsi montaja bakarak elenir ve hiçbiri yeni parça almayı gerektirmez." },
+          { "label": "Yeni ünite bozuktur", "verdict": "unite-bozuk", "explain": "Önce montaj elenir; en yaygın sebep bağlantıdır." },
+          { "label": "Hoparlörler yanmıştır", "verdict": "hoparlor", "explain": "Değişimle aynı anda dördü birden yanmaz." },
+          { "label": "Akü zayıftır", "verdict": "aku", "explain": "Ses kesilmesini tek başına açıklamaz." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Fabrika yükselticisi olan araçta baş ünite hoparlörleri doğrudan sürmez. Bu, en çok atlanan sebep."
+    },
+    {
+      "id": 7,
+      "instruction": "Arıza bulundu. Teslim öncesi.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.hoparlor-arka",
+        "question": "Ne doğrulanır?",
+        "options": [
+          { "label": "Her hoparlör tek tek dinlenir, farklı kaynaklar ve farklı seviyeler denenir, motor çalışırken de dinlenir ve sökülen bütün paneller kablo sıkışmadan yerine takılır", "verdict": "tam-dogrulama", "correct": true, "explain": "Ses arızalarında teslim doğrulaması, teşhisin başındaki kapsam sorusunun aynısıyla yapılır. Birincisi kapsamdır: ses dengesi tek tek her yöne kaydırılarak her hoparlörün ses verdiği doğrulanır — onarım sırasında başka bir sokete dokunulmuş olabilir. İkincisi kaynaktır: en az iki farklı kaynak denenir, çünkü tek bir kaynakta olan sorun bütün sistemi suçlu göstermiş olabilir. Üçüncüsü seviyedir: düşük, orta ve yüksek seviyede dinlenir — bazı arızalar yalnız yük altında ortaya çıkar ve düşük seviyede saklanır. Dördüncüsü motor durumudur: motor çalışırken de dinlenir, çünkü şarj kaynaklı gürültü ve besleme sorunları yalnız o durumda görünür; parazit dersindeki liste burada da geçerli. Beşincisi mekaniktir: sökülen paneller tam oturmuş, hiçbir kablo sıkışmamış ve kapı işlevleri denenmiş olmalı. Altıncısı, montajdan kaynaklı bir arıza bulunduysa aynı hatanın başka bir yerde tekrarlanıp tekrarlanmadığına bakmaktır — bir kapıda yanlış bağlanan uç, büyük olasılıkla diğerinde de yanlıştır. Ve müşteriye ne bulunduğu anlatılır: sebep söylenmeden yapılan onarım müşteri için sihirdir; söylenirse hem güven kurar hem müşteriyi bilgilendirir." },
+          { "label": "Ses geliyorsa yeterlidir", "verdict": "ses-var", "explain": "Kapsam, kaynak, seviye ve motor durumu ayrıca denenir." },
+          { "label": "Yalnız arızalı hoparlör dinlenir", "verdict": "tek", "explain": "Onarım sırasında başka bir sokete dokunulmuş olabilir." },
+          { "label": "Müşteri denesin", "verdict": "musteri", "explain": "Doğrulama teslimden önce ustanın işidir." }
+        ]
+      },
+      "camera": "aksesuar",
+      "teachingNote": "Bir kapıda yanlış bağlanan uç, büyük olasılıkla diğerinde de yanlıştır. Sırada 'akü boşalıyor'."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Bütün hoparlörler sessiz, yükselticinin sürekli beslemesi var ama 'açıl' ucunda gerilim yok. Ne demek?",
+        "a": "acil-ucu",
+        "options": [
+          { "verdict": "acil-ucu", "label": "Yükseltici hiç açılmıyor; uç bağlanmamış, yanlış uca bağlanmış ya da kaynak cihaz onu sürmüyor olabilir", "explain": "Yükseltici üç uçla çalışır: sürekli besleme, şase ve 'açıl' ucu. Üçüncüsü olmadan cihaz hiç uyanmaz. Ölçüm kaynak açıkken ve kapalıyken iki durumda yapılır. Sebepler sırayla: bağlantı, kaynak cihazın ayarı, kablo, en son cihazın kendisi. Gerilim VAR ama yükseltici yine açılmıyorsa şüphe şaseye ve cihaza kayar — şase önce bakılır, çünkü ucuzdur." },
+          { "verdict": "anfi-bozuk", "label": "Yükseltici bozuktur", "explain": "Açılma komutu hiç gelmiyor; cihaz denenmeden suçlanmaz." },
+          { "verdict": "hoparlor", "label": "Hoparlörler bozuktur", "explain": "Hepsi birden bozulmaz." },
+          { "verdict": "sigorta", "label": "Sigorta atmıştır", "explain": "Sürekli besleme geliyor." }
+        ]
+      },
+      {
+        "q": "Ses, ünite değişiminden sonra kesildi. Nereden bakılır?",
+        "a": "montajdan",
+        "options": [
+          { "verdict": "montajdan", "label": "Montajın kendisinden: 'açıl' ucu, adaptör şeması, fabrika yükselticisinin varlığı ve soketlerin tam oturması", "explain": "Şikâyet bir montajdan sonra başlıyorsa şüphe önce o montajdadır. Bazı araçlarda baş ünite hoparlörleri doğrudan sürmez, ayrı bir yükselticiye sinyal verir — yeni ünite bu düzeni bilmiyorsa ses hiç çıkmaz ya da çok kısık çıkar. Dört maddenin hiçbiri yeni parça almayı gerektirmez." },
+          { "verdict": "unite-bozuk", "label": "Yeni ünite bozuktur", "explain": "Önce montaj elenir." },
+          { "verdict": "hoparlor", "label": "Hoparlörler yanmıştır", "explain": "Değişimle birlikte dördü birden yanmaz." },
+          { "verdict": "aku", "label": "Akü zayıftır", "explain": "Ses kesilmesini açıklamaz." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 2'deki 12,5 V ve 0,3 V SENARYO okumalarıdır; istenen FARKTIR (12,2 V) ve ders 'açıl' ucu için beklenen bir gerilim değeri iddia etmiyor.",
+    "sourceRequired": "'Açıl' ucunun beklenen gerilimi ve akımı, hoparlör nominal direnci, yükseltici koruma eşikleri, giriş-çıkış seviye ayarları ve kabul edilebilir gerilim düşümü bilinçle VERİLMEDİ; hepsi cihaza ve araca özgüdür.",
+    "kapsam": "Araç haberleşme ağına ve fabrika ses işlemcisine müdahale KAPSAM DIŞIDIR — bu alanın kırmızı çizgisi. Yükselticinin içindeki elektronik onarım ve hoparlör bobini sarımı kapsam dışı.",
+    "kaynak": "Bu ders bu alanın aşama 7-8 derslerinin sentezidir; yeni bilgi getirmiyor, öğrenilenleri gerçek bir şikâyet üzerinde sınıyor.",
+    "reviewedByMechanic": false
+  }
+}

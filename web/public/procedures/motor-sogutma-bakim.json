@@ -1,0 +1,161 @@
+{
+  "id": "motor.sogutma-bakim",
+  "area": "motor-mekanik",
+  "stage": 5,
+  "title": "Soğutma Sistemi Kontrolü ve Hava Alma",
+  "vehicleClass": "binek-arac",
+  "estimatedMinutes": 20,
+  "prerequisites": ["temel.el-aletleri", "temel.kkd-ve-atolye"],
+  "learningGoals": [
+    "Basınçlı sistemi güvenle açmak ve neden beklendiğini bilmek",
+    "Soğutucunun halinden sistemin durumunu okumak",
+    "Karışım oranını hesaplamak ve hava kilidini teşhis etmek"
+  ],
+
+  "safety": [
+    { "rule": "Sıcak motorda radyatör ya da genleşme deposu kapağı AÇILMAZ", "why": "Sistem basınç altındadır ve sıvı 100 °C'nin üzerindedir. Kapak açılınca basınç bir anda kalkar, sıvı aynı anda kaynayıp kaynar buhar ve sıvı olarak yüze fışkırır. Atölyedeki en yaygın ağır yanık kazası budur", "blocksStart": true },
+    { "rule": "Fan, kontak kapalıyken bile kendiliğinden dönebilir", "why": "Çoğu araçta fan, motor durduktan sonra da termik anahtarla devreye girer. Motor sıcakken fan bölgesine el sokulmaz", "blocksStart": true },
+    { "rule": "Sıcak motora soğuk su eklenmez", "why": "Ani sıcaklık farkı döküm ve alüminyum parçalarda çatlak yapar. Ekleme yapılacaksa motor soğuk olmalı ya da eklenen sıvı ılık olmalı", "blocksStart": false },
+    { "rule": "Antifriz zehirlidir ve tatlıdır", "why": "Etilen glikol tatlı kokar ve tadı tatlıdır; bu yüzden hayvanlar ve çocuklar içer. Yere döküleni bekletme, kabı açık bırakma", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.eldiven", "label": "Kimyasal dayanımlı eldiven", "required": true },
+    { "id": "tool.huni", "label": "Hava alma hunisi", "required": false },
+    { "id": "tool.termometre", "label": "Temassız termometre", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Araç yeni durdu, gösterge kırmızıya yakın. Müşteri 'suyu eksilmiş' diyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.radyator-kapagi",
+        "question": "Şu anda ne yaparsın?",
+        "options": [
+          { "label": "Hiçbir kapağı açmam; motoru soğutur, seviyeyi genleşme deposunun dışından okurum", "verdict": "bekle-disardan-oku", "correct": true, "explain": "Genleşme deposu şeffaftır ve üzerinde MIN-MAX çizgileri vardır; seviye kapağı açmadan okunur. Sıcak sistemde sıvı zaten genleşmiştir, o yüzden sıcak okunan seviye gerçek seviye de değildir. Doğru cevap iki şeyi birden söylüyor: güvenlik için bekle, doğru ölçüm için de bekle." },
+          { "label": "Kapağı bezle sararak yavaşça açarım", "verdict": "bezle-ac", "explain": "En yaygın ve en tehlikeli hata. Bez basıncı tutmaz; kapak ilk kademede bile çıkan buharı yönlendirmez, sadece elini korur — yüzünü korumaz." },
+          { "label": "Motoru çalıştırıp fanın çalışıp çalışmadığına bakarım", "verdict": "fan-testi", "explain": "Fan kontrolü gerekli bir adımdır ama sıraya sonra gelir. Zaten kızgın bir motoru yeniden çalıştırmak, teşhis uğruna motor yakmaktır." },
+          { "label": "Soğuk su ekleyip hemen soğuturum", "verdict": "soguk-su", "explain": "Ani sıcaklık farkı silindir kapağını çatlatır. Ayrıca eklediğin saf su, sistemdeki antifriz oranını da bozar." }
+        ]
+      },
+      "camera": "motor-ust",
+      "teachingNote": "Soğutma sisteminde acele etmek işi hızlandırmaz. Motorun soğuması 30-45 dakikadır; o süre işin parçasıdır, kaybı değil."
+    },
+    {
+      "id": 2,
+      "instruction": "Motor soğudu. Kapağı bastırıp ters yönde çevirerek aç.",
+      "interaction": {
+        "type": "rotate",
+        "target": "part.radyator-kapagi",
+        "direction": "ccw",
+        "turns": 1,
+        "requiresGesture": true
+      },
+      "camera": "motor-ust",
+      "commonMistake": {
+        "if": "ters-yon",
+        "feedback": "Ters yöne çeviriyorsun. Açmak için saat yönünün tersi."
+      },
+      "hint": "Kapak önce bastırılır, sonra çevrilir. Bastırmadan çevirmeye çalışmak kapağın tırnaklarını yer.",
+      "teachingNote": "Bastır-çevir bir zorluk değil, emniyet mandalıdır: kapak ilk kademede durur ve varsa kalan basıncı yan taraftan boşaltır. Kapak da bir parçadır ve yaşlanır — yayı zayıflayan kapak sistemi basınçlandıramaz, kaynama noktası düşer ve motor 'sebepsiz' kaynar."
+    },
+    {
+      "id": 3,
+      "instruction": "Depodaki sıvı kahverengi ve dibinde tortu var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.genlesme-deposu",
+        "question": "Kahverengi, tortulu soğutucu neyi gösterir?",
+        "options": [
+          { "label": "Antifriz ömrünü doldurmuş; koruyucu katkılar tükenmiş ve korozyon başlamış", "verdict": "omru-dolmus", "correct": true, "explain": "Antifriz yalnız donmayı önlemez; içinde korozyon önleyici katkılar vardır ve bu katkıların ömrü sınırlıdır. Tükendiklerinde döküm blok, alüminyum kapak ve bakır petek birbirine karşı elektrokimyasal olarak aşınmaya başlar. Kahverengi tortu bu aşınmanın kendisidir. Sistem yıkanır, komple değiştirilir — üstüne eklemek çözüm değildir." },
+          { "label": "Renk önemli değil, seviye doğruysa sorun yok", "verdict": "renk-onemsiz", "explain": "Seviye sistemin dolu olduğunu söyler, sağlıklı olduğunu değil. Kirlenmiş soğutucu peteği ve kalorifer radyatörünü tıkar; tıkanma seviyeden görülmez." },
+          { "label": "Kapak contası patlamış", "verdict": "kapak-contasi", "explain": "Kapak contası kaçağında soğutucu kahverengi değil, sütlü kahve renginde ve köpüklü olur — çünkü içine yağ karışmıştır. Tortu ile emülsiyon farklı görüntülerdir ve farklı arızalardır." },
+          { "label": "Yanlış marka antifriz konmuş", "verdict": "yanlis-marka", "explain": "Uyumsuz tip karıştırmak gerçekten jelleşme yapar ama görüntüsü jel ve çökelti şeklindedir. Buradaki tablo klasik yaşlanma ve korozyondur." }
+        ]
+      },
+      "camera": "motor-ust",
+      "teachingNote": "Soğutucu bir sıvı değil, bir kimyasaldır ve son kullanma tarihi vardır. 'Su eksilmiş, ekleyelim' cümlesi bu yüzden yanlıştır: eklenen su katkı oranını daha da düşürür."
+    },
+    {
+      "id": 4,
+      "instruction": "Sistem 8 litre alıyor ve %50 karışım isteniyor. Kaç litre saf antifriz gerekir? Değeri gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.genlesme-deposu",
+        "unit": "litre",
+        "acceptRange": [3.9, 4.1]
+      },
+      "camera": "motor-ust",
+      "hint": "Karışım oranı hacim oranıdır: sistemin yarısı antifriz, yarısı saf su.",
+      "teachingNote": "8'in %50'si 4 litredir; kalan 4 litre saf sudur — musluk suyu değil, saf su, çünkü musluk suyundaki kireç ve mineraller peteğin içinde birikir. Şaşırtıcı olan şu: %100 saf antifriz daha iyi korumaz, daha KÖTÜ soğutur. Antifrizin ısı taşıma kapasitesi sudan düşüktür; suyla karıştırılmasının sebebi budur. Su soğutur, antifriz suyun donmasını ve kaynamasını yönetir. İkisi birlikte çalışır."
+    },
+    {
+      "id": 5,
+      "instruction": "Doldurma sonrası: gösterge oynak, kalorifer soğuk üflüyor, üst hortum soğuk kalıyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.ust-hortum",
+        "question": "Bu üç belirti birlikte neyi gösterir?",
+        "options": [
+          { "label": "Sistemde hava var — hava kilidi oluşmuş", "verdict": "hava-kilidi", "correct": true, "explain": "Su pompası sıvı pompalamak için tasarlanmıştır; hava cebine geldiğinde döner ama hiçbir şey taşımaz. Sıcaklık sensörü sıvının içinde olmadığı için gösterge gerçeği göstermez ve oynar. Kalorifer radyatörü sistemin en yüksek noktalarından biridir, hava önce orada toplanır — bu yüzden soğuk üfler. Üç belirti aynı tek nedene çıkıyor." },
+          { "label": "Su pompası bozulmuş", "verdict": "pompa", "explain": "Pompa arızasında da dolaşım durur ama gösterge oynak değil, sürekli yükselen olur ve genelde kayış bölgesinden ses ya da kaçak gelir. Ayrıca arıza doldurmadan hemen sonra başlamamıştır." },
+          { "label": "Termostat kapalı kalmış", "verdict": "termostat-kapali", "explain": "Kapalı kalan termostatta motor kaynar ve alt hortum soğuk kalır, üst hortum kaynar — burada tam tersi tarif ediliyor." },
+          { "label": "Radyatör tıkalı", "verdict": "radyator-tikali", "explain": "Tıkalı radyatörde soğutma yetersiz kalır, sıcaklık kademeli yükselir. Kaloriferin soğuk üflemesi ve göstergenin oynaması tıkanmanın tipik tablosu değildir." }
+        ]
+      },
+      "camera": "motor-ust",
+      "teachingNote": "Tek belirti yanıltır, üç belirti birlikte teşhis eder. Ustalık tek tek belirti toplamak değil, belirtileri aynı nedene bağlayabilmektir."
+    },
+    {
+      "id": 6,
+      "instruction": "Havayı nasıl alırsın?",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.genlesme-deposu",
+        "question": "Doğru hava alma yöntemi hangisi?",
+        "options": [
+          { "label": "Aracın önünü yükseltip depoyu en yüksek nokta yaparım, kaloriferi en sıcağa açarım, kapak açıkken rölantide ısıtıp fan devreye girene kadar kabarcık kesilmesini beklerim", "verdict": "dogru-yontem", "correct": true, "explain": "Hava yukarı çıkar; doldurma ağzını sistemin en yüksek noktası yapmak havaya tek çıkış yolu bırakır. Kaloriferin açılması kalorifer radyatörünü de devreye sokar, yoksa oradaki hava sıkışıp kalır. Termostat açılana ve fan dönene kadar beklemek, büyük çevrimin gerçekten dolaştığını kanıtlar — bu iş 'göründü, tamam' ile bitmez, kabarcık kesilene kadar sürer." },
+          { "label": "Gaz verip motoru hızlı ısıtırım, işi kısaltırım", "verdict": "gaz-ver", "explain": "Yüksek devir sıvıyı köpürtür ve havayı sisteme dağıtır; toplanmasını beklediğin havayı tam tersine karıştırmış olursun." },
+          { "label": "Kapağı kapatıp öyle ısıtırım, basınç havayı sıkıştırır", "verdict": "kapak-kapali", "explain": "Basınç havayı sıkıştırır ama dışarı atmaz; sistem soğuyunca hava yine oradadır. Havanın çıkabilmesi için açık bir yol gerekir." },
+          { "label": "Depoyu ağzına kadar doldurmam yeter", "verdict": "agzina-kadar", "explain": "Doldurmak sıvıyı içeri alır, havayı dışarı çıkarmaz — hava bloğun ve kaloriferin içindeki ceplerdedir. Ayrıca fazla dolan depo, sıvı ısınıp genleşince taşar." }
+        ]
+      },
+      "camera": "motor-ust",
+      "teachingNote": "Hava almak dolum işleminin devamı değil, ayrı bir iştir. Havası alınmamış bir soğutma sistemi, dolu görünen ama motoru koruyamayan sistemdir."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Sıcak motorda radyatör kapağını açmak neden bu kadar tehlikelidir?",
+        "a": "basinc-kalkinca-kaynar",
+        "options": [
+          { "verdict": "basinc-kalkinca-kaynar", "label": "Basınç kalkınca sıvı anında kaynar ve fışkırır", "explain": "Sistem basınç altında olduğu için soğutucu 100 °C'yi geçmiş olmasına rağmen sıvı halde durur. Kapak açıldığı anda basınç atmosfere düşer ve o sıvının tamamı bir anda kaynama noktasının üstünde kalır: patlarcasına buharlaşır. Bu bir sıçrama değil, bir püskürmedir ve yüze gelir." },
+          { "verdict": "kapak-kirilir", "label": "Kapak kırılır", "explain": "Kapağın kırılması önemsiz bir sonuçtur; asıl tehlike insandadır." },
+          { "verdict": "hava-girer", "label": "Sisteme hava girer", "explain": "Hava girmesi gerçekten olur ve düzeltilmesi gerekir ama tehlike sıralamasında yanığın çok arkasındadır." },
+          { "verdict": "tehlike-yok", "label": "Dikkatli açılırsa tehlike yok", "explain": "Dikkat basıncı düşürmez. Tek güvenli yöntem soğumasını beklemektir." }
+        ]
+      },
+      {
+        "q": "Neden %100 saf antifriz kullanılmaz?",
+        "a": "isi-tasima-dusuk",
+        "options": [
+          { "verdict": "isi-tasima-dusuk", "label": "Saf antifrizin ısı taşıma kapasitesi sudan düşüktür; motoru daha kötü soğutur", "explain": "Sezgiye ters gelir ama ölçülmüş bir gerçektir: soğutmayı asıl yapan sudur. Antifrizin işi suyun donmasını engellemek, kaynama noktasını yükseltmek ve metalleri korumaktır. Saf antifriz hem daha kötü soğutur hem de donma koruması belli bir orandan sonra iyileşmez, tersine kötüleşir." },
+          { "verdict": "pahali", "label": "Sadece pahalı olduğu için", "explain": "Maliyet bir sebep değil; teknik sebep ısı taşımadır." },
+          { "verdict": "conta-yer", "label": "Contaları yer", "explain": "Doğru oranda antifriz contalara zarar vermez; sorun soğutma performansındadır." },
+          { "verdict": "sinirsiz-iyi", "label": "Kullanılabilir, ne kadar çoksa o kadar iyi", "explain": "Bu yaygın yanlış tam olarak bu dersin düzelttiği şeydir." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "sourceRequired": "8 litre ve %50 egzersiz değerleridir. Sistem hacmi, antifriz tipi (IAT/OAT/HOAT vb.), değişim aralığı ve kapak basıncı araca özgüdür; üretici kılavuzundan okunur ve kaynaksız yayınlanmaz.",
+    "kapsam": "Radyatör kapağı, genleşme deposu ve üst hortum modeli bekliyor. Model gelene kadar adımlar metinle oynanır; kapak çevirme animasyonlu değildir.",
+    "reviewedByMechanic": false
+  }
+}

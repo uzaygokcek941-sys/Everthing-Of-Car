@@ -1,0 +1,174 @@
+{
+  "id": "elektrik.aku-guvenlik",
+  "area": "arac-elektrik",
+  "stage": 0,
+  "title": "Akü Güvenliği: Kutup Sökme Sırası ve Neden O Sıra",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 20,
+  "prerequisites": ["temel.kkd-ve-atolye"],
+  "learningGoals": [
+    "Kutup sökme ve takma sırasını ezberle değil sebebiyle bilmek",
+    "Anahtarın şaseye değmesinin neden yangın çıkardığını açıklamak",
+    "Akünün gerilimi ile verebildiği akımı birbirinden ayırmak"
+  ],
+
+  "safety": [
+    { "rule": "Akünün yakınında kıvılcım, alev ve sigara olmaz", "why": "Şarj sırasında akü hidrojen üretir ve hidrojen geniş bir karışım aralığında patlar. Kutup üzerinde çıkan tek bir kıvılcım, kapağın altındaki gazı tutuşturup akünün gövdesini parçalayabilir ve içindeki asidi savurabilir", "blocksStart": true },
+    { "rule": "Gözlük takılır", "why": "Akü elektroliti sülfürik asittir. Gözle temasında saniyeler içinde kalıcı hasar bırakır ve müdahale süresi çok kısadır", "blocksStart": true },
+    { "rule": "Metal saat, yüzük ve bileklik çıkarılır", "why": "Akü kısa devrede yüzlerce amper verebilir. Artı kutupla gövde arasına giren bir yüzük saniyeler içinde kızıl kora döner; parmaktan çıkarılamayacağı için yanık derinleşir", "blocksStart": true },
+    { "rule": "Sökülen artı kablo ucu serbest bırakılmaz, yalıtılır", "why": "Serbest kalan artı kablo, altındaki gövdeye değdiği anda kısa devre yapar. Bez ya da yalıtım başlığıyla örtülür ve sabitlenir", "blocksStart": false }
+  ],
+
+  "tools": [
+    { "id": "tool.anahtar-10", "label": "10 mm anahtar", "required": true },
+    { "id": "tool.eldiven", "label": "Eldiven", "required": true },
+    { "id": "tool.gozluk", "label": "Koruyucu gözlük", "required": true },
+    { "id": "tool.tel-firca", "label": "Kutup temizleme fırçası", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Akü tezgâhta. İki kutup da bağlı. Sökmeye başlayacaksın.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.aku-eksi-kutup",
+        "question": "Hangi kutup önce sökülür?",
+        "options": [
+          { "label": "Önce eksi kutup; aracın bütün gövdesi eksi uçtur ve eksi ayrılınca artı tarafta kısa devre yapacak yol kalmaz", "verdict": "once-eksi", "correct": true, "explain": "Araçta eksi kutup gövdenin tamamına bağlıdır: şasi, motor bloğu, karoseri hepsi eksi uçtur. Artı kutubu sökerken anahtarın ucu bu gövdenin herhangi bir yerine değerse, akünün artısı ile eksisi arasında anahtar üzerinden bir yol kurulmuş olur ve akü bütün gücünü o anahtara boşaltır. Önce eksiyi sökersen bu yol daha başında kesilir; artıyı sökerken anahtar gövdeye değse bile devre tamamlanmaz. Kural budur ve sebebi budur: sökerken önce eksi, takarken en son eksi." },
+          { "label": "Önce artı kutup, çünkü tehlikeli olan odur", "verdict": "once-arti", "explain": "Tehlikeli olan gerçekten artıdır — tam da bu yüzden en son sökülür. Artıyı ilk sökmek, anahtarın gövdeye değmesi hâlinde kısa devre yolunu açık bırakır." },
+          { "label": "Sıra önemli değil, ikisi de aynı", "verdict": "sira-onemsiz", "explain": "Sıra bu işin bütün güvenliğidir. Yanlış sırada sökülen bir akü, anahtarı eriten bir kısa devreye ve gaz varsa patlamaya yol açar." },
+          { "label": "İkisi aynı anda gevşetilir", "verdict": "ayni-anda", "explain": "İki kutupla aynı anda uğraşmak, anahtarın ikisine birden köprü kurma riskini yaratır. Tek kutupla çalışılır." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Bu sıra ezberlenecek bir kural değil, tek cümlelik bir mantığın sonucudur: gövde eksidir. Bunu anlayan usta sırayı bir daha unutmaz."
+    },
+    {
+      "id": 2,
+      "instruction": "Eksi kelepçenin somununu 10'luk anahtarla gevşet.",
+      "interaction": {
+        "type": "unscrew",
+        "target": "part.aku-eksi-kelepce",
+        "count": 1,
+        "turns": 4,
+        "tool": "tool.anahtar-10"
+      },
+      "camera": "tezgah",
+      "hint": "Somunu tamamen çıkarma; kelepçeyi açacak kadar gevşetmek yeterli.",
+      "teachingNote": "Somunu tamamen sökmek gereksiz risktir: düşen somun kutupla gövde arasına köprü kurabilir. Kelepçeyi açacak kadar gevşetmek yeter."
+    },
+    {
+      "id": 3,
+      "instruction": "Gevşeyen eksi kelepçeyi kutuptan yukarı çek.",
+      "interaction": {
+        "type": "pull",
+        "target": "part.aku-eksi-kelepce",
+        "axis": "y",
+        "distance": 0.3
+      },
+      "camera": "tezgah",
+      "hint": "Kelepçe sıkışmışsa hafifçe çevirerek gevşet; kutbu kaldıraçla zorlama.",
+      "teachingNote": "Kelepçe çıkmıyorsa tornavidayla kutbun dibinden kaldırma. Kurşun kutup yumuşaktır; dibinden zorlanan kutup akünün içinde gevşer ve akü çöpe gider. Kelepçe çevrilerek gevşetilir ya da kelepçe çektirmesi kullanılır."
+    },
+    {
+      "id": 4,
+      "instruction": "Eksi ayrıldı. Yanındaki çırak anahtarı artı kutbun üstüne bırakıyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.aku-arti-kutup",
+        "question": "Bu neden tehlikeli?",
+        "options": [
+          { "label": "Anahtar artı kutupla herhangi bir gövde parçasına aynı anda değerse, akü yüzlerce amperi anahtarın üzerine boşaltır", "verdict": "kisa-devre", "correct": true, "explain": "Akü küçük bir kutuya benzer ama kısa devrede verebileceği akım yüzlerce amperdir. Bu akım bir anahtarın üzerinden geçtiğinde anahtar saniyeler içinde kızarır ve tutulamaz hâle gelir; yanık temas eden metalden gelir. Üstüne, çıkan kıvılcım akünün üzerindeki hidrojeni tutuşturabilir. Bu yüzden aküyle çalışırken hiçbir metal alet kutupların üzerine bırakılmaz ve artı kutup, iş bitene kadar yalıtılır. Aküyü tehlikeli yapan şey gerilimi değil, verebildiği akımdır: 12 volt insanı çarpmaz ama metali eritir." },
+          { "label": "Tehlikeli değil, 12 volt insanı çarpmaz", "verdict": "12v-zararsiz", "explain": "Doğru: 12 volt insanı çarpmaz. Ama tehlike çarpmak değil, akımın metali ısıtmasıdır. İkisi ayrı şeylerdir." },
+          { "label": "Anahtar mıknatıslanır", "verdict": "miknatis", "explain": "Mıknatıslanma önemsiz bir yan etkidir; asıl tehlike kısa devre akımıdır." },
+          { "label": "Aküyü boşaltır ama zararı olmaz", "verdict": "sadece-bosaltir", "explain": "Aküyü boşaltmakla kalmaz; anahtarı kızdırır, yanık yapar ve gaz varsa patlama riski üretir." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Aküde tehlikeli olan gerilim değil akımdır. Bu ayrımı bir kez kuran öğrenci, sonraki derslerde akım ölçümünün neden ayrı bir dikkat istediğini de anlar."
+    },
+    {
+      "id": 5,
+      "instruction": "Artı kelepçenin somununu gevşet ve kutuptan ayır.",
+      "interaction": {
+        "type": "unscrew",
+        "target": "part.aku-arti-kelepce",
+        "count": 1,
+        "turns": 4,
+        "tool": "tool.anahtar-10"
+      },
+      "camera": "tezgah",
+      "hint": "Anahtarı yalnız somuna değdir; sapı gövdeye yaslama.",
+      "teachingNote": "Eksi ayrıldığı için bu adım artık güvenli. Yine de alışkanlık bozulmaz: anahtarın sapı gövdeye yaslanmaz, çünkü bir sonraki araçta eksi bağlı olabilir."
+    },
+    {
+      "id": 6,
+      "instruction": "Kutup başlarında beyazımsı, kabarmış bir tabaka var.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.aku-arti-kutup",
+        "question": "Bu tabaka nedir ve ne yapar?",
+        "options": [
+          { "label": "Kutup korozyonudur; temas direncini artırır ve marşta gerilim düşümü yaratarak akü sağlamken bile arıza belirtisi üretir", "verdict": "korozyon", "correct": true, "explain": "Kutup üzerindeki beyaz kabarma, akünün nefes deliğinden çıkan asit buharının kurşun ve bakırla tepkimesinden oluşur. Elektrik açısından yaptığı iş bir direnç eklemektir. Bu direnç küçük akımlarda fark edilmez — farlar yanar, radyo çalışır — ama marş anında yüzlerce amper geçerken üzerinde ciddi bir gerilim düşümü yaratır ve marş motoruna ulaşan gerilim düşer. Sonuç, sağlam bir aküyle 'akü bitmiş' şikâyetidir. Temizliği basittir: kelepçe sökülür, kutup ve kelepçe fırçalanır, kuru monte edilir. İleride öğreneceğin gerilim düşümü testi tam olarak bu tür arızaları bulmak için vardır." },
+          { "label": "Zararsız bir tozdur, silinir geçilir", "verdict": "zararsiz", "explain": "Zararsız değildir: temas direnci ekler. Ayrıca asidiktir, çıplak elle silinmez." },
+          { "label": "Akünün dolu olduğunu gösterir", "verdict": "dolu", "explain": "Doluluğun göstergesi değildir; asit buharının dışarı sızdığını gösterir." },
+          { "label": "Yalnız görüntü sorunudur", "verdict": "gorunus", "explain": "Görüntü sorunu olsa temizlemek isteğe bağlı olurdu; elektriksel etkisi olduğu için zorunludur." }
+        ]
+      },
+      "camera": "tezgah",
+      "hint": "Beyaz kabarma asidiktir; çıplak elle silinmez.",
+      "teachingNote": "Elektrikte 'temas' bir parça değildir ama parça gibi arızalanır. Bu dersten sonra her arıza aramasında sorulacak sorulardan biri şudur: buradaki temas gerçekten temas mı?"
+    },
+    {
+      "id": 7,
+      "instruction": "İş bitti, akü geri bağlanacak.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.aku-eksi-kelepce",
+        "question": "Takma sırası nedir?",
+        "options": [
+          { "label": "Önce artı, en son eksi; sökmenin tam tersi", "verdict": "once-arti-son-eksi", "correct": true, "explain": "Takarken mantık sökmedekiyle aynıdır, yalnız tersinden okunur. Eksi bağlı değilken artıyı takarsan, anahtar gövdeye değse bile devre tamamlanmaz. Eksiyi en sona bırakmak, kısa devre yolunun mümkün olduğunca geç kurulmasını sağlar. Son kelepçe takılırken küçük bir kıvılcım görülebilir; bu normaldir, çünkü araçtaki hafıza devreleri o anda beslenmeye başlar. Kıvılcım bekleniyorsa bu iş akünün gaz çıkardığı noktadan uzakta ve havalandırılmış bir yerde yapılır. Bağlantı bittikten sonra kelepçeler elle sallanarak sıkılığı kontrol edilir: gevşek kelepçe, temizlenmiş kutbun bütün faydasını götürür." },
+          { "label": "Yine önce eksi", "verdict": "yine-eksi", "explain": "Eksi ilk takılırsa, artıyı takarken anahtarın gövdeye değmesi doğrudan kısa devre olur. Takma sırası sökmenin tersidir." },
+          { "label": "Sıra fark etmez, çünkü araç kapalı", "verdict": "fark-etmez", "explain": "Araç kapalı olsa da akü her zaman canlıdır; kısa devre kontaktan bağımsızdır." },
+          { "label": "Önce kelepçeler sıkılır, sonra kutuplara geçirilir", "verdict": "once-sik", "explain": "Sıkılmış kelepçe kutba geçmez; kelepçe kutba oturtulup sonra sıkılır." }
+        ]
+      },
+      "camera": "tezgah",
+      "teachingNote": "Sökmede önce eksi, takmada en son eksi. Tek cümle, tek sebep: gövde eksidir. Elektrik alanının bütün derslerinde bu cümleye geri döneceksin."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Aküde neden önce eksi kutup sökülür?",
+        "a": "govde-eksi",
+        "options": [
+          { "verdict": "govde-eksi", "label": "Aracın gövdesi eksi uçtur; eksi ayrılınca artı tarafta kısa devre yapacak yol kalmaz", "explain": "Şasi, motor bloğu ve karoseri akünün eksi ucuna bağlıdır. Artıyı sökerken anahtarın ucu gövdenin herhangi bir yerine değerse, akü artı ile eksi arasında anahtar üzerinden bir yol bulur ve bütün gücünü oraya boşaltır. Eksi önce ayrılırsa bu yol daha baştan kesilir. Takarken sıra terse döner: önce artı, en son eksi — sebep aynı, mantık aynı." },
+          { "verdict": "eksi-tehlikeli", "label": "Eksi kutup daha tehlikelidir", "explain": "Tehlikeli olan artıdır; tam da bu yüzden en son sökülür ve ilk takılır." },
+          { "verdict": "gelenek", "label": "Ustalar öyle alışmıştır", "explain": "Alışkanlık değil, gövdenin eksi olmasından gelen fiziksel bir zorunluluktur." },
+          { "verdict": "aku-omru", "label": "Akünün ömrü uzasın diye", "explain": "Sıranın akü ömrüyle ilgisi yoktur; güvenlikle ilgilidir." }
+        ]
+      },
+      {
+        "q": "12 voltluk bir akü insanı çarpmıyorsa neden tehlikelidir?",
+        "a": "akim",
+        "options": [
+          { "verdict": "akim", "label": "Verebildiği akım çok yüksektir; kısa devrede metali kızdırır ve yangın çıkarır", "explain": "Tehlikeyi belirleyen iki ayrı büyüklük vardır: gerilim insanı çarpar, akım metali ısıtır. 12 volt deriden akım geçirecek kadar yüksek değildir, bu yüzden çarpmaz. Ama bir araç aküsü kısa devrede yüzlerce amper verebilir ve bu akım bir yüzüğün, anahtarın ya da kablonun üzerinden geçtiğinde onu saniyeler içinde kızıl kora çevirir. Üstüne, akünün ürettiği hidrojen bir kıvılcımla tutuşabilir. Bu yüzden aküyle çalışırken takı çıkarılır ve kutupların üzerine metal alet bırakılmaz." },
+          { "verdict": "gerilim", "label": "Gerilimi yüksektir", "explain": "12 volt düşük bir gerilimdir; tehlike oradan gelmez." },
+          { "verdict": "asit", "label": "Yalnız içindeki asit yüzünden", "explain": "Asit ayrı ve gerçek bir tehlikedir ama sorunun cevabı elektrikseldir: yüksek kısa devre akımı." },
+          { "verdict": "tehlikesiz", "label": "Aslında tehlikeli değildir", "explain": "Tehlikelidir: kısa devre yangını ve hidrojen patlaması bu işin iki bilinen kazasıdır." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "sourceRequired": "Bu derste hiçbir sayısal değer kullanılmadı: gerilim, akım ve kelepçe torku verilmedi. Kısa devre akımı 'yüzlerce amper' olarak niteliksel anlatıldı, sayı iddia edilmedi. Dinlenmiş akü gerilimi gibi değerler bir sonraki derste kaynakla birlikte gelir.",
+    "kapsam": "Akü tezgâh üzerinde modellendi; araç üzerindeki bağlantı, kablo yolu ve akü kutusu yok. Kutup temizliği adımı şimdilik seçim olarak öğretiliyor — fırça hareketi sahnede yok.",
+    "vehicleClass": "atolye-egzersizi seçildi çünkü sahne elektrik tezgâhıdır; Scene bileşeni hedef parçadan modeli zaten kendisi buluyor, bu alan yalnız tezgâh bağlamını işaretler.",
+    "reviewedByMechanic": false
+  }
+}

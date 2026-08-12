@@ -1,0 +1,176 @@
+{
+  "id": "direksiyon.aci-sensoru",
+  "area": "direksiyon",
+  "stage": 5,
+  "title": "Direksiyon Açı Sensörü ve ESP ile İlişkisi",
+  "vehicleClass": "atolye-egzersizi",
+  "estimatedMinutes": 35,
+  "prerequisites": ["direksiyon.eps-ogrenme"],
+  "learningGoals": [
+    "Açı sensörünün ne ölçtüğünü ve kararlılık kontrolüne ne sağladığını bilmek",
+    "Sürücünün niyeti ile aracın gerçek davranışı arasındaki karşılaştırmayı kavramak",
+    "Açı sensörü arızasının hangi sistemleri birlikte devre dışı bıraktığını görmek"
+  ],
+
+  "safety": [
+    { "rule": "Kararlılık kontrolü devre dışıyken araç yol testine çıkarılmaz", "why": "Sürücü sistemin devrede olduğunu varsayarak sürer; kaygan zeminde beklediği yardım gelmez", "blocksStart": true },
+    { "rule": "Açı sensörü bölgesine erişim simit sökümü gerektiriyorsa iş bu dersin kapsamı dışındadır", "why": "Simit sökümü airbag ve spiral kablo işlemidir; alanın kırmızı çizgisi", "blocksStart": true },
+    { "rule": "ESP uyarısı yanan araç, durum sürücüye anlatılmadan teslim edilmez", "why": "Sürücü sistemin koruma sağladığını sanarak sınır durumlara girebilir", "blocksStart": true }
+  ],
+
+  "tools": [
+    { "id": "tool.teshis-cihazi", "label": "Teşhis cihazı", "required": true },
+    { "id": "tool.multimetre", "label": "Dijital multimetre", "required": false }
+  ],
+
+  "steps": [
+    {
+      "id": 1,
+      "instruction": "Açı sensörünü tanı.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.aci-sensoru",
+        "question": "Bu sensör ne ölçer ve tork sensöründen farkı ne?",
+        "options": [
+          { "label": "Direksiyonun kaç derece döndüğünü ve ne hızla döndüğünü ölçer; tork sensörü ise uygulanan kuvveti ölçer — biri konumu, diğeri kuvveti bildirir", "verdict": "konum-ve-hiz", "correct": true, "explain": "İki sensör aynı bölgede durur ve sık karıştırılır, ama farklı sorulara cevap verirler. Tork sensörü 'sürücü ne kadar zorluyor' sorusunu yanıtlar ve EPS'in destek hesabının girdisidir. Açı sensörü ise 'direksiyon şu anda nerede ve ne hızla dönüyor' sorusunu yanıtlar. İkisi birbirinin yerine geçmez: sürücü direksiyonu tutup hiç çevirmeden kuvvet uygulayabilir — tork vardır, açı değişmez; ya da araç kendi merkeze dönerken direksiyon döner ama sürücü kuvvet uygulamıyordur — açı değişir, tork yoktur. Açı sensörünün ikinci ölçtüğü şey dönme hızıdır ve bu, ani manevraların ayırt edilmesi için gereklidir; hızlı bir direksiyon hareketi sürücünün acil bir kaçınma yaptığını gösterir. Sensör genellikle kolonun üstünde, spiral kablo bölgesinde yer alır ve çoğu tasarımda mutlak açıyı bilir, yani yalnız 'ne kadar döndü' değil 'toplam kaçıncı turda' bilgisini de taşır. Bu bilgi olmadan, direksiyon iki tur çevrilmiş bir araçta sistem nerede olduğunu bilemezdi." },
+          { "label": "İkisi de aynı şeyi ölçer", "verdict": "ayni", "explain": "Biri konum ve hız, diğeri kuvvet ölçer." },
+          { "label": "Açı sensörü tekerlek açısını ölçer", "verdict": "tekerlek", "explain": "Ölçtüğü şey simidin açısı; tekerlek açısı ondan hesaplanır." },
+          { "label": "Yalnız park asistanı için vardır", "verdict": "park", "explain": "Kararlılık kontrolü başta olmak üzere birçok sistem kullanır." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Tork 'ne kadar zorluyor', açı 'nerede ve ne hızla dönüyor' sorusunu yanıtlar. İkisi birbirinin yerine geçmez."
+    },
+    {
+      "id": 2,
+      "instruction": "Kararlılık kontrolünün bu veriyi neden istediğine bak.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.eps-kontrol-unitesi",
+        "question": "Sistem açı bilgisiyle ne yapıyor?",
+        "options": [
+          { "label": "Sürücünün gitmek istediği yönü hesaplar ve aracın gerçekte gittiği yönle karşılaştırır; ikisi ayrıştığında savrulma vardır", "verdict": "niyet-ile-gercek", "correct": true, "explain": "Kararlılık kontrolünün bütün fikri tek bir karşılaştırmadır: sürücü nereye gitmek istiyor ve araç gerçekte nereye gidiyor? Birinci bilgi direksiyon açısından gelir — açı, araç hızıyla birlikte kullanıldığında 'bu araç şu anda şu yarıçapta bir yay çizmeli' sonucunu verir. İkinci bilgi aracın kendi hareketinden gelir: sapma hızı sensörü aracın kendi ekseni etrafında ne hızla döndüğünü, yanal ivme sensörü yana doğru ne kadar itildiğini, tekerlek hız sensörleri de tekerleklerin dönme farklarını bildirir. Bu iki tablo örtüşüyorsa araç sürücünün istediğini yapıyordur ve sistem sessiz kalır. Ayrıştığında iki tipik durum vardır: araç sürücünün istediğinden az dönüyorsa ön tekerlekler kaymıştır, çok dönüyorsa arka savrulmuştur. Sistem müdahalesini buna göre seçer ve genellikle belirli tekerleklere fren uygulayarak, gerekirse motor gücünü keserek aracı istenen yöne geri getirir. Bu yüzden direksiyon açısı, kararlılık kontrolünün 'sürücünün niyeti' girdisidir ve o girdi yanlışsa sistemin bütün kararları yanlış temele oturur." },
+          { "label": "Yalnız gösterge panelinde açıyı gösterir", "verdict": "gosterge", "explain": "Veri hesaplamada kullanılır, gösterge amaçlı değil." },
+          { "label": "Yakıt tüketimini hesaplar", "verdict": "yakit", "explain": "İlgisi yok." },
+          { "label": "Farları yönlendirmek dışında kullanılmaz", "verdict": "farlar", "explain": "Dönüşe duyarlı farlar bir kullanım ama esas kullanıcı kararlılık kontrolü." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Sürücünün niyeti ile aracın gerçek davranışı. Kararlılık kontrolü bu iki tablonun farkıyla çalışıyor."
+    },
+    {
+      "id": 3,
+      "instruction": "Canlı veriyi okudun: araç düz giderken açı sensörü 1,8°, ön düzen ve simit merkezi düzeltildikten sonra 0,3°. Farkı gir.",
+      "interaction": {
+        "type": "measure",
+        "target": "part.aci-sensoru",
+        "unit": "derece",
+        "acceptRange": [1.4, 1.6]
+      },
+      "camera": "direksiyon",
+      "hint": "1,8 eksi 0,3.",
+      "teachingNote": "1,5°'lik bu düzeltme küçük görünüyor ama kararlılık kontrolü için sürekli bir yalan anlamına geliyordu: araç düz giderken sistem sürücünün hafifçe döndüğünü sanıyordu. Bunun sonucu tek bir anlık hata değil, sürekli kayan bir referanstır — sistem her an gerçekte olmayan küçük bir dönüşü hesaba katar. Buradaki ders, mekanik ile elektroniğin aynı arızayı paylaşmasıdır: sensör tamamen sağlamdı, yanlış olan mekanik referanstı. Bu yüzden açı sensörü şikâyetlerinde önce mekanik doğrulanır — tekerlekler gerçekten düz mü, simit merkezde mi — sonra elektronik değerlendirilir. Kabul edilebilir kalıntı açı aralığı araca özgüdür ve bu ders bir sınır vermiyor."
+    },
+    {
+      "id": 4,
+      "instruction": "Açı sensörü arızalandı ve kod verdi.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.eps-kontrol-unitesi",
+        "question": "Hangi sistemler etkilenir?",
+        "options": [
+          { "label": "Kararlılık kontrolü ve ona bağlı işlevler devre dışı kalır; EPS'in hıza duyarlı davranışı, şerit takip ve park asistanı da etkilenebilir", "verdict": "zincirleme-etki", "correct": true, "explain": "Açı sensörü tek bir sisteme değil, birçok sisteme girdi verir; bu yüzden arızası zincirleme bir etki üretir ve panelde birden fazla uyarı birden yanar. En önemlisi kararlılık kontrolüdür: sürücünün niyetini okuyamayan sistem kendini devre dışı bırakır, çünkü yanlış veriyle fren uygulamak tehlikelidir — bu da bilinçli bir güvenli tarafa geçiştir. EPS etkilenir çünkü merkeze dönüş yardımı ve sönümleme gibi işlevler açıyı kullanır; destek tamamen kesilmese bile davranışı değişebilir. Şerit takip direksiyonun nerede olduğunu bilemez ve devre dışı kalır. Park asistanı manevrayı hesaplayamaz. Bazı araçlarda dönüşe duyarlı farlar ve adaptif süspansiyon da etkilenir. Teşhis açısından bu tablo aslında bir kolaylıktır: panelde aynı anda yanan birden çok uyarı, ortak bir girdinin kaybolduğunu düşündürür ve teker teker sistem aramak yerine ortak kaynağa bakılır. Tersi de doğrudur — tek bir sistemde kod varken diğerleri temizse, sorun ortak girdide değil o sistemin kendisindedir." },
+          { "label": "Yalnız EPS etkilenir", "verdict": "sadece-eps", "explain": "Kararlılık kontrolü başta olmak üzere birçok sistem etkilenir." },
+          { "label": "Hiçbir sistem etkilenmez", "verdict": "etkilenmez", "explain": "Ortak bir girdi kaybolduğu için zincirleme etki olur." },
+          { "label": "Yalnız gösterge paneli etkilenir", "verdict": "gosterge", "explain": "Veri hesaplamada kullanılıyor." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Aynı anda yanan birden çok uyarı, ortak bir girdinin kaybolduğunu düşündürür. Teker teker aramadan ortak kaynağa bak."
+    },
+    {
+      "id": 5,
+      "instruction": "Kolon bölgesinde çalışıldıktan sonra açı verisi tutarsız geliyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.spiral-kablo",
+        "question": "İlk şüpheli ne?",
+        "options": [
+          { "label": "Spiral kablo ve sensörün merkezlenmesi; kablo yanlış konumda takıldıysa hem sinyal hem de kablonun ömrü tehlikededir", "verdict": "spiral-merkez", "correct": true, "explain": "Açı sensörü çoğu tasarımda spiral kablo birimiyle birlikte ya da ona çok yakın konumlanır ve ikisi de direksiyon düzken merkezde olacak biçimde takılır. Kolon bölgesinde bir iş yapıldıktan sonra tutarsız açı verisi görülüyorsa ilk şüpheli montajdır. İki ayrı risk vardır ve ikisi de aynı hatadan doğar. Birincisi sinyaldir: merkezi kaymış bir sensör, tekerlekler düzken sıfır dışında bir değer bildirir ve öğrenme yapılsa bile iki yöndeki hareket payı eşitsiz kalabilir. İkincisi ve daha ciddisi spiral kablonun kendisidir — bu kablo sınırlı sayıda sarılabilir ve merkezde takıldığında iki yöne eşit pay bırakır; kaymış takıldığında bir yönde sonuna gelip kopar. Koptuğunda yalnız açı sinyali değil, korna, direksiyon düğmeleri ve airbag devresi de kesilir; bu, alanın ilk dersinde konan sınırın neden orada olduğunu tekrar gösterir. Bu yüzden kolon işlerinde kural şudur: direksiyon düz konuma getirilir ve kolon dönmeyecek biçimde sabitlenir, montajda üreticinin merkezleme yöntemi uygulanır ve iş bitince öğrenme yapılıp canlı veriden doğrulanır." },
+          { "label": "Lastik basıncı", "verdict": "basinc", "explain": "Açı verisiyle doğrudan ilgisi yok." },
+          { "label": "Akü", "verdict": "aku", "explain": "Düşük gerilim etki edebilir ama kolon işi sonrası ilk şüpheli montaj." },
+          { "label": "Motor devri", "verdict": "devir", "explain": "İlgisi yok." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Kaymış takılan spiral kablo bir yönde sonuna gelip kopar; korna, düğmeler ve airbag devresi birlikte gider."
+    },
+    {
+      "id": 6,
+      "instruction": "ESP uyarısı yanıyor ama sürücü 'zaten hiç kaymadım, gerek yok' diyor.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.direksiyon-simidi",
+        "question": "Ne söylenir?",
+        "options": [
+          { "label": "Sistem normal sürüşte zaten görünmez; değeri kaygan zeminde ve ani manevrada ortaya çıkar. Devre dışı bir sistem, tam gerektiği anda yok demektir", "verdict": "sinir-durumda", "correct": true, "explain": "Kararlılık kontrolünün en yanıltıcı yanı, doğru çalışırken hiç fark edilmemesidir. Normal sürüşte hiçbir şey yapmaz; devreye yalnız aracın gerçek davranışı sürücünün niyetinden ayrıştığında girer — kaygan zeminde, ıslak virajda, ani bir kaçınma manevrasında, buzda. Bu yüzden sürücü 'hiç kaymadım' derken haklıdır ama yanlış sonuca varır: sistemin bugüne kadar devreye girmemiş olması, yarın gerekmeyeceği anlamına gelmez. Söylenecek şey açık ve abartısızdır: bu sistem normal koşullarda görünmez, değeri sınır durumlarda ortaya çıkar ve şu anda devre dışı; kaygan bir zeminde ya da ani bir manevrada beklediğiniz yardım gelmeyecek. Ayrıca teknik bir gerçek daha eklenir — sistem yalnız kendi başına çalışmaz, ona bağlı çekiş kontrolü gibi işlevler de kapanmıştır. Birçok ülkede kararlılık kontrolünün çalışır olması muayenede aranan bir koşuldur ve bu da söylenir. Karar sürücünündür ama karar bilgiyle verilir; 'önemsiz' demek ustanın işi değildir." },
+          { "label": "Haklı, gereksiz bir sistem", "verdict": "gereksiz", "explain": "Değeri sınır durumlarda ortaya çıkar." },
+          { "label": "Ampul sökülür", "verdict": "ampul", "explain": "Uyarıyı görünmez kılmak sistemi çalışır hâle getirmez." },
+          { "label": "Kod silinir, yeter", "verdict": "sil", "explain": "Sebep giderilmeden silinen kod sistemi sessizce arızalı bırakır." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Doğru çalışan bir güvenlik sistemi görünmezdir. Bu, gereksiz olduğu anlamına gelmez."
+    },
+    {
+      "id": 7,
+      "instruction": "Sensör ya da bağlantısı yenilendi.",
+      "interaction": {
+        "type": "inspect-and-choose",
+        "target": "part.aci-sensoru",
+        "question": "İş nasıl kapanır?",
+        "options": [
+          { "label": "Önce mekanik doğrulanır, sonra öğrenme yapılır, canlı veriden düz gidişte sıfıra yakın değer görülür, ilgili bütün sistemlerin kodları temizlenip yol testinde uyarıların söndüğü doğrulanır", "verdict": "mekanik-ogrenme-dogrula", "correct": true, "explain": "Kapanışın sırası bu alanda tekrar tekrar kurulan mantığın son hâlidir. Önce mekanik: tekerlekler gerçekten düz mü, simit merkezde mi, rot dağılımı doğru mu? Bu doğrulanmadan yapılan öğrenme, yanlış bir gerçeği kaydeder. Sonra öğrenme: üreticinin öngördüğü yöntemle sıfır noktası kaydedilir. Sonra ölçüm: canlı veriden araç düz giderken açı değerinin sıfıra yakın olduğu okunur — bu, işlemin kanıtıdır. Sonra kodlar: açı sensörü birçok sisteme girdi verdiği için o sistemlerde de kayıtlar oluşmuştur; hepsi okunur, sebep giderildiği için temizlenir ve yeniden okunarak geri gelmedikleri görülür. Son olarak yol testi: düz gidiş, merkeze dönme, uyarı lambalarının açılışta yanıp sönmesi ve sürüş boyunca yanmaması kontrol edilir; mümkünse geniş bir alanda yavaş bir manevra ile sistemlerin normal davrandığı gözlenir. Yapılan iş kaydedilir. Araç, uyarı lambası yanarken ya da öğrenme doğrulanmadan teslim edilmez." },
+          { "label": "Sensör takıldıysa iş bitmiştir", "verdict": "takildi-bitti", "explain": "Öğrenme ve doğrulama yapılmadan kapanmaz." },
+          { "label": "Yalnız EPS kodları okunur", "verdict": "sadece-eps", "explain": "Sensör birçok sisteme girdi verir; hepsi okunur." },
+          { "label": "Öğrenme gerekmez, sistem kendi bulur", "verdict": "kendi-bulur", "explain": "Sıfır noktası öğretilmeden bilinmez." }
+        ]
+      },
+      "camera": "direksiyon",
+      "teachingNote": "Önce mekanik, sonra öğrenme, sonra ölçüm, sonra kodlar, en son yol testi. Sıra bu alanın imzası."
+    }
+  ],
+
+  "assessment": {
+    "passRequires": ["tumAdimlarTamam", "teshisDogru"],
+    "questions": [
+      {
+        "q": "Kararlılık kontrolü direksiyon açısıyla ne yapar?",
+        "a": "niyet-ile-gercek",
+        "options": [
+          { "verdict": "niyet-ile-gercek", "label": "Sürücünün gitmek istediği yönü hesaplayıp aracın gerçekte gittiği yönle karşılaştırır", "explain": "Açı ve hız birlikte 'bu araç şu yarıçapta bir yay çizmeli' sonucunu verir; sapma hızı, yanal ivme ve tekerlek hız sensörleri aracın gerçek davranışını bildirir. İki tablo ayrıştığında müdahale edilir — az dönüyorsa ön kaymış, çok dönüyorsa arka savrulmuştur. Açı yanlışsa sistemin bütün kararları yanlış temele oturur." },
+          { "verdict": "gosterge", "label": "Panelde açıyı gösterir", "explain": "Veri hesaplamada kullanılır." },
+          { "verdict": "yakit", "label": "Yakıt tüketimini hesaplar", "explain": "İlgisi yok." },
+          { "verdict": "farlar", "label": "Yalnız farları yönlendirir", "explain": "Bir kullanım ama esas kullanıcı kararlılık kontrolü." }
+        ]
+      },
+      {
+        "q": "Kolon bölgesinde çalışıldıktan sonra açı verisi tutarsız. İlk şüpheli?",
+        "a": "spiral-merkez",
+        "options": [
+          { "verdict": "spiral-merkez", "label": "Spiral kablo ve sensörün merkezlenmesi", "explain": "İkisi de direksiyon düzken merkezde olacak biçimde takılır. Kaymış montajda sensör tekerlekler düzken sıfır dışında değer bildirir; daha ciddisi spiral kablo bir yönde sonuna gelip kopar ve korna, düğmeler ile airbag devresi birlikte kesilir. Kolon işlerinde direksiyon düz sabitlenir, üreticinin merkezleme yöntemi uygulanır, iş bitince öğrenme yapılıp canlı veriden doğrulanır." },
+          { "verdict": "basinc", "label": "Lastik basıncı", "explain": "Doğrudan ilgisi yok." },
+          { "verdict": "aku", "label": "Akü", "explain": "Kolon işi sonrası ilk şüpheli montaj." },
+          { "verdict": "devir", "label": "Motor devri", "explain": "İlgisi yok." }
+        ]
+      }
+    ]
+  },
+
+  "_dataNotes": {
+    "olcumDegeri": "Adım 3'teki 1,8° ve 0,3° SENARYO okumalarıdır; istenen FARKTIR (1,5°) ve gösterilen şey sağlam bir sensörün yanlış mekanik referansla yanlış veri üretebileceğidir. Kabul edilebilir kalıntı açı verilmiyor.",
+    "sourceRequired": "Kabul edilebilir kalıntı açı, sensör sinyal aralıkları, öğrenme prosedürü ve ESP müdahale eşikleri bilinçle VERİLMEDİ; araca ve üreticiye özgüdür.",
+    "kapsam": "Kararlılık kontrolünün kendi teşhisi ve fren sistemi müdahalesi bu alanın konusu değil; ders yalnız direksiyon açısının o sisteme ne sağladığını öğretiyor. Sapma hızı ve yanal ivme sensörleri anıldı ama ayrı ders değil. Simit ve airbag sökümü kapsam dışı — alanın kırmızı çizgisi.",
+    "reviewedByMechanic": false
+  }
+}
