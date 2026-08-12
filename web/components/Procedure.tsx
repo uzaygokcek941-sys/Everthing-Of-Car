@@ -301,7 +301,7 @@ export default function ProcedureRunner({ src, onFinish }: { src: string; onFini
                   için render alınmadı, dosya yoksa oynatıcı sessizce gizlenir. */}
               {video && (
                 <video
-                  src={`/videos/${proc.id.replace(/\./g, "-")}.mp4`}
+                  src={`${process.env.NEXT_PUBLIC_VIDEO_BASE ?? ""}/videos/${proc.id.replace(/\./g, "-")}.mp4`}
                   controls
                   onError={() => setVideo(false)}
                   className="w-full rounded border border-zinc-800"
