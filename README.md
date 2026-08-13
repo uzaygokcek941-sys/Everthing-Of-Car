@@ -72,7 +72,8 @@ node render-all.mjs --ders=<dosya-adi>  # tek ders
 Canliya alirken videolari dis depolamaya (ornegin Cloudflare R2) yukleyip
 `NEXT_PUBLIC_VIDEO_BASE` degiskenine taban adresi ver. Degisken bossa
 `/public/videos` aranir, dosya yoksa oynatici sessizce gizlenir - uygulama
-video olmadan da tam calisir.
+video olmadan da tam calisir. Adim adim yukleme: `docs/VIDEO-YAYIN.md`
+(`node scripts/upload-videos.mjs`).
 
 ## Yayin kapilari
 
