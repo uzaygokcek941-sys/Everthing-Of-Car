@@ -1,7 +1,7 @@
 // Ders anlatım videosu. İçeriğin tamamı prosedür JSON'undan gelir; bu dosyada
 // tek bir teknik cümle yazılmaz. Video uydurmaz, dersi derler.
 import React from "react";
-import { AbsoluteFill, Sequence, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
+import { AbsoluteFill, Audio, Sequence, interpolate, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { Doku, Gir, Grade, Sozcukler, Zemin } from "./components";
 import { theme } from "./theme";
 
@@ -23,8 +23,20 @@ export type Ders = {
   assessment?: { questions: Soru[] };
 };
 
-const KAPAK = 150;
-const KAPANIS = 90;
+const FPS = 30;
+/** Konusma bitince sahne bir an daha dursun; kesik his vermesin. */
+const KUYRUK = 26;
+const KAPAK_YEDEK = 150;
+const KAPANIS_YEDEK = 90;
+
+export type Ses = { dosya: string; sure: number };
+export type SesKumesi = Record<string, Ses>;
+
+/** Sure once anlatimdan, ses yoksa metin uzunlugundan. */
+const sesKare = (ses?: Ses) => (ses ? Math.round(ses.sure * FPS) + KUYRUK : null);
+
+const Anlatim: React.FC<{ ses?: Ses }> = ({ ses }) =>
+  ses ? <Audio src={staticFile(ses.dosya)} /> : null;
 
 /** Uzun açıklamanın ilk iki cümlesi: iddianın kendisi. Gerisi uygulamada okunur. */
 export const ozet = (metin: string) => metin.split(/(?<=\.)\s+/).slice(0, 2).join(" ");
@@ -35,34 +47,34 @@ const govde = (adim: Adim) => {
 };
 
 /** Süre metnin uzunluğundan çıkar: okunamayan kare işe yaramaz. */
-export const adimSuresi = (adim: Adim) => {
+export const adimSuresi = (adim: Adim, ses?: Ses) => {
   const { metin } = govde(adim);
   const harf = adim.instruction.length + metin.length + (adim.teachingNote?.length ?? 0);
-  return Math.round(Math.min(560, Math.max(230, 130 + harf / 5.5)));
+  return sesKare(ses) ?? Math.round(Math.min(560, Math.max(230, 130 + harf / 5.5)));
 };
 
 const soruGovde = (soru: Soru) => soru.options.find((o) => o.verdict === soru.a);
 
-export const soruSuresi = (soru: Soru) => {
+export const soruSuresi = (soru: Soru, ses?: Ses) => {
   const dogru = soruGovde(soru);
   const harf = soru.q.length + (dogru?.label.length ?? 0) + ozet(dogru?.explain ?? "").length;
-  return Math.round(Math.min(520, Math.max(230, 130 + harf / 5.5)));
+  return sesKare(ses) ?? Math.round(Math.min(520, Math.max(230, 130 + harf / 5.5)));
 };
 
-export const dersSuresi = (ders: Ders) =>
-  KAPAK +
-  ders.steps.reduce((t, a) => t + adimSuresi(a), 0) +
-  (ders.assessment?.questions ?? []).reduce((t, s) => t + soruSuresi(s), 0) +
-  KAPANIS;
+export const dersSuresi = (ders: Ders, ses?: SesKumesi) =>
+  (sesKare(ses?.kapak) ?? KAPAK_YEDEK) +
+  ders.steps.reduce((t, a, n) => t + adimSuresi(a, ses?.[`a${n + 1}`]), 0) +
+  (ders.assessment?.questions ?? []).reduce((t, s, n) => t + soruSuresi(s, ses?.[`s${n + 1}`]), 0) +
+  (sesKare(ses?.kapanis) ?? KAPANIS_YEDEK);
 
-const Kapak: React.FC<{ ders: Ders }> = ({ ders }) => (
+const Kapak: React.FC<{ ders: Ders; sure: number }> = ({ ders, sure }) => (
   <AbsoluteFill style={{ padding: "110px 130px", justifyContent: "center", fontFamily: theme.yazi.govde }}>
-    <Gir cikisKare={KAPAK - theme.ritim.cikisKare}>
+    <Gir cikisKare={sure - theme.ritim.cikisKare}>
       <p style={{ margin: 0, color: theme.renk.vurgu, fontSize: 26, letterSpacing: 6, textTransform: "uppercase" }}>
         {ders.area === "arac-elektrik" ? "Araç Elektrik ve Elektronik" : "Motor ve Mekanik"}
       </p>
     </Gir>
-    <Gir gecikme={theme.ritim.kademe * 2} cikisKare={KAPAK - theme.ritim.cikisKare}>
+    <Gir gecikme={theme.ritim.kademe * 2} cikisKare={sure - theme.ritim.cikisKare}>
       <h1
         style={{
           margin: "18px 0 0",
@@ -78,7 +90,7 @@ const Kapak: React.FC<{ ders: Ders }> = ({ ders }) => (
     </Gir>
     <div style={{ marginTop: 46 }}>
       {(ders.learningGoals ?? []).map((h, n) => (
-        <Gir key={h} gecikme={26 + n * theme.ritim.kademe * 2} cikisKare={KAPAK - theme.ritim.cikisKare}>
+        <Gir key={h} gecikme={26 + n * theme.ritim.kademe * 2} cikisKare={sure - theme.ritim.cikisKare}>
           <p
             style={{
               margin: "0 0 14px",
@@ -249,40 +261,46 @@ const Kapanis: React.FC = () => (
   </AbsoluteFill>
 );
 
-export const DersVideo: React.FC<{ ders: Ders }> = ({ ders }) => {
-  let imlec = KAPAK;
+export const DersVideo: React.FC<{ ders: Ders; ses?: SesKumesi }> = ({ ders, ses }) => {
+  const kapakSure = sesKare(ses?.kapak) ?? KAPAK_YEDEK;
+  const kapanisSure = sesKare(ses?.kapanis) ?? KAPANIS_YEDEK;
+  let imlec = kapakSure;
 
   return (
     <AbsoluteFill>
       <Zemin />
 
-      <Sequence durationInFrames={KAPAK}>
-        <Kapak ders={ders} />
+      <Sequence durationInFrames={kapakSure}>
+        <Anlatim ses={ses?.kapak} />
+        <Kapak ders={ders} sure={kapakSure} />
       </Sequence>
 
       {ders.steps.map((adim, n) => {
-        const sure = adimSuresi(adim);
+        const sure = adimSuresi(adim, ses?.[`a${n + 1}`]);
         const bas = imlec;
         imlec += sure;
         return (
           <Sequence key={adim.id} from={bas} durationInFrames={sure}>
+            <Anlatim ses={ses?.[`a${n + 1}`]} />
             <AdimSahne adim={adim} sira={n + 1} toplam={ders.steps.length} sure={sure} />
           </Sequence>
         );
       })}
 
       {(ders.assessment?.questions ?? []).map((soru, n, hepsi) => {
-        const sure = soruSuresi(soru);
+        const sure = soruSuresi(soru, ses?.[`s${n + 1}`]);
         const bas = imlec;
         imlec += sure;
         return (
           <Sequence key={soru.q} from={bas} durationInFrames={sure}>
+            <Anlatim ses={ses?.[`s${n + 1}`]} />
             <SoruSahne soru={soru} sira={n + 1} toplam={hepsi.length} sure={sure} />
           </Sequence>
         );
       })}
 
-      <Sequence from={imlec} durationInFrames={KAPANIS}>
+      <Sequence from={imlec} durationInFrames={kapanisSure}>
+        <Anlatim ses={ses?.kapanis} />
         <Kapanis />
       </Sequence>
 

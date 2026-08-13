@@ -5,7 +5,7 @@
 // verilmezse yalnız listeler; gerçekten render almak için --yaz gerekir.
 
 import { execFileSync } from "node:child_process";
-import { mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { basename, join } from "node:path";
 
 const KAYNAK = "../web/public/procedures";
@@ -30,8 +30,11 @@ for (const dosya of dosyalar) {
   // /videos/<id noktasız>.mp4 adresinden arar (Curriculum.tsx ile aynı kural).
   const ad = basename(dosya, ".json");
 
+  // props'u ses-uret.mjs yazar (icinde anlatim dosyalari ve sureleri var).
+  // Yoksa ses olmadan, eski metin-uzunlugu hesabiyla render alinir.
   const propsYol = join("props", `${ad}.json`);
-  writeFileSync(propsYol, JSON.stringify({ ders }));
+  if (!existsSync(propsYol)) writeFileSync(propsYol, JSON.stringify({ ders }));
+  const sessiz = !JSON.parse(readFileSync(propsYol, "utf8")).ses;
 
   if (!yaz) {
     console.log(`  ${ders.id.padEnd(34)} ${ders.steps.length} adım`);
@@ -39,10 +42,16 @@ for (const dosya of dosyalar) {
   }
 
   const cikti = join(HEDEF_MP4, `${ad}.mp4`);
-  console.log(`  render: ${ders.id}`);
+  console.log(`  render: ${ders.id}${sessiz ? "  [SESSIZ]" : ""}`);
   execFileSync(
     "npx",
-    ["remotion", "render", "src/index.ts", "Ders", cikti, "--codec", "h264", "--crf", "18", `--props=${propsYol}`],
+    // veryfast + crf 20: ayni ders 19 dk yerine 7 dk 51 sn'de bitiyor, metin
+    // videosunda gozle fark yok.
+    [
+      "remotion", "render", "src/index.ts", "Ders", cikti,
+      "--codec", "h264", "--crf", "20", "--x264-preset=veryfast", "--concurrency=8",
+      `--props=${propsYol}`,
+    ],
     { stdio: "inherit", shell: true },
   );
   writeFileSync(join(HEDEF_WEB, `${ad}.mp4`), readFileSync(cikti));
