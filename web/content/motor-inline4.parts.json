@@ -2,9 +2,9 @@
   "model": "motor-inline4",
   "file": "/models/motor-inline4.glb",
   "license": {
-    "source": "scripts/build-models.mjs — kod ile üretildi",
+    "source": "scripts/blender/motor.py — Blender 5.2 ile modellendi",
     "author": "Everything For My Car",
-    "license": "Proje içi üretim — üçüncü taraf lisans yükümlülüğü yok",
+    "license": "Proje ici uretim — ucuncu taraf lisans yukumlulugu yok",
     "url": ""
   },
   "parts": {
@@ -14,14 +14,12 @@
     "part.bobin.1": "bobin_1",
     "part.buji.1": "buji_1",
     "part.buji-yeni.1": "buji_yeni_1",
-
     "part.silindir-kapagi": "silindir_kapagi",
     "part.kapak-civatasi": "kapak_civatasi",
     "part.kapak-contasi": "kapak_contasi",
     "part.emme-manifoldu": "emme_manifoldu",
     "part.egzoz-manifoldu": "egzoz_manifoldu",
     "part.manifolt-civata": "manifolt_civata",
-
     "part.silindir-1": "silindir_1",
     "part.krank-kasnagi": "krank_kasnagi",
     "part.kam-kasnagi": "kam_kasnagi",
@@ -31,27 +29,23 @@
     "part.kam-mili": "kam_mili",
     "part.supap": "supap",
     "part.supap-kapagi": "supap_kapagi",
-
     "part.krank-mili": "krank_mili",
     "part.ana-yatak": "ana_yatak",
     "part.biyel": "biyel",
     "part.piston": "piston",
     "part.volan": "volan",
     "part.arka-kece": "arka_kece",
-
     "part.karter": "karter",
     "part.karter-tapasi": "karter_tapasi",
     "part.yag-filtresi": "yag_filtresi",
     "part.yag-cubugu": "yag_cubugu",
     "part.yag-basinc-manometresi": "yag_basinc_manometresi",
-
     "part.radyator-kapagi": "radyator_kapagi",
     "part.radyator-tapasi": "radyator_tapasi",
     "part.genlesme-deposu": "genlesme_deposu",
     "part.ust-hortum": "ust_hortum",
     "part.termostat": "termostat",
     "part.termostat-kapagi": "termostat_kapagi",
-
     "part.hava-filtre-kutusu": "hava_filtre_kutusu",
     "part.hava-filtresi": "hava_filtresi"
   },
@@ -59,10 +53,11 @@
     "file": "GLB public/ altındadır, buraya /models/... olarak yazılır. Boşsa uygulama yer tutucu motoru gösterir.",
     "parts": "Değerler GLB içindeki mesh adlarıdır. Kod değişmez, yalnız bu eşleme değişir.",
     "nokta-yasagi": "Mesh adlarında NOKTA kullanılamaz: three.js GLTFLoader düğüm adındaki '.', ':', '/', '[', ']' karakterlerini siler (sanitizeNodeName). Bu yüzden part.buji.1 -> buji_1 gibi alt çizgili karşılıklar var.",
-    "model": "Şematik: gövdeler kutu ve silindir. Amaç parçanın yerini, eksenini ve hareketini öğretmek; döküm yüzeyi göstermek değil. Gerçekçi bir model gelirse yalnız bu dosyadaki adlar güncellenir.",
+    "model": "Blender ile modellendi (scripts/blender/motor.py, lib.py). Bevel, boolean ve egri kullaniliyor: silindirler bloktan delinir, volan dis dis, kam mili sekiz lobludur, triger kayisi kasnaklarin dis tegetinden hesaplanir, hortum ve manifold kanallari egriden borudur. Fotogercekci degil, olculu ve okunakli bir atolye modelidir. Yeniden uretmek icin: blender --background --python scripts/blender/motor.py -- web/public/models/motor-inline4.glb",
     "olcek": "Metre. X = krank ekseni (1. silindir -X ucunda), Y = yukarı, Z = aracın önü. Motor merkezi yaklaşık y=0.5.",
     "yapisal": "blok, supap_kapagi ve radyator GLB'de vardır ama bir adımın hedefi değildir; sahnede bağlam oluştururlar.",
     "kapsam": "Bu model motor bölmesini kapsar. Tezgâh egzersizleri (kumpas, egzersiz cıvatası), kaldırma ekipmanı (kriko, sehpa), atölye (KKD dolabı, yangın tüpü) ve kabin (yağ basınç lambası) ayrı modeller gerektirir; henüz yok.",
-    "license": "Model kendi kodumuzla üretildiği için CC-BY atıf borcu yoktur. Dışarıdan model alınırsa bu alanlar doldurulur ve atıf uygulamada görünür olmalıdır."
+    "license": "Model kendi kodumuzla üretildiği için CC-BY atıf borcu yoktur. Dışarıdan model alınırsa bu alanlar doldurulur ve atıf uygulamada görünür olmalıdır.",
+    "eksen": "Blender Z-yukari calisir, glTF Y-yukari. lib.export() export_yup=False ile cevrimi kapatir; kapatilmazsa model GLB icinde yan yatar."
   }
 }
