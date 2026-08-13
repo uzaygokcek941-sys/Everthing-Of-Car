@@ -1,7 +1,7 @@
 // web/public/videos -> Cloudflare R2. Kurulum ve dogrulama: docs/VIDEO-YAYIN.md
 // Isi rclone yapar; bu script yalnizca .env.local'i okuyup dogru komutu kurar.
 import { spawnSync } from "node:child_process";
-import { readFileSync, existsSync } from "node:fs";
+import { readFileSync, existsSync, readdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
@@ -35,8 +35,21 @@ if (eksik.length) {
   process.exit(1);
 }
 
+// winget PATH'i ancak kabuk yeniden baslayinca gorunur oluyor; o yuzden paket
+// klasorune de bakiyoruz.
+function rcloneYolu() {
+  if (spawnSync("rclone", ["version"], { shell: true }).status === 0) return "rclone";
+  const kutu = path.join(
+    process.env.LOCALAPPDATA ?? "",
+    "Microsoft/WinGet/Packages/Rclone.Rclone_Microsoft.Winget.Source_8wekyb3d8bbwe"
+  );
+  if (!existsSync(kutu)) return "rclone";
+  const alt = readdirSync(kutu).find((d) => existsSync(path.join(kutu, d, "rclone.exe")));
+  return alt ? path.join(kutu, alt, "rclone.exe") : "rclone";
+}
+
 const r = spawnSync(
-  "rclone",
+  rcloneYolu(),
   ["copy", kaynak, `r2:${env.R2_BUCKET}/videos`, "--transfers", "8", "--progress", "--s3-no-check-bucket"],
   {
     stdio: "inherit",
