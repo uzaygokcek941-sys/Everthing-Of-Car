@@ -52,8 +52,8 @@ const r = spawnSync(
   rcloneYolu(),
   ["copy", kaynak, `r2:${env.R2_BUCKET}/videos`, "--transfers", "8", "--progress", "--s3-no-check-bucket"],
   {
+    // shell: true YOK - yolda bosluk varsa argumanlari tirnaksiz birlestirip bozuyor.
     stdio: "inherit",
-    shell: true,
     env: {
       ...process.env,
       RCLONE_CONFIG_R2_TYPE: "s3",
