@@ -53,7 +53,7 @@
     "file": "GLB public/ altındadır, buraya /models/... olarak yazılır. Boşsa uygulama yer tutucu motoru gösterir.",
     "parts": "Değerler GLB içindeki mesh adlarıdır. Kod değişmez, yalnız bu eşleme değişir.",
     "nokta-yasagi": "Mesh adlarında NOKTA kullanılamaz: three.js GLTFLoader düğüm adındaki '.', ':', '/', '[', ']' karakterlerini siler (sanitizeNodeName). Bu yüzden part.buji.1 -> buji_1 gibi alt çizgili karşılıklar var.",
-    "model": "Blender ile modellendi (scripts/blender/motor.py, lib.py). Bevel, boolean ve egri kullaniliyor: silindirler bloktan delinir, volan dis dis, kam mili sekiz lobludur, triger kayisi kasnaklarin dis tegetinden hesaplanir, hortum ve manifold kanallari egriden borudur. Fotogercekci degil, olculu ve okunakli bir atolye modelidir. Yeniden uretmek icin: blender --background --python scripts/blender/motor.py -- web/public/models/motor-inline4.glb",
+    "model": "Blender ile modellendi (scripts/blender/motor.py, lib.py). Bevel, boolean, egriden boru ve disbukey zarf kullaniliyor; onceki surum kutu ve silindirdi. Fotogercekci degil, olculu ve okunakli bir atolye modelidir. Yeniden uretmek icin: blender --background --python scripts/blender/motor.py -- <cikti>",
     "olcek": "Metre. X = krank ekseni (1. silindir -X ucunda), Y = yukarı, Z = aracın önü. Motor merkezi yaklaşık y=0.5.",
     "yapisal": "blok, supap_kapagi ve radyator GLB'de vardır ama bir adımın hedefi değildir; sahnede bağlam oluştururlar.",
     "kapsam": "Bu model motor bölmesini kapsar. Tezgâh egzersizleri (kumpas, egzersiz cıvatası), kaldırma ekipmanı (kriko, sehpa), atölye (KKD dolabı, yangın tüpü) ve kabin (yağ basınç lambası) ayrı modeller gerektirir; henüz yok.",

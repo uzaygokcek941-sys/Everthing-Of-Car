@@ -2,9 +2,9 @@
   "model": "elektrik",
   "file": "/models/elektrik.glb",
   "license": {
-    "source": "scripts/build-models.mjs — kod ile üretildi",
+    "source": "scripts/blender/elektrik.py — Blender 5.2 ile modellendi",
     "author": "Everything For My Car",
-    "license": "Proje içi üretim — üçüncü taraf lisans yükümlülüğü yok",
+    "license": "Proje ici uretim — ucuncu taraf lisans yukumlulugu yok",
     "url": ""
   },
   "parts": {
@@ -65,6 +65,7 @@
     "yapisal": "tezgah_yuzeyi bir adımın hedefi değildir; parçaların üzerinde durduğu yüzeydir.",
     "kutup-rengi": "Artı kutup kırmızı, eksi kutup çelik gri. Sahnede ikisi ayırt edilebilir olmalıdır; ama ders kutbu renkten değil işaretten okumayı öğretir, çünkü sahadaki kablo rengi güvenilmez.",
     "nokta-yasagi": "Mesh adlarında nokta yok: three.js GLTFLoader düğüm adındaki '.', ':', '/', '[', ']' karakterlerini siler. part.sigorta.1 -> sigorta_1 eşlemesi bu yüzden var.",
-    "model": "Şematik: gövdeler kutu ve silindir. Amaç devrenin yapısını ve prob yerini öğretmek; gerçek bir sigorta kutusunun görünümünü vermek değil."
+    "model": "Blender ile modellendi (scripts/blender/elektrik.py, lib.py). Bevel, boolean, egriden boru ve disbukey zarf kullaniliyor; onceki surum kutu ve silindirdi. Fotogercekci degil, olculu ve okunakli bir atolye modelidir. Yeniden uretmek icin: blender --background --python scripts/blender/elektrik.py -- <cikti>",
+    "eksen": "Blender Z-yukari calisir, glTF Y-yukari. lib.export() export_yup=False ile cevrimi kapatir; kapatilmazsa model GLB icinde yan yatar."
   }
 }

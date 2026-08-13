@@ -64,11 +64,13 @@ kc = cam.constraints.new('TRACK_TO')
 kc.target = odak
 
 import math as _m
-D = CAP * 2.45                                  # 55 mm lens icin guvenli mesafe
+D = CAP * 1.65                                  # 55 mm lens icin guvenli mesafe
+# Yayvan modellerde izometrik aci genisligi kisaltir; 1. kare bilerek cepheye
+# yakin duruyor.
 ACILAR = [
-    ("1-uc-ceyrek", (0.75, -0.95, 0.55)),
-    ("2-yan-triger", (-1.00, -0.35, 0.30)),
-    ("3-ust", (0.25, -0.45, 1.05)),
+    ("1-uc-ceyrek", (0.34, -1.00, 0.30)),
+    ("2-yan-triger", (-1.00, -0.42, 0.26)),
+    ("3-ust", (0.25, -0.55, 0.95)),
 ]
 for ad, yon in ACILAR:
     n = _m.sqrt(sum(v * v for v in yon))

@@ -2,9 +2,9 @@
   "model": "kaporta",
   "file": "/models/kaporta.glb",
   "license": {
-    "source": "scripts/build-models.mjs — kod ile üretildi",
+    "source": "scripts/blender/kaporta.py — Blender 5.2 ile modellendi",
     "author": "Everything For My Car",
-    "license": "Proje içi üretim — üçüncü taraf lisans yükümlülüğü yok",
+    "license": "Proje ici uretim — ucuncu taraf lisans yukumlulugu yok",
     "url": ""
   },
   "parts": {
@@ -35,6 +35,8 @@
     "gocuk-uyarisi": "gocuk_bolgesi UYARI malzemesiyle (kırmızı) üretildi; hasarlı bölgenin hangi panelde olduğu sahnede tek bakışta görülsün diye. zimpara_bolgesi HAVA malzemesiyle yarı saydam: hazırlık yapılan alanı panelin üstünde bir katman gibi gösteriyor.",
     "ad-cakismasi": "part.kaput-kaporta ve part.tampon-kaporta anahtarları bilinçli olarak öneklendi: motor sahnesinde zaten bir part.kaput, aksesuar sahnesinde bir part.tampon var. Mesh adları (kaput, tampon_kaporta) kendi GLB dosyalarında kaldı; çakışan yalnız part.* anahtarıdır. tampon_kaporta adı bilinçli: aksesuar sahnesinde zaten bir tampon var ve iki manifesto birleştirildiğinde part.* anahtarları çakışmasın diye bu sahnedeki tampon ayrı adlandırıldı. Scene.tsx'te OWNER haritası son manifestoyu kazandırdığı için çakışan anahtar sessiz bir hata üretirdi; validate-parts.mjs bu çakışmayı kapı olarak denetliyor.",
     "nokta-yasagi": "Mesh adlarında nokta yok: GLTFLoader düğüm adındaki nokta karakterini siler. part.* anahtarları alt çizgili mesh adlarına eşlenir.",
-    "eksik": "Boya kabini, kurutma fırını, çekme sehpası, gövde ölçüm sistemi, macun ve astar katmanları, cam ve conta MODELLENMEDİ; ilgili dersler bunları metinde anlatıyor ve adım hedeflerini mevcut parçalara bağlıyor. Ultra yüksek mukavemetli çelik bölgeleri sahnede ayrıca işaretlenmiyor — hangi parçanın hangi sınıf olduğu araca özgüdür ve dersler bunu üreticinin onarım kılavuzuna havale ediyor."
+    "eksik": "Boya kabini, kurutma fırını, çekme sehpası, gövde ölçüm sistemi, macun ve astar katmanları, cam ve conta MODELLENMEDİ; ilgili dersler bunları metinde anlatıyor ve adım hedeflerini mevcut parçalara bağlıyor. Ultra yüksek mukavemetli çelik bölgeleri sahnede ayrıca işaretlenmiyor — hangi parçanın hangi sınıf olduğu araca özgüdür ve dersler bunu üreticinin onarım kılavuzuna havale ediyor.",
+    "model": "Blender ile modellendi (scripts/blender/kaporta.py, lib.py). Bevel, boolean, egriden boru ve disbukey zarf kullaniliyor; onceki surum kutu ve silindirdi. Fotogercekci degil, olculu ve okunakli bir atolye modelidir. Yeniden uretmek icin: blender --background --python scripts/blender/kaporta.py -- <cikti>",
+    "eksen": "Blender Z-yukari calisir, glTF Y-yukari. lib.export() export_yup=False ile cevrimi kapatir; kapatilmazsa model GLB icinde yan yatar."
   }
 }

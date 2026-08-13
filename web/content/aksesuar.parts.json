@@ -2,9 +2,9 @@
   "model": "aksesuar",
   "file": "/models/aksesuar.glb",
   "license": {
-    "source": "scripts/build-models.mjs — kod ile üretildi",
+    "source": "scripts/blender/aksesuar.py — Blender 5.2 ile modellendi",
     "author": "Everything For My Car",
-    "license": "Proje içi üretim — üçüncü taraf lisans yükümlülüğü yok",
+    "license": "Proje ici uretim — ucuncu taraf lisans yukumlulugu yok",
     "url": ""
   },
   "parts": {
@@ -59,6 +59,8 @@
     "stop-lambasi-uyari": "stop_lambasi UYARI malzemesiyle (kırmızı, hafif ışıklı) üretildi; aydınlatma derslerinde hangi lambanın hangisi olduğu renkle ayırt edilebilsin diye.",
     "ad-cakismasi": "multimetre_aksesuar adı bilinçli: tezgah sahnesinde zaten bir multimetre var ve iki manifesto birleştirildiğinde part anahtarları çakışmasın diye bu sahnedeki multimetre ayrı adlandırıldı. Aynı sebeple kapı hoparlörü hoparlor_kapi, arka hoparlör hoparlor_arka.",
     "nokta-yasagi": "Mesh adlarında nokta yok: GLTFLoader düğüm adındaki nokta karakterini siler. part.* anahtarları alt çizgili mesh adlarına eşlenir.",
-    "eksik": "Uzaktan kumanda, alıcı modülü, ısıtmalı cam rezistansı, park sensörü ve start-stop bileşenleri MODELLENMEDİ; ilgili dersler bunları metinde anlatıyor ve adım hedeflerini mevcut parçalara bağlıyor. Airbag bileşenleri bu sahnede yok — koltuk ve döşeme derslerinde sınır metinle anlatılıyor, sahnede gösterilmiyor."
+    "eksik": "Uzaktan kumanda, alıcı modülü, ısıtmalı cam rezistansı, park sensörü ve start-stop bileşenleri MODELLENMEDİ; ilgili dersler bunları metinde anlatıyor ve adım hedeflerini mevcut parçalara bağlıyor. Airbag bileşenleri bu sahnede yok — koltuk ve döşeme derslerinde sınır metinle anlatılıyor, sahnede gösterilmiyor.",
+    "model": "Blender ile modellendi (scripts/blender/aksesuar.py, lib.py). Bevel, boolean, egriden boru ve disbukey zarf kullaniliyor; onceki surum kutu ve silindirdi. Fotogercekci degil, olculu ve okunakli bir atolye modelidir. Yeniden uretmek icin: blender --background --python scripts/blender/aksesuar.py -- <cikti>",
+    "eksen": "Blender Z-yukari calisir, glTF Y-yukari. lib.export() export_yup=False ile cevrimi kapatir; kapatilmazsa model GLB icinde yan yatar."
   }
 }

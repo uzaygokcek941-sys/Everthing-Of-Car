@@ -2,9 +2,9 @@
   "model": "tezgah",
   "file": "/models/tezgah.glb",
   "license": {
-    "source": "scripts/build-models.mjs — kod ile üretildi",
+    "source": "scripts/blender/kucuk-sahneler.py — Blender 5.2 ile modellendi",
     "author": "Everything For My Car",
-    "license": "Proje içi üretim — üçüncü taraf lisans yükümlülüğü yok",
+    "license": "Proje ici uretim — ucuncu taraf lisans yukumlulugu yok",
     "url": ""
   },
   "parts": {
@@ -18,34 +18,54 @@
   "props": {
     "dekor.cirir-kolu": {
       "file": "/models/vendor/ratchet_wrench/ratchet_wrench.gltf",
-      "at": [-0.2, 0.93, -0.22],
+      "at": [
+        -0.2,
+        0.93,
+        -0.22
+      ],
       "rotateX": 1.5708,
       "rotateY": 0.5,
       "credit": "John Hutcheson — CC0"
     },
     "dekor.yildiz-anahtar": {
       "file": "/models/vendor/combination_wrench/combination_wrench.gltf",
-      "at": [0.08, 0.93, -0.27],
+      "at": [
+        0.08,
+        0.93,
+        -0.27
+      ],
       "rotateY": 1.4,
       "credit": "BKS — CC0"
     },
     "dekor.kurbagacik": {
       "file": "/models/vendor/adjustable_wrench/adjustable_wrench.gltf",
-      "at": [0.56, 0.93, -0.2],
+      "at": [
+        0.56,
+        0.93,
+        -0.2
+      ],
       "rotateX": 1.5708,
       "rotateY": -0.4,
       "credit": "Mateusz Sadek — CC0"
     },
     "dekor.tornavida": {
       "file": "/models/vendor/screwdriver/screwdriver.gltf",
-      "at": [0.6, 0.93, 0.22],
+      "at": [
+        0.6,
+        0.93,
+        0.22
+      ],
       "rotateX": 1.5708,
       "rotateY": 1.0,
       "credit": "PierreB3D — CC0"
     },
     "dekor.alet-cantasi": {
       "file": "/models/vendor/metal_toolbox/metal_toolbox.gltf",
-      "at": [-1.05, 0, 0.1],
+      "at": [
+        -1.05,
+        0,
+        0.1
+      ],
       "rotateY": 0.3,
       "credit": "Mateusz Sadek — CC0"
     }
@@ -55,6 +75,8 @@
     "olcek": "Metre. Tezgâh yüzeyi y=0.90; parçalar yüzeyin üstünde durur.",
     "yapisal": "tezgah_yuzeyi, tezgah_ayak_sol, tezgah_ayak_sag, mengene, kumpas_cene, mikrometre, flans_civata_flansi, egzersiz_plakasi bir adımın hedefi değildir; bağlam ve görsel bütünlük içindir.",
     "olcu-aletleri": "part.olcu-aletleri tek bir alet değil, aralarından seçim yapılan tepsidir; kumpas ve mikrometre tepsinin üstünde ayrı mesh olarak durur.",
-    "nokta-yasagi": "Mesh adlarında nokta yok: three.js GLTFLoader düğüm adındaki '.', ':', '/', '[', ']' karakterlerini siler."
+    "nokta-yasagi": "Mesh adlarında nokta yok: three.js GLTFLoader düğüm adındaki '.', ':', '/', '[', ']' karakterlerini siler.",
+    "model": "Blender ile modellendi (scripts/blender/kucuk-sahneler.py, lib.py). Bevel, boolean, egriden boru ve disbukey zarf kullaniliyor; onceki surum kutu ve silindirdi. Fotogercekci degil, olculu ve okunakli bir atolye modelidir. Yeniden uretmek icin: blender --background --python scripts/blender/kucuk-sahneler.py -- <cikti>",
+    "eksen": "Blender Z-yukari calisir, glTF Y-yukari. lib.export() export_yup=False ile cevrimi kapatir; kapatilmazsa model GLB icinde yan yatar."
   }
 }

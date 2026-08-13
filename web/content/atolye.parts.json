@@ -2,9 +2,9 @@
   "model": "atolye",
   "file": "/models/atolye.glb",
   "license": {
-    "source": "scripts/build-models.mjs — kod ile üretildi",
+    "source": "scripts/blender/kucuk-sahneler.py — Blender 5.2 ile modellendi",
     "author": "Everything For My Car",
-    "license": "Proje içi üretim — üçüncü taraf lisans yükümlülüğü yok",
+    "license": "Proje ici uretim — ucuncu taraf lisans yukumlulugu yok",
     "url": ""
   },
   "parts": {
@@ -18,12 +18,20 @@
   "props": {
     "dekor.arac": {
       "file": "/models/vendor/covered_car/covered_car.gltf",
-      "at": [0, 0, 0],
+      "at": [
+        0,
+        0,
+        0
+      ],
       "credit": "MP — CC0"
     },
     "dekor.alet-arabasi": {
       "file": "/models/vendor/tool_cart/tool_cart.gltf",
-      "at": [-1.6, 0, 0.9],
+      "at": [
+        -1.6,
+        0,
+        0.9
+      ],
       "rotateY": 1.5708,
       "credit": "Savva Zakharov — CC0"
     }
@@ -33,6 +41,8 @@
     "olcek": "Metre. Zemin y=0; araç gövdesi yerde duruyor konumda (y=0.62). Kaldırma animasyonu gövdeyi yukarı taşır.",
     "yapisal": "zemin ve arac_govdesi bir adımın hedefi değildir; sahnenin bağlamıdır.",
     "kaldirma-noktasi": "Marşpiyel üzerindeki takviyeli nokta olarak modellendi. Yanlış noktadan kaldırma senaryosu için ileride ikinci bir işaret mesh'i eklenebilir.",
-    "nokta-yasagi": "Mesh adlarında nokta yok: three.js GLTFLoader düğüm adındaki '.', ':', '/', '[', ']' karakterlerini siler."
+    "nokta-yasagi": "Mesh adlarında nokta yok: three.js GLTFLoader düğüm adındaki '.', ':', '/', '[', ']' karakterlerini siler.",
+    "model": "Blender ile modellendi (scripts/blender/kucuk-sahneler.py, lib.py). Bevel, boolean, egriden boru ve disbukey zarf kullaniliyor; onceki surum kutu ve silindirdi. Fotogercekci degil, olculu ve okunakli bir atolye modelidir. Yeniden uretmek icin: blender --background --python scripts/blender/kucuk-sahneler.py -- <cikti>",
+    "eksen": "Blender Z-yukari calisir, glTF Y-yukari. lib.export() export_yup=False ile cevrimi kapatir; kapatilmazsa model GLB icinde yan yatar."
   }
 }

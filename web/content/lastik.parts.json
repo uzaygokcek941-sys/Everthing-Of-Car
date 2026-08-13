@@ -2,9 +2,9 @@
   "model": "lastik",
   "file": "/models/lastik.glb",
   "license": {
-    "source": "scripts/build-models.mjs — kod ile üretildi",
+    "source": "scripts/blender/lastik.py — Blender 5.2 ile modellendi",
     "author": "Everything For My Car",
-    "license": "Proje içi üretim — üçüncü taraf lisans yükümlülüğü yok",
+    "license": "Proje ici uretim — ucuncu taraf lisans yukumlulugu yok",
     "url": ""
   },
   "parts": {
@@ -37,6 +37,8 @@
     "olcek": "Metre. Zemin y=0, tekerlek merkezi y=0.32 — lastik zemine değer. X = aks ekseni (+X izleyiciye doğru dış yüz), Z = derinlik.",
     "yanak": "lastik_yanagi ayrı bir mesh çünkü bu alanın ilk teşhis dersi yanak yazısını OKUTUR. Yazının kendisi geometri değil, dersin metnindedir; sahne yalnız nereye bakılacağını gösterir.",
     "nokta-yasagi": "Mesh adlarında nokta yok: GLTFLoader düğüm adındaki '.' karakterini siler. part.bijon.1 -> bijon_1 eşlemesi bu yüzden var.",
-    "eksik": "Lastik sökme makinesi (demonte) ve ön düzen ayar cihazı henüz yok; o dersler cihazı metinde anlatıyor. Marka/model yok — jenerik tekerlek."
+    "eksik": "Lastik sökme makinesi (demonte) ve ön düzen ayar cihazı henüz yok; o dersler cihazı metinde anlatıyor. Marka/model yok — jenerik tekerlek.",
+    "model": "Blender ile modellendi (scripts/blender/lastik.py, lib.py). Bevel, boolean, egriden boru ve disbukey zarf kullaniliyor; onceki surum kutu ve silindirdi. Fotogercekci degil, olculu ve okunakli bir atolye modelidir. Yeniden uretmek icin: blender --background --python scripts/blender/lastik.py -- <cikti>",
+    "eksen": "Blender Z-yukari calisir, glTF Y-yukari. lib.export() export_yup=False ile cevrimi kapatir; kapatilmazsa model GLB icinde yan yatar."
   }
 }

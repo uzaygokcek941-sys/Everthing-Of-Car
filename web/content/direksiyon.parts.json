@@ -2,9 +2,9 @@
   "model": "direksiyon",
   "file": "/models/direksiyon.glb",
   "license": {
-    "source": "scripts/build-models.mjs — kod ile üretildi",
+    "source": "scripts/blender/direksiyon.py — Blender 5.2 ile modellendi",
     "author": "Everything For My Car",
-    "license": "Proje içi üretim — üçüncü taraf lisans yükümlülüğü yok",
+    "license": "Proje ici uretim — ucuncu taraf lisans yukumlulugu yok",
     "url": ""
   },
   "parts": {
@@ -39,6 +39,8 @@
     "airbag": "airbag_modulu bilinçli olarak UYARI malzemesiyle (kırmızı, hafif ışıklı) üretildi. Bu parça derste sökülmez; rengi sınırı görünür kılmak içindir. Aynı sebeple spiral_kablo ayrı bir mesh: simidin arkasındaki bu parça yanlış işlemde kopar ve airbag devresini keser.",
     "hidrolik-ve-eps-birlikte": "Gerçek bir araçta hidrolik ve elektrik yardım aynı anda BULUNMAZ; sahnede ikisi birden var çünkü aynı sahne her iki sistem ailesinin derslerinde kullanılıyor. Ders metinleri hangi sistemden söz ettiğini açıkça söyler.",
     "nokta-yasagi": "Mesh adlarında nokta yok: GLTFLoader düğüm adındaki nokta karakterini siler. part.* anahtarları alt çizgili mesh adlarına eşlenir.",
-    "eksik": "Direksiyon kolonu ayar mekanizması, kilit silindiri, kayış-kasnak sistemi ve teşhis cihazı modellenmedi; ilgili dersler bunları metinde anlatıyor. Rot başı bu sahnede ayrıca üretildi ve lastik sahnesindeki part.rot-basi ile karışmasın diye sol/sağ olarak adlandırıldı."
+    "eksik": "Direksiyon kolonu ayar mekanizması, kilit silindiri, kayış-kasnak sistemi ve teşhis cihazı modellenmedi; ilgili dersler bunları metinde anlatıyor. Rot başı bu sahnede ayrıca üretildi ve lastik sahnesindeki part.rot-basi ile karışmasın diye sol/sağ olarak adlandırıldı.",
+    "model": "Blender ile modellendi (scripts/blender/direksiyon.py, lib.py). Bevel, boolean, egriden boru ve disbukey zarf kullaniliyor; onceki surum kutu ve silindirdi. Fotogercekci degil, olculu ve okunakli bir atolye modelidir. Yeniden uretmek icin: blender --background --python scripts/blender/direksiyon.py -- <cikti>",
+    "eksen": "Blender Z-yukari calisir, glTF Y-yukari. lib.export() export_yup=False ile cevrimi kapatir; kapatilmazsa model GLB icinde yan yatar."
   }
 }
