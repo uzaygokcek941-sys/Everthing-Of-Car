@@ -1,0 +1,7 @@
+name = "araba-videolar"
+main = "index.js"
+compatibility_date = "2026-08-01"
+
+[[r2_buckets]]
+binding = "VIDEOLAR"
+bucket_name = "arabalar"

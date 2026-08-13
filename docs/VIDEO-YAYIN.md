@@ -42,7 +42,38 @@ node scripts/upload-videos.mjs
 Kesilirse aynı komutu tekrar çalıştır — rclone yüklenmiş dosyaları atlar.
 2,3 GB, bağlantına göre 20–90 dakika.
 
-## 4. Vercel'e adresi ver
+## 4. Worker ile yayinla (r2.dev Turkiye'de kesiliyor)
+
+`pub-*.r2.dev` adresi Turk Telekom aginda SNI seviyesinde kesiliyor: HTTPS el
+sikismasi bozuluyor, HTTP `88.255.216.16/landpage` adresine yonlendiriyor. Ayni
+anda example.com ve vercel.com sorunsuz aciliyor, DNS de temiz - yani engel
+`r2.dev` adina ozel. Hedef kitle Turkiye'deki ciraklar oldugu icin bu adres
+kullanilamaz.
+
+Cozum: kovayi bir Worker'in arkasina koymak. `workers.dev` kesilmiyor.
+
+```bash
+cd worker
+npx wrangler login      # tarayicida Allow
+npx wrangler deploy
+```
+
+Worker kovayi baglama ile okur (`VIDEOLAR`), token gerekmez, R2 cikisi ucretsiz
+kalir. Range istegini destekler - onsuz videoda ileri sarma calismaz.
+Yayindaki adres: https://araba-videolar.uzaygokcek.workers.dev
+
+Hesapta workers.dev alt adi yoksa bir kereye mahsus kaydedilir; panel sayfasi
+404 verirse API ile:
+
+```
+PUT https://api.cloudflare.com/client/v4/accounts/<hesap>/workers/subdomain
+{"subdomain":"<ad>"}
+```
+
+Alt ad yeni kaydedildiyse sertifika uretilene kadar birkac dakika TLS hatasi
+verebilir; beklemek yeterli.
+
+## 5. Vercel'e adresi ver
 
 Project → Settings → Environment Variables → `NEXT_PUBLIC_VIDEO_BASE` =
 2. adımdaki `https://pub-xxxxxxxx.r2.dev` (sonunda eğik çizgi yok) →
@@ -55,7 +86,7 @@ böyle yapıyor.
 ## Doğrulama
 
 ```bash
-curl -I https://pub-xxxxxxxx.r2.dev/videos/motor-yag-degisimi.mp4
+curl -I https://araba-videolar.uzaygokcek.workers.dev/videos/motor-buji-degisimi.mp4
 ```
 
 `HTTP/2 200` ve `content-type: video/mp4` dönmeli. Sitede herhangi bir dersi aç;
