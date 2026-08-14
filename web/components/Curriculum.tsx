@@ -16,7 +16,9 @@ const DONE_KEY = "efmc.done";
 
 type Proc = { id: string; title: string; status: string };
 type Stage = { no: number; title: string; why: string; gate: string; ustalikIsareti: string; procedures: Proc[] };
-type Area = { title: string; goal: string; ustalikTanimi: string[]; stages: Stage[] };
+// ustalikTanimi bazi alan dosyalarinda tek metin, bazilarinda satir dizisi.
+// Ikisi de icerik acisindan gecerli; bilesen ikisini de kabul eder.
+type Area = { title: string; goal: string; ustalikTanimi: string[] | string; stages: Stage[] };
 type Done = Record<string, { score: number; at: string }>;
 
 /** Prosedür kimliği dosya adına birebir çevrilir: motor.buji-degisimi -> motor-buji-degisimi.json */
@@ -135,7 +137,7 @@ export default function Curriculum() {
       })}
 
       <div className="border-t border-zinc-800 pt-4 text-xs text-zinc-500">
-        {area.ustalikTanimi.map((line) => (
+        {(Array.isArray(area.ustalikTanimi) ? area.ustalikTanimi : [area.ustalikTanimi]).map((line) => (
           <p key={line}>{line}</p>
         ))}
       </div>
