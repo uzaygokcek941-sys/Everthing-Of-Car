@@ -1,8 +1,8 @@
 "use client";
 
-import { Component, Suspense, useEffect, useMemo, useRef, type ReactNode } from "react";
+import { Component, Suspense, useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Bounds, Environment, OrbitControls, useGLTF } from "@react-three/drei";
+import { Bounds, Environment, OrbitControls, useBounds, useGLTF } from "@react-three/drei";
 import { Box3, Color, Mesh, MeshStandardMaterial, Quaternion, Vector3, type Object3D } from "three";
 import { motionFor, type Interaction, type Motion } from "@/lib/interactions";
 import motor from "@/content/motor-inline4.parts.json";
@@ -108,7 +108,7 @@ function useTargetTransform(node: Object3D | undefined, hareket: Motion | null, 
   }, [node, tur, kayma, eksenAdi]);
 }
 
-function Model({ url, mesh, hareket }: { url: string; mesh?: string; hareket: Motion | null }) {
+function Model({ url, mesh, hareket, bildir }: { url: string; mesh?: string; hareket: Motion | null; bildir: (o: Object3D | null) => void }) {
   const { scene } = useGLTF(url);
   // Klon: useGLTF sahneyi önbellekte paylaşır, hedefi doğrudan oynatmak diğer
   // sahneleri de bozardı.
@@ -116,12 +116,15 @@ function Model({ url, mesh, hareket }: { url: string; mesh?: string; hareket: Mo
   const node = useMemo(() => (mesh ? root.getObjectByName(mesh) : undefined), [root, mesh]);
 
   useTargetTransform(node, hareket, true);
+  useEffect(() => {
+    bildir(node ?? null);
+  }, [node, bildir]);
 
   return <primitive object={root} />;
 }
 
 /** Hazır varlık: taban merkezi `at` noktasına oturtulur, hedefse hareketi alır. */
-function PropModel({ prop, hareket, hedef }: { prop: Prop; hareket: Motion | null; hedef: boolean }) {
+function PropModel({ prop, hareket, hedef, bildir }: { prop: Prop; hareket: Motion | null; hedef: boolean; bildir: (o: Object3D | null) => void }) {
   const { scene } = useGLTF(prop.file);
   const { at, rotateX = 0, rotateY = 0, scale = 1 } = prop;
 
@@ -138,8 +141,51 @@ function PropModel({ prop, hareket, hedef }: { prop: Prop; hareket: Motion | nul
   }, [scene, at, rotateX, rotateY, scale]);
 
   useTargetTransform(root, hareket, hedef);
+  useEffect(() => {
+    if (hedef) bildir(root);
+  }, [hedef, root, bildir]);
 
   return <primitive object={root} />;
+}
+
+/**
+ * Kamera hedefe odaklanir. Onceden Bounds butun sahneyi sigdiriyordu: elektrik
+ * tezgahinda ders akuyu anlatirken ekranda kocaman bir masa, kosede minicik bir
+ * aku goruluyordu. Kutu hedefin %60'i kadar genisletiliyor ki parca baglamiyla
+ * birlikte gorunsun.
+ */
+function Odak({ hedef }: { hedef: Object3D | null }) {
+  const bounds = useBounds();
+  // bounds her karede yeni bir nesne olarak gelebiliyor; bagimliliga koyunca
+  // efekt surekli tetiklenip kamera hic oturmuyordu (sayfa asla durulmadi).
+  const api = useRef(bounds);
+  api.current = bounds;
+
+  useEffect(() => {
+    // Bir kare beklenir: model o an sahneye eklenmis olur, dunya matrisi hazir.
+    const zamanlayici = setTimeout(() => {
+      if (!hedef) {
+        api.current.refresh().fit();
+        return;
+      }
+      const kutu = new Box3().setFromObject(hedef);
+      if (kutu.isEmpty()) {
+        api.current.refresh().fit();
+        return;
+      }
+      // Asgari cerceve: kucuk bir hedefi (aku kutbu gibi) oldugu gibi
+      // sigdirmak kamerayi burnunun dibine sokuyor ve baglam kayboluyor.
+      // Cerceve en az 45 cm, ya da parcanin 2.2 kati - hangisi buyukse.
+      const olcu = kutu.getSize(new Vector3());
+      const enBuyuk = Math.max(olcu.x, olcu.y, olcu.z);
+      const istenen = Math.max(enBuyuk * 2.2, 0.45);
+      kutu.expandByScalar((istenen - enBuyuk) / 2);
+      api.current.refresh(kutu).fit();
+    }, 80);
+    return () => clearTimeout(zamanlayici);
+  }, [hedef]);
+
+  return null;
 }
 
 function Placeholder() {
@@ -177,6 +223,9 @@ export default function Scene({
   const owner = target ? OWNER.get(target) : undefined;
   const manifest = owner?.manifest ?? ((bench ? tezgah : motor) as Manifest);
   const { file, license } = manifest;
+  const [odakDugumu, setOdakDugumu] = useState<Object3D | null>(null);
+  // Hedef degisince odak sifirlanir; aksi halde onceki parcada kalirdi.
+  useEffect(() => setOdakDugumu(null), [target, file]);
   const props = Object.entries(manifest.props ?? {});
 
   // Kod ile üretilen sahnenin ve indirilen varlıkların atıfları birlikte gösterilir.
@@ -194,12 +243,23 @@ export default function Scene({
         <Bounds fit clip observe margin={1.35}>
           <ModelBoundary key={file}>
             <Suspense fallback={<Placeholder />}>
-              {file ? <Model url={file} mesh={owner?.mesh} hareket={hareket} /> : <Placeholder />}
+              {file ? (
+                <Model url={file} mesh={owner?.mesh} hareket={hareket} bildir={setOdakDugumu} />
+              ) : (
+                <Placeholder />
+              )}
               {props.map(([id, prop]) => (
-                <PropModel key={id} prop={prop} hareket={id === target ? hareket : null} hedef={id === target} />
+                <PropModel
+                  key={id}
+                  prop={prop}
+                  hareket={id === target ? hareket : null}
+                  hedef={id === target}
+                  bildir={setOdakDugumu}
+                />
               ))}
             </Suspense>
           </ModelBoundary>
+          <Odak hedef={odakDugumu} />
         </Bounds>
 
         <Environment preset="warehouse" />
