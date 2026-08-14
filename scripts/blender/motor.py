@@ -14,16 +14,23 @@ from lib import *  # noqa
 reset()
 
 # ——— malzemeler ——————————————————————————————————————————————————
-DOKUM = mat("dokum", (0.42, 0.44, 0.47), metal=0.75, rough=0.62)
-ALU = mat("alu", (0.68, 0.70, 0.73), metal=0.90, rough=0.34)
-CELIK = mat("celik", (0.55, 0.57, 0.60), metal=0.95, rough=0.25)
-KAUCUK = mat("kaucuk", (0.09, 0.09, 0.10), metal=0.00, rough=0.85)
-BAKIR = mat("bakir", (0.72, 0.45, 0.20), metal=0.90, rough=0.35)
-PLASTIK = mat("plastik", (0.14, 0.15, 0.17), metal=0.00, rough=0.55)
-CONTA = mat("conta", (0.75, 0.30, 0.18), metal=0.10, rough=0.70)
+# Metallik yuzey kendi rengini degil ortami yansitir; her seye metal=0.9
+# verildiginde parlak bir ortamda hepsi beyaza doner ve parcalar birbirinden
+# ayirt edilemez. Gercekte blok oksitli/boyali, yani dielektrik gibi davranir.
+# Yalnizca islenmis celik ve alu yuzeyler gercek metaldir.
+DOKUM = mat("dokum", (0.115, 0.120, 0.130), metal=0.20, rough=0.80)
+ALU = mat("alu", (0.500, 0.520, 0.545), metal=0.85, rough=0.44)
+CELIK = mat("celik", (0.620, 0.640, 0.670), metal=1.00, rough=0.28)
+KAUCUK = mat("kaucuk", (0.038, 0.038, 0.042), metal=0.00, rough=0.93)
+BAKIR = mat("bakir", (0.480, 0.255, 0.110), metal=0.90, rough=0.46)
+# Radyator petegi ve benzeri genis yuzeyler: metal birakilinca alan isigini
+# ayna gibi yansitip beyaz bir levhaya donuyordu. Gercekte siyah boyali.
+PETEK = mat("petek", (0.055, 0.058, 0.062), metal=0.35, rough=0.72)
+PLASTIK = mat("plastik", (0.085, 0.090, 0.105), metal=0.00, rough=0.52)
+CONTA = mat("conta", (0.560, 0.190, 0.095), metal=0.00, rough=0.78)
 SEFFAF = mat("seffaf", (0.80, 0.84, 0.88), metal=0.00, rough=0.15, alpha=0.35)
-BOYA = mat("boya", (0.16, 0.32, 0.55), metal=0.35, rough=0.30)
-FILTRE = mat("filtre", (0.85, 0.80, 0.62), metal=0.00, rough=0.90)
+BOYA = mat("boya", (0.075, 0.170, 0.330), metal=0.05, rough=0.28)
+FILTRE = mat("filtre", (0.760, 0.700, 0.520), metal=0.00, rough=0.95)
 
 # ——— olculer —————————————————————————————————————————————————————
 ARALIK = 0.09
@@ -266,7 +273,7 @@ ust_tank = cube(loc=(0, 0.725, 0.42), scale=(0.245, 0.022, 0.030))
 alt_tank = cube(loc=(0, 0.375, 0.42), scale=(0.245, 0.022, 0.030))
 bevel(ust_tank, 0.006, 2)
 bevel(alt_tank, 0.006, 2)
-part([petek] + kanatlar + [ust_tank, alt_tank], "radyator", ALU)
+part([petek] + kanatlar + [ust_tank, alt_tank], "radyator", PETEK)
 
 boyun = cyl(0.030, 0.022, loc=(-0.16, 0.752, 0.42), v=28)
 rad_kapak = cyl(0.036, 0.018, loc=(-0.16, 0.768, 0.42), v=28)
@@ -297,10 +304,17 @@ term_civata = cyl(0.005, 0.026, loc=(-0.082, 0.660, 0.150), rot=(math.pi / 2 - 0
 part([term_kapak, term_civata], "termostat_kapagi", ALU)
 
 # ——— kaput ve motor kapagi civatasi ——————————————————————————————
+# Kaput acik: kapali duz levha motoru gizliyor, atolyede kaput hep kalkiktir.
+# Panel kapali konumda kurulur, sonra mentese ekseni (x ekseni, y=1.00,
+# z=-0.19) etrafinda dondurulur - parca dondurmek yerine tek tek konum
+# hesaplamak kaburgalari ust uste yigiyordu.
 kap_panel = cube(loc=(0, 1.02, 0.16), scale=(0.42, 0.012, 0.36))
 bevel(kap_panel, 0.014, 3)
 kap_kaburga = [cube(loc=(0, 0.998, -0.10 + i * 0.13), scale=(0.40, 0.012, 0.014)) for i in range(4)]
 mentese = [cube(loc=(x, 1.00, -0.19), scale=(0.030, 0.020, 0.012)) for x in (-0.32, 0.32)]
+# Kaput KAPALI kalir: kaporta derslerinin ilk adimi "Kaputu ac ve destek
+# cubuguna oturt" ve etkilesim onu y ekseninde 0.4 kaldiriyor. Modeli acik
+# kurmak o dersi anlamsiz birakirdi.
 part([kap_panel] + kap_kaburga + mentese, "kaput", BOYA)
 
 mk_civata = cyl(0.005, 0.024, loc=(0.15, 0.700, -0.05))

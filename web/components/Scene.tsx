@@ -61,13 +61,17 @@ const EKSEN: Record<Motion["axis"], Vector3> = {
  * Dönüş yerel eksende uygulanır (baseQuat * spin), çünkü yatay cıvatalar düğüm
  * quaternion'ıyla yatırılmıştır; global Y'de döndürmek onları eğerdi.
  */
-function useTargetTransform(node: Object3D | undefined, hareket: Motion | null) {
+function useTargetTransform(node: Object3D | undefined, hareket: Motion | null, vurgula: boolean) {
   const base = useRef<{ pos: Vector3; quat: Quaternion }>(null);
 
   useEffect(() => {
     if (!node) return;
     const rest = { pos: node.position.clone(), quat: node.quaternion.clone() };
     base.current = rest;
+    // Vurgu yalnizca hedefe uygulanir. Hazir varlik (dekor) kokunu de
+    // vurgulamak butun aracin turuncu yanmasina yol aciyordu: emissive
+    // gerceklik neyse onun uzerine binip dokuyu tamamen yutuyor.
+    if (!vurgula) return;
 
     // Hedef tek bir mesh olabilir (kod ile üretilen sahne) ya da birden çok
     // mesh'ten oluşan bir grup (indirilen hazır varlık); ikisinde de aynı vurgu.
@@ -90,7 +94,7 @@ function useTargetTransform(node: Object3D | undefined, hareket: Motion | null) 
         o.material = original;
       }
     };
-  }, [node]);
+  }, [node, vurgula]);
 
   const tur = hareket?.turns ?? 0;
   const kayma = hareket?.slide ?? 0;
@@ -111,13 +115,13 @@ function Model({ url, mesh, hareket }: { url: string; mesh?: string; hareket: Mo
   const root = useMemo(() => scene.clone(true), [scene]);
   const node = useMemo(() => (mesh ? root.getObjectByName(mesh) : undefined), [root, mesh]);
 
-  useTargetTransform(node, hareket);
+  useTargetTransform(node, hareket, true);
 
   return <primitive object={root} />;
 }
 
 /** Hazır varlık: taban merkezi `at` noktasına oturtulur, hedefse hareketi alır. */
-function PropModel({ prop, hareket }: { prop: Prop; hareket: Motion | null }) {
+function PropModel({ prop, hareket, hedef }: { prop: Prop; hareket: Motion | null; hedef: boolean }) {
   const { scene } = useGLTF(prop.file);
   const { at, rotateX = 0, rotateY = 0, scale = 1 } = prop;
 
@@ -133,7 +137,7 @@ function PropModel({ prop, hareket }: { prop: Prop; hareket: Motion | null }) {
     return clone;
   }, [scene, at, rotateX, rotateY, scale]);
 
-  useTargetTransform(root, hareket);
+  useTargetTransform(root, hareket, hedef);
 
   return <primitive object={root} />;
 }
@@ -192,7 +196,7 @@ export default function Scene({
             <Suspense fallback={<Placeholder />}>
               {file ? <Model url={file} mesh={owner?.mesh} hareket={hareket} /> : <Placeholder />}
               {props.map(([id, prop]) => (
-                <PropModel key={id} prop={prop} hareket={id === target ? hareket : null} />
+                <PropModel key={id} prop={prop} hareket={id === target ? hareket : null} hedef={id === target} />
               ))}
             </Suspense>
           </ModelBoundary>

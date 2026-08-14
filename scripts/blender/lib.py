@@ -253,3 +253,22 @@ def export(path):
     for a in adlar:
         print("  mesh:", a)
     return adlar
+
+
+def mentese_ekseni(obj, aci, y, z):
+    """Nesneyi x ekseni yonundeki bir mentese etrafinda dondurur.
+
+    Blender'in rotation_euler'i nesne merkezini kullanir; kaput gibi kenarindan
+    acilan parcalarda pivot menteseye tasinmali. Kose noktalari dogrudan
+    donduruluyor, boylece uygulanmis donusum GLB'ye de aynen giriyor.
+    """
+    import math
+    from mathutils import Matrix, Vector
+
+    pivot = Vector((0.0, y, z))
+    donus = Matrix.Rotation(aci, 4, 'X')
+    obj_pivot = obj.matrix_world.inverted() @ pivot
+    for v in obj.data.vertices:
+        v.co = donus @ (v.co - obj_pivot) + obj_pivot
+    obj.data.update()
+    return obj
