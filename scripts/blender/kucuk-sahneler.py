@@ -137,13 +137,10 @@ sarilar = [cube(loc=(0, 0.001, dz * 0.95), scale=(1.30, 0.002, 0.030)) for dz in
 sarilar += [cube(loc=(dx * 1.30, 0.001, 0), scale=(0.030, 0.002, 0.95)) for dx in (-1, 1)]
 part(sarilar, "calisma_alani", SARI)
 
-govde = cube(loc=(0, 0.62, 0), scale=(0.78, 0.26, 1.35))
-bevel(govde, 0.055, 4)
-tavan = cube(loc=(0, 0.98, -0.15), scale=(0.62, 0.13, 0.75))
-bevel(tavan, 0.075, 4)
-tekerlekler = [tube(0.30, 0.16, 0.16, loc=(dx * 0.80, 0.30, dz * 0.95), rot=(0, math.pi / 2, 0), v=32)
-               for dx in (-1, 1) for dz in (-1, 1)]
-part([govde, tavan] + tekerlekler, "arac_govdesi", BOYALI)
+# Kaba kutu-arac KALDIRILDI: sahnede zaten dokulu brandali arac hazir varligi
+# ayni noktada duruyordu (atolye.parts.json -> dekor.arac). Ikisi ust uste
+# binince kutu-aracin tekerlekleri brandanin icinden disari cikiyordu.
+# Hicbir ders arac_govdesi'ni hedef almiyor, yalnizca baglamdi.
 
 kn = cube(loc=(-0.78, 0.355, 0.55), scale=(0.020, 0.020, 0.075))
 kn_kertik = [cube(loc=(-0.78, 0.335, 0.55 + dz), scale=(0.024, 0.008, 0.010)) for dz in (-0.045, 0.045)]
