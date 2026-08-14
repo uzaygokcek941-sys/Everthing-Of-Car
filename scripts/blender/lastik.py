@@ -12,12 +12,12 @@ from lib import *  # noqa
 
 reset()
 
-CELIK = mat("celik", (0.55, 0.57, 0.60), metal=0.95, rough=0.28)
-ALU = mat("alu", (0.72, 0.74, 0.77), metal=0.92, rough=0.24)
+CELIK = mat("celik", (0.580, 0.600, 0.630), metal=1.00, rough=0.36)
+ALU = mat("alu", (0.500, 0.520, 0.550), metal=0.85, rough=0.45)
 KAUCUK = mat("kaucuk", (0.075, 0.075, 0.082), metal=0.00, rough=0.92)
 PLASTIK = mat("plastik", (0.13, 0.14, 0.16), metal=0.00, rough=0.55)
-KURSUN = mat("kursun", (0.42, 0.43, 0.46), metal=0.80, rough=0.55)
-BAKIR = mat("bakir", (0.72, 0.45, 0.20), metal=0.85, rough=0.38)
+KURSUN = mat("kursun", (0.300, 0.310, 0.330), metal=0.60, rough=0.65)
+BAKIR = mat("bakir", (0.480, 0.260, 0.110), metal=0.90, rough=0.45)
 
 MY = 0.32
 R_DIS = 0.32

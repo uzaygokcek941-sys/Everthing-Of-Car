@@ -12,14 +12,14 @@ from lib import *  # noqa
 
 reset()
 
-SAC = mat("sac", (0.62, 0.64, 0.67), metal=0.88, rough=0.32)
-BOYALI = mat("boyali", (0.16, 0.32, 0.55), metal=0.35, rough=0.26)
+SAC = mat("sac", (0.420, 0.440, 0.470), metal=0.70, rough=0.55)
+BOYALI = mat("boyali", (0.055, 0.115, 0.235), metal=0.00, rough=0.30)
 PLASTIK = mat("plastik", (0.13, 0.14, 0.16), metal=0.00, rough=0.58)
 DOSEME = mat("doseme", (0.22, 0.21, 0.20), metal=0.00, rough=0.85)
 CAM = mat("cam", (0.72, 0.80, 0.85), metal=0.00, rough=0.06, alpha=0.28)
 KAUCUK = mat("kaucuk", (0.07, 0.07, 0.08), metal=0.00, rough=0.90)
-CELIK = mat("celik", (0.55, 0.57, 0.60), metal=0.95, rough=0.28)
-BAKIR = mat("bakir", (0.74, 0.46, 0.20), metal=0.92, rough=0.30)
+CELIK = mat("celik", (0.580, 0.600, 0.630), metal=1.00, rough=0.36)
+BAKIR = mat("bakir", (0.480, 0.260, 0.110), metal=0.90, rough=0.45)
 KIRMIZI = mat("kirmizi", (0.62, 0.10, 0.08), metal=0.10, rough=0.50)
 KAGIT = mat("kagit", (0.80, 0.78, 0.72), metal=0.00, rough=0.88)
 SIYAH = mat("siyah", (0.05, 0.05, 0.06), metal=0.05, rough=0.70)

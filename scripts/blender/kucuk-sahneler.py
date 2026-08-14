@@ -16,15 +16,15 @@ def malzemeler():
     """reset() dosyayi bosaltip malzeme referanslarini gecersiz kildigi icin
     her sahne kendi malzemelerini yeniden kurar."""
     global CELIK, ALU, PLASTIK, AHSAP, KIRMIZI, TURUNCU, SARI, BETON, BOYALI
-    CELIK = mat("celik", (0.55, 0.57, 0.60), metal=0.95, rough=0.28)
-    ALU = mat("alu", (0.70, 0.72, 0.75), metal=0.92, rough=0.30)
+    CELIK = mat("celik", (0.580, 0.600, 0.630), metal=1.00, rough=0.36)
+    ALU = mat("alu", (0.500, 0.520, 0.550), metal=0.85, rough=0.45)
     PLASTIK = mat("plastik", (0.13, 0.14, 0.16), metal=0.00, rough=0.55)
     AHSAP = mat("ahsap", (0.32, 0.22, 0.13), metal=0.00, rough=0.80)
     KIRMIZI = mat("kirmizi", (0.62, 0.10, 0.08), metal=0.10, rough=0.50)
     TURUNCU = mat("turuncu", (0.80, 0.42, 0.06), metal=0.20, rough=0.55)
     SARI = mat("sari", (0.80, 0.66, 0.10), metal=0.20, rough=0.55)
     BETON = mat("beton", (0.30, 0.31, 0.33), metal=0.00, rough=0.95)
-    BOYALI = mat("boyali", (0.16, 0.32, 0.55), metal=0.35, rough=0.28)
+    BOYALI = mat("boyali", (0.055, 0.115, 0.235), metal=0.00, rough=0.30)
 
 
 # ═══ kabin ═══════════════════════════════════════════════════════════
