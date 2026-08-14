@@ -36,7 +36,10 @@ function metinler(ders) {
         adim.instruction,
         dogru?.label ? dogru.label + "." : adim.hint,
         dogru ? ozet(dogru.explain) : "",
-        adim.teachingNote
+        // Ogretmen notu 1200 karakteri gecebiliyor; tamami okunursa tek adim
+        // 100 saniyeyi asiyor. Aciklamada oldugu gibi ilk iki cumle yeter,
+        // tamami zaten uygulamada yazili duruyor.
+        adim.teachingNote ? ozet(adim.teachingNote) : ""
       ),
     });
   });
@@ -77,7 +80,9 @@ function seslendir(metin, mp3) {
         "python",
         // --rate=-4%: argparse "-4%" i ayri arguman sanip hata veriyor, esittiyle gecilir.
         ["-m", "edge_tts", "--voice", SESI, "--rate=-4%", "--text", metin, "--write-media", gecici],
-        { stdio: ["ignore", "ignore", "pipe"] }
+        // timeout: edge_tts agdan yanit gelmezse suresiz asili kaliyor ve hic
+        // hata firlatmadigi icin yeniden deneme de devreye girmiyordu.
+        { stdio: ["ignore", "ignore", "pipe"], timeout: 90_000, killSignal: "SIGKILL" }
       );
       if (!saglam(gecici)) throw new Error("bos veya bozuk ses: " + gecici);
       renameSync(gecici, mp3);
@@ -99,13 +104,21 @@ for (const dosya of dosyalar) {
   const klasor = join(SES, ad);
   mkdirSync(klasor, { recursive: true });
 
+  // Onceki kosunun metinleri: yalnizca degisen parca yeniden seslendirilir.
+  const propsYol = join("props", `${ad}.json`);
+  const eski = existsSync(propsYol) ? JSON.parse(readFileSync(propsYol, "utf8")).ses : null;
   const ses = {};
   for (const { ad: parca, metin } of metinler(ders)) {
     const mp3 = join(klasor, `${parca}.mp3`);
-    if (yenile || !saglam(mp3)) seslendir(metin, mp3);
-    ses[parca] = { dosya: `ses/${ad}/${parca}.mp3`, sure: sure(mp3) };
+    // Metin degistiyse eski kayit gecersizdir; yoksa kisaltma islemezdi.
+    // Eski kosular metni kaydetmiyordu: o durumda yalnizca adim sesleri
+    // yenilenir, cunku degisen tek sey ogretmen notunun kisaltilmasiydi.
+    const bilinmiyor = eski?.[parca] && eski[parca].metin === undefined;
+    const eskiyeGuven = bilinmiyor && !parca.startsWith("a");
+    if (yenile || !saglam(mp3) || (!eskiyeGuven && eski?.[parca]?.metin !== metin)) seslendir(metin, mp3);
+    ses[parca] = { dosya: `ses/${ad}/${parca}.mp3`, sure: sure(mp3), metin };
   }
 
-  writeFileSync(join("props", `${ad}.json`), JSON.stringify({ ders, ses }));
+  writeFileSync(propsYol, JSON.stringify({ ders, ses }));
   console.log(`  ${ad.padEnd(36)} ${Object.keys(ses).length} parça`);
 }

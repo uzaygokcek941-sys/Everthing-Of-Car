@@ -5,13 +5,16 @@
 // verilmezse yalnız listeler; gerçekten render almak için --yaz gerekir.
 
 import { execFileSync } from "node:child_process";
-import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { basename, join } from "node:path";
 
 const KAYNAK = "../web/public/procedures";
 const HEDEF_MP4 = "out";
 const HEDEF_WEB = "../web/public/videos";
 const yaz = process.argv.includes("--yaz");
+const basarisiz = [];
+let cikti = "";
+let propsYol = "";
 const sadece = process.argv.find((a) => a.startsWith("--ders="))?.slice(7);
 
 mkdirSync("props", { recursive: true });
@@ -32,7 +35,7 @@ for (const dosya of dosyalar) {
 
   // props'u ses-uret.mjs yazar (icinde anlatim dosyalari ve sureleri var).
   // Yoksa ses olmadan, eski metin-uzunlugu hesabiyla render alinir.
-  const propsYol = join("props", `${ad}.json`);
+  propsYol = join("props", `${ad}.json`);
   if (!existsSync(propsYol)) writeFileSync(propsYol, JSON.stringify({ ders }));
   const sessiz = !JSON.parse(readFileSync(propsYol, "utf8")).ses;
 
@@ -41,8 +44,46 @@ for (const dosya of dosyalar) {
     continue;
   }
 
-  const cikti = join(HEDEF_MP4, `${ad}.mp4`);
+  cikti = join(HEDEF_WEB, `${ad}.mp4`);
+
+  // Kaldigi yerden devam: cikti kendi ses dosyalarindan yeniyse yeniden
+  // render alma. 164 videoluk kosu kesilirse bastan baslamasin diye.
+  const ses = JSON.parse(readFileSync(propsYol, "utf8")).ses;
+  const sesZamani = ses
+    ? Math.max(...Object.values(ses).map((x) => statSync(join("public", x.dosya)).mtimeMs))
+    : 0;
+  if (!process.argv.includes("--zorla") && existsSync(cikti) && statSync(cikti).mtimeMs > sesZamani) {
+    console.log(`  atla (guncel): ${ad}`);
+    continue;
+  }
+
   console.log(`  render: ${ders.id}${sessiz ? "  [SESSIZ]" : ""}`);
+  // Tek bir video coktugunde 164'luk kosu olmesin: bir kez yeniden dene,
+  // olmuyorsa kaydet ve devam et. (Ilk kosu Remotion'un gecici ses klasoru
+  // kaybolunca cokmustu; sebep disk doluydu.)
+  try {
+    derle();
+  } catch (ilk) {
+    console.log(`  YENIDEN DENIYOR: ${ad} (${String(ilk.message).slice(0, 90)})`);
+    try {
+      derle();
+    } catch (ikinci) {
+      basarisiz.push([ad, String(ikinci.message).slice(0, 160)]);
+      console.log(`  BASARISIZ: ${ad}`);
+      continue;
+    }
+  }
+}
+
+if (basarisiz.length) {
+  console.log("");
+  console.log(`BASARISIZ ${basarisiz.length}: ${basarisiz.map(([a]) => a).join(", ")}`);
+} else if (yaz) {
+  console.log("");
+  console.log("Hepsi basarili.");
+}
+
+function derle() {
   execFileSync(
     "npx",
     // veryfast + crf 20: ayni ders 19 dk yerine 7 dk 51 sn'de bitiyor, metin
@@ -50,11 +91,13 @@ for (const dosya of dosyalar) {
     [
       "remotion", "render", "src/index.ts", "Ders", cikti,
       "--codec", "h264", "--crf", "20", "--x264-preset=veryfast", "--concurrency=8",
+      // Olculdu (900 kare, ayni ders): donanim rasterlestirmesi 83 sn, yazilim
+      // 176 sn. Remotion varsayilanda yazilimi seciyordu.
+      "--gl=angle",
       `--props=${propsYol}`,
     ],
     { stdio: "inherit", shell: true },
   );
-  writeFileSync(join(HEDEF_WEB, `${ad}.mp4`), readFileSync(cikti));
 }
 
 console.log(yaz ? "\nBitti." : "\nGerçekten render almak için: node render-all.mjs --yaz");
