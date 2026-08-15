@@ -11,6 +11,7 @@ import { basename, join } from "node:path";
 
 const KAYNAK = "../web/public/procedures";
 const SES = "public/ses";
+const MUFREDAT = "../web/public/curriculum";
 const SESI = "tr-TR-AhmetNeural";
 const sadece = process.argv.find((a) => a.startsWith("--ders="))?.slice(7);
 const yenile = process.argv.includes("--yenile");
@@ -19,7 +20,9 @@ const yenile = process.argv.includes("--yenile");
 const ozet = (m) => m.split(/(?<=\.)\s+/).slice(0, 2).join(" ");
 const birlestir = (...p) => p.filter(Boolean).join(" ").replace(/\s+/g, " ").trim();
 
-const alanAdi = (a) => (a === "arac-elektrik" ? "Araç elektrik ve elektronik" : "Motor ve mekanik");
+// Alan adi mufredattan okunur: elle yazilan liste alan eklendikce kaymisti,
+// alti alanin dordu "Motor ve mekanik" diye anons ediliyordu.
+const alanAdi = (a) => JSON.parse(readFileSync(join(MUFREDAT, `${a}.json`), "utf8")).title;
 
 function metinler(ders) {
   const l = [];
