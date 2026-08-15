@@ -90,7 +90,9 @@ function derle() {
     // videosunda gozle fark yok.
     [
       "remotion", "render", "src/index.ts", "Ders", cikti,
-      "--codec", "h264", "--crf", "20", "--x264-preset=veryfast", "--concurrency=8",
+      // crf 23: metin agirlikli goruntude gozle fark yok, dosya ~%30 kucuk.
+      // Disk 7.8 GB'a dusmustu; ilk kosu zaten disk dolulugundan cokmustu.
+      "--codec", "h264", "--crf", "23", "--x264-preset=veryfast", "--concurrency=8",
       // Olculdu (900 kare, ayni ders): donanim rasterlestirmesi 83 sn, yazilim
       // 176 sn. Remotion varsayilanda yazilimi seciyordu.
       "--gl=angle",
