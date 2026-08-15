@@ -279,7 +279,10 @@ export default function Scene({
       )}
 
       {krediler.length > 0 && (
-        <span className="absolute bottom-0 right-0 max-w-[60%] p-3 text-right text-[11px] leading-snug text-zinc-500">
+        <span
+          title={`Model: ${krediler.join(" · ")}`}
+          className="pointer-events-none absolute bottom-0 left-0 right-0 truncate bg-gradient-to-t from-black/60 to-transparent px-3 py-2 text-[10px] text-zinc-500"
+        >
           Model: {krediler.join(" · ")}
         </span>
       )}

@@ -82,11 +82,11 @@ export default function Curriculum() {
     );
 
   return (
-    <div className="space-y-5 p-4">
+    <div className="mx-auto max-w-3xl space-y-8 p-5 sm:p-8">
       {tabs}
       <div>
-        <h1 className="text-lg font-medium text-zinc-100">{area.title}</h1>
-        <p className="mt-1 text-sm text-zinc-400">{area.goal}</p>
+        <h1 className="text-2xl font-semibold tracking-tight text-zinc-50">{area.title}</h1>
+        <p className="mt-2 text-[15px] leading-relaxed text-zinc-400">{area.goal}</p>
       </div>
 
       {area.stages.map((stage, i) => {
@@ -98,13 +98,13 @@ export default function Curriculum() {
         return (
           <section key={stage.no} className={unlocked ? "" : "opacity-50"}>
             <div className="flex items-baseline gap-2">
-              <span className="font-mono text-xs text-zinc-600">{stage.no}</span>
-              <h2 className="text-sm font-medium text-zinc-100">{stage.title}</h2>
-              {!unlocked && <span className="text-xs text-zinc-500">kilitli</span>}
+              <span className="font-mono text-sm text-amber-500/70">{stage.no}</span>
+              <h2 className="text-lg font-semibold text-zinc-100">{stage.title}</h2>
+              {!unlocked && <span className="rounded-full border border-zinc-700 px-2 py-0.5 text-[11px] text-zinc-500">kilitli</span>}
             </div>
-            <p className="mt-0.5 text-xs text-zinc-500">{stage.why}</p>
+            <p className="mt-1 text-sm leading-relaxed text-zinc-500">{stage.why}</p>
 
-            <ul className="mt-2 space-y-1">
+            <ul className="mt-4 space-y-2">
               {stage.procedures.map((p) => {
                 const playable = p.status === "yazildi" && unlocked;
                 const result = done[p.id];
@@ -113,14 +113,14 @@ export default function Curriculum() {
                     <button
                       disabled={!playable}
                       onClick={() => setActive(p.id)}
-                      className={`flex w-full items-center justify-between rounded border px-3 py-2 text-left text-sm ${
+                      className={`flex w-full items-center justify-between gap-4 rounded-lg border px-4 py-3.5 text-left text-[15px] transition ${
                         playable
-                          ? "border-zinc-700 text-zinc-200 hover:border-amber-400"
-                          : "border-zinc-800 text-zinc-600"
+                          ? "border-zinc-700 bg-zinc-900/40 text-zinc-100 hover:border-amber-400/70 hover:bg-zinc-900"
+                          : "border-zinc-800/70 text-zinc-600"
                       }`}
                     >
                       <span>{p.title}</span>
-                      <span className="ml-3 shrink-0 text-xs">
+                      <span className={`shrink-0 text-xs ${playable ? "text-amber-400" : "text-zinc-600"}`}>
                         {result ? `${result.score} puan` : p.status === "yazildi" ? "başla" : "yazılmadı"}
                       </span>
                     </button>
@@ -130,13 +130,15 @@ export default function Curriculum() {
             </ul>
 
             {written.length > 0 && (
-              <p className="mt-1.5 text-xs italic text-zinc-600">Usta işareti: {stage.ustalikIsareti}</p>
+              <p className="mt-3 border-l-2 border-zinc-800 pl-3 text-sm italic leading-relaxed text-zinc-500">
+                Usta işareti: {stage.ustalikIsareti}
+              </p>
             )}
           </section>
         );
       })}
 
-      <div className="border-t border-zinc-800 pt-4 text-xs text-zinc-500">
+      <div className="space-y-2 border-t border-zinc-800 pt-6 text-sm leading-relaxed text-zinc-500">
         {(Array.isArray(area.ustalikTanimi) ? area.ustalikTanimi : [area.ustalikTanimi]).map((line) => (
           <p key={line}>{line}</p>
         ))}
