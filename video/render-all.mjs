@@ -27,6 +27,15 @@ const dosyalar = readdirSync(KAYNAK)
 
 console.log(`${dosyalar.length} ders${yaz ? "" : " (kuru çalışma — render alınmıyor)"}`);
 
+// Onceki surum her ders icin "remotion render src/index.ts" cagiriyordu; bu
+// her seferinde webpack paketini (359 MB) ve public klasorunu (324 MB) bastan
+// uretiyordu. Olculdu: ders basi 18 dk. Bir kez paketleyip 164 kez kullaniyoruz.
+const PAKET = "build";
+if (yaz) {
+  console.log("paketleniyor (bir kez)...");
+  execFileSync("npx", ["remotion", "bundle", "src/index.ts", PAKET], { stdio: "inherit", shell: true });
+}
+
 for (const dosya of dosyalar) {
   const ders = JSON.parse(readFileSync(join(KAYNAK, dosya), "utf8"));
   // Dosya adı prosedür id'sinin tireli hâlidir; uygulama da videoyu
@@ -89,7 +98,7 @@ function derle() {
     // veryfast + crf 20: ayni ders 19 dk yerine 7 dk 51 sn'de bitiyor, metin
     // videosunda gozle fark yok.
     [
-      "remotion", "render", "src/index.ts", "Ders", cikti,
+      "remotion", "render", PAKET, "Ders", cikti,
       // crf 23: metin agirlikli goruntude gozle fark yok, dosya ~%30 kucuk.
       // Disk 7.8 GB'a dusmustu; ilk kosu zaten disk dolulugundan cokmustu.
       "--codec", "h264", "--crf", "23", "--x264-preset=veryfast", "--concurrency=8",
