@@ -23,11 +23,12 @@ export type Ders = {
   assessment?: { questions: Soru[] };
 };
 
-const FPS = 30;
+// Root.tsx'teki Composition fps'i ile AYNI olmali; ayrilirsa ses goruntuden kayar.
+const FPS = 24;
 /** Konusma bitince sahne bir an daha dursun; kesik his vermesin. */
-const KUYRUK = 26;
-const KAPAK_YEDEK = 150;
-const KAPANIS_YEDEK = 90;
+const KUYRUK = Math.round(0.87 * FPS);
+const KAPAK_YEDEK = 5 * FPS;
+const KAPANIS_YEDEK = 3 * FPS;
 
 export type Ses = { dosya: string; sure: number };
 export type SesKumesi = Record<string, Ses>;
@@ -38,8 +39,17 @@ const sesKare = (ses?: Ses) => (ses ? Math.round(ses.sure * FPS) + KUYRUK : null
 const Anlatim: React.FC<{ ses?: Ses }> = ({ ses }) =>
   ses ? <Audio src={staticFile(ses.dosya)} /> : null;
 
-/** Uzun açıklamanın ilk iki cümlesi: iddianın kendisi. Gerisi uygulamada okunur. */
-export const ozet = (metin: string) => metin.split(/(?<=\.)\s+/).slice(0, 2).join(" ");
+/** Notun 600 karaktere sigan bastan kismi; gerisi uygulamada yazili okunur. */
+// ses-uret.mjs'teki ozet() ile ayni kural: 600 karakterlik sinir, cumle butun.
+export const ozet = (metin: string) => {
+  const cumleler = metin.split(/(?<=\.)\s+/);
+  let cikan = "";
+  for (const c of cumleler) {
+    if (cikan && (cikan + " " + c).length > 600) break;
+    cikan = cikan ? cikan + " " + c : c;
+  }
+  return cikan;
+};
 
 const govde = (adim: Adim) => {
   const dogru = adim.interaction.options?.find((o) => o.correct);
@@ -267,7 +277,10 @@ export const DersVideo: React.FC<{ ders: Ders; ses?: SesKumesi }> = ({ ders, ses
   let imlec = kapakSure;
 
   return (
-    <AbsoluteFill>
+    // Tuval 1280x720; tasarim 1920x1080 olcusunde yazildi. --scale kullanmak
+    // yuksekligi 720.0000000000001 yapip Remotion'a "tam sayi degil" dedirtti;
+    // CSS olcegi bu kisitin disinda ve tuval boyutu tam sayi kaliyor.
+    <AbsoluteFill style={{ width: 1920, height: 1080, transform: "scale(0.6666666666666666)", transformOrigin: "top left" }}>
       <Zemin />
 
       <Sequence durationInFrames={kapakSure}>

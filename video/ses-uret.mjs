@@ -16,8 +16,19 @@ const SESI = "tr-TR-AhmetNeural";
 const sadece = process.argv.find((a) => a.startsWith("--ders="))?.slice(7);
 const yenile = process.argv.includes("--yenile");
 
-// Ders.tsx'teki ozet() ile ayni kural: iddianin kendisi ilk iki cumlededir.
-const ozet = (m) => m.split(/(?<=\.)\s+/).slice(0, 2).join(" ");
+// Ders.tsx'teki ozet() ile ayni kural olmali; ikisi birlikte degisir.
+const ozet = (m) => {
+  // Iki cumleyle kesmek ogretim notlarinin %38'ini atiyordu ve tam da en
+  // dolgun notlari kirpiyordu. Karakter siniri %19'a dusuruyor; 600 karakter
+  // yaklasik 40 saniye konusma, adimi sismeden birakiyor.
+  const cumleler = m.split(/(?<=\.)\s+/);
+  let cikan = "";
+  for (const c of cumleler) {
+    if (cikan && (cikan + " " + c).length > 600) break;
+    cikan = cikan ? cikan + " " + c : c;
+  }
+  return cikan;
+};
 const birlestir = (...p) => p.filter(Boolean).join(" ").replace(/\s+/g, " ").trim();
 
 // Alan adi mufredattan okunur: elle yazilan liste alan eklendikce kaymisti,

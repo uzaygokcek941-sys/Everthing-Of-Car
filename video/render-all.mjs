@@ -10,7 +10,9 @@ import { basename, join } from "node:path";
 
 const KAYNAK = "../web/public/procedures";
 const HEDEF_MP4 = "out";
-const HEDEF_WEB = "../web/public/videos";
+// C: surekli doluyor ve Remotion ders basina birkac GB gecici alan istiyor.
+// VIDEO_CIKTI verilirse cikti baska surucuye yazilir (D: gibi).
+const HEDEF_WEB = process.env.VIDEO_CIKTI || "../web/public/videos";
 const yaz = process.argv.includes("--yaz");
 const basarisiz = [];
 let cikti = "";

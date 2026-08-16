@@ -7,7 +7,8 @@ import path from "node:path";
 
 const kok = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const envYolu = path.join(kok, "web", ".env.local");
-const kaynak = path.join(kok, "web", "public", "videos");
+// render-all.mjs ile ayni degisken: cikti baska surucudeyse oradan yuklenir.
+const kaynak = process.env.VIDEO_CIKTI || path.join(kok, "web", "public", "videos");
 
 if (!existsSync(envYolu)) {
   console.error(`${envYolu} yok. docs/VIDEO-YAYIN.md 3. adima bak.`);

@@ -12,9 +12,10 @@ export const RemotionRoot: React.FC = () => (
     // Süre metnin uzunluğundan hesaplanır; sabit bir sayı ölü kare bırakırdı.
     calculateMetadata={({ props }) => ({ durationInFrames: dersSuresi(props.ders, props.ses) })}
     durationInFrames={1200}
-    fps={30}
-    width={1920}
-    height={1080}
+    // Ders.tsx'teki FPS sabiti ile birlikte degisir.
+    fps={24}
+    width={1280}
+    height={720}
     defaultProps={{ ders: varsayilan as unknown as Ders, ses: undefined as SesKumesi | undefined }}
   />
 );
