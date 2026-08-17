@@ -24,7 +24,7 @@ export type Ders = {
 };
 
 // Root.tsx'teki Composition fps'i ile AYNI olmali; ayrilirsa ses goruntuden kayar.
-const FPS = 24;
+const FPS = 20;
 /** Konusma bitince sahne bir an daha dursun; kesik his vermesin. */
 const KUYRUK = Math.round(0.87 * FPS);
 const KAPAK_YEDEK = 5 * FPS;
@@ -277,10 +277,10 @@ export const DersVideo: React.FC<{ ders: Ders; ses?: SesKumesi }> = ({ ders, ses
   let imlec = kapakSure;
 
   return (
-    // Tuval 1280x720; tasarim 1920x1080 olcusunde yazildi. --scale kullanmak
+    // Tuval 960x540; tasarim 1920x1080 olcusunde yazildi. 0.5 ikili tabanda tam. --scale kullanmak
     // yuksekligi 720.0000000000001 yapip Remotion'a "tam sayi degil" dedirtti;
     // CSS olcegi bu kisitin disinda ve tuval boyutu tam sayi kaliyor.
-    <AbsoluteFill style={{ width: 1920, height: 1080, transform: "scale(0.6666666666666666)", transformOrigin: "top left" }}>
+    <AbsoluteFill style={{ width: 1920, height: 1080, transform: "scale(0.5)", transformOrigin: "top left" }}>
       <Zemin />
 
       <Sequence durationInFrames={kapakSure}>

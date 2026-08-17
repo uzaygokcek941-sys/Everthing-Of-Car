@@ -13,9 +13,9 @@ export const RemotionRoot: React.FC = () => (
     calculateMetadata={({ props }) => ({ durationInFrames: dersSuresi(props.ders, props.ses) })}
     durationInFrames={1200}
     // Ders.tsx'teki FPS sabiti ile birlikte degisir.
-    fps={24}
-    width={1280}
-    height={720}
+    fps={20}
+    width={960}
+    height={540}
     defaultProps={{ ders: varsayilan as unknown as Ders, ses: undefined as SesKumesi | undefined }}
   />
 );

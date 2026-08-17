@@ -32,10 +32,11 @@ console.log(`${dosyalar.length} ders${yaz ? "" : " (kuru çalışma — render a
 // Onceki surum her ders icin "remotion render src/index.ts" cagiriyordu; bu
 // her seferinde webpack paketini (359 MB) ve public klasorunu (324 MB) bastan
 // uretiyordu. Olculdu: ders basi 18 dk. Bir kez paketleyip 164 kez kullaniyoruz.
-const PAKET = "build";
+// C: surekli doluyor; paket de baska surucuye alinabilsin.
+const PAKET = process.env.PAKET_YOL || "build";
 if (yaz) {
   console.log("paketleniyor (bir kez)...");
-  execFileSync("npx", ["remotion", "bundle", "src/index.ts", PAKET], { stdio: "inherit", shell: true });
+  execFileSync("npx", ["remotion", "bundle", "src/index.ts", `--out-dir=${PAKET}`], { stdio: "inherit", shell: true });
 }
 
 for (const dosya of dosyalar) {
