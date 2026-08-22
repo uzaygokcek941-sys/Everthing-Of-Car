@@ -2,8 +2,18 @@
 
 import { Component, Suspense, useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Bounds, Environment, OrbitControls, useBounds, useGLTF } from "@react-three/drei";
-import { Box3, Color, Mesh, MeshStandardMaterial, Quaternion, Vector3, type Object3D } from "three";
+import { Bounds, Environment, OrbitControls, useBounds, useGLTF, useTexture } from "@react-three/drei";
+import {
+  Box3,
+  Color,
+  Mesh,
+  MeshStandardMaterial,
+  Quaternion,
+  RepeatWrapping,
+  Vector3,
+  type Object3D,
+  type Texture,
+} from "three";
 import { motionFor, type Interaction, type Motion } from "@/lib/interactions";
 import motor from "@/content/motor-inline4.parts.json";
 import tezgah from "@/content/tezgah.parts.json";
@@ -108,11 +118,53 @@ function useTargetTransform(node: Object3D | undefined, hareket: Motion | null, 
   }, [node, tur, kayma, eksenAdi]);
 }
 
+// Modeller dokusuz geliyor (materyal var, doku yok): duz renk plastik gibi
+// gorunuyordu. Ayni gecmisi butun parcalara verip yalnizca puruz ve kabartma
+// ekliyoruz; taban renk modelin kendi renginde kaliyor.
+const DOKULAR = [
+  "/dokular/Metal032_1K-JPG_Roughness.jpg",
+  "/dokular/Metal032_1K-JPG_NormalGL.jpg",
+  "/dokular/Rubber004_1K-JPG_Roughness.jpg",
+  "/dokular/Rubber004_1K-JPG_NormalGL.jpg",
+];
+const KAUCUK = /lastik|tire|rubber|tekerlek|hortum|conta|kayis/i;
+
+function tekrarla(doku: Texture, kere: number): Texture {
+  const kopya = doku.clone();
+  kopya.wrapS = kopya.wrapT = RepeatWrapping;
+  kopya.repeat.set(kere, kere);
+  kopya.needsUpdate = true;
+  return kopya;
+}
+
+/** Klonlanmis sahnedeki her materyale PBR haritalarini gecirir. */
+function yuzeyUygula(kok: Object3D, harita: Texture[]): void {
+  const [metalP, metalN, kaucukP, kaucukN] = harita;
+  kok.traverse((o) => {
+    if (!(o instanceof Mesh)) return;
+    const malzeme = o.material as MeshStandardMaterial;
+    if (!malzeme || malzeme.roughnessMap) return;
+    const kaucuk = KAUCUK.test(o.name) || KAUCUK.test(malzeme.name ?? "");
+    malzeme.roughnessMap = kaucuk ? kaucukP : metalP;
+    malzeme.normalMap = kaucuk ? kaucukN : metalN;
+    // HDRI yansimasi olmadan puruz haritasi da gorunmuyor.
+    malzeme.envMapIntensity = 1;
+    malzeme.needsUpdate = true;
+  });
+}
+
 function Model({ url, mesh, hareket, bildir }: { url: string; mesh?: string; hareket: Motion | null; bildir: (o: Object3D | null) => void }) {
   const { scene } = useGLTF(url);
+  // useTexture suspense ile bekletiyor; klon olusurken haritalar hazir oluyor.
+  const ham = useTexture(DOKULAR);
+  const harita = useMemo(() => ham.map((d) => tekrarla(d, 2)), [ham]);
   // Klon: useGLTF sahneyi önbellekte paylaşır, hedefi doğrudan oynatmak diğer
   // sahneleri de bozardı.
-  const root = useMemo(() => scene.clone(true), [scene]);
+  const root = useMemo(() => {
+    const kopya = scene.clone(true);
+    yuzeyUygula(kopya, harita);
+    return kopya;
+  }, [scene, harita]);
   const node = useMemo(() => (mesh ? root.getObjectByName(mesh) : undefined), [root, mesh]);
 
   useTargetTransform(node, hareket, true);
@@ -262,7 +314,7 @@ export default function Scene({
           <Odak hedef={odakDugumu} />
         </Bounds>
 
-        <Environment preset="warehouse" />
+        <Environment files="/hdri/atolye_1k.hdr" />
         <OrbitControls enableDamping makeDefault />
       </Canvas>
 

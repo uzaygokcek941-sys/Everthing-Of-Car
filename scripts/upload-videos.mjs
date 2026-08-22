@@ -1,7 +1,7 @@
 // web/public/videos -> Cloudflare R2. Kurulum ve dogrulama: docs/VIDEO-YAYIN.md
 // Isi rclone yapar; bu script yalnizca .env.local'i okuyup dogru komutu kurar.
 import { spawnSync } from "node:child_process";
-import { readFileSync, existsSync, readdirSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
@@ -71,4 +71,37 @@ if (r.error?.code === "ENOENT") {
   console.error("rclone bulunamadi. Kur: winget install Rclone.Rclone");
   process.exit(1);
 }
+
+// Hangi derslerin sesli surumu yayinda? R2 basliklarindan anlasilmiyor (worker
+// Last-Modified vermiyor), o yuzden listeyi biz birakiyoruz; panel bunu okuyor.
+if (r.status === 0) {
+  const liste = readdirSync(kaynak)
+    .filter((d) => d.endsWith(".mp4"))
+    .map((d) => d.slice(0, -4))
+    .sort();
+  const gecici = path.join(kok, ".sesli");
+  mkdirSync(gecici, { recursive: true });
+  writeFileSync(
+    path.join(gecici, "_sesli.json"),
+    JSON.stringify({ guncelleme: new Date().toISOString(), dersler: liste }),
+  );
+  spawnSync(
+    rcloneYolu(),
+    ["copy", gecici, `r2:${env.R2_BUCKET}/videos`, "--s3-no-check-bucket"],
+    {
+      stdio: "inherit",
+      env: {
+        ...process.env,
+        RCLONE_CONFIG_R2_TYPE: "s3",
+        RCLONE_CONFIG_R2_PROVIDER: "Cloudflare",
+        RCLONE_CONFIG_R2_ENDPOINT: env.R2_ENDPOINT,
+        RCLONE_CONFIG_R2_ACCESS_KEY_ID: env.R2_ACCESS_KEY_ID,
+        RCLONE_CONFIG_R2_SECRET_ACCESS_KEY: env.R2_SECRET_ACCESS_KEY,
+        RCLONE_CONFIG_R2_ACL: "private",
+      },
+    },
+  );
+  console.log(`_sesli.json yazildi: ${liste.length} ders`);
+}
+
 process.exit(r.status ?? 1);
